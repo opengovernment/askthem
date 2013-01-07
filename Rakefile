@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-OpengovernmentApp::Application.load_tasks
+OpenGovernment::Application.load_tasks
