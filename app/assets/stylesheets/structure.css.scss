@@ -1,0 +1,303 @@
+@import "compass";
+
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+
+body{
+	background:#ebf5f3;
+	color:#3c636e;
+	font-family: helvetica, arial, verdana, sans-serif;
+}
+
+a{
+	color:#96cdce;
+	text-decoration: none;
+	outline:none;
+}
+
+/*
+=========
+Mixins
+=========
+*/
+@mixin rounded_corners($border-radius:3px){
+	@include border-radius($border-radius);
+}
+
+@mixin drop_shadow($x:0, $y:2px, $choke:0, $blur:0, $color:rgba(0,0,0,.1)){
+	@include box-shadow($x $y $choke $blur $color);
+}
+
+@mixin inset_double_drop_shadow(
+	$x:0, $y:2px, $choke:0, $blur:0, $color:rgba(0,0,0,.1), 
+	$inset: inset, $x2:0, $y2:2px, $choke2:0, $blur2:0, $color2:#ffaa9f){
+	@include box-shadow($x $y $choke $blur $color, $inset $x2 $y2 $choke2 $blur2 $color2);
+}
+
+@mixin cta_background{
+	@include background(linear-gradient(top center, #ff7866, #f47362));
+}
+
+/*
+Block fluidity, for now
+*/
+@mixin responsive-max($max-width:910px) {
+  max-width: $max-width;
+}
+@mixin responsive-blocker($min-width:910px) {
+  min-width: $min-width;
+}
+
+
+/*
+Main Structural Elements
+*/
+header div.wrapper,div.content_body div.wrapper,footer div.wrapper{
+	padding-left:7.6923077%;
+	width:85.714286%;
+}
+
+header.main{
+	margin-top: 36px;
+	margin-bottom: 42px;
+	@include responsive-blocker();
+	@include responsive-max();
+	width:100%;
+}
+
+div.content_body{
+	background: white;
+	@include responsive-blocker();
+	@include responsive-max();
+	width: 100%;
+}
+
+
+/*
+Buttons!
+*/
+a.cta_pill{
+	color:#ffffff;
+	border:1px solid #d77164;
+	display:inline-block;
+	font-size:0.875em;
+	font-weight:600;
+	line-height: 1.286em;
+	padding:13px 24px 12px;
+	@include box-shadow(0 1px 0 #e66c5c);
+	@include cta_background();
+	@include rounded_corners();
+	@include drop_shadow();
+	@include inset_double_drop_shadow();
+}
+
+/*
+Sitewide elements
+*/
+
+nav{
+	ul.top_nav{
+		border-bottom: 1px solid #E5E5E6;
+		display:block;
+		width:100%;
+		margin-bottom: 42px;
+		li{
+			display:inline-block;
+			a{
+				padding:16px 20px;
+				font-size:0.813em;
+				font-weight: 100;
+				line-height: 1.385em;
+				&.active{
+					color:#6f9798;
+					border-bottom: 4px solid #EEF4F2;
+					padding-bottom: 13px;
+				}
+				&:hover{
+					color:#6f9798;
+				}
+			}
+		}
+	}
+	li.subject{
+		color: #477380;
+		padding: 15px 0 17px;
+		background: url(/images/nav_arrow@2x.jpg);
+		font-size: 1em;
+		font-weight: 600;
+		line-height: 1.125em;
+		background-size: 21px 48px;
+		background-repeat: no-repeat;
+		background-position: right center;
+		padding-right: 40px;
+	}
+}
+
+/*
+Filtering
+*/
+div.filters{
+	clear: both;
+	background: #F1F7F5;
+	border:1px solid #e0e6e4;
+	margin-top: 24px;
+	margin-bottom:24px;
+	display: inline-block;
+	width: 100%;
+	@include rounded_corners();
+	span.info{
+		display:inline-block;
+		margin:18px 18px 16px;
+	}
+	ul.menu{
+		background: white;
+		@include box-shadow(0 1px 3px rgba(33,54,60,.1));
+		color:#477380;
+		cursor:pointer;
+		display: inline-block;
+		font-size:0.688em;
+		font-weight:600;
+		line-height: 1.364em;
+		text-transform:uppercase;
+		padding: 9px 30px 9px 12px;
+		margin-right: 3px;
+		@include rounded_corners();
+	}
+	div.search{
+		float: right;
+		background: white;
+		border: 1px solid #DDE3E1;
+		@include box-shadow(inset 0 3px 3px rgba(41,110,122,.07));
+		margin:6px;
+		position:relative;
+		@include rounded_corners();
+		input[type=text]{
+			background: none;
+			border: none;
+			color:#5e9187;
+			padding-left: 11px;
+			height: 28px;
+			padding-bottom: 2px;
+			padding-top: 6px;
+			margin-right: 35px;
+			font-family: helvetica, arial, verdana, sans-serif;
+			font-size:0.875em;
+			font-weight:100;
+			line-height: 1.5em;
+			width: 140px;
+			&:focus{
+				outline:none;
+			}
+		}
+		input[type=submit]{
+			background: url(/images/mag_glass@2x.png);
+			background-size: 14px 14px;
+			background-repeat: no-repeat;
+			border: none;
+			padding: 8px;
+			position: absolute;
+			margin-top: -6px;
+			right: -1px;
+			cursor: pointer;
+			top: 6px;
+			background-position: center;
+			width: 35px;
+			height: 34px;
+		}
+	}
+}
+
+a.logo{
+	background: url(/images/logo@2x.jpg);
+	width: 175px;
+	height: 26px;
+	display: inline-block;
+	background-size: 175px 26px;
+	text-indent: -9999px;
+}
+header p.slogan{
+	font-size: 0.75em;
+	line-height: 1em;
+	display: inline-block;
+	font-weight: 100;
+	vertical-align: bottom;
+	padding-bottom: 1px;
+	color: #97B8C2;
+	margin-left: 30px;
+}
+ul.admin_nav{
+	position:absolute;
+	right:7.6923077%;
+	top: 0;
+	li{
+		display:inline-block;
+		float:left;
+		a{
+			color: #477380;
+			border-right: 1px solid #CCE3DB;
+			padding: 12px 20px 0px;
+			display: block;
+			font-size: 0.75em;
+			float: left;
+			line-height: 1.5em;
+			&:hover{
+				color:#5e9187;
+				@include background(radial-gradient(top center, #f5fffe, rgba(255,255,255,0)));
+			}
+		}
+		&:last-child a{
+			border-right:0;
+		}
+	}
+}
+
+
+
+

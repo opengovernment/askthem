@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-US">
 <head>
   <title>OpenGovernment</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
@@ -7,8 +7,76 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+	<header class="main">
+		<div class="wrapper">
+			<a href="/" class="logo">OpenGovernment</a>
+			<p class="slogan">Contact everyone who represents you</p>
+			<section>
+				<ul class="admin_nav">
+					<li>
+						<a href="#">Your Profile</a>
+					</li>
+					<li>
+						<a href="#">Dashboard</a>
+					</li>
+					<li>
+						<a href="#">Steve T</a>
+					</li>
+				</ul>
+			</section>
+		</div>
+	</header>
+	<section>
+		<div class="content_body">
+			<div class="wrapper">
+				<%= yield %>
+			</div>
+		</div>
+	</section>
 
-<%= yield %>
+	<footer>
+		<div class="wrapper">
+			<div class="col">
+				<h5>Our Principles</h5>
+				<ul>
+					<li>Free for everyone</li>
+					<li>Open-source</li>
+					<li>Open standards</li>
+					<li>Not-for-profit</li>
+					<li>Non-partisan</li>
+				</ul>
+			</div>
+			<div class="col">
+				<h5>About Us</h5>
+				<ul>
+					<li><a href="#">Our Data Sources</a></li>
+					<li><a href="#">Blog</a></li>
+					<li><a href="#">User Support &amp; Contact</a></li>
+					<li><a href="#">Join Mailing-list</a></li>
+				</ul>
+			</div>
+			<div class="col">
+				<h5>More OpenGovernment</h5>
+				<ul>
+					<li><a href="#">More OpenGovernment</a></li>
+					<li><a href="#">Twitter &amp; Facebook</a></li>
+					<li><a href="#">Wiki Community project</a></li>
+					<li><a href="#">Tools &amp; Goodies</a></li>
+					<li><a href="#">Our Code &amp; Data</a></li>
+				</ul>
+			</div>
+			<div class="col">
+				<h5>Get Involved</h5>
+				<ul>
+					<li><a href="#">Volunteer</a></li>
+					<li><a href="#">Donate</a></li>
+					<li><a href="#">OpenGovernment for All 50 States</a></li>
+					<li><a href="#">OpenCongress.org</a></li>
+					<li><a href="#">State and Gov Badges</a></li>
+				</ul>
+			</div>
+		</div>
+	</footer>
 
 </body>
 </html>

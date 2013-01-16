@@ -1,3 +1,67 @@
 // Place all the styles related to the questions controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+section.questions{
+	header{
+		text-align:right;
+	}
+	h1{
+		float:left;
+		clear:both;
+		display:inline-block;
+	}
+	a.cta_pill{
+		margin-top: -9px;
+	}
+	
+	ol>li{
+		width:100%;
+		div.rating{
+			display: inline-block;
+			width: 3.8461538%;
+			height: 20px;
+			vertical-align: top;
+			span.arrow{
+				background:#2b464e;
+			}
+		}
+		div.question_content{
+			display:inline-block;
+			margin-left:2.5641026%;
+			vertical-align: top;
+			width:56.410256%;
+			a.title{
+				color:#3c636e;
+				font-size:1.125em;
+				line-height: 1em;
+			}
+			p{
+				color:#3c636e;
+				font-size:0.875em;
+				line-height: 1.286em;
+				margin-top:12px;
+				span.context{}
+			}
+			a.comment_count{
+				display:inline-block;
+				margin-top:6px;
+			}
+		}
+		div.question_attr{
+			display:inline-block;
+			margin-left:10.25641%;
+			vertical-align: top;
+			width:19.230769%;
+			span.followers{}
+			span.posted{}
+			span.author{
+				a{
+					img{
+						
+					}
+				}
+			}
+		}
+	}
+}
