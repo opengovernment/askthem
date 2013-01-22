@@ -67,6 +67,9 @@ a{
 Mixins
 =========
 */
+$darkblue: #2b464e;
+$context: #c8c8c8;
+
 @mixin rounded_corners($border-radius:3px){
 	@include border-radius($border-radius);
 }
@@ -138,6 +141,20 @@ a.cta_pill{
 	@include inset_double_drop_shadow();
 }
 
+a.sim_act{
+	background: #A8E6E7;
+	color: #3C636E;
+	font-size: 0.75em;
+	font-weight:600;
+	line-height: 2em;
+	text-shadow: 0 1px 0 #B3F7E9;
+	padding: 7px 12px 6px;
+	min-width: 70px;
+	text-align: center;
+	display: inline-block;
+	@include rounded_corners();
+}
+
 /*
 Sitewide elements
 */
@@ -188,7 +205,7 @@ div.filters{
 	background: #F1F7F5;
 	border:1px solid #e0e6e4;
 	margin-top: 24px;
-	margin-bottom:24px;
+	margin-bottom:42px;
 	display: inline-block;
 	width: 100%;
 	@include rounded_corners();
@@ -206,9 +223,45 @@ div.filters{
 		font-weight:600;
 		line-height: 1.364em;
 		text-transform:uppercase;
-		padding: 9px 30px 9px 12px;
+		padding: 9px 9px 9px 12px;
+		position:relative;
 		margin-right: 3px;
 		@include rounded_corners();
+		li.menu{
+			display:none;
+			position: absolute;
+			left: 0;
+			background: white;
+			width: 100%;
+			margin-top: 6px;
+			text-indent: 12px;
+			li{
+				display:block;
+				a{
+					display: block;
+					font-weight: normal;
+					font-size:1em;
+					line-height: 1.5em;
+					text-transform: none;
+					padding: 6px 0;
+				}
+			}
+			span{
+				display:none;
+			}
+		}
+		&:hover{
+			li.menu{
+				display:block;
+			}
+		}
+		li.selected{
+			display:block;
+			span{
+				display:inline-block;
+				padding-left:10px;
+			}
+		}
 	}
 	div.search{
 		float: right;
