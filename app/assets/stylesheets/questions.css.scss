@@ -125,6 +125,8 @@ section.questions{
 		}
 	}
 }
+
+
 section.question{
 	article{
 		display:inline-block;
@@ -252,6 +254,39 @@ section.question{
 			border-bottom:1px solid #e5e5e5;
 			padding-bottom:6px;
 			margin-bottom:12px;
+		}
+	}
+	
+	
+	/*
+	Ask a question flow
+	*/
+	h1.action{
+		color:#f77463;
+		font-size:3em;
+		line-height: 0.75em;
+	}
+	div.flow_info{
+		display: inline-block;
+		vertical-align: top;
+		margin-top: 12px;
+		padding-left: 8.974359%;
+		width: 29.487179%;
+		h3{
+			color:#f77463;
+			font-size:1.5em;
+			font-weight:100;
+			line-height: 1.25em;
+			margin-bottom:6px;
+		}
+		p{
+			font-size:0.875em;
+			line-height: 1.286em;
+			font-weight:100;
+			color:#2c4850;
+			a{
+				text-decoration:underline;
+			}
 		}
 	}
 }	

@@ -126,8 +126,9 @@ div.content_body{
 /*
 Buttons!
 */
-a.cta_pill{
+.cta_pill{
 	color:#ffffff;
+	cursor:pointer;
 	border:1px solid #d77164;
 	display:inline-block;
 	font-size:0.875em;
@@ -141,7 +142,7 @@ a.cta_pill{
 	@include inset_double_drop_shadow();
 }
 
-a.sim_act{
+.sim_act{
 	background: #A8E6E7;
 	color: #3C636E;
 	font-size: 0.75em;

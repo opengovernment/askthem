@@ -1,2 +1,67 @@
-<h1>Questions#new</h1>
+<section>
+	<nav>
+		<ul class="top_nav">
+			<li class="subject">
+				Pennsylvania
+			</li>
+			<li>
+				<a href="/" class="active">Questions</a>
+			</li>
+			<li><a href="#">Bills</a></li>
+			<li><a href="#">People</a></li>
+			<li><a href="#">Issues</a></li>
+			<li><a href="#">Money</a></li>
+			<li><a href="#">State Overview</a></li>
+		</ul>
+	</nav>
+</section>
+
+<section class="question">
+	<article>
+		<header>
+			<h1 class="action">Ask a question</h1>
+		</header>
+		<form class="action" action="new_submit" method="get" accept-charset="utf-8">
+			
+			<label for="summary">Question Summary 
+				<span class="details">Treat it like a subject for an e-mail</span>
+			</label>
+			<input type="text" name="summary" id="summary" placeholder="Summary&hellip;" />
+
+			<label for="question">Full Question 
+				<span class="details">Give it your all!</span>
+			</label>
+			<textarea name="question" id="question" cols="30" rows="10" placeholder="Go on&hellip;"></textarea>
+			
+			<label for="importance">Why is this important? 
+				<span class="opt">(optional)</span>
+			</label>
+			
+			<div class="resizable-textarea">
+				<textarea name="importance" id="importance" cols="30" rows="10" placeholder="Go on&hellip;"></textarea>
+			</div>
+			
+			<label for="issue_area">Select an issue area 
+				<span class="opt">(optional)</span>
+			</label>
+			
+			<select name="issue_area" id="issue_area">
+				<option value="0">Select an Issue</option>
+				<option value="1">Issue #1!</option>
+			</select>
+			
+			<div class="controls">
+				<input type="submit" value="Save &amp; Preview" class="cta_pill">
+				<span class="info">
+					We'll help you find your elected officials on the following page!
+				</span>
+			</div>
+		</form>
+	</article>
+	<div class="flow_info">
+		<h3>Your question may have already been answered!</h3>
+		<p>Just be sure to <a href="#">search first</a> before asking your question!</p>
+	</div>
+</section>
+
 <p>Find me in app/views/questions/new.html.erb</p>
