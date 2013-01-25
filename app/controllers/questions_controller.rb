@@ -7,4 +7,7 @@ class QuestionsController < ApplicationController
 
   def new
   end
+  
+  def preview
+  end
 end

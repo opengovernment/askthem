@@ -15,6 +15,7 @@ hasValue = (element) ->
 	
 
 $(document).ready ->
+	$('#summary').focus()
 	$('textarea').css('overflow', 'hidden').autogrow()
 	
 	$('#summary').keyup ->

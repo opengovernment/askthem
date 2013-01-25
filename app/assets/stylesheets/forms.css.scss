@@ -35,7 +35,7 @@ form{
 			margin-bottom:36px;
 			padding-top:0;
 			width:100%;
-			&:focus{
+			&:focus, &:hover{
 				background-image: url(/images/textarea_bg_focus@2x.png);
 				background-size: 2px 30px;
 				background-position: 0 29px;
@@ -60,7 +60,7 @@ form{
 			resize: none;
 			margin-bottom: 36px;
 			width: 100%;
-			&:focus{
+			&:focus, &:hover{
 				background-image: url(/images/textarea_bg_focus@2x.png);
 				background-size: 2px 30px;
 				background-position: 0 29px;
@@ -97,3 +97,7 @@ div.controls{
 		vertical-align: middle;
 	}
 }
+
+/*
+Success, Info, Error treatments & messages
+*/

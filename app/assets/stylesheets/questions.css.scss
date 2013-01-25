@@ -289,4 +289,19 @@ section.question{
 			}
 		}
 	}
-}	
+}
+
+/*
+Preview
+*/
+section.preview{
+	padding-top:48px;
+	padding-bottom:36px;
+	div.actions a{
+		margin-bottom:12px;
+		&.edit{
+			width: 79px;
+			text-indent: -10px;
+		}
+	}
+}

@@ -117,8 +117,10 @@ header.main{
 
 div.content_body{
 	background: white;
+	@include box-shadow(0 0 5px rgba(0, 0, 0, .1));
 	@include responsive-blocker();
 	@include responsive-max();
+	@include border-radius(0 2px 2px 0);
 	width: 100%;
 }
 
@@ -353,5 +355,27 @@ ul.admin_nav{
 }
 
 
+/*
+Footer
+*/
 
-
+footer{
+	margin-top: 36px;
+	margin-bottom: 42px;
+	min-width: 910px;
+	max-width: 910px;
+	width: 100%;
+	div.col{
+		display: inline-block;
+		width: 25%;
+		float: left;
+		ul>li{
+			font-size:0.813em;
+			line-height: 1.385em;
+			padding:6px 0;
+			a{
+				text-shadow:0 1px 0 #ffffff;
+			}
+		}
+	}
+}
