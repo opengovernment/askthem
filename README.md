@@ -1,5 +1,12 @@
 # Open Government: Local
 
+## Getting Started
+
+```sh
+bundle
+rails server
+``
+
 ## Bugs? Questions?
 
 This project's main repository is on GitHub: [http://github.com/opengovernment/opengovernment-local](http://github.com/opengovernment/opengovernment-local, where your contributions, forks, bug reports, feature requests, and feedback are greatly welcomed.
