@@ -34,7 +34,7 @@ development:
     # allow_dynamic_fields: true
 
     # Enable the identity map, needed for eager loading. (default: false)
-    # identity_map_enabled: false
+    identity_map_enabled: true
 
     # Includes the root model name in json serialization. (default: false)
     # include_root_in_json: false
@@ -78,3 +78,18 @@ test:
         # low amounts for fast failures.
         max_retries: 1
         retry_interval: 0
+<% uri = URI.parse(ENV['MONGOLAB_URI'] || 'mongodb://127.0.0.1:27017/open_government_production') %> # https://gist.github.com/2588954
+production:
+  sessions:
+    default:
+      database: <%= uri.path.sub '/', '' %>
+<% if uri.user %>
+      username: <%= uri.user %>
+<% end %>
+<% if uri.password %>
+      password: <%= uri.password %>
+<% end %>
+      hosts:
+      - <%= uri.host %>:<%= uri.port %>
+  options:
+    identity_map_enabled: true
