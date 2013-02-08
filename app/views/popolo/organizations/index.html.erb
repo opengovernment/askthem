@@ -1,0 +1,9 @@
+<h1>Legislatures</h1>
+
+<ul>
+  <% @organizations.where(classification: 'legislature').each do |organization| %>
+    <li>
+      <%= link_to organization.name, organization %>
+    </li>
+  <% end %>
+</ul>
