@@ -1,20 +1,4 @@
-<section>
-	<nav>
-		<ul class="top_nav">
-			<li class="subject">
-				Pennsylvania
-			</li>
-			<li>
-				<a href="/" class="active">Questions</a>
-			</li>
-			<li><a href="#">Bills</a></li>
-			<li><a href="#">People</a></li>
-			<li><a href="#">Issues</a></li>
-			<li><a href="#">Money</a></li>
-			<li><a href="#">State Overview</a></li>
-		</ul>
-	</nav>
-</section>
+<%= render 'shared/navigation' %>
 
 <section class="question">
 	<article>
@@ -26,12 +10,12 @@
 		<p>Contrary to the requirements of the Federal Constitutional Court is the identification of Internet users are even allowed to identify minor offenses. Should allow access to communications data (just legal Zitiergebot).</p>
 		<span class="author_wrap">
 			<span class="posted">Posted 1 hour ago by</span>
-			<span class="author"><a href="#"><img src="http://lorempixel.com/40/40/people/" alt="" />Steve T</a></span>
+			<span class="author"><%= link_to image_tag('http://lorempixel.com/40/40/people/', size: '40x40', alt: '')Steve T', '#' %></span>
 		</span>
 		
 		<div class="support">
-			<a href="#" class="cta_pill">Support this Question</a>
-			<a href="#" class="email">E-mail this to Council Member &rarr;</a>
+			<%= link_to 'Support this Question', '#', class: 'cta_pill' %>
+			<%= link_to 'E-mail this to Council Member →', '#', class: 'email' %>
 		</div>
 		
 		<div class="comments">
@@ -50,27 +34,25 @@
 	            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
 	        })();
 	    </script>
-	    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-	    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+	    <noscript>Please enable JavaScript to view the <%= link_to 'comments powered by Disqus', 'http://disqus.com/?ref_noscript' %>.</noscript>
+	    <%= link_to 'comments powered by <span class="logo-disqus">Disqus</span>'.html_safe, 'http://disqus.com/', class: 'dsq-brlink' %>
     
 			
 		</div>
 	</article>
 	<div class="actions">
 		<ul>
-			<li><a href="#" class="upvote">30</a></li>
-			<li><a href="#" class="follow sim_act">+ Follow</a></li>
-			<li><a href="#" class="share sim_act">Share</a></li>
+			<li><%= link_to '30', '#', class: 'upvote' %></li>
+			<li><%= link_to '+ Follow', '#', class: 'follow sim_act' %></li>
+			<li><%= link_to 'Share', '#', class: 'share sim_act' %></li>
 		</ul>
 		<h5>Issues</h5>
 		<ul class="tags">
-			<li><a href="#">Tag A</a><div class="usage" style="width:10%;"></div></li>
-			<li><a href="#">Tag B</a><div class="usage" style="width:60%;"></div></li>
-			<li><a href="#">Tag C</a><div class="usage" style="width:30%;"></div></li>
+			<li><%= link_to 'Tag A', '#' %><div class="usage" style="width:10%;"></div></li>
+			<li><%= link_to 'Tag B', '#' %><div class="usage" style="width:60%;"></div></li>
+			<li><%= link_to 'Tag C', '#' %><div class="usage" style="width:30%;"></div></li>
 		</ul>
 		<h5>Inappropriate?</h5>
-		<a href="#" class="flag">Flag this question</a>
+		<%= link_to 'Flag this question', '#', class: 'flag' %>
 	</div>
 </section>
-
-<p>Find me in app/views/questions/show.html.erb</p>

@@ -189,7 +189,7 @@ nav{
 	li.subject{
 		color: #477380;
 		padding: 15px 0 17px;
-		background: url(/images/nav_arrow@2x.jpg);
+		background: url(/assets/nav_arrow@2x.jpg);
 		font-size: 1em;
 		font-weight: 600;
 		line-height: 1.125em;
@@ -293,7 +293,7 @@ div.filters{
 			}
 		}
 		input[type=submit]{
-			background: url(/images/mag_glass@2x.png);
+			background: url(/assets/mag_glass@2x.png);
 			background-size: 14px 14px;
 			background-repeat: no-repeat;
 			border: none;
@@ -311,7 +311,7 @@ div.filters{
 }
 
 a.logo{
-	background: url(/images/logo@2x.jpg);
+	background: url(/assets/logo@2x.jpg);
 	width: 175px;
 	height: 26px;
 	display: inline-block;

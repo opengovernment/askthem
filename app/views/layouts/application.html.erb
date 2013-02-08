@@ -9,19 +9,13 @@
 <body>
 	<header class="main">
 		<div class="wrapper">
-			<a href="/" class="logo">OpenGovernment</a>
+			<%= link_to 'OpenGovernment', root_path, class: 'logo' %>
 			<p class="slogan">Contact everyone who represents you</p>
 			<section>
 				<ul class="admin_nav">
-					<li>
-						<a href="#">Your Profile</a>
-					</li>
-					<li>
-						<a href="#">Dashboard</a>
-					</li>
-					<li>
-						<a href="#">Steve T <span class="icon-angle-down"></span></a>
-					</li>
+					<li><%= link_to 'Your Profile', '#' %></li>
+					<li><%= link_to 'Dashboard', '#' %></li>
+					<li><%= link_to 'Steve T <span class="icon-angle-down"></span>'.html_safe, '#' %></li>
 				</ul>
 			</section>
 		</div>
@@ -49,30 +43,30 @@
 			<div class="col">
 				<h5>About Us</h5>
 				<ul>
-					<li><a href="#">Our Data Sources</a></li>
-					<li><a href="#">Blog</a></li>
-					<li><a href="#">User Support &amp; Contact</a></li>
-					<li><a href="#">Join Mailing-list</a></li>
+					<li><%= link_to 'Our Data Sources', '#' %></li>
+					<li><%= link_to 'Blog', '#' %></li>
+					<li><%= link_to 'User Support & Contact', '#' %></li>
+					<li><%= link_to 'Join Mailing-list', '#' %></li>
 				</ul>
 			</div>
 			<div class="col">
 				<h5>More OpenGovernment</h5>
 				<ul>
-					<li><a href="#">More OpenGovernment</a></li>
-					<li><a href="#">Twitter &amp; Facebook</a></li>
-					<li><a href="#">Wiki Community project</a></li>
-					<li><a href="#">Tools &amp; Goodies</a></li>
-					<li><a href="#">Our Code &amp; Data</a></li>
+					<li><%= link_to 'More OpenGovernment', '#' %></li>
+					<li><%= link_to 'Twitter & Facebook', '#' %></li>
+					<li><%= link_to 'Wiki Community project', '#' %></li>
+					<li><%= link_to 'Tools & Goodies', '#' %></li>
+					<li><%= link_to 'Our Code & Data', '#' %></li>
 				</ul>
 			</div>
 			<div class="col">
 				<h5>Get Involved</h5>
 				<ul>
-					<li><a href="#">Volunteer</a></li>
-					<li><a href="#">Donate</a></li>
-					<li><a href="#">OpenGovernment for All 50 States</a></li>
-					<li><a href="#">OpenCongress.org</a></li>
-					<li><a href="#">State and Gov Badges</a></li>
+					<li><%= link_to 'Volunteer', '#' %></li>
+					<li><%= link_to 'Donate', '#' %></li>
+					<li><%= link_to 'OpenGovernment for All 50 States', '#' %></li>
+					<li><%= link_to 'OpenCongress.org', '#' %></li>
+					<li><%= link_to 'State and Gov Badges', '#' %></li>
 				</ul>
 			</div>
 		</div>

@@ -1,25 +1,9 @@
-<section>
-	<nav>
-		<ul class="top_nav">
-			<li class="subject">
-				Pennsylvania
-			</li>
-			<li>
-				<a href="/" class="active">Questions</a>
-			</li>
-			<li><a href="#">Bills</a></li>
-			<li><a href="#">People</a></li>
-			<li><a href="#">Issues</a></li>
-			<li><a href="#">Money</a></li>
-			<li><a href="#">State Overview</a></li>
-		</ul>
-	</nav>
-</section>
+<%= render 'shared/navigation' %>
 
 <section class="questions">
 	<header>
 		<h1>Questions</h1>
-		<a href="/questions/new" class="cta_pill">Post a Question</a>
+		<%= link_to 'Post a Question', new_question_path, class: 'cta_pill' %>
 	</header>
 	<div class="filters">
 		<span class="info">Filter by:</span>
@@ -27,10 +11,10 @@
 			<li class="selected">District <span class="icon-angle-down"></span></li>
 			<li class="menu">
 				<ul>
-					<li><a href="#">Option</a> <span class="icon-angle-down"></span></li>
-					<li><a href="#">Option</a> <span class="icon-angle-down"></span></li>
-					<li><a href="#">Option</a> <span class="icon-angle-down"></span></li>
-					<li><a href="#">Option</a> <span class="icon-angle-down"></span></li>
+					<li><%= link_to 'Option', '#' %> <span class="icon-angle-down"></span></li>
+					<li><%= link_to 'Option', '#' %> <span class="icon-angle-down"></span></li>
+					<li><%= link_to 'Option', '#' %> <span class="icon-angle-down"></span></li>
+					<li><%= link_to 'Option', '#' %> <span class="icon-angle-down"></span></li>
 				</ul>
 			</li>
 		</ul>
@@ -38,10 +22,10 @@
 			<li class="selected">Official <span class="icon-angle-down"></span></li>
 			<li class="menu">
 				<ul>
-					<li><a href="#">Option</a> <span class="icon-angle-down"></span></li>
-					<li><a href="#">Option</a> <span class="icon-angle-down"></span></li>
-					<li><a href="#">Option</a> <span class="icon-angle-down"></span></li>
-					<li><a href="#">Option</a> <span class="icon-angle-down"></span></li>
+					<li><%= link_to 'Option', '#' %> <span class="icon-angle-down"></span></li>
+					<li><%= link_to 'Option', '#' %> <span class="icon-angle-down"></span></li>
+					<li><%= link_to 'Option', '#' %> <span class="icon-angle-down"></span></li>
+					<li><%= link_to 'Option', '#' %> <span class="icon-angle-down"></span></li>
 				</ul>
 			</li>
 		</ul>
@@ -57,14 +41,14 @@
 				<span class="count">25</span>
 			</div>
 			<div class="question_content">
-				<a href="/questions/show" class="title">Why have this thing for act for what?</a>
+				<%= link_to 'Why have this thing for act for what?', '/questions/show', class: 'title' %>
 				<p>Lorem ipsum dolor sit amet, adipisicing elit, sed do  tempor incididunt ut labore et dolore magna aliqua sed do eiusmod tempor  ut&hellip; <span class="context">&rarr; in Pennsylvania Bills</span></p>
-				<a href="#" class="comment_count">12 comments</a>
+				<%= link_to '12 comments', '#', class: 'comment_count' %>
 			</div>
 			<div class="question_attr">
 				<span class="followers">30 followers</span>
 				<span class="posted">Posted 1 hour ago by</span>
-				<span class="author"><a href="#"><img src="http://lorempixel.com/40/40/people/" alt="" />Steve T</a></span>
+				<span class="author"><%= link_to image_tag('http://lorempixel.com/40/40/people/', size: '40x40', alt: '') + 'Steve T', '#' %></span>
 			</div>
 		</li>
 		
@@ -73,14 +57,14 @@
 				<span class="count">25</span>
 			</div>
 			<div class="question_content">
-				<a href="/questions/show" class="title">Why have this thing for act for what?</a>
+				<%= link_to 'Why have this thing for act for what?', '/questions/show', class: 'title' %>
 				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua sed do ut labore et&hellip; <span class="context">&rarr; in Pennsylvania Bills</span></p>
-				<a href="#" class="comment_count">12 comments</a>
+				<%= link_to '12 comments', '#', class: 'comment_count' %>
 			</div>
 			<div class="question_attr">
 				<span class="followers">30 followers</span>
 				<span class="posted">Posted 1 hour ago by</span>
-				<span class="author"><a href="#"><img src="http://lorempixel.com/40/40/people/" alt="" />Steve T</a></span>
+				<span class="author"><%= link_to image_tag('http://lorempixel.com/40/40/people/', size: '40x40', alt: '') + 'Steve T', '#' %></span>
 			</div>
 		</li>
 		
@@ -89,14 +73,14 @@
 				<span class="count">25</span>
 			</div>
 			<div class="question_content">
-				<a href="/questions/show" class="title">Why have this thing for act for what?</a>
+				<%= link_to 'Why have this thing for act for what?', '/questions/show', class: 'title' %>
 				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, tempor incididunt ut labore et dolore magna aliqua sed do eiusmod ut labore et dolore magna aliqua&hellip; <span class="context">&rarr; in Pennsylvania Bills</span></p>
-				<a href="#" class="comment_count">12 comments</a>
+				<%= link_to '12 comments', '#', class: 'comment_count' %>
 			</div>
 			<div class="question_attr">
 				<span class="followers">30 followers</span>
 				<span class="posted">Posted 1 hour ago by</span>
-				<span class="author"><a href="#"><img src="http://lorempixel.com/40/40/people/" alt="" />Steve T</a></span>
+				<span class="author"><%= link_to image_tag('http://lorempixel.com/40/40/people/', size: '40x40', alt: '') + 'Steve T', '#' %></span>
 			</div>
 		</li>
 		
@@ -105,14 +89,14 @@
 				<span class="count">25</span>
 			</div>
 			<div class="question_content">
-				<a href="/questions/show" class="title">Why have this thing for act for what?</a>
+				<%= link_to 'Why have this thing for act for what?', '/questions/show', class: 'title' %>
 				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, tempor incididunt ut labore et dolore magna aliqua sed do eiusmod ut labore et dolore magna aliqua&hellip; <span class="context">&rarr; in Pennsylvania Bills</span></p>
-				<a href="#" class="comment_count">12 comments</a>
+				<%= link_to '12 comments', '#', class: 'comment_count' %>
 			</div>
 			<div class="question_attr">
 				<span class="followers">30 followers</span>
 				<span class="posted">Posted 1 hour ago by</span>
-				<span class="author"><a href="#"><img src="http://lorempixel.com/40/40/people/" alt="" />Steve T</a></span>
+				<span class="author"><%= link_to image_tag('http://lorempixel.com/40/40/people/', size: '40x40', alt: '') + 'Steve T', '#' %></span>
 			</div>
 		</li>
 		
@@ -121,14 +105,14 @@
 				<span class="count">25</span>
 			</div>
 			<div class="question_content">
-				<a href="/questions/show" class="title">Why have this thing for act for what?</a>
+				<%= link_to 'Why have this thing for act for what?', '/questions/show', class: 'title' %>
 				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, tempor incididunt ut labore et dolore magna aliqua sed do eiusmod ut labore et dolore magna aliqua&hellip; <span class="context">&rarr; in Pennsylvania Bills</span></p>
-				<a href="#" class="comment_count">12 comments</a>
+				<%= link_to '12 comments', '#', class: 'comment_count' %>
 			</div>
 			<div class="question_attr">
 				<span class="followers">30 followers</span>
 				<span class="posted">Posted 1 hour ago by</span>
-				<span class="author"><a href="#"><img src="http://lorempixel.com/40/40/people/" alt="" />Steve T</a></span>
+				<span class="author"><%= link_to image_tag('http://lorempixel.com/40/40/people/', size: '40x40', alt: '') + 'Steve T', '#' %></span>
 			</div>
 		</li>
 		
@@ -137,18 +121,15 @@
 				<span class="count">25</span>
 			</div>
 			<div class="question_content">
-				<a href="/questions/show" class="title">Why have this thing for act for what?</a>
+				<%= link_to 'Why have this thing for act for what?', '/questions/show', class: 'title' %>
 				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, tempor incididunt ut labore et dolore magna aliqua sed do eiusmod ut labore et dolore magna aliqua&hellip; <span class="context">&rarr; in Pennsylvania Bills</span></p>
-				<a href="#" class="comment_count">12 comments</a>
+				<%= link_to '12 comments', '#', class: 'comment_count' %>
 			</div>
 			<div class="question_attr">
 				<span class="followers">30 followers</span>
 				<span class="posted">Posted 1 hour ago by</span>
-				<span class="author"><a href="#"><img src="http://lorempixel.com/40/40/people/" alt="" />Steve T</a></span>
+				<span class="author"><%= link_to image_tag('http://lorempixel.com/40/40/people/', size: '40x40', alt: '') + 'Steve T', '#' %></span>
 			</div>
-		</li>
-		
+		</li>		
 	</ol>
 </section>
-
-<p>Find me in app/views/questions/index.html.erb</p>

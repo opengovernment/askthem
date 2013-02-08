@@ -8,13 +8,11 @@
 		<p>Contrary to the requirements of the Federal Constitutional Court is the identification of Internet users are even allowed to identify minor offenses. Should allow access to communications data (just legal Zitiergebot).</p>
 		<span class="author_wrap">
 			<span class="posted">Posted by</span>
-			<span class="author"><a href="#"><img src="http://lorempixel.com/40/40/people/" alt="" />Steve T</a></span>
+			<span class="author"><%= link_to image_tag('http://lorempixel.com/40/40/people/', size: '40x40', alt: '') + 'Steve T', '#' %></span>
 		</span>
 	</article>
 	<div class="actions">
-		<a href="/questions/show" class="cta_pill">Publish</a>
-		<a href="/questions/new" class="edit sim_act">&larr; Edit</a>
+		<%= link_to 'Publish', '/questions/show', class: 'cta_pill' %>
+		<%= link_to '← Edit', new_question_path, class: 'edit sim_act' %>
 	</div>
 </section>
-
-<p>Find me in app/views/questions/preview.html.erb</p>

@@ -34,7 +34,7 @@ section.questions{
 		}
 		div.rating{
 			@include rounded_corners();
-			background: url(/images/up_vote_sm@2x.png) no-repeat $darkblue;
+			background: url(/assets/up_vote_sm@2x.png) no-repeat $darkblue;
 			display: inline-block;
 			width: 3.8461538%;
 			background-size: 12px 11px;
@@ -86,7 +86,7 @@ section.questions{
 			vertical-align: top;
 			width:19.230769%;
 			span.followers{
-				background:url(/images/followers_icon@2x.png) no-repeat left top transparent;
+				background:url(/assets/followers_icon@2x.png) no-repeat left top transparent;
 				background-size:15px 14px;
 				border-bottom:1px solid #f7f7f7;
 				color:#3c636e;
@@ -205,7 +205,7 @@ section.question{
 		ul li{
 			margin-bottom:12px;
 			a.upvote{
-				background: url(/images/up_vote_sm@2x.png) no-repeat $darkblue;
+				background: url(/assets/up_vote_sm@2x.png) no-repeat $darkblue;
 				color: #FBFCF9;
 				display: block;
 				background-size: 12px 11px;
@@ -242,7 +242,7 @@ section.question{
 			}
 		}
 		a.flag{
-			background: url(/images/flag_icon@2x.png) no-repeat 0 0 transparent;
+			background: url(/assets/flag_icon@2x.png) no-repeat 0 0 transparent;
 			color: #C7C7C7;
 			background-size: 8px 14px;
 			font-size: 0.688em;
