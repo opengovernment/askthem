@@ -1,58 +1,58 @@
 <%= render 'shared/navigation' %>
 
 <section class="question">
-	<article>
-		<header>
-			<h2>To <strong>Ron Paul</strong> <span>(R- 6th House District)</span></h2>
-			<h1>What for dost doth under thy venerable name?</h1>
-		</header>
-		<p>Several points I think the bill is unconstitutional: first It already lacks the constitutionally required final determination of which rules should allow access to communications data (just legal Zitiergebot). second It lacks the constitutionally required limitation of data access to individual cases. third Contrary to the requirements of the Federal Constitutional Court are requests for communications data by police not be restricted to cases of specific risk or suspicion of a misdemeanor or felony. Contrary to the requirements of the Federal Constitutional Court is the identification of Internet users are even allowed to identify minor offenses.</p>
-		<p>Contrary to the requirements of the Federal Constitutional Court is the identification of Internet users are even allowed to identify minor offenses. Should allow access to communications data (just legal Zitiergebot).</p>
-		<span class="author_wrap">
-			<span class="posted">Posted 1 hour ago by</span>
-			<span class="author"><%= link_to image_tag('http://lorempixel.com/40/40/people/', size: '40x40', alt: '')Steve T', '#' %></span>
-		</span>
-		
-		<div class="support">
-			<%= link_to 'Support this Question', '#', class: 'cta_pill' %>
-			<%= link_to 'E-mail this to Council Member →', '#', class: 'email' %>
-		</div>
-		
-		<div class="comments">
-			<!--
-			Disqus
-			-->
-	    <div id="disqus_thread"></div>
-	    <script type="text/javascript">
-	        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-	        var disqus_shortname = 'dobot'; // required: replace example with your forum shortname
+  <article>
+    <header>
+      <h2>To <strong>Ron Paul</strong> <span>(R- 6th House District)</span></h2>
+      <h1>What for dost doth under thy venerable name?</h1>
+    </header>
+    <p>Several points I think the bill is unconstitutional: first It already lacks the constitutionally required final determination of which rules should allow access to communications data (just legal Zitiergebot). second It lacks the constitutionally required limitation of data access to individual cases. third Contrary to the requirements of the Federal Constitutional Court are requests for communications data by police not be restricted to cases of specific risk or suspicion of a misdemeanor or felony. Contrary to the requirements of the Federal Constitutional Court is the identification of Internet users are even allowed to identify minor offenses.</p>
+    <p>Contrary to the requirements of the Federal Constitutional Court is the identification of Internet users are even allowed to identify minor offenses. Should allow access to communications data (just legal Zitiergebot).</p>
+    <span class="author_wrap">
+      <span class="posted">Posted 1 hour ago by</span>
+      <span class="author"><%= link_to image_tag('http://lorempixel.com/40/40/people/', size: '40x40', alt: '')Steve T', '#' %></span>
+    </span>
 
-	        /* * * DON'T EDIT BELOW THIS LINE * * */
-	        (function() {
-	            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-	            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-	            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-	        })();
-	    </script>
-	    <noscript>Please enable JavaScript to view the <%= link_to 'comments powered by Disqus', 'http://disqus.com/?ref_noscript' %>.</noscript>
-	    <%= link_to 'comments powered by <span class="logo-disqus">Disqus</span>'.html_safe, 'http://disqus.com/', class: 'dsq-brlink' %>
-    
-			
-		</div>
-	</article>
-	<div class="actions">
-		<ul>
-			<li><%= link_to '30', '#', class: 'upvote' %></li>
-			<li><%= link_to '+ Follow', '#', class: 'follow sim_act' %></li>
-			<li><%= link_to 'Share', '#', class: 'share sim_act' %></li>
-		</ul>
-		<h5>Issues</h5>
-		<ul class="tags">
-			<li><%= link_to 'Tag A', '#' %><div class="usage" style="width:10%;"></div></li>
-			<li><%= link_to 'Tag B', '#' %><div class="usage" style="width:60%;"></div></li>
-			<li><%= link_to 'Tag C', '#' %><div class="usage" style="width:30%;"></div></li>
-		</ul>
-		<h5>Inappropriate?</h5>
-		<%= link_to 'Flag this question', '#', class: 'flag' %>
-	</div>
+    <div class="support">
+      <%= link_to 'Support this Question', '#', class: 'cta_pill' %>
+      <%= link_to 'E-mail this to Council Member →', '#', class: 'email' %>
+    </div>
+
+    <div class="comments">
+      <!--
+      Disqus
+      -->
+      <div id="disqus_thread"></div>
+      <script type="text/javascript">
+          /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+          var disqus_shortname = 'dobot'; // required: replace example with your forum shortname
+
+          /* * * DON'T EDIT BELOW THIS LINE * * */
+          (function() {
+              var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+              dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+              (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+      </script>
+      <noscript>Please enable JavaScript to view the <%= link_to 'comments powered by Disqus', 'http://disqus.com/?ref_noscript' %>.</noscript>
+      <%= link_to 'comments powered by <span class="logo-disqus">Disqus</span>'.html_safe, 'http://disqus.com/', class: 'dsq-brlink' %>
+
+
+    </div>
+  </article>
+  <div class="actions">
+    <ul>
+      <li><%= link_to '30', '#', class: 'upvote' %></li>
+      <li><%= link_to '+ Follow', '#', class: 'follow sim_act' %></li>
+      <li><%= link_to 'Share', '#', class: 'share sim_act' %></li>
+    </ul>
+    <h5>Issues</h5>
+    <ul class="tags">
+      <li><%= link_to 'Tag A', '#' %><div class="usage" style="width:10%;"></div></li>
+      <li><%= link_to 'Tag B', '#' %><div class="usage" style="width:60%;"></div></li>
+      <li><%= link_to 'Tag C', '#' %><div class="usage" style="width:30%;"></div></li>
+    </ul>
+    <h5>Inappropriate?</h5>
+    <%= link_to 'Flag this question', '#', class: 'flag' %>
+  </div>
 </section>

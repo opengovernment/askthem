@@ -1,135 +1,135 @@
 <%= render 'shared/navigation' %>
 
 <section class="questions">
-	<header>
-		<h1>Questions</h1>
-		<%= link_to 'Post a Question', new_question_path, class: 'cta_pill' %>
-	</header>
-	<div class="filters">
-		<span class="info">Filter by:</span>
-		<ul class="menu">
-			<li class="selected">District <span class="icon-angle-down"></span></li>
-			<li class="menu">
-				<ul>
-					<li><%= link_to 'Option', '#' %> <span class="icon-angle-down"></span></li>
-					<li><%= link_to 'Option', '#' %> <span class="icon-angle-down"></span></li>
-					<li><%= link_to 'Option', '#' %> <span class="icon-angle-down"></span></li>
-					<li><%= link_to 'Option', '#' %> <span class="icon-angle-down"></span></li>
-				</ul>
-			</li>
-		</ul>
-		<ul class="menu">
-			<li class="selected">Official <span class="icon-angle-down"></span></li>
-			<li class="menu">
-				<ul>
-					<li><%= link_to 'Option', '#' %> <span class="icon-angle-down"></span></li>
-					<li><%= link_to 'Option', '#' %> <span class="icon-angle-down"></span></li>
-					<li><%= link_to 'Option', '#' %> <span class="icon-angle-down"></span></li>
-					<li><%= link_to 'Option', '#' %> <span class="icon-angle-down"></span></li>
-				</ul>
-			</li>
-		</ul>
-		<div class="search">
-			<input type="text" name="" id="" placeholder="Search state" />
-			<input type="submit" value="" />
-		</div>
-	</div>
-	<ol>
-		
-		<li>
-			<div class="rating">
-				<span class="count">25</span>
-			</div>
-			<div class="question_content">
-				<%= link_to 'Why have this thing for act for what?', '/questions/show', class: 'title' %>
-				<p>Lorem ipsum dolor sit amet, adipisicing elit, sed do  tempor incididunt ut labore et dolore magna aliqua sed do eiusmod tempor  ut&hellip; <span class="context">&rarr; in Pennsylvania Bills</span></p>
-				<%= link_to '12 comments', '#', class: 'comment_count' %>
-			</div>
-			<div class="question_attr">
-				<span class="followers">30 followers</span>
-				<span class="posted">Posted 1 hour ago by</span>
-				<span class="author"><%= link_to image_tag('http://lorempixel.com/40/40/people/', size: '40x40', alt: '') + 'Steve T', '#' %></span>
-			</div>
-		</li>
-		
-		<li>
-			<div class="rating">
-				<span class="count">25</span>
-			</div>
-			<div class="question_content">
-				<%= link_to 'Why have this thing for act for what?', '/questions/show', class: 'title' %>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua sed do ut labore et&hellip; <span class="context">&rarr; in Pennsylvania Bills</span></p>
-				<%= link_to '12 comments', '#', class: 'comment_count' %>
-			</div>
-			<div class="question_attr">
-				<span class="followers">30 followers</span>
-				<span class="posted">Posted 1 hour ago by</span>
-				<span class="author"><%= link_to image_tag('http://lorempixel.com/40/40/people/', size: '40x40', alt: '') + 'Steve T', '#' %></span>
-			</div>
-		</li>
-		
-		<li>
-			<div class="rating">
-				<span class="count">25</span>
-			</div>
-			<div class="question_content">
-				<%= link_to 'Why have this thing for act for what?', '/questions/show', class: 'title' %>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, tempor incididunt ut labore et dolore magna aliqua sed do eiusmod ut labore et dolore magna aliqua&hellip; <span class="context">&rarr; in Pennsylvania Bills</span></p>
-				<%= link_to '12 comments', '#', class: 'comment_count' %>
-			</div>
-			<div class="question_attr">
-				<span class="followers">30 followers</span>
-				<span class="posted">Posted 1 hour ago by</span>
-				<span class="author"><%= link_to image_tag('http://lorempixel.com/40/40/people/', size: '40x40', alt: '') + 'Steve T', '#' %></span>
-			</div>
-		</li>
-		
-		<li>
-			<div class="rating">
-				<span class="count">25</span>
-			</div>
-			<div class="question_content">
-				<%= link_to 'Why have this thing for act for what?', '/questions/show', class: 'title' %>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, tempor incididunt ut labore et dolore magna aliqua sed do eiusmod ut labore et dolore magna aliqua&hellip; <span class="context">&rarr; in Pennsylvania Bills</span></p>
-				<%= link_to '12 comments', '#', class: 'comment_count' %>
-			</div>
-			<div class="question_attr">
-				<span class="followers">30 followers</span>
-				<span class="posted">Posted 1 hour ago by</span>
-				<span class="author"><%= link_to image_tag('http://lorempixel.com/40/40/people/', size: '40x40', alt: '') + 'Steve T', '#' %></span>
-			</div>
-		</li>
-		
-		<li>
-			<div class="rating">
-				<span class="count">25</span>
-			</div>
-			<div class="question_content">
-				<%= link_to 'Why have this thing for act for what?', '/questions/show', class: 'title' %>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, tempor incididunt ut labore et dolore magna aliqua sed do eiusmod ut labore et dolore magna aliqua&hellip; <span class="context">&rarr; in Pennsylvania Bills</span></p>
-				<%= link_to '12 comments', '#', class: 'comment_count' %>
-			</div>
-			<div class="question_attr">
-				<span class="followers">30 followers</span>
-				<span class="posted">Posted 1 hour ago by</span>
-				<span class="author"><%= link_to image_tag('http://lorempixel.com/40/40/people/', size: '40x40', alt: '') + 'Steve T', '#' %></span>
-			</div>
-		</li>
-		
-		<li>
-			<div class="rating">
-				<span class="count">25</span>
-			</div>
-			<div class="question_content">
-				<%= link_to 'Why have this thing for act for what?', '/questions/show', class: 'title' %>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, tempor incididunt ut labore et dolore magna aliqua sed do eiusmod ut labore et dolore magna aliqua&hellip; <span class="context">&rarr; in Pennsylvania Bills</span></p>
-				<%= link_to '12 comments', '#', class: 'comment_count' %>
-			</div>
-			<div class="question_attr">
-				<span class="followers">30 followers</span>
-				<span class="posted">Posted 1 hour ago by</span>
-				<span class="author"><%= link_to image_tag('http://lorempixel.com/40/40/people/', size: '40x40', alt: '') + 'Steve T', '#' %></span>
-			</div>
-		</li>		
-	</ol>
+  <header>
+    <h1>Questions</h1>
+    <%= link_to 'Post a Question', new_question_path, class: 'cta_pill' %>
+  </header>
+  <div class="filters">
+    <span class="info">Filter by:</span>
+    <ul class="menu">
+      <li class="selected">District <span class="icon-angle-down"></span></li>
+      <li class="menu">
+        <ul>
+          <li><%= link_to 'Option', '#' %> <span class="icon-angle-down"></span></li>
+          <li><%= link_to 'Option', '#' %> <span class="icon-angle-down"></span></li>
+          <li><%= link_to 'Option', '#' %> <span class="icon-angle-down"></span></li>
+          <li><%= link_to 'Option', '#' %> <span class="icon-angle-down"></span></li>
+        </ul>
+      </li>
+    </ul>
+    <ul class="menu">
+      <li class="selected">Official <span class="icon-angle-down"></span></li>
+      <li class="menu">
+        <ul>
+          <li><%= link_to 'Option', '#' %> <span class="icon-angle-down"></span></li>
+          <li><%= link_to 'Option', '#' %> <span class="icon-angle-down"></span></li>
+          <li><%= link_to 'Option', '#' %> <span class="icon-angle-down"></span></li>
+          <li><%= link_to 'Option', '#' %> <span class="icon-angle-down"></span></li>
+        </ul>
+      </li>
+    </ul>
+    <div class="search">
+      <input type="text" name="" id="" placeholder="Search state" />
+      <input type="submit" value="" />
+    </div>
+  </div>
+  <ol>
+
+    <li>
+      <div class="rating">
+        <span class="count">25</span>
+      </div>
+      <div class="question_content">
+        <%= link_to 'Why have this thing for act for what?', '/questions/show', class: 'title' %>
+        <p>Lorem ipsum dolor sit amet, adipisicing elit, sed do  tempor incididunt ut labore et dolore magna aliqua sed do eiusmod tempor  ut&hellip; <span class="context">&rarr; in Pennsylvania Bills</span></p>
+        <%= link_to '12 comments', '#', class: 'comment_count' %>
+      </div>
+      <div class="question_attr">
+        <span class="followers">30 followers</span>
+        <span class="posted">Posted 1 hour ago by</span>
+        <span class="author"><%= link_to image_tag('http://lorempixel.com/40/40/people/', size: '40x40', alt: '') + 'Steve T', '#' %></span>
+      </div>
+    </li>
+
+    <li>
+      <div class="rating">
+        <span class="count">25</span>
+      </div>
+      <div class="question_content">
+        <%= link_to 'Why have this thing for act for what?', '/questions/show', class: 'title' %>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua sed do ut labore et&hellip; <span class="context">&rarr; in Pennsylvania Bills</span></p>
+        <%= link_to '12 comments', '#', class: 'comment_count' %>
+      </div>
+      <div class="question_attr">
+        <span class="followers">30 followers</span>
+        <span class="posted">Posted 1 hour ago by</span>
+        <span class="author"><%= link_to image_tag('http://lorempixel.com/40/40/people/', size: '40x40', alt: '') + 'Steve T', '#' %></span>
+      </div>
+    </li>
+
+    <li>
+      <div class="rating">
+        <span class="count">25</span>
+      </div>
+      <div class="question_content">
+        <%= link_to 'Why have this thing for act for what?', '/questions/show', class: 'title' %>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, tempor incididunt ut labore et dolore magna aliqua sed do eiusmod ut labore et dolore magna aliqua&hellip; <span class="context">&rarr; in Pennsylvania Bills</span></p>
+        <%= link_to '12 comments', '#', class: 'comment_count' %>
+      </div>
+      <div class="question_attr">
+        <span class="followers">30 followers</span>
+        <span class="posted">Posted 1 hour ago by</span>
+        <span class="author"><%= link_to image_tag('http://lorempixel.com/40/40/people/', size: '40x40', alt: '') + 'Steve T', '#' %></span>
+      </div>
+    </li>
+
+    <li>
+      <div class="rating">
+        <span class="count">25</span>
+      </div>
+      <div class="question_content">
+        <%= link_to 'Why have this thing for act for what?', '/questions/show', class: 'title' %>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, tempor incididunt ut labore et dolore magna aliqua sed do eiusmod ut labore et dolore magna aliqua&hellip; <span class="context">&rarr; in Pennsylvania Bills</span></p>
+        <%= link_to '12 comments', '#', class: 'comment_count' %>
+      </div>
+      <div class="question_attr">
+        <span class="followers">30 followers</span>
+        <span class="posted">Posted 1 hour ago by</span>
+        <span class="author"><%= link_to image_tag('http://lorempixel.com/40/40/people/', size: '40x40', alt: '') + 'Steve T', '#' %></span>
+      </div>
+    </li>
+
+    <li>
+      <div class="rating">
+        <span class="count">25</span>
+      </div>
+      <div class="question_content">
+        <%= link_to 'Why have this thing for act for what?', '/questions/show', class: 'title' %>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, tempor incididunt ut labore et dolore magna aliqua sed do eiusmod ut labore et dolore magna aliqua&hellip; <span class="context">&rarr; in Pennsylvania Bills</span></p>
+        <%= link_to '12 comments', '#', class: 'comment_count' %>
+      </div>
+      <div class="question_attr">
+        <span class="followers">30 followers</span>
+        <span class="posted">Posted 1 hour ago by</span>
+        <span class="author"><%= link_to image_tag('http://lorempixel.com/40/40/people/', size: '40x40', alt: '') + 'Steve T', '#' %></span>
+      </div>
+    </li>
+
+    <li>
+      <div class="rating">
+        <span class="count">25</span>
+      </div>
+      <div class="question_content">
+        <%= link_to 'Why have this thing for act for what?', '/questions/show', class: 'title' %>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, tempor incididunt ut labore et dolore magna aliqua sed do eiusmod ut labore et dolore magna aliqua&hellip; <span class="context">&rarr; in Pennsylvania Bills</span></p>
+        <%= link_to '12 comments', '#', class: 'comment_count' %>
+      </div>
+      <div class="question_attr">
+        <span class="followers">30 followers</span>
+        <span class="posted">Posted 1 hour ago by</span>
+        <span class="author"><%= link_to image_tag('http://lorempixel.com/40/40/people/', size: '40x40', alt: '') + 'Steve T', '#' %></span>
+      </div>
+    </li>
+  </ol>
 </section>
