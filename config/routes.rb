@@ -7,5 +7,5 @@ OpenGovernment::Application.routes.draw do
     end
   end
 
-  root to: 'popolo/organizations#index'
+  root to: 'pages#index'
 end
