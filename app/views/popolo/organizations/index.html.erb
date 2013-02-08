@@ -1,9 +1,16 @@
-<h1>Legislatures</h1>
-
-<ul>
-  <% @organizations.where(classification: 'legislature').each do |organization| %>
-    <li>
-      <%= link_to organization.name, organization %>
-    </li>
-  <% end %>
-</ul>
+<section>
+  <header>
+    <h1>Organizations</h1>
+  </header>
+  <ul>
+    <% @organizations.where(classification: {'$ne' => 'party'}).each do |organization| %>
+      <li>
+        <% if @organization %>
+          <%= link_to organization.name, nested_organization_path([@organization, organization]) %>
+        <% else %>
+          <%= link_to organization.name, organization_path(organization) %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</section>

@@ -1,1 +1,13 @@
-<h1><%= @organization.name %></h1>
+<section>
+  <header>
+    <h1><%= @organization.name %></h1>
+  </header>
+
+  <% unless @organization.leaf? %>
+    <ul>
+      <% @organization.children.each do |organization| %>
+        <li><%= link_to organization.name, nested_organization_path([@organization, organization]) %></li>
+      <% end %>
+    </ul>
+  <% end %>
+</section>

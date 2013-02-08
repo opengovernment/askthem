@@ -1,4 +1,6 @@
 OpenGovernment::Application.routes.draw do
+  root to: 'pages#index'
+
   mount Popolo::Engine => '/'
 
   resources :questions, only: [:index, :show, :new] do
@@ -6,6 +8,4 @@ OpenGovernment::Application.routes.draw do
       get :preview
     end
   end
-
-  root to: 'pages#index'
 end
