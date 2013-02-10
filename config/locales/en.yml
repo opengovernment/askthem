@@ -1,5 +1,13 @@
 en:
   popolo:
+    areas:
+      depth:
+        '0': States
+        '1': Districts
+      classifications:
+        state: States
+        lower: State Representative Districts
+        upper: State Senate Districts
     organizations:
       depth:
         '0': Legislatures

@@ -46,6 +46,7 @@ GEM
       multi_json (~> 1.0)
     arel (3.0.2)
     builder (3.0.4)
+    chronic (0.9.0)
     chunky_png (1.2.7)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
@@ -163,6 +164,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  chronic
   coffee-rails (~> 3.2.1)
   compass-rails
   jquery-rails
