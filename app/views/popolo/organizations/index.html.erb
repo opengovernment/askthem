@@ -1,16 +1,39 @@
+<% if @organization %>
+<nav>
+  <ul class="breadcrumb">
+    <li><%= link_to t('popolo.organizations.depth.0'), organizations_path %> <span class="divider">/</span></li>
+  <% ancestors = @organization.ancestors %>
+  <% ancestors.each_with_index do |ancestor,index| %>
+    <li>
+    <% if ancestor.root? %>
+      <%= link_to ancestor.name, nested_organizations_path([ancestor]) %>
+    <% else %>
+      <%= link_to ancestor.name, nested_organizations_path(ancestors[0..index]) %>
+    <% end %>
+      <span class="divider">/</span>
+    </li>
+  <% end %>
+    <li class="active"><%= @organization.name %></li>
+  </ul>
+</nav>
+<% end %>
+
 <section>
   <header>
-    <h1>Organizations</h1>
+    <h1><%= t(@organization && @organization.depth + 1 || 0, scope: [:popolo, :organizations, :depth]) %></h1>
   </header>
+
+<% unless @organization && @organization.leaf? %>
   <ul>
-    <% @organizations.where(classification: {'$ne' => 'party'}).each do |organization| %>
-      <li>
-        <% if @organization %>
-          <%= link_to organization.name, nested_organization_path([@organization, organization]) %>
-        <% else %>
-          <%= link_to organization.name, organization_path(organization) %>
-        <% end %>
-      </li>
+  <% @organizations.where(classification: {'$ne' => 'party'}).each do |organization| %>
+    <li>
+    <% if @organization %>
+      <%= link_to organization.name, nested_organization_path([@organization, organization]) %>
+    <% else %>
+      <%= link_to organization.name, organization_path(organization) %>
     <% end %>
+  </li>
+  <% end %>
   </ul>
+<% end %>
 </section>
