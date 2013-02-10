@@ -1,1 +1,1 @@
-Popolo::Billy.level_field = :state
+Popolo::Billy.level_field = 'state'
