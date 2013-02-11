@@ -6,7 +6,6 @@ gem 'jquery-rails'
 gem 'popolo', path: '/Users/james/Sites/code/engines/popolo'
 gem 'popolo-billy', path: '/Users/james/Sites/code/engines/popolo-billy'
 
-gem 'chronic'
 gem 'unicorn'
 
 group :production do

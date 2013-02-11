@@ -1,0 +1,34 @@
+<nav>
+  <ul class="breadcrumb">
+    <li><%= link_to resource_collection_name.capitalize, collection_path %> <span class="divider">/</span></li>
+<% ancestors = object.ancestors %>
+<% ancestors.each_with_index do |ancestor,index| %>
+    <li>
+  <% if ancestor.root? %>
+      <%= link_to ancestor.name, nested_resource_path([ancestor]) %>
+  <% else %>
+      <%= link_to ancestor.name, nested_resource_path(ancestors[0..index]) %>
+  <% end %>
+      <span class="divider">/</span>
+    </li>
+<% end %>
+    <li class="active"><%= object.name %></li>
+  </ul>
+</nav>
+
+<% collection = object.children.asc(:sort_name) %>
+<% unless collection.empty? %>
+  <% groups = collection.group_by(&:classification) %>
+  <% groups.each do |classification,documents| %>
+<section>
+  <header>
+    <h1><%= t(classification, scope: [:popolo, resource_collection_name, :classifications]) %></h1>
+  </header>
+  <ul>
+    <% documents.each do |document| %>
+    <li><%= link_to document.name, nested_resource_path([object, document]) %></li>
+    <% end %>
+  </ul>
+</section>
+  <% end %>
+<% end %>

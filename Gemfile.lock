@@ -11,6 +11,7 @@ PATH
   remote: /Users/james/Sites/code/engines/popolo-billy
   specs:
     popolo-billy (0.0.1)
+      chronic
       decorators (~> 1.0.0)
       popolo (~> 0.0.1)
 
@@ -164,7 +165,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  chronic
   coffee-rails (~> 3.2.1)
   compass-rails
   jquery-rails
