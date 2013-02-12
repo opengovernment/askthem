@@ -3,8 +3,8 @@ source 'https://rubygems.org'
 gem 'rails', '3.2.11'
 gem 'jquery-rails'
 
-gem 'popolo', path: '/Users/james/Sites/code/engines/popolo'
-gem 'popolo-billy', path: '/Users/james/Sites/code/engines/popolo-billy'
+gem 'popolo', '~> 0.0.1'
+gem 'popolo-billy', '~> 0.0.1'
 
 gem 'unicorn'
 
