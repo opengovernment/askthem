@@ -1,0 +1,18 @@
+<section>
+  <ol>
+    <% @posts.asc(:sort_name).each do |post| %>
+    <li>
+      <% if post.person && post.person.image? %>
+        <%= image_tag(post.person.image) %>
+      <% end %>
+      <%= link_to post.role, post %>
+      <% if post.person && post.person['party'] %>
+        <%= post.person['party'] %>
+      <% end %>
+      <% if post.person %>
+        <%= post.person.name %>
+      <% end %>
+    </li>
+    <% end %>
+  </ol>
+</section>

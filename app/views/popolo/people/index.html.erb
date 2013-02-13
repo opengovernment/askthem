@@ -1,0 +1,15 @@
+<section>
+  <ol>
+    <% @people.asc(:sort_name).each do |person| %>
+    <li>
+      <% if person.image? %>
+        <%= image_tag(person.image) %>
+      <% end %>
+      <% if person['party'] %>
+        <%= post.person['party'] %>
+      <% end %>
+      <%= person.name %>
+    </li>
+    <% end %>
+  </ol>
+</section>
