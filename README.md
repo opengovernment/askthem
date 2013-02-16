@@ -2,10 +2,8 @@
 
 ## Getting Started
 
-```sh
-bundle
-rails server
-``
+    bundle
+    rails server
 
 ## Bugs? Questions?
 
