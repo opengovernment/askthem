@@ -1,0 +1,43 @@
+<%= render partial: 'popolo/areas_or_organizations/breadcrumb', locals: {object: @organization} %>
+
+<section>
+  <div class="media">
+    <% if @post.person && @post.person.image? %>
+    <span class="pull-left">
+      <%= cloudfront(@post.person.image, 150, 200, class: 'media-object') %>
+    </span>
+    <% end %>
+    <div class="media-body">
+      <h4 class="media-heading">
+        <%= @post.role %>
+        <% if @post.person %>
+        <%= @post.person.name %>
+        <% end %>
+      </h4>
+      <% if @post.person['party'] %>
+        <%= @post.person['party'] %>
+        <% if @post.area %>
+          – <%= @post.area.name %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  <% if @post.person && @post.person.summary? %>
+  <p><%= @post.person.summary %></p>
+  <% end %>
+
+  <ul>
+    <li><%= link_to 'Questions', '#' %></li>
+    <li><%= link_to 'Voting Record', '#' %></li>
+    <li><%= link_to 'Sponsorship', '#' %></li>
+    <li><%= link_to 'News', '#' %></li>
+    <li><%= link_to 'Interest Groups', '#' %></li>
+  </ul>
+
+  <aside>
+    <% if @post.person && @post.person.email? %>
+    <p>Email: <%= mail_to @post.person.email %></p>
+    <% end %>
+    <%= render @post.addresses %>
+  </aside>
+</section>

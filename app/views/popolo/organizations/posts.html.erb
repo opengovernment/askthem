@@ -1,18 +1,18 @@
-<%= render partial: 'popolo/areas_or_organizations/breadcrumb', locals: {object: object} %>
+<%= render partial: 'popolo/areas_or_organizations/breadcrumb', locals: {object: @organization} %>
 
 <section>
-  <h1><%= object.name %></h1>
+  <h1><%= @organization.name %></h1>
 
   <ol class="media-list">
     <% @posts.asc(:sort_name).each do |post| %>
     <li class="media">
       <% if post.person && post.person.image? %>
       <span class="pull-left">
-        <%= cloudfront(post.person.image, 50, 75) %>
+        <%= cloudfront(post.person.image, 50, 75, class: 'media-object') %>
       </span>
       <% end %>
       <div class="media-body">
-        <h4 class="media-heading"><%= link_to post.name, post %></h4>
+        <h4 class="media-heading"><%= link_to post.name, nested_organization_post_path(@organization.ancestors_and_self, post) %></h4>
         <% if post.person && post.person['party'] %>
         <%= post.person['party'] %>
         <% end %>
