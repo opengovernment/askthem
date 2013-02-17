@@ -3,8 +3,8 @@ source 'https://rubygems.org'
 gem 'rails', '3.2.11'
 gem 'jquery-rails'
 
-gem 'popolo', '~> 0.0.1'
-gem 'popolo-billy', '~> 0.0.1'
+gem 'popolo-billy', '0.0.2'
+gem 'popolo', '0.0.2' # @todo remove on 0.0.3 release
 
 gem 'unicorn'
 
