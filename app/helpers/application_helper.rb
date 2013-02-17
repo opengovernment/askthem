@@ -20,6 +20,7 @@ module ApplicationHelper
 
   def subheader_on_posts(post)
     parts = []
+    parts << post.role
     parts << post.person['party'] if post.person && post.person['party']
     parts << area_name(post.area) if post.area
     parts.join(', ')
@@ -27,8 +28,8 @@ module ApplicationHelper
 
   def subheader_on_post(post)
     parts = []
-    parts << post.person['party'] if post.person && post.person['party']
     parts << post.role
+    parts << post.person['party'] if post.person && post.person['party']
     parts << area_name(post.area) if post.area
     parts.join(', ')
   end
