@@ -2,3 +2,4 @@
 /log/*.log
 /tmp
 /dump-dir
+/public/assets
