@@ -1,29 +1,28 @@
-<%= render partial: 'popolo/areas_or_organizations/breadcrumb', locals: {object: @organization} %>
+<%= render 'shared/navigation' %>
 
 <section>
-  <div class="media">
-    <% if @post.person && @post.person.image? %>
-    <span class="pull-left">
-      <%= cloudfront(@post.person.image, 150, 200, class: 'media-object') %>
-    </span>
-    <% end %>
-    <div class="media-body">
-      <h4 class="media-heading">
-        <%= @post.role %>
-        <% if @post.person %>
-        <%= @post.person.name %>
+  <% if @post.person %>
+    <div class="media">
+      <span class="pull-left">
+        <% if @post.person.image? %>
+          <%= cdn_image_tag(@post.person.image, size: '100x100', alt: '', class: 'media-object') %>
+        <% else %>
+          <%# @todo placeholder image %>
         <% end %>
-      </h4>
-      <% if @post.person['party'] %>
-        <%= @post.person['party'] %>
-        <% if @post.area %>
-          – <%= @post.area.name %>
-        <% end %>
-      <% end %>
+      </span>
+      <div class="media-body">
+        <h1 class="media-heading">
+          <%= @post.person.name %>
+        </h1>
+        <%= subheader_on_post(@post) %>
+      </div>
     </div>
-  </div>
-  <% if @post.person && @post.person.summary? %>
-  <p><%= @post.person.summary %></p>
+
+    <% if @post.person.summary? %>
+      <p><%= @post.person.summary %></p>
+    <% end %>
+  <% else %>
+    <%# @todo if no elected official for this seat %>
   <% end %>
 
   <ul>
@@ -36,7 +35,7 @@
 
   <aside>
     <% if @post.person && @post.person.email? %>
-    <p>Email: <%= mail_to @post.person.email %></p>
+      <p>Email: <%= mail_to @post.person.email %></p>
     <% end %>
     <%= render @post.addresses %>
   </aside>
