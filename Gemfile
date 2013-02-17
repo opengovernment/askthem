@@ -13,6 +13,7 @@ group :production do
 end
 
 group :test, :development do
+  gem 'heroku' # Rake task
   gem 'rspec-rails'
 end
 
