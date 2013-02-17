@@ -3,7 +3,10 @@ source 'https://rubygems.org'
 gem 'rails', '3.2.11'
 gem 'jquery-rails'
 
-gem 'popolo-billy', '0.0.2', path: 'vendor/gems/popolo-billy-0.0.2'
+gem 'popolo-billy', '0.0.2', require: 'popolo/billy', path: 'vendor/gems/popolo-billy-0.0.2'
+gem 'decorators', '~> 1.0.0'
+gem 'chronic'
+
 gem 'popolo', '0.0.2' # @todo remove on 0.0.3 release
 
 gem 'unicorn'
