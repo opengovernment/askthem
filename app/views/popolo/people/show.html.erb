@@ -1,6 +1,6 @@
 <section>
   <% if @person.image? %>
-    <%= image_tag(@person.image) %>
+    <%= cloudfront(@person.image, 150, 200) %>
   <% end %>
   <%= @person.name %>
   <% if @person['party'] %>

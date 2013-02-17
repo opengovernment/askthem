@@ -1,13 +1,13 @@
 <section>
   <% if @post.person %>
     <% if @post.person.image? %>
-      <%= image_tag(@post.person.image) %>
+      <%= cloudfront(@post.person.image, 150, 200) %>
     <% end %>
     <%= @post.person.name %>
     <% if @post.person['party'] %>
       <%= @post.person['party'] %>
     <% end %>
-    <%= @post.role %>
+    <%= @post.name %>
     <% if @post.person.summary? %>
       <p><%= @post.person.summary %></p>
     <% end %>

@@ -3,12 +3,12 @@
     <% @people.asc(:sort_name).each do |person| %>
     <li>
       <% if person.image? %>
-        <%= image_tag(person.image) %>
+        <%= cloudfront(person.image, 50, 75) %>
       <% end %>
       <% if person['party'] %>
-        <%= post.person['party'] %>
+        <%= person['party'] %>
       <% end %>
-      <%= person.name %>
+      <%= link_to person.name, person %>
     </li>
     <% end %>
   </ol>

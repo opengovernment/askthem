@@ -13,5 +13,6 @@
  *= require typography.css.scss
  *= require forms.css.scss
  *= require questions.css.scss
- *= require font-awesome.scss
+ *= require font-awesome.css.scss
+ *= require bootstrap.css.scss
  */
