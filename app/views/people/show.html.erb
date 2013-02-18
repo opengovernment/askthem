@@ -1,0 +1,55 @@
+<%= render 'shared/navigation' %>
+
+<section>
+  <div class="media">
+    <span class="pull-left">
+      <% if @person.image? %>
+        <%= cdn_image_tag(@person.image, size: '100x100', alt: '', class: 'media-object') %>
+      <% else %>
+        <%# @todo add placeholder image %>
+      <% end %>
+    </span>
+    <div class="media-body">
+      <h1 class="media-heading">
+        <%= @person.name %>
+      </h1>
+      <%= person_attributes(@person) %>
+    </div>
+  </div>
+
+  <% if @person.summary? %>
+    <p><%= @person.summary %></p>
+  <% end %>
+
+  <ul>
+    <li><%= link_to 'Questions', '#' %><%# @todo %></li>
+    <li><%= link_to 'Voting Record', '#' %><%# @todo %></li>
+    <li><%= link_to 'Sponsorship', '#' %><%# @todo %></li>
+    <li><%= link_to 'News', '#' %><%# @todo %></li>
+    <li><%= link_to 'Interest Groups', '#' %><%# @todo %></li>
+  </ul>
+
+  <aside>
+    <% if @person.email? %>
+      <p>Email: <%= mail_to @person.email %></p>
+    <% end %>
+    <% @person['offices'].each do |office| %>
+      <section>
+        <% if office['type'] %>
+          <header>
+            <%=t office['type'], scope: [:offices, :types], default: office['type'] %>
+          </header>
+        <% end %>
+        <% if office['phone'] %>
+          <p>Phone: <%= office['phone'] %></p>
+        <% end %>
+        <% if office['fax'] %>
+          <p>Fax: <%= office['fax'] %></p>
+        <% end %>
+        <% if office['address'] %>
+          <%= simple_format office['address'] %>
+        <% end %>
+      </section>
+    <% end %>
+  </aside>
+</section>

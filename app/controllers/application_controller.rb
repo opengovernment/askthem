@@ -7,4 +7,10 @@ class ApplicationController < ActionController::Base
     end
   end
   protect_from_forgery
+
+private
+
+  def set_jurisdiction
+    @jurisdiction ||= Metadatum.find(params[:jurisdiction])
+  end
 end

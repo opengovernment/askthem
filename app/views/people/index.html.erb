@@ -1,0 +1,29 @@
+<%= render 'shared/navigation' %>
+
+<section>
+  <ol class="media-list">
+    <% collection.asc(:chamber, :family_name).each do |person| %><%# @todo check indexes %>
+      <li class="media">
+        <span class="pull-left">
+          <% if person.image? %>
+            <%= cdn_image_tag(person.image, size: '50x50', alt: '', class: 'media-object') %>
+          <% else %>
+            <%# @todo add placeholder image %>
+          <% end %>
+        </span>
+        <div class="media-body">
+          <p>
+            <strong>
+              <%= person_attributes(person) %>
+            </strong>
+            – <%= pluralize person.questions.count, 'question' %>
+            – <%= pluralize person.answers.count, 'answer' %>
+          </p>
+          <h2 class="media-heading">
+            <%= link_to name_with_title(person), person_path(@jurisdiction.id, person) %>
+          </h2>
+        </div>
+      </li>
+    <% end %>
+  </ol>
+</section>

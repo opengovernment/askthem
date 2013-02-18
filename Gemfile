@@ -3,6 +3,8 @@ source 'https://rubygems.org'
 gem 'rails', '3.2.11'
 gem 'jquery-rails'
 
+gem 'mongoid', '~> 3.0.17'
+gem 'inherited_resources', '~> 1.3.1'
 gem 'unicorn'
 
 group :production do
@@ -11,7 +13,6 @@ end
 
 group :test, :development do
   gem 'heroku' # Rake task
-  gem 'rspec-rails'
 end
 
 group :assets do

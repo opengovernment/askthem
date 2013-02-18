@@ -1,44 +1,60 @@
 module ApplicationHelper
+  # Returns an "img" tag for the remote image.
+  #
   # @param [String] url an image URL
   # @param [Hash] opts optional arguments
   # @option opts [Integer] :width the maximum image width
   # @option opts [Integer] :height the maximum image height
+  # @return [String] the HTML for an "img" tag
   def cdn_image_tag(url, opts = {})
     width, height = opts[:size].split('x')
     image_tag("http://#{ENV['CLOUDFRONT_DOMAIN_NAME']}/#{CGI.escape(url)}/#{width}/#{height}", opts)
   end
 
-  def jurisdiction_name
-    if @area
-      @area.root.name
-    elsif @organization && @organization.area
-      @organization.area.root.name
-    elsif @post && @post.area
-      @post.area.root.name
+  # Returns an "a" tag for the navigation tab.
+  #
+  # @param [String] body the link text
+  # @param [String,Hash] url_options the link URL
+  # @param [Hash] html_options HTML attributes
+  # @return the HTML for an "a" tag
+  def tab(body, url_options, html_options = {})
+    if current_page?(url_options)
+      html_options[:class] ||= ''
+      html_options[:class] << ' active'
     end
+    link_to body, url_options, html_options
   end
 
-  def subheader_on_posts(post)
+  # Returns a person's name prefixed by their role's title
+  #
+  # @param [Person] person a person
+  # @return [String] the person's name prefixed by their role's title
+  def name_with_title(person)
+    [ @jurisdiction['chambers'][person['chamber']]['title'],
+      person.name,
+    ].join(' ')
+  end
+
+  # Returns the person's basic attributes.
+  #
+  # @param [Person] person a person
+  # @return [String] the person's attributes
+  def person_attributes(person)
     parts = []
-    parts << post.role
-    parts << post.person['party'] if post.person && post.person['party']
-    parts << area_name(post.area) if post.area
+    parts << person['party'] if person['party'].present?
+    parts << district_name(person['district']) if person['district'].present?
     parts.join(', ')
   end
 
-  def subheader_on_post(post)
-    parts = []
-    parts << post.role
-    parts << post.person['party'] if post.person && post.person['party']
-    parts << area_name(post.area) if post.area
-    parts.join(', ')
-  end
-
-  def area_name(area)
-    if area.name[/\A[\dA-Z]+\z/]
-      "District #{area.name}"
+  # Formats a district name, if necessary.
+  #
+  # @param [String] name a district name
+  # @return [String] the formatted district name
+  def district_name(name)
+    if name[/\A[\dA-Z]+\z/]
+      "District #{name}"
     else
-      area.name
+      name
     end
   end
 end

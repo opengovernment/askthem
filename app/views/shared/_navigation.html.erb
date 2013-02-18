@@ -1,13 +1,13 @@
 <section>
   <nav>
     <ul class="top_nav">
-      <li class="subject"><%= jurisdiction_name %></li>
-      <li><%= link_to 'Questions', main_app.questions_path, class: 'active' %></li>
-      <li><%= link_to 'Bills', '#' %></li>
-      <li><%= link_to 'People', '#' %></li>
-      <li><%= link_to 'Issues', '#' %></li>
-      <li><%= link_to 'Money', '#' %></li>
-      <li><%= link_to 'State Overview', '#' %></li>
+      <li class="subject"><%= @jurisdiction.name %></li>
+      <li><%= tab 'Questions', questions_path %></li>
+      <li><%= tab 'Bills', bills_path %></li>
+      <li><%= tab 'People', people_path %></li>
+      <li><%= tab 'Issues', '#' %><%# @todo %></li>
+      <li><%= tab 'Money', '#' %><%# @todo %></li>
+      <li><%= tab 'State Overview', jurisdiction_path %></li>
     </ul>
   </nav>
 </section>

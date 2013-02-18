@@ -1,13 +1,5 @@
 class QuestionsController < ApplicationController
-  def index
-  end
-
-  def show
-  end
-
-  def new
-  end
-
-  def preview
-  end
+  inherit_resources
+  respond_to :html
+  actions :index, :show, :new
 end
