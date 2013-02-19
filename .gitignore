@@ -3,3 +3,4 @@
 /tmp
 /dump-dir
 /public/assets
+/config/initializers/_heroku.rb

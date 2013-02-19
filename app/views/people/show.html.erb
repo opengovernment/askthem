@@ -11,7 +11,7 @@
     </span>
     <div class="media-body">
       <h1 class="media-heading">
-        <%= @person.name %>
+        <%= name_with_title(@person) %>
       </h1>
       <p><%= person_attributes(@person) %></p>
       <p>
@@ -21,15 +21,14 @@
     </div>
   </div>
 
-  <% if @person.summary? %>
-    <p><%= @person.summary %></p>
+  <% if @person.person_detail.biography? %>
+    <p><%= @person.person_detail.biography %></p>
   <% end %>
 
   <ul>
     <li><%= link_to 'Questions', '#' %><%# @todo %></li>
     <li><%= link_to 'Voting Record', '#' %><%# @todo %></li>
     <li><%= link_to 'Sponsorship', '#' %><%# @todo %></li>
-    <li><%= link_to 'News', '#' %><%# @todo %></li>
     <li><%= link_to 'Interest Groups', '#' %><%# @todo %></li>
   </ul>
 
@@ -41,7 +40,7 @@
       <section>
         <% if office['type'] %>
           <header>
-            <%=t office['type'], scope: [:offices, :types], default: office['type'] %>
+            <%= office['name'] || t(office['type'], scope: [:offices, :types], default: office['type']) %>
           </header>
         <% end %>
         <% if office['phone'] %>
@@ -55,5 +54,25 @@
         <% end %>
       </section>
     <% end %>
+
+    <section>
+      <header>Committees</header>
+      <%# @todo %>
+    </section>
+
+    <section>
+      <header>Bills Sponsored</header>
+      <%# @todo %>
+    </section>
+
+    <section>
+      <header>Recent Votes</header>
+      <%# @todo %>
+    </section>
+
+    <section>
+      <header>Campaign Donations</header>
+      <%# @todo %>
+    </section>
   </aside>
 </section>

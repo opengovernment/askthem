@@ -1,6 +1,10 @@
+# Billy
 class Person
   include Mongoid::Document
   store_in collection: 'legislators'
+
+  # Non-Billy
+  has_one :person_detail, autobuild: true
 
   field :full_name, type: String, as: :name
   field :leg_id, type: String, as: :slug
@@ -12,8 +16,6 @@ class Person
   field :email, type: String
   field '+gender', type: String, as: :gender
   field :photo_url, type: String, as: :image
-  field :sources, type: Array, as: :links
-  field :summary, type: String
 
   def questions # @todo
     []
