@@ -5,7 +5,7 @@ development:
     default:
       # Defines the name of the default database that Mongoid can connect to.
       # (required).
-      database: open_government_development
+      database: fiftystates
       # Provides the hosts the default session can connect to. Must be an array
       # of host:port pairs. (required)
       hosts:
@@ -78,7 +78,7 @@ test:
         # low amounts for fast failures.
         max_retries: 1
         retry_interval: 0
-<% uri = URI.parse(ENV['MONGOHQ_URL'] || ENV['MONGOLAB_URI'] || 'mongodb://127.0.0.1:27017/open_government_production') %> # https://gist.github.com/2588954
+<% uri = URI.parse(ENV['MONGOHQ_URL'] || ENV['MONGOLAB_URI'] || 'mongodb://127.0.0.1:27017/fiftystates') %> # https://gist.github.com/2588954
 production:
   sessions:
     default:
