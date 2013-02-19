@@ -1,8 +1,18 @@
-# Open Government: Local
+# Open Government: Application
 
 ## Getting Started
 
+Get the latest data from OpenStates:
+
+    ./script/openstates.sh
+
+Install or update dependencies:
+
+    rvm 1.9.3
     bundle
+
+Start the server:
+
     rails server
 
 ## Bugs? Questions?
