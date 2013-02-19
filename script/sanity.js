@@ -1,9 +1,3 @@
-/**
- * Future work
- *
- * We can validate Billy documents against their schemas.
- */
-
 var pad = '                                        ';
 
 var reportList = function (collection, field, criteria, message) {
@@ -183,7 +177,7 @@ reportTotal('legislators', {
 }, 'have a blank photo_url');
 
 // Manually review the list of party names.
-print('\nDistinct legislators party:');
+print('\nDistinct parties for manual review:');
 db.legislators.mapReduce(function () {
   emit(this.party || 'sanity', 1);
 }, function (key, values) {
