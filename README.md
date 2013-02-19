@@ -17,9 +17,9 @@ Get the latest data from OpenStates:
 
     ./script/openstates.sh
 
-Get biographies from TransparencyData:
+Get biographies from the Influence Explorer API (a third of OpenStates legislators have biographies):
 
-    bundle exec rake transparencydata:biographies
+    bundle exec rake influenceexplorer:biographies
 
 ## Bugs? Questions?
 

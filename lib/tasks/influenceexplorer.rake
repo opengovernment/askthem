@@ -1,21 +1,18 @@
-namespace :transparencydata do
-  desc 'Download biographies and biography URLs from Transparency Data'
+namespace :influenceexplorer do
+  desc 'Get biographies and biography URLs from the Influence Explorer API'
   task biographies: :environment do
     if ENV['SUNLIGHT_API_KEY']
       include ActionView::Helpers::SanitizeHelper
 
-      query = Person.where(transparencydata_id: {'$ne' => nil})
-      #progressbar = ProgressBar.create(format: '%a |%B| %p%% %e', length: 80, smoothing: 0.5, total: query.count)
+      query = Person.where(transparencydata_id: {'$ne' => ['', nil]})
+      progressbar = ProgressBar.create(format: '%a |%B| %p%% %e', length: 80, smoothing: 0.5, total: query.count)
 
       urls = []
       wait = 1
 
       query.each do |person|
-        #progressbar.increment
-        if person.person_detail.persisted?
-          print '.'
-          next
-        end
+        progressbar.increment
+        next if person.person_detail.persisted?
 
         begin
           response = JSON.parse(RestClient.get("http://transparencydata.com/api/1.0/entities/#{person.transparencydata_id.strip}.json?apikey=#{ENV['SUNLIGHT_API_KEY']}"))
@@ -35,7 +32,6 @@ namespace :transparencydata do
           end
         rescue Errno::ECONNRESET, RestClient::ServerBrokeConnection
           wait *= 2 # incremental backoff
-          puts "Waiting #{wait}..."
           sleep wait
           retry
         rescue RestClient::ResourceNotFound
@@ -43,6 +39,7 @@ namespace :transparencydata do
         end
       end
 
+      # Print entity IDs that 404.
       urls.each do |url|
         puts url
       end
