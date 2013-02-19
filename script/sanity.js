@@ -7,11 +7,11 @@
 var pad = '                                        ';
 
 var reportList = function (collection, field, criteria, message) {
-  message = message && message + ' ' || '';
+  message = message || collection + ' with invalid ' + field;
 
   var count = db[collection].count(criteria);
   if (count) {
-    print('\n' + message + collection + ' with invalid ' + field + ':');
+    print('\n' + message + ':');
     db[collection].find(criteria).forEach(function (obj) {
       if (field.indexOf('.') === -1) {
         print(obj._id + ': ' + obj[field]);
@@ -21,27 +21,14 @@ var reportList = function (collection, field, criteria, message) {
       }
     });
   }
-}
+};
 
 var reportTotal = function (collection, criteria, message) {
   var count = db[collection].count(criteria);
   if (count) {
     print('\n' + count + ' ' + collection + ' ' + message);
   }
-}
-
-var distinct = function (collection, field) {
-  print('\nDistinct ' + collection + '.' + field + ':');
-  db[collection].mapReduce(function () {
-    emit(this[field] || 'sanity', 1);
-  }, function (key, values) {
-    return Array.sum(values);
-  }, {out: {inline: 1}}).results.forEach(function (result) {
-    if (result._id != 'sanity') {
-      print(result._id + pad.substring(0, 40 - result._id.length) + result.value);
-    }
-  });
-}
+};
 
 // Do all documents belong to valid jurisdictions?
 var jurisdictions = db.metadata.distinct('_id');
@@ -83,10 +70,10 @@ db.metadata.find().forEach(function (obj) {
         '$exists': true,
         '$nin': chambers,
       },
-    }, obj._id.toUpperCase());
+    }, obj._id.toUpperCase() + ' ' + collection + ' with invalid chamber');
   });
 
-  chambers_plus_other = chambers.concat(['joint', 'other']);
+  var chambers_plus_other = chambers.concat(['joint', 'other']);
 
   reportList('events', 'participants.chamber', {
     state: obj._id,
@@ -94,9 +81,9 @@ db.metadata.find().forEach(function (obj) {
       '$exists': true,
       '$nin': chambers_plus_other,
     },
-  }, obj._id.toUpperCase());
+  }, obj._id.toUpperCase() + ' events with invalid participants.chamber (e.g. "Senate")');
 
-  chambers_plus_joint = chambers.concat(['joint']);
+  var chambers_plus_joint = chambers.concat(['joint']);
 
   reportList('committees', 'chamber', {
     state: obj._id,
@@ -104,7 +91,7 @@ db.metadata.find().forEach(function (obj) {
       '$exists': true,
       '$nin': chambers_plus_joint,
     },
-  }, obj._id.toUpperCase());
+  }, obj._id.toUpperCase() + ' committees with invalid chamber');
 
   reportList('legislators', 'roles.chamber', {
     state: obj._id,
@@ -112,17 +99,25 @@ db.metadata.find().forEach(function (obj) {
       '$exists': true,
       '$nin': chambers_plus_joint,
     },
-  }, obj._id.toUpperCase());
+  }, obj._id.toUpperCase() + ' legislators with invalid roles.chamber');
 
   ['district', 'roles.district'].forEach(function (field) {
-    criteria = {state: obj._id}
+    var criteria = {state: obj._id}
     criteria[field] = {
       '$exists': true,
       '$nin': districts,
     }
-    reportList('legislators', field, criteria, obj._id.toUpperCase());
+    reportList('legislators', field, criteria, obj._id.toUpperCase() + ' legislators with invalid ' + field);
   });
 });
+
+// Do any inactive legislators have roles?
+reportList('legislators', 'roles.state', {
+  active: false,
+  roles: {
+    '$ne': [],
+  },
+}, 'Inactive legislators with roles');
 
 // Do any legislators belong to unknown parties?
 reportList('legislators', 'party', {
@@ -130,6 +125,11 @@ reportList('legislators', 'party', {
     '$in': ['Unknown', 'unknown'],
   }
 });
+
+// Are any addresses nearly blank?
+reportList('legislators', 'offices.address', {
+  'offices.address': ',',
+}, 'Legislators with invalid offices.address (",")');
 
 // Are genders taken from a code list?
 reportList('legislators', '+gender', {
@@ -157,6 +157,23 @@ reportList('legislators', 'photo_url', {
   },
 });
 
+// Any spaces in IDs?
+['transparencydata_id', 'nimsp_id', 'nimsp_candidate_id', 'votesmart_id'].forEach(function (field) {
+  var criteria1 = {};
+  criteria1[field] = {
+    '$exists': true,
+    '$in': [/ /],
+  };
+  reportList('legislators', field, criteria1);
+
+  var criteria2 = {};
+  criteria2[field] = {
+    '$exists': true,
+    '$in': ['', null],
+  };
+  reportTotal('legislators', criteria2, 'have a blank ' + field + ' ("" or null)');
+});
+
 // Are any photo URLs blank?
 reportTotal('legislators', {
   photo_url: {
@@ -166,6 +183,15 @@ reportTotal('legislators', {
 }, 'have a blank photo_url');
 
 // Manually review the list of party names.
-distinct('legislators', 'party');
+print('\nDistinct legislators party:');
+db.legislators.mapReduce(function () {
+  emit(this.party || 'sanity', 1);
+}, function (key, values) {
+  return Array.sum(values);
+}, {out: {inline: 1}}).results.forEach(function (result) {
+  if (result._id != 'sanity') {
+    print(result._id + pad.substring(0, 40 - result._id.length) + result.value);
+  }
+});
 
-print('Done!');
+print('\nDone!');
