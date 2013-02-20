@@ -179,13 +179,13 @@ reportTotal('legislators', {
 // Manually review the list of party names.
 print('\nDistinct parties for manual review:');
 db.legislators.mapReduce(function () {
-  emit(this.party || 'sanity', 1);
+  if (this.party) {
+    emit(this.party, 1);
+  }
 }, function (key, values) {
   return Array.sum(values);
 }, {out: {inline: 1}}).results.forEach(function (result) {
-  if (result._id != 'sanity') {
-    print(result._id + pad.substring(0, 40 - result._id.length) + result.value);
-  }
+  print(result._id + pad.substring(0, 40 - result._id.length) + result.value);
 });
 
 print('\nDone!');
