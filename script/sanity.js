@@ -1,5 +1,6 @@
-var pad = '                                        ';
-
+// Finds documents in the given collection matching the given criteria. If any
+// documents are found, prints the given message and, for each document, prints
+// its ID and the value of the given field.
 var reportList = function (collection, field, criteria, message) {
   message = message || collection + ' with invalid ' + field;
 
@@ -17,6 +18,9 @@ var reportList = function (collection, field, criteria, message) {
   }
 };
 
+// Finds documents in the given collection matching the given criteria. If any
+// documents are found, prints the number of documents found e.g. "100 bills"
+// followed by the given message.
 var reportTotal = function (collection, criteria, message) {
   var count = db[collection].count(criteria);
   if (count) {
@@ -24,7 +28,7 @@ var reportTotal = function (collection, criteria, message) {
   }
 };
 
-// Do all documents belong to valid jurisdictions?
+// Do all documents belong to valid jurisdictions? (always passes, thus far)
 var jurisdictions = db.metadata.distinct('_id');
 ['bills', 'committees', 'events', 'legislators', 'votes'].forEach(function (collection) {
   reportList(collection, 'state', {
@@ -125,7 +129,7 @@ reportList('legislators', 'offices.address', {
   'offices.address': ',',
 }, 'Legislators with invalid offices.address (",")');
 
-// Are genders taken from a code list?
+// Are all genders taken from a code list?
 reportList('legislators', '+gender', {
   '+gender': {
     '$exists': true,
@@ -133,7 +137,7 @@ reportList('legislators', '+gender', {
   },
 });
 
-// Are office types taken from a code list?
+// Are all office types taken from a code list?
 reportList('legislators', 'offices.type', {
   'offices': {
     '$ne': [],
@@ -175,6 +179,9 @@ reportTotal('legislators', {
     '$in': ['', null],
   },
 }, 'have a blank photo_url');
+
+// Used as part of a poor man's sprintf to align party counts.
+var pad = '                                        ';
 
 // Manually review the list of party names.
 print('\nDistinct parties for manual review:');
