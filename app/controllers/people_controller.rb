@@ -8,6 +8,6 @@ class PeopleController < ApplicationController
 private
 
   def collection
-    end_of_association_chain.where(state: @jurisdiction.id, active: true)
+    @people ||= end_of_association_chain.where(state: @jurisdiction.id, active: true)
   end
 end

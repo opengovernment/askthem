@@ -8,7 +8,7 @@ module ApplicationHelper
   # @return [String] the HTML for an "img" tag
   def cdn_image_tag(url, opts = {})
     width, height = opts[:size].split('x')
-    image_tag("http://#{ENV['CLOUDFRONT_DOMAIN_NAME']}/#{CGI.escape(url)}/#{width}/#{height}", opts)
+    image_tag("http://d2xfsikitl0nz3.cloudfront.net/#{CGI.escape(url)}/#{width}/#{height}", opts)
   end
 
   # Returns an "a" tag for the navigation tab.

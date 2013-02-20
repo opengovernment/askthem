@@ -2,10 +2,6 @@
 
 ## Getting Started
 
-Get the latest data from OpenStates:
-
-    ./script/openstates.sh
-
 Install or update dependencies:
 
     rvm 1.9.3
@@ -14,6 +10,16 @@ Install or update dependencies:
 Start the server:
 
     rails server
+
+## Pulling Data
+
+Get the latest data from OpenStates:
+
+    ./script/openstates.sh
+
+Get biographies from the Influence Explorer API (a third of OpenStates legislators have biographies):
+
+    bundle exec rake influenceexplorer:biographies
 
 ## Bugs? Questions?
 

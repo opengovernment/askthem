@@ -7,6 +7,10 @@ gem 'mongoid', '~> 3.0.17'
 gem 'inherited_resources', '~> 1.3.1'
 gem 'unicorn'
 
+# Rake tasks
+gem 'ruby-progressbar'
+gem 'rest-client'
+
 group :production do
   gem 'newrelic_rpm'
 end

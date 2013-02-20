@@ -118,6 +118,7 @@ GEM
       railties (~> 3.1)
     rest-client (1.6.7)
       mime-types (>= 1.16)
+    ruby-progressbar (1.0.1)
     rubyzip (0.9.9)
     sass (3.2.5)
     sass-rails (3.2.6)
@@ -155,6 +156,8 @@ DEPENDENCIES
   mongoid (~> 3.0.17)
   newrelic_rpm
   rails (= 3.2.11)
+  rest-client
+  ruby-progressbar
   sass-rails (~> 3.2.3)
   uglifier (>= 1.0.3)
   unicorn

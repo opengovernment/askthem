@@ -2,7 +2,7 @@
 
 <section>
   <ol class="media-list">
-    <% collection.asc(:chamber, :family_name).each do |person| %><%# @todo check indexes %>
+    <% @people.asc(:chamber, :family_name).each do |person| %><%# @todo check indexes %>
       <li class="media">
         <span class="pull-left">
           <% if person.image? %>
@@ -13,9 +13,7 @@
         </span>
         <div class="media-body">
           <p>
-            <strong>
-              <%= person_attributes(person) %>
-            </strong>
+            <%= person_attributes(person) %>
             – <%= pluralize person.questions.count, 'question' %>
             – <%= pluralize person.answers.count, 'answer' %>
           </p>
