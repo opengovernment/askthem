@@ -1,0 +1,56 @@
+// Place all the styles related to the people controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "compass";
+
+$darkblue: #2b464e;
+$context: #c8c8c8;
+
+@mixin rounded_corners($border-radius:3px){
+  @include border-radius($border-radius);
+}
+
+section.people{
+  header{
+    position:relative;
+    a.cta_pill{
+      float:right;
+    }
+  }
+  div.person_info{
+    display:inline-block;
+    width: 59.61538%;
+  }
+  div.person_photo{
+    display:inline-block;
+    vertical-align:top;
+  }
+  img.person_photo{
+    margin-right:20px;
+    @include rounded_corners();
+  }
+  div.person_details{
+    display:inline-block;
+    margin-bottom:24px;
+  }
+  h2{
+    font-size:1em;
+    line-height: 1.5em;
+    font-weight:600;
+  }
+  .attr{
+    span.count{
+      display:inline-block;
+      margin-right:20px;
+      color:#7b969e;
+      font-size:0.813em;
+      line-height: 1.385em;
+    }
+  }
+  p{
+    color:#7b969e;
+    font-size:0.813em;
+    line-height: 1.385em;
+  }
+}

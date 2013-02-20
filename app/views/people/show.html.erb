@@ -1,59 +1,238 @@
 <%= render 'shared/navigation' %>
 
-<section>
-  <div class="media">
-    <span class="pull-left">
-      <% if @person.image? %>
-        <%= cdn_image_tag(@person.image, size: '100x100', alt: '', class: 'media-object') %>
-      <% else %>
-        <%# @todo add placeholder image %>
+<section class="people">
+  <header>
+    <div class="person_info">
+        <% if @person.image? %>
+        <div class="person_photo">
+          <%= cdn_image_tag(@person.image, size: '80x80', alt: '', class: 'person_photo') %>
+        </div>
+        <% else %>
+          <%# @todo add placeholder image %>
+        <% end %>
+        
+        <div class="person_details">
+          <h1><%= @person.name %></h1>
+          <h2><%= person_attributes(@person) %></h2>
+          <div class="attr">
+            <span class="count"><%= pluralize @person.questions.count, 'question' %></span>
+            <span class="count"><%= pluralize @person.answers.count, 'answer' %></span>
+          </div>
+        </div>
+      
+      <% if @person.summary? %>
+        <p><%= truncate(@person.summary, :length => 130) %> <%= link_to 'Read more on Wikipedia', '#' %><%# @todo %></p>
       <% end %>
-    </span>
-    <div class="media-body">
-      <h1 class="media-heading">
-        <%= @person.name %>
-      </h1>
-      <p><%= person_attributes(@person) %></p>
-      <p>
-        <%= pluralize @person.questions.count, 'question' %>
-        <%= pluralize @person.answers.count, 'answer' %>
-      </p>
+      <p><%= truncate("Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", :length => 130) %> <%= link_to 'Read more on Wikipedia', '#' %></p>
+    </div>
+    <%= link_to 'Ask them a Question', new_question_path, class: 'cta_pill' %>
+  </header>
+  
+  <div class="related_wrap">
+    <div class="related_data">
+      <nav>
+        <ul class="related_nav">
+          <li><%= link_to 'Questions', '#', class: 'active' %><%# @todo %></li>
+          <li><%= link_to 'Voting Record', '#' %><%# @todo %></li>
+          <li><%= link_to 'Sponsorship', '#' %><%# @todo %></li>
+          <li><%= link_to 'News', '#' %><%# @todo %></li>
+          <li><%= link_to 'Interest Groups', '#' %><%# @todo %></li>
+        </ul>
+      </nav>
+    
+      <div class="related_content">
+        <section class="questions related_focus">
+          <ol>
+            <li>
+              <div class="rating">
+                <span class="count">25</span>
+              </div>
+              <div class="question_content">
+                <%= link_to 'Why have this thing for act for what?', '/questions/show', class: 'title' %>
+                <p>Lorem ipsum dolor sit amet, adipisicing elit, sed do  tempor incididunt ut labore et dolore magna aliqua sed do eiusmod tempor  ut&hellip; <span class="context">&rarr; in Pennsylvania Bills</span></p>
+                <%= link_to '12 comments', '#', class: 'comment_count' %>
+              </div>
+              <div class="question_attr">
+                <span class="author">posted by <%= link_to image_tag('http://lorempixel.com/40/40/people/', size: '20x20', alt: '') + 'Steve T', '#' %></span>
+              </div>
+            </li>
+
+            <li>
+              <div class="rating">
+                <span class="count">25</span>
+              </div>
+              <div class="question_content">
+                <%= link_to 'Why have this thing for act for what?', '/questions/show', class: 'title' %>
+                <p>Lorem ipsum dolor sit amet, adipisicing elit, sed do  tempor incididunt ut labore et dolore magna aliqua sed do eiusmod tempor  ut&hellip; <span class="context">&rarr; in Pennsylvania Bills</span></p>
+                <%= link_to '12 comments', '#', class: 'comment_count' %>
+              </div>
+              <div class="question_attr">
+                <span class="author">posted by <%= link_to image_tag('http://lorempixel.com/40/40/people/', size: '20x20', alt: '') + 'Steve T', '#' %></span>
+              </div>
+            </li>
+        
+            <li>
+              <div class="rating">
+                <span class="count">25</span>
+              </div>
+              <div class="question_content">
+                <%= link_to 'Why have this thing for act for what?', '/questions/show', class: 'title' %>
+                <p>Lorem ipsum dolor sit amet, adipisicing elit, sed do  tempor incididunt ut labore et dolore magna aliqua sed do eiusmod tempor  ut&hellip; <span class="context">&rarr; in Pennsylvania Bills</span></p>
+                <%= link_to '12 comments', '#', class: 'comment_count' %>
+              </div>
+              <div class="question_attr">
+                <span class="author">posted by <%= link_to image_tag('http://lorempixel.com/40/40/people/', size: '20x20', alt: '') + 'Steve T', '#' %></span>
+              </div>
+            </li>
+          
+            <li>
+              <div class="rating">
+                <span class="count">25</span>
+              </div>
+              <div class="question_content">
+                <%= link_to 'Why have this thing for act for what?', '/questions/show', class: 'title' %>
+                <p>Lorem ipsum dolor sit amet, adipisicing elit, sed do  tempor incididunt ut labore et dolore magna aliqua sed do eiusmod tempor  ut&hellip; <span class="context">&rarr; in Pennsylvania Bills</span></p>
+                <%= link_to '12 comments', '#', class: 'comment_count' %>
+              </div>
+              <div class="question_attr">
+                <span class="author">posted by <%= link_to image_tag('http://lorempixel.com/40/40/people/', size: '20x20', alt: '') + 'Steve T', '#' %></span>
+              </div>
+            </li>
+        
+            <li>
+              <div class="rating">
+                <span class="count">25</span>
+              </div>
+              <div class="question_content">
+                <%= link_to 'Why have this thing for act for what?', '/questions/show', class: 'title' %>
+                <p>Lorem ipsum dolor sit amet, adipisicing elit, sed do  tempor incididunt ut labore et dolore magna aliqua sed do eiusmod tempor  ut&hellip; <span class="context">&rarr; in Pennsylvania Bills</span></p>
+                <%= link_to '12 comments', '#', class: 'comment_count' %>
+              </div>
+              <div class="question_attr">
+                <span class="author">posted by <%= link_to image_tag('http://lorempixel.com/40/40/people/', size: '20x20', alt: '') + 'Steve T', '#' %></span>
+              </div>
+            </li>
+          
+            <li>
+              <div class="rating">
+                <span class="count">25</span>
+              </div>
+              <div class="question_content">
+                <%= link_to 'Why have this thing for act for what?', '/questions/show', class: 'title' %>
+                <p>Lorem ipsum dolor sit amet, adipisicing elit, sed do  tempor incididunt ut labore et dolore magna aliqua sed do eiusmod tempor  ut&hellip; <span class="context">&rarr; in Pennsylvania Bills</span></p>
+                <%= link_to '12 comments', '#', class: 'comment_count' %>
+              </div>
+              <div class="question_attr">
+                <span class="author">posted by <%= link_to image_tag('http://lorempixel.com/40/40/people/', size: '20x20', alt: '') + 'Steve T', '#' %></span>
+              </div>
+            </li>
+        
+            <li>
+              <div class="rating">
+                <span class="count">25</span>
+              </div>
+              <div class="question_content">
+                <%= link_to 'Why have this thing for act for what?', '/questions/show', class: 'title' %>
+                <p>Lorem ipsum dolor sit amet, adipisicing elit, sed do  tempor incididunt ut labore et dolore magna aliqua sed do eiusmod tempor  ut&hellip; <span class="context">&rarr; in Pennsylvania Bills</span></p>
+                <%= link_to '12 comments', '#', class: 'comment_count' %>
+              </div>
+              <div class="question_attr">
+                <span class="author">posted by <%= link_to image_tag('http://lorempixel.com/40/40/people/', size: '20x20', alt: '') + 'Steve T', '#' %></span>
+              </div>
+            </li>
+          </ol>
+        </section>
+    
+        <aside>
+          <% if @person.email? %>
+            <h4>Email:</h4><p><%= mail_to @person.email %></p>
+          <% end %>
+    
+          <% @person['offices'].each do |office| %>
+            <section>
+              <% if office['type'] %>
+                <h4>
+                  <%=t office['type'], scope: [:offices, :types], default: office['type'] %>
+                </h4>
+              <% end %>
+              <ul>
+                <% if office['phone'] %>
+                  <li>Phone: <%= office['phone'] %></li>
+                <% end %>
+                <% if office['fax'] %>
+                  <li>Fax: <%= office['fax'] %></li>
+                <% end %>
+                <% if office['address'] %>
+                  <li><%= simple_format office['address'] %></li>
+                <% end %>
+              </ul>
+            </section>
+          <% end %>
+        
+          <section>
+            <h4>Committees</h4>
+            <ul>
+              <li>
+                <%= link_to 'Committee link A', '#' %>
+              </li>
+              <li>
+                <%= link_to 'Committee link B', '#' %>
+              </li>
+            </ul>
+          </section>
+        
+          <section>
+            <h4>Bills Sponsored</h4>
+            <ul>
+              <li>
+                Cosponsor of <%= link_to 'SB 220', '#' %> Identity Fraud - Prohibition of Unauthorized Skimming and Re-Encoding Devices
+              </li>
+              <li>
+                Cosponsor of <%= link_to 'SB 220', '#' %> Identity Fraud - Prohibition of Unauthorized Skimming and Re-Encoding Devices
+              </li>
+            </ul>
+          </section>
+        
+          <section>
+            <h4>Recent Votes</h4>
+            <ul>
+              <li>
+                Yes on <%= link_to 'SB 220', '#' %> motion Third Reading, January 24, 2013
+              </li>
+              <li>
+                No on <%= link_to 'SB 400', '#' %> motion Third Reading, January 24, 2013
+              </li>
+            </ul>
+          </section>
+        
+          <section>
+            <h4>Campaign Donations</h4>
+            <ul>
+              <li>
+                Yes on <%= link_to 'SB 220', '#' %> motion Third Reading, January 24, 2013
+              </li>
+              <li>
+                No on <%= link_to 'SB 400', '#' %> motion Third Reading, January 24, 2013
+              </li>
+            </ul>
+          </section>
+        
+          <section>
+            <h4>News Coverage</h4>
+            <ul>
+              <li>
+                And here we have some news coverage <%= link_to 'read on NYTimes.com', '#' %>
+              </li>
+              <li>
+                And here we have some news coverage <%= link_to 'read on boston.com', '#' %>
+              </li>
+            </ul>
+          </section>
+        
+        
+        </aside>
+      </div>
     </div>
   </div>
-
-  <% if @person.summary? %>
-    <p><%= @person.summary %></p>
-  <% end %>
-
-  <ul>
-    <li><%= link_to 'Questions', '#' %><%# @todo %></li>
-    <li><%= link_to 'Voting Record', '#' %><%# @todo %></li>
-    <li><%= link_to 'Sponsorship', '#' %><%# @todo %></li>
-    <li><%= link_to 'News', '#' %><%# @todo %></li>
-    <li><%= link_to 'Interest Groups', '#' %><%# @todo %></li>
-  </ul>
-
-  <aside>
-    <% if @person.email? %>
-      <p>Email: <%= mail_to @person.email %></p>
-    <% end %>
-    <% @person['offices'].each do |office| %>
-      <section>
-        <% if office['type'] %>
-          <header>
-            <%=t office['type'], scope: [:offices, :types], default: office['type'] %>
-          </header>
-        <% end %>
-        <% if office['phone'] %>
-          <p>Phone: <%= office['phone'] %></p>
-        <% end %>
-        <% if office['fax'] %>
-          <p>Fax: <%= office['fax'] %></p>
-        <% end %>
-        <% if office['address'] %>
-          <%= simple_format office['address'] %>
-        <% end %>
-      </section>
-    <% end %>
-  </aside>
+  
 </section>

@@ -5,13 +5,17 @@ h1{
   font-weight: 100;
 }
 h2{
-
+  font-size:1.125em;
+  line-height: 1.333em;
 }
 h3{
 
 }
 h4{
-
+  color:#2b464e;
+  font-size:0.813em;
+  line-height: 1.385em;
+  padding-bottom:6px;
 }
 h5{
   color:#3c636e;
@@ -26,6 +30,9 @@ footer h5{
 }
 p{
 
+}
+strong{
+  font-weight:600;
 }
 span.info{
   color:#a2adae;

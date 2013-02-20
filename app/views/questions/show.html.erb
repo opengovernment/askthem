@@ -3,14 +3,17 @@
 <section class="question">
   <article>
     <header>
-      <h2>To <strong>Ron Paul</strong> <span>(R- 6th House District)</span></h2>
+      <%# @todo %>
+      <%# Need conditional for "if: bill, elsif: member, else" to target this header %>
+      <h2>To <strong><%= link_to 'Ron Paul', '#' %></strong> <span>(R- 6th House District)</span></h2>
+      <h2>On <strong><%= link_to truncate('Bill Name, it might be CISPA', :length => 5), '#', %></strong></h2>
       <h1>What for dost doth under thy venerable name?</h1>
     </header>
     <p>Several points I think the bill is unconstitutional: first It already lacks the constitutionally required final determination of which rules should allow access to communications data (just legal Zitiergebot). second It lacks the constitutionally required limitation of data access to individual cases. third Contrary to the requirements of the Federal Constitutional Court are requests for communications data by police not be restricted to cases of specific risk or suspicion of a misdemeanor or felony. Contrary to the requirements of the Federal Constitutional Court is the identification of Internet users are even allowed to identify minor offenses.</p>
     <p>Contrary to the requirements of the Federal Constitutional Court is the identification of Internet users are even allowed to identify minor offenses. Should allow access to communications data (just legal Zitiergebot).</p>
     <span class="author_wrap">
       <span class="posted">Posted 1 hour ago by</span>
-      <span class="author"><%= link_to image_tag('http://lorempixel.com/40/40/people/', size: '40x40', alt: '')Steve T', '#' %></span>
+      <span class="author"><%= link_to image_tag('http://lorempixel.com/40/40/people/', size: '40x40', alt: ''), 'Steve T'%></span>
     </span>
 
     <div class="support">
