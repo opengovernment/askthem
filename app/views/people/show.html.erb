@@ -10,7 +10,7 @@
         <% else %>
           <%# @todo add placeholder image %>
         <% end %>
-        
+
         <div class="person_details">
           <h1><%= name_with_title(@person) %></h1>
           <h2><%= person_attributes(@person) %></h2>
@@ -19,15 +19,14 @@
             <span class="count"><%= pluralize @person.answers.count, 'answer' %></span>
           </div>
         </div>
-      
-      <% if @person.summary? %>
-        <p><%= truncate(@person.summary, :length => 130) %> <%= link_to 'Read more on Wikipedia', '#' %><%# @todo %></p>
+
+      <% if @person.person_detail.biography? %>
+        <p><%= truncate(@person.person_detail.biography, length: 130) %> <%= link_to 'Read more on Wikipedia', @person.person_detail.links.find_by(note: 'Wikipedia').url %></p>
       <% end %>
-      <p><%= truncate("Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", :length => 130) %> <%= link_to 'Read more on Wikipedia', '#' %></p>
     </div>
     <%= link_to 'Ask them a Question', new_question_path, class: 'cta_pill' %>
   </header>
-  
+
   <div class="related_wrap">
     <div class="related_data">
       <nav>
@@ -39,7 +38,7 @@
           <li><%= link_to 'Interest Groups', '#' %><%# @todo %></li>
         </ul>
       </nav>
-    
+
       <div class="related_content">
         <section class="questions related_focus">
           <ol>
@@ -70,7 +69,7 @@
                 <span class="author">posted by <%= link_to image_tag('http://lorempixel.com/40/40/people/', size: '20x20', alt: '') + 'Steve T', '#' %></span>
               </div>
             </li>
-        
+
             <li>
               <div class="rating">
                 <span class="count">25</span>
@@ -84,7 +83,7 @@
                 <span class="author">posted by <%= link_to image_tag('http://lorempixel.com/40/40/people/', size: '20x20', alt: '') + 'Steve T', '#' %></span>
               </div>
             </li>
-          
+
             <li>
               <div class="rating">
                 <span class="count">25</span>
@@ -98,7 +97,7 @@
                 <span class="author">posted by <%= link_to image_tag('http://lorempixel.com/40/40/people/', size: '20x20', alt: '') + 'Steve T', '#' %></span>
               </div>
             </li>
-        
+
             <li>
               <div class="rating">
                 <span class="count">25</span>
@@ -112,7 +111,7 @@
                 <span class="author">posted by <%= link_to image_tag('http://lorempixel.com/40/40/people/', size: '20x20', alt: '') + 'Steve T', '#' %></span>
               </div>
             </li>
-          
+
             <li>
               <div class="rating">
                 <span class="count">25</span>
@@ -126,7 +125,7 @@
                 <span class="author">posted by <%= link_to image_tag('http://lorempixel.com/40/40/people/', size: '20x20', alt: '') + 'Steve T', '#' %></span>
               </div>
             </li>
-        
+
             <li>
               <div class="rating">
                 <span class="count">25</span>
@@ -142,12 +141,12 @@
             </li>
           </ol>
         </section>
-    
+
         <aside>
           <% if @person.email? %>
             <h4>Email:</h4><p><%= mail_to @person.email %></p>
           <% end %>
-    
+
           <% @person['offices'].each do |office| %>
             <section>
               <% if office['type'] %>
@@ -168,7 +167,7 @@
               </ul>
             </section>
           <% end %>
-        
+
           <section>
             <h4>Committees</h4>
             <ul>
@@ -180,7 +179,7 @@
               </li>
             </ul>
           </section>
-        
+
           <section>
             <h4>Bills Sponsored</h4>
             <ul>
@@ -192,7 +191,7 @@
               </li>
             </ul>
           </section>
-        
+
           <section>
             <h4>Recent Votes</h4>
             <ul>
@@ -204,7 +203,7 @@
               </li>
             </ul>
           </section>
-        
+
           <section>
             <h4>Campaign Donations</h4>
             <ul>
@@ -216,7 +215,7 @@
               </li>
             </ul>
           </section>
-        
+
           <section>
             <h4>News Coverage</h4>
             <ul>
@@ -228,8 +227,6 @@
               </li>
             </ul>
           </section>
-        
-        
         </aside>
       </div>
     </div>

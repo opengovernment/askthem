@@ -3,7 +3,6 @@
 <section class="bills">
   <header>
     <div class="bill_info">
-        
         <div class="bill_details">
           <h2><strong>SB 471</strong> 2013 <a href="#">Read the complete bill &rarr;</a></h2>
           <h1><%= @bill.title %></h1>
@@ -13,12 +12,11 @@
             <span class="count"><%= pluralize @bill.answers.count, 'answer' %></span>
           </div>
         </div>
-      
     </div>
     <%= link_to 'Ask about this Bill', new_question_path, class: 'cta_pill' %>
     <%= link_to 'Tell your Senator what you think', '#', class: 'sim_act' %>
   </header>
-  
+
   <div class="related_wrap">
     <div class="related_data">
       <nav>
@@ -30,7 +28,7 @@
           <li><%= link_to 'Interest Groups', '#' %><%# @todo %></li>
         </ul>
       </nav>
-    
+
       <div class="related_content">
         <section class="questions related_focus">
           <ol>
@@ -61,7 +59,7 @@
                 <span class="author">posted by <%= link_to image_tag('http://lorempixel.com/40/40/people/', size: '20x20', alt: '') + 'Steve T', '#' %></span>
               </div>
             </li>
-        
+
             <li>
               <div class="rating">
                 <span class="count">25</span>
@@ -75,7 +73,7 @@
                 <span class="author">posted by <%= link_to image_tag('http://lorempixel.com/40/40/people/', size: '20x20', alt: '') + 'Steve T', '#' %></span>
               </div>
             </li>
-          
+
             <li>
               <div class="rating">
                 <span class="count">25</span>
@@ -89,7 +87,7 @@
                 <span class="author">posted by <%= link_to image_tag('http://lorempixel.com/40/40/people/', size: '20x20', alt: '') + 'Steve T', '#' %></span>
               </div>
             </li>
-        
+
             <li>
               <div class="rating">
                 <span class="count">25</span>
@@ -103,7 +101,7 @@
                 <span class="author">posted by <%= link_to image_tag('http://lorempixel.com/40/40/people/', size: '20x20', alt: '') + 'Steve T', '#' %></span>
               </div>
             </li>
-          
+
             <li>
               <div class="rating">
                 <span class="count">25</span>
@@ -117,7 +115,7 @@
                 <span class="author">posted by <%= link_to image_tag('http://lorempixel.com/40/40/people/', size: '20x20', alt: '') + 'Steve T', '#' %></span>
               </div>
             </li>
-        
+
             <li>
               <div class="rating">
                 <span class="count">25</span>
@@ -133,12 +131,12 @@
             </li>
           </ol>
         </section>
-    
+
         <aside>
           <% if @person.email? %>
             <h4>Email:</h4><p><%= mail_to @person.email %></p>
           <% end %>
-    
+
           <% @person['offices'].each do |office| %>
             <section>
               <% if office['type'] %>
@@ -159,7 +157,7 @@
               </ul>
             </section>
           <% end %>
-        
+
           <section>
             <h4>Committees</h4>
             <ul>
@@ -171,7 +169,7 @@
               </li>
             </ul>
           </section>
-        
+
           <section>
             <h4>Bills Sponsored</h4>
             <ul>
@@ -183,7 +181,7 @@
               </li>
             </ul>
           </section>
-        
+
           <section>
             <h4>Recent Votes</h4>
             <ul>
@@ -195,7 +193,7 @@
               </li>
             </ul>
           </section>
-        
+
           <section>
             <h4>Campaign Donations</h4>
             <ul>
@@ -207,7 +205,7 @@
               </li>
             </ul>
           </section>
-        
+
           <section>
             <h4>News Coverage</h4>
             <ul>
@@ -219,8 +217,6 @@
               </li>
             </ul>
           </section>
-        
-        
         </aside>
       </div>
     </div>
