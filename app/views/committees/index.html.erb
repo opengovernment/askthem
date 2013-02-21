@@ -1,5 +1,25 @@
 <%= render 'shared/navigation' %>
 
 <section>
-  TODO: Committees
+  <ol>
+    <% @committees.asc(:committee, :subcommittee).each do |committee| %><%# @todo check indexes %>
+      <li>
+        <%= committee['chamber'] %>
+        <% if committee['subcommittee'] %>
+          <%= link_to committee['committee'], committee_path(@jurisdiction.id, parent_id) %>:
+          <%= link_to committee['subcommittee'], committee_path(@jurisdiction.id, committee) %>
+        <% else %>
+          <%= link_to committee['committee'], committee_path(@jurisdiction.id, committee) %>
+        <% end %>
+        <ul>
+          <% committee['members'].each do |member| %>
+            <li>
+              <%= link_to member['name'], member['leg_id'] %>
+              <%= member['role'] %>
+            </li>
+          <% end %>
+        </ul>
+      </li>
+    <% end %>
+  </ol>
 </section>
