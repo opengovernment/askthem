@@ -1,0 +1,6 @@
+{ "_id" : { "key" : "_id" }, "value" : { "type" : "String" }, "totalOccurrences" : 6824, "percentContaining" : 100 }
+{ "_id" : { "key" : "name" }, "value" : { "type" : "String" }, "totalOccurrences" : 6824, "percentContaining" : 100 }
+{ "_id" : { "key" : "chamber" }, "value" : { "type" : "String" }, "totalOccurrences" : 6824, "percentContaining" : 100 }
+{ "_id" : { "key" : "abbr" }, "value" : { "type" : "String" }, "totalOccurrences" : 6824, "percentContaining" : 100 }
+{ "_id" : { "key" : "boundary_id" }, "value" : { "type" : "String" }, "totalOccurrences" : 6824, "percentContaining" : 100 }
+{ "_id" : { "key" : "num_seats" }, "value" : { "type" : "Number" }, "totalOccurrences" : 6824, "percentContaining" : 100 }

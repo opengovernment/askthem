@@ -1,0 +1,4 @@
+{ "_id" : { "key" : "_id" }, "value" : { "type" : "String" }, "totalOccurrences" : 30792, "percentContaining" : 100 }
+{ "_id" : { "key" : "remote" }, "value" : { "type" : "String" }, "totalOccurrences" : 30792, "percentContaining" : 100 }
+{ "_id" : { "key" : "abbr" }, "value" : { "type" : "String" }, "totalOccurrences" : 30792, "percentContaining" : 100 }
+{ "_id" : { "key" : "normal" }, "value" : { "type" : "Array" }, "totalOccurrences" : 30792, "percentContaining" : 100 }
