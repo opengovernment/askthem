@@ -3,4 +3,6 @@
 /tmp
 /dump-dir
 /public/assets
+/dump
+latest-mongo-dump.tar.gz
 /config/initializers/_heroku.rb

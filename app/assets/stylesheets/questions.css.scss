@@ -27,6 +27,7 @@ section.questions{
   ol>li{
     border-bottom: 1px solid #E5EBE9;
     padding-bottom: 27px;
+    position:relative;
     margin-bottom: 27px;
     width:100%;
     &:last-child{
@@ -81,10 +82,11 @@ section.questions{
       }
     }
     div.question_attr{
-      display:inline-block;
-      margin-left:10.25641%;
+      display: inline-block;
+      position: absolute;
       vertical-align: top;
-      width:19.230769%;
+      right: 10px;
+      bottom: 27px;
       span.followers{
         background:url(/assets/followers_icon@2x.png) no-repeat left top transparent;
         background-size:15px 14px;
@@ -134,13 +136,6 @@ section.question{
     h1{
       padding-top:18px;
       padding-bottom:24px;
-    }
-    h2{
-      font-size:1.125em;
-      line-height: 1.333em;
-      strong{
-        font-weight:600;
-      }
     }
     p{
       font-size:1em;
