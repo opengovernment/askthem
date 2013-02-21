@@ -30,9 +30,13 @@ var reportTotal = function (collection, criteria, message) {
 
 // Foreign keys ////////////////////////////////////////////////////////////////
 
-var reportInvalidForeignKeys = function (collection, field, relation) {
+var reportInvalidForeignKeys = function (collection, field, relation, callback) {
   var ids = db[collection].distinct(field);
   ids.splice(ids.indexOf(null), 1);
+  if (callback) {
+    ids = ids.filter(callback);
+  }
+
   var result = db[relation].find({
     _all_ids: {
       '$in': ids,
@@ -59,7 +63,12 @@ reportInvalidForeignKeys('legislators', 'roles.committee_id', 'committees');
 reportInvalidForeignKeys('bills', 'sponsors.leg_id', 'legislators');
 reportInvalidForeignKeys('bills', 'actions.committee', 'committees');
 reportInvalidForeignKeys('bills', 'companions.internal_id', 'bills');
-// @todo actions.related_entities.id according to actions.related_entities.type
+reportInvalidForeignKeys('bills', 'actions.related_entities.id', 'committees', function (id) {
+  return /C[0-9]{6}$/.test(id);
+});
+reportInvalidForeignKeys('bills', 'actions.related_entities.id', 'legislators', function (id) {
+  return /L[0-9]{6}$/.test(id);
+});
 
 // Valid jurisdictions, chambers and districts /////////////////////////////////
 
