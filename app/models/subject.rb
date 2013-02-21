@@ -1,5 +1,5 @@
 # Billy
 class Subject
   include Mongoid::Document
-  # @todo
+  # @todo remote, abbr, normal (array)
 end
