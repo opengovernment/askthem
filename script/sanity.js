@@ -83,7 +83,7 @@ var reportAsymmetricForeignKeys = function (parent, child, parent_dot_notation, 
     document[fields[0]].forEach(function (subdocument) {
       var id = subdocument[fields[1]];
       if (id) {
-        var criteria = {_id: id};
+        var criteria = {_all_ids: id};
         criteria[child_dot_notation] = document._id;
         if (!db[child].count(criteria)) {
           count += 1;
