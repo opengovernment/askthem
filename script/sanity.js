@@ -320,6 +320,20 @@ reportList('bills', 'sponsors.type', {
 
 // Invalid values //////////////////////////////////////////////////////////////
 
+// abbreviation should be equal to _id.
+reportList('metadata', 'abbreviation', {
+  '$where': function () {
+    return this._id != this.abbreviation;
+  },
+}, 'metadata whose abbreviation is not equal to _id');
+
+// leg_id should be equal to _id.
+reportList('legislators', 'leg_id', {
+  '$where': function () {
+    return this._id != this.leg_id;
+  },
+}, 'legislators whose leg_id is not equal to _id');
+
 // Do any inactive legislators have roles?
 reportList('legislators', 'roles.state', {
   active: false,

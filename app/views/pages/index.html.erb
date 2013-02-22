@@ -1,10 +1,8 @@
 <section>
-  TODO: Home page
-
   <ul>
     <% @jurisdictions.each do |jurisdiction| %>
       <li>
-        <%= link_to jurisdiction.name, jurisdiction_path(jurisdiction: jurisdiction.id) %>
+        <%= link_to jurisdiction['name'], jurisdiction_path(jurisdiction: jurisdiction.id) %>
       </li>
     <% end %>
   </ul>

@@ -3,7 +3,7 @@
 <section>
   <%= @committee['chamber'] %>
   <% if @committee['subcommittee'] %>
-    <%= link_to @committee['committee'], committee_path(@jurisdiction.id, @committee.parent_id) %>:
+    <%= link_to @committee['committee'], committee_path(@jurisdiction.id, @committee['parent_id']) %>:
   <% end %>
   <%= @committee.name %>
   <ul>
