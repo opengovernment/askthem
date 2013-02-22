@@ -3,6 +3,8 @@ class Person
   include Mongoid::Document
   store_in collection: 'legislators'
 
+  index(chamber: 1, last_name: 1)
+
   # Non-Billy
   has_one :person_detail, autobuild: true
 

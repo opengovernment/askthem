@@ -5,6 +5,7 @@ gem 'jquery-rails'
 
 gem 'mongoid', '~> 3.0.17'
 gem 'inherited_resources', '~> 1.3.1'
+gem 'kaminari'
 gem 'unicorn'
 
 # Rake tasks

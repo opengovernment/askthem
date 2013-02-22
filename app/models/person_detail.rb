@@ -1,4 +1,4 @@
-# Exists only because we blow away the Person collection 
+# Exists only because we blow away the `people` collection regularly.
 class PersonDetail
   include Mongoid::Document
 

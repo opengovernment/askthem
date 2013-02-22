@@ -16,6 +16,7 @@ Start the server:
 Get the latest data from OpenStates:
 
     ./script/openstates.sh
+    rake db:mongoid:create_indexes
 
 Get biographies from the Influence Explorer API (a third of OpenStates legislators have biographies):
 

@@ -1,0 +1,96 @@
+Tue Feb 19 11:41:36   Creating index: { key: { _id: 1 }, ns: "fiftystates.events", name: "_id_" }
+Tue Feb 19 11:41:36   Creating index: { key: { _id: 1 }, ns: "fiftystates.document_ids", name: "_id_" }
+Tue Feb 19 11:41:36   Creating index: { key: { _id: 1 }, ns: "fiftystates.popularity_counts", name: "_id_" }
+Tue Feb 19 11:41:36   Creating index: { key: { _id: 1 }, ns: "fiftystates.committees", name: "_id_" }
+Tue Feb 19 11:41:36   Creating index: { key: { _id: 1 }, ns: "fiftystates.metadata", name: "_id_" }
+Tue Feb 19 11:41:36   Creating index: { key: { _id: 1 }, ns: "fiftystates.reports", name: "_id_" }
+Tue Feb 19 11:41:36   Creating index: { key: { _id: 1 }, ns: "fiftystates.subjects", name: "_id_" }
+Tue Feb 19 11:41:36   Creating index: { key: { _id: 1 }, ns: "fiftystates.vote_ids", name: "_id_" }
+Tue Feb 19 11:41:36   Creating index: { key: { _id: 1 }, ns: "fiftystates.event_ids", name: "_id_" }
+Tue Feb 19 11:41:36   Creating index: { key: { _id: 1 }, ns: "fiftystates.quality_exceptions", name: "_id_" }
+Tue Feb 19 11:41:36   Creating index: { key: { _id: 1 }, ns: "fiftystates.legislators", name: "_id_" }
+Tue Feb 19 11:41:36   Creating index: { key: { _id: 1 }, ns: "fiftystates.districts", name: "_id_" }
+Tue Feb 19 11:41:36   Creating index: { key: { _id: 1 }, ns: "fiftystates.bills", name: "_id_" }
+Tue Feb 19 11:41:36   Creating index: { key: { _id: 1 }, ns: "fiftystates.votes", name: "_id_" }
+Tue Feb 19 11:41:36   Creating index: { key: { _id: 1 }, ns: "fiftystates.billy_runs", name: "_id_" }
+Tue Feb 19 11:41:36   Creating index: { key: { _id: 1 }, ns: "fiftystates.manual.name_matchers", name: "_id_" }
+Tue Feb 19 11:41:36   Creating index: { key: { state: 1, chamber: 1 }, ns: "fiftystates.committees", name: "state_1_chamber_1" }
+Tue Feb 19 11:41:36   Creating index: { key: { state: 1, votesmart_id: 1 }, ns: "fiftystates.committees", name: "state_1_votesmart_id_1" }
+Tue Feb 19 11:41:37   Creating index: { key: { roles.state: 1, roles.type: 1, roles.term: 1, roles.chamber: 1, roles.district: 1 }, ns: "fiftystates.legislators", name: "roles.state_1_roles.type_1_roles.term_1_roles.chamber_1_roles.district_1" }
+Tue Feb 19 11:41:38   Creating index: { key: { roles.state: 1, roles.type: 1, roles.term: 1, roles.chamber: 1, full_name: 1, first_name: 1, last_name: 1, middle_name: 1, suffixes: 1 }, ns: "fiftystates.legislators", name: "role_and_name_parts" }
+Tue Feb 19 11:41:38   Creating index: { key: { state: 1, committee: 1, subcommittee: 1 }, ns: "fiftystates.committees", name: "state_1_committee_1_subcommittee_1" }
+Tue Feb 19 11:41:39   Creating index: { key: { _all_ids: 1 }, unique: true, ns: "fiftystates.legislators", name: "_all_ids_1" }
+Tue Feb 19 11:41:39   Creating index: { key: { when: 1, state: 1, type: 1 }, ns: "fiftystates.events", name: "when_1_state_1_type_1" }
+Tue Feb 19 11:41:39   Creating index: { key: { when: -1, state: 1, type: 1 }, ns: "fiftystates.events", name: "when_-1_state_1_type_1" }
+Tue Feb 19 11:41:40   Creating index: { key: { _all_ids: 1 }, ns: "fiftystates.committees", name: "_all_ids_1" }
+Tue Feb 19 11:41:40   Creating index: { key: { bill_id: 1 }, ns: "fiftystates.votes", name: "bill_id_1" }
+Tue Feb 19 11:41:44   Creating index: { key: { _voters: 1, date: 1 }, ns: "fiftystates.votes", name: "_voters_1_date_1" }
+Tue Feb 19 11:46:52   Creating index: { key: { active: 1, state: 1, chamber: 1 }, ns: "fiftystates.legislators", name: "active_1_state_1_chamber_1" }
+Tue Feb 19 11:46:53   Creating index: { key: { abbr: 1 }, ns: "fiftystates.subjects", name: "abbr_1" }
+Tue Feb 19 11:46:53   Creating index: { key: { state: 1, active: 1, chamber: 1 }, ns: "fiftystates.legislators", name: "state_1_active_1_chamber_1" }
+Tue Feb 19 11:46:53   Creating index: { key: { bill_id: 1, date: 1 }, ns: "fiftystates.votes", name: "bill_id_1_date_1" }
+Tue Feb 19 11:46:56   Creating index: { key: { abbr: 1 }, ns: "fiftystates.manual.name_matchers", name: "abbr_1" }
+Tue Feb 19 11:46:57   Creating index: { key: { type: 1, date: 1, obj_id: 1 }, ns: "fiftystates.popularity_counts", name: "type_1_date_1_obj_id_1" }
+Tue Feb 19 11:46:57   Creating index: { key: { boundary_id: 1 }, ns: "fiftystates.districts", name: "boundary_id_1" }
+Tue Feb 19 11:46:57   Creating index: { key: { state: 1, session: 1, chamber: 1, bill_id: 1 }, unique: true, ns: "fiftystates.bills", name: "state_1_session_1_chamber_1_bill_id_1" }
+Tue Feb 19 11:47:02   Creating index: { key: { created_at: -1, bill_id: 1 }, ns: "fiftystates.bills", name: "created_at_-1_bill_id_1" }
+Tue Feb 19 11:47:05   Creating index: { key: { updated_at: -1, bill_id: 1 }, ns: "fiftystates.bills", name: "updated_at_-1_bill_id_1" }
+Tue Feb 19 11:47:07   Creating index: { key: { action_dates.last: -1, bill_id: 1 }, ns: "fiftystates.bills", name: "action_dates.last_-1_bill_id_1" }
+Tue Feb 19 11:47:11   Creating index: { key: { action_dates.first: -1, sponsors.leg_id: 1, state: 1 }, ns: "fiftystates.bills", name: "action_dates.first_-1_sponsors.leg_id_1_state_1" }
+Tue Feb 19 11:47:41   Creating index: { key: { action_dates.last: -1, sponsors.leg_id: 1, state: 1 }, ns: "fiftystates.bills", name: "action_dates.last_-1_sponsors.leg_id_1_state_1" }
+Tue Feb 19 11:48:06   Creating index: { key: { updated_at: -1, sponsors.leg_id: 1, state: 1 }, ns: "fiftystates.bills", name: "updated_at_-1_sponsors.leg_id_1_state_1" }
+Tue Feb 19 11:50:23   Creating index: { key: { action_dates.first: -1, chamber: 1, state: 1 }, ns: "fiftystates.bills", name: "action_dates.first_-1_chamber_1_state_1" }
+Tue Feb 19 11:50:27   Creating index: { key: { action_dates.last: -1, chamber: 1, state: 1 }, ns: "fiftystates.bills", name: "action_dates.last_-1_chamber_1_state_1" }
+Tue Feb 19 11:50:30   Creating index: { key: { updated_at: -1, chamber: 1, state: 1 }, ns: "fiftystates.bills", name: "updated_at_-1_chamber_1_state_1" }
+Tue Feb 19 11:50:34   Creating index: { key: { action_dates.passed_upper: -1, chamber: 1, state: 1 }, ns: "fiftystates.bills", name: "action_dates.passed_upper_-1_chamber_1_state_1" }
+Tue Feb 19 11:50:39   Creating index: { key: { action_dates.passed_lower: -1, chamber: 1, state: 1 }, ns: "fiftystates.bills", name: "action_dates.passed_lower_-1_chamber_1_state_1" }
+Tue Feb 19 11:50:42   Creating index: { key: { action_dates.first: -1, session: 1, state: 1 }, ns: "fiftystates.bills", name: "action_dates.first_-1_session_1_state_1" }
+Tue Feb 19 11:50:47   Creating index: { key: { action_dates.last: -1, session: 1, state: 1 }, ns: "fiftystates.bills", name: "action_dates.last_-1_session_1_state_1" }
+Tue Feb 19 11:50:50   Creating index: { key: { updated_at: -1, session: 1, state: 1 }, ns: "fiftystates.bills", name: "updated_at_-1_session_1_state_1" }
+Tue Feb 19 11:50:53   Creating index: { key: { action_dates.first: -1, session: 1, chamber: 1, state: 1 }, ns: "fiftystates.bills", name: "action_dates.first_-1_session_1_chamber_1_state_1" }
+Tue Feb 19 11:51:00   Creating index: { key: { action_dates.last: -1, session: 1, chamber: 1, state: 1 }, ns: "fiftystates.bills", name: "action_dates.last_-1_session_1_chamber_1_state_1" }
+Tue Feb 19 11:51:04   Creating index: { key: { updated_at: -1, session: 1, chamber: 1, state: 1 }, ns: "fiftystates.bills", name: "updated_at_-1_session_1_chamber_1_state_1" }
+Tue Feb 19 11:51:07   Creating index: { key: { action_dates.first: -1, _term: 1, chamber: 1, state: 1 }, ns: "fiftystates.bills", name: "action_dates.first_-1__term_1_chamber_1_state_1" }
+Tue Feb 19 11:51:13   Creating index: { key: { action_dates.last: -1, _term: 1, chamber: 1, state: 1 }, ns: "fiftystates.bills", name: "action_dates.last_-1__term_1_chamber_1_state_1" }
+Tue Feb 19 11:51:20   Creating index: { key: { updated_at: -1, _term: 1, chamber: 1, state: 1 }, ns: "fiftystates.bills", name: "updated_at_-1__term_1_chamber_1_state_1" }
+Tue Feb 19 11:51:31   Creating index: { key: { action_dates.first: -1, status: 1, state: 1 }, ns: "fiftystates.bills", name: "action_dates.first_-1_status_1_state_1" }
+Tue Feb 19 11:51:55   Creating index: { key: { action_dates.last: -1, status: 1, state: 1 }, ns: "fiftystates.bills", name: "action_dates.last_-1_status_1_state_1" }
+Tue Feb 19 11:51:59   Creating index: { key: { updated_at: -1, status: 1, state: 1 }, ns: "fiftystates.bills", name: "updated_at_-1_status_1_state_1" }
+Tue Feb 19 11:52:02   Creating index: { key: { action_dates.first: -1, type: 1, state: 1 }, ns: "fiftystates.bills", name: "action_dates.first_-1_type_1_state_1" }
+Tue Feb 19 11:52:09   Creating index: { key: { action_dates.last: -1, type: 1, state: 1 }, ns: "fiftystates.bills", name: "action_dates.last_-1_type_1_state_1" }
+Tue Feb 19 11:52:16   Creating index: { key: { updated_at: -1, type: 1, state: 1 }, ns: "fiftystates.bills", name: "updated_at_-1_type_1_state_1" }
+Tue Feb 19 11:52:26   Creating index: { key: { action_dates.first: -1, state: 1 }, ns: "fiftystates.bills", name: "action_dates.first_-1_state_1" }
+Tue Feb 19 11:52:29   Creating index: { key: { action_dates.last: -1, state: 1 }, ns: "fiftystates.bills", name: "action_dates.last_-1_state_1" }
+Tue Feb 19 11:52:32   Creating index: { key: { updated_at: -1, state: 1 }, ns: "fiftystates.bills", name: "updated_at_-1_state_1" }
+Tue Feb 19 11:52:35   Creating index: { key: { sponsors.leg_id: 1, sponsors.type: 1, state: 1 }, ns: "fiftystates.bills", name: "sponsors.leg_id_1_sponsors.type_1_state_1" }
+Tue Feb 19 11:53:04   Creating index: { key: { sponsors.leg_id: 1, state: 1, action_dates.first: -1 }, ns: "fiftystates.bills", name: "sponsors.leg_id_1_state_1_action_dates.first_-1" }
+Tue Feb 19 11:55:16   Creating index: { key: { sponsors.leg_id: 1, state: 1, action_dates.last: -1 }, ns: "fiftystates.bills", name: "sponsors.leg_id_1_state_1_action_dates.last_-1" }
+Tue Feb 19 11:59:10   Creating index: { key: { sponsors.leg_id: 1, state: 1, updated_at: -1 }, ns: "fiftystates.bills", name: "sponsors.leg_id_1_state_1_updated_at_-1" }
+Tue Feb 19 12:01:26   Creating index: { key: { chamber: 1, state: 1, action_dates.first: -1 }, ns: "fiftystates.bills", name: "chamber_1_state_1_action_dates.first_-1" }
+Tue Feb 19 12:01:30   Creating index: { key: { chamber: 1, state: 1, action_dates.last: -1 }, ns: "fiftystates.bills", name: "chamber_1_state_1_action_dates.last_-1" }
+Tue Feb 19 12:01:35   Creating index: { key: { chamber: 1, state: 1, updated_at: -1 }, ns: "fiftystates.bills", name: "chamber_1_state_1_updated_at_-1" }
+Tue Feb 19 12:01:39   Creating index: { key: { chamber: 1, state: 1, action_dates.passed_upper: -1 }, ns: "fiftystates.bills", name: "chamber_1_state_1_action_dates.passed_upper_-1" }
+Tue Feb 19 12:01:43   Creating index: { key: { chamber: 1, state: 1, action_dates.passed_lower: -1 }, ns: "fiftystates.bills", name: "chamber_1_state_1_action_dates.passed_lower_-1" }
+Tue Feb 19 12:01:47   Creating index: { key: { session: 1, state: 1, action_dates.first: -1 }, ns: "fiftystates.bills", name: "session_1_state_1_action_dates.first_-1" }
+Tue Feb 19 12:01:51   Creating index: { key: { session: 1, state: 1, action_dates.last: -1 }, ns: "fiftystates.bills", name: "session_1_state_1_action_dates.last_-1" }
+Tue Feb 19 12:01:54   Creating index: { key: { session: 1, state: 1, updated_at: -1 }, ns: "fiftystates.bills", name: "session_1_state_1_updated_at_-1" }
+Tue Feb 19 12:01:57   Creating index: { key: { session: 1, chamber: 1, state: 1, action_dates.first: -1 }, ns: "fiftystates.bills", name: "session_1_chamber_1_state_1_action_dates.first_-1" }
+Tue Feb 19 12:02:02   Creating index: { key: { session: 1, chamber: 1, state: 1, action_dates.last: -1 }, ns: "fiftystates.bills", name: "session_1_chamber_1_state_1_action_dates.last_-1" }
+Tue Feb 19 12:02:06   Creating index: { key: { session: 1, chamber: 1, state: 1, updated_at: -1 }, ns: "fiftystates.bills", name: "session_1_chamber_1_state_1_updated_at_-1" }
+Tue Feb 19 12:02:10   Creating index: { key: { _term: 1, chamber: 1, state: 1, action_dates.first: -1 }, ns: "fiftystates.bills", name: "_term_1_chamber_1_state_1_action_dates.first_-1" }
+Tue Feb 19 12:02:15   Creating index: { key: { _term: 1, chamber: 1, state: 1, action_dates.last: -1 }, ns: "fiftystates.bills", name: "_term_1_chamber_1_state_1_action_dates.last_-1" }
+Tue Feb 19 12:02:20   Creating index: { key: { _term: 1, chamber: 1, state: 1, updated_at: -1 }, ns: "fiftystates.bills", name: "_term_1_chamber_1_state_1_updated_at_-1" }
+Tue Feb 19 12:02:26   Creating index: { key: { status: 1, state: 1, action_dates.first: -1 }, ns: "fiftystates.bills", name: "status_1_state_1_action_dates.first_-1" }
+Tue Feb 19 12:02:30   Creating index: { key: { status: 1, state: 1, action_dates.last: -1 }, ns: "fiftystates.bills", name: "status_1_state_1_action_dates.last_-1" }
+Tue Feb 19 12:02:33   Creating index: { key: { status: 1, state: 1, updated_at: -1 }, ns: "fiftystates.bills", name: "status_1_state_1_updated_at_-1" }
+Tue Feb 19 12:02:36   Creating index: { key: { subjects: 1, state: 1, action_dates.first: -1 }, ns: "fiftystates.bills", name: "subjects_1_state_1_action_dates.first_-1" }
+Tue Feb 19 12:02:45   Creating index: { key: { subjects: 1, state: 1, action_dates.last: -1 }, ns: "fiftystates.bills", name: "subjects_1_state_1_action_dates.last_-1" }
+Tue Feb 19 12:02:53   Creating index: { key: { subjects: 1, state: 1, updated_at: -1 }, ns: "fiftystates.bills", name: "subjects_1_state_1_updated_at_-1" }
+Tue Feb 19 12:03:01   Creating index: { key: { type: 1, state: 1, action_dates.first: -1 }, ns: "fiftystates.bills", name: "type_1_state_1_action_dates.first_-1" }
+Tue Feb 19 12:03:06   Creating index: { key: { type: 1, state: 1, action_dates.last: -1 }, ns: "fiftystates.bills", name: "type_1_state_1_action_dates.last_-1" }
+Tue Feb 19 12:03:11   Creating index: { key: { type: 1, state: 1, updated_at: -1 }, ns: "fiftystates.bills", name: "type_1_state_1_updated_at_-1" }
+Tue Feb 19 12:03:15   Creating index: { key: { state: 1, action_dates.first: -1 }, ns: "fiftystates.bills", name: "state_1_action_dates.first_-1" }
+Tue Feb 19 12:03:18   Creating index: { key: { state: 1, action_dates.last: -1 }, ns: "fiftystates.bills", name: "state_1_action_dates.last_-1" }
+Tue Feb 19 12:03:22   Creating index: { key: { state: 1, updated_at: -1 }, ns: "fiftystates.bills", name: "state_1_updated_at_-1" }
+Tue Feb 19 12:03:24   Creating index: { key: { state: 1, action_dates.passed_upper: -1 }, ns: "fiftystates.bills", name: "state_1_action_dates.passed_upper_-1" }
+Tue Feb 19 12:03:27   Creating index: { key: { state: 1, action_dates.passed_lower: -1 }, ns: "fiftystates.bills", name: "state_1_action_dates.passed_lower_-1" }

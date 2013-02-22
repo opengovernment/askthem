@@ -70,6 +70,36 @@ reportInvalidForeignKeys('bills', 'actions.related_entities.id', 'legislators', 
   return /L[0-9]{6}$/.test(id);
 });
 
+var reportAsymmetricForeignKeys = function (parent, child, parent_dot_notation, child_dot_notation) {
+  print('\nLooking for asymmetries from ' + parent + ' to ' + child + '...');
+  var count = 0;
+  var criteria = {};
+  var fields = parent_dot_notation.split('.');
+  criteria[parent_dot_notation] = {
+    '$exists': true,
+    '$ne': null,
+  };
+  db[parent].find(criteria).forEach(function (document) {
+    document[fields[0]].forEach(function (subdocument) {
+      var id = subdocument[fields[1]];
+      if (id) {
+        var criteria = {_id: id};
+        criteria[child_dot_notation] = document._id;
+        if (!db[child].count(criteria)) {
+          count += 1;
+          print(document._id + '-' + id);
+        }
+      }
+    })
+  });
+  if (count) {
+    print(count + ' ' + parent + '-' + child + ' asymmetries found.');
+  }
+}
+
+reportAsymmetricForeignKeys('committees', 'legislators', 'members.leg_id', 'roles.committee_id');
+reportAsymmetricForeignKeys('legislators', 'committees', 'roles.committee_id', 'members.leg_id');
+
 // Valid jurisdictions, chambers and districts /////////////////////////////////
 
 // Do all documents belong to valid jurisdictions? (always passes, thus far)
@@ -344,6 +374,28 @@ reportTotal('legislators', {
   };
   reportTotal('legislators', criteria2, 'have a blank ' + field + ' ("" or null)');
 });
+
+// Hierarchy ///////////////////////////////////////////////////////////////////
+
+reportList('committees', 'parent_id', {
+  subcommittee: null,
+  parent_id: {
+    '$ne': null,
+  },
+}, 'committees with parent IDs');
+
+reportList('committees', 'parent_id', {
+  parent_id: null,
+  subcommittee: {
+    '$ne': null,
+  },
+}, 'subcommittees without parent IDs');
+
+reportList('committees', 'parent_id', {
+  '$where': function () {
+    return this.parent_id == this._id;
+  },
+}, 'committees whose parent is themselves');
 
 // Manually review /////////////////////////////////////////////////////////////
 

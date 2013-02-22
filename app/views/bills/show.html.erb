@@ -4,7 +4,7 @@
   <header>
     <div class="bill_info">
         <div class="bill_details">
-          <h2><strong>SB 471</strong> 2013 <a href="#">Read the complete bill &rarr;</a></h2>
+          <h2><strong><%= @bill['bill_id'] %></strong> 2013 <a href="#">Read the complete bill &rarr;</a></h2>
           <h1><%= @bill.title %></h1>
           <div class="attr">
             <span class="count"><%= pluralize @bill.views.count, 'answer' %></span>
@@ -22,10 +22,6 @@
       <nav>
         <ul class="related_nav">
           <li><%= link_to 'Questions', '#', class: 'active' %><%# @todo %></li>
-          <li><%= link_to 'Voting Record', '#' %><%# @todo %></li>
-          <li><%= link_to 'Sponsorship', '#' %><%# @todo %></li>
-          <li><%= link_to 'News', '#' %><%# @todo %></li>
-          <li><%= link_to 'Interest Groups', '#' %><%# @todo %></li>
         </ul>
       </nav>
 

@@ -2,7 +2,7 @@
 
 <section>
   <ol class="media-list">
-    <% @people.asc(:chamber, :family_name).each do |person| %><%# @todo check indexes %>
+    <% @people.asc(:chamber, :family_name).each do |person| %>
       <li class="media">
         <span class="pull-left">
           <% if person.image? %>

@@ -1,6 +1,32 @@
 <%= render 'shared/navigation' %>
 
 <section>
-  TODO: Committee
-  <%# @todo link to bill actions with actions.related_entities.id %>
+  <%= @committee['chamber'] %>
+  <% if @committee['subcommittee'] %>
+    <%= link_to @committee['committee'], committee_path(@jurisdiction.id, @committee.parent_id) %>:
+  <% end %>
+  <%= @committee.name %>
+  <ul>
+    <% @committee['members'].each do |member| %>
+      <li>
+        <%= link_to member['name'], member['leg_id'] %>
+        <%= member['role'] %>
+      </li>
+    <% end %>
+  </ul>
+  <% if @bills.any? %>
+    <section>
+      <header>
+        <h2>Bills referred to committee</h2>
+      </header>
+      <ul>
+        <% @bills.each do |bill| %>
+          <li>
+            <%= link_to bill['bill_id'], bill_path(@jurisdiction.id, bill) %>
+          </li>
+        <% end %>
+      </ul>
+      <%= paginate @bills, outer_window: 1 %>
+    </section>
+  <% end %>
 </section>
