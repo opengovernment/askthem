@@ -144,6 +144,7 @@ if (false) {
 }
 
 // bills#actions.related_entities.name and legislators#full_name or committees#committee or committees#subcommittee
+/*
 reportList('bills', 'actions.related_entities.id', {
   'actions.related_entities.id': {
     '$ne': null,
@@ -152,12 +153,13 @@ reportList('bills', 'actions.related_entities.id', {
     for (var i = 0, l = this.actions.length; i < l; i++) {
       if (this.actions[i].related_entities) {
         for (var j = 0, m = this.actions[i].related_entities.length; j < m; j++) {
-          if 
+          // @todo
         }
       }
     }
   },
 });
+*/
 
 // committees#members.name and legislators#full_name
 if (verbose) {
@@ -181,6 +183,8 @@ if (verbose) {
     },
   }, "committees with a member whose name is not the legislator's name");
 }
+
+
 
 // bills: sponsors.chamber and chamber
 // @todo It seems common practice in some states for representatives to be

@@ -25,6 +25,7 @@ reportList('committees', 'parent_id', {
 }, 'committees whose parent is themselves');
 
 // Do all documents belong to valid jurisdictions?
+print('\nThe next steps can take several seconds...');
 var jurisdictions = db.metadata.distinct('_id');
 ['bills', 'committees', 'events', 'legislators', 'votes'].forEach(function (collection) {
   reportList(collection, 'state', {

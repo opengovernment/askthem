@@ -26,7 +26,11 @@ Get biographies from the Influence Explorer API (a third of OpenStates legislato
 
 We provide a number of scripts for checking the quality and consistency of a Billy database. You can run e.g. the `code-lists.js` validator with:
 
-    mongo DATABASE_NAME script/sanity/sanity.js script/sanity/code-lists.js
+    mongo DATABASE_NAME script/sanity/helper.js script/sanity/code-lists.js
+
+To run all the scripts, do:
+
+    mongo DATABASE_NAME script/sanity/helper.js script/sanity/{code-lists.js,denormalization.js,foreign-keys.js,hierarchy.js,manual-review.js,miscellaneous.js}
 
 ## Bugs? Questions?
 
