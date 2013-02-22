@@ -22,6 +22,12 @@ Get biographies from the Influence Explorer API (a third of OpenStates legislato
 
     bundle exec rake influenceexplorer:biographies
 
+## Data Quality
+
+We provide a number of scripts for checking the quality and consistency of a Billy database. You can run e.g. the `code-lists.js` validator with:
+
+    mongo DATABASE_NAME script/sanity/sanity.js script/sanity/code-lists.js
+
 ## Bugs? Questions?
 
 This project's main repository is on GitHub: [http://github.com/opengovernment/opengovernment-local](http://github.com/opengovernment/opengovernment-local), where your contributions, forks, bug reports, feature requests, and feedback are greatly welcomed.
