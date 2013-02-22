@@ -215,31 +215,6 @@ db.metadata.find().forEach(function (obj) {
   });
 });
 
-// Are all a legislator's roles in a predictable jurisdiction?
-reportList('legislators', 'state', {
-  '$where': function () {
-    for (var i = 0, l = this.roles.length; i < l; i++) {
-      var value = this.roles[i].state;
-      if (value != this.state) {
-        return true;
-      }
-    }
-  },
-}, "legislators with a role whose state is not the legislator's state");
-
-// Are all a legislator's roles in a predictable chamber?
-// @note The chamber should probably be "joint" if not.
-reportList('legislators', 'chamber', {
-  '$where': function () {
-    for (var i = 0, l = this.roles.length; i < l; i++) {
-      var value = this.roles[i].chamber;
-      if (this.active && value != 'joint' && value != this.chamber) {
-        return true;
-      }
-    }
-  },
-}, "legislators with a role whose chamber is neither 'joint' nor the legislator's chamber");
-
 // Code lists //////////////////////////////////////////////////////////////////
 
 // Genders
@@ -342,6 +317,45 @@ reportList('bills', 'sponsors.type', {
   };
   reportList('bills', field, criteria);
 });
+
+// Denormalization /////////////////////////////////////////////////////////////
+
+// Are all a legislator's roles in a predictable jurisdiction?
+reportList('legislators', 'state', {
+  '$where': function () {
+    for (var i = 0, l = this.roles.length; i < l; i++) {
+      var value = this.roles[i].state;
+      if (value != this.state) {
+        return true;
+      }
+    }
+  },
+}, "legislators with a role whose state is not the legislator's state");
+
+// Are all a legislator's roles in a predictable chamber?
+// @note The chamber should probably be "joint" if not.
+reportList('legislators', 'chamber', {
+  '$where': function () {
+    for (var i = 0, l = this.roles.length; i < l; i++) {
+      var value = this.roles[i].chamber;
+      if (this.active && value != 'joint' && value != this.chamber) {
+        return true;
+      }
+    }
+  },
+}, "legislators with a role whose chamber is neither 'joint' nor the legislator's chamber");
+
+// Are all a legislator's roles in a predictable district?
+reportList('legislators', 'district', {
+  '$where': function () {
+    for (var i = 0, l = this.roles.length; i < l; i++) {
+      var value = this.roles[i].district;
+      if (this.active && value && value != this.district) {
+        return true;
+      }
+    }
+  },
+}, "legislators with a role whose district is not the legislator's district");
 
 // Invalid values //////////////////////////////////////////////////////////////
 
