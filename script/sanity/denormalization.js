@@ -121,49 +121,69 @@ reportList('legislators', 'roles.committee_id', {
 }, "legislators with a role whose position is not their position on the committee");
 
 // bills#companions.bill_id and bills#bill_id through bills#companions.internal_id
-// @note Very long running time.
-if (false) {
-  reportList('bills', 'companions.internal_id', {
-    'companions.internal_id': {
-      '$exists': true,
+// @note There is no index on bills#_all_ids, so we don't use that field here.
+reportList('bills', 'companions.internal_id', {
+  'companions.internal_id': {
+    '$exists': true,
+  },
+  '$where': function () {
+    for (var i = 0, l = this.companions.length; i < l; i++) {
+      var id = this.companions[i].internal_id;
+      if (id) {
+        var document = db.bills.findOne({_id: id});
+        if (document) {
+          if (this.companions[i].bill_id != document.bill_id) {
+            return true;
+          }
+        }
+      }
+    }
+  },
+}, "bills with a companion whose bill ID is not the bill's bill ID");
+
+// bills#actions.related_entities.name and legislators#full_name or committees#committee or committees#subcommittee
+// @note It's common for names to differ, e.g. "Sears" versus "Dick W Sears" or
+//   "Pensions and Retirement" versus "Pensions & Retirement".
+if (verbose) {
+  reportList('bills', 'actions.related_entities.id', {
+    'actions.related_entities.id': {
+      '$ne': null,
     },
     '$where': function () {
-      for (var i = 0, l = this.companions.length; i < l; i++) {
-        var id = this.companions[i].internal_id;
-        if (id) {
-          var document = db.bills.findOne({_all_ids: id});
-          if (document) {
-            if (this.companions[i].bill_id != document.bill_id) {
-              return true;
+      for (var i = 0, l = this.actions.length; i < l; i++) {
+        if (this.actions[i].related_entities) {
+          for (var j = 0, m = this.actions[i].related_entities.length; j < m; j++) {
+            var entity = this.actions[i].related_entities[j];
+            var id = entity.id;
+            var value = entity.name;
+            if (id) {
+              if (/C[0-9]{6}$/.test(id)) {
+                var document = db.committees.findOne({_all_ids: id});
+                if (document) {
+                  if (value != document.committee && value != document.subcommittee) {
+                    return true;
+                  }
+                }
+              }
+              else if (/L[0-9]{6}$/.test(id)) {
+                var document = db.legislators.findOne({_all_ids: id});
+                if (document) {
+                  if (value != document.full_name) {
+                    return true;
+                  }
+                }
+              }
             }
           }
         }
       }
     },
-  }, "bills with a companion whose bill ID is not the bill's bill ID");  
+  }, "bills with an action whose related entity's name is not that entity's name");
 }
 
-// bills#actions.related_entities.name and legislators#full_name or committees#committee or committees#subcommittee
-/*
-reportList('bills', 'actions.related_entities.id', {
-  'actions.related_entities.id': {
-    '$ne': null,
-  },
-  '$where': function () {
-    for (var i = 0, l = this.actions.length; i < l; i++) {
-      if (this.actions[i].related_entities) {
-        for (var j = 0, m = this.actions[i].related_entities.length; j < m; j++) {
-          // @todo
-        }
-      }
-    }
-  },
-});
-*/
-
 // committees#members.name and legislators#full_name
+// @note It's common for names to differ, e.g. "James Doe" versus "Jim Doe".
 if (verbose) {
-  // @note It's common for names to differ, e.g. "James Doe" versus "Jim Doe".
   reportList('committees', 'members.leg_id', {
     'members.leg_id': {
       '$ne': null,
@@ -184,47 +204,45 @@ if (verbose) {
   }, "committees with a member whose name is not the legislator's name");
 }
 
-
-
 // bills: sponsors.chamber and chamber
 // @todo It seems common practice in some states for representatives to be
 //   primary on a bill and for a senator to be cosponsor. Needs clarification.
-if (false) {
-  reportList('bills', 'chamber', {
-    'sponsors.chamber': {
-      '$exists': true,
-    },
-    '$where': function () {
-      for (var i = 0, l = this.sponsors.length; i < l; i++) {
-        var value = this.sponsors[i].chamber;
-        if (value && value != this.chamber) {
-          return true;
-        }
+/*
+reportList('bills', 'chamber', {
+  'sponsors.chamber': {
+    '$exists': true,
+  },
+  '$where': function () {
+    for (var i = 0, l = this.sponsors.length; i < l; i++) {
+      var value = this.sponsors[i].chamber;
+      if (value && value != this.chamber) {
+        return true;
       }
-    },
-  }, "bills with a sponsor whose chamber is not the bill's chamber");
-}
+    }
+  },
+}, "bills with a sponsor whose chamber is not the bill's chamber");
+*/
 
 // bills#actions._scraped_committee_name and committees#subcommittee or committees#subcommittee
 // @note Scraped committee names are not meant to match committee names.
-if (false) {
-  reportList('bills', 'actions.committee', {
-    'actions.committee': {
-      '$exists': true,
-    },
-    '$where': function () {
-      for (var i = 0, l = this.actions.length; i < l; i++) {
-        var id = this.actions[i].committee;
-        if (id) {
-          var document = db.committees.findOne({_all_ids: id});
-          if (document) {
-            var value = this.actions[i]._scraped_committee_name;
-            if (value != document.committee && value != document.subcommittee) {
-              return true;
-            }
+/*
+reportList('bills', 'actions.committee', {
+  'actions.committee': {
+    '$exists': true,
+  },
+  '$where': function () {
+    for (var i = 0, l = this.actions.length; i < l; i++) {
+      var id = this.actions[i].committee;
+      if (id) {
+        var document = db.committees.findOne({_all_ids: id});
+        if (document) {
+          var value = this.actions[i]._scraped_committee_name;
+          if (value != document.committee && value != document.subcommittee) {
+            return true;
           }
         }
       }
-    },
-  }, "bills with an action whose committee name is not the committee's name");  
-}
+    }
+  },
+}, "bills with an action whose committee name is not the committee's name");  
+*/
