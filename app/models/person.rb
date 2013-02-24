@@ -3,9 +3,10 @@ class Person
   include Mongoid::Document
   store_in collection: 'legislators'
 
+  # For sorting on people#index.
   index(chamber: 1, last_name: 1)
 
-  # Non-Billy
+  # Stores Popolo fields that are not available in Billy.
   has_one :person_detail, autobuild: true
 
   field :full_name, type: String, as: :name

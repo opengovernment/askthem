@@ -1,4 +1,5 @@
 # Exists only because we blow away the `people` collection regularly.
+# @note Based on Popolo.
 class PersonDetail
   include Mongoid::Document
 

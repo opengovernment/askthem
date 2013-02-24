@@ -30,7 +30,7 @@ module ApplicationHelper
   # @param [Person] person a person
   # @return [String] the person's name prefixed by their role's title
   def name_with_title(person)
-    [ @jurisdiction['chambers'][person['chamber']]['title'],
+    [ @jurisdiction.chamber_title(person['chamber']),
       person.name,
     ].join(' ')
   end

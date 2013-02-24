@@ -1,4 +1,5 @@
 # A URL for a document about a person.
+# @note From Popolo.
 class Link
   include Mongoid::Document
 
