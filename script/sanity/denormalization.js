@@ -141,7 +141,8 @@ reportList('bills', 'companions.internal_id', {
   },
 }, "bills with a companion whose bill ID is not the bill's bill ID");
 
-// bills#actions.related_entities.name and legislators#full_name or committees#committee or committees#subcommittee
+// bills#actions.related_entities.name and legislators#full_name or
+//   committees#committee or committees#subcommittee
 // @note It's common for names to differ, e.g. "Sears" versus "Dick W Sears" or
 //   "Pensions and Retirement" versus "Pensions & Retirement".
 if (verbose) {
@@ -179,6 +180,41 @@ if (verbose) {
       }
     },
   }, "bills with an action whose related entity's name is not that entity's name");
+}
+
+// bills#sponsors.name and legislators#full_name or committees#committee or
+//   committees#subcommittee
+// @note It's common for names to differ, e.g. "Joint Appropriations Interim 
+//   Committee" versus "Appropriations" or "DAVIS" versus "Bettye Davis".
+if (verbose)
+  reportList('bills', 'sponsors.name', {
+    'sponsors.name': {
+      '$exists': true,
+    },
+    '$where': function () {
+      for (var i = 0, l = this.sponsors.length; i < l; i++) {
+        var id;
+        if (id = this.sponsors[i].leg_id) {
+          var document = db.legislators.findOne({_all_ids: id});
+          if (document) {
+            var value = this.sponsors[i].name;
+            if (value != document.full_name) {
+              return true;
+            }
+          }
+        }
+        else if (id = this.sponsors[i].committee_id) {
+          var document = db.committees.findOne({_all_ids: id});
+          if (document) {
+            var value = this.sponsors[i].name;
+            if (value != document.committee && value != document.subcommittee) {
+              return true;
+            }
+          }
+        }
+      }
+    },
+  }, "bills with a sponsor whose committee name is not the committee's name");
 }
 
 // committees#members.name and legislators#full_name

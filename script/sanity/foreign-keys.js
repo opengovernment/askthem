@@ -29,6 +29,7 @@ reportInvalidForeignKeys('committees', 'parent_id', 'committees');
 reportInvalidForeignKeys('committees', 'members.leg_id', 'legislators');
 reportInvalidForeignKeys('legislators', 'roles.committee_id', 'committees');
 reportInvalidForeignKeys('bills', 'sponsors.leg_id', 'legislators');
+reportInvalidForeignKeys('bills', 'sponsors.committee_id', 'committees');
 reportInvalidForeignKeys('bills', 'actions.committee', 'committees');
 reportInvalidForeignKeys('bills', 'companions.internal_id', 'bills');
 
@@ -53,7 +54,7 @@ var reportAsymmetricForeignKeys = function (parent, child, parent_field, child_f
     document[fields[0]].forEach(function (subdocument) {
       var id = subdocument[fields[1]];
       if (id) {
-        var criteria = {_all_ids: id};
+        var criteria = {_id: id}; // bills don't index _all_ids
         criteria[child_field] = document._id;
         if (!db[child].count(criteria)) {
           count += 1;
@@ -69,3 +70,4 @@ var reportAsymmetricForeignKeys = function (parent, child, parent_field, child_f
 
 reportAsymmetricForeignKeys('committees', 'legislators', 'members.leg_id', 'roles.committee_id');
 reportAsymmetricForeignKeys('legislators', 'committees', 'roles.committee_id', 'members.leg_id');
+reportAsymmetricForeignKeys('bills', 'bills', 'companions.internal_id', 'companions.internal_id');
