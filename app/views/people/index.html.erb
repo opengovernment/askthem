@@ -18,7 +18,7 @@
             – <%= pluralize person.answers.count, 'answer' %>
           </p>
           <h2 class="media-heading">
-            <%= link_to name_with_title(person), person_path(@jurisdiction.id, person) %>
+            <%= link_to person.name, person_path(@jurisdiction.id, person) %>
           </h2>
         </div>
       </li>

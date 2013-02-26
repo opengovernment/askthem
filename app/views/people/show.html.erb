@@ -12,7 +12,9 @@
         <% end %>
 
         <div class="person_details">
-          <h1><%= name_with_title(@person) %></h1>
+          <h1>
+            <%= @person.name %> <% unless person['active'] %>(Not in Office)<% end %>
+          </h1>
           <h2><%= person_attributes(@person) %></h2>
           <div class="attr">
             <span class="count"><%= pluralize @person.questions.count, 'question' %></span>
