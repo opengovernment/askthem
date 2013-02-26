@@ -6,6 +6,7 @@ gem 'jquery-rails'
 
 gem 'mongoid', '~> 3.0.17'
 gem 'inherited_resources', '~> 1.3.1'
+gem 'andand'
 gem 'kaminari'
 gem 'unicorn'
 
@@ -17,8 +18,10 @@ group :production do
   gem 'newrelic_rpm'
 end
 
-group :test, :development do
+group :development do
   gem 'heroku' # Rake task
+  gem 'ruby-growl', '3.0'
+  gem 'bullet'
 end
 
 group :assets do

@@ -7,7 +7,7 @@ class Metadatum
   # @param [String] chamber "lower" or "upper"
   # @return [String] the brief name of the chamber
   def chamber_name(chamber)
-    read_attribute(:chambers)[chamber]['name']
+    read_attribute(:chambers)[chamber].andand['name'] || chamber
   end
 
   # Returns the title for members of the chamber.
@@ -15,6 +15,6 @@ class Metadatum
   # @param [String] chamber "lower" or "upper"
   # @return [String] the title for members of the chamber
   def chamber_title(chamber)
-    read_attribute(:chambers)[chamber]['title']
+    read_attribute(:chambers)[chamber].andand['title']
   end
 end
