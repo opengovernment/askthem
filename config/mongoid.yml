@@ -78,7 +78,7 @@ test:
         # low amounts for fast failures.
         max_retries: 1
         retry_interval: 0
-<% uri = URI.parse(ENV['MONGOHQ_URL'] || ENV['MONGOLAB_URI'] || 'mongodb://127.0.0.1:27017/fiftystates') %> # https://gist.github.com/2588954
+<% uri = URI.parse(ENV['MONGOHQ_URL'] || ENV['MONGOLAB_URI'] || 'mongodb://127.0.0.1:27017/opengovernment_local') %> # https://gist.github.com/2588954
 production:
   sessions:
     default:

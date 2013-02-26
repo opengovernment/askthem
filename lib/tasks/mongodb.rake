@@ -25,7 +25,7 @@ namespace :mongodb do
 END
       if STDIN.gets == "nogoingback\n"
         puts `mongodump -h localhost -d #{database} -o dump-dir`.chomp
-        puts `mongorestore -h #{uri.host}:#{uri.port} -d #{uri.path.sub '/', ''} -u #{uri.user} -p #{uri.password} dump-dir/*`.chomp
+        puts `mongorestore -h #{uri.host}:#{uri.port} -d #{uri.path.sub '/', ''} -u #{uri.user} -p #{uri.password} --drop dump-dir/#{database}`.chomp
       else
         puts 'Confirmation did not match "nogoingback". Aborted.'
       end
@@ -43,8 +43,8 @@ END
  !    To proceed, type "nogoingback"
 END
       if STDIN.gets == "nogoingback\n"
-        puts `mongodump -h #{uri.host}:#{uri.port} -d #{uri.path.sub '/', ''} -u #{uri.user} -p #{uri.password} -o dump-dir`.chomp
-        puts `mongorestore -h localhost -d #{database} --drop dump-dir/*`.chomp
+        puts `mongodump -h #{uri.host}:#{uri.port} -d #{uri.path.sub '/', ''} -u #{uri.user} -p #{uri.password} -o dump-dir/`.chomp
+        puts `mongorestore -h localhost -d #{database} --drop dump-dir/#{database}`.chomp
       else
         puts 'Confirmation did not match "nogoingback". Aborted.'
       end
