@@ -8,6 +8,6 @@ class BillsController < ApplicationController
 private
 
   def collection
-    @bills ||= end_of_association_chain.where(state: @jurisdiction.id).page(params[:page])
+    @bills ||= end_of_association_chain.where(state: @jurisdiction.id, _current_session: true).desc('action_dates.last').page(params[:page])
   end
 end

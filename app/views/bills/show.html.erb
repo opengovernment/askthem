@@ -1,22 +1,36 @@
 <%= render 'shared/navigation' %>
 
-<%= @jurisdiction.chamber_name(@bill['chamber']) %>
-
 <section class="bills">
   <header>
     <div class="bill_info">
-        <div class="bill_details">
-          <h2><strong><%= @bill['bill_id'] %></strong> 2013 <a href="#">Read the complete bill &rarr;</a></h2>
-          <h1><%= @bill.title %></h1>
-          <div class="attr">
-            <span class="count"><%= pluralize @bill.views.count, 'answer' %></span>
-            <span class="count"><%= pluralize @bill.questions.count, 'question' %></span>
-            <span class="count"><%= pluralize @bill.answers.count, 'answer' %></span>
-          </div>
+      <div class="bill_details">
+        <h2>
+          <strong><%= @bill['bill_id'] %></strong>
+          2013<%# @todo %>
+          <%= link_to 'Read the complete bill →', '#' %><%# @todo %>
+        </h2>
+        <%= @jurisdiction.chamber_name(@bill['chamber']) %>
+        <%= @bill.type.first.titleize %>
+        <h1><%= truncate(@bill['title'], length: 30) %></h1>
+        <div class="attr">
+          <span class="count"><%= pluralize @bill.questions.count, 'question' %></span>
+          <span class="count"><%= pluralize @bill.answers.count, 'answer' %></span>
         </div>
+      </div>
     </div>
     <%= link_to 'Ask about this Bill', new_question_path, class: 'cta_pill' %>
     <%= link_to 'Tell your Senator what you think', '#', class: 'sim_act' %>
+    <% @bill.dates.each do |type,date| %>
+      <% if type == 'first' %>
+        Introduced
+      <% elsif type == 'passed_lower' %>
+        Passed <%= @jurisdiction.chamber_name('lower') %>
+      <% elsif type == 'passed_upper' %>
+        Passed <%= @jurisdiction.chamber_name('upper') %>
+      <% elsif type == 'signed' %>
+        Signed into Law
+      <% end %>
+    <% end %>
   </header>
 
   <div class="related_wrap">
@@ -30,107 +44,71 @@
       <div class="related_content">
         <section class="questions related_focus">
           <ol>
-            <li>
-              <div class="rating">
-                <span class="count">25</span>
-              </div>
-              <div class="question_content">
-                <%= link_to 'Why have this thing for act for what?', '/questions/show', class: 'title' %>
-                <p>Lorem ipsum dolor sit amet, adipisicing elit, sed do  tempor incididunt ut labore et dolore magna aliqua sed do eiusmod tempor  ut&hellip; <span class="context">&rarr; in Pennsylvania Bills</span></p>
-                <%= link_to '12 comments', '#', class: 'comment_count' %>
-              </div>
-              <div class="question_attr">
-                <span class="author">posted by <%= link_to image_tag('http://lorempixel.com/40/40/people/', size: '20x20', alt: '') + 'Steve T', '#' %></span>
-              </div>
-            </li>
-
-            <li>
-              <div class="rating">
-                <span class="count">25</span>
-              </div>
-              <div class="question_content">
-                <%= link_to 'Why have this thing for act for what?', '/questions/show', class: 'title' %>
-                <p>Lorem ipsum dolor sit amet, adipisicing elit, sed do  tempor incididunt ut labore et dolore magna aliqua sed do eiusmod tempor  ut&hellip; <span class="context">&rarr; in Pennsylvania Bills</span></p>
-                <%= link_to '12 comments', '#', class: 'comment_count' %>
-              </div>
-              <div class="question_attr">
-                <span class="author">posted by <%= link_to image_tag('http://lorempixel.com/40/40/people/', size: '20x20', alt: '') + 'Steve T', '#' %></span>
-              </div>
-            </li>
-
-            <li>
-              <div class="rating">
-                <span class="count">25</span>
-              </div>
-              <div class="question_content">
-                <%= link_to 'Why have this thing for act for what?', '/questions/show', class: 'title' %>
-                <p>Lorem ipsum dolor sit amet, adipisicing elit, sed do  tempor incididunt ut labore et dolore magna aliqua sed do eiusmod tempor  ut&hellip; <span class="context">&rarr; in Pennsylvania Bills</span></p>
-                <%= link_to '12 comments', '#', class: 'comment_count' %>
-              </div>
-              <div class="question_attr">
-                <span class="author">posted by <%= link_to image_tag('http://lorempixel.com/40/40/people/', size: '20x20', alt: '') + 'Steve T', '#' %></span>
-              </div>
-            </li>
-
-            <li>
-              <div class="rating">
-                <span class="count">25</span>
-              </div>
-              <div class="question_content">
-                <%= link_to 'Why have this thing for act for what?', '/questions/show', class: 'title' %>
-                <p>Lorem ipsum dolor sit amet, adipisicing elit, sed do  tempor incididunt ut labore et dolore magna aliqua sed do eiusmod tempor  ut&hellip; <span class="context">&rarr; in Pennsylvania Bills</span></p>
-                <%= link_to '12 comments', '#', class: 'comment_count' %>
-              </div>
-              <div class="question_attr">
-                <span class="author">posted by <%= link_to image_tag('http://lorempixel.com/40/40/people/', size: '20x20', alt: '') + 'Steve T', '#' %></span>
-              </div>
-            </li>
-
-            <li>
-              <div class="rating">
-                <span class="count">25</span>
-              </div>
-              <div class="question_content">
-                <%= link_to 'Why have this thing for act for what?', '/questions/show', class: 'title' %>
-                <p>Lorem ipsum dolor sit amet, adipisicing elit, sed do  tempor incididunt ut labore et dolore magna aliqua sed do eiusmod tempor  ut&hellip; <span class="context">&rarr; in Pennsylvania Bills</span></p>
-                <%= link_to '12 comments', '#', class: 'comment_count' %>
-              </div>
-              <div class="question_attr">
-                <span class="author">posted by <%= link_to image_tag('http://lorempixel.com/40/40/people/', size: '20x20', alt: '') + 'Steve T', '#' %></span>
-              </div>
-            </li>
-
-            <li>
-              <div class="rating">
-                <span class="count">25</span>
-              </div>
-              <div class="question_content">
-                <%= link_to 'Why have this thing for act for what?', '/questions/show', class: 'title' %>
-                <p>Lorem ipsum dolor sit amet, adipisicing elit, sed do  tempor incididunt ut labore et dolore magna aliqua sed do eiusmod tempor  ut&hellip; <span class="context">&rarr; in Pennsylvania Bills</span></p>
-                <%= link_to '12 comments', '#', class: 'comment_count' %>
-              </div>
-              <div class="question_attr">
-                <span class="author">posted by <%= link_to image_tag('http://lorempixel.com/40/40/people/', size: '20x20', alt: '') + 'Steve T', '#' %></span>
-              </div>
-            </li>
-
-            <li>
-              <div class="rating">
-                <span class="count">25</span>
-              </div>
-              <div class="question_content">
-                <%= link_to 'Why have this thing for act for what?', '/questions/show', class: 'title' %>
-                <p>Lorem ipsum dolor sit amet, adipisicing elit, sed do  tempor incididunt ut labore et dolore magna aliqua sed do eiusmod tempor  ut&hellip; <span class="context">&rarr; in Pennsylvania Bills</span></p>
-                <%= link_to '12 comments', '#', class: 'comment_count' %>
-              </div>
-              <div class="question_attr">
-                <span class="author">posted by <%= link_to image_tag('http://lorempixel.com/40/40/people/', size: '20x20', alt: '') + 'Steve T', '#' %></span>
-              </div>
-            </li>
+            <% 5.times do %>
+              <li>
+                <div class="rating">
+                  <span class="count">25</span>
+                </div>
+                <div class="question_content">
+                  <%= link_to 'Why have this thing for act for what?', '/questions/show', class: 'title' %>
+                  <p>Lorem ipsum dolor sit amet, adipisicing elit, sed do  tempor incididunt ut labore et dolore magna aliqua sed do eiusmod tempor  ut&hellip; <span class="context">&rarr; in Pennsylvania Bills</span></p>
+                  <%= link_to '12 comments', '#', class: 'comment_count' %>
+                </div>
+                <div class="question_attr">
+                  <span class="author">posted by <%= link_to image_tag('http://lorempixel.com/40/40/people/', size: '20x20', alt: '') + 'Steve T', '#' %></span>
+                </div>
+              </li>
+            <% end %>
           </ol>
         </section>
 
         <aside>
+          <% unless @bill['sponsors'].empty? %>
+            <section>
+              <h4>
+                Sponsors
+                <% if @bill['sponsors'].size > 5 %>
+                  (<%= @bill['sponsors'].size %>)
+                <% end %>
+              </h4>
+              <ul>
+                <% @bill.people_and_committee_sponsors(5).each do |sponsor| %>
+                  <li>
+                    <% if Person === sponsor %>
+                      <% if sponsor.image? %>
+                        <%= cdn_image_tag(sponsor.image, size: '50x50', alt: '', class: 'media-object') %>
+                      <% else %>
+                        <%# @todo add placeholder image %>
+                      <% end %>
+                      <%= link_to sponsor.name, person_path(@jurisdiction.id, sponsor) %>
+                      <%= district_name(sponsor['district']) if sponsor['district'] %>
+                    <% elsif Committee == sponsor %>
+                      <%= link_to sponsor.name, committee_path(@jurisdiction.id, committee) %>
+                    <% else %>
+                      <%= sponsor.name %>
+                    <% end %>
+                    (<%= sponsor['type'] %>)
+                  </li>
+                <% end %>
+              </ul>
+              <% if @bill['sponsors'].size > 5 %>
+                <%= link_to 'View all', '#' %><%# @todo %>
+              <% end %>
+            </section>
+          <% end %>
+
+          <% unless @bill['subjects'].empty? %>
+            <section>
+              <h4>Issue Areas</h4>
+              <ul>
+                <% @bill['subjects'].each do |subject| %>
+                  <li>
+                    <%= link_to subject, '#' %><%# @todo search for bills with same subject %>
+                  </li>
+                <% end %>
+              </ul>
+            </section>
+          <% end %>
         </aside>
       </div>
     </div>

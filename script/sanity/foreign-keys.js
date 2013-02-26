@@ -54,7 +54,7 @@ var reportAsymmetricForeignKeys = function (parent, child, parent_field, child_f
     document[fields[0]].forEach(function (subdocument) {
       var id = subdocument[fields[1]];
       if (id) {
-        var criteria = {_id: id}; // bills don't index _all_ids
+        var criteria = {_id: id}; // no index on _all_ids field of bills collection
         criteria[child_field] = document._id;
         if (!db[child].count(criteria)) {
           count += 1;

@@ -30,9 +30,11 @@ module ApplicationHelper
   # @param [Person] person a person
   # @return [String] the person's name prefixed by their role's title
   def name_with_title(person)
-    [ @jurisdiction.chamber_title(person['chamber']),
-      person.name,
-    ].join(' ')
+    parts = []
+    parts << @jurisdiction.chamber_title(person['chamber']) if person['chamber']
+    parts << person.name
+    parts << '(Not in Office)' unless person['active']
+    parts.join(' ')
   end
 
   # Returns the person's basic attributes.
@@ -41,8 +43,8 @@ module ApplicationHelper
   # @return [String] the person's attributes
   def person_attributes(person)
     parts = []
-    parts << person['party'] if person['party'].present?
-    parts << district_name(person['district']) if person['district'].present?
+    parts << person['party'] if person['party']
+    parts << district_name(person['district']) if person['district']
     parts.join(', ')
   end
 
