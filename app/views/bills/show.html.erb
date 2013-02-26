@@ -7,7 +7,9 @@
         <h2>
           <strong><%= @bill['bill_id'] %></strong>
           2013<%# @todo %>
-          <%= link_to 'Read the complete bill →', '#' %><%# @todo %>
+          <% if @bill['versions'].last %>
+            <%= link_to 'Read the complete bill →', @bill['versions'].last['url'] %>
+          <% end %>
         </h2>
         <%= @jurisdiction.chamber_name(@bill['chamber']) %>
         <%= @bill.type.first.titleize %>
