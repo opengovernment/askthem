@@ -33,10 +33,11 @@ class Bill
       end
     end
 
-    # Maintain the sponsors' order.
+    # Maintain the sponsors' order. Not every bill has foreign keys for its
+    # sponsors, e.g. WIB00000879.
     sponsors.map do |sponsor|
       document = map[sponsor['leg_id'] || sponsor['committee_id']] || OpenStruct.new(name: sponsor['name'])
-      document['type'] = sponsor['type']
+      document.type = sponsor['type']
       document
     end
   end
