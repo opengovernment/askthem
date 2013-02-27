@@ -63,6 +63,7 @@ section.questions{
         line-height: 1.286em;
         margin-top:12px;
         span.context{
+          display:none;
           color:$context;
         }
       }
@@ -116,6 +117,33 @@ section.questions{
             width:20px;
             height:20px;
             vertical-align:middle;
+          }
+        }
+      }
+    }
+  }
+  /*
+    Questions on a person or bill detail page
+  */
+  &.related_focus{
+    ol{
+      width:92.714025500911%;
+      li{
+        div.question_content{
+          width:84.867075664622%;
+          p{
+            color:$lightgrey;
+            width:69.444444444444%;
+          }
+        }
+        div.question_attr{
+          color:$lightgrey;
+          font-size: 0.75em;
+          line-height: 1.5em;
+          span.author a{
+            font-size:1em;
+            font-weight:normal;
+            margin-left: 5px;
           }
         }
       }
