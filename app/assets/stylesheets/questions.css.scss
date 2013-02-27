@@ -3,13 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 @import "compass";
-
-$darkblue: #2b464e;
-$context: #c8c8c8;
-
-@mixin rounded_corners($border-radius:3px){
-  @include border-radius($border-radius);
-}
+@import "mixins";
 
 section.questions{
   header{
@@ -35,18 +29,19 @@ section.questions{
     }
     div.rating{
       @include rounded_corners();
-      background: url(/assets/up_vote_sm@2x.png) no-repeat $darkblue;
       display: inline-block;
       width: 3.8461538%;
       background-size: 12px 11px;
       background-position: center center;
-      height: 30px;
       position:relative;
       vertical-align: top;
+      a.upvote{
+        color:$darkblue;
+        font-size:1.125em;
+      }
       span.count{
-        position: absolute;
-        bottom: -24px;
-        font-size: 1.125em;
+        color:$darkblue;
+        font-size: 1em;
         line-height: 1em;
         text-align: center;
         width: 100%;
@@ -58,12 +53,12 @@ section.questions{
       vertical-align: top;
       width:56.410256%;
       a.title{
-        color:#3c636e;
+        color:$darkblue;
         font-size:1.125em;
         line-height: 1em;
       }
       p{
-        color:#3c636e;
+        color:$darkblue;
         font-size:0.875em;
         line-height: 1.286em;
         margin-top:12px;
@@ -91,7 +86,7 @@ section.questions{
         background:url(/assets/followers_icon@2x.png) no-repeat left top transparent;
         background-size:15px 14px;
         border-bottom:1px solid #f7f7f7;
-        color:#3c636e;
+        color:$darkblue;
         display:block;
         font-size:0.75em;
         font-weight:600;

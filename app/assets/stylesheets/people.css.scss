@@ -3,13 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 @import "compass";
-
-$darkblue: #2b464e;
-$context: #c8c8c8;
-
-@mixin rounded_corners($border-radius:3px){
-  @include border-radius($border-radius);
-}
+@import "mixins";
 
 section.people{
   header{
@@ -25,14 +19,17 @@ section.people{
   div.person_photo{
     display:inline-block;
     vertical-align:top;
+    width:21.505376344086%;
   }
   img.person_photo{
-    margin-right:20px;
+    margin-right:20%;
     @include rounded_corners();
+    width:80%;
   }
   div.person_details{
     display:inline-block;
     margin-bottom:24px;
+    width:77.41935483871%;
   }
   h2{
     font-size:1em;
@@ -52,5 +49,6 @@ section.people{
     color:#7b969e;
     font-size:0.813em;
     line-height: 1.385em;
+    word-wrap: break-word;
   }
 }

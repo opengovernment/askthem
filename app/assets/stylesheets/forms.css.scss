@@ -1,10 +1,13 @@
+@import "compass";
+@import "mixins";
+
 form{
   input[type=text],input[type=email],input[type=number], textarea{
     font-family:helvetica, arial, verdana, sans-serif;
   }
   &.action{
     label{
-      color: #3C636E;
+      color: $darkblue;
       display: block;
       font-weight: 600;
       font-size: 1.125em;

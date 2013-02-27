@@ -44,7 +44,9 @@
 
         <aside>
           <% if @person.email? %>
+          <section>
             <h4>Email:</h4><p><%= mail_to @person.email %></p>
+          </section>
           <% end %>
 
           <% @person['offices'].each do |office| %>

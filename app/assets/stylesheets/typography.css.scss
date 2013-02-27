@@ -1,5 +1,8 @@
+@import "compass";
+@import "mixins";
+
 h1{
-  color: #3C636E;
+  color: $darkblue;
   font-size: 2.25em;
   line-height: 1em;
   font-weight: 100;
@@ -18,7 +21,7 @@ h4{
   padding-bottom:6px;
 }
 h5{
-  color:#3c636e;
+  color:$darkblue;
   font-size:0.625em;
   font-weight:600;
   line-height: 2.4em;

@@ -1,4 +1,5 @@
 @import "compass";
+@import "mixins";
 
 /* http://meyerweb.com/eric/tools/css/reset/
    v2.0 | 20110126
@@ -51,13 +52,13 @@ table {
 
 
 body{
-  background:#ebf5f3;
-  color:#3c636e;
+  background:#D4E8EB;
+  color:$darkblue;
   font-family: helvetica, arial, verdana, sans-serif;
 }
 
 a{
-  color:#96cdce;
+  color:$linkcolor;
   text-decoration: none;
   outline:none;
 }
@@ -65,47 +66,12 @@ html{
   -webkit-font-smoothing: antialiased;
 }
 
-/*
-=========
-Mixins
-=========
-*/
-$darkblue: #2b464e;
-$context: #c8c8c8;
-
-@mixin rounded_corners($border-radius:3px){
-  @include border-radius($border-radius);
-}
-
-@mixin drop_shadow($x:0, $y:2px, $choke:0, $blur:0, $color:rgba(0,0,0,.1)){
-  @include box-shadow($x $y $choke $blur $color);
-}
-
-@mixin inset_double_drop_shadow(
-  $x:0, $y:2px, $choke:0, $blur:0, $color:rgba(0,0,0,.1),
-  $inset: inset, $x2:0, $y2:2px, $choke2:0, $blur2:0, $color2:#ffaa9f){
-  @include box-shadow($x $y $choke $blur $color, $inset $x2 $y2 $choke2 $blur2 $color2);
-}
-
-@mixin cta_background{
-  @include background(linear-gradient(top center, #ff7866, #f47362));
-}
-
-/*
-Block fluidity, for now
-*/
-@mixin responsive-max($max-width:910px) {
-  max-width: $max-width;
-}
-@mixin responsive-blocker($min-width:910px) {
-  min-width: $min-width;
-}
 
 /*
   Header & Admin controls
 */
 a.logo{
-  background: url(/assets/logo@2x.jpg);
+  background-image: url(/assets/logo.png);
   width: 175px;
   height: 26px;
   display: inline-block;
@@ -120,7 +86,7 @@ header p.slogan{
   font-weight: 100;
   vertical-align: bottom;
   padding-bottom: 1px;
-  color: #97B8C2;
+  color: #49656D;
   margin-left: 30px;
 }
 ul.admin_nav{
@@ -131,7 +97,7 @@ ul.admin_nav{
     display:inline-block;
     float:left;
     a{
-      color: #477380;
+      color: #5D8A97;
       border-right: 1px solid #CCE3DB;
       padding: 12px 20px 0px;
       display: block;
@@ -139,12 +105,24 @@ ul.admin_nav{
       float: left;
       line-height: 1.5em;
       &:hover{
-        color:#5e9187;
-        @include background(radial-gradient(top center, #f5fffe, rgba(255,255,255,0)));
+        color:#3b626d;
       }
     }
     &:last-child a{
       border-right:0;
+    }
+  }
+}
+
+div.attr{
+  span.attr{
+    color:$lightblue;
+    display:inline-block;
+    margin-right:20px;
+    font-size:0.813em;
+    line-height: 1.385em;
+    &:last-child{
+      margin-right:0;
     }
   }
 }
@@ -186,6 +164,7 @@ div.related_data{
   background: url(/assets/related_bg@2x.jpg) repeat;
   background-size: 30px 30px;
   border-top: 1px solid #e7e7e7;
+  border-right: 1px solid #E7E7E7;
   box-shadow: 0px -1px 3px rgba(0,0,0,.05), 0 1px 0 0px #ffffff inset;
   margin-top: 30px;
   padding-bottom: 60px;
@@ -204,11 +183,11 @@ div.related_data{
         margin-bottom: -3px;
         display: inline-block;
         &:hover{
-          color:#3c636e;
+          color:$darkblue;
         }
         &.active{
-          color:#3c636e;
-          border-bottom:5px solid #3c626d;
+          color:$darkblue;
+          border-bottom:5px solid $darkblue;
           padding: 21px 18px 16px;
         }
       }
@@ -273,12 +252,11 @@ Buttons!
 }
 
 .sim_act{
-  background: #A8E6E7;
-  color: #3C636E;
+  background: #96c5ce;
+  color: #ffffff;
   font-size: 0.75em;
   font-weight:600;
   line-height: 2em;
-  text-shadow: 0 1px 0 #B3F7E9;
   padding: 7px 12px 6px;
   min-width: 70px;
   text-align: center;
@@ -286,13 +264,14 @@ Buttons!
   @include rounded_corners();
 }
 
+
 /*
 Sub navigations
 */
 
 nav{
   ul.top_nav{
-    border-bottom: 1px solid #E5E5E6;
+    border-bottom: 1px solid #ebf1f3;
     display:block;
     width:100%;
     margin-bottom: 42px;
@@ -301,22 +280,21 @@ nav{
       a{
         padding:16px 20px;
         font-size:0.813em;
-        font-weight: 100;
         line-height: 1.385em;
         &.active{
-          color:#6f9798;
+          color:#709eac;
           border-bottom: 4px solid #EEF4F2;
           padding-bottom: 13px;
         }
         &:hover{
-          color:#6f9798;
+          color:#709eac;
         }
       }
     }
   }
   li.subject{
-    color: #477380;
-    padding: 15px 0 17px;
+    color: $darkblue;
+    padding: 15px 0 15px;
     background: url(/assets/nav_arrow@2x.jpg);
     font-size: 1em;
     font-weight: 600;
@@ -448,6 +426,24 @@ div.filters{
   }
 }
 
+/*
+  UI helpers
+*/
+a.show_full_title, a.show_short_title{
+  display: inline-block;
+  clear: left;
+  font-weight:normal;
+  font-size: 13px;
+  line-height: 14px;
+  margin-left: 6px;
+  margin-top: 12px;
+  span{
+    display: inline-block;
+    font-size: 0.678em;
+    vertical-align:1px;
+  }
+}
+
 
 /*
 Footer
@@ -471,5 +467,19 @@ footer{
         text-shadow:0 1px 0 #ffffff;
       }
     }
+  }
+}
+
+
+
+/*
+Retina
+*/
+@media (min--moz-device-pixel-ratio: 1.5),
+  (-o-min-device-pixel-ratio: 3/2),
+  (-webkit-min-device-pixel-ratio: 1.5),
+  (min-resolution: 1.5dppx){
+  a.logo{
+    background-image:url(/assets/logo@2x.png);
   }
 }
