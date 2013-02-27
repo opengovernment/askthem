@@ -4,9 +4,13 @@ require 'ostruct'
 class Bill
   include Mongoid::Document
 
-  # For querying bills related to a committee.
+  # Bills related to a committee or legislator.
   index('actions.related_entities.id' => 1)
-  # For querying a state's current bills.
+  # Bills with an action by a committee.
+  index('actions.committee' => 1)
+  # Bills sponsored by a committee.
+  index('sponsors.committee_id' => 1)
+  # A state's current bills.
   index(state: 1, _current_session: 1, 'action_dates.last' => -1)
 
   # @param [Integer] limit the number of sponsors to return

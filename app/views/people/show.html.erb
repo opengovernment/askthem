@@ -3,24 +3,24 @@
 <section class="people">
   <header>
     <div class="person_info">
-        <% if @person.image? %>
-        <div class="person_photo">
-          <%= cdn_image_tag(@person.image, size: '80x80', alt: '', class: 'person_photo') %>
-        </div>
-        <% else %>
-          <%# @todo add placeholder image %>
-        <% end %>
+      <% if @person.image? %>
+      <div class="person_photo">
+        <%= cdn_image_tag(@person.image, size: '80x80', alt: '', class: 'person_photo') %>
+      </div>
+      <% else %>
+        <%# @todo add placeholder image %>
+      <% end %>
 
-        <div class="person_details">
-          <h1>
-            <%= @person.name %> <% unless person['active'] %>(Not in Office)<% end %>
-          </h1>
-          <h2><%= person_attributes(@person) %></h2>
-          <div class="attr">
-            <span class="count"><%= pluralize @person.questions.count, 'question' %></span>
-            <span class="count"><%= pluralize @person.answers.count, 'answer' %></span>
-          </div>
+      <div class="person_details">
+        <h1>
+          <%= @person.name %> <% unless person['active'] %>(Not in Office)<% end %>
+        </h1>
+        <h2><%= person_attributes(@person) %></h2>
+        <div class="attr">
+          <span class="count"><%= pluralize @person.questions.count, 'question' %></span>
+          <span class="count"><%= pluralize @person.answers.count, 'answer' %></span>
         </div>
+      </div>
 
       <% if @person.person_detail.biography? %>
         <p><%= truncate(@person.person_detail.biography, length: 130) %> <%= link_to 'Read more on Wikipedia', @person.person_detail.links.find_by(note: 'Wikipedia').url %></p>
