@@ -1,8 +1,44 @@
 @import "compass";
 @import "mixins";
 
+$fontpath: "/assets" !default;
+
+@font-face {
+    font-family: 'RobotoRegular';
+    src: url('#{$fontpath}Roboto-Regular-webfont.eot');
+    src: url('#{$fontpath}Roboto-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('#{$fontpath}Roboto-Regular-webfont.woff') format('woff'),
+         url('#{$fontpath}Roboto-Regular-webfont.ttf') format('truetype'),
+         url('#{$fontpath}Roboto-Regular-webfont.svg#RobotoRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'RobotoThin';
+    src: url('#{$fontpath}Roboto-Thin-webfont.eot');
+    src: url('#{$fontpath}Roboto-Thin-webfont.eot?#iefix') format('embedded-opentype'),
+         url('#{$fontpath}Roboto-Thin-webfont.woff') format('woff'),
+         url('#{$fontpath}Roboto-Thin-webfont.ttf') format('truetype'),
+         url('#{$fontpath}Roboto-Thin-webfont.svg#RobotoThin') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'RobotoLight';
+    src: url('#{$fontpath}Roboto-Light-webfont.eot');
+    src: url('#{$fontpath}Roboto-Light-webfont.eot?#iefix') format('embedded-opentype'),
+         url('#{$fontpath}Roboto-Light-webfont.woff') format('woff'),
+         url('#{$fontpath}Roboto-Light-webfont.ttf') format('truetype'),
+         url('#{$fontpath}Roboto-Light-webfont.svg#RobotoLight') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
 h1{
   color: $darkblue;
+  @include RobotoLight;
   font-size: 2.25em;
   line-height: 1em;
   font-weight: 100;

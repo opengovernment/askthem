@@ -51,4 +51,16 @@ section.people{
     line-height: 1.385em;
     word-wrap: break-word;
   }
+  &.listings{
+    h1{
+      float: left;
+      clear: both;
+      display: inline-block;
+    }
+    a.cta_pill{
+      float: right;
+      width: 165px;
+      text-align: center;
+    }
+  }
 }

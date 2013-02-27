@@ -55,12 +55,12 @@ section.questions{
       a.title{
         color:$darkblue;
         font-size:1.125em;
-        line-height: 1em;
+        line-height: 1.333em;
       }
       p{
         color:$darkblue;
-        font-size:0.875em;
-        line-height: 1.286em;
+        font-size:0.813em;
+        line-height: 1.385em;
         margin-top:12px;
         span.context{
           display:none;
@@ -147,6 +147,19 @@ section.questions{
           }
         }
       }
+    }
+  }
+  
+  &.listings{
+    h1{
+      float: left;
+      clear: both;
+      display: inline-block;
+    }
+    a.cta_pill{
+      float: right;
+      width: 165px;
+      text-align: center;
     }
   }
 }

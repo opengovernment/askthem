@@ -1,11 +1,16 @@
 @import 'compass';
 
 $darkblue: #1D2F34;
+$middleblue: #3c636e;
 $lightblue: #7b969e;
+
 $lightgrey: #919191;
+
 $context: #c8c8c8;
 $border-delimiter: #DCE2E4;
+
 $linkcolor: #8BC4D6;
+$linkhover: #709EAC;
 
 @mixin rounded_corners($border-radius:3px){
   @include border-radius($border-radius);
@@ -23,6 +28,20 @@ $linkcolor: #8BC4D6;
 
 @mixin cta_background{
   @include background(linear-gradient(top center, #ff7866, #f47362));
+}
+
+/*
+  Typographic Mixes
+*/
+
+@mixin RobotoLight(){
+  font-family:'RobotoLight', helvetica, arial, verdana, sans-serif;
+}
+@mixin RobotoThin(){
+  font-family:'RobotoThin', helvetica, arial, verdana, sans-serif;
+}
+@mixin RobotoRegular(){
+  font-family:'RobotoRegular', helvetica, arial, verdana, sans-serif;
 }
 
 /*
