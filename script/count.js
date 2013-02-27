@@ -30,7 +30,7 @@ var count = function (collection, message, criteria, callback) {
     median = (counts[index - 1] + counts[index]) / 2;
   }
 
-  print(collection + ': ' + message);
+  print('\n' + collection + ': ' + message);
   print('mean   ' + (Math.round(total / db[collection].count(criteria) * 10) / 10));
   print('median ' + median);
   print('max    (' + maximum_id + ') ' + maximum);
@@ -133,6 +133,18 @@ count('committees', 'subcommittee length', {
   return this.subcommittee.length;
 });
 
+count('committees', 'sponsored bills', {}, function () {
+  return db.bills.count({'sponsors.committee_id': this._id});
+});
+
+count('committees', 'related bills', {}, function () {
+  return db.bills.count({'actions.related_entities.id': this._id});
+});
+
+count('committees', 'actioned bills', {}, function () {
+  return db.bills.count({'actions.committee': this._id});
+});
+
 count('legislators', 'full_name length', {}, function () {
   return this.full_name.length;
 });
@@ -157,4 +169,12 @@ count('legislators', 'committee roles', {
     }
   });
   return count;
+});
+
+count('legislators', 'sponsored bills', {}, function () {
+  return db.bills.count({'sponsors.leg_id': this._id});
+});
+
+count('legislators', 'related bills', {}, function () {
+  return db.bills.count({'actions.related_entities.id': this._id});
 });
