@@ -41,8 +41,8 @@ section.questions{
       }
       span.count{
         color:$darkblue;
-        font-size: 1em;
-        line-height: 1em;
+        font-size:0.889em;
+        line-height: 1.125em;
         text-align: center;
         width: 100%;
       }
@@ -56,6 +56,9 @@ section.questions{
         color:$darkblue;
         font-size:1.125em;
         line-height: 1.333em;
+        &:hover{
+          color:$linkhover;
+        }
       }
       p{
         color:$darkblue;
@@ -109,7 +112,7 @@ section.questions{
         a{
           display:inline-block;
           font-size:0.75em;
-          font-weight:100;
+          font-weight:600;
           line-height: 1.5em;
           img{
             @include rounded_corners();
@@ -142,7 +145,6 @@ section.questions{
           line-height: 1.5em;
           span.author a{
             font-size:1em;
-            font-weight:normal;
             margin-left: 5px;
           }
         }

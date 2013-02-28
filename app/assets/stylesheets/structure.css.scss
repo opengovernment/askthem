@@ -173,10 +173,11 @@ div.related_data{
   margin-top: 30px;
   padding-bottom: 60px;
   ul.related_nav{
-    border-bottom: 3px solid #a9cccd;
-    display: block;
-    width: 70.5128205%;
+    border-bottom: 3px solid #95c3cc;
     box-shadow: 1px 0 0 #e7e7e7 inset;
+    display: block;
+    padding-left:1%;
+    width: 76.5128205%;
     li{
       display:inline-block;
       a{
@@ -203,22 +204,21 @@ div.related_data{
       box-shadow: 3px 0 7px rgba(0, 0, 0, 0.03), -1px 0 0 rgba(150, 197, 206, 0.37) inset;
       display:inline-block;
       padding-top:30px;
-      width:70.5128205%;
+      width:77.5128205%;
     }
     aside{
       display:inline-block;
-      width:27.5641025%;
+      width:20.5641025%;
       vertical-align:top;
       section{
-        background:url(/assets/related_delimiter.png) repeat-x;
-        background-position:0 bottom;
+        border-bottom:1px dashed rgba(0, 0, 0, .15);
         margin-left: 11.62790697%;
         margin-right: 11.62790697%;
-        margin-bottom: 18px;
-        padding-bottom: 18px;
+        margin-bottom: 24px;
+        padding-bottom: 24px;
         &:last-child,
         &.last{
-          background:none;
+          border:0;
         }
         ul>li{
           color:#7b969e;
@@ -365,10 +365,11 @@ div.filters{
     margin-right: 3px;
     @include rounded_corners();
     li.menu{
+      background: white;
+      @include box-shadow(0 1px 3px rgba(33,54,60,.1));
       display:none;
       position: absolute;
       left: 0;
-      background: white;
       width: 100%;
       margin-top: 6px;
       text-indent: 12px;
