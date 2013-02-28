@@ -13,7 +13,7 @@
 
       <div class="person_details">
         <h1>
-          <%= @person.name %> <% unless person['active'] %>(Not in Office)<% end %>
+          <%= @person.name %> <% unless @person['active'] %>(Not in Office)<% end %>
         </h1>
         <h2><%= person_attributes(@person) %></h2>
         <div class="attr">
@@ -42,11 +42,14 @@
       </nav>
 
       <div class="related_content">
-<%= render partial: 'questions' %>
+        
+        <%= render partial: 'questions' %>
 
         <aside>
           <% if @person.email? %>
+          <section>
             <h4>Email:</h4><p><%= mail_to @person.email %></p>
+          </section>
           <% end %>
 
           <% @person['offices'].each do |office| %>

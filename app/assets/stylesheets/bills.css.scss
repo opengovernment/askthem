@@ -1,0 +1,101 @@
+@import "compass";
+@import "mixins";
+
+section.bills{
+  div.bill_info{
+    display: inline-block;
+    float:left;
+    width: 69.230769230769%;
+    h1{
+      margin-bottom:24px;
+    }
+    p.show_full{
+      color: $darkblue;
+      font-size: 2.25em;
+      line-height: 1em;
+      font-weight: 100;
+      margin-bottom:24px;
+    }
+    h2{
+      margin-bottom:24px;
+      a{
+        color:#27a2b5;
+      }
+    }
+    ol.actions{
+      margin-top:24px;
+      padding-top:24px;
+      border-top:1px solid $border-delimiter;
+      li{
+        font-size:0.688em;
+        line-height: 1.455em;
+        display:inline-block;
+        color:#dcddde;
+        font-weight:600;
+        span{
+          color:#eaeced;
+        }
+        &.active{
+          color:$darkblue;
+          span{
+            color:#bbc0c2;
+          }
+        }
+      }
+    }
+  }
+  a.cta_pill{
+    float: right;
+    width: 165px;
+    text-align: center;
+  }
+  a.sim_act{
+    float:right;
+    margin-top:12px;
+    width:191px;
+  }
+  div.related_wrap{
+    clear:both;
+  }
+  section.sponsors{
+    li{
+      color:$lightblue;
+      display:block;
+      margin-bottom:18px;
+      &:last-child{
+        margin-bottom:0;
+      }
+    }
+    div.depiction{
+      display:inline-block;
+      vertical-align: top;
+      margin-right:6.060606060606%;
+      width:18.181818181818%;
+      img{
+        @include border-radius(3px);
+        height:auto;
+        width:100%;
+        min-width:100%;
+      }
+    }
+    div.details{
+      display:inline-block;
+      width:69.69696969697%;
+    }
+    span.sponsor_type{
+      display:block;
+    }
+  }
+  &.listings{
+    h1{
+      float: left;
+      clear: both;
+      display: inline-block;
+    }
+    a.cta_pill{
+      float: right;
+      width: 165px;
+      text-align: center;
+    }
+  }
+}

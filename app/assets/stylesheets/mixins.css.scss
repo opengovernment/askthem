@@ -1,0 +1,55 @@
+@import 'compass';
+
+$darkblue: #1D2F34;
+$middleblue: #3c636e;
+$lightblue: #7b969e;
+
+$lightgrey: #919191;
+
+$context: #c8c8c8;
+$border-delimiter: #DCE2E4;
+
+$linkcolor: #8BC4D6;
+$linkhover: #709EAC;
+
+@mixin rounded_corners($border-radius:3px){
+  @include border-radius($border-radius);
+}
+
+@mixin drop_shadow($x:0, $y:2px, $choke:0, $blur:0, $color:rgba(0,0,0,.1)){
+  @include box-shadow($x $y $choke $blur $color);
+}
+
+@mixin inset_double_drop_shadow(
+  $x:0, $y:2px, $choke:0, $blur:0, $color:rgba(0,0,0,.1),
+  $inset: inset, $x2:0, $y2:2px, $choke2:0, $blur2:0, $color2:#ffaa9f){
+  @include box-shadow($x $y $choke $blur $color, $inset $x2 $y2 $choke2 $blur2 $color2);
+}
+
+@mixin cta_background{
+  @include background(linear-gradient(top center, #ff7866, #f47362));
+}
+
+/*
+  Typographic Mixes
+*/
+
+@mixin RobotoLight(){
+  font-family:'RobotoLight', helvetica, arial, verdana, sans-serif;
+}
+@mixin RobotoThin(){
+  font-family:'RobotoThin', helvetica, arial, verdana, sans-serif;
+}
+@mixin RobotoRegular(){
+  font-family:'RobotoRegular', helvetica, arial, verdana, sans-serif;
+}
+
+/*
+Block fluidity, for now
+*/
+@mixin responsive-max($max-width:910px) {
+  max-width: $max-width;
+}
+@mixin responsive-blocker($min-width:910px) {
+  min-width: $min-width;
+}
