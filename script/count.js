@@ -37,6 +37,21 @@ var count = function (collection, message, criteria, callback) {
   print('min    (' + minimum_id + ') ' + minimum);
 }
 
+['bills', 'committees', 'events', 'legislators', 'votes'].forEach(function (collection) {
+  count('metadata', collection, {}, function () {
+    return db[collection].count({state: this._id});
+  });
+});
+count('metadata', 'bills in current session', {}, function () {
+  return db.bills.count({state: this._id, _current_session: true});
+});
+count('metadata', 'active legislators', {}, function () {
+  return db.legislators.count({state: this._id, active: true});
+});
+count('metadata', 'districts', {}, function () {
+  return db.districts.count({abbr: this._id});
+});
+
 count('bills', 'actions', {
   actions: {
     '$ne': [],
