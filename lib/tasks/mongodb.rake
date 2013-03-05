@@ -9,8 +9,10 @@ namespace :mongodb do
 
   def uri
     @uri ||= begin
-      url = `heroku config:get MONGOHQ_URL`.chomp
-      url = `heroku config:get MONGOLAB_URI`.chomp if url.empty?
+      url = nil
+      %w(MONGO_URL MONGOHQ_URL MONGOLAB_URI).find do |constant|
+        url = `heroku config:get #{constant}`.chomp
+      end
       URI.parse(url)
     end
   end
@@ -25,7 +27,7 @@ namespace :mongodb do
 END
       if STDIN.gets == "nogoingback\n"
         puts `mongodump -h localhost -d #{database} -o dump-dir`.chomp
-        puts `mongorestore -h #{uri.host}:#{uri.port} -d #{uri.path.sub '/', ''} -u #{uri.user} -p #{uri.password} --drop dump-dir/#{database}`.chomp
+        puts `mongorestore -h #{uri.host}:#{uri.port || '27017'} -d #{uri.path.sub('/', '')} -u #{uri.user} -p #{uri.password} --drop dump-dir/#{database}`.chomp
       else
         puts 'Confirmation did not match "nogoingback". Aborted.'
       end
@@ -43,7 +45,7 @@ END
  !    To proceed, type "nogoingback"
 END
       if STDIN.gets == "nogoingback\n"
-        puts `mongodump -h #{uri.host}:#{uri.port} -d #{uri.path.sub '/', ''} -u #{uri.user} -p #{uri.password} -o dump-dir/`.chomp
+        puts `mongodump -h #{uri.host}:#{uri.port || '27017'} -d #{uri.path.sub('/', '')} -u #{uri.user} -p #{uri.password} -o dump-dir/`.chomp
         puts `mongorestore -h localhost -d #{database} --drop dump-dir/#{database}`.chomp
       else
         puts 'Confirmation did not match "nogoingback". Aborted.'
