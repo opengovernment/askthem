@@ -27,6 +27,10 @@ development:
         # The time in seconds that Moped should wait before retrying an
         # operation on failure. (default: 1)
         # retry_interval: 1
+    oglocal:
+      database: opengovernment_local
+      hosts:
+        - localhost:27017
   # Configure Mongoid specific options. (optional)
   options:
     # Configuration for whether or not to allow access to fields that do
@@ -78,18 +82,29 @@ test:
         # low amounts for fast failures.
         max_retries: 1
         retry_interval: 0
-<% uri = URI.parse(ENV['MONGO_URL'] || ENV['MONGOHQ_URL'] || ENV['MONGOLAB_URI'] || 'mongodb://127.0.0.1:27017/opengovernment_local') %> # https://gist.github.com/2588954
+<% default = URI.parse(ENV['MONGO_URL'] || 'mongodb://127.0.0.1:27017/fiftystates') %> # https://gist.github.com/2588954
+<% oglocal = URI.parse(ENV['MONGOHQ_URL'] || ENV['MONGOLAB_URI'] || 'mongodb://127.0.0.1:27017/opengovernment_local') %> # https://gist.github.com/2588954
 production:
   sessions:
     default:
-      database: <%= uri.path.sub '/', '' %>
-<% if uri.user %>
-      username: <%= uri.user %>
+      database: <%= default.path.sub '/', '' %>
+<% if default.user %>
+      username: <%= default.user %>
 <% end %>
-<% if uri.password %>
-      password: <%= uri.password %>
+<% if default.password %>
+      password: <%= default.password %>
 <% end %>
       hosts:
-      - <%= uri.host %>:<%= uri.port %>
+      - <%= default.host %>:<%= default.port %>
+    oglocal:
+      database: <%= oglocal.path.sub '/', '' %>
+<% if oglocal.user %>
+      username: <%= oglocal.user %>
+<% end %>
+<% if oglocal.password %>
+      password: <%= oglocal.password %>
+<% end %>
+      hosts:
+      - <%= oglocal.host %>:<%= oglocal.port %>
   options:
     identity_map_enabled: true

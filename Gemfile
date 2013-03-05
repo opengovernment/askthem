@@ -1,10 +1,10 @@
 source 'https://rubygems.org'
 ruby '1.9.3'
 
-gem 'rails', '3.2.11'
+gem 'rails', '3.2.12'
 gem 'jquery-rails'
 
-gem 'mongoid', '~> 3.0.17'
+gem 'mongoid', '~> 3.1.2'
 gem 'inherited_resources', '~> 1.3.1'
 gem 'andand'
 gem 'kaminari'

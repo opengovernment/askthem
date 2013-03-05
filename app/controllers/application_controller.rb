@@ -8,9 +8,20 @@ class ApplicationController < ActionController::Base
   end
   protect_from_forgery
 
+  before_filter :switch_database
+  after_filter :reset_database
+
 private
 
   def set_jurisdiction
     @jurisdiction ||= Metadatum.find(params[:jurisdiction])
+  end
+
+  def switch_database
+    Mongoid.override_session('oglocal') if @jurisdiction && !@jurisdiction.id[/\A[a-z]{2}\z/]
+  end
+
+  def reset_database
+    Mongoid.override_session(nil)
   end
 end
