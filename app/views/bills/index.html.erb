@@ -46,22 +46,22 @@
         <ol class="actions">
           <% bill.dates.select{|_,date| date}.each do |action,date| %>
             <% if action == 'first' %>
-              <li class="active">
+              <li<% if date %> class="active"<% end %>>
                 Introduced
                 <%= l(date, format: :bill) if date %>
               </li>
             <% elsif action == 'passed_lower' %>
-              <li class="active">
+              <li<% if date %> class="active"<% end %>>
                 Passed <%= @jurisdiction.chamber_name('lower') %>
                 <%= l(date, format: :bill) if date %>
               </li>
             <% elsif action == 'passed_upper' %>
-              <li class="active">
+              <li<% if date %> class="active"<% end %>>
                 Passed <%= @jurisdiction.chamber_name('upper') %>
                 <%= l(date, format: :bill) if date %>
               </li>
             <% elsif action == 'signed' %>
-              <li class="active">
+              <li<% if date %> class="active"<% end %>>
                 Signed into Law
                 <%= l(date, format: :bill) if date %>
               </li>
