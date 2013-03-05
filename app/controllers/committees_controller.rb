@@ -14,6 +14,6 @@ class CommitteesController < ApplicationController
 private
 
   def collection
-    @committees ||= end_of_association_chain.where(state: @jurisdiction.id)
+    @committees ||= end_of_association_chain.where(state: @jurisdiction.id).asc(:committee, :subcommittee)
   end
 end

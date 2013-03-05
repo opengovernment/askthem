@@ -3,3 +3,6 @@ en:
     types:
       capitol: Capitol Office
       district: District Office
+  time:
+    formats:
+      bill: '%B %e, %Y'

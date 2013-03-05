@@ -34,5 +34,59 @@
       <input type="submit" value="" />
     </div>
   </div>
-  TODO: Bills
+
+  <ol>
+    <% @bills.each do |bill| %>
+      <li>
+        <%= link_to bill['bill_id'], bill_path(@jurisdiction.id, bill) %>
+        <%= bill.dates.first.last.year %>
+        <%= pluralize bill.questions.count, 'question' %>
+        <%= truncate(bill['title'], length: 95) %>
+
+        <ol class="actions">
+          <% bill.dates.select{|_,date| date}.each do |action,date| %>
+            <% if action == 'first' %>
+              <li class="active">
+                Introduced
+                <%= l(date, format: :bill) if date %>
+              </li>
+            <% elsif action == 'passed_lower' %>
+              <li class="active">
+                Passed <%= @jurisdiction.chamber_name('lower') %>
+                <%= l(date, format: :bill) if date %>
+              </li>
+            <% elsif action == 'passed_upper' %>
+              <li class="active">
+                Passed <%= @jurisdiction.chamber_name('upper') %>
+                <%= l(date, format: :bill) if date %>
+              </li>
+            <% elsif action == 'signed' %>
+              <li class="active">
+                Signed into Law
+                <%= l(date, format: :bill) if date %>
+              </li>
+            <% end %>
+          <% end %>
+        </ol>
+
+        <ul>
+          <% bill.people_and_committee_sponsors(5).each do |sponsor| %>
+            <li>
+              <% if Person === sponsor %>
+                <div class="depiction">
+                  <% if sponsor.image? %>
+                    <%= cdn_image_tag(sponsor.image, size: '50x50', alt: '', class: 'media-object') %>
+                  <% else %>
+                    <%# @todo add placeholder image %>
+                  <% end %>
+                </div>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+      </li>
+    <% end %>
+  </ol>
+
+  <%= paginate @bills, outer_window: 1 %>
 </section>

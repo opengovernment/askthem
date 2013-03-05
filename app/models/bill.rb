@@ -4,6 +4,28 @@ require 'ostruct'
 class Bill
   include Mongoid::Document
 
+  DATE_ORDER = {
+    'lower' => [
+      'first',
+      'passed_lower',
+      'passed_upper',
+      'signed',
+      'last',
+    ],
+    'upper' => [
+      'first',
+      'passed_upper',
+      'passed_lower',
+      'signed',
+      'last',
+    ]
+  }
+
+  OTHER_CHAMBER = {
+    'lower' => 'upper',
+    'upper' => 'lower',
+  }
+
   # Bills related to a committee or legislator.
   index('actions.related_entities.id' => 1)
   # Bills with an action by a committee.
@@ -50,9 +72,27 @@ class Bill
     end
   end
 
+  def jurisdiction
+    @jurisdiction ||= Metadatum.find(read_attribute(:state))
+  end
+
   # @return [Array] the major actions sorted by date
   def dates
-    read_attribute(:action_dates).to_a.select{|_,date| date}.sort_by{|_,date| date}
+    @dates ||= begin
+      dates = read_attribute(:action_dates).to_a
+
+      # Remove extra chambers.
+      chamber = read_attribute(:chamber)
+      if jurisdiction.chambers.size == 1
+        dates.delete_at(dates.index{|action,_| action.include?(OTHER_CHAMBER[chamber])})
+      end
+
+      # Sort the dates appropriately.
+      order = DATE_ORDER[chamber]
+      dates.sort do |(a,_),(b,_)|
+        order.index(a) <=> order.index(b)
+      end
+    end
   end
 
   def questions # @todo

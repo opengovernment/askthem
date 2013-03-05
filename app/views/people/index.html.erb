@@ -35,7 +35,7 @@
     </div>
   </div>
   <ol class="media-list">
-    <% @people.asc(:chamber, :family_name).each do |person| %>
+    <% @people.each do |person| %>
       <li class="media">
         <span class="pull-left">
           <% if person.image? %>

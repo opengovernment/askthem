@@ -6,15 +6,22 @@
       <div class="bill_details">
         <h2>
           <strong><%= @bill['bill_id'] %></strong>
-          2013<%# @todo %>
+          <%= @bill.dates.first.last.year %>
           <% if @bill['versions'].last %>
             <%= link_to 'Read the complete bill →', @bill['versions'].last['url'] %>
           <% end %>
         </h2>
-        <h1 class="title_short"><%= truncate(@bill['title'], length: 95) %>
-        <% if @bill['title'].length >= 95 %><a href="#" class="show_full_title" target="title"><span class="icon-plus"></span> Show full</a><% end %>
-        </h1><% if @bill['title'].length >= 95 %>
-        <p class="show_full title_long" style="display:none;"><%= @bill['title'] %><a href="#" class="show_short_title" target="title"> <span class="icon-minus"></span> Show less</a></p>
+        <h1 class="title_short">
+          <%= truncate(@bill['title'], length: 95) %>
+          <% if @bill['title'].length >= 95 %>
+            <a href="#" class="show_full_title" target="title"><span class="icon-plus"></span> Show full</a>
+          <% end %>
+        </h1>
+        <% if @bill['title'].length >= 95 %>
+          <p class="show_full title_long" style="display:none;">
+            <%= @bill['title'] %>
+            <a href="#" class="show_short_title" target="title"><span class="icon-minus"></span> Show less</a>
+          </p>
         <% end %>
         <div class="attr">
           <span class="attr">
@@ -27,15 +34,30 @@
           <span class="attr"><%= pluralize @bill.answers.count, 'answer' %></span>
         </div>
         <ol class="actions">
-          <% @bill.dates.each do |type,date| %>
-            <% if type == 'first' %>
-            <li class="active">Introduced <span class="icon-circle-arrow-right"></span></li>
-            <% elsif type == 'passed_lower' %>
-            <li>Passed <%= @jurisdiction.chamber_name('lower') %> <span class="icon-circle-arrow-right"></span></li>
-            <% elsif type == 'passed_upper' %>
-            <li>Passed <%= @jurisdiction.chamber_name('upper') %> <span class="icon-circle-arrow-right"></span></li>
-            <% elsif type == 'signed' %>
-            <li>Signed into Law</li>
+          <% @bill.dates.each do |action,date| %>
+            <% if action == 'first' %>
+              <li<% if date %> class="active"<% end %>>
+                Introduced
+                <%= l(date, format: :bill) if date %>
+                <span class="icon-circle-arrow-right"></span>
+              </li>
+            <% elsif action == 'passed_lower' %>
+              <li<% if date %> class="active"<% end %>>
+                Passed <%= @jurisdiction.chamber_name('lower') %>
+                <%= l(date, format: :bill) if date %>
+                <span class="icon-circle-arrow-right"></span>
+              </li>
+            <% elsif action == 'passed_upper' %>
+              <li<% if date %> class="active"<% end %>>
+                Passed <%= @jurisdiction.chamber_name('upper') %>
+                <%= l(date, format: :bill) if date %>
+                <span class="icon-circle-arrow-right"></span>
+              </li>
+            <% elsif action == 'signed' %>
+              <li<% if date %> class="active"<% end %>>
+                Signed into Law
+                <%= l(date, format: :bill) if date %>
+              </li>
             <% end %>
           <% end %>
         </ol>
@@ -90,18 +112,18 @@
                 <% @bill.people_and_committee_sponsors(5).each do |sponsor| %>
                   <li>
                     <% if Person === sponsor %>
-                    <div class="depiction">
-                      <% if sponsor.image? %>
-                        <%= cdn_image_tag(sponsor.image, size: '50x50', alt: '', class: 'media-object') %>
-                      <% else %>
-                        <%# @todo add placeholder image %>
-                      <% end %>
-                    </div>
-                    <div class="details">
-                      <%= link_to sponsor.name, person_path(@jurisdiction.id, sponsor) %>
-                      <%= district_name(sponsor['district']) if sponsor['district'] %>
-                      <span class="sponsor_type"><%= sponsor.type %></span>
-                    </div>
+                      <div class="depiction">
+                        <% if sponsor.image? %>
+                          <%= cdn_image_tag(sponsor.image, size: '50x50', alt: '', class: 'media-object') %>
+                        <% else %>
+                          <%# @todo add placeholder image %>
+                        <% end %>
+                      </div>
+                      <div class="details">
+                        <%= link_to sponsor.name, person_path(@jurisdiction.id, sponsor) %>
+                        <%= district_name(sponsor['district']) if sponsor['district'] %>
+                        <span class="sponsor_type"><%= sponsor.type %></span>
+                      </div>
                     <% elsif Committee == sponsor %>
                       <%= link_to sponsor.name, committee_path(@jurisdiction.id, committee) %>
                       <span class="sponsor_type"><%= sponsor.type %></span>

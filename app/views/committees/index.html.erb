@@ -2,7 +2,7 @@
 
 <section>
   <ol>
-    <% @committees.asc(:committee, :subcommittee).each do |committee| %>
+    <% @committees.each do |committee| %>
       <li>
         <%= @jurisdiction.chamber_name(committee['chamber']) %>
         <% if committee['subcommittee'] %>
