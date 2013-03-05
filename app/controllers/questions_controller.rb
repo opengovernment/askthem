@@ -3,7 +3,7 @@ class QuestionsController < ApplicationController
   respond_to :html
   actions :index, :show, :new
 
-  before_filter :set_jurisdiction
+  prepend_before_filter :set_jurisdiction
 
   def show
     # @todo stub
