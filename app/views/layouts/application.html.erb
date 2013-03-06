@@ -12,7 +12,7 @@
       <%= link_to 'OpenGovernment', root_path, class: 'logo' %>
       <p class="slogan">Contact everyone who represents you</p>
       <section>
-        <ul class="admin_nav">
+        <ul class="admin_nav thin">
           <li><%= link_to 'Your Profile', '#' %><%# @todo %></li>
           <li><%= link_to 'Dashboard', '#' %><%# @todo %></li>
           <li><%= link_to 'Steve T <span class="icon-angle-down"></span>'.html_safe, '#' %><%# @todo %></li>
@@ -26,50 +26,42 @@
 <%= yield %>
       </div>
     </div>
+    <ul class="admin_nav wide">
+      <li><%= link_to 'Your Profile', '#' %><%# @todo %></li>
+      <li><%= link_to 'Dashboard', '#' %><%# @todo %></li>
+      <li><%= link_to 'Steve T <span class="icon-angle-down"></span>'.html_safe, '#' %><%# @todo %></li>
+    </ul>
   </section>
 
   <footer>
     <div class="wrapper">
       <div class="col">
-        <h5>Our Principles</h5>
         <ul>
-          <li>Free for everyone</li>
-          <li>Open-source</li>
-          <li>Open standards</li>
-          <li>Not-for-profit</li>
-          <li>Non-partisan</li>
-        </ul>
-      </div>
-      <div class="col">
-        <h5>About Us</h5>
-        <ul>
-          <li><%= link_to 'Our Data Sources', '#' %><%# @todo %></li>
+          <li><%= link_to 'About', '#' %><%# @todo %></li>
           <li><%= link_to 'Blog', '#' %><%# @todo %></li>
-          <li><%= link_to 'User Support & Contact', '#' %><%# @todo %></li>
-          <li><%= link_to 'Join Mailing-list', '#' %><%# @todo %></li>
+          <li><%= link_to 'Support', '#' %><%# @todo %></li>
+          <li><%= link_to 'Contact Us', '#' %><%# @todo %></li>
         </ul>
       </div>
       <div class="col">
-        <h5>More OpenGovernment</h5>
         <ul>
-          <li><%= link_to 'More OpenGovernment', '#' %><%# @todo %></li>
-          <li><%= link_to 'Twitter & Facebook', '#' %><%# @todo %></li>
-          <li><%= link_to 'Wiki Community project', '#' %><%# @todo %></li>
-          <li><%= link_to 'Tools & Goodies', '#' %><%# @todo %></li>
-          <li><%= link_to 'Our Code & Data', '#' %><%# @todo %></li>
-        </ul>
-      </div>
-      <div class="col">
-        <h5>Get Involved</h5>
-        <ul>
+          <li><%= link_to 'Code &amp; Data'.html_safe, '#' %><%# @todo %></li>
           <li><%= link_to 'Volunteer', '#' %><%# @todo %></li>
           <li><%= link_to 'Donate', '#' %><%# @todo %></li>
-          <li><%= link_to 'OpenGovernment for All 50 States', '#' %><%# @todo %></li>
-          <li><%= link_to 'OpenCongress.org', '#' %><%# @todo %></li>
-          <li><%= link_to 'State and Gov Badges', '#' %><%# @todo %></li>
+          <li><%= link_to 'Bring OG to Your City', '#' %><%# @todo %></li>
         </ul>
       </div>
+      <div class="col">
+        <ul class="logos">
+          <li class="ppf"><%= link_to image_tag('/assets/credit_ppf.png') %></li>
+          <li class="opennorth"><%= link_to image_tag('/assets/credit_opennorth.png') %></li>
+          <li class="openstates"><%= link_to image_tag('/assets/credit_openstates.png') %></li>
+          <li class="knight"><%= link_to image_tag('/assets/credit_kfoundation.png') %></li>
+        </ul>
+      </div>
+      <p>OpenGovernment is a project of the non-profit Participatory Politics Foundation, with Open North as technical lead and generous support from the Knight Foundation. State legislative data from Open States.</p>
     </div>
+    <div class="clear"></div>
   </footer>
 
 </body>

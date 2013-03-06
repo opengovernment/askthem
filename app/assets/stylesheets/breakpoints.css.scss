@@ -1,0 +1,22 @@
+@media (min-width: 1028px){
+  ul.admin_nav{
+    &.thin{
+      display:none;
+    }
+    &.wide{
+      display:inline-block;
+      position: relative;
+      vertical-align: top;
+      right:auto;
+      top:auto;
+    }
+    li{
+      clear:both;
+      a{
+        border-right: 0;
+        padding-bottom: 12px;
+        border-bottom: 1px solid #BDDCE0;
+      }
+    }
+  }
+}

@@ -3,7 +3,7 @@
 <section class="questions listings">
   <header>
     <h1>Questions</h1>
-    <%= link_to 'Post a Question', new_question_path, class: 'cta_pill' %>
+    <%= link_to 'Ask a Question', new_question_path, class: 'cta_pill' %>
   </header>
   <div class="filters">
     <span class="info">Filter by:</span>
@@ -36,23 +36,22 @@
   </div>
   <ol class="questions">
     <% 5.times do %>
-    <li>
-      <div class="rating">
-        <a href="#" class="icon-caret-up">
-          <span class="count">25</span>
-        </a>
-      </div>
-      <div class="question_content">
-        <%= link_to 'Why have this thing for act for what?', '/questions/show', class: 'title' %>
-        <p>Lorem ipsum dolor sit amet, adipisicing elit, sed do  tempor incididunt ut labore et dolore magna aliqua sed do eiusmod tempor  ut&hellip; <span class="context">&rarr; in Pennsylvania Bills</span></p>
-        <%= link_to '12 comments', '#', class: 'comment_count' %>
-      </div>
-      <div class="question_attr">
-        <span class="followers">30 followers</span>
-        <span class="posted">Posted 1 hour ago by</span>
-        <span class="author"><%= link_to image_tag('http://lorempixel.com/40/40/people/', size: '40x40', alt: '') + 'Steve T', '#' %></span>
-      </div>
-    </li>
+      <li>
+        <div class="question_content">
+          <%= link_to 'Why have this thing for act for what? <span class="icon-angle-right view"></span>'.html_safe, '/questions/show', class: 'title' %>
+          <p>Lorem ipsum dolor sit amet, adipisicing elit, sed do  tempor incididunt ut labore et dolore magna aliqua sed do eiusmod tempor  ut&hellip; <span class="context">&rarr; in Pennsylvania Bills</span></p>
+          <span class="target">
+            <%= link_to image_tag('http://lorempixel.com/40/40/people/', size: '20x20', alt: '') + 'Steve T', '#' %>
+            <span class="to">&rarr;</span>
+            <%= link_to image_tag('http://lorempixel.com/40/40/people/', size: '20x20', alt: '') + 'Roger Smith, Councilmember, Ward 7', '#', class: 'recipient' %>
+          </span>
+        </div>
+        <ul class="activity">
+          <li><%= link_to '25 Signatures', '#', class: 'support'%></li>
+        </ul>
+        <a href="#" class="sign_on">Sign On</a>
+        <div class="clear"></div>
+      </li>
     <% end %>
   </ol>
 </section>

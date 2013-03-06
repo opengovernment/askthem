@@ -1,80 +1,22 @@
 <section class="questions related_focus">
   <ol>
+    <% 5.times do %>
     <li>
-      <div class="rating">
-        <a href="#" class="upvote icon-caret-up">
-          <span class="count">25</span>
-        </a>
-      </div>
       <div class="question_content">
-        <%= link_to truncate('Dear Katcho Achadjian, I learned that there have been changes to the spouses.', :length => 110), '/questions/show', class: 'title' %>
-        <p>Unfortunately I could not find on the Internet clear whether these changes also apply to spouses who are&hellip; <span class="context">&rarr; in Pennsylvania Bills</span></p>
-        <%= link_to '12 comments', '#', class: 'comment_count' %>
+        <%= link_to 'Why have this thing for act for what? <span class="icon-angle-right view"></span>'.html_safe, '/questions/show', class: 'title' %>
+        <p>Lorem ipsum dolor sit amet, adipisicing elit, sed do  tempor incididunt ut labore et dolore magna aliqua sed do eiusmod tempor  ut&hellip; <span class="context">&rarr; in Pennsylvania Bills</span></p>
+        <span class="target">
+          <%= link_to image_tag('http://lorempixel.com/40/40/people/', size: '20x20', alt: '') + 'Steve T', '#' %>
+          <span class="to">&rarr;</span>
+          <%= link_to cdn_image_tag(@person.image, size: '20x20', alt: '', class: 'person_photo') + @person.name + ', ' + person_attributes(@person), '#', class: 'recipient' %>
+        </span>
       </div>
-      <div class="question_attr">
-        <span class="author">Posted by <%= link_to image_tag('http://lorempixel.com/40/40/people/', size: '20x20', alt: '') + 'Steve T', '#' %></span>
-      </div>
+      <ul class="activity">
+        <li><%= link_to '25 Signatures', '#', class: 'support'%></li>
+      </ul>
+      <a href="#" class="sign_on">Sign On</a>
+      <div class="clear"></div>
     </li>
-    <li>
-      <div class="rating">
-        <a href="#" class="upvote icon-caret-up">
-          <span class="count">25</span>
-        </a>
-      </div>
-      <div class="question_content">
-        <%= link_to truncate('I live in the village communities Pansdorf which belongs to the municipality Ratekau. How do you feel about the planned hinterland connections in the fixed link.', :length => 110), '/questions/show', class: 'title' %>
-        <p>Even the grossly negligent budgeting leaves a now already bodes ill. Airport Berlin I say only. associated with the various&hellip; <span class="context">&rarr; in Pennsylvania Bills</span></p>
-        <%= link_to '12 comments', '#', class: 'comment_count' %>
-      </div>
-      <div class="question_attr">
-        <span class="author">Posted by <%= link_to image_tag('http://lorempixel.com/40/40/people/', size: '20x20', alt: '') + 'Steve T', '#' %></span>
-      </div>
-    </li>
-    <li>
-      <div class="rating">
-        <a href="#" class="upvote icon-caret-up">
-          <span class="count">25</span>
-        </a>
-      </div>
-      <div class="question_content">
-        <%= link_to truncate('Last Saturday (08.01.) have on the edge of Rosa Luxembourg Congress in Berlin left-wing thugs attacked SED victims and beaten up', :length => 110), '/questions/show', class: 'title' %>
-        <p>The Internet is full of this message. Two of them had to be treated in the sick house. Is the culprit disappeared into the crowd&hellip; <span class="context">&rarr; in Pennsylvania Bills</span></p>
-        <%= link_to '12 comments', '#', class: 'comment_count' %>
-      </div>
-      <div class="question_attr">
-        <span class="author">Posted by <%= link_to image_tag('http://lorempixel.com/40/40/people/', size: '20x20', alt: '') + 'Steve T', '#' %></span>
-      </div>
-    </li>
-    <li>
-      <div class="rating">
-        <a href="#" class="upvote icon-caret-up">
-          <span class="count">25</span>
-        </a>
-      </div>
-      <div class="question_content">
-        <%= link_to truncate('Dear Katcho Achadjian, I learned that there have been changes to the spouses.', :length => 110), '/questions/show', class: 'title' %>
-        <p>Unfortunately I could not find on the Internet clear whether these changes also apply to spouses who are&hellip; <span class="context">&rarr; in Pennsylvania Bills</span></p>
-        <%= link_to '12 comments', '#', class: 'comment_count' %>
-      </div>
-      <div class="question_attr">
-        <span class="author">Posted by <%= link_to image_tag('http://lorempixel.com/40/40/people/', size: '20x20', alt: '') + 'Steve T', '#' %></span>
-      </div>
-    </li>
-
-    <li>
-      <div class="rating">
-        <a href="#" class="upvote icon-caret-up">
-          <span class="count">25</span>
-        </a>
-      </div>
-      <div class="question_content">
-        <%= link_to truncate('I live in the village communities Pansdorf which belongs to the municipality Ratekau. How do you feel about the planned hinterland connections in the fixed link.', :length => 110), '/questions/show', class: 'title' %>
-        <p>Even the grossly negligent budgeting leaves a now already bodes ill. Airport Berlin I say only. associated with the various&hellip; <span class="context">&rarr; in Pennsylvania Bills</span></p>
-        <%= link_to '12 comments', '#', class: 'comment_count' %>
-      </div>
-      <div class="question_attr">
-        <span class="author">Posted by <%= link_to image_tag('http://lorempixel.com/40/40/people/', size: '20x20', alt: '') + 'Steve T', '#' %></span>
-      </div>
-    </li>
+    <% end %>
   </ol>
 </section>

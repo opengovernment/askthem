@@ -49,7 +49,10 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
-
+div.clear{
+  clear:both;
+  height:0;
+}
 
 body{
   background:#D4E8EB;
@@ -95,8 +98,11 @@ header p.slogan{
 }
 ul.admin_nav{
   position:absolute;
-  right:7.6923077%;
+  right:0;
   top: 0;
+  &.wide{
+    display:none;
+  }
   li{
     display:inline-block;
     float:left;
@@ -153,6 +159,7 @@ div.content_body{
   @include responsive-blocker();
   @include responsive-max();
   @include border-radius(0 2px 2px 0);
+  display:inline-block;
   width: 100%;
   div.wrapper{
     padding-bottom:60px;
@@ -203,7 +210,7 @@ div.related_data{
       background:#ffffff;
       box-shadow: 3px 0 7px rgba(0, 0, 0, 0.03), -1px 0 0 rgba(150, 197, 206, 0.37) inset;
       display:inline-block;
-      padding-top:30px;
+      padding-top:18px;
       width:77.5128205%;
     }
     aside{
@@ -337,14 +344,16 @@ nav{
 Filtering
 */
 div.filters{
-  clear: both;
   background: url(/assets/related_bg@2x.jpg) repeat;
   background-size: 30px 30px;
   border:1px solid #E7E7E7;
+  clear: both;
+  display: inline-block;
   margin-top: 24px;
   margin-bottom:42px;
-  display: inline-block;
+  position:relative;
   width: 100%;
+  z-index:1;
   @include rounded_corners();
   span.info{
     display:inline-block;
@@ -469,8 +478,8 @@ Footer
 */
 
 footer{
-  margin-top: 36px;
-  margin-bottom: 42px;
+  padding-top: 36px;
+  padding-bottom: 42px;
   min-width: 910px;
   max-width: 910px;
   width: 100%;
@@ -482,10 +491,45 @@ footer{
       font-size:0.813em;
       line-height: 1.385em;
       padding:6px 0;
+      &.ppf{
+        display:block;
+        width:20%;
+      }
+      &.opennorth{
+        display:block;
+        width:65%;
+      }
+      &.openstates{
+        display:block;
+        width:65%;
+      }
+      &.knight{
+        display:block;
+        width: 20%;
+      }
       a{
-        text-shadow:0 1px 0 #ffffff;
+        color:#5D8A97;
+        &:hover{
+          color:#3B626D;
+          img{
+            @include opacity(1);
+          }
+        }
+        img{
+          @include transition(opacity .3s ease-in);
+          @include opacity(.5);
+          width: 100%;
+          display: inline-block;
+          min-width: 100%;
+        }
       }
     }
+  }
+  p{
+    display: inline-block;
+    font-size: 0.813em;
+    line-height: 1.385em;
+    width: 25%;
   }
 }
 

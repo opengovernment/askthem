@@ -14,10 +14,12 @@ form{
       margin-bottom: 12px;
       line-height: 1em;
       span.details{
+        color:$middleblue;
         display:block;
-        font-size:0.813em;
-        line-height: 1.385em;
-        font-weight:100;
+        font-size:0.889em;
+        font-weight:normal;
+        line-height: 1.5em;
+        margin-top:6px;
       }
       span.option{
         color:#c8c8c8;
