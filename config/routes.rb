@@ -4,7 +4,13 @@ OpenGovernment::Application.routes.draw do
   scope ':jurisdiction' do
     resources :bills, only: [:index, :show]
     resources :committees, only: [:index, :show]
-    resources :people, only: [:index, :show]
+    resources :people, only: [:index, :show] do
+      member do
+        get 'bills'
+        get 'committees'
+        get 'votes'
+      end
+    end
 
     resources :questions, only: [:index, :show, :new] do
       collection do

@@ -13,6 +13,6 @@
   </article>
   <div class="actions">
     <%= link_to 'Publish', '/questions/show', class: 'cta_pill' %>
-    <%= link_to '← Edit', new_question_path, class: 'edit sim_act' %>
+    <%= link_to '← Edit', new_question_path(@jurisdiction.id), class: 'edit sim_act' %>
   </div>
 </section>

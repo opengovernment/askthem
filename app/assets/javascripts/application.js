@@ -13,5 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.autogrow-textarea
-//= require questions
 //= require bills
+//= require people
+//= require questions
