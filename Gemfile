@@ -6,6 +6,7 @@ gem 'jquery-rails'
 
 gem 'mongoid', '~> 3.1.2'
 gem 'inherited_resources', '~> 1.3.1'
+gem 'devise'
 gem 'andand'
 gem 'kaminari'
 gem 'unicorn'

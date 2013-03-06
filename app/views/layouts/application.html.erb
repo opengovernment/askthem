@@ -12,11 +12,13 @@
     <%= link_to 'OpenGovernment', root_path, class: 'logo' %>
     <p class="slogan">Contact everyone who represents you</p>
     <section>
-      <ul class="admin_nav">
-        <li><%= link_to 'Your Profile', '#' %><%# @todo %></li>
-        <li><%= link_to 'Dashboard', '#' %><%# @todo %></li>
-        <li><%= link_to 'Steve T <span class="icon-angle-down"></span>'.html_safe, '#' %><%# @todo %></li>
-      </ul>
+      <% if user_signed_in? %>
+        <ul class="admin_nav">
+          <li><%= link_to 'Your Profile', '#' %><%# @todo %></li>
+          <li><%= link_to 'Dashboard', '#' %><%# @todo %></li>
+          <li><%= link_to 'Steve T <span class="icon-angle-down"></span>'.html_safe, '#' %><%# @todo %></li>
+        </ul>
+      <% end %>
     </section>
   </div>
 </header>
@@ -24,6 +26,12 @@
 <section>
   <div class="content_body">
     <div class="wrapper">
+      <% if notice %>
+        <p class="notice"><%= notice %></p>
+      <% end %>
+      <% if alert %>
+        <p class="alert"><%= alert %></p>
+      <% end %>
 <%= yield %>
     </div>
   </div>
