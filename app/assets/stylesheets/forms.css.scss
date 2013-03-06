@@ -1,6 +1,20 @@
 @import "compass";
 @import "mixins";
 
+$placeholder-color: #c8c8c8;
+::-webkit-input-placeholder {
+  color: #c8c8c8;
+}
+:-moz-placeholder {
+  color: #c8c8c8;
+}
+::-moz-placeholder {
+  color: #c8c8c8;
+}
+:-ms-input-placeholder {
+  color: #c8c8c8;
+}
+
 form{
   input[type=text],input[type=email],input[type=number], textarea{
     font-family:helvetica, arial, verdana, sans-serif;
@@ -33,7 +47,7 @@ form{
       font-size:0.938em;
       line-height: 2em;
       font-weight:100;
-      color:#c8c8c8;
+      color:#284249;
       outline:none;
       margin-bottom:36px;
       padding-top:0;
@@ -44,9 +58,6 @@ form{
         background-position: 0 29px;
         color:#818181;
       }
-      &.hasValue{
-        color:#284249;
-      }
     }
     textarea{
       background-image: url(/assets/textarea_bg@2x.png);
@@ -54,7 +65,7 @@ form{
       background-size: 2px 30px;
       background-position: 0 29px;
       padding-top: 0;
-      color: #C8C8C8;
+      color:#284249;
       font-size: 0.938em;
       line-height: 2em;
       font-weight: 100;
@@ -69,12 +80,6 @@ form{
         background-position: 0 29px;
         color:#818181;
       }
-      &.hasValue{
-        color:#284249;
-      }
-    }
-    select{
-
     }
   }
 }
