@@ -114,9 +114,9 @@
                     <% if Person === sponsor %>
                       <div class="depiction">
                         <% if sponsor.image? %>
-                          <%= cdn_image_tag(sponsor.image, size: '50x50', alt: '', class: 'media-object') %>
+                          <%= cdn_image_tag(sponsor.image, size: '50x50', alt: '') %>
                         <% else %>
-                          <%# @todo add placeholder image %>
+                          <%= image_tag('placeholder.png', size: '50x50', alt: '') %>
                         <% end %>
                       </div>
                       <div class="details">
