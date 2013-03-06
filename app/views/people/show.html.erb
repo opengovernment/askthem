@@ -8,7 +8,7 @@
         <%= cdn_image_tag(@person.image, size: '80x80', alt: '', class: 'person_photo') %>
       </div>
       <% else %>
-        <%# @todo add placeholder image %>
+        <%= image_tag('http://placehold.it/80x80', size: '80x80', alt: '') %>
       <% end %>
 
       <div class="person_details">
@@ -26,24 +26,23 @@
         <p><%= truncate(@person.person_detail.biography, length: 130) %> <%= link_to 'Read more on Wikipedia', @person.person_detail.links.find_by(note: 'Wikipedia').url %></p>
       <% end %>
     </div>
-    <%= link_to 'Ask them a Question', new_question_path, class: 'cta_pill' %>
+    <%= link_to 'Ask them a Question', new_question_path(@jurisdiction.id), class: 'cta_pill' %>
   </header>
 
   <div class="related_wrap">
     <div class="related_data">
       <nav>
         <ul class="related_nav">
-          <li><%= link_to 'Questions', '#', class: 'active' %><%# @todo %></li>
-          <li><%= link_to 'Voting Record', '#' %><%# @todo %></li>
-          <li><%= link_to 'Sponsorship', '#' %><%# @todo %></li>
-          <li><%= link_to 'News', '#' %><%# @todo %></li>
-          <li><%= link_to 'Interest Groups', '#' %><%# @todo %></li>
+          <li><%= link_to 'Questions', resource_path(@jurisdiction.id), class: @tab == 'questions' && 'active' %></li>
+          <li><%= link_to 'Sponsored Bills', bills_resource_path(@jurisdiction.id), class: @tab == 'bills' && 'active' %></li>
+          <li><%= link_to 'Votes', votes_resource_path(@jurisdiction.id), class: @tab == 'votes' && 'active' %></li>
+          <li><%= link_to 'Committees', committees_resource_path(@jurisdiction.id), class: @tab == 'committees' && 'active' %></li>
+          <!--li><%= link_to 'Interest Groups', '#' %><%# @todo %></li-->
         </ul>
       </nav>
 
       <div class="related_content">
-        
-        <%= render partial: 'questions' %>
+        <%= render partial: @tab %>
 
         <aside>
           <% if @person.email? %>

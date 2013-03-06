@@ -1,0 +1,21 @@
+<section class="questions related_focus">
+  <ol>
+    <% 5.times do %>
+      <li>
+        <div class="rating">
+          <a href="#" class="upvote icon-caret-up">
+            <span class="count">25</span>
+          </a>
+        </div>
+        <div class="question_content">
+          <%= link_to 'Why have this thing for act for what?', '/questions/show', class: 'title' %>
+          <p>Lorem ipsum dolor sit amet, adipisicing elit, sed do  tempor incididunt ut labore et dolore magna aliqua sed do eiusmod tempor  ut&hellip; <span class="context">&rarr; in Pennsylvania Bills</span></p>
+          <%= link_to '12 comments', '#', class: 'comment_count' %>
+        </div>
+        <div class="question_attr">
+          <span class="author">Posted by <%= link_to image_tag('http://lorempixel.com/40/40/people/', size: '20x20', alt: '') + 'Steve T', '#' %></span>
+        </div>
+      </li>
+    <% end %>
+  </ol>
+</section>

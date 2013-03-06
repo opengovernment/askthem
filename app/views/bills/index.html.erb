@@ -3,7 +3,7 @@
 <section class="bills listings">
   <header>
     <h1>Bills</h1>
-    <%= link_to 'Post a Question', new_question_path, class: 'cta_pill' %>
+    <%= link_to 'Post a Question', new_question_path(@jurisdiction.id), class: 'cta_pill' %>
   </header>
   <div class="filters">
     <span class="info">Filter by:</span>
@@ -75,9 +75,9 @@
               <% if Person === sponsor %>
                 <div class="depiction">
                   <% if sponsor.image? %>
-                    <%= cdn_image_tag(sponsor.image, size: '50x50', alt: '', class: 'media-object') %>
+                    <%= cdn_image_tag(sponsor.image, size: '50x50', alt: '') %>
                   <% else %>
-                    <%# @todo add placeholder image %>
+                    <%= image_tag('placeholder.png', size: '50x50', alt: '') %>
                   <% end %>
                 </div>
               <% end %>

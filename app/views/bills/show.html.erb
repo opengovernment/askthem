@@ -63,7 +63,7 @@
         </ol>
       </div>
     </div>
-    <%= link_to 'Ask about this Bill', new_question_path, class: 'cta_pill' %>
+    <%= link_to 'Ask about this Bill', new_question_path(@jurisdiction.id), class: 'cta_pill' %>
     <%= link_to 'Tell your Senator what you think', '#', class: 'sim_act' %>
   </header>
 
@@ -71,12 +71,13 @@
     <div class="related_data">
       <nav>
         <ul class="related_nav">
-          <li><%= link_to 'Questions', '#', class: 'active' %><%# @todo %></li>
-          <li><%= link_to 'Sponsors', '#' %><%# @todo %></li>
+          <li><%= link_to 'Questions', resource_path(@jurisdiction.id), class: @tab == 'questions' && 'active' %></li>
+          <li><%= link_to 'Sponsors', sponsors_resource_path(@jurisdiction.id), class: @tab == 'sponsors' && 'active' %></li>
         </ul>
       </nav>
 
       <div class="related_content">
+        
         <section class="questions related_focus">
           <ol>
             <% 5.times do %>
@@ -100,7 +101,8 @@
 
           </ol>
         </section>
-
+        
+        <%= render partial: @tab %>
         <aside>
           <% unless @bill['sponsors'].empty? %>
             <section class="sponsors">
@@ -116,9 +118,9 @@
                     <% if Person === sponsor %>
                       <div class="depiction">
                         <% if sponsor.image? %>
-                          <%= cdn_image_tag(sponsor.image, size: '50x50', alt: '', class: 'media-object') %>
+                          <%= cdn_image_tag(sponsor.image, size: '50x50', alt: '') %>
                         <% else %>
-                          <%# @todo add placeholder image %>
+                          <%= image_tag('placeholder.png', size: '50x50', alt: '') %>
                         <% end %>
                       </div>
                       <div class="details">
