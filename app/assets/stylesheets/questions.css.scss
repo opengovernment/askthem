@@ -23,7 +23,6 @@ section.questions{
   }
 
   ol>li{
-    @include transition(border-left 0.1s ease-in, margin-left 0.1s ease-in);
     border-bottom: 1px solid #F3F3F3;
     border-left: 0px solid #fff;
     padding-top: 30px;
@@ -128,20 +127,22 @@ section.questions{
     }
     
     a.sign_on{
-      @include transition(all .2s ease-in);
-      @include opacity(.2);
-      background: #F9F9F9;
-      border: 1px solid #E9E9E9;
-      border-radius: 3px;
-      color: #999;
+      @include border-radius(3px);
+      @include box-shadow(0 1px 3px rgba(0, 0, 0, .1));
+      @include background(linear-gradient(top center, #FCFCFC, #f9f9f9));
+      @include transition(all .1s ease-in);
+      @include opacity(.8);
+      display:inline-block;
+      font-size:0.813em;
+      border: 1px solid white;
       clear:right;
       float:right;
+      font-weight:600;
       margin-right:2.5641026%;
       margin-top:12px;
       padding: 12px 30px;
       &:hover{
-        background: #F9F9F9;
-        border: 1px solid #C9C9C9;
+        @include box-shadow(0 1px 3px rgba(0, 0, 0, .2));
       }
     }
     
@@ -160,9 +161,10 @@ section.questions{
         margin-right: 10px;
         padding-left: 25px;
         img{
-          vertical-align:bottom;
-          margin-right:5px;
+          vertical-align: bottom;
+          margin-right: 5px;
           width: 20px;
+          height: 20px;
         }
         &.recipient{
           font-weight:600;

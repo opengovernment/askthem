@@ -8,7 +8,7 @@
         <span class="target">
           <%= link_to image_tag('http://lorempixel.com/40/40/people/', size: '20x20', alt: '') + 'Steve T', '#' %>
           <span class="to">&rarr;</span>
-          <%= link_to cdn_image_tag(@person.image, size: '20x20', alt: '', class: 'person_photo') + @person.name + ', ' + person_attributes(@person), '#', class: 'recipient' %>
+          <%= link_to cdn_image_tag(@person.image, size: '20x20', alt: '', class: 'person_photo') + @person.name, '#', class: 'recipient' %>
         </span>
       </div>
       <ul class="activity">
