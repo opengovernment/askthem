@@ -59,8 +59,7 @@ db.metadata.find().forEach(function (obj) {
 
   // @note Can add `enum` to districts.json and person.json schemas.
   // @see https://github.com/sunlightlabs/billy/blob/master/billy/schemas/bill.json#L112
-  // @see https://github.com/sunlightlabs/billy/blob/master/billy/schemas/vote.json#L5
-  ['bills', 'districts', 'legislators', 'votes'].forEach(function (collection) {
+  ['bills', 'districts', 'legislators'].forEach(function (collection) {
     reportList(collection, 'chamber', {
       state: obj._id,
       chamber: {
@@ -109,14 +108,17 @@ db.metadata.find().forEach(function (obj) {
   }, obj._id.toUpperCase() + ' events with invalid participants.chamber (e.g. "Senate")');
 
   // @see https://github.com/sunlightlabs/billy/blob/master/billy/schemas/committee.json#L6
+  // @see https://github.com/sunlightlabs/billy/blob/master/billy/schemas/vote.json#L5
   var chambers_plus_joint = chambers.concat(['joint']);
-  reportList('committees', 'chamber', {
-    state: obj._id,
-    'chamber': {
-      '$exists': true,
-      '$nin': chambers_plus_joint,
-    },
-  }, obj._id.toUpperCase() + ' committees with invalid chamber');
+  ['committees', 'votes'].forEach(function (collection) {
+    reportList(collection, 'chamber', {
+      state: obj._id,
+      'chamber': {
+        '$exists': true,
+        '$nin': chambers_plus_joint,
+      },
+    }, obj._id.toUpperCase() + ' ' + collection + ' with invalid chamber');
+  });
 
   // @see https://github.com/sunlightlabs/billy/blob/master/billy/schemas/person.json#L11
   reportList('legislators', 'roles.chamber', {

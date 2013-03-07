@@ -30,7 +30,7 @@ We provide a number of scripts for checking the quality and consistency of a Bil
 
 To run all the scripts, do:
 
-    mongo DATABASE_NAME script/sanity/helper.js script/sanity/{code-lists.js,denormalization.js,foreign-keys.js,hierarchy.js,manual-review.js,miscellaneous.js}
+    mongo DATABASE_NAME script/sanity/helper.js script/sanity/{code-lists.js,counts.js,denormalization.js,foreign-keys.js,hierarchy.js,manual-review.js,miscellaneous.js}
 
 ## Bugs? Questions?
 

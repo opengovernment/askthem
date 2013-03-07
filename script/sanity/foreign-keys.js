@@ -32,6 +32,12 @@ reportInvalidForeignKeys('bills', 'sponsors.leg_id', 'legislators');
 reportInvalidForeignKeys('bills', 'sponsors.committee_id', 'committees');
 reportInvalidForeignKeys('bills', 'actions.committee', 'committees');
 reportInvalidForeignKeys('bills', 'companions.internal_id', 'bills');
+reportInvalidForeignKeys('votes', 'bill_id', 'bills');
+reportInvalidForeignKeys('votes', '_voters', 'legislators');
+reportInvalidForeignKeys('votes', 'yes_votes.leg_id', 'legislators');
+reportInvalidForeignKeys('votes', 'no_votes.leg_id', 'legislators');
+reportInvalidForeignKeys('votes', 'other_votes.leg_id', 'legislators');
+reportInvalidForeignKeys('votes', 'committee_id', 'committees');
 
 // actions.related_entities.id can either point to a committee or a legislator.
 reportInvalidForeignKeys('bills', 'actions.related_entities.id', 'committees', function (id) {

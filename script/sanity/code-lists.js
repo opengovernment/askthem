@@ -98,3 +98,20 @@ reportList('bills', 'sponsors.type', {
   };
   reportList('bills', field, criteria);
 });
+
+// Vote types
+// @see https://github.com/sunlightlabs/billy/blob/master/billy/schemas/vote.json#L11
+reportList('votes', 'type', {
+  type: {
+    '$exists': true,
+    '$nin': [
+      'amendment',
+      'other',
+      'passage',
+      'reading:1',
+      'reading:2',
+      'reading:3',
+      'veto_override',
+    ],
+  },
+});
