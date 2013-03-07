@@ -2,26 +2,26 @@
 reportList('committees', 'parent_id', {
   subcommittee: null,
   parent_id: {
-    '$ne': null,
-  },
+    '$ne': null
+  }
 }, 'committees with parent IDs');
 
 // Subcommittees should have parent IDs.
 reportList('committees', 'parent_id', {
   parent_id: null,
   subcommittee: {
-    '$ne': null,
-  },
+    '$ne': null
+  }
 }, 'subcommittees without parent IDs');
 
 // A committee should not be its own parent.
 reportList('committees', 'parent_id', {
   parent_id: {
-    '$ne': null,
+    '$ne': null
   },
   '$where': function () {
     return this.parent_id == this._id;
-  },
+  }
 }, 'committees whose parent is themselves');
 
 // Do all documents belong to valid jurisdictions?
@@ -30,24 +30,24 @@ var jurisdictions = db.metadata.distinct('_id');
 ['bills', 'committees', 'events', 'legislators', 'votes'].forEach(function (collection) {
   reportList(collection, 'state', {
     state: {
-      '$nin': jurisdictions,
-    },
+      '$nin': jurisdictions
+    }
   });
 });
 ['districts', 'subjects'].forEach(function (collection) {
   reportList(collection, 'abbr', {
     abbr: {
-      '$nin': jurisdictions,
-    },
+      '$nin': jurisdictions
+    }
   });
 });
 reportList('legislators', 'roles.state', {
   roles: {
-    '$ne': [],
+    '$ne': []
   },
   'roles.state': {
-    '$nin': jurisdictions,
-  },
+    '$nin': jurisdictions
+  }
 });
 
 // Do all documents belong to valid chambers and districts?
@@ -64,8 +64,8 @@ db.metadata.find().forEach(function (obj) {
       state: obj._id,
       chamber: {
         '$exists': true,
-        '$nin': chambers,
-      },
+        '$nin': chambers
+      }
     }, obj._id.toUpperCase() + ' ' + collection + ' with invalid chamber');
   });
 
@@ -74,8 +74,8 @@ db.metadata.find().forEach(function (obj) {
     state: obj._id,
     bill_chamber: {
       '$exists': true,
-      '$nin': chambers,
-    },
+      '$nin': chambers
+    }
   }, obj._id.toUpperCase() + ' votes with invalid bill_chamber');
 
   // @see https://github.com/sunlightlabs/billy/blob/master/billy/schemas/bill.json#L152
@@ -83,8 +83,8 @@ db.metadata.find().forEach(function (obj) {
     state: obj._id,
     'sponsors.chamber': {
       '$exists': true,
-      '$nin': chambers,
-    },
+      '$nin': chambers
+    }
   }, obj._id.toUpperCase() + ' bills with invalid sponsors.chamber');
 
   // @see https://github.com/sunlightlabs/billy/blob/master/billy/schemas/bill.json#L103
@@ -93,8 +93,8 @@ db.metadata.find().forEach(function (obj) {
     state: obj._id,
     'companions.chamber': {
       '$exists': true,
-      '$nin': chambers_plus_null,
-    },
+      '$nin': chambers_plus_null
+    }
   }, obj._id.toUpperCase() + ' bills with invalid companions.chamber');
 
   // @note Can add `enum` property to events.json schema.
@@ -103,8 +103,8 @@ db.metadata.find().forEach(function (obj) {
     state: obj._id,
     'participants.chamber': {
       '$exists': true,
-      '$nin': chambers_plus_other,
-    },
+      '$nin': chambers_plus_other
+    }
   }, obj._id.toUpperCase() + ' events with invalid participants.chamber (e.g. "Senate")');
 
   // @see https://github.com/sunlightlabs/billy/blob/master/billy/schemas/committee.json#L6
@@ -115,8 +115,8 @@ db.metadata.find().forEach(function (obj) {
       state: obj._id,
       'chamber': {
         '$exists': true,
-        '$nin': chambers_plus_joint,
-      },
+        '$nin': chambers_plus_joint
+      }
     }, obj._id.toUpperCase() + ' ' + collection + ' with invalid chamber');
   });
 
@@ -125,8 +125,8 @@ db.metadata.find().forEach(function (obj) {
     state: obj._id,
     'roles.chamber': {
       '$exists': true,
-      '$nin': chambers_plus_joint,
-    },
+      '$nin': chambers_plus_joint
+    }
   }, obj._id.toUpperCase() + ' legislators with invalid roles.chamber');
 
   var districts = db.districts.distinct('name', {abbr: obj._id});
@@ -134,7 +134,7 @@ db.metadata.find().forEach(function (obj) {
     var criteria = {state: obj._id};
     criteria[field] = {
       '$exists': true,
-      '$nin': districts,
+      '$nin': districts
     };
     reportList('legislators', field, criteria, obj._id.toUpperCase() + ' legislators with invalid ' + field);
   });

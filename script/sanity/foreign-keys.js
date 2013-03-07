@@ -7,8 +7,8 @@ var reportInvalidForeignKeys = function (collection, field, relation, callback) 
 
   var result = db[relation].find({
     _all_ids: {
-      '$in': ids,
-    },
+      '$in': ids
+    }
   });
 
   if (result.size() < ids.length) {
@@ -22,7 +22,7 @@ var reportInvalidForeignKeys = function (collection, field, relation, callback) 
         print(id);
       }
     });
-  };
+  }
 };
 
 reportInvalidForeignKeys('committees', 'parent_id', 'committees');
@@ -41,10 +41,10 @@ reportInvalidForeignKeys('votes', 'committee_id', 'committees');
 
 // actions.related_entities.id can either point to a committee or a legislator.
 reportInvalidForeignKeys('bills', 'actions.related_entities.id', 'committees', function (id) {
-  return /C[0-9]{6}$/.test(id);
+  return (/C[0-9]{6}$/).test(id);
 });
 reportInvalidForeignKeys('bills', 'actions.related_entities.id', 'legislators', function (id) {
-  return /L[0-9]{6}$/.test(id);
+  return (/L[0-9]{6}$/).test(id);
 });
 
 var reportAsymmetricForeignKeys = function (parent, child, parent_field, child_field) {
@@ -54,7 +54,7 @@ var reportAsymmetricForeignKeys = function (parent, child, parent_field, child_f
   var fields = parent_field.split('.');
   criteria[parent_field] = {
     '$exists': true,
-    '$ne': null,
+    '$ne': null
   };
   db[parent].find(criteria).forEach(function (document) {
     document[fields[0]].forEach(function (subdocument) {
@@ -67,12 +67,12 @@ var reportAsymmetricForeignKeys = function (parent, child, parent_field, child_f
           print(document._id + '-' + id);
         }
       }
-    })
+    });
   });
   if (count) {
     print(count + ' ' + parent + '-' + child + ' asymmetries found.');
   }
-}
+};
 
 reportAsymmetricForeignKeys('committees', 'legislators', 'members.leg_id', 'roles.committee_id');
 reportAsymmetricForeignKeys('legislators', 'committees', 'roles.committee_id', 'members.leg_id');

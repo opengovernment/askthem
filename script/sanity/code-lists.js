@@ -3,19 +3,19 @@
 reportList('legislators', '+gender', {
   '+gender': {
     '$exists': true,
-    '$nin': ['Female', 'Male'],
-  },
+    '$nin': ['Female', 'Male']
+  }
 });
 
 // Office types
 // @see https://github.com/sunlightlabs/billy/blob/master/billy/schemas/person.json#L27
 reportList('legislators', 'offices.type', {
   'offices': {
-    '$ne': [],
+    '$ne': []
   },
   'offices.type': {
-    '$nin': ['capitol', 'district'],
-  },
+    '$nin': ['capitol', 'district']
+  }
 });
 
 // Bill action types
@@ -50,17 +50,17 @@ reportList('bills', 'actions.type', {
       'bill:reading:1',
       'bill:reading:2',
       'bill:reading:3',
-      'other',
-    ],
-  },
+      'other'
+    ]
+  }
 });
 
 // Bill action actors
 reportList('bills', 'actions.actor', {
   'actions.actor': {
     '$exists': true,
-    '$nin': [/^lower/, /^upper/, 'other', 'executive'],
-  },
+    '$nin': [/^lower/, /^upper/, 'other', 'executive']
+  }
 }, 'bills with invalid actions.actor (e.g. "Senate" or "House")');
 
 // Bill action related entity type
@@ -68,8 +68,8 @@ reportList('bills', 'actions.actor', {
 reportList('bills', 'actions.related_entities.type', {
   'actions.related_entities.type': {
     '$exists': true,
-    '$nin': ['committee', 'legislator'],
-  },
+    '$nin': ['committee', 'legislator']
+  }
 });
 
 // Bill sponsor types
@@ -77,14 +77,14 @@ reportList('bills', 'actions.related_entities.type', {
 reportList('bills', 'sponsors.type', {
   'sponsors.type': {
     '$exists': true,
-    '$nin': ['primary', 'cosponsor'],
-  },
+    '$nin': ['primary', 'cosponsor']
+  }
 });
 
 // Bill MIME types
 // @see https://github.com/sunlightlabs/billy/blob/master/billy/schemas/bill.json#L190
 ['documents.mimetype', 'versions.mimetype'].forEach(function (field) {
-  var criteria = {}
+  var criteria = {};
   criteria[field] = {
     '$exists': true,
     '$nin': [
@@ -93,8 +93,8 @@ reportList('bills', 'sponsors.type', {
       'application/msword',
       'application/rtf',
       'application/octet-stream',
-      'application/vnd.wordperfect',
-    ],
+      'application/vnd.wordperfect'
+    ]
   };
   reportList('bills', field, criteria);
 });
@@ -111,7 +111,7 @@ reportList('votes', 'type', {
       'reading:1',
       'reading:2',
       'reading:3',
-      'veto_override',
-    ],
-  },
+      'veto_override'
+    ]
+  }
 });

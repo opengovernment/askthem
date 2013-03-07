@@ -1,5 +1,3 @@
-'use strict';
-
 // legislators: roles.state and state
 reportList('legislators', 'state', {
   roles: {
