@@ -71,8 +71,8 @@
     <div class="related_data">
       <nav>
         <ul class="related_nav">
-          <li><%= link_to 'Questions', resource_path(@jurisdiction.id), class: @tab == 'questions' && 'active' %></li>
-          <li><%= link_to 'Sponsors', sponsors_resource_path(@jurisdiction.id), class: @tab == 'sponsors' && 'active' %></li>
+          <li id="questions-tab"><%= link_to 'Questions', resource_path(@jurisdiction.id), class: @tab == 'questions' && 'active' %></li>
+          <li id="sponsors-tab"><%= link_to 'Sponsors', sponsors_resource_path(@jurisdiction.id), class: @tab == 'sponsors' && 'active' %></li>
         </ul>
       </nav>
 
@@ -114,7 +114,7 @@
                 <% end %>
               </ul>
               <% if @bill['sponsors'].size > 5 %>
-                <%= link_to 'View all', '#' %><%# @todo %>
+                <%= link_to 'View all', sponsors_resource_path(@jurisdiction.id), rel: 'sponsors' %>
               <% end %>
             </section>
           <% end %>

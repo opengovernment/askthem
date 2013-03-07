@@ -1,3 +1,7 @@
 <section class="related_focus">
-  TODO: Bills
+  <ol class="bills">
+    <%= render @bills %>
+  </ol>
+
+  <%= paginate @bills, outer_window: 1 %>
 </section>

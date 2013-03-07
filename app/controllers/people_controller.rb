@@ -12,6 +12,7 @@ class PeopleController < ApplicationController
   end
 
   def bills
+    @bills = resource.bills.page(params[:page])
     tab 'bills'
   end
 

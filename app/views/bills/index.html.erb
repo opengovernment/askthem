@@ -36,55 +36,7 @@
   </div>
 
   <ol class="bills">
-    <% @bills.each do |bill| %>
-      <li>
-        <div class="bill_content">
-          <%= link_to bill['bill_id'], bill_path(@jurisdiction.id, bill), class: 'title' %>
-          <p><%= truncate(bill['title'], length: 95) %>, <%= bill.dates.first.last.year %></p>
-          <ol class="actions">
-            <% bill.dates.select{|_,date| date}.each do |action,date| %>
-              <% if action == 'first' %>
-                <li<% if date %> class="active"<% end %>>
-                  Introduced
-                  <%= l(date, format: :bill) if date %>
-                </li>
-              <% elsif action == 'passed_lower' %>
-                <li<% if date %> class="active"<% end %>>
-                  Passed <%= @jurisdiction.chamber_name('lower') %>
-                  <%= l(date, format: :bill) if date %>
-                </li>
-              <% elsif action == 'passed_upper' %>
-                <li<% if date %> class="active"<% end %>>
-                  Passed <%= @jurisdiction.chamber_name('upper') %>
-                  <%= l(date, format: :bill) if date %>
-                </li>
-              <% elsif action == 'signed' %>
-                <li<% if date %> class="active"<% end %>>
-                  Signed into Law
-                  <%= l(date, format: :bill) if date %>
-                </li>
-              <% end %>
-            <% end %>
-          </ol>
-        </div>
-        
-        <ul class="activity">
-          <li><%= pluralize bill.questions.count, 'question' %></li>
-          <% bill.people_and_committee_sponsors(limit: 5, only: :people).each do |sponsor| %>
-            <li class="depiction">
-              <% if Person === sponsor %>
-                <% if sponsor.image? %>
-                  <%= cdn_image_tag(sponsor.image, size: '50x50', alt: '') %>
-                <% else %>
-                  <%= image_tag('placeholder.png', size: '50x50', alt: '') %>
-                <% end %>
-              <% end %>
-            </li>
-          <% end %>
-        </ul>
-        <div class="clear"></div>
-      </li>
-    <% end %>
+    <%= render @bills %>
   </ol>
 
   <%= paginate @bills, outer_window: 1 %>

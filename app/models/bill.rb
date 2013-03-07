@@ -87,7 +87,7 @@ class Bill
     # Get all the committee sponsors in a single query.
     ids = sponsors.select{|x| x['committee_id']}.map{|x| x['committee_id']}
     unless ids.empty?
-      Committee.where(_id: {'$in' => ids}).each do |committee|
+      Committee.where(_id: {'$in' => ids}).each do |document|
         documents_by_id[document.id] = document
       end
     end

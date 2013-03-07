@@ -20,6 +20,26 @@ class Person
   field '+gender', type: String, as: :gender
   field :photo_url, type: String, as: :image
 
+  # Returns the person's sponsored bills.
+  def bills
+    Bill.where('sponsors.leg_id' => id)
+  end
+
+  # Returns the person's committees.
+  def committees
+    ids = read_attribute(:roles).map{|x| x['committee_id']}.compact
+    if ids.empty?
+      []
+    else
+      Committee.where(_id: {'$in' => ids}).to_a
+    end
+  end
+
+  # Returns the person's votes.
+  def votes
+    Vote.where(_voters: id)
+  end
+
   def questions # @todo
     []
   end
