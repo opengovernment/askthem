@@ -527,21 +527,21 @@ footer{
     ul>li{
       font-size:0.813em;
       line-height: 1.385em;
-      padding:6px 0;
+      padding:6px 10px 6px 0;
       &.ppf{
-        display:block;
-        width:20%;
+        display: inline-block;
+        width: 20%;
       }
       &.opennorth{
-        display:block;
-        width:65%;
+        display: inline-block;
+        width: 20%;
       }
       &.openstates{
-        display:block;
-        width:65%;
+        display: inline-block;
+        width: 65%;
       }
       &.knight{
-        display:block;
+        display: inline-block;
         width: 20%;
       }
       a{

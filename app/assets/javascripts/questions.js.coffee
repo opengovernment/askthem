@@ -3,7 +3,4 @@ jQuery ($) ->
   $('textarea').css('overflow', 'hidden').autogrow()
 
   $('#summary').keyup ->
-    max_length = $(this).attr('maxlength')
-    
-    $('span.summary_count').text ->
-      return max_length - $('#summary').val().length
+    $('.summary_count').text($(this).attr('maxlength') - $('#summary').val().length)
