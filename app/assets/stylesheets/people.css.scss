@@ -24,6 +24,7 @@ section.people{
   img.person_photo{
     margin-right:20%;
     @include rounded_corners();
+    height:80%;
     width:80%;
   }
   div.person_details{

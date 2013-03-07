@@ -16,3 +16,4 @@
 //= require tabs
 //= require bills
 //= require questions
+//= require responsive

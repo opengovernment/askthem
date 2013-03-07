@@ -2,6 +2,9 @@
 <html lang="en-US">
 <head>
   <title>OpenGovernment</title>
+  <meta name="viewport" content="width=device-width" />
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+  
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= csrf_meta_tags %>
 </head>
@@ -61,7 +64,7 @@
           <li><%= link_to 'Bring OG to Your City', '#' %><%# @todo %></li>
         </ul>
       </div>
-      <div class="col">
+      <div class="col logos">
         <ul class="logos">
           <li class="ppf"><%= link_to image_tag('/assets/credit_ppf.png') %></li>
           <li class="opennorth"><%= link_to image_tag('/assets/credit_opennorth.png') %></li>

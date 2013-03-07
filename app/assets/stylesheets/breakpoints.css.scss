@@ -1,3 +1,5 @@
+@import 'compass';
+
 @media (min-width: 1028px){
   ul.admin_nav{
     &.thin{
@@ -19,4 +21,234 @@
       }
     }
   }
+}
+
+
+@media (max-width: 420px){
+  
+  header div.wrapper, div.content_body div.wrapper, footer div.wrapper{
+    padding-left: 6.6923077%;
+  }
+
+  header.main{
+    margin-top:18px;
+    margin-bottom:18px;
+  }
+  a.logo{
+    margin: auto;
+    text-align: center;
+    display: block;
+  }
+  header p.slogan{
+    width: 100%;
+    text-align: center;
+    margin: 6px auto 0 auto;
+    display: block;
+    font-size: 13px;
+    line-height: 18px;
+  }
+
+  /*
+    Nav
+  */
+  nav{
+    ul.top_nav{
+      li{
+        display:none;
+        width: 100%;
+        text-align: center;
+        &.subject{
+          display: inline-block;
+          padding-right: 0;
+          background: none;
+          .expand_menu{
+            cursor:pointer;
+            display: block;
+            font-weight: 100;
+            font-family: helvetica, arial, sans-serif;
+            font-size: 13px;
+            padding: 6px;
+            margin-top: 6px;
+          }
+        }
+        a{
+          padding: 12px 20px;
+          display: block;
+        }
+      }
+    }
+  }
+  
+  
+  /*
+    Filters
+  */
+  
+  div.filters{
+    margin-top:6px;
+    width:100%;
+    span.info{
+      display:none;
+    }
+    ul.menu{
+      display:none;
+    }
+    div.search{
+      float:none;
+      display:block;
+    }
+    div.search input[type=text]{
+      margin-right:0;
+      width: 100%;
+    }
+  }
+  
+  /*
+    Buttons
+  */
+  .cta_pill{
+    width:100%;
+    box-sizing: border-box;
+  }
+  
+  section.questions.listings a.cta_pill, section.bills.listings a.cta_pill, section.people.listings a.cta_pill{
+    clear: left;
+    margin-top: 12px;
+    float: none;
+    width: 100%;
+    text-align: center;
+  }
+  section.people header .cta_pill{
+    text-align:center;
+  }
+  
+  span.info{
+    margin-top:12px;
+  }
+
+  /*
+    Footer
+  */
+  
+  footer{
+    div.col{
+      width:50%;
+      &.logos{
+        width:100%;
+      }
+    }
+    p{
+      width:100%;
+    }
+  }
+  
+  /*
+    Questions
+  */
+  section.question{
+    article{
+      width:100%;
+    }
+    div.flow_info{
+      display:none;
+    }
+    div.count .summary_count{
+      top:42px;
+    }
+  }
+  section.questions ol>li,
+  section.questions.related_focus ol>li{
+    div.question_content{
+      margin-left:0;
+      width: 100%;
+    }
+    span.target{
+      padding:0;
+      a.recipient{
+        margin-top:6px;
+      }
+    }
+    ul.activity{
+      width: 40%;
+      float: none;
+      text-align: left;
+      margin-top: 24px;
+    }
+    a.sign_on{
+      @include opacity(1);
+      clear: none;
+    }
+  }
+  
+  /*
+    People
+  */
+  
+  section.people{
+    div.person_info{
+      width: 100%;
+      .person_photo{
+        width:20%;
+        img{
+          width:100%;
+          height:100%;
+        }
+      }
+      .person_details{
+        width: 70%;
+        margin-left: 5%;
+      }
+    }
+  }
+  
+  /*
+    Bills
+  */
+  
+  /*
+    Related Data
+  */
+  div.related_wrap{
+    width:100%;
+  }
+  
+  div.related_data{
+    border-right:0;
+    ul.related_nav{
+      padding-left: 0;
+      width: 100%;
+      li{
+        display: block;
+        width: 50%;
+        float: left;
+        a{
+          box-sizing: border-box;
+          text-align:center;
+          width:100%;
+          &.active{
+            background:rgba(0,0,0,.05);
+            padding:21px 18px;
+            border-bottom:0;
+          }
+        }
+      }
+    }
+    div.related_content{
+      section.related_focus{
+        box-shadow:none;
+        width:100%;
+      }
+      aside{
+        display: inline-block;
+        width: 100%;
+        vertical-align: top;
+        margin-top: 54px;
+        section:last-child{
+          margin-bottom: 0;
+          padding-bottom: 0;
+        }
+      }
+    }
+  }
+  
 }
