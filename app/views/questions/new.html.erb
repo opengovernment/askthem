@@ -6,24 +6,23 @@
       <h1 class="action">Ask a question</h1>
     </header>
     <form class="action" action="/questions/preview" method="get" accept-charset="utf-8">
-
-      <label for="summary">Question Summary
-        <span class="details">Treat it like a subject for an e-mail</span>
-      </label>
-      <input type="text" name="summary" id="summary" placeholder="Summary&hellip;" maxlength="60" />
+      <div class="count">
+        <span class="summary_count">60</span>
+        <input type="text" name="summary" id="summary" placeholder="Summary&hellip;" maxlength="60" />
+      </div>
 
       <label for="question">Full Question
         <span class="details">Give it your all!</span>
       </label>
       <textarea name="question" id="question" cols="30" rows="10" placeholder="Go on&hellip;"></textarea>
 
-      <label for="importance">Why is this important?
+      <!-- <label for="importance">Why is this important?
         <span class="opt">(optional)</span>
       </label>
 
       <div class="resizable-textarea">
         <textarea name="importance" id="importance" cols="30" rows="10" placeholder="Go on&hellip;"></textarea>
-      </div>
+      </div> -->
 
       <label for="issue_area">Select an issue area
         <span class="opt">(optional)</span>
@@ -35,7 +34,7 @@
       </select>
 
       <div class="controls">
-        <input type="submit" value="Save &amp; Preview" class="cta_pill">
+        <input type="submit" value="Publish Question" class="cta_pill">
         <span class="info">
           We'll help you find your elected officials on the following page!
         </span>

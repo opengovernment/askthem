@@ -3,16 +3,28 @@
 
 $placeholder-color: #c8c8c8;
 ::-webkit-input-placeholder {
-  color: #c8c8c8;
+  color: $placeholder-color;
 }
 :-moz-placeholder {
-  color: #c8c8c8;
+  color: $placeholder-color;
 }
 ::-moz-placeholder {
-  color: #c8c8c8;
+  color: $placeholder-color;
 }
 :-ms-input-placeholder {
-  color: #c8c8c8;
+  color: $placeholder-color;
+}
+
+div.count{
+  position:relative;
+  span.summary_count{
+    position: absolute;
+    right: 0;
+    top: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #999;
+  }
 }
 
 form{

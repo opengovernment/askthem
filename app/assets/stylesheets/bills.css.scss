@@ -2,6 +2,11 @@
 @import "mixins";
 
 section.bills{
+  
+  div.filters{
+    margin-bottom:0;
+  }
+  
   div.bill_info{
     display: inline-block;
     float:left;
@@ -96,6 +101,73 @@ section.bills{
       float: right;
       width: 165px;
       text-align: center;
+    }
+  }
+}
+
+ol.bills > li {
+  @include transition(border-left 0.1s ease-in, margin-left 0.1s ease-in);
+  border-bottom: 1px solid #F3F3F3;
+  border-left: 0px solid #fff;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  position:relative;
+  width:100%;
+  div.bill_content{
+    display: inline-block;
+    float: left;
+    margin-left: 2.5641026%;
+    vertical-align: top;
+    width:70.867075664622%;
+  }
+  a.title{
+    font-size:1.5em;
+    line-height: 1.25em;
+    font-weight:100;
+    display: block;
+    &:hover{
+      color:$linkhover;
+    }
+  }
+  p{
+    color:$lightgrey;
+    font-size:0.813em;
+    line-height: 1.385em;
+    margin-top:12px;
+  }
+  ol.actions{
+    li{
+      font-size: 0.688em;
+      line-height: 1.455em;
+      display: inline-block;
+      color: #DCDDDE;
+      font-weight: 600;
+      &.active{
+        color: #1D2F34;
+      }
+    }
+  }
+  ul.activity{
+    display: inline-block;
+    vertical-align: bottom;
+    margin-right: 2.5641026%;
+    text-align: right;
+    width: 20%;
+    float: right;
+    li{
+      display:block;
+      font-size: 0.813em;
+      line-height: 1.385em;
+      margin-right: 10px;
+      margin-bottom: 12px;
+    }
+    li.depiction{
+      display:inline-block;
+      margin-bottom:0;
+      img{
+        height:30px;
+        width:30px;
+      }
     }
   }
 }

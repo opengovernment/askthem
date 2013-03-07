@@ -155,7 +155,7 @@ header.main{
 
 div.content_body{
   background: white;
-  @include box-shadow(0 0 5px rgba(0, 0, 0, .1));
+  @include box-shadow(0 0 5px rgba(0, 0, 0, .1), 0 35px 85px rgba(255, 255, 255, .45));
   @include responsive-blocker();
   @include responsive-max();
   @include border-radius(0 2px 2px 0);
@@ -450,6 +450,37 @@ div.filters{
       background-position: center;
       width: 35px;
       height: 34px;
+    }
+  }
+}
+
+/*
+  Pagination
+*/
+nav.pagination{
+  display:block;
+  margin-top:12px;
+  span{
+    display:inline-block;
+    &.current, &.gap{
+      display: inline-block;
+      font-size:0.813em;
+      color: #999;
+      padding: 6px;
+    }
+    &.prev{}
+    &.next{}
+    a{
+      @include border-radius(3px);
+      @include box-shadow(0 1px 3px rgba(0, 0, 0, .1));
+      @include background(linear-gradient(top center, #FCFCFC, #f9f9f9));
+      display:inline-block;
+      padding: 6px;
+      font-size:0.813em;
+      border: 1px solid white;
+      &:hover{
+        @include box-shadow(0 1px 3px rgba(0, 0, 0, .2));
+      }
     }
   }
 }

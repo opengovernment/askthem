@@ -35,55 +35,54 @@
     </div>
   </div>
 
-  <ol>
+  <ol class="bills">
     <% @bills.each do |bill| %>
       <li>
-        <%= link_to bill['bill_id'], bill_path(@jurisdiction.id, bill) %>
-        <%= bill.dates.first.last.year %>
-        <%= pluralize bill.questions.count, 'question' %>
-        <%= truncate(bill['title'], length: 95) %>
-
-        <ol class="actions">
-          <% bill.dates.select{|_,date| date}.each do |action,date| %>
-            <% if action == 'first' %>
-              <li<% if date %> class="active"<% end %>>
-                Introduced
-                <%= l(date, format: :bill) if date %>
-              </li>
-            <% elsif action == 'passed_lower' %>
-              <li<% if date %> class="active"<% end %>>
-                Passed <%= @jurisdiction.chamber_name('lower') %>
-                <%= l(date, format: :bill) if date %>
-              </li>
-            <% elsif action == 'passed_upper' %>
-              <li<% if date %> class="active"<% end %>>
-                Passed <%= @jurisdiction.chamber_name('upper') %>
-                <%= l(date, format: :bill) if date %>
-              </li>
-            <% elsif action == 'signed' %>
-              <li<% if date %> class="active"<% end %>>
-                Signed into Law
-                <%= l(date, format: :bill) if date %>
-              </li>
+        <div class="bill_content">
+          <%= link_to bill['bill_id'], bill_path(@jurisdiction.id, bill), class: 'title' %>
+          <p><%= truncate(bill['title'], length: 95) %>, <%= bill.dates.first.last.year %></p>
+          <ol class="actions">
+            <% bill.dates.select{|_,date| date}.each do |action,date| %>
+              <% if action == 'first' %>
+                <li<% if date %> class="active"<% end %>>
+                  Introduced
+                  <%= l(date, format: :bill) if date %>
+                </li>
+              <% elsif action == 'passed_lower' %>
+                <li<% if date %> class="active"<% end %>>
+                  Passed <%= @jurisdiction.chamber_name('lower') %>
+                  <%= l(date, format: :bill) if date %>
+                </li>
+              <% elsif action == 'passed_upper' %>
+                <li<% if date %> class="active"<% end %>>
+                  Passed <%= @jurisdiction.chamber_name('upper') %>
+                  <%= l(date, format: :bill) if date %>
+                </li>
+              <% elsif action == 'signed' %>
+                <li<% if date %> class="active"<% end %>>
+                  Signed into Law
+                  <%= l(date, format: :bill) if date %>
+                </li>
+              <% end %>
             <% end %>
-          <% end %>
-        </ol>
-
-        <ul>
+          </ol>
+        </div>
+        
+        <ul class="activity">
+          <li><%= pluralize bill.questions.count, 'question' %></li>
           <% bill.people_and_committee_sponsors(5).each do |sponsor| %>
-            <li>
+            <li class="depiction">
               <% if Person === sponsor %>
-                <div class="depiction">
-                  <% if sponsor.image? %>
-                    <%= cdn_image_tag(sponsor.image, size: '50x50', alt: '') %>
-                  <% else %>
-                    <%= image_tag('placeholder.png', size: '50x50', alt: '') %>
-                  <% end %>
-                </div>
+                <% if sponsor.image? %>
+                  <%= cdn_image_tag(sponsor.image, size: '50x50', alt: '') %>
+                <% else %>
+                  <%= image_tag('placeholder.png', size: '50x50', alt: '') %>
+                <% end %>
               <% end %>
             </li>
           <% end %>
         </ul>
+        <div class="clear"></div>
       </li>
     <% end %>
   </ol>
