@@ -148,7 +148,7 @@ header div.wrapper,div.content_body div.wrapper,footer div.wrapper{
 header.main{
   margin-top: 36px;
   margin-bottom: 42px;
-/*  @include responsive-blocker();*/
+  @include responsive-blocker();
   @include responsive-max();
   width:100%;
 }
@@ -156,7 +156,7 @@ header.main{
 div.content_body{
   background: white;
   @include box-shadow(0 0 5px rgba(0, 0, 0, .1), 0 35px 85px rgba(255, 255, 255, .45));
-/*  @include responsive-blocker();*/
+  @include responsive-blocker();
   @include responsive-max();
   @include border-radius(0 2px 2px 0);
   display:inline-block;
@@ -305,6 +305,9 @@ nav{
         padding:16px 20px;
         font-size:0.813em;
         line-height: 1.385em;
+        &.top{
+          
+        }
         &.active{
           color:$middleblue;
           border-bottom: 4px solid #d4e8eb;
@@ -514,7 +517,7 @@ Footer
 footer{
   padding-top: 36px;
   padding-bottom: 42px;
-/*  @include responsive-blocker();*/
+  @include responsive-blocker();
   @include responsive-max();
   width: 100%;
   div.col{

@@ -2,7 +2,7 @@
   <nav>
     <ul class="top_nav">
       <li class="subject"><%= @jurisdiction['name'] %> <a href="#top" class="expand_menu"><span class="icon-angle-down"></span> Expand Menu</a></li>
-      <li><a name="top"></a><%= tab 'Questions', questions_path %></li>
+      <li><a name="top" style="display:none;"></a><%= tab 'Questions', questions_path %></li>
       <li><%= tab 'Bills', bills_path %></li>
       <li><%= tab 'People', people_path %></li>
       <li><%= tab 'Issues', '#' %><%# @todo %></li>

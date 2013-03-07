@@ -1,4 +1,5 @@
 @import 'compass';
+@import 'mixins';
 
 @media (min-width: 1028px){
   ul.admin_nav{
@@ -25,6 +26,14 @@
 
 
 @media (max-width: 420px){
+  
+  /*
+    Kill blockers
+  */
+  
+  header.main, div.content_body, footer{
+    @include responsive-blocker(0);
+  }
   
   header div.wrapper, div.content_body div.wrapper, footer div.wrapper{
     padding-left: 6.6923077%;
