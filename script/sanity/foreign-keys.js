@@ -70,7 +70,7 @@ var reportAsymmetricForeignKeys = function (parent, child, parent_field, child_f
     });
   });
   if (count) {
-    print(count + ' ' + parent + '-' + child + ' asymmetries found.');
+    print(count + ' ' + parent + '#' + parent_field + ' to ' + child + '#' + child_field + ' asymmetries found.');
   }
 };
 

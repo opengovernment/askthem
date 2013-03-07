@@ -72,12 +72,14 @@ reportList('legislators', 'roles.committee_id', {
         if (this.roles[i].subcommittee) {
           var subcommittee = db.committees.findOne({_all_ids: id});
           if (subcommittee) {
-            committee = db.committees.findOne({_all_ids: subcommittee.parent_id});
             if (this.roles[i].subcommittee !== subcommittee.subcommittee) {
               return true;
             }
-            if (this.roles[i].committee !== committee.committee) {
-              return true;
+            committee = db.committees.findOne({_all_ids: subcommittee.parent_id});
+            if (committee) {
+              if (this.roles[i].committee !== committee.committee) {
+                return true;
+              }
             }
           }
         }
@@ -142,26 +144,6 @@ reportList('bills', 'companions.internal_id', {
   }
 }, "bills with a companion whose bill ID is not the bill's bill ID");
 
-reportList('votes', 'committee', {
-  committee: {
-    '$exists': true
-  },
-  '$where': function () {
-    var document = db.committees.findOne({_all_ids: this.committee_id});
-    return document && this.committee !== document.committee && this.committee !== document.subcommittee;
-  }
-}, "votes whose committee name is not the committee's name");
-
-reportList('votes', '+bill_id', {
-  '+bill_id': {
-    '$exists': true
-  },
-  '$where': function () {
-    var document = db.bills.findOne({_id: this.bill_id});
-    return document && this['+bill_id'] !== document.bill_id;
-  }
-}, "votes whose bill ID is not the bill's ID");
-
 reportList('votes', '+bill_session', {
   '+bill_session': {
     '$exists': true
@@ -181,6 +163,7 @@ reportList('votes', '+bill_session', {
     return document && this['+bill_session'] !== this.session;
   }
 }, "votes whose bill session is not its session");
+
 
 
 // bills#actions.related_entities.name and legislators#full_name or
@@ -346,6 +329,31 @@ if (verbose) {
   }, "votes with an 'other' voter whose name is not the legislator's name");
 }
 
+// @note It's common for names to differ, e.g. "A10" versus "A 10".
+reportList('votes', '+bill_id', {
+  '+bill_id': {
+    '$exists': true
+  },
+  '$where': function () {
+    var document = db.bills.findOne({_id: this.bill_id});
+    return document && this['+bill_id'] !== document.bill_id;
+  }
+}, "votes whose bill ID is not the bill's ID");
+
+// @note It's common for names to differ, e.g. "Joint Appropriations Interim 
+//   Committee" versus "Appropriations".
+if (verbose) {
+  reportList('votes', 'committee', {
+    committee: {
+      '$exists': true
+    },
+    '$where': function () {
+      var document = db.committees.findOne({_all_ids: this.committee_id});
+      return document && this.committee !== document.committee && this.committee !== document.subcommittee;
+    }
+  }, "votes whose committee name is not the committee's name");
+}
+
 
 
 // bills: sponsors.chamber and chamber
@@ -365,28 +373,4 @@ reportList('bills', 'chamber', {
     }
   }
 }, "bills with a sponsor whose chamber is not the bill's chamber");
-*/
-
-// bills#actions._scraped_committee_name and committees#subcommittee or committees#subcommittee
-// @note Scraped committee names are not meant to match committee names.
-/*
-reportList('bills', 'actions.committee', {
-  'actions.committee': {
-    '$exists': true
-  },
-  '$where': function () {
-    for (var i = 0, l = this.actions.length; i < l; i++) {
-      var id = this.actions[i].committee;
-      if (id) {
-        var document = db.committees.findOne({_all_ids: id});
-        if (document) {
-          var value = this.actions[i]._scraped_committee_name;
-          if (value !== document.committee && value !== document.subcommittee) {
-            return true;
-          }
-        }
-      }
-    }
-  }
-}, "bills with an action whose committee name is not the committee's name");  
 */
