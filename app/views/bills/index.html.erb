@@ -70,7 +70,7 @@
         
         <ul class="activity">
           <li><%= pluralize bill.questions.count, 'question' %></li>
-          <% bill.person_sponsors(5).each do |sponsor| %>
+          <% bill.people_and_committee_sponsors(limit: 5, only: :people).each do |sponsor| %>
             <li class="depiction">
               <% if Person === sponsor %>
                 <% if sponsor.image? %>

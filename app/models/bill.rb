@@ -60,41 +60,49 @@ class Bill
 
   # Returns the sponsors of the bill.
   #
-  # @param [Integer] limit the number of sponsors to return
+  # @param [Hash] opts optional arguments
+  # @option opts [Integer] :limit the number of sponsors to return
+  # @option opts [Symbol] :only the type of sponsors to return
   # @return [Array] the people and committees sponsoring the bill
-  def people_and_committee_sponsors(limit = 0)
+  def people_and_committee_sponsors(opts = {})
     sponsors = read_attribute(:sponsors)
-    sponsors = sponsors.first(limit) if limit.nonzero?
+    case opts[:only]
+    when :people
+      sponsors.select!{|x| x['leg_id']}
+    when :committees
+      sponsors.select!{|x| x['committee_id']}
+    end
+    sponsors = sponsors.first(opts[:limit]) if opts.key?(:limit)
 
-    map = instantiate_sponsors(sponsors, Person, 'leg_id').merge(instantiate_sponsors(sponsors, Committee, 'committee_id'))
+    documents_by_id = {}
+
+    # Get all the legislator sponsors in a single query.
+    ids = sponsors.select{|x| x['leg_id']}.map{|x| x['leg_id']}
+    unless ids.empty?
+      Person.where(_id: {'$in' => ids}).each do |document|
+        documents_by_id[document.id] = document
+      end
+    end
+
+    # Get all the committee sponsors in a single query.
+    ids = sponsors.select{|x| x['committee_id']}.map{|x| x['committee_id']}
+    unless ids.empty?
+      Committee.where(_id: {'$in' => ids}).each do |committee|
+        documents_by_id[document.id] = document
+      end
+    end
 
     # Maintain the sponsors' order. Not every bill has foreign keys for its
     # sponsors, e.g. WIB00000879.
     sponsors.map do |sponsor|
-      map[sponsor['leg_id'] || sponsor['committee_id']] || OpenStruct.new(name: sponsor['name'], type: sponsor['type'])
+      document = documents_by_id[sponsor['leg_id'] || sponsor['committee_id']]
+      if document
+        document['type'] = sponsor['type']
+      else
+        document = OpenStruct.new(name: sponsor['name'], type: sponsor['type'])
+      end
+      document
     end
-  end
-
-  # Returns a list of legislators sponsoring the bill.
-  #
-  # @param [Integer] limit the number of sponsors to return
-  # @return [Array] the legislators sponsoring the bill
-  # @note Use only if you want to exclude committees.
-  def person_sponsors(limit = 0)
-    sponsors = read_attribute(:sponsors).select{|x| x['leg_id']}
-    sponsors = sponsors.first(limit) if limit.nonzero?
-    instantiate_sponsors(sponsors, Person, 'leg_id').values
-  end
-
-  # Returns a list of committees sponsoring the bill.
-  #
-  # @param [Integer] limit the number of sponsors to return
-  # @return [Array] the committees sponsoring the bill
-  # @note Use only if you want to exclude legislators.
-  def committee_sponsors(limit = 0)
-    sponsors = read_attribute(:sponsors).select{|x| x['committee_id']}
-    sponsors = sponsors.first(limit) if limit.nonzero?
-    instantiate_sponsors(sponsors, Committee, 'committee_id').values
   end
 
   def questions # @todo
@@ -103,22 +111,5 @@ class Bill
 
   def answers # @todo
     []
-  end
-
-private
-
-  def instantiate_sponsors(sponsors, klass, field)
-    map = {}
-
-    # Get all the legislator sponsors in a single query.
-    ids_and_types = Hash[*sponsors.select{|x| x[field]}.map{|x| [x[field], x['type']]}.flatten]
-    unless ids_and_types.empty?
-      klass.where(_id: {'$in' => ids_and_types.keys}).each do |document|
-        document['type'] = ids_and_types[document.id]
-        map[document.id] = document
-      end
-    end
-
-    map
   end
 end

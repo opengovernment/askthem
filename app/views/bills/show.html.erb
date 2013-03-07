@@ -88,7 +88,7 @@
                 <% end %>
               </h4>
               <ul>
-                <% @bill.people_and_committee_sponsors(5).each do |sponsor| %>
+                <% @bill.people_and_committee_sponsors(limit: 5).each do |sponsor| %>
                   <li>
                     <% if Person === sponsor %>
                       <div class="depiction">
