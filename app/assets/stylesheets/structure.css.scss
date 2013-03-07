@@ -172,7 +172,7 @@ div.related_wrap{
   overflow:hidden;
 }
 div.related_data{
-  background: url(/assets/related_bg@2x.jpg) repeat;
+  background: url(/assets/related_bg@2x.png) repeat;
   background-size: 30px 30px;
   border-top: 1px solid #e7e7e7;
   border-right: 1px solid #E7E7E7;
@@ -322,7 +322,7 @@ nav{
   li.subject{
     color: $middleblue;
     padding: 17px 0 13px;
-    background: url(/assets/nav_arrow@2x.jpg);
+    background: url(/assets/nav_arrow@2x.png);
     font-size: 1em;
     font-weight: 600;
     line-height: 1.125em;
@@ -350,7 +350,7 @@ nav{
 Filtering
 */
 div.filters{
-  background: url(/assets/related_bg@2x.jpg) repeat;
+  background: url(/assets/related_bg@2x.png) repeat;
   background-size: 30px 30px;
   border:1px solid #E7E7E7;
   clear: both;
