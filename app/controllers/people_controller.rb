@@ -17,6 +17,7 @@ class PeopleController < ApplicationController
   end
 
   def committees
+    @committees = resource.committees
     tab 'committees'
   end
 

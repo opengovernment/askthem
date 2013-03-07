@@ -11,4 +11,16 @@ class Committee
   def bills
     Bill.where('actions.related_entities.id' => id)
   end
+
+  # Returns the committee's members.
+  def people
+    ids = read_attribute(:members).map{|x| x['leg_id']}.compact
+    if ids.empty?
+      []
+    else
+      Person.where(_id: {'$in' => ids}).to_a
+    end
+  end
+
+  # @todo def votes
 end

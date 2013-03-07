@@ -1,0 +1,18 @@
+<li>
+  <div class="bill_content"><%# @todo fix class name %>
+    <%= committee.name %>
+  </div>
+  
+  <ul class="activity">
+    <% committee.people.each do |person| %><%# @todo expensive, as not eagerly loaded %>
+      <li class="depiction">
+        <% if person.image? %><%# @todo tooltip with name, check max # members %>
+          <%= cdn_image_tag(person.image, size: '50x50', alt: '') %>
+        <% else %>
+          <%= image_tag('placeholder.png', size: '50x50', alt: '') %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+  <div class="clear"></div>
+</li>

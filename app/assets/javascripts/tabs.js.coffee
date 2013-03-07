@@ -1,4 +1,6 @@
 jQuery ($) ->
+  # @todo load correct tab on page load
+
   $('.related_nav a').click (e) ->
     e.preventDefault()
     $this = $(this)
@@ -7,6 +9,7 @@ jQuery ($) ->
     $.ajax($this.attr('href') + '.js', dataType: 'html').done (data) ->
       $('.related_nav .active').removeClass('active')
       $('.related_focus').replaceWith(data) # @todo animate
+      # @todo add hash so that it loads correct tab on page load
       $this.addClass('active')
 
   $('.related_focus nav a').click (e) -> # @todo live handler
