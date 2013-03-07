@@ -9,6 +9,10 @@ class QuestionsController < ApplicationController
     # @todo stub
   end
 
+  def preview
+    # @todo stub
+  end
+
 private
 
   def collection

@@ -4,8 +4,7 @@
   <title>OpenGovernment</title>
   <meta name="viewport" content="width=device-width" />
   <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-  
-  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= stylesheet_link_tag 'application', media: 'all' %>
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -13,7 +12,7 @@
   <header class="main">
     <div class="wrapper">
       <%= link_to 'OpenGovernment', root_path, class: 'logo' %>
-      <p class="slogan">Contact everyone who represents you</p>
+      <p class="slogan">Ask questions to your city and state elected officials</p>
       <section>
       <% if user_signed_in? %>
         <ul class="admin_nav thin">
@@ -51,32 +50,32 @@
       <div class="col">
         <ul>
           <li><%= link_to 'About', '#' %><%# @todo %></li>
-          <li><%= link_to 'Blog', '#' %><%# @todo %></li>
+          <li><%= link_to 'Blog', 'http://blog.opengovernment.org/' %></li>
           <li><%= link_to 'Support', '#' %><%# @todo %></li>
           <li><%= link_to 'Contact Us', '#' %><%# @todo %></li>
         </ul>
       </div>
       <div class="col">
         <ul>
-          <li><%= link_to 'Code &amp; Data'.html_safe, '#' %><%# @todo %></li>
+          <li><%= link_to 'Code & Data', '#' %><%# @todo %></li>
           <li><%= link_to 'Volunteer', '#' %><%# @todo %></li>
-          <li><%= link_to 'Donate', '#' %><%# @todo %></li>
+          <li><%= link_to 'Donate', 'http://www.opencongress.org/donate' %></li>
           <li><%= link_to 'Bring OG to Your City', '#' %><%# @todo %></li>
         </ul>
       </div>
       <div class="col logos">
         <ul class="logos">
-          <li class="ppf"><%= link_to image_tag('/assets/credit_ppf.png') %></li>
-          <li class="opennorth"><%= link_to image_tag('/assets/credit_opennorth.png') %></li>
-          <li class="openstates"><%= link_to image_tag('/assets/credit_openstates.png') %></li>
-          <li class="knight"><%= link_to image_tag('/assets/credit_kfoundation.png') %></li>
+          <li class="ppf"><%= link_to image_tag('credit_ppf.png', alt: 'Participatory Politics Foundation'), 'http://www.participatorypolitics.org/' %></li>
+          <li class="opennorth"><%= link_to image_tag('credit_opennorth.png', alt: 'Open North'), 'http://www.opennorth.ca/' %></li>
+          <li class="knight"><%= link_to image_tag('credit_kfoundation.png', alt: 'Knight Foundation'), 'http://www.knightfoundation.org/' %></li>
+          <li class="openstates"><%= link_to image_tag('credit_openstates.png', alt: 'Open States'), 'http://openstates.org/' %></li>
         </ul>
       </div>
-      <p>OpenGovernment is a project of the non-profit Participatory Politics Foundation, with Open North as technical lead and generous support from the Knight Foundation. State legislative data from Open States.</p>
+      <p>OpenGovernment is a project of the nonprofit Participatory Politics Foundation, with Open North as technical lead and generous support from the Knight Foundation. State legislative data from Open States.</p>
     </div>
-  <div class="clear"></div>
+    <div class="clear"></div>
   </footer>
 
-<%= javascript_include_tag "application" %>
+<%= javascript_include_tag 'application' %>
 </body>
 </html>
