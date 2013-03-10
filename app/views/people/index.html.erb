@@ -35,27 +35,7 @@
     </div>
   </div>
 
-  <ol class="media-list">
-    <% @people.each do |person| %>
-      <li class="media">
-        <span class="pull-left">
-          <% if person.image? %>
-            <%= cdn_image_tag(person.image, size: '50x50', alt: '', class: 'media-object') %>
-          <% else %>
-            <%= image_tag('placeholder.png', size: '50x50', alt: '') %>
-          <% end %>
-        </span>
-        <div class="media-body">
-          <p>
-            <%= person_attributes(person) %>
-            – <%= pluralize person.questions.count, 'question' %>
-            – <%= pluralize person.answers.count, 'answer' %>
-          </p>
-          <h2 class="media-heading">
-            <%= link_to person.name, person_path(@jurisdiction.id, person) %>
-          </h2>
-        </div>
-      </li>
-    <% end %>
+  <ol class="people-list">
+    <%= render @people %>
   </ol>
 </section>

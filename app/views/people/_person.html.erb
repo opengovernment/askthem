@@ -1,0 +1,19 @@
+<li>
+  <span class="pull-left">
+    <% if person.image? %>
+      <%= cdn_image_tag(person.image, size: '50x50', alt: '') %>
+    <% else %>
+      <%= image_tag('placeholder.png', size: '50x50', alt: '') %>
+    <% end %>
+  </span>
+  <div class="list-item">
+    <p>
+      <%= person_attributes(person) %>
+      – <%= pluralize person.questions.count, 'question' %>
+      – <%= pluralize person.answers.count, 'answer' %>
+    </p>
+    <h2>
+      <%= link_to person.name, person_path(@jurisdiction.id, person) %>
+    </h2>
+  </div>
+</li>

@@ -32,11 +32,6 @@ section.people{
     margin-bottom:24px;
     width:77.41935483871%;
   }
-  h2{
-    font-size:1em;
-    line-height: 1.5em;
-    font-weight:600;
-  }
   .attr{
     span.count{
       display:inline-block;
@@ -45,12 +40,6 @@ section.people{
       font-size:0.813em;
       line-height: 1.385em;
     }
-  }
-  p{
-    color:#7b969e;
-    font-size:0.813em;
-    line-height: 1.385em;
-    word-wrap: break-word;
   }
   &.listings{
     h1{
@@ -63,5 +52,36 @@ section.people{
       width: 165px;
       text-align: center;
     }
+  }
+}
+
+.people-list > li {
+  margin-top: 15px;
+  overflow: hidden;
+  zoom: 1;
+  &:first-child {
+    margin-top: 0;
+  }
+  .pull-left {
+    margin-right: 10px;
+  }
+  img {
+    display: block;
+  }
+  .list-item {
+    overflow: hidden;
+    zoom: 1;
+  }
+  h2 {
+    margin-bottom: 5px;
+    font-size: 1em;
+    font-weight: 600;
+    line-height: 1.5em;
+  }
+  p {
+    color: #7b969e;
+    font-size: 0.813em;
+    line-height: 1.385em;
+    word-wrap: break-word;
   }
 }
