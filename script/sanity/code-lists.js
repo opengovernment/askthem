@@ -99,6 +99,58 @@ reportList('bills', 'sponsors.type', {
   reportList('bills', field, criteria);
 });
 
+// Participant chamber
+reportList('events', 'participants.chamber ', {
+  'participants.chamber': {
+    '$nin': [
+      'lower',
+      'upper',
+      'joint',
+      'other'
+    ]
+  }
+});
+
+// Participant type
+// @see https://github.com/sunlightlabs/billy/blob/master/billy/schemas/event.json#L64
+reportList('events', 'participants.participant_type ', {
+  'participants.participant_type': {
+    '$nin': [
+      'committee',
+      'legislator'
+    ]
+  }
+});
+
+// Participant role
+// @see https://github.com/sunlightlabs/billy/blob/master/billy/schemas/event.json#L71
+reportList('events', 'participants.type ', {
+  'participants.type': {
+    '$nin': [
+      'chair',
+      'host',
+      'participant'
+    ]
+  }
+});
+
+// Event types
+reportList('events', 'type', {
+  type: {
+    '$nin': [
+      'committee:hearing',
+      'committee:meeting',
+      'house:session',
+      'joint:session',
+      'senate:session',
+      'floor_time',
+      'other',
+      'redistricting',
+      'special'
+    ]
+  }
+});
+
 // Vote types
 // @see https://github.com/sunlightlabs/billy/blob/master/billy/schemas/vote.json#L11
 reportList('votes', 'type', {

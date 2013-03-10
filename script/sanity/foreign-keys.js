@@ -39,11 +39,18 @@ reportInvalidForeignKeys('votes', 'no_votes.leg_id', 'legislators');
 reportInvalidForeignKeys('votes', 'other_votes.leg_id', 'legislators');
 reportInvalidForeignKeys('votes', 'committee_id', 'committees');
 
-// actions.related_entities.id can either point to a committee or a legislator.
+// actions.related_entities.id can point to either a committee or a legislator.
 reportInvalidForeignKeys('bills', 'actions.related_entities.id', 'committees', function (id) {
   return (/C[0-9]{6}$/).test(id);
 });
 reportInvalidForeignKeys('bills', 'actions.related_entities.id', 'legislators', function (id) {
+  return (/L[0-9]{6}$/).test(id);
+});
+// participants.id can point to either a committee or a legislator.
+reportInvalidForeignKeys('events', 'participants.id', 'committees', function (id) {
+  return (/C[0-9]{6}$/).test(id);
+});
+reportInvalidForeignKeys('events', 'participants.id', 'legislators', function (id) {
   return (/L[0-9]{6}$/).test(id);
 });
 
