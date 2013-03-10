@@ -3,5 +3,5 @@
     <%= render @bills %>
   </ol>
 
-  <%= paginate @bills, outer_window: 1 %><%# force format as html %>
+  <%= paginate @bills, outer_window: 1, params: {format: nil} %>
 </section>

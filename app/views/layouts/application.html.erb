@@ -14,13 +14,11 @@
       <%= link_to 'OpenGovernment', root_path, class: 'logo' %>
       <p class="slogan">Ask questions to your city and state elected officials</p>
       <section>
-      <% if user_signed_in? %>
-        <ul class="admin_nav thin">
-          <li><%= link_to 'Your Profile', '#' %><%# @todo %></li>
-          <li><%= link_to 'Dashboard', '#' %><%# @todo %></li>
-          <li><%= link_to 'Steve T <span class="icon-angle-down"></span>'.html_safe, '#' %><%# @todo %></li>
-        </ul>
-      <% end %>
+        <% if user_signed_in? %>
+          <ul class="admin_nav thin">
+            <%= render partial: 'shared/user' %>
+          </ul>
+        <% end %>
       </section>
     </div>
   </header>
@@ -36,13 +34,11 @@
 <%= yield %>
       </div>
     </div>
-      <% if user_signed_in? %>
+    <% if user_signed_in? %>
       <ul class="admin_nav wide">
-        <li><%= link_to 'Your Profile', '#' %><%# @todo %></li>
-        <li><%= link_to 'Dashboard', '#' %><%# @todo %></li>
-        <li><%= link_to 'Steve T <span class="icon-angle-down"></span>'.html_safe, '#' %><%# @todo %></li>
+        <%= render partial: 'shared/user' %>
       </ul>
-      <% end %>
+    <% end %>
   </section>
   
   <footer>
@@ -67,7 +63,7 @@
         <ul class="logos">
           <li class="ppf"><%= link_to image_tag('credit_ppf.png', alt: 'Participatory Politics Foundation'), 'http://www.participatorypolitics.org/' %></li>
           <li class="opennorth"><%= link_to image_tag('credit_opennorth.png', alt: 'Open North'), 'http://www.opennorth.ca/' %></li>
-          <li class="knight"><%= link_to image_tag('credit_kfoundation.png', alt: 'Knight Foundation'), 'http://www.knightfoundation.org/' %></li>
+          <li class="knight"><%= link_to image_tag('credit_kfoundation.png', alt: 'John S. and James L. Knight Foundation'), 'http://www.knightfoundation.org/' %></li>
           <li class="openstates"><%= link_to image_tag('credit_openstates.png', alt: 'Open States'), 'http://openstates.org/' %></li>
         </ul>
       </div>

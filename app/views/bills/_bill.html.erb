@@ -1,7 +1,9 @@
 <li>
   <div class="bill_content">
     <%= link_to bill['bill_id'], bill_path(@jurisdiction.id, bill), class: 'title' %>
-    <p><%= truncate(bill['title'], length: 95) %>, <%= bill.dates.first.last.year %></p>
+    <p>
+      <%= truncate(bill['title'], length: 95) %><% if bill.dates.first.last %>, <%= bill.dates.first.last.year %><% end %>
+    </p>
     <ol class="actions">
       <% bill.dates.select{|_,date| date}.each do |action,date| %>
         <% if action == 'first' %>

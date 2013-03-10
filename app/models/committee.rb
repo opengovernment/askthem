@@ -22,5 +22,8 @@ class Committee
     end
   end
 
-  # @todo def votes
+  # Returns votes relating to this committee.
+  def votes
+    Vote.where(committee_id: id)
+  end
 end

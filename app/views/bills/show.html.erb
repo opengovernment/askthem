@@ -6,7 +6,7 @@
       <div class="bill_details">
         <h2>
           <strong><%= @bill['bill_id'] %></strong>
-          <%= @bill.dates.first.last.year %>
+          <%= @bill.dates.first.last.andand.year %>
           <% if @bill['versions'].last %>
             <%= link_to 'Read the complete bill →', @bill['versions'].last['url'] %>
           <% end %>
@@ -71,8 +71,8 @@
     <div class="related_data">
       <nav>
         <ul class="related_nav">
-          <li id="questions-tab"><%= link_to 'Questions', resource_path(@jurisdiction.id), class: @tab == 'questions' && 'active' %></li>
-          <li id="sponsors-tab"><%= link_to 'Sponsors', sponsors_resource_path(@jurisdiction.id), class: @tab == 'sponsors' && 'active' %></li>
+          <li><%= link_to 'Questions', resource_path(@jurisdiction.id), id: 'questions-tab', class: @tab == 'questions' && 'active' %></li>
+          <li><%= link_to 'Sponsors', sponsors_resource_path(@jurisdiction.id), id: 'sponsors-tab', class: @tab == 'sponsors' && 'active' %></li>
         </ul>
       </nav>
 

@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.autogrow-textarea
+//= require jquery.history
 //= require tabs
 //= require bills
 //= require questions
