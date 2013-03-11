@@ -102,6 +102,7 @@ reportList('bills', 'sponsors.type', {
 // Participant chamber
 reportList('events', 'participants.chamber ', {
   'participants.chamber': {
+    '$exists': true,
     '$nin': [
       'lower',
       'upper',
@@ -115,6 +116,7 @@ reportList('events', 'participants.chamber ', {
 // @see https://github.com/sunlightlabs/billy/blob/master/billy/schemas/event.json#L64
 reportList('events', 'participants.participant_type ', {
   'participants.participant_type': {
+    '$exists': true,
     '$nin': [
       'committee',
       'legislator'
@@ -126,10 +128,11 @@ reportList('events', 'participants.participant_type ', {
 // @see https://github.com/sunlightlabs/billy/blob/master/billy/schemas/event.json#L71
 reportList('events', 'participants.type ', {
   'participants.type': {
+    '$exists': true,
     '$nin': [
       'chair',
-      'host',
-      'participant'
+      'committee',
+      'host'
     ]
   }
 });
