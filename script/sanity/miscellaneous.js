@@ -33,15 +33,6 @@ reportList('legislators', 'offices.address', {
   'offices.address': ','
 }, 'legislators with invalid offices.address (",")');
 
-// Are any photo URLs relative paths?
-// @note Can add `pattern` property to person.json schema.
-reportList('legislators', 'photo_url', {
-  photo_url: {
-    '$exists': true,
-    '$nin': ['', null, /^http/]
-  }
-});
-
 // Any spaces in IDs?
 ['transparencydata_id', 'nimsp_id', 'nimsp_candidate_id', 'votesmart_id'].forEach(function (field) {
   var criteria1 = {};
@@ -66,3 +57,50 @@ reportTotal('legislators', {
     '$in': ['', null]
   }
 }, 'have a blank photo_url ("" or null)');
+
+// Are any URLs relative paths?
+// @note Can add `pattern` property schemas.
+var fields = {
+  bills: [
+    'documents.url',
+    'sources.url',
+    'sponsors.+leg_url',
+    'sponsors.+main_sponsor_url',
+    'versions.url',
+    'versions.+pdf_url',
+    '+bill_url'
+  ],
+  committees: [
+    'sources.url'
+  ],
+  events: [
+    'documents.url',
+    'sources.url',
+    '+location_url'
+  ],
+  legislators: [
+    'offices.+url',
+    'photo_url',
+    'sources.url',
+    'url',
+    '+additional_info_url',
+    '+facebook_url',
+    '+image_url',
+    '+img_url',
+    '+leg_url',
+    '+url'
+  ],
+  votes: [
+    'sources.url'
+  ]
+};
+for (var collection in fields) {
+  fields[collection].forEach(function (field) {
+    var criteria = {}
+    criteria[field] = {
+      '$exists': true,
+      '$nin': ['', null, /^(?:http|ftp)/]
+    };
+    reportList(collection, field, criteria);
+  });
+}
