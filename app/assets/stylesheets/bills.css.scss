@@ -49,7 +49,7 @@ section.bills{
       }
     }
   }
-  a.cta_pill{
+  a.bill_detail.cta_pill{
     float: right;
     width: 165px;
     text-align: center;
@@ -99,8 +99,6 @@ section.bills{
     }
     a.cta_pill{
       float: right;
-      width: 165px;
-      text-align: center;
     }
   }
 }
@@ -116,7 +114,6 @@ ol.bills > li {
   div.bill_content{
     display: inline-block;
     float: left;
-    margin-left: 2.5641026%;
     vertical-align: top;
     width:70.867075664622%;
   }

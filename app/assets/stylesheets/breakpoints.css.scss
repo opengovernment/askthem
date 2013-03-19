@@ -179,12 +179,12 @@
     }
     ul.activity{
       width: 40%;
-      float: none;
+      float: left;
       text-align: left;
       margin-top: 24px;
     }
     a.sign_on{
-      @include opacity(1);
+      margin-top: 24px;
       clear: none;
     }
   }
