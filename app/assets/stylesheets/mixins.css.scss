@@ -44,6 +44,10 @@ $linkhover: #709EAC;
   font-family:'RobotoRegular', helvetica, arial, verdana, sans-serif;
 }
 
+@mixin Helvetica(){
+  font-family:helvetica, arial, verdana, sans-serif;
+}
+
 /*
 Block fluidity, for now
 */

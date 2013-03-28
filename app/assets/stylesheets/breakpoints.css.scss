@@ -134,7 +134,15 @@
   span.info{
     margin-top:12px;
   }
-
+  
+  /*
+    Type
+  */
+  h1{
+    display:block;
+    text-align:center;
+  }
+  
   /*
     Footer
   */
@@ -210,9 +218,52 @@
     }
   }
   
+  .people-list > li{
+    width:100%;
+    div.avatar, div.person-info{
+      float:left;
+    }
+  }
+  
   /*
     Bills
   */
+  
+  /*
+    Overview
+  */
+  nav{
+    ul.radio_nav{
+      width:100%;
+      li{
+        width:100%;
+        a{
+          display:block;
+        }
+      }
+    }
+    div.nav_extras{
+      width:100%;
+      padding:12px 0;
+      a{
+        display:none;
+      }
+      div.rep_search{
+        margin-bottom: 6px;
+        width: 96%;
+        float: none;
+        display: block;
+        margin: auto;
+        input[type=text]{
+          width:96%;
+        }
+        input[type=submit]{
+          top:auto;
+          bottom:0;
+        }
+      }
+    }
+  }
   
   /*
     Related Data
