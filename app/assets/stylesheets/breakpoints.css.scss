@@ -229,6 +229,32 @@
     Bills
   */
   
+  section.bills{
+    div.bill_info{
+      margin-bottom:24px;
+      width:100%;
+      h2{
+        text-align:center;
+        width:100%;
+        a{
+          display:block;
+        }
+      }
+      div.attr{
+        text-align:center;
+      }
+    }
+    a.bill_detail.cta_pill{
+      float:none;
+      width:100%;
+    }
+    a.sim_act{
+      float:none;
+      display:block;
+      width:auto;
+    }
+  }
+  
   /*
     Overview
   */
@@ -287,8 +313,9 @@
           width:100%;
           &.active{
             background:rgba(0,0,0,.05);
-            padding:21px 18px;
+            padding:18px 18px 21px 18px;
             border-bottom:0;
+            border-top:3px solid #F77463;
           }
         }
       }
