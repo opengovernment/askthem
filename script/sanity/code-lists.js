@@ -1,9 +1,26 @@
+var mimetypes = [
+  'text/html',
+  'application/pdf',
+  'application/msword',
+  'application/rtf',
+  'application/octet-stream',
+  'application/vnd.wordperfect'
+]
+
 // Genders
 // @note Can add `enum` property if `gender` is added to the schema.
 reportList('legislators', '+gender', {
   '+gender': {
     '$exists': true,
     '$nin': ['Female', 'Male']
+  }
+});
+
+// Status
+reportList('legislators', '+leg_status', {
+  '+leg_status': {
+    '$exists': true,
+    '$nin': ['Active', 'Deceased', 'Resigned']
   }
 });
 
@@ -87,16 +104,28 @@ reportList('bills', 'sponsors.type', {
   var criteria = {};
   criteria[field] = {
     '$exists': true,
-    '$nin': [
-      'text/html',
-      'application/pdf',
-      'application/msword',
-      'application/rtf',
-      'application/octet-stream',
-      'application/vnd.wordperfect'
-    ]
+    '$nin': mimetypes
   };
   reportList('bills', field, criteria);
+});
+
+// Document MIME type
+reportList('events', 'documents.+mimetype', {
+  'documents.+mimetype': {
+    '$exists': true,
+    '$nin': mimetypes
+  }
+});
+
+reportList('events', 'documents.+type', {
+  'documents.+type': {
+    '$exists': true,
+    '$nin': [
+      'agenda',
+      'full-text',
+      'other'
+    ]
+  }
 });
 
 // Participant chamber
