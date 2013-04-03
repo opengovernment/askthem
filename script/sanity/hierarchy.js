@@ -69,6 +69,14 @@ db.metadata.find().forEach(function (obj) {
     }, obj._id.toUpperCase() + ' ' + collection + ' with invalid chamber');
   });
 
+  reportList('events', '+chamber', {
+    state: obj._id,
+    '+chamber': {
+      '$exists': true,
+      '$nin': chambers
+    }
+  }, obj._id.toUpperCase() + ' events with invalid +chamber');
+
   // @see https://github.com/sunlightlabs/billy/blob/master/billy/schemas/vote.json#L6
   reportList('votes', 'bill_chamber', {
     state: obj._id,
