@@ -1,23 +1,30 @@
 // @note These errors currently occur tens of thousands of times.
-if (verbose) {
-  reportList('votes', 'yes_count', {
-    '$where': function () {
-      return this.yes_count != this.yes_votes.length;
-    }
-  });
+reportList('votes', 'yes_count', {
+  yes_votes: {
+    '$ne': []
+  },
+  '$where': function () {
+    return this.yes_count != this.yes_votes.length;
+  }
+});
 
-  reportList('votes', 'no_count', {
-    '$where': function () {
-      return this.no_count != this.no_votes.length;
-    }
-  });
+reportList('votes', 'no_count', {
+  no_votes: {
+    '$ne': []
+  },
+  '$where': function () {
+    return this.no_count != this.no_votes.length;
+  }
+});
 
-  reportList('votes', 'other_count', {
-    '$where': function () {
-      return this.other_count != this.other_votes.length;
-    }
-  });
-}
+reportList('votes', 'other_count', {
+  other_votes: {
+    '$ne': []
+  },
+  '$where': function () {
+    return this.other_count != this.other_votes.length;
+  }
+});
 
 reportList('votes', '+absent', {
   '+absent': {
