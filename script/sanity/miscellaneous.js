@@ -27,6 +27,14 @@ reportList('legislators', 'party', {
   }
 });
 
+// Are any photo URLs blank?
+reportTotal('legislators', {
+  photo_url: {
+    '$exists': true,
+    '$in': ['', null]
+  }
+}, 'have a blank photo_url ("" or null)');
+
 // Are any addresses nearly blank?
 // @note Can add `minLength` property to person.json schema.
 reportList('legislators', 'offices.address', {
@@ -50,13 +58,10 @@ reportList('legislators', 'offices.address', {
   reportTotal('legislators', criteria2, 'have a blank ' + field + ' ("" or null)');
 });
 
-// Are any photo URLs blank?
-reportTotal('legislators', {
-  photo_url: {
-    '$exists': true,
-    '$in': ['', null]
-  }
-}, 'have a blank photo_url ("" or null)');
+// Any null voters?
+reportList('votes', '.', {
+  '_voters': null
+}, 'votes with null in _voters');
 
 // Are any URLs relative paths?
 // @note Can add `pattern` property schemas.
