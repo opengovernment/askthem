@@ -13,7 +13,7 @@ var reportList = function (collection, field, criteria, message) {
 
   var count = db[collection].count(criteria);
   if (count) {
-    print('\n' + message + ':');
+    print('\n# ' + message + ':');
     db[collection].find(criteria).forEach(function (obj) {
       if (field.indexOf('.') === -1) {
         print(obj._id + ': ' + obj[field]);
