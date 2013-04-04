@@ -4,7 +4,7 @@
   <header>
     <div class="person_info">
       <% if @person.image? %>
-      <div class="person_photo">
+      <div class="avatar">
         <%= cdn_image_tag(@person.image, size: '80x80', alt: '', class: 'person_photo') %>
       </div>
       <% else %>

@@ -1,5 +1,61 @@
 <%= render 'shared/navigation' %>
 
 <section>
-  <%= @jurisdiction['legislature_name'] %>
+  <h1><%= @jurisdiction['legislature_name'] %></h1>
+  <nav>
+    <ul class="radio_nav">
+      <li>
+        <a href="#" class="active">13 Senators
+          <span class="info">
+            <span>9 Dem</span> <span>12 Rep</span>
+          </span>
+        </a>
+      </li>
+      <li>
+        <a href="#">13 Assembly
+          <span class="info">
+            <span>40 Dem</span> <span>9 Rep</span>
+          </span>
+        </a>
+      </li>
+      <li>
+        <a href="#">13 Committees
+          <span class="info">
+            9 Joint Committees
+          </span>
+        </a>
+      </li>
+      <li>
+        <a href="#">200 Bills</a>
+      </li>
+      <li class="last">
+        <a href="#">4 Key Votes</a>
+      </li>
+      <li class="clear"></li>
+    </ul>
+    
+    <div class="nav_extras">
+      <a href="#">State Resources</a>
+      <div class="rep_search">
+        <label for="find_rep">Find your representatives:</label>
+        <input type="text" name="find_rep" id="find_rep" />
+        <input type="submit" value="search" class="icon-map-marker" />
+      </div>
+      <div class="clear"></div>
+    </div>
+  </nav>
+  <ol class="people-list">
+    <%= 12.times do %><%# @todo %>
+    <li>
+      <div class="avatar">
+        <img src="http://lorempixel.com/60/60/" alt="" />
+      </div>
+      <div class="person-info">
+        <h2><a href="#">Steven Trevathan</a></h2>
+        <span class="jurisdiction">Democrat, Representative, District 35</span>
+        <span class="stats"><span>0 Questions</span> <span>0 Answers</span></span>
+      </div>
+    </li>
+    <%end%>
+  </ol>
 </section>

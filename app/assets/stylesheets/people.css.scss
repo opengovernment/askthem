@@ -5,6 +5,26 @@
 @import "compass";
 @import "mixins";
 
+div.avatar{
+  @include border-radius(30px);
+  border:1px solid #2d3132;
+  display: inline-block;
+  overflow: hidden;
+  width:100%;
+  img{
+    @include border-radius(30px);
+    float:left;
+    width: 100%;
+    height: auto;
+  }
+}
+
+.people-list > li div.avatar{
+  max-width:60px;
+  width:17.647058823529%;
+  vertical-align: top;
+}
+
 section.people{
   header{
     position:relative;
@@ -16,21 +36,24 @@ section.people{
     display:inline-block;
     width: 59.61538%;
   }
-  div.person_photo{
-    display:inline-block;
+  div.avatar{
+    @include border-radius(40px);
+    border:1px solid #2d3132;
+    display: inline-block;
+    overflow: hidden;
+    width:17.204301075269%;
     vertical-align:top;
-    width:21.505376344086%;
-  }
-  img.person_photo{
-    margin-right:20%;
-    @include rounded_corners();
-    height:80%;
-    width:80%;
+    img{
+      @include border-radius(40px);
+      float:left;
+      width: 100%;
+    }
   }
   div.person_details{
     display:inline-block;
     margin-bottom:24px;
-    width:77.41935483871%;
+    margin-left:4.301075268817%;
+    width:75%;
   }
   .attr{
     span.count{
@@ -47,41 +70,68 @@ section.people{
       clear: both;
       display: inline-block;
     }
-    a.cta_pill{
-      float: right;
-      width: 165px;
-      text-align: center;
-    }
   }
 }
 
 .people-list > li {
-  margin-top: 15px;
-  overflow: hidden;
-  zoom: 1;
-  &:first-child {
-    margin-top: 0;
-  }
-  .pull-left {
-    margin-right: 10px;
-  }
-  img {
-    display: block;
-  }
-  .list-item {
-    overflow: hidden;
-    zoom: 1;
-  }
-  h2 {
-    margin-bottom: 5px;
-    font-size: 1em;
-    font-weight: 600;
-    line-height: 1.5em;
-  }
-  p {
-    color: #7b969e;
-    font-size: 0.813em;
-    line-height: 1.385em;
-    word-wrap: break-word;
+  display:inline-block;
+  float:left;
+  padding-bottom: 30px;
+  width:50%;
+  div.person-info{
+    display:inline-block;
+    margin-left:5.128205128205%;
+    width:76.470588235294%;
+    h2{
+      color:#3b626c;
+      display:inline-block;
+      @include RobotoRegular();
+      font-size:1.125em;
+      line-height: 1.333em;
+    }
+    span.jurisdiction{
+      color:#7b969e;
+      display:inline-block;
+      font-size:0.813em;
+      @include Helvetica();
+      font-weight:100;
+      line-height: 1.385em;
+    }
+    span.stats{
+      color:#bdcace;
+      display:inline-block;
+      font-size:0.813em;
+      @include Helvetica();
+      line-height: 1.385em;
+      span{
+        display:inline-block;
+        padding-right:20px;
+        margin-left:10px;
+        position:relative;
+        &:first-child{
+          margin-left:0px;
+          &:after{
+            color: #E5E5E5;
+            content: "\2022";
+            position: absolute;
+            right: 0;
+          }
+        }
+      }
+    }
   }
 }
+
+
+/*
+    <li>
+      <div class="avatar">
+        <img src="http://lorempixel.com/60/60/" alt="" />
+      </div>
+      <div class="person-info">
+        <h2>Steven Trevathan</h2>
+        <span class="jurisdiction">Republican, Representative, District 35</span>
+        <span class="stats"><span>0 Questions</span> <span>0 Answers</span></span>
+      </div>
+    </li>
+*/
