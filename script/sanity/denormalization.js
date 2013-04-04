@@ -247,19 +247,20 @@ reportList('events', '+chamber', {
       }
     }
   }
-});
+}, "events whose participant's chamber is not its chamber");
 
-// events#+chamber and legislators#chamber
-reportList('events', '+chamber', {
-  '+chamber': {
-    '$exists': true
+// events#participants.chamber and legislators#chamber
+reportList('events', 'participants.chamber', {
+  'participants.chamber': {
+    '$exists': true,
+    '$nin': ['joint', 'other']
   },
   '$where': function () {
     for (var i = 0, l = this.participants.length; i < l; i++) {
       var obj = this.participants[i];
       var id = obj.id;
       var value = obj.chamber;
-      if (id && value) {
+      if (id && value && value !== 'joint' && value !== 'other') {
         var document;
         if (/C[0-9]{6}$/.test(id)) {
           document = db.committee.findOne({_all_ids: id});
@@ -271,8 +272,9 @@ reportList('events', '+chamber', {
           return true;
         }
       }
+    }
   }
-}, "votes whose bill chamber is not the bill's chamber");
+}, "events whose participant's chamber is not the participant's chamber");
 
 reportList('events', 'related_bills.bill_id', {
   'related_bills.bill_id': {
@@ -291,7 +293,7 @@ reportList('events', 'related_bills.bill_id', {
       }
     }
   }
-});
+}, "events with a related bill whose bill ID is not the bill's ID");
 
 // votes: +bill_session and session
 reportList('votes', '+bill_session', {

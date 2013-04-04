@@ -69,14 +69,6 @@ db.metadata.find().forEach(function (obj) {
     }, obj._id.toUpperCase() + ' ' + collection + ' with invalid chamber');
   });
 
-  reportList('events', '+chamber', {
-    state: obj._id,
-    '+chamber': {
-      '$exists': true,
-      '$nin': chambers
-    }
-  }, obj._id.toUpperCase() + ' events with invalid +chamber');
-
   // @see https://github.com/sunlightlabs/billy/blob/master/billy/schemas/vote.json#L6
   reportList('votes', 'bill_chamber', {
     state: obj._id,
@@ -107,6 +99,13 @@ db.metadata.find().forEach(function (obj) {
 
   // @note Can add `enum` property to events.json schema.
   var chambers_plus_other = chambers.concat(['joint', 'other']);
+  reportList('events', '+chamber', {
+    state: obj._id,
+    '+chamber': {
+      '$exists': true,
+      '$nin': chambers
+    }
+  }, obj._id.toUpperCase() + ' events with invalid +chamber');
   reportList('events', 'participants.chamber', {
     state: obj._id,
     'participants.chamber': {
