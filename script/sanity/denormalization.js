@@ -233,6 +233,22 @@ reportList('events', 'participants.participant_type', {
   }
 }, "events with a participant whose type is not that participant's type");
 
+// events: participants.chamber and +chamber
+reportList('events', '+chamber', {
+  '+chamber': {
+    '$exists': true,
+    '$nin': ['joint', 'other']
+  },
+  '$where': function () {
+    for (var i = 0, l = this.participants.length; i < l; i++) {
+      var value = this.participants[i].chamber;
+      if (value && value !== this['+chamber']) {
+        return true;
+      }
+    }
+  }
+});
+
 // events#+chamber and legislators#chamber
 reportList('events', '+chamber', {
   '+chamber': {
@@ -257,6 +273,25 @@ reportList('events', '+chamber', {
       }
   }
 }, "votes whose bill chamber is not the bill's chamber");
+
+reportList('events', 'related_bills.bill_id', {
+  'related_bills.bill_id': {
+    '$exists': true
+  },
+  '$where': function () {
+    for (var i = 0, l = this.related_bills.length; i < l; i++) {
+      var obj = this.related_bills[i];
+      var id = obj.id;
+      var value = obj.bill_id;
+      if (id && value) {
+        var document = db.bills.findOne({_id: id});
+        if (document && value !== document.bill_id) {
+          return true;
+        }
+      }
+    }
+  }
+});
 
 // votes: +bill_session and session
 reportList('votes', '+bill_session', {
@@ -385,6 +420,38 @@ if (verbose) {
       }
     }
   }, "committees with a member whose name is not the legislator's name");
+}
+
+// @note It's common for names to differ, e.g. "Higher Education*" versus
+//   "Higher Education" or "Rep. Drew Darby" versus "Drew Darby".
+if (verbose) {
+  reportList('events', 'participants.id', {
+    'participants.id': {
+      '$exists': true
+    },
+    '$where': function () {
+      for (var i = 0, l = this.participants.length; i < l; i++) {
+        var obj = this.participants[i];
+        var id = obj.id;
+        var value = obj.participant;
+        if (id && value) {
+          var document;
+          if (/C[0-9]{6}$/.test(id)) {
+            document = db.committees.findOne({_all_ids: id});
+            if (document && value !== document.committee && value !== document.subcommittee) {
+              return true;
+            }
+          }
+          else if (/L[0-9]{6}$/.test(id)) {
+            document = db.legislators.findOne({_all_ids: id});
+            if (document && value !== document.full_name) {
+              return true;
+            }
+          }
+        }
+      }
+    }
+  }, "events with a participant whose name is not that of the participant's name");  
 }
 
 // @note It's common for names to differ, e.g. "Sales, Scott" versus "Scott Sales".

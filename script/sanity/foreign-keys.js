@@ -25,13 +25,14 @@ var reportInvalidForeignKeys = function (collection, field, relation, callback) 
   }
 };
 
-reportInvalidForeignKeys('committees', 'parent_id', 'committees');
-reportInvalidForeignKeys('committees', 'members.leg_id', 'legislators');
-reportInvalidForeignKeys('legislators', 'roles.committee_id', 'committees');
 reportInvalidForeignKeys('bills', 'sponsors.leg_id', 'legislators');
 reportInvalidForeignKeys('bills', 'sponsors.committee_id', 'committees');
 reportInvalidForeignKeys('bills', 'actions.committee', 'committees');
 reportInvalidForeignKeys('bills', 'companions.internal_id', 'bills');
+reportInvalidForeignKeys('committees', 'parent_id', 'committees');
+reportInvalidForeignKeys('committees', 'members.leg_id', 'legislators');
+reportInvalidForeignKeys('events', 'related_bills.id', 'bills');
+reportInvalidForeignKeys('legislators', 'roles.committee_id', 'committees');
 reportInvalidForeignKeys('votes', 'bill_id', 'bills');
 reportInvalidForeignKeys('votes', '_voters', 'legislators');
 reportInvalidForeignKeys('votes', 'yes_votes.leg_id', 'legislators');

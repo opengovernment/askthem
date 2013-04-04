@@ -109,7 +109,7 @@ reportList('bills', 'sponsors.type', {
   reportList('bills', field, criteria);
 });
 
-// Document MIME type
+// Document MIME types
 reportList('events', 'documents.+mimetype', {
   'documents.+mimetype': {
     '$exists': true,
@@ -117,6 +117,7 @@ reportList('events', 'documents.+mimetype', {
   }
 });
 
+// Document types
 reportList('events', 'documents.+type', {
   'documents.+type': {
     '$exists': true,
@@ -128,15 +129,13 @@ reportList('events', 'documents.+type', {
   }
 });
 
-// Participant chamber
-reportList('events', 'participants.chamber ', {
-  'participants.chamber': {
+// Related bills types
+reportList('events', 'related_bills.type', {
+  'related_bills.type': {
     '$exists': true,
     '$nin': [
-      'lower',
-      'upper',
-      'joint',
-      'other'
+      'bill',
+      'consideration'
     ]
   }
 });
