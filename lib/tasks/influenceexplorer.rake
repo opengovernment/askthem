@@ -4,19 +4,22 @@ namespace :influenceexplorer do
     if ENV['SUNLIGHT_API_KEY']
       include ActionView::Helpers::SanitizeHelper
 
-      query = Person.where(transparencydata_id: {'$ne' => ['', nil]})
-      progressbar = ProgressBar.create(format: '%a |%B| %p%% %e', length: 80, smoothing: 0.5, total: query.count)
+      people = Person.where(transparencydata_id: {'$ne' => ['', nil]})
+      progressbar = ProgressBar.create(format: '%a |%B| %p%% %e', length: 80, smoothing: 0.5, total: people.count)
 
-      urls = []
-      wait = 1
+      not_found_urls = []
 
-      query.each do |person|
+      people.each do |person|
         progressbar.increment
+
+        # Assume biographies never change.
         next if person.person_detail.persisted?
+
+        # Reset the incremental backoff.
+        wait = 1
 
         begin
           response = JSON.parse(RestClient.get("http://transparencydata.com/api/1.0/entities/#{person.transparencydata_id.strip}.json?apikey=#{ENV['SUNLIGHT_API_KEY']}"))
-          wait = 1 # reset incremental backoff
 
           person_detail = PersonDetail.new
           if response['metadata']['bio']
@@ -35,12 +38,12 @@ namespace :influenceexplorer do
           sleep wait
           retry
         rescue RestClient::ResourceNotFound
-          urls << person.transparencydata_id
+          not_found_urls << person.transparencydata_id
         end
       end
 
       # Print entity IDs that 404.
-      urls.each do |url|
+      not_found_urls.each do |url|
         puts url
       end
     else
