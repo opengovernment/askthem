@@ -3,6 +3,8 @@ OpenGovernment::Application.routes.draw do
 
   root to: 'pages#index'
 
+  resources :users, only: :show
+
   scope ':jurisdiction' do
     resources :bills, only: [:index, :show] do
       member do
@@ -28,4 +30,5 @@ OpenGovernment::Application.routes.draw do
   end
 
   match ':jurisdiction' => 'pages#overview', as: :jurisdiction, via: :get
+  match 'dashboard' => 'pages#dashboard', as: :dashboard, via: :get
 end
