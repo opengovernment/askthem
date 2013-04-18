@@ -44,6 +44,15 @@ class User
   ## Token authenticatable
   # field :authentication_token, :type => String
 
+  field :given_name, type: String
+  field :family_name, type: String
+  # @todo lookup INSPIRE and xAL terms
+  field :street_address, type: String
+  field :postal_code, type: String
+  field :locality, type: String
+  field :region, type: String
+  field :country, type: String, default: 'US' # @todo are ISO country codes uppercase or lowercase?
+
   embeds_many :authentications
 
   index('authentications.provider' => 1, 'authentications.uid' => 1)
