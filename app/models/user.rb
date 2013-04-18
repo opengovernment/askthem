@@ -45,6 +45,7 @@ class User
   # field :authentication_token, :type => String
 
   embeds_many :authentications
+  mount_uploader :image, ImageUploader
 
   # @todo carrierwave photo
 
