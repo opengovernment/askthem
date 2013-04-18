@@ -46,6 +46,8 @@ class User
 
   embeds_many :authentications
 
+  # @todo carrierwave photo
+
   field :given_name, type: String
   field :family_name, type: String
   # @todo lookup INSPIRE and xAL terms

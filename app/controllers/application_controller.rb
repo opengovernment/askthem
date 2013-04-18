@@ -24,4 +24,9 @@ private
   def set_jurisdiction
     @jurisdiction ||= Metadatum.find(params[:jurisdiction])
   end
+
+  def not_found
+    expires_in 1.hour, public: true
+    render file: "#{Rails.root}/public/404.html", status: 404, layout: false
+  end
 end

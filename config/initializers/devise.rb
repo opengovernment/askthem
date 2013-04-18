@@ -96,7 +96,7 @@ Devise.setup do |config|
   # initial account confirmation) to be applied. Requires additional unconfirmed_email
   # db field (see migrations). Until confirmed new email is stored in
   # unconfirmed email column, and copied to email column on successful confirmation.
-  config.reconfirmable = true
+  # config.reconfirmable = true
 
   # Defines which key will be used when confirming an account
   # config.confirmation_keys = [ :email ]
@@ -231,4 +231,10 @@ Devise.setup do |config|
   # When using omniauth, Devise cannot automatically set Omniauth path,
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = "/my_engine/users/auth"
+end
+
+Warden::Manager.after_set_user({}, :unshift) do |record, warden, options|
+  if record && record.respond_to?(:active_for_authentication?) && !record.active_for_authentication?
+    record.send_confirmation_instructions
+  end
 end

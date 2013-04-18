@@ -1,6 +1,6 @@
 <h2>Sign in</h2>
 
-<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: {id: 'new_session'}) do |f| %>
   <%= f.input :email %>
   <%= f.input :password %>
   <%= f.input :remember_me, as: :hidden, input_html: {value: 1} %>
