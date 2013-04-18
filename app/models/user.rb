@@ -44,6 +44,8 @@ class User
   ## Token authenticatable
   # field :authentication_token, :type => String
 
+  embeds_many :authentications
+
   field :given_name, type: String
   field :family_name, type: String
   # @todo lookup INSPIRE and xAL terms
@@ -53,12 +55,37 @@ class User
   field :region, type: String
   field :country, type: String, default: 'US' # @todo are ISO country codes uppercase or lowercase?
 
-  embeds_many :authentications
-
   index('authentications.provider' => 1, 'authentications.uid' => 1)
+
+  validates_presence_of :given_name, :family_name, :street_address,
+    :locality, :region, :postal_code, :country
+
+  before_validation :set_password_confirmation
 
   # @todo Check what Devise wiki says.
   def self.find_or_create_from_auth_hash(hash)
     where('authentications.provider' => hash[:provider], 'authentications.uid' => hash[:uid]).first
+  end
+
+  def name
+    given_name
+  end
+
+  # @note Unlike Devise, allows changing the password without a password.
+  def update_without_password(params, *options)
+    params.delete(:password) if params[:password].blank?
+    result = update_attributes(params, *options)
+    clean_up_passwords
+    result
+  end
+
+  # @note Unlike Devise, allows updating a user without a password.
+  alias_method :update_with_password, :update_without_password
+
+private
+
+  # @note Unlike Devise, do not require password confirmations.
+  def set_password_confirmation
+    self.password_confirmation = password
   end
 end

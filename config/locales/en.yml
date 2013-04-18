@@ -6,3 +6,11 @@ en:
   time:
     formats:
       bill: '%B %e, %Y'
+  mongoid:
+    attributes:
+      user:
+        given_name: First name
+        family_name: Last name
+        locality: City
+        region: State
+        postal_code: Zipcode

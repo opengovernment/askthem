@@ -6,6 +6,7 @@ gem 'jquery-rails'
 
 gem 'mongoid', '~> 3.1.2'
 gem 'inherited_resources', '~> 1.3.1'
+gem 'simple_form'
 gem 'kaminari'
 
 # Authentication
