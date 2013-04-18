@@ -1,10 +1,13 @@
 class User
   include Mongoid::Document
+  store_in session: 'default'
+
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable,
+    :trackable, :validatable, :confirmable, :omniauthable,
+    :omniauth_providers => [:facebook]
 
   ## Database authenticatable
   field :email,              :type => String, :default => ""
@@ -28,10 +31,10 @@ class User
   field :last_sign_in_ip,    :type => String
 
   ## Confirmable
-  # field :confirmation_token,   :type => String
-  # field :confirmed_at,         :type => Time
-  # field :confirmation_sent_at, :type => Time
-  # field :unconfirmed_email,    :type => String # Only if using reconfirmable
+  field :confirmation_token,   :type => String
+  field :confirmed_at,         :type => Time
+  field :confirmation_sent_at, :type => Time
+  field :unconfirmed_email,    :type => String # Only if using reconfirmable
 
   ## Lockable
   # field :failed_attempts, :type => Integer, :default => 0 # Only if lock strategy is :failed_attempts
@@ -40,4 +43,13 @@ class User
 
   ## Token authenticatable
   # field :authentication_token, :type => String
+
+  embeds_many :authentications
+
+  index('authentications.provider' => 1, 'authentications.uid' => 1)
+
+  # @todo Check what Devise wiki says.
+  def self.find_or_create_from_auth_hash(hash)
+    where('authentications.provider' => hash[:provider], 'authentications.uid' => hash[:uid]).first
+  end
 end

@@ -3,7 +3,7 @@
 class Link
   include Mongoid::Document
 
-  embedded_in :person
+  embedded_in :person_detail
 
   # A URL for a document about a person.
   field :url, type: String

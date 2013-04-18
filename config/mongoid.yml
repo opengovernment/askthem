@@ -5,7 +5,7 @@ development:
     default:
       # Defines the name of the default database that Mongoid can connect to.
       # (required).
-      database: fiftystates
+      database: opengovernment_local
       # Provides the hosts the default session can connect to. Must be an array
       # of host:port pairs. (required)
       hosts:
@@ -27,8 +27,8 @@ development:
         # The time in seconds that Moped should wait before retrying an
         # operation on failure. (default: 1)
         # retry_interval: 1
-    oglocal:
-      database: opengovernment_local
+    openstates:
+      database: fiftystates
       hosts:
         - localhost:27017
   # Configure Mongoid specific options. (optional)
@@ -82,8 +82,8 @@ test:
         # low amounts for fast failures.
         max_retries: 1
         retry_interval: 0
-<% default = URI.parse(ENV['MONGO_URL'] || 'mongodb://127.0.0.1:27017/fiftystates') %> # https://gist.github.com/2588954
-<% oglocal = URI.parse(ENV['MONGOHQ_URL'] || ENV['MONGOLAB_URI'] || 'mongodb://127.0.0.1:27017/opengovernment_local') %> # https://gist.github.com/2588954
+<% default = URI.parse(ENV['MONGOHQ_URL'] || ENV['MONGOLAB_URI'] || 'mongodb://127.0.0.1:27017/opengovernment_local') %> # https://gist.github.com/2588954
+<% openstates = URI.parse(ENV['MONGO_URL'] || 'mongodb://127.0.0.1:27017/fiftystates') %> # https://gist.github.com/2588954
 production:
   sessions:
     default:
@@ -96,15 +96,15 @@ production:
 <% end %>
       hosts:
       - <%= default.host %>:<%= default.port %>
-    oglocal:
-      database: <%= oglocal.path.sub '/', '' %>
-<% if oglocal.user %>
-      username: <%= oglocal.user %>
+    openstates:
+      database: <%= openstates.path.sub '/', '' %>
+<% if openstates.user %>
+      username: <%= openstates.user %>
 <% end %>
-<% if oglocal.password %>
-      password: <%= oglocal.password %>
+<% if openstates.password %>
+      password: <%= openstates.password %>
 <% end %>
       hosts:
-      - <%= oglocal.host %>:<%= oglocal.port %>
+      - <%= openstates.host %>:<%= openstates.port %>
   options:
     identity_map_enabled: true

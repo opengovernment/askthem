@@ -2,23 +2,22 @@
 <html lang="en-US">
 <head>
   <title>OpenGovernment</title>
-  <meta name="viewport" content="width=device-width" />
+  <meta name="viewport" content="width=device-width">
   <meta name="viewport" content="initial-scale=1, maximum-scale=1">
   <%= stylesheet_link_tag 'application', media: 'all' %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <div id="fb-root"></div>
 
   <header class="main">
     <div class="wrapper">
       <%= link_to 'OpenGovernment', root_path, class: 'logo' %>
       <p class="slogan">Ask questions to your city and state elected officials</p>
       <section>
-        <% if user_signed_in? %>
-          <ul class="admin_nav thin">
-            <%= render partial: 'shared/user' %>
-          </ul>
-        <% end %>
+        <ul class="admin_nav thin">
+          <%= render partial: 'shared/user' %>
+        </ul>
       </section>
     </div>
   </header>
@@ -34,11 +33,9 @@
 <%= yield %>
       </div>
     </div>
-    <% if user_signed_in? %>
-      <ul class="admin_nav wide">
-        <%= render partial: 'shared/user' %>
-      </ul>
-    <% end %>
+    <ul class="admin_nav wide">
+      <%= render partial: 'shared/user' %>
+    </ul>
   </section>
   
   <footer>
@@ -72,6 +69,18 @@
     <div class="clear"></div>
   </footer>
 
+<script>
+window.fbAsyncInit = function () {
+  FB.init({
+    appId: '<%= ENV['APP_ID'] %>',
+    status: true,
+    cookie: true,
+    logging: false,
+    xfbml: true,
+    channelUrl: '<%= channel_url %>'
+  });
+};
+</script>
 <%= javascript_include_tag 'application' %>
 </body>
 </html>

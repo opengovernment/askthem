@@ -31,4 +31,5 @@ OpenGovernment::Application.routes.draw do
 
   match ':jurisdiction' => 'pages#overview', as: :jurisdiction, via: :get
   match 'dashboard' => 'pages#dashboard', as: :dashboard, via: :get
+  match 'channel' => 'pages#channel', as: :channel, via: :get
 end

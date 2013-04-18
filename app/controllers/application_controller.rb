@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
 private
 
   def switch_database
-    Mongoid.override_session('oglocal') if params[:jurisdiction] && !params[:jurisdiction][/\A[a-z]{2}\z/]
+    Mongoid.override_session('openstates') if params[:jurisdiction] && params[:jurisdiction][/\A[a-z]{2}\z/]
   end
 
   def reset_database

@@ -2,6 +2,7 @@
 # @note Based on Popolo.
 class PersonDetail
   include Mongoid::Document
+  store_in session: 'default'
 
   belongs_to :person, index: true
 

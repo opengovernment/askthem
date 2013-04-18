@@ -1,5 +1,6 @@
 # Billy
 class Event
   include Mongoid::Document
-  # @todo
+
+  # @todo Updated based on wiki
 end

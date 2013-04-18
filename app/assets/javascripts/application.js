@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require jquery.autogrow-textarea
 //= require jquery.history
+//= require omniauth
 //= require tabs
 //= require bills
 //= require questions

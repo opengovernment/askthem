@@ -6,7 +6,7 @@
       <div class="bill_details">
         <h2>
           <strong><%= @bill['bill_id'] %></strong>
-          <%= @bill.dates.first.last.andand.year %>
+          <%= @bill.dates.first.last.try(:year) %>
           <% if @bill['versions'].last %>
             <%= link_to 'Read the complete bill →', @bill['versions'].last['url'] %>
           <% end %>
