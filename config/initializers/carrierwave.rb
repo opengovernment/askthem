@@ -9,7 +9,7 @@ CarrierWave.configure do |config|
       :aws_secret_access_key => ENV['AWS_SECRET_ACCESS_KEY'],
     }
     config.fog_directory = ENV['AWS_DIRECTORY']
-    config.asset_host = '//' + ENV['AWS_DIRECTORY']
+    config.asset_host = "//#{ENV['AWS_DIRECTORY']}.s3.amazonaws.com"
     config.storage = :fog
   else
     config.storage = :file

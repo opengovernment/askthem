@@ -79,7 +79,7 @@ class Bill
     # Get all the legislator sponsors in a single query.
     ids = sponsors.select{|x| x['leg_id']}.map{|x| x['leg_id']}
     unless ids.empty?
-      Person.where(_id: {'$in' => ids}).each do |document|
+      Person.where(_all_ids: {'$in' => ids}).each do |document|
         documents_by_id[document.id] = document
       end
     end
@@ -87,7 +87,7 @@ class Bill
     # Get all the committee sponsors in a single query.
     ids = sponsors.select{|x| x['committee_id']}.map{|x| x['committee_id']}
     unless ids.empty?
-      Committee.where(_id: {'$in' => ids}).each do |document|
+      Committee.where(_all_ids: {'$in' => ids}).each do |document|
         documents_by_id[document.id] = document
       end
     end

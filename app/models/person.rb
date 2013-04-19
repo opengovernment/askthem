@@ -31,7 +31,7 @@ class Person
     if ids.empty?
       []
     else
-      Committee.where(_id: {'$in' => ids}).to_a
+      Committee.where(_all_ids: {'$in' => ids}).to_a
     end
   end
 
