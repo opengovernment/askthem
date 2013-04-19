@@ -6,4 +6,5 @@ curl -O http://static.openstates.org.s3.amazonaws.com/mongo/latest-mongo-dump.ta
 tar xvf latest-mongo-dump.tar.gz
 # Remove unnecessary collections.
 rm -f dump/fiftystates/{billy_runs,document_ids,event_ids,manual.leg_ids,manual.name_matchers,popularity_counts,quality_exceptions,reports,tracked_versions,vote_ids}.bson
+# @todo Add --noIndexRestore and use billy-util mongo-index --purge command instead.
 mongorestore -drop dump/

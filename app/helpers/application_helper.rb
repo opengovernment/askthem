@@ -18,8 +18,6 @@ module ApplicationHelper
         args[:chamber] = @jurisdiction.chamber_name(@committee['chamber']).sub(/\A./){|letter| letter.upcase}
       end
 
-      # @todo args[:event] = @event. if @event
-
       if @jurisdiction
         args[:jurisdiction] = @jurisdiction['name']
       end
