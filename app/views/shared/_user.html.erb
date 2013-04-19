@@ -5,7 +5,7 @@
 <li><%= link_to 'Sign out', destroy_user_session_path %></li>
 <li>
   <%= link_to '#' do %><%# @todo make dropdown appear %>
-    <%= current_user.name%> <span class="icon-angle-down"></span>
+    <%= current_user.alternate_name %> <span class="icon-angle-down"></span>
   <% end %>
 </li>
 <% else %>

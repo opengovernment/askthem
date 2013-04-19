@@ -1,4 +1,68 @@
 module ApplicationHelper
+  def translation_arguments
+    @translation_arguments ||= begin
+      args = {}
+
+      if @area
+        args[:area] = @area['name']
+      end
+
+      if @bill
+        args[:bill] = @bill['bill_id']
+        args[:chamber] = @jurisdiction.chamber_name(@bill['chamber'])
+        args[:year] = @bill.dates.first.last.try(:year)
+      end
+
+      if @committee
+        args[:committee] = @committee.name
+        args[:chamber] = @jurisdiction.chamber_name(@committee['chamber']).sub(/\A./){|letter| letter.upcase}
+      end
+
+      # @todo args[:event] = @event. if @event
+
+      if @jurisdiction
+        args[:jurisdiction] = @jurisdiction['name']
+      end
+
+      if @person
+        args[:person] = @person.name
+        args[:honorary_prefix] = @jurisdiction.chamber_title(@person['chamber'])
+      end
+
+      if @question
+        # @todo args[:question] = @question.
+      end
+
+      if @user
+        args[:user] = @user.name
+      end
+
+      if @vote
+        # @todo args[:vote] = @vote.
+      end
+
+      args
+    end
+  end
+
+  def title
+    t("#{controller.controller_name}.#{controller.action_name}.title", translation_arguments.merge(default: 'OpenGovernment'))
+  end
+
+  def description
+    t("#{controller.controller_name}.#{controller.action_name}.description", translation_arguments.merge(default: ''))
+  end
+
+  def og_image
+    if @user && @user.image?
+      @user.image.url
+    elsif @person && @person.image?
+      @person.image
+    else
+      root_url.chomp('/') + image_path('logo.png')
+    end
+  end
+
   # Returns an "img" tag for the remote image.
   #
   # @param [String] url an image URL

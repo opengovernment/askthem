@@ -14,3 +14,67 @@ en:
         locality: City
         region: State
         postal_code: Zipcode
+
+  # Controllers
+  pages:
+    index:
+      title: "OpenGovernment: Ask questions to your city and state elected officials"
+      description: Ask questions to your city and state elected officials
+    overview:
+      title: "%{jurisdiction} - OpenGovernment"
+    dashboard:
+      title: Your Dashboard - OpenGovernment
+  bills:
+    index:
+      title: "Bills in %{jurisdiction} - OpenGovernment"
+    show:
+      title: "%{chamber} Bill %{bill} %{year} in %{jurisdiction} - OpenGovernment"
+    sponsors:
+      title: "Sponsors of %{bill} in %{jurisdiction} - OpenGovernment"
+  committees:
+    index:
+      title: "Committees in %{jurisdiction} - OpenGovernment"
+    show:
+      title: "%{committee} in %{jurisdiction} - OpenGovernment"
+  people:
+    index:
+      title: "Officials in %{jurisdiction} - OpenGovernment"
+    show:
+      title: "%{honorary_prefix} %{person} in %{jurisdiction} - OpenGovernment"
+    bills:
+      title: "Bills Sponsored by %{person} in %{jurisdiction} - OpenGovernment"
+    committees:
+      title: "Committee Memberships for %{person} in %{jurisdiction} - OpenGovernment"
+    votes:
+      title: "Votes by %{person} in %{jurisdiction} - OpenGovernment"
+  questions:
+    index:
+      title: "Questions for Officials in %{jurisdiction} - OpenGovernment"
+      description: "Ask questions to your %{jurisdiction} elected officials"
+    show:
+      title: "@todo"
+      description: Show your support for this question by adding your signature
+    new:
+      title: Ask a Question - OpenGovernment
+    preview:
+      title: Preview Your Question - OpenGovernment
+  users:
+    show:
+      title: "%{user} - OpenGovernment"
+  registrations:
+    new:
+      title: Sign Up - OpenGovernment
+    create:
+      title: Sign Up - OpenGovernment
+    edit:
+      title: Update Profile - OpenGovernment
+    update:
+      title: Update Profile - OpenGovernment
+  sessions:
+    new:
+      title: Sign In - OpenGovernment
+  passwords:
+    new:
+      title: Reset Password - OpenGovernment
+    edit:
+      title: Reset Password - OpenGovernment

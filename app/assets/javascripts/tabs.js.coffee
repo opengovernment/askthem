@@ -45,6 +45,7 @@ jQuery ($) ->
 
   History.Adapter.bind window, 'statechange', ->
     state = History.getState().data
+    # @todo change page title
     $.ajax(ajaxURL(state.href), dataType: 'html').done (data) ->
       $('.related_nav .active').removeClass('active') if state.id
       scroller.animate({scrollTop: $('.related_wrap').offset().top}, 'slow');

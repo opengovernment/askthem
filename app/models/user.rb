@@ -71,7 +71,11 @@ class User
   end
 
   def name
-    given_name
+    "#{given_name} #{family_name}"
+  end
+
+  def alternate_name
+    given_name_was # avoid updating the navigation if there are arrors on the object
   end
 
   # @note Unlike Devise, allows changing the password without a password.
