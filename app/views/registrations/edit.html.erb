@@ -9,7 +9,7 @@
     <%= f.input :email %>
     <%= f.input :street_address %>
     <%= f.input :locality %>
-    <%= f.input :region %>
+    <%= f.input :region, collection: OpenGovernment::STATES %>
     <%= f.input :postal_code %>
     <%= f.input :password, input_html: {autocomplete: 'off'} %>
     <%= f.button :submit, 'Update' %>

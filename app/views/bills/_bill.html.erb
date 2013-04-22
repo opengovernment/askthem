@@ -2,7 +2,7 @@
   <div class="bill_content">
     <%= link_to bill['bill_id'], bill_path(@jurisdiction.id, bill), class: 'title' %>
     <p>
-      <%= truncate(bill['title'], length: 95) %>, <%= bill.session_label %>
+      <%= short_bill_title(bill) %>, <%= bill.session_label %>
     </p>
     <ol class="actions">
       <% bill.dates.select{|_,date| date}.each do |action,date| %>
@@ -33,10 +33,10 @@
   
   <ul class="activity">
     <li><%= pluralize bill.questions.count, 'question' %></li>
-    <% bill.people_and_committee_sponsors(limit: 5, only: :people).each do |sponsor| %>
+    <% bill.people_and_committee_sponsors(limit: 5, only: :people).each do |sponsor| %><%# @note N+1 query %>
       <li class="depiction">
         <% if Person === sponsor %>
-          <% if sponsor.image? %><%# @todo tooltip with name %>
+          <% if sponsor.image? %><%# @todo ST tooltip with name %>
             <%= cdn_image_tag(sponsor.image, size: '50x50', alt: '') %>
           <% else %>
             <%= image_tag('placeholder.png', size: '50x50', alt: '') %>

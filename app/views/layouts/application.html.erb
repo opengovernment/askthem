@@ -16,7 +16,7 @@
   <meta property="og:description" content="<%= description %>">
   <meta property="og:site_name" content="OpenGovernment">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="<%# @todo %>">
+  <meta property="og:url" content="<%= request.protocol + request.host_with_port + request.fullpath %>">
   <meta property="og:image" content="<%= og_image %>">
   <meta property="og:locale" content="en_US">
   <meta property="fb:admins" content="100002666906486">
@@ -60,18 +60,18 @@
     <div class="wrapper">
       <div class="col">
         <ul>
-          <li><%= link_to 'About', '#' %><%# @todo %></li>
+          <li><%= link_to 'About', '#' %><%# @todo DM %></li>
           <li><%= link_to 'Blog', 'http://blog.opengovernment.org/' %></li>
-          <li><%= link_to 'Support', '#' %><%# @todo %></li>
-          <li><%= link_to 'Contact Us', '#' %><%# @todo %></li>
+          <li><%= link_to 'Support', '#' %><%# @todo DM %></li>
+          <li><%= link_to 'Contact Us', '#' %><%# @todo DM %></li>
         </ul>
       </div>
       <div class="col">
         <ul>
-          <li><%= link_to 'Code & Data', '#' %><%# @todo %></li>
-          <li><%= link_to 'Volunteer', '#' %><%# @todo %></li>
+          <li><%= link_to 'Code & Data', '#' %><%# @todo DM %></li>
+          <li><%= link_to 'Volunteer', '#' %><%# @todo DM %></li>
           <li><%= link_to 'Donate', 'http://www.opencongress.org/donate' %></li>
-          <li><%= link_to 'Bring OG to Your City', '#' %><%# @todo %></li>
+          <li><%= link_to 'Bring OG to Your City', '#' %><%# @todo DM %></li>
         </ul>
       </div>
       <div class="col logos">

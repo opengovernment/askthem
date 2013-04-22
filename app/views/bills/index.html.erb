@@ -35,9 +35,5 @@
     </div>
   </div>
 
-  <ol class="bills">
-    <%= render @bills %>
-  </ol>
-
-  <%= paginate @bills, outer_window: 1 %>
+  <%= render partial: 'page' %>
 </section>

@@ -22,6 +22,7 @@ gem 'ruby-progressbar'
 gem 'rest-client'
 
 group :production do
+  gem 'airbrake'
   gem 'unicorn'
   gem 'newrelic_rpm'
 end

@@ -1,12 +1,14 @@
+<%= render 'shared/navigation' %>
+
 <section>
   <header>
-    <h1>Issues</h1>
+    <h1>Issue Areas</h1>
   </header>
 
   <ul>
     <% @subjects.each do |subject| %>
       <li>
-        <%= link_to subject_path(subject.parameterize) %>
+        <%= link_to subject, subject_path(@jurisdiction.id, subject.parameterize) %>
       </li>
     <% end %>
   </ul>

@@ -1,11 +1,17 @@
 class BillsController < ApplicationController
   inherit_resources
   respond_to :html
-  respond_to :js, only: [:show, :sponsors]
+  respond_to :js, only: [:index, :show, :sponsors]
   actions :index, :show
   custom_actions resource: :sponsors
 
   before_filter :set_jurisdiction
+
+  def index
+    index! do |format|
+      format.js {render partial: 'page'}
+    end
+  end
 
   def show
     tab 'questions'

@@ -33,7 +33,7 @@ jQuery ($) ->
     History.pushState({href: href, id: $(this).attr('id')}, '', href)
 
   # Pagination on "Sponsored Bills" tab.
-  $(document).on 'click', '.related_focus nav a', (e) ->
+  $(document).on 'click', 'nav[data-replace] a', (e) ->
     e.preventDefault()
     href = $(this).attr('href')
     History.pushState({href: href}, '', href)
@@ -49,7 +49,20 @@ jQuery ($) ->
     state = History.getState().data
     # @todo change page title
     $.ajax(ajaxURL(state.href), dataType: 'html').done (data) ->
-      $('.related_nav .active').removeClass('active') if state.id
-      scroller.animate({scrollTop: $('.related_wrap').offset().top}, 'slow');
-      replace('.related_focus', data)
-      $('#' + state.id).addClass('active') if state.id
+      $related_nav = $('.related_nav')
+      if $related_nav.length
+        $('.related_nav .active').removeClass('active') if state.id
+
+      $nav = $('nav[data-replace]')
+
+      if $nav.length
+        target = $nav.data('replace')
+        scroll = $nav.data('scroll') or target
+        scroller.animate({scrollTop: $(scroll).offset().top}, 'slow');
+        replace(target, data)
+      else
+        scroller.animate({scrollTop: $('.related_wrap').offset().top}, 'slow');
+        replace('.related_focus', data)
+
+      if $related_nav.length
+        $('#' + state.id).addClass('active') if state.id

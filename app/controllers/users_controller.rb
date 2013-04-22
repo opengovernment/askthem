@@ -1,8 +1,5 @@
 class UsersController < ApplicationController
+  inherit_resources
   respond_to :html
-
-  def show
-    @user = User.find(params[:id])
-    respond_with @user # @todo check arguments for caching
-  end
+  actions :show
 end

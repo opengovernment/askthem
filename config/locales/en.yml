@@ -57,7 +57,7 @@ en:
       title: "%{jurisdiction} Questions - OpenGovernment"
       description: "Ask and support questions to your %{jurisdiction} officials"
     show:
-      title: "" # @todo
+      title: '“%{question}” - %{jurisdiction} - OpenGovernment'
       description: Show your support for this question by adding your signature
     new:
       title: Ask a Question - OpenGovernment

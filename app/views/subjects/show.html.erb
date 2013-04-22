@@ -1,11 +1,9 @@
+<%= render 'shared/navigation' %>
+
 <section>
   <header>
     <h1><%= @subject %></h1>
   </header>
 
-  <ol class="bills">
-    <%= render @bills %>
-  </ol>
-
-  <%= paginate @bills, outer_window: 1, params: {format: nil} %>
+  <%= render partial: 'page' %>
 </section>

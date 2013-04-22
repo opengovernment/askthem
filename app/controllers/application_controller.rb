@@ -27,6 +27,6 @@ private
 
   def not_found
     expires_in 1.hour, public: true
-    render file: "#{Rails.root}/public/404.html", status: 404, layout: false
+    render file: Rails.root.join('public', '404.html'), status: :not_found, layout: false
   end
 end

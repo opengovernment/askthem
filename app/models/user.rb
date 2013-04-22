@@ -49,17 +49,19 @@ class User
 
   field :given_name, type: String
   field :family_name, type: String
-  # @todo lookup INSPIRE and xAL terms
+  # @note The following are vCard terms.
   field :street_address, type: String
-  field :postal_code, type: String
   field :locality, type: String
   field :region, type: String
-  field :country, type: String, default: 'US' # @todo are ISO country codes uppercase or lowercase?
+  field :postal_code, type: String
+  field :country, type: String, default: 'US'
 
   index('authentications.provider' => 1, 'authentications.uid' => 1)
 
   validates_presence_of :given_name, :family_name, :street_address,
     :locality, :region, :postal_code, :country
+  validates_inclusion_of :region, in: OpenGovernment::STATES.values, allow_blank: true
+  validates_inclusion_of :country, in: %w(US), allow_blank: true
 
   before_validation :set_password_confirmation
 

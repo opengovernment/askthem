@@ -31,4 +31,13 @@ class Metadatum
   def state?
     read_attribute(:abbreviation)[/\A[a-z]{2}\z/]
   end
+
+  # Returns whether the jurisdiction assigns subjects to bills.
+  #
+  # @return [Boolean] whether the jurisdiction assigns subjects to bills
+  # @note A jurisdiction can include "subjects" in its feature flags, without
+  #   setting any subjects on any bills.
+  def subjects?
+    !!Bill.where(state: self.id, subjects: {'$nin' => [[], nil]}).first
+  end
 end

@@ -5,7 +5,7 @@
       <li><a name="top" style="display:none;"></a><%= tab 'Questions', questions_path %></li>
       <li><%= tab 'Bills', bills_path %></li>
       <li><%= tab 'People', people_path %></li>
-      <% if @jurisdiction.state? %>
+      <% if @jurisdiction.subjects? %>
       <li><%= tab 'Issues', subjects_path %></li>
       <% end %>
       <%# <li><%= tab 'Money', '#' </li> @todo %>

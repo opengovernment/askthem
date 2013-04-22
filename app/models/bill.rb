@@ -33,7 +33,7 @@ class Bill
 
   # @return [String] the bill's human-readable session
   def session_label
-    jurisdiction['session_details'][read_attribute(:session)]
+    jurisdiction['session_details'][read_attribute(:session)]['display_name']
   end
 
   # @return [Array] the major actions sorted by date

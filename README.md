@@ -13,7 +13,7 @@ Start the server:
 
 ## Pulling Data
 
-Get the latest data from OpenStates:
+Get the latest data from OpenStates (in development only):
 
     ./script/openstates.sh
     rake db:mongoid:create_indexes

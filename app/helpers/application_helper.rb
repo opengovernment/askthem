@@ -10,7 +10,7 @@ module ApplicationHelper
       if @bill
         args[:bill_id] = @bill['bill_id']
         args[:bill_type] = @bill['type'].first.titleize
-        args[:bill_title] = @bill['title'] # @todo check meta description max-length
+        args[:bill_title] = short_bill_title(@bill)
         args[:session] = @bill.session_label
       end
 
@@ -20,7 +20,7 @@ module ApplicationHelper
       end
 
       if @question
-        # @todo args[:question] = @question.
+        args[:question] = @question.title
       end
 
       if @user
@@ -37,6 +37,10 @@ module ApplicationHelper
 
   def description
     t("#{controller.controller_name}.#{controller.action_name}.description", translation_arguments.merge(default: ''))
+  end
+
+  def short_bill_title(bill)
+    truncate(bill['title'].gsub(/\A"|"\z/, ''), length: 95)
   end
 
   def og_image

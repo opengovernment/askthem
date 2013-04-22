@@ -2,6 +2,7 @@ class QuestionsController < ApplicationController
   inherit_resources
   respond_to :html
   actions :index, :show, :new
+  custom_actions resource: :preview
 
   before_filter :set_jurisdiction
 
