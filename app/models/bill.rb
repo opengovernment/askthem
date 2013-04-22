@@ -26,9 +26,7 @@ class Bill
     'upper' => 'lower',
   }
 
-  # A state's current bills.
-  index(state: 1, _current_session: 1, 'action_dates.last' => -1) # @todo not available in API?
-
+  # @return [Metadatum] the bill's jurisdiction
   def jurisdiction
     @jurisdiction ||= Metadatum.find(read_attribute(:state))
   end

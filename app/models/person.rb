@@ -35,11 +35,6 @@ class Person
     end
   end
 
-  # Returns the person's votes.
-  def votes
-    Vote.where(_voters: id) # @todo not available in API?
-  end
-
   def votesmart_url(section = nil)
     if self['votesmart_id']
       url = "http://votesmart.org/candidate/"

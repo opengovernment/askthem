@@ -17,4 +17,9 @@ class Metadatum
   def chamber_title(chamber)
     read_attribute(:chambers)[chamber].try{|chamber| chamber['title']}
   end
+
+  # @return [String] the current session
+  def current_session
+    read_attribute(:terms).last['sessions'].last
+  end
 end
