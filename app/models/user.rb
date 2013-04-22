@@ -47,8 +47,6 @@ class User
   embeds_many :authentications
   mount_uploader :image, ImageUploader
 
-  # @todo carrierwave photo
-
   field :given_name, type: String
   field :family_name, type: String
   # @todo lookup INSPIRE and xAL terms

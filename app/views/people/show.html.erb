@@ -37,7 +37,6 @@
           <li><%= link_to 'Sponsored Bills', bills_resource_path(@jurisdiction.id), id: 'bills-tab', class: @tab == 'bills' && 'active' %></li>
           <li><%= link_to 'Votes', votes_resource_path(@jurisdiction.id), id: 'votes-tab', class: @tab == 'votes' && 'active' %></li>
           <li><%= link_to 'Committees', committees_resource_path(@jurisdiction.id), id: 'committees-tab', class: @tab == 'committees' && 'active' %></li>
-          <!--li><%= link_to 'Interest Groups', '#' %><%# @todo %></li-->
         </ul>
       </nav>
 
