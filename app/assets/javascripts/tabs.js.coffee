@@ -38,8 +38,6 @@ jQuery ($) ->
     href = $(this).attr('href')
     History.pushState({href: href}, '', href)
 
-  # @todo Pagination on bills#index and subjects#show
-
   # "View all" link in sidebar.
   $('a[rel="sponsors"]').click (e) ->
     e.preventDefault()
@@ -49,20 +47,15 @@ jQuery ($) ->
     state = History.getState().data
     # @todo change page title
     $.ajax(ajaxURL(state.href), dataType: 'html').done (data) ->
-      $related_nav = $('.related_nav')
-      if $related_nav.length
-        $('.related_nav .active').removeClass('active') if state.id
-
       $nav = $('nav[data-replace]')
-
-      if $nav.length
+      if state.id
+        target = '.related_focus'
+        scroll = '.related_wrap'
+      else
         target = $nav.data('replace')
         scroll = $nav.data('scroll') or target
-        scroller.animate({scrollTop: $(scroll).offset().top}, 'slow');
-        replace(target, data)
-      else
-        scroller.animate({scrollTop: $('.related_wrap').offset().top}, 'slow');
-        replace('.related_focus', data)
 
-      if $related_nav.length
-        $('#' + state.id).addClass('active') if state.id
+      $('.related_nav .active').removeClass('active') if state.id
+      scroller.animate({scrollTop: $(scroll).offset().top}, 'slow');
+      replace(target, data)
+      $('#' + state.id).addClass('active') if state.id
