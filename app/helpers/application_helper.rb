@@ -13,11 +13,6 @@ module ApplicationHelper
         args[:year] = @bill.dates.first.last.try(:year)
       end
 
-      if @committee
-        args[:committee] = @committee.name
-        args[:chamber] = @jurisdiction.chamber_name(@committee['chamber']).sub(/\A./){|letter| letter.upcase}
-      end
-
       if @jurisdiction
         args[:jurisdiction] = @jurisdiction['name']
       end
