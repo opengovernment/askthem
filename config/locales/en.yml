@@ -31,11 +31,6 @@ en:
       title: "%{chamber} Bill %{bill} %{year} in %{jurisdiction} - OpenGovernment"
     sponsors:
       title: "Sponsors of %{bill} in %{jurisdiction} - OpenGovernment"
-  committees:
-    index:
-      title: "Committees in %{jurisdiction} - OpenGovernment"
-    show:
-      title: "%{committee} in %{jurisdiction} - OpenGovernment"
   people:
     index:
       title: "Officials in %{jurisdiction} - OpenGovernment"
