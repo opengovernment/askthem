@@ -18,8 +18,17 @@ class Metadatum
     read_attribute(:chambers)[chamber].try{|chamber| chamber['title']}
   end
 
-  # @return [String] the current session
+  # Returns the current session's identifier.
+  #
+  # @return [String] the current session's identifier
   def current_session
     read_attribute(:terms).last['sessions'].last
+  end
+
+  # Returns whether the jurisdiction is a US state.
+  #
+  # @return [Boolean] whether the jurisdiction is a US state
+  def state?
+    read_attribute(:abbreviation)[/\A[a-z]{2}\z/]
   end
 end

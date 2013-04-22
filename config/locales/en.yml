@@ -22,54 +22,74 @@ en:
       description: Ask questions to your city and state elected officials
     overview:
       title: "%{jurisdiction} - OpenGovernment"
+      description: "Ask questions and track government in %{jurisdiction}"
     dashboard:
       title: Your Dashboard - OpenGovernment
+      description: Track your activity on OpenGovernment
   bills:
     index:
-      title: "Bills in %{jurisdiction} - OpenGovernment"
+      title: "%{jurisdiction} Bills - OpenGovernment"
+      description: "Search %{jurisdiction} bills"
     show:
-      title: "%{chamber} Bill %{bill} %{year} in %{jurisdiction} - OpenGovernment"
+      title: "%{bill_id} - %{jurisdiction} %{session} - OpenGovernment"
+      description: "%{jurisdiction} %{session} %{bill_type} %{bill_id}: %{bill_title}"
     sponsors:
-      title: "Sponsors of %{bill} in %{jurisdiction} - OpenGovernment"
+      title: "%{bill_id} Sponsors - %{jurisdiction} %{session} - OpenGovernment"
+      description: "Sponsors of %{jurisdiction} %{session} %{bill_type} %{bill_id}"
   people:
     index:
-      title: "Officials in %{jurisdiction} - OpenGovernment"
+      title: "%{jurisdiction} Officials - OpenGovernment"
+      description: "Ask questions to your %{jurisdiction} officials"
     show:
-      title: "%{honorary_prefix} %{person} in %{jurisdiction} - OpenGovernment"
+      title: "%{honorary_prefix} %{person} - %{jurisdiction} - OpenGovernment"
+      description: "Ask %{jurisdiction} %{honorary_prefix} %{person} a question"
     bills:
-      title: "Bills Sponsored by %{person} in %{jurisdiction} - OpenGovernment"
+      title: "%{person} Sponsored Bills - %{jurisdiction} - OpenGovernment"
+      description: "Bills sponsored by %{jurisdiction} %{honorary_prefix} %{person}"
     committees:
-      title: "Committee Memberships for %{person} in %{jurisdiction} - OpenGovernment"
+      title: "%{person} Committee Memberships - %{jurisdiction} - OpenGovernment"
+      description: "Committee memberships for %{jurisdiction} %{honorary_prefix} %{person}"
     votes:
-      title: "Votes by %{person} in %{jurisdiction} - OpenGovernment"
+      title: "%{person} Votes - %{jurisdiction} - OpenGovernment"
+      description: "Votes by %{jurisdiction} %{honorary_prefix} %{person}"
   questions:
     index:
-      title: "Questions for Officials in %{jurisdiction} - OpenGovernment"
-      description: "Ask questions to your %{jurisdiction} elected officials"
+      title: "%{jurisdiction} Questions - OpenGovernment"
+      description: "Ask and support questions to your %{jurisdiction} officials"
     show:
-      title: "@todo"
+      title: "" # @todo
       description: Show your support for this question by adding your signature
     new:
       title: Ask a Question - OpenGovernment
+      description: Ask a question to your city and state elected officials
     preview:
       title: Preview Your Question - OpenGovernment
+      description: Confirm your question to a city or state elected official
   users:
     show:
       title: "%{user} - OpenGovernment"
+      description: "Show your support for questions by %{user}"
   registrations:
     new:
       title: Sign Up - OpenGovernment
+      description: Sign up to ask questions to your city and state elected officials
     create:
       title: Sign Up - OpenGovernment
+      description: Sign up to ask questions to your city and state elected officials
     edit:
       title: Update Profile - OpenGovernment
+      description: Update your basic profile details
     update:
       title: Update Profile - OpenGovernment
+      description: Update your basic profile details
   sessions:
     new:
       title: Sign In - OpenGovernment
+      description: Sign in to ask questions to your city and state elected officials
   passwords:
     new:
       title: Reset Password - OpenGovernment
+      description: Reset your password to sign in
     edit:
       title: Reset Password - OpenGovernment
+      description: Reset your password to sign in

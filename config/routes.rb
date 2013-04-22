@@ -28,6 +28,8 @@ OpenGovernment::Application.routes.draw do
         get :preview
       end
     end
+
+    resources :subjects, only: [:index, :show]
   end
 
   match ':jurisdiction' => 'pages#overview', as: :jurisdiction, via: :get

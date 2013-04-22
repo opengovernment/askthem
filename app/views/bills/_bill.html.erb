@@ -2,7 +2,7 @@
   <div class="bill_content">
     <%= link_to bill['bill_id'], bill_path(@jurisdiction.id, bill), class: 'title' %>
     <p>
-      <%= truncate(bill['title'], length: 95) %><% if bill.dates.first.last %>, <%= bill.dates.first.last.year %><% end %>
+      <%= truncate(bill['title'], length: 95) %>, <%= bill.session_label %>
     </p>
     <ol class="actions">
       <% bill.dates.select{|_,date| date}.each do |action,date| %>

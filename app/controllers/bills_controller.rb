@@ -26,6 +26,9 @@ private
   end
 
   def collection
-    @bills ||= end_of_association_chain.where(state: @jurisdiction.id, session: @jurisdiction.current_session).desc('action_dates.last').page(params[:page])
+    @bills ||= end_of_association_chain.where({
+      state: @jurisdiction.id,
+      session: @jurisdiction.current_session,
+    }).desc('action_dates.last').page(params[:page])
   end
 end

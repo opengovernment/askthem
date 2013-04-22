@@ -1,0 +1,13 @@
+<section>
+  <header>
+    <h1>Issues</h1>
+  </header>
+
+  <ul>
+    <% @subjects.each do |subject| %>
+      <li>
+        <%= link_to subject_path(subject.parameterize) %>
+      </li>
+    <% end %>
+  </ul>
+</section>

@@ -31,6 +31,11 @@ class Bill
     @jurisdiction ||= Metadatum.find(read_attribute(:state))
   end
 
+  # @return [String] the bill's human-readable session
+  def session_label
+    jurisdiction['session_details'][read_attribute(:session)]
+  end
+
   # @return [Array] the major actions sorted by date
   def dates
     @dates ||= begin
@@ -38,7 +43,7 @@ class Bill
 
       # Remove extra chambers.
       chamber = read_attribute(:chamber)
-      if jurisdiction.chambers.size == 1
+      if jurisdiction['chambers'].size == 1
         dates.delete_at(dates.index{|action,_| action.include?(OTHER_CHAMBER[chamber])})
       end
 

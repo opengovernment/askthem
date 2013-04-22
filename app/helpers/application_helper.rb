@@ -3,18 +3,15 @@ module ApplicationHelper
     @translation_arguments ||= begin
       args = {}
 
-      if @area
-        args[:area] = @area['name']
+      if @jurisdiction
+        args[:jurisdiction] = @jurisdiction['name']
       end
 
       if @bill
-        args[:bill] = @bill['bill_id']
-        args[:chamber] = @jurisdiction.chamber_name(@bill['chamber'])
-        args[:year] = @bill.dates.first.last.try(:year)
-      end
-
-      if @jurisdiction
-        args[:jurisdiction] = @jurisdiction['name']
+        args[:bill_id] = @bill['bill_id']
+        args[:bill_type] = @bill['type'].first.titleize
+        args[:bill_title] = @bill['title'] # @todo check meta description max-length
+        args[:session] = @bill.session_label
       end
 
       if @person
@@ -28,10 +25,6 @@ module ApplicationHelper
 
       if @user
         args[:user] = @user.name
-      end
-
-      if @vote
-        # @todo args[:vote] = @vote.
       end
 
       args

@@ -38,6 +38,8 @@ jQuery ($) ->
     href = $(this).attr('href')
     History.pushState({href: href}, '', href)
 
+  # @todo Pagination on bills#index and subjects#show
+
   # "View all" link in sidebar.
   $('a[rel="sponsors"]').click (e) ->
     e.preventDefault()
