@@ -14,7 +14,7 @@ class Person
   field :last_name, type: String, as: :family_name
   field :first_name, type: String, as: :given_name
   field :middle_name, type: String, as: :additional_name
-  field '+title', type: String, as: :honorific_prefix
+  field '+title', type: String, as: :honorific_prefix # always "" in OpenStates
   field :suffixes, type: String, as: :honorific_suffix
   field :email, type: String
   field '+gender', type: String, as: :gender
@@ -31,13 +31,36 @@ class Person
     if ids.empty?
       []
     else
-      Committee.where(_all_ids: {'$in' => ids}).to_a
+      Committee.where(_id: {'$in' => ids}).to_a
     end
   end
 
   # Returns the person's votes.
   def votes
-    Vote.where(_voters: id)
+    Vote.where(_voters: id) # @todo not available in API?
+  end
+
+  def votesmart_url(section = nil)
+    if self['votesmart_id']
+      url = "http://votesmart.org/candidate/"
+      url += "#{section}/" if section
+      url += self['votesmart_id']
+    end
+  end
+  def votesmart_biography_url
+    votesmart_url('biography')
+  end
+  def votesmart_evaluations_url
+    votesmart_url('evaluations')
+  end
+  def votesmart_key_votes_url
+    votesmart_url('key-votes')
+  end
+  def votesmart_public_statements_url
+    votesmart_url('public-statements')
+  end
+  def votesmart_campaign_finance_url
+    votesmart_url('campaign-finance')
   end
 
   def questions # @todo

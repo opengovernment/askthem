@@ -33,7 +33,7 @@ class Bill
   # Bills sponsored by a committee.
   index('sponsors.committee_id' => 1)
   # A state's current bills.
-  index(state: 1, _current_session: 1, 'action_dates.last' => -1)
+  index(state: 1, _current_session: 1, 'action_dates.last' => -1) # @todo not available in API?
 
   def jurisdiction
     @jurisdiction ||= Metadatum.find(read_attribute(:state))
@@ -79,7 +79,7 @@ class Bill
     # Get all the legislator sponsors in a single query.
     ids = sponsors.select{|x| x['leg_id']}.map{|x| x['leg_id']}
     unless ids.empty?
-      Person.where(_all_ids: {'$in' => ids}).each do |document|
+      Person.where(_id: {'$in' => ids}).each do |document|
         documents_by_id[document.id] = document
       end
     end
@@ -87,7 +87,7 @@ class Bill
     # Get all the committee sponsors in a single query.
     ids = sponsors.select{|x| x['committee_id']}.map{|x| x['committee_id']}
     unless ids.empty?
-      Committee.where(_all_ids: {'$in' => ids}).each do |document|
+      Committee.where(_id: {'$in' => ids}).each do |document|
         documents_by_id[document.id] = document
       end
     end

@@ -3,6 +3,7 @@ namespace :influenceexplorer do
   task biographies: :environment do
     if ENV['SUNLIGHT_API_KEY']
       include ActionView::Helpers::SanitizeHelper
+      Mongoid.override_session('openstates')
 
       people = Person.where(transparencydata_id: {'$ne' => ['', nil]})
       progressbar = ProgressBar.create(format: '%a |%B| %p%% %e', length: 80, smoothing: 0.5, total: people.count)

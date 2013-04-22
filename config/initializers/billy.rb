@@ -1,3 +1,4 @@
+# @todo Remove after switching to OpenStates API and JSON downloads.
 module Mongoid
   module Factory
     old_from_db = instance_method(:from_db)

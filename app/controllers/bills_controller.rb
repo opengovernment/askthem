@@ -26,6 +26,6 @@ private
   end
 
   def collection
-    @bills ||= end_of_association_chain.where(state: @jurisdiction.id, _current_session: true).desc('action_dates.last').page(params[:page])
+    @bills ||= end_of_association_chain.where(state: @jurisdiction.id, _current_session: true).desc('action_dates.last').page(params[:page]) # @todo not available in API?
   end
 end
