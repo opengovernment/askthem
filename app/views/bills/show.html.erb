@@ -71,8 +71,8 @@
     <div class="related_data">
       <nav>
         <ul class="related_nav">
-          <li><%= link_to 'Questions', resource_path(@jurisdiction.id), id: 'questions-tab', class: @tab == 'questions' && 'active' %></li>
-          <li><%= link_to 'Sponsors', sponsors_resource_path(@jurisdiction.id), id: 'sponsors-tab', class: @tab == 'sponsors' && 'active' %></li>
+          <li><%= link_to 'Questions', resource_path(@jurisdiction.id), tab_options('questions', 'show') %></li>
+          <li><%= link_to 'Sponsors', sponsors_resource_path(@jurisdiction.id), tab_options('sponsors') %></li>
         </ul>
       </nav>
 

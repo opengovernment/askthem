@@ -7,5 +7,9 @@
     remote:        data-remote
 -%>
 <span class="prev">
-  <%= link_to_unless current_page.first?, raw(t 'views.pagination.previous'), url, :rel => 'prev', :remote => remote %>
+  <%= link_to_unless current_page.first?, raw(t 'views.pagination.previous'), url, {
+    'rel'        => 'prev',
+    'remote'     => remote,
+    'data-title' => title(page: current_page - 1),
+  } %>
 </span>

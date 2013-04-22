@@ -36,6 +36,7 @@ en:
     sponsors:
       title: "%{bill_id} Sponsors - %{jurisdiction} %{session} - OpenGovernment"
       description: "Sponsors of %{jurisdiction} %{session} %{bill_type} %{bill_id}"
+    pagination: "%{jurisdiction} Bills – Page %{page} - OpenGovernment"
   people:
     index:
       title: "%{jurisdiction} Officials - OpenGovernment"
@@ -52,6 +53,7 @@ en:
     votes:
       title: "%{person} Votes - %{jurisdiction} - OpenGovernment"
       description: "Votes by %{jurisdiction} %{honorary_prefix} %{person}"
+    pagination: "%{person} Sponsored Bills – Page %{page} - %{jurisdiction} - OpenGovernment"
   questions:
     index:
       title: "%{jurisdiction} Questions - OpenGovernment"
@@ -65,6 +67,14 @@ en:
     preview:
       title: Preview Your Question - OpenGovernment
       description: Confirm your question to a city or state elected official
+  subjects:
+    index:
+      title: "%{jurisdiction} Issue Areas - OpenGovernment"
+      description: "Browse %{jurisdiction} bills by issue area"
+    show:
+      title: "%{subject} - %{jurisdiction} - OpenGovernment"
+      description: "Browse %{jurisdiction} %{subject} bills"
+    pagination: "%{subject} – Page %{page} - %{jurisdiction} - OpenGovernment"
   users:
     show:
       title: "%{user} - OpenGovernment"

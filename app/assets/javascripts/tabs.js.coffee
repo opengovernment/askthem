@@ -29,14 +29,16 @@ jQuery ($) ->
   # Tabs on people#show and bills#show.
   $('.related_nav a').click (e) ->
     e.preventDefault()
-    href = $(this).attr('href')
-    History.pushState({href: href, id: $(this).attr('id')}, '', href)
+    $this = $(this)
+    href = $this.attr('href')
+    History.pushState({href: href, id: $this.attr('id')}, $this.data('title'), href)
 
-  # Pagination on "Sponsored Bills" tab.
+  # Pagination.
   $(document).on 'click', 'nav[data-replace] a', (e) ->
     e.preventDefault()
-    href = $(this).attr('href')
-    History.pushState({href: href}, '', href)
+    $this = $(this)
+    href = $this.attr('href')
+    History.pushState({href: href}, $this.data('title'), href)
 
   # "View all" link in sidebar.
   $('a[rel="sponsors"]').click (e) ->
@@ -45,7 +47,6 @@ jQuery ($) ->
 
   History.Adapter.bind window, 'statechange', ->
     state = History.getState().data
-    # @todo change page title
     $.ajax(ajaxURL(state.href), dataType: 'html').done (data) ->
       $nav = $('nav[data-replace]')
       if state.id
