@@ -15,8 +15,6 @@ OpenGovernment::Application.routes.draw do
       end
     end
 
-    resources :committees, only: [:index, :show] # @todo remove?
-
     resources :people, only: [:index, :show] do
       member do
         get 'bills'

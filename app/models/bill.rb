@@ -26,12 +26,6 @@ class Bill
     'upper' => 'lower',
   }
 
-  # Bills related to a committee or legislator.
-  index('actions.related_entities.id' => 1)
-  # Bills with an action by a committee.
-  index('actions.committee' => 1)
-  # Bills sponsored by a committee.
-  index('sponsors.committee_id' => 1)
   # A state's current bills.
   index(state: 1, _current_session: 1, 'action_dates.last' => -1) # @todo not available in API?
 

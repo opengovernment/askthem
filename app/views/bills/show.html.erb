@@ -103,9 +103,6 @@
                         <%= district_name(sponsor['district']) if sponsor['district'] %>
                         <span class="sponsor_type"><%= sponsor.type %></span>
                       </div>
-                    <% elsif Committee == sponsor %>
-                      <%= link_to sponsor.name, committee_path(@jurisdiction.id, committee) %>
-                      <span class="sponsor_type"><%= sponsor.type %></span>
                     <% else %>
                       <%= sponsor.name %>
                       <span class="sponsor_type"><%= sponsor.type %></span>
