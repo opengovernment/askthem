@@ -45,6 +45,8 @@ class User
   # field :authentication_token, :type => String
 
   embeds_many :authentications
+  has_many :questions
+  has_many :signatures
   mount_uploader :image, ImageUploader
 
   field :given_name, type: String

@@ -7,6 +7,7 @@ OpenGovernment::Application.routes.draw do
   root to: 'pages#index'
 
   resources :users, only: :show
+  resources :signatures, only: :create
 
   scope ':jurisdiction' do
     resources :bills, only: [:index, :show] do

@@ -34,16 +34,31 @@
     </div>
   </article>
   <div class="actions">
-    <ul>
-      <li><%= link_to 'Sign On', '#', class: 'cta_pill' %><%# @todo %></li>
-      <li><%= link_to 'E-mail this to Council Member →', '#', class: 'email' %><%# @todo %></li>
-    </ul>
+    <% if user_signed_in? %>
+      <ul>
+        <li><%= link_to 'Sign On', signatures_path(question_id: @question.id), class: 'cta_pill' %><%# @todo link to remote %></li>
+        <li><%= link_to 'E-mail this to Council Member →', '#', class: 'email' %><%# @todo %></li>
+      </ul>
+    <% else %>
+      <%= simple_form_for(@user, as: :user, url: registration_path(:user)) do |f| %>
+        <%= hidden_field_tag :question_id, @question.id %>
+        <%= f.input :given_name %>
+        <%= f.input :family_name %>
+        <%= f.input :email %>
+        <%= f.input :street_address %>
+        <%= f.input :locality %>
+        <%= f.input :region, collection: OpenGovernment::STATES %>
+        <%= f.input :postal_code %>
+        <%= f.input :password %>
+        <%= f.button :submit, 'Sign On' %>
+      <% end %>
+    <% end %>
     <h5>Share</h5>
     <ul>
        <li>
-         <%= link_to '', '#', class: 'icon-facebook' %><%# @todo %>
-         <%= link_to '', '#', class: 'icon-twitter' %><%# @todo %>
-         <%= link_to '', '#', class: 'icon-google-plus' %><%# @todo %>
+         <%= link_to '', "https://www.facebook.com/sharer.php?u=#{URI.escape(current_url)}", class: 'icon-facebook' %>
+         <%= link_to '', "https://twitter.com/share?text=#{URI.escape(@question.title)}", class: 'icon-twitter' %>
+         <%= link_to '', "https://plus.google.com/share?url=#{URI.escape(current_url)}", class: 'icon-google-plus' %>
        </li>
     </ul>
     <h5>Issues</h5>

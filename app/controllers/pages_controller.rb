@@ -11,6 +11,12 @@ class PagesController < ApplicationController
   end
 
   def dashboard
+    @questions = current_user.questions
+    @signatures = current_user.signatures
+  end
+
+  def search
+    # @todo
   end
 
   def channel

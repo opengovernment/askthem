@@ -15,7 +15,7 @@
 //= require jquery.autogrow-textarea
 //= require jquery.history
 //= require facebook
-//= require devise
+//= require authentication
 //= require tabs
 //= require bills
 //= require questions

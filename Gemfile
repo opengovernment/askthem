@@ -24,6 +24,7 @@ gem 'rest-client'
 group :production do
   gem 'airbrake'
   gem 'unicorn'
+  gem 'fog'
   gem 'newrelic_rpm'
 end
 

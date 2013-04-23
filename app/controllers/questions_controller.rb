@@ -7,7 +7,8 @@ class QuestionsController < ApplicationController
   before_filter :set_jurisdiction
 
   def show
-    # @todo stub
+    @question = Question.new(title: 'What for dost doth under thy venerable name?') # @todo stub
+    @user = User.new unless user_signed_in?
   end
 
   def preview
