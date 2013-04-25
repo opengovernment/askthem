@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby '1.9.3'
 
-gem 'rails', '3.2.12'
+gem 'rails', '3.2.13'
 gem 'jquery-rails'
 
 gem 'mongoid', '~> 3.1.2'
@@ -34,6 +34,14 @@ group :development do
   gem 'heroku' # Rake task
   gem 'ruby-growl', '3.0'
   gem 'bullet'
+end
+
+group :test, :development do
+  gem 'rspec-rails'
+end
+
+group :test do
+  gem 'factory_girl_rails'
 end
 
 group :assets do
