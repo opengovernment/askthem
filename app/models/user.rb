@@ -44,6 +44,9 @@ class User
   ## Token authenticatable
   # field :authentication_token, :type => String
 
+  include Geocoder::Model::Mongoid
+  geocoded_by :address
+
   embeds_many :authentications
   has_many :questions
   has_many :signatures
@@ -57,11 +60,12 @@ class User
   field :region, type: String
   field :postal_code, type: String
   field :country, type: String, default: 'US'
+  field :coordinates, type: Array
 
   index('authentications.provider' => 1, 'authentications.uid' => 1)
 
-  validates_presence_of :given_name, :family_name, :street_address,
-    :locality, :region, :postal_code, :country
+  validates_presence_of :given_name, :family_name
+  validates_presence_of :street_address, :locality, :region, :postal_code, :country
   validates_inclusion_of :region, in: OpenGovernment::STATES.values, allow_blank: true
   validates_inclusion_of :country, in: %w(US), allow_blank: true
 
@@ -78,6 +82,18 @@ class User
 
   def alternate_name
     given_name_was # avoid updating the navigation if there are arrors on the object
+  end
+
+  def address
+    [street_address, locality, region, country, postal_code] * ', '
+  end
+
+  def self.perform(id, meth)
+    user = self.class.find(id) # will raise an error if not found
+    case meth
+    when 'geocode'
+      user.geocode
+    end
   end
 
   # @note Unlike Devise, allows changing the password without a password.

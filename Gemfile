@@ -5,8 +5,10 @@ gem 'rails', '3.2.12'
 gem 'jquery-rails'
 
 gem 'mongoid', '~> 3.1.2'
+gem 'geocoder' # must be after mongoid
 gem 'rmagick'
 gem 'carrierwave-mongoid'
+gem 'resque'
 gem 'inherited_resources', '~> 1.3.1'
 gem 'simple_form'
 gem 'kaminari'
