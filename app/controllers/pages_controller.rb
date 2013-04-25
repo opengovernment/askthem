@@ -8,11 +8,12 @@ class PagesController < ApplicationController
   end
 
   def overview
+    # @todo cut this page?
   end
 
   def dashboard
-    @questions = current_user.questions
-    @signatures = current_user.signatures
+    @questions_asked = current_user.questions
+    @questions_signed = current_user.questions_signed
   end
 
   def search

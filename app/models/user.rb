@@ -88,6 +88,10 @@ class User
     [street_address, locality, region, country, postal_code] * ', '
   end
 
+  def questions_signed
+    Question.find(signatures.map(&:question_id))
+  end
+
   def self.perform(id, meth)
     user = self.class.find(id) # will raise an error if not found
     case meth

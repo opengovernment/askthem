@@ -36,7 +36,6 @@ private
 
   def collection
     @people ||= end_of_association_chain.where({
-      state: @jurisdiction.id,
       active: true,
     }).asc(:chamber, :family_name)
   end
