@@ -23,4 +23,10 @@ class PagesController < ApplicationController
     expires_in 1.hour, public: true
     render layout: false
   end
+
+private
+
+  def set_jurisdiction
+    @jurisdiction ||= Metadatum.find(params[:jurisdiction])
+  end
 end

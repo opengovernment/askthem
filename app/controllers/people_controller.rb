@@ -1,11 +1,10 @@
 class PeopleController < ApplicationController
   inherit_resources
+  belongs_to :jurisdiction, parent_class: Metadatum, param: :jurisdiction
   respond_to :html
   respond_to :js, only: [:show, :bills, :committees, :votes]
   actions :index, :show
   custom_actions resource: [:bills, :committees, :votes]
-
-  before_filter :set_jurisdiction
 
   def show
     tab 'questions'
@@ -28,8 +27,8 @@ class PeopleController < ApplicationController
 private
 
   def tab(tab)
+    @tab = tab
     show! do |format|
-      @tab = tab
       format.html {render action: 'show'}
       format.js {render partial: @tab}
     end

@@ -1,13 +1,12 @@
 class QuestionsController < ApplicationController
   inherit_resources
+  belongs_to :jurisdiction, parent_class: Metadatum, param: :jurisdiction
   respond_to :html
-  actions :index, :show, :new
+  actions :index, :show, :new, :create
   custom_actions resource: :preview
 
-  before_filter :set_jurisdiction
-
   def show
-    @question = Question.new(title: 'What for dost doth under thy venerable name?') # @todo stub
+    @question = Question.new(title: 'What for dost doth under thy venerable name?', state: @jurisdiction.id) # @todo stub
     @user = User.new unless user_signed_in?
   end
 

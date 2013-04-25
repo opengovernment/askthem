@@ -1,10 +1,9 @@
 class SubjectsController < ApplicationController
   inherit_resources
+  belongs_to :jurisdiction, parent_class: Metadatum, param: :jurisdiction
   respond_to :html
   respond_to :js, only: :show
   actions :index, :show
-
-  before_filter :set_jurisdiction
 
   def show
     show! do |format|
@@ -29,6 +28,6 @@ private
 
   # @note MT, RI and WI have inconsistent subject names (typos, etc.).
   def subjects
-    Bill.where(state: @jurisdiction.id).distinct('subjects')
+    Bill.where(state: parent.id).distinct('subjects')
   end
 end

@@ -3,9 +3,7 @@ class Person
   include Mongoid::Document
   store_in collection: 'legislators'
 
-  # For sorting on people#index.
-  index(chamber: 1, last_name: 1)
-
+  belongs_to :metadatum, foreign_key: 'state'
   # Stores Popolo fields that are not available in Billy.
   has_one :person_detail, autobuild: true
 

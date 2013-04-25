@@ -24,7 +24,7 @@ OpenGovernment::Application.routes.draw do
       end
     end
 
-    resources :questions, only: [:index, :show, :new] do
+    resources :questions, only: [:index, :show, :new, :create] do
       collection do
         get :preview
       end

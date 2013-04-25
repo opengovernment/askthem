@@ -1,11 +1,10 @@
 class BillsController < ApplicationController
   inherit_resources
+  belongs_to :jurisdiction, parent_class: Metadatum, param: :jurisdiction
   respond_to :html
   respond_to :js, only: [:index, :show, :sponsors]
   actions :index, :show
   custom_actions resource: :sponsors
-
-  before_filter :set_jurisdiction
 
   def index
     index! do |format|
@@ -24,8 +23,8 @@ class BillsController < ApplicationController
 private
 
   def tab(tab)
+    @tab = tab
     show! do |format|
-      @tab = tab
       format.html {render action: 'show'}
       format.js {render partial: @tab}
     end

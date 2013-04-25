@@ -4,6 +4,8 @@ require 'ostruct'
 class Bill
   include Mongoid::Document
 
+  belongs_to :metadatum, foreign_key: 'state'
+
   DATE_ORDER = {
     'lower' => [
       'first',

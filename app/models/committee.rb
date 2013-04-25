@@ -2,6 +2,8 @@
 class Committee
   include Mongoid::Document
 
+  belongs_to :metadatum, foreign_key: 'state'
+
   # @note Field in common with Popolo.
   def name
     read_attribute(:subcommittee) || read_attribute(:committee)

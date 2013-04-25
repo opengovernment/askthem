@@ -2,6 +2,12 @@
 class Metadatum
   include Mongoid::Document
 
+  has_many :bills, foreign_key: 'state'
+  has_many :committees, foreign_key: 'state'
+  has_many :people, foreign_key: 'state'
+  has_many :questions, foreign_key: 'state'
+  has_many :votes, foreign_key: 'state'
+
   # Returns the brief name of the chamber.
   #
   # @param [String] chamber "lower" or "upper"
