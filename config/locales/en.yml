@@ -25,10 +25,10 @@ en:
       description: "Ask questions and track government in %{jurisdiction}"
     lower:
       title: "%{jurisdiction} %{lower} Overview - OpenGovernment"
-      description: "Browse %{jurisdiction} %{honorary_prefix}"
+      description: "Browse %{jurisdiction} %{lower}"
     upper:
       title: "%{jurisdiction} %{upper} Overview - OpenGovernment"
-      description: "Browse %{jurisdiction} %{honorary_prefix}"
+      description: "Browse %{jurisdiction} %{upper}"
     bills:
       title: "%{jurisdiction} Bills Overview - OpenGovernment"
       description: "Browse %{jurisdiction} bills"

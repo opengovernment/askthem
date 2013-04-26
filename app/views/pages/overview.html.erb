@@ -12,7 +12,7 @@
           <%= link_to upper_overview_path(@jurisdiction['abbreviation']), tab_options('upper') do %>
             <%= @upper.count %> <%= @jurisdiction.chamber_title('upper').pluralize %>
             <span class="info">
-              <% @lower_parties.each do |party,people| %>
+              <% @upper_parties.each do |party,people| %>
                 <span><%= people.size %> <%= party%></span>
               <% end %>
             </span>

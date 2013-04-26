@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  before_filter :set_jurisdiction, only: [:overview, :lower, :upper, :bills]
+  before_filter :set_jurisdiction, only: [:overview, :lower, :upper, :bills, :votes]
   before_filter :authenticate_user!, only: :dashboard
   caches_action :channel
 
@@ -52,9 +52,12 @@ private
   end
 
   def tab(tab)
+    # @note Each pair of `@lower` and `@upper` lines must be run together, as
+    #   below, otherwise the first query to evaluate will clear the persistence
+    #   options of the unevaluated query.
     @lower = Person.in(@jurisdiction['abbreviation']).where(chamber: 'lower')
-    @upper = Person.in(@jurisdiction['abbreviation']).where(chamber: 'upper')
     @lower_parties = @lower.group_by{|person| person['party']}
+    @upper = Person.in(@jurisdiction['abbreviation']).where(chamber: 'upper')
     @upper_parties = @upper.group_by{|person| person['party']}
     @bills = Bill.in(@jurisdiction['abbreviation']).includes(:metadatum).desc('action_dates.last').page(params[:page])
     @votes = [] # @todo stub
