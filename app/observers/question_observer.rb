@@ -4,8 +4,12 @@ class QuestionObserver < Mongoid::Observer
   end
 
   def after_update(question)
-    if question.answered? && question.answered_changed?
-      increment(question, :answered_question_count, 1)
+    if question.answered_changed?
+      if question.answered?
+        increment(question, :answered_question_count, 1)
+      else
+        increment(question, :answered_question_count, -1)
+      end
     end
   end
 

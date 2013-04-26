@@ -37,7 +37,7 @@ class PagesController < ApplicationController
   end
 
   def search
-    # @todo
+    # @todo OgLocal, OpenStates, DemocracyMap
   end
 
   def channel
@@ -57,6 +57,7 @@ private
     @lower_parties = @lower.group_by{|person| person['party']}
     @upper_parties = @upper.group_by{|person| person['party']}
     @bills = Bill.in(@jurisdiction['abbreviation']).includes(:metadatum).desc('action_dates.last').page(params[:page])
+    @votes = [] # @todo stub
 
     @tab = tab
     respond_to do |format|

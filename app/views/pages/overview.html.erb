@@ -38,7 +38,7 @@
       </li>
       <li class="last">
         <%= link_to votes_overview_path(@jurisdiction['abbreviation']), tab_options('votes') do %>
-          4 Key Votes
+          <%= number_with_delimiter @votes.count %> Key Votes
         <% end %>
       </li>
       <li class="clear"></li>

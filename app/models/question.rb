@@ -20,10 +20,11 @@ class Question
   field :body, type: String
   # The question's issue area.
   field :subject, type: String
-  # Whether the question is answered.
-  field :answered, type: Boolean, default: false
   # The number of signatures.
   field :signature_count, type: Integer, default: 0
+  # Whether the question is answered.
+  # @note Use `update_attribute`, not `set`, to trigger the observers.
+  field :answered, type: Boolean, default: false
 
   validates_presence_of :state, :user_id, :person_id, :title, :body
   validates_length_of :title, within: 3..60, allow_blank: true
@@ -39,7 +40,7 @@ private
   end
 
   def subject_must_be_included_in_the_list_of_subjects
-    unless subject.blank? || Bill.use(state).where(state: state).distinct('subjects').include?(subject)
+    unless subject.blank? || Bill.in(state).distinct('subjects').include?(subject)
       errors.add(:subject, 'is not included in the list of subjects')
     end
   end

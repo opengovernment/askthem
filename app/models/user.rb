@@ -92,6 +92,7 @@ class User
     Question.find(signatures.map(&:question_id))
   end
 
+  @queue = :user_geocode
   def self.perform(id, meth)
     user = self.class.find(id) # will raise an error if not found
     case meth
