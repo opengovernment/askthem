@@ -1,3 +1,4 @@
+# A simple wrapper for the Project VoteSmart API.
 class ProjectVoteSmart
   class Error < StandardError; end
 
@@ -7,8 +8,10 @@ class ProjectVoteSmart
     @api_key = opts[:api_key]
   end
 
-  def get(meth, params = {})
-    result = JSON.parse(RestClient.get("http://api.votesmart.org/#{meth}", params: params.merge(key: @api_key, o: 'JSON')))
+  # @param [String] endpoint the API endpoint
+  # @param [Hash] params the API request's parameters
+  def get(endpoint, params = {})
+    result = JSON.parse(RestClient.get("http://api.votesmart.org/#{endpoint}", params: params.merge(key: @api_key, o: 'JSON')))
 
     if result['error']
       raise ProjectVoteSmart::Error, result['error']['errorMessage']
