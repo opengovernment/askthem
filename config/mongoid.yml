@@ -82,6 +82,14 @@ test:
         # low amounts for fast failures.
         max_retries: 1
         retry_interval: 0
+    openstates:
+      database: open_government_test_fiftystates
+      hosts:
+        - localhost:27017
+      options:
+        consistency: :strong
+        max_retries: 1
+        retry_interval: 0
 <% default = URI.parse(ENV['MONGOHQ_URL'] || ENV['MONGOLAB_URI'] || 'mongodb://127.0.0.1:27017/opengovernment_local') %> # https://gist.github.com/2588954
 <% openstates = URI.parse(ENV['MONGO_URL'] || 'mongodb://127.0.0.1:27017/fiftystates') %> # https://gist.github.com/2588954
 production:
