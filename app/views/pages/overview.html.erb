@@ -37,7 +37,7 @@
         <% end %>
       </li>
       <li class="last">
-        <%= link_to '#', tab_options('votes') do %><%# @todo %>
+        <%= link_to votes_overview_path(@jurisdiction['abbreviation']), tab_options('votes') do %>
           4 Key Votes
         <% end %>
       </li>

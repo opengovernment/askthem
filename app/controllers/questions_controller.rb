@@ -13,10 +13,4 @@ class QuestionsController < ApplicationController
   def preview
     # @todo stub
   end
-
-private
-
-  def collection
-    @questions ||= end_of_association_chain # @todo limit to jurisdiction
-  end
 end

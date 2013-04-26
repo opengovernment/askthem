@@ -6,7 +6,7 @@
   <ul class="activity">
     <% committee.people.each do |person| %><%# @note N+1 query %>
       <li class="depiction">
-        <% if person.image? %><%# @todo ST tooltip with name, use layout to support up to 93 members %>
+        <% if person.image? %><%# @todo ST use layout to support up to 93 members %>
           <%= cdn_image_tag(person.image, size: '50x50', alt: '') %>
         <% else %>
           <%= image_tag('placeholder.png', size: '50x50', alt: '') %>

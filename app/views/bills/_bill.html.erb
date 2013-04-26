@@ -36,7 +36,7 @@
     <% bill.people_and_committee_sponsors(limit: 5, only: :people).each do |sponsor| %><%# @note N+1 query %>
       <li class="depiction">
         <% if Person === sponsor %>
-          <% if sponsor.image? %><%# @todo ST tooltip with name %>
+          <% if sponsor.image? %>
             <%= cdn_image_tag(sponsor.image, size: '50x50', alt: '') %>
           <% else %>
             <%= image_tag('placeholder.png', size: '50x50', alt: '') %>

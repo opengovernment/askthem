@@ -27,6 +27,10 @@ class PagesController < ApplicationController
     tab 'bills'
   end
 
+  def votes
+    tab 'votes'
+  end
+
   def dashboard
     @questions_asked = current_user.questions
     @questions_signed = current_user.questions_signed
