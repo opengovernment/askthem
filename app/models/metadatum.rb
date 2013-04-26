@@ -8,6 +8,10 @@ class Metadatum
   has_many :questions, foreign_key: 'state'
   has_many :votes, foreign_key: 'state'
 
+  def self.find_by_abbreviation(abbreviation)
+    where(abbreviation: abbreviation).first
+  end
+
   # Returns the brief name of the chamber.
   #
   # @param [String] chamber "lower" or "upper"
@@ -29,13 +33,6 @@ class Metadatum
   # @return [String] the current session's identifier
   def current_session
     read_attribute(:terms).last['sessions'].last
-  end
-
-  # Returns whether the jurisdiction is a US state.
-  #
-  # @return [Boolean] whether the jurisdiction is a US state
-  def state?
-    read_attribute(:abbreviation)[/\A[a-z]{2}\z/]
   end
 
   # Returns whether the jurisdiction assigns subjects to bills.
