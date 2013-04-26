@@ -3,7 +3,7 @@
     <% 5.times do %>
     <li>
       <div class="question_content">
-        <%= link_to 'Why have this thing for act for what? <span class="icon-angle-right view"></span>'.html_safe, question_path(@jurisdiction.abbreviation, '1'), class: 'title' %>
+        <%= link_to 'Why have this thing for act for what? <span class="icon-angle-right view"></span>'.html_safe, question_path(@jurisdiction['abbreviation'], '1'), class: 'title' %>
         <p>Lorem ipsum dolor sit amet, adipisicing elit, sed do  tempor incididunt ut labore et dolore magna aliqua sed do eiusmod tempor  ut&hellip; <span class="context">&rarr; in Pennsylvania Bills</span></p>
         <span class="target">
           <%= link_to image_tag('http://lorempixel.com/40/40/people/', size: '20x20', alt: '') + 'Steve T', '#' %>

@@ -9,7 +9,21 @@ class Metadatum
   has_many :votes, foreign_key: 'state'
 
   def self.find_by_abbreviation(abbreviation)
-    where(abbreviation: abbreviation).first
+    self.use(abbreviation).where(abbreviation: abbreviation).first
+  end
+
+  # Returns whether the jurisdiction has a lower chamber.
+  #
+  # @return [Boolean] whether the jurisdiction has a lower chamber
+  def lower_chamber?
+    read_attribute(:chambers).key?('lower')
+  end
+
+  # Returns whether the jurisdiction has an upper chamber.
+  #
+  # @return [Boolean] whether the jurisdiction has an upper chamber
+  def upper_chamber?
+    read_attribute(:chambers).key?('upper')
   end
 
   # Returns the brief name of the chamber.
@@ -41,6 +55,14 @@ class Metadatum
   # @note A jurisdiction can include "subjects" in its feature flags, without
   #   setting any subjects on any bills.
   def subjects?
-    !!Bill.where(state: self.id, subjects: {'$nin' => [[], nil]}).first
+    # The following code is slow. Worse, it resets the persistence options of
+    # all unevaluated queries. We instead cache a list of states with subjects.
+    #
+    #     !!Bill.where(state: self.id, subjects: {'$nin' => [[], nil]}).first
+    #
+    # Run the following code to get a fresh list of states with subjects:
+    #
+    #     a = []; db.metadata.distinct('_id').forEach(function (x) {if (db.bills.findOne({state: x, subjects: {$nin: [[], null]}})) a.push(x)})
+    %w(ak al ca hi ia id in ky la md me mi mn mo ms mt nc nd nj nm nv ny ok or ri sc sd tn tx ut va wa wi).include?(abbreviation)
   end
 end

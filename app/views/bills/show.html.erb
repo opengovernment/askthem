@@ -63,7 +63,7 @@
         </ol>
       </div>
     </div>
-    <%= link_to 'Ask about this Bill', new_question_path(@jurisdiction.abbreviation), class: 'bill_detail cta_pill' %>
+    <%= link_to 'Ask about this Bill', new_question_path(@jurisdiction['abbreviation']), class: 'bill_detail cta_pill' %>
     <%= link_to 'Tell your Senator what you think', '#', class: 'sim_act' %>
   </header>
 
@@ -71,8 +71,8 @@
     <div class="related_data">
       <nav>
         <ul class="related_nav">
-          <li><%= link_to 'Questions', resource_path(@jurisdiction.abbreviation), tab_options('questions', 'show') %></li>
-          <li><%= link_to 'Sponsors', sponsors_resource_path(@jurisdiction.abbreviation), tab_options('sponsors') %></li>
+          <li><%= link_to 'Questions', bill_path(@jurisdiction['abbreviation']), tab_options('questions', 'show') %></li>
+          <li><%= link_to 'Sponsors', sponsors_bill_path(@jurisdiction['abbreviation']), tab_options('sponsors') %></li>
         </ul>
       </nav>
 
@@ -99,7 +99,7 @@
                         <% end %>
                       </div>
                       <div class="details">
-                        <%= link_to sponsor.name, person_path(@jurisdiction.abbreviation, sponsor) %>
+                        <%= link_to sponsor.name, person_path(@jurisdiction['abbreviation'], sponsor) %>
                         <%= district_name(sponsor['district']) if sponsor['district'] %>
                         <span class="sponsor_type"><%= sponsor.type %></span>
                       </div>
@@ -111,7 +111,7 @@
                 <% end %>
               </ul>
               <% if @bill['sponsors'].size > 5 %>
-                <%= link_to 'View all', sponsors_resource_path(@jurisdiction.abbreviation), rel: 'sponsors' %>
+                <%= link_to 'View all', sponsors_bill_path(@jurisdiction['abbreviation']), rel: 'sponsors' %>
               <% end %>
             </section>
           <% end %>
@@ -122,7 +122,7 @@
               <ul>
                 <% @bill['subjects'].each do |subject| %>
                   <li>
-                    <%= link_to subject, subject_path(@jurisdiction.abbreviation, subject) %>
+                    <%= link_to subject, subject_path(@jurisdiction['abbreviation'], subject) %>
                   </li>
                 <% end %>
               </ul>

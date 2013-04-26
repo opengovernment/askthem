@@ -11,7 +11,7 @@ class PeopleController < ApplicationController
   end
 
   def bills
-    @bills = resource.bills.page(params[:page])
+    @bills = resource.bills.includes(:metadatum).page(params[:page])
     tab 'bills'
   end
 
@@ -21,6 +21,7 @@ class PeopleController < ApplicationController
   end
 
   def votes
+    @votes = resource.votes
     tab 'votes'
   end
 
@@ -34,9 +35,11 @@ private
     end
   end
 
+  def end_of_association_chain
+    Person.in(parent['abbreviation'])
+  end
+
   def collection
-    @people ||= end_of_association_chain.where({
-      active: true,
-    }).asc(:chamber, :family_name)
+    @people ||= end_of_association_chain.where(active: true).asc(:chamber, :family_name)
   end
 end

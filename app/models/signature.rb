@@ -1,7 +1,7 @@
 class Signature
   include Mongoid::Document
   include Mongoid::Timestamps
-  store_in session: 'default'
+  store_in session: 'default' # @see https://github.com/mongoid/mongoid/pull/2909
 
   belongs_to :user
   belongs_to :question

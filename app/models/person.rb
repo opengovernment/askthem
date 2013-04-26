@@ -3,10 +3,14 @@ class Person
   include Mongoid::Document
   store_in collection: 'legislators'
 
+  # The person's jurisdiction.
   belongs_to :metadatum, foreign_key: 'state'
+  # Questions addressed to the person.
+  has_many :questions
   # Stores Popolo fields that are not available in Billy.
   has_one :person_detail, autobuild: true
 
+  # Popolo fields and aliases.
   field :full_name, type: String, as: :name
   field :leg_id, type: String, as: :slug
   field :last_name, type: String, as: :family_name
@@ -18,9 +22,22 @@ class Person
   field '+gender', type: String, as: :gender
   field :photo_url, type: String, as: :image
 
+  field :question_count, type: Integer, default: 0
+  field :answered_question_count, type: Integer, default: 0
+
+  # Returns questions answered by the person.
+  def questions_answered
+    questions.where(answered: true)
+  end
+
   # Returns the person's sponsored bills.
   def bills
-    Bill.where('sponsors.leg_id' => id)
+    Bill.use(read_attribute(:state)).where('sponsors.leg_id' => id)
+  end
+
+  # Returns the person's votes.
+  def votes
+    Vote.use(read_attribute(:state)).or({'yes_votes.leg_id' => id}, {'no_votes.leg_id' => id}, {'other_votes.leg_id' => id})
   end
 
   # Returns the person's committees.
@@ -29,17 +46,10 @@ class Person
     if ids.empty?
       []
     else
-      Committee.where(_id: {'$in' => ids}).to_a
+      Committee.use(read_attribute(:state)).where(_id: {'$in' => ids}).to_a
     end
   end
 
-  def votesmart_url(section = nil)
-    if self['votesmart_id']
-      url = "http://votesmart.org/candidate/"
-      url += "#{section}/" if section
-      url += self['votesmart_id']
-    end
-  end
   def votesmart_biography_url
     votesmart_url('biography')
   end
@@ -56,11 +66,13 @@ class Person
     votesmart_url('campaign-finance')
   end
 
-  def questions # @todo
-    []
-  end
+private
 
-  def answers # @todo
-    []
+  def votesmart_url(section = nil)
+    if self['votesmart_id']
+      url = "http://votesmart.org/candidate/"
+      url += "#{section}/" if section
+      url += self['votesmart_id']
+    end
   end
 end

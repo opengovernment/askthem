@@ -1,20 +1,4 @@
 module OpenGovernment
-  # Returns the MongoDB session to use to access the jurisdiction' sdata.
-  #
-  # @param [String] abbreviation a jurisdiction's abbreviation
-  # @return [String,nil] the MongoDB session to use
-  def self.session(abbreviation)
-    'openstates' if state?(abbreviation)
-  end
-
-  # Returns whether the jurisdiction is a US state.
-  #
-  # @param [String] abbreviation a jurisdiction's abbreviation
-  # @return [Boolean] whether the jurisdiction is a US state
-  def self.state?(abbreviation)
-    abbreviation && abbreviation[/\A[a-z]{2}\z/]
-  end
-
   # 50 states plus Puerto Rico and District of Columbia.
   STATES = {
     'Alaska'               => 'ak',

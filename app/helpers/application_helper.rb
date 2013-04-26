@@ -138,6 +138,14 @@ private
         args[:user] = @user.name
       end
 
+      # pages#overview
+      if @jurisdiction.lower_chamber?
+        args[:lower] = @jurisdiction.chamber_title('lower').pluralize
+      end
+      if @jurisdiction.upper_chamber?
+        args[:upper] = @jurisdiction.chamber_title('upper').pluralize
+      end
+
       args
     end
   end

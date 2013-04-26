@@ -2,7 +2,7 @@
 # @note Based on Popolo.
 class PersonDetail
   include Mongoid::Document
-  store_in session: 'default'
+  store_in session: 'default' # @see https://github.com/mongoid/mongoid/pull/2909
 
   belongs_to :person, index: true
 

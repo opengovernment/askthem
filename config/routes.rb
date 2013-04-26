@@ -31,6 +31,10 @@ OpenGovernment::Application.routes.draw do
     end
 
     resources :subjects, only: [:index, :show]
+
+    match 'overview/lower' => 'pages#lower', as: :lower_overview, via: :get
+    match 'overview/upper' => 'pages#upper', as: :upper_overview, via: :get
+    match 'overview/bills' => 'pages#bills', as: :bills_overview, via: :get
   end
 
   match ':jurisdiction' => 'pages#overview', as: :jurisdiction, via: :get

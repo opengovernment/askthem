@@ -1,27 +1,31 @@
 class Question
   include Mongoid::Document
   include Mongoid::Timestamps
-  store_in session: 'default'
+  store_in session: 'default' # @see https://github.com/mongoid/mongoid/pull/2909
 
+  # The jurisdiction in which the question is asked.
   belongs_to :metadatum, foreign_key: 'state'
+  # The author of the question.
   belongs_to :user
+  # The person to whom the question is addressed.
+  belongs_to :person
+  # The bill the question is about.
+  belongs_to :bill
+  # The signatures in support of the question.
   has_many :signatures
 
-  # The question's jurisdiction.
-  field :state, type: String
   # The question's summary.
   field :title, type: String
   # The question's content.
   field :body, type: String
   # The question's issue area.
   field :subject, type: String
+  # Whether the question is answered.
+  field :answered, type: Boolean, default: false
   # The number of signatures.
-  field :signature_count, default: 0
+  field :signature_count, type: Integer, default: 0
 
-  # @todo add more message fields (to whom it is addressed) and context fields
-  #   (if the question is about a bill) and other parts of PublicMail
-
-  validates_presence_of :title, :body, :state
+  validates_presence_of :state, :user_id, :person_id, :title, :body
   validates_length_of :title, within: 3..60, allow_blank: true
   validates_length_of :body, minimum: 60, allow_blank: true
   validate :state_must_be_included_in_the_list_of_states
@@ -29,13 +33,13 @@ class Question
 
 private
   def state_must_be_included_in_the_list_of_states
-    unless state.blank? || Metadatum.where(state: state).first
+    unless state.blank? || Metadatum.find_by_abbreviation(state)
       errors.add(:state, 'is not included in the list of states')
     end
   end
 
   def subject_must_be_included_in_the_list_of_subjects
-    unless subject.blank? || Bill.where(state: state).distinct('subjects').includes?(subject)
+    unless subject.blank? || Bill.use(state).where(state: state).distinct('subjects').include?(subject)
       errors.add(:subject, 'is not included in the list of subjects')
     end
   end

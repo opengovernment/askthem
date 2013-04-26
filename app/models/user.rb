@@ -1,6 +1,6 @@
 class User
   include Mongoid::Document
-  store_in session: 'default'
+  store_in session: 'default' # @see https://github.com/mongoid/mongoid/pull/2909
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,

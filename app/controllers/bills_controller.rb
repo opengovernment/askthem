@@ -30,9 +30,11 @@ private
     end
   end
 
+  def end_of_association_chain
+    Bill.in(parent['abbreviation'])
+  end
+
   def collection
-    @bills ||= end_of_association_chain.where({
-      session: @jurisdiction.current_session,
-    }).desc('action_dates.last').page(params[:page])
+    @bills ||= end_of_association_chain.where(session: parent.current_session).includes(:metadatum).desc('action_dates.last').page(params[:page])
   end
 end

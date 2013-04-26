@@ -8,7 +8,7 @@
   <ul>
     <% @subjects.each do |subject| %>
       <li>
-        <%= link_to subject, subject_path(@jurisdiction.abbreviation, subject.parameterize) %>
+        <%= link_to subject, subject_path(@jurisdiction['abbreviation'], subject.parameterize) %>
       </li>
     <% end %>
   </ul>

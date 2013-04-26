@@ -7,39 +7,46 @@
 
   <nav>
     <ul class="radio_nav">
+      <% if @jurisdiction.upper_chamber? %>
+        <li>
+          <%= link_to upper_overview_path(@jurisdiction['abbreviation']), tab_options('upper') do %>
+            <%= @upper.count %> <%= @jurisdiction.chamber_title('upper').pluralize %>
+            <span class="info">
+              <% @lower_parties.each do |party,people| %>
+                <span><%= people.size %> <%= party%></span>
+              <% end %>
+            </span>
+          <% end %>
+        </li>
+      <% end %>
+      <% if @jurisdiction.lower_chamber? %>
+        <li>
+          <%= link_to lower_overview_path(@jurisdiction['abbreviation']), tab_options('lower', 'overview') do %>
+            <%= @lower.count %> <%= @jurisdiction.chamber_title('lower').pluralize %>
+            <span class="info">
+              <% @lower_parties.each do |party,people| %>
+                <span><%= people.size %> <%= party%></span>
+              <% end %>
+            </span>
+          <% end %>
+        </li>
+      <% end %>
       <li>
-        <a href="#" class="active">13 Senators
-          <span class="info">
-            <span>9 Dem</span> <span>12 Rep</span>
-          </span>
-        </a>
-      </li>
-      <li>
-        <a href="#">13 Assembly
-          <span class="info">
-            <span>40 Dem</span> <span>9 Rep</span>
-          </span>
-        </a>
-      </li>
-      <li>
-        <a href="#">13 Committees
-          <span class="info">
-            9 Joint Committees
-          </span>
-        </a>
-      </li>
-      <li>
-        <a href="#">200 Bills</a>
+        <%= link_to bills_overview_path(@jurisdiction['abbreviation']), tab_options('bills') do %>
+          <%= number_with_delimiter @bills.count %> Bills
+        <% end %>
       </li>
       <li class="last">
-        <a href="#">4 Key Votes</a>
+        <%= link_to '#', tab_options('votes') do %><%# @todo %>
+          4 Key Votes
+        <% end %>
       </li>
       <li class="clear"></li>
     </ul>
     
     <div class="nav_extras">
-      <a href="#">State Resources</a>
-      <div class="rep_search">
+      <a href="#">State Resources</a><%# @todo remove since we have no content? %>
+      <div class="rep_search"><%# @todo change into a form %>
         <label for="find_rep">Find your representatives:</label>
         <input type="text" name="find_rep" id="find_rep">
         <input type="submit" value="search" class="icon-map-marker">
@@ -47,18 +54,5 @@
       <div class="clear"></div>
     </div>
   </nav>
-  <ol class="people-list">
-    <%= 12.times do %>
-    <li>
-      <div class="avatar">
-        <img src="http://lorempixel.com/60/60/" alt="">
-      </div>
-      <div class="person-info">
-        <h2><a href="#">Steven Trevathan</a></h2>
-        <span class="jurisdiction">Democrat, Representative, District 35</span>
-        <span class="stats"><span>0 Questions</span> <span>0 Answers</span></span>
-      </div>
-    </li>
-    <%end%>
-  </ol>
+  <%= render partial: @tab %>
 </section>

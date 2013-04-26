@@ -12,7 +12,7 @@
     </span>
   </article>
   <div class="actions">
-    <%= link_to 'Publish', question_path(@jurisdiction.abbreviation, '1'), class: 'cta_pill' %>
-    <%= link_to '← Edit', new_question_path(@jurisdiction.abbreviation), class: 'edit sim_act' %>
+    <%= link_to 'Publish', question_path(@jurisdiction['abbreviation'], '1'), class: 'cta_pill' %>
+    <%= link_to '← Edit', new_question_path(@jurisdiction['abbreviation']), class: 'edit sim_act' %>
   </div>
 </section>

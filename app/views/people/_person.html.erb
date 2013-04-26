@@ -8,7 +8,7 @@
     
   </div>
   <div class="person-info">
-    <h2><%= link_to person.name, person_path(@jurisdiction.abbreviation, person) %></h2>
+    <h2><%= link_to person.name, person_path(@jurisdiction['abbreviation'], person) %></h2>
     <span class="jurisdiction"><%= person_attributes(person) %></span>
     <span class="stats"><span><%= pluralize person.question_count, 'Question' %></span>
     <span><%= pluralize person.answered_question_count, 'Answer' %></span></span>

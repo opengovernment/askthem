@@ -3,6 +3,10 @@ class Vote
   include Mongoid::Document
 
   belongs_to :metadatum, foreign_key: 'state'
+  belongs_to :bill
 
-  # @todo Updated based on wiki
+  # Returns the people who voted.
+  def people
+    # @todo
+  end
 end

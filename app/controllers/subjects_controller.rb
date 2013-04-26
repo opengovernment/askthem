@@ -5,29 +5,26 @@ class SubjectsController < ApplicationController
   respond_to :js, only: :show
   actions :index, :show
 
+  # @note There is no index with both the `subjects` and `session` fields.
   def show
     show! do |format|
-      @bills = Bill.where({
-        state: @jurisdiction.abbreviation,
-        subjects: @subject,
-        session: @jurisdiction.current_session, # not in index
-      }).desc('action_dates.last').page(params[:page])
+      @bills = chain.where(subjects: @subject, session: parent.current_session).includes(:metadatum).desc('action_dates.last').page(params[:page])
       format.js {render partial: 'page'}
     end
   end
 
 private
 
+  # @note MT, RI and WI have inconsistent subject names (typos, etc.).
+  def chain
+    Bill.in(parent['abbreviation'])
+  end
+
   def collection
-    @subjects ||= subjects.sort
+    @subjects ||= chain.distinct('subjects').sort
   end
 
   def resource
-    @subject ||= subjects.find{|subject| subject.parameterize == params[:id]}
-  end
-
-  # @note MT, RI and WI have inconsistent subject names (typos, etc.).
-  def subjects
-    Bill.where(state: parent.id).distinct('subjects')
+    @subject ||= chain.distinct('subjects').find{|subject| subject.parameterize == params[:id]}
   end
 end
