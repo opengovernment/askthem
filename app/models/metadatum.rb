@@ -5,7 +5,7 @@ class Metadatum
   has_many :bills, foreign_key: 'state'
   has_many :committees, foreign_key: 'state'
   has_many :people, foreign_key: 'state'
-  has_many :questions, foreign_key: 'state'
+  has_many :questions, foreign_key: 'state' # @todo does this work in both directions/environments?
   has_many :votes, foreign_key: 'state'
 
   def self.find_by_abbreviation(abbreviation)

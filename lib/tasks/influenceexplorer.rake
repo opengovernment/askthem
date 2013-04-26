@@ -15,7 +15,7 @@ namespace :influenceexplorer do
         # Assume biographies never change.
         next if person.person_detail.persisted?
 
-        # Reset the incremental backoff.
+        # Reset the exponential backoff.
         wait = 1
 
         begin
@@ -34,7 +34,7 @@ namespace :influenceexplorer do
             person_detail.save!
           end
         rescue Errno::ECONNRESET, RestClient::ServerBrokeConnection
-          wait *= 2 # incremental backoff
+          wait *= 2 # exponential backoff
           sleep wait
           retry
         rescue RestClient::ResourceNotFound

@@ -9,7 +9,7 @@ class Bill
   # The bill's votes.
   has_many :votes
   # Questions about the bill.
-  has_many :questions
+  has_many :questions # @todo does this work in both directions/environments?
 
   field :question_count, type: Integer, default: 0
   field :answered_question_count, type: Integer, default: 0

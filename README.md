@@ -23,9 +23,29 @@ Get the latest data from OpenStates (in development only):
     ./script/openstates.sh
     rake db:mongoid:create_indexes
 
-Get biographies from the Influence Explorer API (a third of OpenStates legislators have biographies):
+### Influence Explorer
+
+You can import Influence Explorer data on a yearly basis.
+
+1. Get biographies from the Influence Explorer API (a third of OpenStates legislators have biographies)
 
     bundle exec rake influenceexplorer:biographies
+
+### Project VoteSmart
+
+You can import Project VoteSmart data on a yearly basis.
+
+1. Get Project VoteSmart rating categories
+
+        bundle exec rake projectvotesmart:categories
+
+2. Get Project VoteSmart special interest groups
+
+        bundle exec rake projectvotesmart:special_interest_groups
+
+3. Get Project VoteSmart special interest group ratings
+
+        bundle exec rake projectvotesmart:ratings
 
 ## Data Quality
 

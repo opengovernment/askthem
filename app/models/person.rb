@@ -6,9 +6,11 @@ class Person
   # The person's jurisdiction.
   belongs_to :metadatum, foreign_key: 'state'
   # Questions addressed to the person.
-  has_many :questions
+  has_many :questions # @todo does this work in both directions/environments?
+  # Special interest group ratings for the person.
+  has_many :ratings # @todo does this work in both directions/environments?
   # Stores Popolo fields that are not available in Billy.
-  has_one :person_detail, autobuild: true
+  has_one :person_detail, autobuild: true # @todo does this work in both directions/environments?
 
   # Popolo fields and aliases.
   field :full_name, type: String, as: :name

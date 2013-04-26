@@ -4,13 +4,13 @@ class Question
   store_in session: 'default' # @see https://github.com/mongoid/mongoid/pull/2909
 
   # The jurisdiction in which the question is asked.
-  belongs_to :metadatum, foreign_key: 'state'
+  belongs_to :metadatum, foreign_key: 'state' # @todo does this work in both directions/environments?
   # The author of the question.
   belongs_to :user
   # The person to whom the question is addressed.
-  belongs_to :person
+  belongs_to :person # @todo does this work in both directions/environments?
   # The bill the question is about.
-  belongs_to :bill
+  belongs_to :bill # @todo does this work in both directions/environments?
   # The signatures in support of the question.
   has_many :signatures
 
