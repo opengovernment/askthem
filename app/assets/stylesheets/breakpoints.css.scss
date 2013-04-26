@@ -225,6 +225,24 @@
     }
   }
   
+  section.profile{
+    header{
+      div.avatar{
+        display:block;
+        margin:0 auto 24px auto;
+      }
+      span.loc{
+        margin: auto;
+        display: block;
+        text-align: center;
+      }
+      ul.links{
+        margin:auto;
+        text-align:center;
+      }
+    }
+  }
+  
   /*
     Bills
   */

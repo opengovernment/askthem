@@ -19,11 +19,20 @@ div.avatar{
   }
 }
 
+.profile div.avatar{
+  @include border-radius(65px);
+  max-width:130px;
+}
+
 .people-list > li div.avatar{
   max-width:60px;
   width:17.647058823529%;
   vertical-align: top;
 }
+
+/*
+  Representatives
+*/
 
 section.people{
   header{
@@ -122,16 +131,30 @@ section.people{
   }
 }
 
-
 /*
-    <li>
-      <div class="avatar">
-        <img src="http://lorempixel.com/60/60/" alt="" />
-      </div>
-      <div class="person-info">
-        <h2>Steven Trevathan</h2>
-        <span class="jurisdiction">Republican, Representative, District 35</span>
-        <span class="stats"><span>0 Questions</span> <span>0 Answers</span></span>
-      </div>
-    </li>
+  User Profiles
 */
+section.profile{
+  padding-top:42px;
+  div.avatar{
+    vertical-align:middle;
+  }
+  div.person-info{
+    display:inline-block;
+    vertical-align:middle;
+    margin-left:1.923076923077%;
+    span.loc{
+      font-size:1.125em;
+      line-height: 1.667em;
+    }
+    ul.links>li{
+      display:inline-block;
+      margin-right:04.615384615385%;
+      a{
+        display:block;
+        font-size:0.813em;
+        line-height: 1.846em;
+      }
+    }
+  }
+}

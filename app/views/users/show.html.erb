@@ -1,1 +1,58 @@
-User Profile
+<section class="profile">
+  <header>
+    <div class="avatar">
+      <img src="http://lorempixel.com/130/130/" alt="" />
+    </div>
+    <div class="person-info">
+      <h1>Steven Trevathan</h1>
+      <span class="loc">Boston, MA</span>
+      <ul class="links">
+        <li><a href="#">@strevat</a></li>
+        <li><a href="#">steventrevathan.com</a></li>
+      </ul>
+    </div>
+  </header>
+  <div class="related_data">
+    <nav>
+      <ul class="related_nav">
+        <li><a href="#" class="active">12 Questions</a></li>
+        <li><a href="#">300 Signatures</a></li>
+      </ul>
+    </nav>
+    <div class="related_content">
+      <section class="questions related_focus">
+        <ol>
+          <% 5.times do %>
+          <li>
+            <div class="question_content">
+              <%= link_to 'Why have this thing for act for what? <span class="icon-angle-right view"></span>'.html_safe, '#', class: 'title' %>
+              <p>Lorem ipsum dolor sit amet, adipisicing elit, sed do  tempor incididunt ut labore et dolore magna aliqua sed do eiusmod tempor  ut&hellip; <span class="context">&rarr; in Pennsylvania Bills</span></p>
+              <span class="target">
+                <%= link_to image_tag('http://lorempixel.com/40/40/people/', size: '20x20', alt: '') + 'Steve T', '#' %>
+                <span class="to">&rarr;</span>
+                <%= link_to image_tag('http://lorempixel.com/40/40/people/', size: '20x20', alt: '') + 'Phil Mendelson, Councilmember, Ward 7', '#', class: 'recipient' %>
+              </span>
+            </div>
+            <ul class="activity">
+              <li><%= link_to '25 Signatures', '#', class: 'support'%></li>
+            </ul>
+            <a href="#" class="sign_on">Sign On</a>
+            <div class="clear"></div>
+          </li>
+          <% end %>
+
+        </ol>
+      </section>
+      <aside>
+        <section>
+          <h4>Top Issues</h4>
+          <ul>
+            <li><a href="#">Education</a></li>
+            <li><a href="#">Human Rights</a></li>
+            <li><a href="#">Natural Resources</a></li>
+          </ul>
+        </section>
+      </aside>
+    </div>
+  </div>
+</section>
