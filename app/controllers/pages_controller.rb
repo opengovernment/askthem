@@ -28,6 +28,6 @@ class PagesController < ApplicationController
 private
 
   def set_jurisdiction
-    @jurisdiction ||= Metadatum.find(params[:jurisdiction])
+    @jurisdiction ||= Metadatum.find_by_abbreviation(params[:jurisdiction])
   end
 end

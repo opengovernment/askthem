@@ -1,6 +1,6 @@
 class SubjectsController < ApplicationController
   inherit_resources
-  belongs_to :jurisdiction, parent_class: Metadatum, param: :jurisdiction
+  belongs_to :jurisdiction, parent_class: Metadatum, finder: :find_by_abbreviation, param: :jurisdiction
   respond_to :html
   respond_to :js, only: :show
   actions :index, :show
@@ -8,7 +8,7 @@ class SubjectsController < ApplicationController
   def show
     show! do |format|
       @bills = Bill.where({
-        state: @jurisdiction.id,
+        state: @jurisdiction.abbreviation,
         subjects: @subject,
         session: @jurisdiction.current_session, # not in index
       }).desc('action_dates.last').page(params[:page])
