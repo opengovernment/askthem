@@ -1,5 +1,10 @@
 # Open Government: Application
 
+[![Build Status](https://secure.travis-ci.org/opengovernment/opengovernment-app.png)](http://travis-ci.org/opengovernment/opengovernment-app)
+[![Dependency Status](https://gemnasium.com/opengovernment/opengovernment-app.png)](https://gemnasium.com/opengovernment/opengovernment-app)
+[![Coverage Status](https://coveralls.io/repos/opengovernment/opengovernment-app/badge.png?branch=master)](https://coveralls.io/r/opengovernment/opengovernment-app)
+[![Code Climate](https://codeclimate.com/github/opengovernment/opengovernment-app.png)](https://codeclimate.com/github/opengovernment/opengovernment-app)
+
 ## Getting Started
 
 Install or update dependencies:

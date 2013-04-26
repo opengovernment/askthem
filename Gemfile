@@ -12,6 +12,7 @@ gem 'resque'
 gem 'inherited_resources', '~> 1.3.1'
 gem 'simple_form'
 gem 'kaminari'
+gem 'coveralls', require: false
 
 # Authentication
 gem 'devise'
@@ -42,6 +43,7 @@ end
 
 group :test do
   gem 'factory_girl_rails'
+  gem 'mongoid-rspec'
 end
 
 group :assets do
