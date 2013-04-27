@@ -19,6 +19,7 @@ class PersonDetail
 
   index(state: 1)
   index(person_id: 1)
+  index(votesmart_id: 1)
 
   validates_presence_of :state, :person_id
 

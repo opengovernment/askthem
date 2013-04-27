@@ -55,11 +55,11 @@ private
     # Each pair of `@lower` and `@upper` lines must be run together, as below,
     # otherwise the first query to evaluate will clear the persistence options
     # of the unevaluated query.
-    @lower = Person.in(@jurisdiction.abbreviation).where(chamber: 'lower')
+    @lower = Person.in(@jurisdiction.abbreviation).active.where(chamber: 'lower')
     @lower_parties = @lower.group_by{|person| person['party']}
-    @upper = Person.in(@jurisdiction.abbreviation).where(chamber: 'upper')
+    @upper = Person.in(@jurisdiction.abbreviation).active.where(chamber: 'upper')
     @upper_parties = @upper.group_by{|person| person['party']}
-    @bills = Bill.in(@jurisdiction.abbreviation).includes(:metadatum).desc('action_dates.last').page(params[:page])
+    @bills = Bill.in(@jurisdiction.abbreviation).in_session(@jurisdiction.current_session).page(params[:page])
     @votes = [] # @todo stub
 
     @tab = tab

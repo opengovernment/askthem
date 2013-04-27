@@ -13,6 +13,8 @@ class Bill
 
   field :subjects, type: Array # for FactoryGirl
 
+  scope :in_session, ->(session) {includes(:metadatum).where(session: session).desc('action_dates.last')}
+
   DATE_ORDER = {
     'lower' => [
       'first',

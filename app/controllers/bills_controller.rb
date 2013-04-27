@@ -35,6 +35,6 @@ private
   end
 
   def collection
-    @bills ||= end_of_association_chain.where(session: parent.current_session).includes(:metadatum).desc('action_dates.last').page(params[:page])
+    @bills ||= end_of_association_chain.in_session(parent.current_session).page(params[:page])
   end
 end

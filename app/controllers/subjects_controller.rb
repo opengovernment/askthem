@@ -8,7 +8,7 @@ class SubjectsController < ApplicationController
   # @note There is no index with both the `subjects` and `session` fields.
   def show
     show! do |format|
-      @bills = chain.where(subjects: @subject, session: parent.current_session).includes(:metadatum).desc('action_dates.last').page(params[:page])
+      @bills = chain.in_session(parent.current_session).where(subjects: @subject).page(params[:page])
       format.js {render partial: 'page'}
     end
   end

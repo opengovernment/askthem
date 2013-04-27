@@ -22,6 +22,8 @@ class Person
   field '+gender', type: String, as: :gender
   field :photo_url, type: String, as: :image
 
+  scope :active, where(active: true).asc(:chamber, :family_name)
+
   # Stores Popolo fields that are not available in Billy.
   # @note `has_one` associations require a matching `belongs_to`, as they must
   #   be able to call `inverse_of_field`.

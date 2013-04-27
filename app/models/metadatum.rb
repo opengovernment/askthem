@@ -11,7 +11,6 @@ class Metadatum
   # OpenGoverment
   has_many :person_details, foreign_key: 'state'
   has_many :questions, foreign_key: 'state'
-  has_many :ratings, foreign_key: 'state'
 
   field :_id, type: String, default: -> {abbreviation}
   field :abbreviation, type: String

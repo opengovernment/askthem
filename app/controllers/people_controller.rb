@@ -11,7 +11,7 @@ class PeopleController < ApplicationController
   end
 
   def bills
-    @bills = resource.bills.includes(:metadatum).page(params[:page])
+    @bills = resource.bills.in_session(parent.current_session).page(params[:page])
     tab 'bills'
   end
 
@@ -40,6 +40,6 @@ private
   end
 
   def collection
-    @people ||= end_of_association_chain.where(active: true).asc(:chamber, :family_name)
+    @people ||= end_of_association_chain.active
   end
 end
