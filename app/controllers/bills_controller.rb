@@ -31,7 +31,7 @@ private
   end
 
   def end_of_association_chain
-    Bill.in(parent['abbreviation'])
+    Bill.in(parent.abbreviation)
   end
 
   def collection

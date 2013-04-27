@@ -1,6 +1,6 @@
 <li>
   <div class="bill_content">
-    <%= link_to bill['bill_id'], bill_path(@jurisdiction['abbreviation'], bill), class: 'title' %>
+    <%= link_to bill['bill_id'], bill_path(@jurisdiction.abbreviation, bill), class: 'title' %>
     <p>
       <%= short_bill_title(bill) %>, <%= bill.session_label %>
     </p>

@@ -9,7 +9,7 @@
     <ul class="radio_nav">
       <% if @jurisdiction.upper_chamber? %>
         <li>
-          <%= link_to upper_overview_path(@jurisdiction['abbreviation']), tab_options('upper') do %>
+          <%= link_to upper_overview_path(@jurisdiction.abbreviation), tab_options('upper') do %>
             <%= @upper.count %> <%= @jurisdiction.chamber_title('upper').pluralize %>
             <span class="info">
               <% @upper_parties.each do |party,people| %>
@@ -21,7 +21,7 @@
       <% end %>
       <% if @jurisdiction.lower_chamber? %>
         <li>
-          <%= link_to lower_overview_path(@jurisdiction['abbreviation']), tab_options('lower', 'overview') do %>
+          <%= link_to lower_overview_path(@jurisdiction.abbreviation), tab_options('lower', 'overview') do %>
             <%= @lower.count %> <%= @jurisdiction.chamber_title('lower').pluralize %>
             <span class="info">
               <% @lower_parties.each do |party,people| %>
@@ -32,12 +32,12 @@
         </li>
       <% end %>
       <li>
-        <%= link_to bills_overview_path(@jurisdiction['abbreviation']), tab_options('bills') do %>
+        <%= link_to bills_overview_path(@jurisdiction.abbreviation), tab_options('bills') do %>
           <%= number_with_delimiter @bills.count %> Bills
         <% end %>
       </li>
       <li class="last">
-        <%= link_to votes_overview_path(@jurisdiction['abbreviation']), tab_options('votes') do %>
+        <%= link_to votes_overview_path(@jurisdiction.abbreviation), tab_options('votes') do %>
           <%= number_with_delimiter @votes.count %> Key Votes
         <% end %>
       </li>

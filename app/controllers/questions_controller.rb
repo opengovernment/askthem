@@ -6,7 +6,7 @@ class QuestionsController < ApplicationController
   custom_actions resource: :preview
 
   def show
-    @question = Question.new(title: 'What for dost doth under thy venerable name?', state: @jurisdiction['abbreviation']) # @todo stub
+    @question = Question.new(title: 'What for dost doth under thy venerable name?', state: @jurisdiction.abbreviation) # @todo stub
     @user = User.new unless user_signed_in?
   end
 

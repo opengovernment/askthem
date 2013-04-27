@@ -5,7 +5,7 @@
     <header>
       <h1 class="action">Ask a question</h1>
     </header>
-    <form class="action" action="<%= preview_questions_path(@jurisdiction['abbreviation']) %>" method="get" accept-charset="utf-8">
+    <form class="action" action="<%= preview_questions_path(@jurisdiction.abbreviation) %>" method="get" accept-charset="utf-8">
       <div class="count">
         <span class="summary_count">60</span>
         <input type="text" name="summary" id="summary" placeholder="Summary&hellip;" maxlength="60">

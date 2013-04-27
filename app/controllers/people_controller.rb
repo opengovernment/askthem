@@ -36,7 +36,7 @@ private
   end
 
   def end_of_association_chain
-    Person.in(parent['abbreviation'])
+    Person.in(parent.abbreviation)
   end
 
   def collection
