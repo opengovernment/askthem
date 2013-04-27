@@ -24,6 +24,6 @@ private
 
   def increment(question, field, by)
     question.person.inc(field, by)
-    question.bill.inc(field, by) if question.bill?
+    question.bill.inc(field, by) if question.bill_id?
   end
 end

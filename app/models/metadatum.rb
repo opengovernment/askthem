@@ -2,13 +2,16 @@
 class Metadatum
   include Mongoid::Document
 
+  # OpenStates
   has_many :bills, foreign_key: 'state'
   has_many :committees, foreign_key: 'state'
   has_many :people, foreign_key: 'state'
-  has_many :questions, foreign_key: 'state' # @todo does this work in both directions/environments?
   has_many :votes, foreign_key: 'state'
 
-  # Frequently accessed and needed for FactoryGirl.
+  # OpenGoverment
+  has_many :questions, foreign_key: 'state'
+
+  field :_id, type: String, default: -> {abbreviation}
   field :abbreviation, type: String
 
   def self.find_by_abbreviation(abbreviation)

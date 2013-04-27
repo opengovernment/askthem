@@ -39,7 +39,7 @@ FactoryGirl.define do
     rating_scorecard
 
     after(:build) do |record|
-      record.person = FactoryGirl.create(:person)
+      record.person = FactoryGirl.create(:person) unless record.person_id?
     end
   end
 
@@ -47,7 +47,7 @@ FactoryGirl.define do
 
   factory :person_detail do
     after(:build) do |record|
-      record.person = FactoryGirl.create(:person)
+      record.person = FactoryGirl.create(:person) unless record.person_id?
     end
   end
 
@@ -57,12 +57,12 @@ FactoryGirl.define do
     body 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vel blandit felis. Morbi nec odio arcu.'
 
     after(:build) do |record|
-      record.person = FactoryGirl.create(:person)
+      record.person = FactoryGirl.create(:person) unless record.person_id?
     end
 
     factory :question_about_bill do
       after(:build) do |record|
-        record.bill = FactoryGirl.create(:bill)
+        record.bill = FactoryGirl.create(:bill) unless record.bill_id?
       end
     end
   end

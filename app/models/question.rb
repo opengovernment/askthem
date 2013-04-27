@@ -31,6 +31,9 @@ class Question
   validates_length_of :body, minimum: 60, allow_blank: true
   validate :state_must_be_included_in_the_list_of_states
   validate :subject_must_be_included_in_the_list_of_subjects
+  validate :bill_and_person_must_belong_to_the_same_state
+
+  attr_accessor :person_state, :bill_state
 
   # @return [Metadatum] the jurisdiction in which the question is asked
   def metadatum
@@ -45,7 +48,7 @@ class Question
   # @param [Person] person a person
   def person=(person)
     self.person_id = person.id
-    self.state = person['state']
+    self.state = self.person_state = person['state']
   end
 
   # @return [Bill] the bill the question is about
@@ -56,7 +59,7 @@ class Question
   # @param [Bill] bill a bill
   def bill=(bill)
     self.bill_id = bill.id
-    self.state = bill['state']
+    self.state = self.bill_state = bill['state']
   end
 
 private
@@ -69,6 +72,12 @@ private
   def subject_must_be_included_in_the_list_of_subjects
     unless subject.blank? || Bill.in(state).distinct('subjects').include?(subject)
       errors.add(:subject, 'is not included in the list of subjects')
+    end
+  end
+
+  def bill_and_person_must_belong_to_the_same_state
+    unless bill_id.blank? || bill_state == person_state
+      errors.add(:base, 'The person and the bill must belong to the same state')
     end
   end
 end
