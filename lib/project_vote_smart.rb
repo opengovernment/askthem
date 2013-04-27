@@ -8,6 +8,7 @@ class ProjectVoteSmart
   ERROR_MESSAGES = [
     'No categories for this state and year.',
     'No SIGs fit this criteria.',
+    'No Sig Rating fits this criterion',
     'No Ratings fit this criteria.',
   ]
 

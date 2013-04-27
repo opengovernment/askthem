@@ -33,17 +33,17 @@ You can import Influence Explorer data on a yearly basis.
 
 ### Project VoteSmart
 
-You can import Project VoteSmart data on a yearly basis.
+You can import Project VoteSmart data on a yearly basis (see, for example, [the years for each special interest group's last rating](http://votesmart.org/interest-groups)).
 
-1. Get Project VoteSmart rating categories
-
-        bundle exec rake projectvotesmart:categories
-
-2. Get Project VoteSmart special interest groups
+1. Get Project VoteSmart special interest groups
 
         bundle exec rake projectvotesmart:special_interest_groups
 
-3. Get Project VoteSmart special interest group ratings
+1. Get Project VoteSmart special interest group scorecards
+
+        bundle exec rake projectvotesmart:scorecards
+
+1. Get Project VoteSmart special interest group scorecard ratings
 
         bundle exec rake projectvotesmart:ratings
 
