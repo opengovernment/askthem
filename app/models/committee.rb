@@ -7,7 +7,7 @@ class Committee
   # Returns the committee's name.
   #
   # @return [String] the committee's name
-  # @note Field in common with Popolo.
+  # @note From Popolo.
   def name
     read_attribute(:subcommittee) || read_attribute(:committee)
   end

@@ -1,5 +1,6 @@
 # Additional translations at https://github.com/plataformatec/devise/wiki/I18n
-# @note Commenting out any unused features to make it easier on translators.
+#
+# Commenting out any unused features to make it easier on translators.
 
 en:
   errors:

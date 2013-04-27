@@ -1,6 +1,6 @@
-# @note Unlike Devise, confirmation emails are resent when an unconfirmed user
-#   attempts to sign in. It's unlikely that a user will actively seek out the
-#   "Resend confirmation instructions" page.
+# Unlike Devise, confirmation emails are resent when an unconfirmed user
+# attempts to sign in. It's unlikely that a user will actively seek out the
+# "Resend confirmation instructions" page.
 class ConfirmationsController < Devise::ConfirmationsController
   def new
     not_found

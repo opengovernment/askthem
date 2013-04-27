@@ -3,12 +3,12 @@ module ApplicationHelper
     request.protocol + request.host_with_port + request.fullpath
   end
 
-  # @note Called by the page layout and paginators.
+  # Called by the page layout and paginators.
   def title(args = {})
     translate_in_controller_scope("#{controller.action_name}.title", params.slice(:page).merge(default: 'OpenGovernment').merge(args))
   end
 
-  # @note Called by the page layout.
+  # Called by the page layout.
   def description(args = {})
     translate_in_controller_scope("#{controller.action_name}.description", params.slice(:page).merge(default: '').merge(args))
   end

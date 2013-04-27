@@ -52,15 +52,18 @@ class User
   has_many :signatures
   mount_uploader :image, ImageUploader
 
+  field :coordinates, type: Array
+
+  # Based on Popolo.
   field :given_name, type: String
   field :family_name, type: String
-  # @note The following are vCard terms.
+
+  # Based on vCard.
   field :street_address, type: String
   field :locality, type: String
   field :region, type: String
   field :postal_code, type: String
   field :country, type: String, default: 'US'
-  field :coordinates, type: Array
 
   index('authentications.provider' => 1, 'authentications.uid' => 1)
 
@@ -101,7 +104,7 @@ class User
     end
   end
 
-  # @note Unlike Devise, allows changing the password without a password.
+  # Unlike Devise, allows changing the password without a password.
   def update_without_password(params, *options)
     params.delete(:password) if params[:password].blank?
     result = update_attributes(params, *options)
@@ -109,12 +112,12 @@ class User
     result
   end
 
-  # @note Unlike Devise, allows updating a user without a password.
+  # Unlike Devise, allows updating a user without a password.
   alias_method :update_with_password, :update_without_password
 
 private
 
-  # @note Unlike Devise, do not require password confirmations.
+  # Unlike Devise, doesn't require password confirmations.
   def set_password_confirmation
     self.password_confirmation = password
   end

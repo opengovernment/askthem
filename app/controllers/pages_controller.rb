@@ -52,9 +52,9 @@ private
   end
 
   def tab(tab)
-    # @note Each pair of `@lower` and `@upper` lines must be run together, as
-    #   below, otherwise the first query to evaluate will clear the persistence
-    #   options of the unevaluated query.
+    # Each pair of `@lower` and `@upper` lines must be run together, as below,
+    # otherwise the first query to evaluate will clear the persistence options
+    # of the unevaluated query.
     @lower = Person.in(@jurisdiction['abbreviation']).where(chamber: 'lower')
     @lower_parties = @lower.group_by{|person| person['party']}
     @upper = Person.in(@jurisdiction['abbreviation']).where(chamber: 'upper')
