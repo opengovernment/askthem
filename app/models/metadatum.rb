@@ -8,7 +8,7 @@ class Metadatum
   has_many :questions, foreign_key: 'state' # @todo does this work in both directions/environments?
   has_many :votes, foreign_key: 'state'
 
-  # Needed for FactoryGirl, and accessed frequently.
+  # Frequently accessed and needed for FactoryGirl.
   field :abbreviation, type: String
 
   def self.find_by_abbreviation(abbreviation)
