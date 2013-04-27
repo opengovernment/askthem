@@ -2,7 +2,10 @@
 FactoryGirl.define do
   # OpenStates
 
+  # @note If `id` were ever different from `abbreviation`, all `belongs_to
+  #   :metadatum` calls would to set `:primary_key`.
   factory :metadatum do
+    id 'anytown'
     abbreviation 'anytown'
   end
 
@@ -73,11 +76,11 @@ FactoryGirl.define do
     sequence(:email) {|n| "user#{n}@example.com" }
     given_name 'John'
     family_name 'Public'
-    street_address '1 Main St'
-    locality 'Anytown'
-    region 'ak'
+    street_address '148 Lafayette St'
+    locality 'New York'
+    region 'ny'
     country 'US'
-    postal_code '11111'
+    postal_code '10013'
     password 'password'
   end
 end

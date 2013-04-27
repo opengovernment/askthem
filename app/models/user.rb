@@ -2,20 +2,20 @@ class User
   include Mongoid::Document
   store_in session: 'default' # @see https://github.com/mongoid/mongoid/pull/2909
 
+  # Devise
+
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable, :recoverable, :rememberable,
-    :trackable, :validatable, :confirmable, :omniauthable,
-    :omniauth_providers => [:facebook]
+  # devise :database_authenticatable, :registerable,
+  #        :recoverable, :rememberable, :trackable, :validatable
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable,
+    :confirmable, :omniauthable, :omniauth_providers => [:facebook]
 
   ## Database authenticatable
   field :email,              :type => String, :default => ""
   field :encrypted_password, :type => String, :default => ""
 
-  validates_presence_of :email
-  validates_presence_of :encrypted_password
-  
   ## Recoverable
   field :reset_password_token,   :type => String
   field :reset_password_sent_at, :type => Time
@@ -31,10 +31,13 @@ class User
   field :last_sign_in_ip,    :type => String
 
   ## Confirmable
+  # field :confirmation_token,   :type => String
+  # field :confirmed_at,         :type => Time
+  # field :confirmation_sent_at, :type => Time
+  # field :unconfirmed_email,    :type => String # Only if using reconfirmable
   field :confirmation_token,   :type => String
   field :confirmed_at,         :type => Time
   field :confirmation_sent_at, :type => Time
-  field :unconfirmed_email,    :type => String # Only if using reconfirmable
 
   ## Lockable
   # field :failed_attempts, :type => Integer, :default => 0 # Only if lock strategy is :failed_attempts
@@ -44,8 +47,10 @@ class User
   ## Token authenticatable
   # field :authentication_token, :type => String
 
+  # Non-Devise
+
   include Geocoder::Model::Mongoid
-  geocoded_by :address
+  geocoded_by :address_for_geocoding
 
   embeds_many :authentications
   has_many :questions
@@ -79,32 +84,39 @@ class User
     where('authentications.provider' => hash[:provider], 'authentications.uid' => hash[:uid]).first
   end
 
+  # @return [String] the user's formatted name
   def name
     "#{given_name} #{family_name}"
   end
 
+  # @return [String] the user's persisted given name
   def alternate_name
     given_name_was # avoid updating the navigation if there are arrors on the object
   end
 
-  def address
-    [street_address, locality, region, country, postal_code] * ', '
-  end
-
+  # @return [Array<Question>] questions signed by the user
   def questions_signed
     Question.find(signatures.map(&:question_id))
   end
 
+  # @return [String] the user's address for geocoding
+  def address_for_geocoding
+    [street_address, locality, region, country, postal_code] * ', '
+  end
+
   @queue = :user_geocode
   def self.perform(id, meth)
-    user = self.class.find(id) # will raise an error if not found
-    case meth
+    user = find(id) # will raise an error if not found
+    case meth.to_s
     when 'geocode'
       user.geocode
+      user.save
     end
   end
 
   # Unlike Devise, allows changing the password without a password.
+  # @see https://github.com/plataformatec/devise/blob/master/lib/devise/models/database_authenticatable.rb#L89
+  # @see https://github.com/plataformatec/devise/blob/master/lib/devise/models/database_authenticatable.rb#L59
   def update_without_password(params, *options)
     params.delete(:password) if params[:password].blank?
     result = update_attributes(params, *options)
