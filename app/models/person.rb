@@ -9,8 +9,6 @@ class Person
   has_many :questions # @todo does this work in both directions/environments?
   # Special interest group ratings for the person.
   has_many :ratings # @todo does this work in both directions/environments?
-  # Stores Popolo fields that are not available in Billy.
-  has_one :person_detail, autobuild: true # @todo does this work in both directions/environments?
 
   # Popolo fields and aliases.
   field :full_name, type: String, as: :name
@@ -26,6 +24,11 @@ class Person
 
   field :question_count, type: Integer, default: 0
   field :answered_question_count, type: Integer, default: 0
+
+  # Stores Popolo fields that are not available in Billy.
+  def person_detail
+    PersonDetail.where(person_id: id).first || PersonDetail.new(person: person)
+  end
 
   # Returns questions answered by the person.
   def questions_answered
