@@ -10,6 +10,7 @@ class RatingScorecard
 
   index(ratingId: 1)
   index(sigId: 1)
+  index(retrieved: 1)
 
   # A time span in the format `YYYY` or `YYYY-YYYY`, or the empty string.
   field :timespan, type: String

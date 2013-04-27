@@ -27,8 +27,8 @@ class Question
   field :answered, type: Boolean, default: false
 
   index(state: 1)
-  index(person_id: 1)
-  index(bill_id: 1)
+  index(person_id: 1, answered: 1)
+  index(bill_id: 1, answered: 1)
 
   validates_presence_of :state, :person_id, :user_id, :title, :body
   validates_length_of :title, within: 3..60, allow_blank: true

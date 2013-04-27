@@ -5,10 +5,9 @@ class SubjectsController < ApplicationController
   respond_to :js, only: :show
   actions :index, :show
 
-  # @note There is no index with both the `subjects` and `session` fields.
   def show
     show! do |format|
-      @bills = chain.in_session(parent.current_session).where(subjects: @subject).page(params[:page])
+      @bills = chain.in_session(parent.current_session).where(subjects: @subject).page(params[:page]) # no index includes both `subjects` and `session`
       format.js {render partial: 'page'}
     end
   end
