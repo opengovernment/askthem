@@ -5,8 +5,11 @@ FactoryGirl.define do
   # @note If `id` were ever different from `abbreviation`, all `belongs_to
   #   :metadatum` calls would to set `:primary_key`.
   factory :metadatum do
-    id 'anytown'
     abbreviation 'anytown'
+
+    after(:build) do |record|
+      record._id = record.abbreviation
+    end
   end
 
   factory :bill do

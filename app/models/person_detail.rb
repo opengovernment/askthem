@@ -17,6 +17,7 @@ class PersonDetail
   # The person's candidateId from ProjectVoteSmart.
   field :votesmart_id, type: String
 
+  index(state: 1)
   index(person_id: 1)
 
   validates_presence_of :state, :person_id
@@ -33,7 +34,11 @@ class PersonDetail
 
   # @param [Person] person a person
   def person=(person)
-    self.person_id = person.id
-    self.state = person['state']
+    if person
+      self.person_id = person.id
+      self.state = person['state']
+    else
+      self.person_id = nil
+    end
   end
 end

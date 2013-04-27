@@ -30,8 +30,8 @@
           <span class="attr">
             <%= @bill.type.first.titleize %>
           </span>
-          <span class="attr"><%= pluralize @bill.question_count, 'question' %></span>
-          <span class="attr"><%= pluralize @bill.answered_question_count, 'answer' %></span>
+          <span class="attr"><%= pluralize @bill.questions.count, 'question' %></span>
+          <span class="attr"><%= pluralize @bill.questions_answered.count, 'answer' %></span>
         </div>
         <ol class="actions">
           <% @bill.dates.each do |action,date| %>

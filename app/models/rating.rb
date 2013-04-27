@@ -8,10 +8,6 @@ class Rating
   # The scorecard from which this rating originates.
   belongs_to :rating_scorecard, foreign_key: 'ratingId', primary_key: 'ratingId'
 
-  index(person_id: 1, ratingId: 1)
-  index(ratingId: 1)
-  index(sigId: 1)
-
   # The person's jurisdiction.
   field :state, type: String
   # The person being rated.
@@ -28,6 +24,13 @@ class Rating
   field :name, type: String
   field :description, type: String
 
+  index(person_id: 1, ratingId: 1)
+  index(ratingId: 1)
+  index(sigId: 1)
+
+  index(state: 1)
+  index(person_id: 1)
+
   validates_presence_of :state, :person_id
 
   # @return [Metadatum] the jurisdiction in which the question is asked
@@ -42,7 +45,11 @@ class Rating
 
   # @param [Person] person a person
   def person=(person)
-    self.person_id = person.id
-    self.state = person['state']
+    if person
+      self.person_id = person.id
+      self.state = person['state']
+    else
+      self.person_id = nil
+    end
   end
 end

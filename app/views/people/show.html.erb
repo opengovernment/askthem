@@ -17,8 +17,8 @@
         </h1>
         <h2><%= person_attributes(@person) %></h2>
         <div class="attr">
-          <span class="count"><%= pluralize @person.question_count, 'question' %></span>
-          <span class="count"><%= pluralize @person.answered_question_count, 'answer' %></span>
+          <span class="count"><%= pluralize @person.questions.count, 'question' %></span>
+          <span class="count"><%= pluralize @person.questions_answered.count, 'answer' %></span>
         </div>
       </div>
 

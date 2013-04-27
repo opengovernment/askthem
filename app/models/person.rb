@@ -6,7 +6,7 @@ class Person
   # The person's jurisdiction.
   belongs_to :metadatum, foreign_key: 'state'
   # Questions addressed to the person.
-  has_many :questions # @todo does this work in both directions/environments?
+  has_many :questions
   # Special interest group ratings for the person.
   has_many :ratings
 
@@ -21,9 +21,6 @@ class Person
   field :email, type: String
   field '+gender', type: String, as: :gender
   field :photo_url, type: String, as: :image
-
-  field :question_count, type: Integer, default: 0
-  field :answered_question_count, type: Integer, default: 0
 
   # Stores Popolo fields that are not available in Billy.
   # @note `has_one` associations require a matching `belongs_to`, as they must

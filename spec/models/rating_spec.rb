@@ -7,7 +7,7 @@ describe Rating do
 
   context 'with two sessions' do
     before :each do
-      @metadatum = Metadatum.with(session: 'openstates').create(_id: 'zz', abbreviation: 'zz')
+      @metadatum = Metadatum.with(session: 'openstates').create(abbreviation: 'zz')
       @person = Person.with(session: 'openstates').create(state: 'zz')
       @record = Rating.with(session: 'default').create(person: @person)
     end

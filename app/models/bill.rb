@@ -9,10 +9,9 @@ class Bill
   # The bill's votes.
   has_many :votes
   # Questions about the bill.
-  has_many :questions # @todo does this work in both directions/environments?
+  has_many :questions
 
-  field :question_count, type: Integer, default: 0
-  field :answered_question_count, type: Integer, default: 0
+  field :subjects, type: Array # for FactoryGirl
 
   DATE_ORDER = {
     'lower' => [
