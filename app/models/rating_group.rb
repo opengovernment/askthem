@@ -1,16 +1,21 @@
 # Project VoteSmart
 #
-# @note A special interest group can belong to multiple categories, so we would
-#   need a HABTM association between the two. This information is not directly
-#   available in the API. We should also verify if a special interest group can
-#   ever assign a rating whose categories are outside its own categories.
+# A special interest group can belong to multiple categories, so we would need
+# a HABTM association between the two. This information is not directly
+# available in the API. We should also verify if a special interest group can
+# ever assign a rating whose categories are outside its own categories.
+#
+# @see http://api.votesmart.org/docs/Rating.html
 class RatingGroup
   include Mongoid::Document
 
+  # The special interest group's scorecards.
+  has_many :rating_scorecards, foreign_key: 'sigId', primary_key: 'sigId'
   # The special interest group's ratings.
   has_many :ratings, foreign_key: 'sigId', primary_key: 'sigId'
 
-  field :sigId, type: String
+  index(sigId: 1)
+
   field :parentId, type: String # always -1
   field :stateId, type: String # always "NA"
   field :name, type: String

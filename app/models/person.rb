@@ -8,7 +8,7 @@ class Person
   # Questions addressed to the person.
   has_many :questions # @todo does this work in both directions/environments?
   # Special interest group ratings for the person.
-  has_many :ratings # @todo does this work in both directions/environments?
+  has_many :ratings
 
   # Popolo fields and aliases.
   field :full_name, type: String, as: :name
@@ -26,6 +26,8 @@ class Person
   field :answered_question_count, type: Integer, default: 0
 
   # Stores Popolo fields that are not available in Billy.
+  # @note `has_one` associations require a matching `belongs_to`, as they must
+  #   be able to call `inverse_of_field`.
   def person_detail
     PersonDetail.where(person_id: id).first || PersonDetail.new(person: person)
   end

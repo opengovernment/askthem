@@ -8,21 +8,30 @@ class PersonDetail
   # person has on other websites, e.g. Twitter.
   embeds_many :links
 
-  # The person'd ID.
-  field :person_id
   # The person's jurisdiction.
-  field :state
+  field :state, type: String
+  # The person.
+  field :person_id, type: String
   # The person's extended biography.
-  field :biography
+  field :biography, type: String
   # The person's candidateId from ProjectVoteSmart.
-  field :votesmart_id
+  field :votesmart_id, type: String
 
   index(person_id: 1)
 
+  validates_presence_of :state, :person_id
+
+  # @return [Metadatum] the jurisdiction in which the question is asked
+  def metadatum
+    Metadatum.find_by_abbreviation(state)
+  end
+
+  # @return [Person] the person
   def person
     Person.use(state).find(person_id)
   end
 
+  # @param [Person] person a person
   def person=(person)
     self.person_id = person.id
     self.state = person['state']

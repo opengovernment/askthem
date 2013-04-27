@@ -1,13 +1,72 @@
 # https://github.com/thoughtbot/factory_girl/blob/master/GETTING_STARTED.md
 FactoryGirl.define do
+  # OpenStates
+
   factory :metadatum do
-    id 'ak'
+    abbreviation 'anytown'
   end
 
   factory :bill do
+    metadatum
+  end
+
+  factory :committee do
+    metadatum
   end
 
   factory :person do
+    metadatum
+  end
+
+  factory :vote do
+    metadatum
+  end
+
+  # Project VoteSmart
+
+  factory :rating_group do
+  end
+
+  factory :rating_scorecard do
+    rating_group
+  end
+
+  factory :rating do
+    rating_group
+    rating_scorecard
+
+    after(:build) do |record|
+      record.person = FactoryGirl.create(:person)
+    end
+  end
+
+  # OpenGovernment
+
+  factory :person_detail do
+    after(:build) do |record|
+      record.person = FactoryGirl.create(:person)
+    end
+  end
+
+  factory :question do
+    user
+    title 'Question'
+    body 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vel blandit felis. Morbi nec odio arcu.'
+
+    after(:build) do |record|
+      record.person = FactoryGirl.create(:person)
+    end
+
+    factory :question_about_bill do
+      after(:build) do |record|
+        record.bill = FactoryGirl.create(:bill)
+      end
+    end
+  end
+
+  factory :signature do
+    user
+    question
   end
 
   factory :user do
@@ -20,17 +79,5 @@ FactoryGirl.define do
     country 'US'
     postal_code '11111'
     password 'password'
-  end
-
-  factory :question do
-    state 'ak'
-    user
-    person
-    title 'Question'
-    body 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vel blandit felis. Morbi nec odio arcu.'
-
-    factory :question_about_bill do
-      bill
-    end
   end
 end
