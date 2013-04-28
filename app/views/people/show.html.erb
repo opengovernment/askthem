@@ -33,10 +33,11 @@
     <div class="related_data">
       <nav>
         <ul class="related_nav">
-          <li><%= link_to 'Questions', person_path(@jurisdiction.abbreviation), tab_options('questions', 'show') %></li>
-          <li><%= link_to 'Sponsored Bills', bills_person_path(@jurisdiction.abbreviation), tab_options('bills') %></li>
-          <li><%= link_to 'Votes', votes_person_path(@jurisdiction.abbreviation), tab_options('votes') %></li>
-          <li><%= link_to 'Committees', committees_person_path(@jurisdiction.abbreviation), tab_options('committees') %></li>
+          <li><%= link_to 'Questions', person_path(@jurisdiction.abbreviation, @person.id), tab_options('questions', 'show') %></li>
+          <li><%= link_to 'Sponsored Bills', bills_person_path(@jurisdiction.abbreviation, @person.id), tab_options('bills') %></li>
+          <li><%= link_to 'Votes', votes_person_path(@jurisdiction.abbreviation, @person.id), tab_options('votes') %></li>
+          <li><%= link_to 'Committees', committees_person_path(@jurisdiction.abbreviation, @person.id), tab_options('committees') %></li>
+          <li><%= link_to 'Interest Groups', ratings_person_path(@jurisdiction.abbreviation, @person.id), tab_options('ratings') %></li>
         </ul>
       </nav>
 

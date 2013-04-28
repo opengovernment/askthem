@@ -22,6 +22,20 @@ class Person
 
   scope :active, where(active: true).asc(:chamber, :family_name) # no index includes `last_name`
 
+  # Inactive legislators will not have `chamber` or `district` fields.
+  def most_recent(attribute)
+    if read_attribute(attribute)
+      read_attribute(attribute)
+    else
+      read_attribute(:old_roles).to_a.reverse.each do |_,roles|
+        roles.each do |role|
+          return role[attribute.to_s] if role[attribute.to_s]
+        end
+      end
+      nil # don't return the enumerator
+    end
+  end
+
   # Returns Popolo fields that are not available in Billy.
   #
   # @note `has_one` associations require a matching `belongs_to`, as they must
@@ -47,7 +61,7 @@ class Person
 
   # Returns the person's votes.
   def votes
-    Vote.use(read_attribute(:state)).or({'yes_votes.leg_id' => id}, {'no_votes.leg_id' => id}, {'other_votes.leg_id' => id})
+    Vote.use(read_attribute(:state)).or({'yes_votes.leg_id' => id}, {'no_votes.leg_id' => id}, {'other_votes.leg_id' => id}) # no index
   end
 
   # Returns the person's committees.

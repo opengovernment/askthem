@@ -1,0 +1,7 @@
+<div id="page">
+  <ol class="questions">
+    <%= render @questions %>
+  </ol>
+
+  <%= paginate @questions, outer_window: 1, params: {format: nil}, replace: '#page', scroll: 'section header' %>
+</div>

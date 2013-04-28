@@ -30,6 +30,9 @@ FactoryGirl.define do
 
   # Project VoteSmart
 
+  factory :key_vote do
+  end
+
   factory :rating_group do
   end
 

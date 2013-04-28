@@ -13,10 +13,12 @@ class BillsController < ApplicationController
   end
 
   def show
+    @questions = resource.questions.page(params[:page])
     tab 'questions'
   end
 
   def sponsors
+    @sponsors = resource.people_and_committee_sponsors(eager: true)
     tab 'sponsors'
   end
 
@@ -35,6 +37,6 @@ private
   end
 
   def collection
-    @bills ||= end_of_association_chain.in_session(parent.current_session).page(params[:page])
+    @bills ||= end_of_association_chain.in_session(parent.current_session).includes(:questions).page(params[:page])
   end
 end

@@ -7,7 +7,7 @@ class SubjectsController < ApplicationController
 
   def show
     show! do |format|
-      @bills = chain.in_session(parent.current_session).where(subjects: @subject).page(params[:page]) # no index includes both `subjects` and `session`
+      @bills = chain.recent.where(subjects: @subject).includes(:questions).page(params[:page]) # no index includes `session`, so we omit it
       format.js {render partial: 'page'}
     end
   end

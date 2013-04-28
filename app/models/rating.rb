@@ -13,7 +13,7 @@ class Rating
   field :rating, type: String
 
   # Fields from the scorecard.
-  field :ratingText, type: String
+  field :timespan, type: String
   field :ratingName, type: String
   field :ratingText, type: String
 
@@ -23,6 +23,25 @@ class Rating
 
   index(ratingId: 1)
   index(sigId: 1)
+
+  # @param [Person,nil] person the person being rated, or nil
+  # @param [Metadatum,nil] person the person's jurisdiction, or nil
+  # @return [String] a sentence explaining the rating
+  def sentence(person = nil, metadatum = nil)
+    if ratingText?
+      person ||= self.person # avoid N+1 query
+      metadatum ||= self.metadatum # avoid N+1 query
+      sentence = ratingText
+      sentence.sub!(/\[HOUSE\]/, metadatum.chamber_name(person.most_recent(:chamber)))
+      sentence.sub!(/\[NAME\]/, person.name)
+      sentence.sub!(/\[NUMBER\]/, rating)
+      sentence.sub!(/\[ORGANIZATION\]/, name)
+      sentence.sub!(/\[RATING\]/, rating)
+      sentence.sub!(/\[TITLE\]/, metadatum.chamber_title(person.most_recent(:chamber)))
+      sentence.sub!(/\[YEAR\]/, timespan? ? timespan : '')
+      sentence.strip.squeeze(' ')
+    end
+  end
 
   # @return [Person] the person being rated
   def person

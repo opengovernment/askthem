@@ -71,8 +71,8 @@
     <div class="related_data">
       <nav>
         <ul class="related_nav">
-          <li><%= link_to 'Questions', bill_path(@jurisdiction.abbreviation), tab_options('questions', 'show') %></li>
-          <li><%= link_to 'Sponsors', sponsors_bill_path(@jurisdiction.abbreviation), tab_options('sponsors') %></li>
+          <li><%= link_to 'Questions', bill_path(@jurisdiction.abbreviation, @bill.id), tab_options('questions', 'show') %></li>
+          <li><%= link_to 'Sponsors', sponsors_bill_path(@jurisdiction.abbreviation, @bill.id), tab_options('sponsors') %></li>
         </ul>
       </nav>
 
@@ -100,7 +100,7 @@
                       </div>
                       <div class="details">
                         <%= link_to sponsor.name, person_path(@jurisdiction.abbreviation, sponsor) %>
-                        <%= district_name(sponsor['district']) if sponsor['district'] %>
+                        <%= district_name(sponsor.most_recent(:district)) %>
                         <span class="sponsor_type"><%= sponsor.type %></span>
                       </div>
                     <% else %>
@@ -111,7 +111,7 @@
                 <% end %>
               </ul>
               <% if @bill['sponsors'].size > 5 %>
-                <%= link_to 'View all', sponsors_bill_path(@jurisdiction.abbreviation), rel: 'sponsors' %>
+                <%= link_to 'View all', sponsors_bill_path(@jurisdiction.abbreviation, @bill.id), rel: 'sponsors' %>
               <% end %>
             </section>
           <% end %>

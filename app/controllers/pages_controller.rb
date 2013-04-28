@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  before_filter :set_jurisdiction, only: [:overview, :lower, :upper, :bills, :votes]
+  before_filter :set_jurisdiction, only: [:overview, :lower, :upper, :bills, :key_votes]
   before_filter :authenticate_user!, only: :dashboard
   caches_action :channel
 
@@ -27,8 +27,8 @@ class PagesController < ApplicationController
     tab 'bills'
   end
 
-  def votes
-    tab 'votes'
+  def key_votes
+    tab 'key_votes'
   end
 
   def dashboard
@@ -55,7 +55,7 @@ class PagesController < ApplicationController
   end
 
   def search
-    # @todo
+    # @todo elasticsearch
   end
 
   def channel
@@ -74,11 +74,17 @@ private
     # otherwise the first query to evaluate will clear the persistence options
     # of the unevaluated query.
     @lower = Person.in(@jurisdiction.abbreviation).active.where(chamber: 'lower')
+    @lower = @lower.includes(:questions) if tab == 'lower'
     @lower_parties = @lower.group_by{|person| person['party']}
+
     @upper = Person.in(@jurisdiction.abbreviation).active.where(chamber: 'upper')
+    @upper = @upper.includes(:questions) if tab == 'upper'
     @upper_parties = @upper.group_by{|person| person['party']}
+
     @bills = Bill.in(@jurisdiction.abbreviation).in_session(@jurisdiction.current_session).page(params[:page])
-    @votes = [] # @todo stub
+    @bills = @bills.includes(:questions) if tab == 'bills'
+
+    @key_votes = KeyVote.in(@jurisdiction.abbreviation).page(params[:page])
 
     @tab = tab
     respond_to do |format|

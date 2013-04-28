@@ -178,5 +178,13 @@ namespace :projectvotesmart do
   desc 'Update key votes from Project VoteSmart'
   task key_votes: :environment do
     # @todo http://api.votesmart.org/docs/Votes.html
+
+    # The following all return billId, billNumber, title, type
+    # Votes.getBillsByYearState
+    # Votes.getBillsByStateRecent
+    # Votes.getByBillNumber
+
+    # Votes.getBill
+    # Votes.getBillAction
   end
 end

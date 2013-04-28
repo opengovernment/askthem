@@ -1,0 +1,40 @@
+<li>
+  <div class="question_content">
+    <%= link_to question_path(@jurisdiction.abbreviation, question.id), class: 'title' do %>
+      <% question.title %>
+      <span class="icon-angle-right view"></span>
+    <% end %>
+    <p>
+      <%= truncate(question.body, length: 100) %>
+      <% if question.bill_id? %>
+        <span class="context">
+          &rarr; about <%= question.bill.bill_id %>
+        </span>
+      <% end %>
+    </p>
+    <span class="target">
+      <%= link_to user_path(question.user) do %>
+        <% if question.user.image? %>
+          <%= image_tag(question.user.image.url, size: '20x20', alt: '') %>
+        <% end %>
+        <%= question.user.alternate_name %>
+      <% end %>
+
+      <span class="to">&rarr;</span>
+
+      <%= link_to person_path(@jurisdiction.abbreviation, question.person), class: 'recipient' do %>
+        <% if question.person.image? %>
+          <%= cdn_image_tag(question.person.image, size: '20x20', alt: '') %>
+        <% end %>
+        <%= question.person.name %>
+      <% end %>
+    </span>
+  </div>
+  <ul class="activity">
+    <li>
+      <%= link_to pluralize(question.signature_count, 'signature'), '#', class: 'support' %><%# @todo %>
+    </li>
+  </ul>
+  <%= link_to 'Sign On', '#', class: 'sign_on' %><%# @todo %>
+  <div class="clear"></div>
+</li>

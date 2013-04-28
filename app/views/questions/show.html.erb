@@ -61,12 +61,14 @@
          <%= link_to '', "https://plus.google.com/share?url=#{URI.escape(current_url)}", class: 'icon-google-plus' %>
        </li>
     </ul>
-    <h5>Issues</h5>
+    <% if @question.subject? %>
+    <h5>Issue Area</h5>
     <ul class="tags">
-      <li><%= link_to 'Tag A', '#' %><%# @todo %><div class="usage" style="width:10%;"></div></li>
-      <li><%= link_to 'Tag B', '#' %><%# @todo %><div class="usage" style="width:60%;"></div></li>
-      <li><%= link_to 'Tag C', '#' %><%# @todo %><div class="usage" style="width:30%;"></div></li>
+      <li>
+        <%= link_to @question.subject, questions_path(@jurisdiction.id, subject: @question.subject) %>
+      </li>
     </ul>
+    <% end %>
     <%= link_to 'Flag this question', '#', class: 'flag' %><%# @todo %>
   </div>
 </section>
