@@ -37,7 +37,7 @@ class PagesController < ApplicationController
   end
 
   def search
-    # @todo OgLocal, OpenStates, DemocracyMap
+    # @todo OgLocal, OpenStates
   end
 
   def channel
