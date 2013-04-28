@@ -6,7 +6,7 @@
     <%= link_to 'Post a Question', new_question_path(@jurisdiction.abbreviation), class: 'cta_pill' %>
   </header>
   <div class="filters">
-    <span class="info">Filter by:</span><%# @todo are these really the filters we're using? %>
+    <span class="info">Filter by:</span><%# @todo DM are these really the filters we're using? %>
     <ul class="menu">
       <li class="selected">District <span class="icon-angle-down"></span></li>
       <li class="menu">
@@ -29,7 +29,7 @@
         </ul>
       </li>
     </ul>
-    <div class="search"><%# @todo full-text search within state? %>
+    <div class="search"><%# @todo DM full-text search within state? %>
       <input type="text" name="" id="" placeholder="Search state">
       <input type="submit" value="">
     </div>

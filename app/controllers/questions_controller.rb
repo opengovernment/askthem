@@ -18,7 +18,8 @@ private
   end
 
   def collection
-    @questions ||= Kaminari.paginate_array([stub] * 75).page(params[:page]) # @todo end_of_association_chain.includes(:user).where(params.slice(:subject)).page(params[:page])
+    @questions ||= Kaminari.paginate_array([stub] * 75).page(params[:page]) # @todo remove once we add some questions
+    # end_of_association_chain.includes(:user).where(params.slice(:subject)).page(params[:page])
   end
 
   def resource # @todo remove once we add some questions
@@ -36,6 +37,7 @@ private
       person: Person.in(parent.abbreviation).last,
       bill: bill,
       bill_id: bill.try(:id),
+      issued_at: 1.week.ago,
     })
   end
 end

@@ -1,7 +1,7 @@
 <li>
   <div class="question_content">
     <%= link_to question_path(@jurisdiction.abbreviation, question.id), class: 'title' do %>
-      <% question.title %>
+      <%= question.title %>
       <span class="icon-angle-right view"></span>
     <% end %>
     <p>
@@ -32,9 +32,9 @@
   </div>
   <ul class="activity">
     <li>
-      <%= link_to pluralize(question.signature_count, 'signature'), '#', class: 'support' %><%# @todo %>
+      <%= link_to pluralize(question.signature_count, 'signature'), '#', class: 'support' %><%# @todo link to remote %>
     </li>
   </ul>
-  <%= link_to 'Sign On', '#', class: 'sign_on' %><%# @todo %>
+  <%= link_to 'Sign On', '#', class: 'sign_on' %><%# @todo link to remote %>
   <div class="clear"></div>
 </li>

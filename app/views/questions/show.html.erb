@@ -3,44 +3,43 @@
 <section class="question">
   <article>
     <header>
-      <%# @todo need conditional for "if: bill, elsif: member, else" to target this header %>
-      <h2>To <strong><%= link_to 'Ron Paul', '#' %></strong> <span>(R- 6th House District)</span></h2>
-      <h2>On <strong><%= link_to truncate('Bill Name, it might be CISPA', :length => 60), '#' %></strong></h2>
-      <h1>What for dost doth under thy venerable name?</h1>
+      <h2>
+        To <strong><%= link_to @question.person.name, person_path(@jurisdiction.abbreviation, @question.person.id) %></strong>
+        <span>(<%= person_attributes(@question.person) %>)</span>
+      </h2>
+      <% if @question.bill_id? %>
+      <h2>
+        On <strong><%= link_to short_bill_title(@question.bill), bill_path(@jurisdiction.abbreviation, @question.bill.id) %></strong>
+      </h2>
+      <% end %>
+      <h1><%= @question.title %></h1>
     </header>
-    <p>Several points I think the bill is unconstitutional: first It already lacks the constitutionally required final determination of which rules should allow access to communications data (just legal Zitiergebot). second It lacks the constitutionally required limitation of data access to individual cases. third Contrary to the requirements of the Federal Constitutional Court are requests for communications data by police not be restricted to cases of specific risk or suspicion of a misdemeanor or felony. Contrary to the requirements of the Federal Constitutional Court is the identification of Internet users are even allowed to identify minor offenses.</p>
-    <p>Contrary to the requirements of the Federal Constitutional Court is the identification of Internet users are even allowed to identify minor offenses. Should allow access to communications data (just legal Zitiergebot).</p>
+    <%= simple_format(@question.body) %>
     <span class="author_wrap">
-      <span class="posted">Posted 1 hour ago by</span>
-      <span class="author"><%= link_to image_tag('http://lorempixel.com/40/40/people/', size: '40x40', alt: '') + 'Steve T', '#'%></span>
+      <span class="posted">Posted <%= time_tag @question.issued_at, l(@question.issued_at.to_date, format: :long), 'data-time-ago' => @question.issued_at.iso8601 %> by</span>
+      <span class="author">
+        <%= link_to user_path(@question.user) do %>
+          <% if @question.user.image? %>
+            <%= image_tag(@question.user.image.url, size: '40x40', alt: '') %>
+          <% end %>
+          <%= @question.user.alternate_name %>
+        <% end %>
+      </span>
     </span>
 
     <div class="comments">
       <div id="disqus_thread"></div>
-      <script type="text/javascript">
-          /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-          var disqus_shortname = 'dobot'; // required: replace example with your forum shortname
-
-          /* * * DON'T EDIT BELOW THIS LINE * * */
-          (function() {
-              var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-              dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-              (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-          })();
-      </script>
-      <noscript>Please enable JavaScript to view the <%= link_to 'comments powered by Disqus', 'http://disqus.com/?ref_noscript' %>.</noscript>
-      <%= link_to 'comments powered by <span class="logo-disqus">Disqus</span>'.html_safe, 'http://disqus.com/', class: 'dsq-brlink' %>
-
     </div>
   </article>
+
   <div class="actions">
     <% if user_signed_in? %>
       <ul>
         <li><%= link_to 'Sign On', signatures_path(question_id: @question.id), class: 'cta_pill' %><%# @todo link to remote %></li>
-        <li><%= link_to 'E-mail this to Council Member →', '#', class: 'email' %><%# @todo %></li>
+        <li><%= link_to 'E-mail this to Council Member →', '#', class: 'email' %><%# @todo ST we are removing this feature? %></li>
       </ul>
     <% else %>
-      <%= simple_form_for(@user, as: :user, url: registration_path(:user)) do |f| %>
+      <%= simple_form_for(@user, as: :user, url: registration_path(:user)) do |f| %><%# @todo maybe use a custom controller %>
         <%= hidden_field_tag :question_id, @question.id %>
         <%= f.input :given_name %>
         <%= f.input :family_name %>
@@ -72,3 +71,13 @@
     <%= link_to 'Flag this question', '#', class: 'flag' %><%# @todo %>
   </div>
 </section>
+
+<%# @see http://disqus.com/admin/universalcode/ %>
+<script type="text/javascript">
+var disqus_shortname = 'dobot';
+(function() {
+  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>

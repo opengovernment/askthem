@@ -20,6 +20,8 @@ class Question
   field :body, type: String
   # The question's issue area.
   field :subject, type: String
+  # The questions's time of publication.
+  field :issued_at, type: Time
   # The number of signatures.
   field :signature_count, type: Integer, default: 0
   # Whether the question is answered.

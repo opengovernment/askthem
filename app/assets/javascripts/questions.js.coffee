@@ -18,3 +18,5 @@ jQuery ($) ->
 
   $('.icon-google-plus').click (event) ->
     popup.call(this, event, 227) # auto-resizes
+
+  $('time[data-time-ago]').timeago()
