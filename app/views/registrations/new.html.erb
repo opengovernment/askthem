@@ -4,6 +4,11 @@
   </header>
 
   <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: {id: 'new_registration'}) do |f| %>
+    <% if resource.remote_image_url %>
+      <%= f.input :remote_image_url, as: :hidden %>
+    <% end %>
+    <%= f.input :image, as: :file %>
+    <%= f.input :image_cache, as: :hidden %>
     <%= f.input :given_name %>
     <%= f.input :family_name %>
     <%= f.input :email %>

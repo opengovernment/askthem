@@ -207,6 +207,7 @@ Devise.setup do |config|
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', :scope => 'user,public_repo'
   config.omniauth :developer unless Rails.env.production?
+  # @see https://github.com/mkdynamic/omniauth-facebook#configuring
   config.omniauth :facebook, '124751554385930', ENV['FACEBOOK_APP_SECRET']
 
   # ==> Warden configuration

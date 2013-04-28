@@ -79,9 +79,18 @@ class User
 
   before_validation :set_password_confirmation
 
-  # @todo Check what Devise wiki says.
-  def self.find_or_create_from_auth_hash(hash)
-    where('authentications.provider' => hash[:provider], 'authentications.uid' => hash[:uid]).first
+  def self.new_with_session(params, session)
+    super.tap do |user|
+      data = session['devise.facebook_data']
+      if data
+        # `data['info']['location']` isn't reliably a locality or region.
+        user.email = data['info']['email'] if user.email.blank?
+        user.given_name ||= data['info']['first_name']
+        user.family_name ||= data['info']['last_name']
+        user.remote_image_url ||= data['info']['image']
+        user.authentications.build(data.slice(:provider, :uid))
+      end
+    end
   end
 
   # @return [String] the user's formatted name
