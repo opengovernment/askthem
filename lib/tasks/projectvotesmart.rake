@@ -177,6 +177,6 @@ namespace :projectvotesmart do
 
   desc 'Update key votes from Project VoteSmart'
   task key_votes: :environment do
-    # @todo
+    # @todo http://api.votesmart.org/docs/Votes.html
   end
 end

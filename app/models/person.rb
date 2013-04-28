@@ -7,8 +7,6 @@ class Person
   belongs_to :metadatum, foreign_key: 'state'
   # Questions addressed to the person.
   has_many :questions
-  # Special interest group ratings for the person.
-  has_many :ratings
 
   # Popolo fields and aliases.
   field :full_name, type: String, as: :name
@@ -24,11 +22,17 @@ class Person
 
   scope :active, where(active: true).asc(:chamber, :family_name) # no index includes `last_name`
 
-  # Stores Popolo fields that are not available in Billy.
+  # Returns Popolo fields that are not available in Billy.
+  #
   # @note `has_one` associations require a matching `belongs_to`, as they must
   #   be able to call `inverse_of_field`.
   def person_detail
     PersonDetail.where(person_id: id).first || PersonDetail.new(person: self)
+  end
+
+  # Returns the person's special interest group ratings.
+  def ratings
+    Rating.where(candidateId: read_attribute(:votesmart_id) || person_detail.votesmart_id)
   end
 
   # Returns questions answered by the person.
@@ -75,10 +79,10 @@ class Person
 private
 
   def votesmart_url(section = nil)
-    if self['votesmart_id']
+    if read_attribute(:votesmart_id)
       url = "http://votesmart.org/candidate/"
       url += "#{section}/" if section
-      url += self['votesmart_id']
+      url += read_attribute(:votesmart_id)
     end
   end
 end

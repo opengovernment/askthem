@@ -1,3 +1,29 @@
+print('Legislators with non-unique transparencydata_id:')
+db.legislators.mapReduce(function () {
+  if (this.transparencydata_id) {
+    emit(this.transparencydata_id, 1);
+  }
+}, function (key, values) {
+  return Array.sum(values);
+}, {out: {inline: 1}}).results.forEach(function (result) {
+  if (result.value > 1) {
+    print(result._id + ' occurs ' + result.value + ' times');
+  }
+});
+
+print('Legislators with non-unique votesmart_id:')
+db.legislators.mapReduce(function () {
+  if (this.votesmart_id) {
+    emit(this.votesmart_id, 1);
+  }
+}, function (key, values) {
+  return Array.sum(values);
+}, {out: {inline: 1}}).results.forEach(function (result) {
+  if (result.value > 1) {
+    print(result._id + '      '.substring(0, 6 - result._id.length) + ' occurs ' + result.value + ' times');
+  }
+});
+
 // abbreviation should be equal to _id.
 reportList('metadata', 'abbreviation', {
   '$where': function () {
