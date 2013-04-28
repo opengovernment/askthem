@@ -8,11 +8,8 @@ class Rating
   # The scorecard from which this rating originates.
   belongs_to :rating_scorecard, foreign_key: 'ratingId', primary_key: 'ratingId'
 
-  # The person's jurisdiction.
-  field :state, type: String
-  # The person being rated.
-  field :person_id, type: String
-  # The person's rating.
+  # Fields from the rating.
+  field :candidateId, type: String
   field :rating, type: String
 
   # Fields from the scorecard.
@@ -24,32 +21,12 @@ class Rating
   field :name, type: String
   field :description, type: String
 
-  index(person_id: 1, ratingId: 1)
   index(ratingId: 1)
   index(sigId: 1)
 
-  index(state: 1)
-  index(person_id: 1)
-
-  validates_presence_of :state, :person_id
-
-  # @return [Metadatum] the jurisdiction in which the question is asked
-  def metadatum
-    Metadatum.find_by_abbreviation(state)
-  end
-
   # @return [Person] the person being rated
   def person
-    Person.use(state).find(person_id)
-  end
-
-  # @param [Person] person a person
-  def person=(person)
-    if person
-      self.person_id = person.id
-      self.state = person['state']
-    else
-      self.person_id = nil
-    end
+    Person.with(session: 'openstates').where(votesmart_id: candidateId).first || # no index
+      PersonDetail.where(votesmart_id: candidateId).first.person
   end
 end

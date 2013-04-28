@@ -7,9 +7,10 @@ class ProjectVoteSmart
   # Known error messages that imply that no document was found.
   ERROR_MESSAGES = [
     'No categories for this state and year.',
+    'No officials found matching this criteria.',
+    'No Ratings fit this criteria.',
     'No SIGs fit this criteria.',
     'No Sig Rating fits this criterion',
-    'No Ratings fit this criteria.',
   ]
 
   # Based on API documentation. Only the Rating endpoints have been tested.

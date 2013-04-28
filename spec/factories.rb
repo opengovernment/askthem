@@ -40,10 +40,6 @@ FactoryGirl.define do
   factory :rating do
     rating_group
     rating_scorecard
-
-    after(:build) do |record|
-      record.person = FactoryGirl.create(:person) unless record.person_id?
-    end
   end
 
   # OpenGovernment

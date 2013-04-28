@@ -68,6 +68,7 @@ namespace :openstates do
     task bills: :environment do
       openstates do
         # @todo use updated_since
+        # @todo complete https://github.com/sunlightlabs/billy/wiki/Differences-between-the-API-and-MongoDB
       end
     end
   end

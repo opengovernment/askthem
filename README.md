@@ -35,6 +35,10 @@ You can import Influence Explorer data on a yearly basis.
 
 You can import Project VoteSmart data on a yearly basis (see, for example, [the years for each special interest group's last rating](http://votesmart.org/interest-groups)).
 
+1. Match OpenStates legislators with Project VoteSmart officials
+
+        bundle exec rake projectvotesmart:people
+
 1. Get Project VoteSmart special interest groups
 
         bundle exec rake projectvotesmart:special_interest_groups

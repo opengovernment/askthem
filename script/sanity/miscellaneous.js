@@ -19,6 +19,16 @@ reportList('legislators', 'leg_id', {
   }
 }, 'legislators whose leg_id is not equal to _id');
 
+// Legislators with unnecessary prefixes.
+reportList('legislators', 'full_name', {
+  full_name: /(Representative|Senator)/
+}, 'legislators with unnecessary prefixes');
+
+// Legislators with unnecessary suffixes.
+reportList('legislators', 'full_name', {
+  full_name: /\)$/
+}, 'legislators with unnecessary suffixes');
+
 // Do any inactive legislators have roles?
 reportList('legislators', 'roles.state', {
   active: false,

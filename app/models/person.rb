@@ -28,7 +28,7 @@ class Person
   # @note `has_one` associations require a matching `belongs_to`, as they must
   #   be able to call `inverse_of_field`.
   def person_detail
-    PersonDetail.where(person_id: id).first || PersonDetail.new(person: person)
+    PersonDetail.where(person_id: id).first || PersonDetail.new(person: self)
   end
 
   # Returns questions answered by the person.
