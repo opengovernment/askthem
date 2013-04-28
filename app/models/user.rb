@@ -79,16 +79,17 @@ class User
 
   before_validation :set_password_confirmation
 
+  # Called by RegistrationsController.
   def self.new_with_session(params, session)
     super.tap do |user|
       data = session['devise.facebook_data']
       if data
-        # `data['info']['location']` isn't reliably a locality or region.
         user.email = data['info']['email'] if user.email.blank?
         user.given_name ||= data['info']['first_name']
         user.family_name ||= data['info']['last_name']
         user.remote_image_url ||= data['info']['image']
         user.authentications.build(data.slice(:provider, :uid))
+        # `data['info']['location']` isn't reliably a locality or region.
       end
     end
   end
