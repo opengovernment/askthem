@@ -178,6 +178,7 @@ namespace :projectvotesmart do
   desc 'Update key votes from Project VoteSmart'
   task key_votes: :environment do
     # @todo http://api.votesmart.org/docs/Votes.html
+    # @see lib/open_gov/key_votes.rb in OG 1.0
 
     # The following all return billId, billNumber, title, type
     # Votes.getBillsByYearState

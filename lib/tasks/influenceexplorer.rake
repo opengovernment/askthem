@@ -1,4 +1,9 @@
 namespace :influenceexplorer do
+  desc 'Get contributions from the Influence Explorer API'
+  task contributions: :environment do
+    # @todo see lib/open_gov/contributions.rb in OG 1.0
+  end
+
   desc 'Get biographies and biography URLs from the Influence Explorer API'
   task biographies: :environment do
     if ENV['SUNLIGHT_API_KEY']
