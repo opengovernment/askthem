@@ -13,10 +13,30 @@ module ApplicationHelper
     translate_in_controller_scope("#{controller.action_name}.description", params.slice(:page).merge(default: '').merge(args))
   end
 
+  # Return's a bill's truncated title.
+  #
+  # @param [Bill] bill a bill
+  # @return [String] the bill's truncated title
   def short_bill_title(bill)
     truncate(bill['title'].gsub(/\A"|"\z/, ''), length: 95) # an unclosed quotation looks funny, so remove it
   end
 
+  # Used by partials that may not always be within a jurisdiction's scope.
+  #
+  # @param [Bill,Committee,Person,Vote] object a Billy object
+  # @return [Metadatum] the object's jurisdiction
+  def jurisdiction(object)
+    if @jurisdiction
+      @jurisdiction
+    else
+      @jurisdictions ||= {}
+      @jurisdictions[object['state']] ||= Metadatum.find_by_abbreviation(object['state'])
+    end
+  end
+
+  # Returns the URL for the page's Facebook Open Graph image.
+  #
+  # @return [String] the URL for the page's Facebook Open Graph image
   def og_image
     if @user && @user.image?
       @user.image.url
@@ -76,7 +96,7 @@ module ApplicationHelper
   # @return [String] the person's attributes
   def person_attributes(person)
     parts = []
-    parts << @jurisdiction.chamber_title(person['chamber']) if person['chamber']
+    parts << jurisdiction(person).chamber_title(person['chamber']) if person['chamber']
     parts << district_name(person['district']) if person['district']
     parts << person['party'] if person['party']
     parts.join(', ')

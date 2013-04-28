@@ -36,8 +36,26 @@ class PagesController < ApplicationController
     @questions_signed = current_user.questions_signed
   end
 
+  # @see https://github.com/alexreisner/geocoder#use-outside-of-rails
+  # @see https://github.com/sunlightlabs/billy/wiki/Differences-between-the-API-and-MongoDB
+  def locator
+    data = Geocoder.search(params[:q]).first # request.location geocodes by IP
+    if data.country_code == 'US' && data.latitude.nonzero? && data.longitude.nonzero?
+      ids = JSON.parse(RestClient.get('http://openstates.org/api/v1/legislators/geo/', params: {
+        fields: 'id',
+        lat: data.latitude,
+        long: data.longitude,
+        apikey: ENV['SUNLIGHT_API_KEY'],
+      })).map do |legislator|
+        legislator['id']
+      end
+      @people = Person.with(session: 'openstates').includes(:questions).find(ids)
+    end
+    #@todo OgLocal API to add local people
+  end
+
   def search
-    # @todo OgLocal, OpenStates
+    # @todo
   end
 
   def channel
