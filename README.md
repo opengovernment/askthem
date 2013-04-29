@@ -33,7 +33,7 @@ You can import Influence Explorer data on a yearly basis.
 
 ### Project VoteSmart
 
-You can import Project VoteSmart data on a yearly basis (see, for example, [the years for each special interest group's last rating](http://votesmart.org/interest-groups)).
+You can import Project VoteSmart people on a yearly basis. Ratings are added regularly, though not every day, so the others should run on a weekly basis.
 
 1. Match OpenStates legislators with Project VoteSmart officials
 
