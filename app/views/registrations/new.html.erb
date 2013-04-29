@@ -5,6 +5,9 @@
 
   <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: {id: 'new_registration'}) do |f| %>
     <%= devise_error_messages! %>
+    <%= resource.errors.inspect %>
+    <%= resource.inspect %>
+    <%= resource.authentications.inspect %>
     <% if resource.remote_image_url %>
       <%= f.input :remote_image_url, as: :hidden %>
     <% end %>
