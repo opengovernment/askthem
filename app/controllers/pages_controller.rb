@@ -51,7 +51,7 @@ class PagesController < ApplicationController
       end
       @people = Person.with(session: 'openstates').includes(:questions).find(ids)
     end
-    #@todo OgLocal API to add local people
+    # @todo OgLocal API to add local people, DemocracyMap in failure case
   end
 
   def search

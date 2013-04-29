@@ -88,7 +88,7 @@ class User
         user.given_name ||= data['info']['first_name']
         user.family_name ||= data['info']['last_name']
         user.remote_image_url ||= data['info']['image']
-        user.authentications.build(data.slice(:provider, :uid))
+        user.authentications.build(data.slice('provider', 'uid'))
         # `data['info']['location']` isn't reliably a locality or region.
       end
     end
