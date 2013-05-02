@@ -6,6 +6,12 @@ class QuestionsController < ApplicationController
   actions :index, :show, :new, :create
   custom_actions resource: :preview
 
+  def index
+    index! do |format|
+      format.js {render partial: 'page'}
+    end
+  end
+
   def show
     @user = User.new unless user_signed_in?
     show!
