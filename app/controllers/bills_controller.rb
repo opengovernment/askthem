@@ -13,10 +13,12 @@ class BillsController < ApplicationController
   end
 
   def show
+    @questions = resource.questions.page(params[:page])
     tab 'questions'
   end
 
   def sponsors
+    @sponsors = resource.people_and_committee_sponsors(eager: true)
     tab 'sponsors'
   end
 
@@ -31,10 +33,10 @@ private
   end
 
   def end_of_association_chain
-    Bill.in(parent['abbreviation'])
+    Bill.in(parent.abbreviation)
   end
 
   def collection
-    @bills ||= end_of_association_chain.where(session: parent.current_session).includes(:metadatum).desc('action_dates.last').page(params[:page])
+    @bills ||= end_of_association_chain.in_session(parent.current_session).includes(:questions).page(params[:page])
   end
 end

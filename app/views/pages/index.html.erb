@@ -2,7 +2,7 @@
   <ul>
     <% @jurisdictions.each do |jurisdiction| %>
       <li>
-        <%= link_to jurisdiction['name'], questions_path(jurisdiction: jurisdiction['abbreviation']) %>
+        <%= link_to jurisdiction['name'], questions_path(jurisdiction.abbreviation) %>
       </li>
     <% end %>
   </ul>

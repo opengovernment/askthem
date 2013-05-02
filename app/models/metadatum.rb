@@ -2,14 +2,21 @@
 class Metadatum
   include Mongoid::Document
 
+  # OpenStates
   has_many :bills, foreign_key: 'state'
   has_many :committees, foreign_key: 'state'
   has_many :people, foreign_key: 'state'
-  has_many :questions, foreign_key: 'state'
   has_many :votes, foreign_key: 'state'
 
+  # OpenGoverment
+  has_many :person_details, foreign_key: 'state'
+  has_many :questions, foreign_key: 'state'
+
+  field :_id, type: String, default: -> {abbreviation}
+  field :abbreviation, type: String
+
   def self.find_by_abbreviation(abbreviation)
-    self.use(abbreviation).where(abbreviation: abbreviation).first
+    self.use(abbreviation).find(abbreviation)
   end
 
   # Returns whether the jurisdiction has a lower chamber.

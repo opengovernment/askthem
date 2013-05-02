@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  rescue_from Mongoid::Errors::DocumentNotFound, with: :not_found
+  # rescue_from Mongoid::Errors::DocumentNotFound, with: :not_found
   protect_from_forgery
 
 private

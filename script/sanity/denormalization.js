@@ -316,7 +316,7 @@ reportList('votes', '+bill_session', {
   }
 }, "votes whose bill session is not the bill's session");
 
-// @note It's normal for a vote's chamber to not match its bill_chamber.
+// It's normal for a vote's chamber to not match its bill_chamber.
 
 // votes#chamber and bills#chamber
 reportList('votes', 'bill_chamber', {
@@ -333,8 +333,8 @@ reportList('votes', 'bill_chamber', {
 
 // bills#actions.related_entities.name and legislators#full_name or
 //   committees#committee or committees#subcommittee
-// @note It's common for names to differ, e.g. "Sears" versus "Dick W Sears" or
-//   "Pensions and Retirement" versus "Pensions & Retirement".
+// It's common for names to differ, e.g. "Sears" versus "Dick W Sears" or
+// "Pensions and Retirement" versus "Pensions & Retirement".
 if (verbose) {
   reportList('bills', 'actions.related_entities.id', {
     'actions.related_entities.id': {
@@ -369,8 +369,8 @@ if (verbose) {
   }, "bills with an action whose related entity's name is not that entity's name");
 }
 
-// @note It's common for names to differ, e.g. "Joint Appropriations Interim 
-//   Committee" versus "Appropriations" or "DAVIS" versus "Bettye Davis".
+// It's common for names to differ, e.g. "Joint Appropriations Interim 
+// Committee" versus "Appropriations" or "DAVIS" versus "Bettye Davis".
 if (verbose) {
   // bills#sponsors.name and legislators#full_name or committees#committee or
   //   committees#subcommittee
@@ -401,7 +401,7 @@ if (verbose) {
   }, "bills with a sponsor whose committee name is not the committee's name");
 }
 
-// @note It's common for names to differ, e.g. "James Doe" versus "Jim Doe".
+// It's common for names to differ, e.g. "James Doe" versus "Jim Doe".
 if (verbose) {
   // committees#members.name and legislators#full_name
   reportList('committees', 'members.leg_id', {
@@ -424,8 +424,8 @@ if (verbose) {
   }, "committees with a member whose name is not the legislator's name");
 }
 
-// @note It's common for names to differ, e.g. "Higher Education*" versus
-//   "Higher Education" or "Rep. Drew Darby" versus "Drew Darby".
+// It's common for names to differ, e.g. "Higher Education*" versus "Higher
+// Education" or "Rep. Drew Darby" versus "Drew Darby".
 if (verbose) {
   reportList('events', 'participants.id', {
     'participants.id': {
@@ -456,7 +456,7 @@ if (verbose) {
   }, "events with a participant whose name is not that of the participant's name");  
 }
 
-// @note It's common for names to differ, e.g. "Sales, Scott" versus "Scott Sales".
+// It's common for names to differ, e.g. "Sales, Scott" versus "Scott Sales".
 if (verbose) {
   // votes#yes_votes.name and legislators#full_name
   reportList('votes', 'yes_votes.leg_id', {
@@ -519,7 +519,7 @@ if (verbose) {
   }, "votes with an 'other' voter whose name is not the legislator's name");
 }
 
-// @note It's common for names to differ, e.g. "A10" versus "A 10".
+// It's common for names to differ, e.g. "A10" versus "A 10".
 if (verbose) {
   // votes#+bill_id and bills#bill_id
   reportList('votes', '+bill_id', {
@@ -533,8 +533,8 @@ if (verbose) {
   }, "votes whose bill ID is not the bill's ID");
 }
 
-// @note It's common for names to differ, e.g. "Joint Appropriations Interim 
-//   Committee" versus "Appropriations".
+// It's common for names to differ, e.g. "Joint Appropriations Interim 
+// Committee" versus "Appropriations".
 if (verbose) {
   // votes#committee and committees#committee or committees#subcommittee
   reportList('votes', 'committee', {
@@ -548,8 +548,8 @@ if (verbose) {
   }, "votes whose committee name is not the committee's name");
 }
 
-// @note It's common for a lower house member to be the primary sponsor of a
-//   bill and for an upper house member to be cosponsor.
+// It's common for a lower house member to be the primary sponsor of a bill and
+// for an upper house member to be cosponsor.
 if (verbose) {
   // bills: sponsors.chamber and chamber
   reportList('bills', 'chamber', {

@@ -1,6 +1,6 @@
 <li>
   <div class="bill_content">
-    <%= link_to bill['bill_id'], bill_path(@jurisdiction['abbreviation'], bill), class: 'title' %>
+    <%= link_to bill['bill_id'], bill_path(@jurisdiction.abbreviation, bill), class: 'title' %>
     <p>
       <%= short_bill_title(bill) %>, <%= bill.session_label %>
     </p>
@@ -32,7 +32,7 @@
   </div>
   
   <ul class="activity">
-    <li><%= pluralize bill.question_count, 'question' %></li>
+    <li><%= pluralize bill.questions.count, 'question' %></li>
     <% bill.people_and_committee_sponsors(limit: 5, only: :people).each do |sponsor| %><%# @note N+1 query %>
       <li class="depiction">
         <% if Person === sponsor %>

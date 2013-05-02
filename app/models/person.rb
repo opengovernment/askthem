@@ -7,8 +7,6 @@ class Person
   belongs_to :metadatum, foreign_key: 'state'
   # Questions addressed to the person.
   has_many :questions
-  # Stores Popolo fields that are not available in Billy.
-  has_one :person_detail, autobuild: true
 
   # Popolo fields and aliases.
   field :full_name, type: String, as: :name
@@ -22,8 +20,34 @@ class Person
   field '+gender', type: String, as: :gender
   field :photo_url, type: String, as: :image
 
-  field :question_count, type: Integer, default: 0
-  field :answered_question_count, type: Integer, default: 0
+  scope :active, where(active: true).asc(:chamber, :family_name) # no index includes `last_name`
+
+  # Inactive legislators will not have `chamber` or `district` fields.
+  def most_recent(attribute)
+    if read_attribute(attribute)
+      read_attribute(attribute)
+    else
+      read_attribute(:old_roles).to_a.reverse.each do |_,roles|
+        roles.each do |role|
+          return role[attribute.to_s] if role[attribute.to_s]
+        end
+      end
+      nil # don't return the enumerator
+    end
+  end
+
+  # Returns Popolo fields that are not available in Billy.
+  #
+  # @note `has_one` associations require a matching `belongs_to`, as they must
+  #   be able to call `inverse_of_field`.
+  def person_detail
+    PersonDetail.where(person_id: id).first || PersonDetail.new(person: self)
+  end
+
+  # Returns the person's special interest group ratings.
+  def ratings
+    Rating.where(candidateId: read_attribute(:votesmart_id) || person_detail.votesmart_id)
+  end
 
   # Returns questions answered by the person.
   def questions_answered
@@ -37,7 +61,7 @@ class Person
 
   # Returns the person's votes.
   def votes
-    Vote.use(read_attribute(:state)).or({'yes_votes.leg_id' => id}, {'no_votes.leg_id' => id}, {'other_votes.leg_id' => id})
+    Vote.use(read_attribute(:state)).or({'yes_votes.leg_id' => id}, {'no_votes.leg_id' => id}, {'other_votes.leg_id' => id}) # no index
   end
 
   # Returns the person's committees.
@@ -69,10 +93,10 @@ class Person
 private
 
   def votesmart_url(section = nil)
-    if self['votesmart_id']
+    if read_attribute(:votesmart_id)
       url = "http://votesmart.org/candidate/"
       url += "#{section}/" if section
-      url += self['votesmart_id']
+      url += read_attribute(:votesmart_id)
     end
   end
 end

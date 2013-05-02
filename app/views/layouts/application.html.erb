@@ -90,6 +90,7 @@
     <div class="clear"></div>
   </footer>
 
+<div id="fb-root"></div>
 <script>
 window.fbAsyncInit = function () {
   FB.init({
@@ -101,7 +102,74 @@ window.fbAsyncInit = function () {
     channelUrl: '<%= channel_url %>'
   });
 };
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js"; // adding parameters calls FB.init
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
 </script>
+
+<header class="main">
+  <div class="wrapper">
+    <%= link_to 'OpenGovernment', root_path, class: 'logo' %>
+    <p class="slogan">Ask questions to your city and state elected officials</p>
+    <section>
+      <ul class="admin_nav thin">
+        <%= render partial: 'shared/user' %>
+      </ul>
+    </section>
+  </div>
+</header>
+<section>
+  <div class="content_body">
+    <% if notice %>
+      <p class="notice"><%= notice %></p>
+    <% end %>
+    <% if alert %>
+      <p class="alert"><%= alert %></p>
+    <% end %>
+    <div class="wrapper">
+<%= yield %>
+    </div>
+  </div>
+  <ul class="admin_nav wide">
+    <%= render partial: 'shared/user' %>
+  </ul>
+</section>
+
+<footer>
+  <div class="wrapper">
+    <div class="col">
+      <ul>
+        <li><%= link_to 'About', '#' %><%# @todo DM %></li>
+        <li><%= link_to 'Blog', 'http://blog.opengovernment.org/' %></li>
+        <li><%= link_to 'Support', '#' %><%# @todo DM %></li>
+        <li><%= link_to 'Contact Us', '#' %><%# @todo DM %></li>
+      </ul>
+    </div>
+    <div class="col">
+      <ul>
+        <li><%= link_to 'Code & Data', '#' %><%# @todo DM %></li>
+        <li><%= link_to 'Volunteer', '#' %><%# @todo DM %></li>
+        <li><%= link_to 'Donate', 'http://www.opencongress.org/donate' %></li>
+        <li><%= link_to 'Bring OG to Your City', '#' %><%# @todo DM %></li>
+      </ul>
+    </div>
+    <div class="col logos">
+      <ul class="logos">
+        <li class="ppf"><%= link_to image_tag('credit_ppf.png', alt: 'Participatory Politics Foundation'), 'http://www.participatorypolitics.org/' %></li>
+        <li class="opennorth"><%= link_to image_tag('credit_opennorth.png', alt: 'Open North'), 'http://www.opennorth.ca/' %></li>
+        <li class="knight"><%= link_to image_tag('credit_kfoundation.png', alt: 'John S. and James L. Knight Foundation'), 'http://www.knightfoundation.org/' %></li>
+        <li class="openstates"><%= link_to image_tag('credit_openstates.png', alt: 'Open States'), 'http://openstates.org/' %></li>
+      </ul>
+    </div>
+    <p>OpenGovernment is a project of the nonprofit Participatory Politics Foundation, with Open North as technical lead and generous support from the Knight Foundation. State legislative data from Open States.</p>
+  </div>
+  <div class="clear"></div>
+</footer>
+
 <%= javascript_include_tag 'application' %>
 <% if Rails.env.production? %>
 <script>

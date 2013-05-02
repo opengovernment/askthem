@@ -13,7 +13,7 @@ development:
       options:
         # Change whether the session persists in safe mode by default.
         # (default: false)
-        # safe: false
+        safe: true
 
         # Change the default consistency model to :eventual or :strong.
         # :eventual will send reads to secondaries, :strong sends everything
@@ -31,6 +31,8 @@ development:
       database: fiftystates
       hosts:
         - localhost:27017
+      options:
+        safe: true
   # Configure Mongoid specific options. (optional)
   options:
     # Configuration for whether or not to allow access to fields that do
@@ -104,6 +106,8 @@ production:
 <% end %>
       hosts:
       - <%= default.host %>:<%= default.port %>
+      options:
+        safe: true
     openstates:
       database: <%= openstates.path.sub '/', '' %>
 <% if openstates.user %>
@@ -114,5 +118,7 @@ production:
 <% end %>
       hosts:
       - <%= openstates.host %>:<%= openstates.port %>
+      options:
+        safe: true
   options:
     identity_map_enabled: true

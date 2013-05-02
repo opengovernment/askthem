@@ -5,7 +5,7 @@
     <header>
       <h1 class="action">Ask a question</h1>
     </header>
-    <form class="action" action="<%= preview_questions_path(@jurisdiction['abbreviation']) %>" method="get" accept-charset="utf-8">
+    <form class="action" action="<%= preview_questions_path(@jurisdiction.abbreviation) %>" method="get" accept-charset="utf-8"><%# @todo make into a proper form %>
       <div class="count">
         <span class="summary_count">60</span>
         <input type="text" name="summary" id="summary" placeholder="Summary&hellip;" maxlength="60">
@@ -15,14 +15,6 @@
         <span class="details">Why is this important? Give it your all!</span>
       </label>
       <textarea name="question" id="question" cols="30" rows="10" placeholder="Go on&hellip;"></textarea>
-
-      <!-- <label for="importance">Why is this important?
-        <span class="opt">(optional)</span>
-      </label>
-
-      <div class="resizable-textarea">
-        <textarea name="importance" id="importance" cols="30" rows="10" placeholder="Go on&hellip;"></textarea>
-      </div> -->
 
       <label for="issue_area">Select an issue area
         <span class="opt">(optional)</span>
@@ -43,6 +35,6 @@
   </article>
   <div class="flow_info">
     <h3>Your question may have already been answered!</h3>
-    <p>Just be sure to <%= link_to 'search first', '#' %> before asking your question!</p>
+    <p>Just be sure to <%= link_to 'search first', questions_path(@jurisdiction.abbreviation) %> before asking your question!</p>
   </div>
 </section>

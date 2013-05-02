@@ -1,18 +1,30 @@
 <section class="question preview">
   <article>
     <header>
-      <h2>To <strong>Ron Paul</strong> <span>(R- 6th House District)</span></h2>
-      <h1>What for dost doth under thy venerable name?</h1>
+      <h2>
+        To <strong><%= @question.person.name %></strong>
+        <span>(<%= person_attributes(@question.person) %>)</span>
+      </h2>
+      <% if @question.bill_id? %>
+      <h2>
+        On <strong><%= short_bill_title(@question.bill) %></strong>
+      </h2>
+      <% end %>
+      <h1><%= @question.title %></h1>
     </header>
-    <p>Several points I think the bill is unconstitutional: first It already lacks the constitutionally required final determination of which rules should allow access to communications data (just legal Zitiergebot). second It lacks the constitutionally required limitation of data access to individual cases. third Contrary to the requirements of the Federal Constitutional Court are requests for communications data by police not be restricted to cases of specific risk or suspicion of a misdemeanor or felony. Contrary to the requirements of the Federal Constitutional Court is the identification of Internet users are even allowed to identify minor offenses.</p>
-    <p>Contrary to the requirements of the Federal Constitutional Court is the identification of Internet users are even allowed to identify minor offenses. Should allow access to communications data (just legal Zitiergebot).</p>
+    <%= simple_format(@question.body) %>
     <span class="author_wrap">
       <span class="posted">Posted by</span>
-      <span class="author"><%= link_to image_tag('http://lorempixel.com/40/40/people/', size: '40x40', alt: '') + 'Steve T', '#' %></span>
+      <span class="author">
+        <% if @question.user.image? %>
+          <%= image_tag(@question.user.image.url, size: '40x40', alt: '') %>
+        <% end %>
+        <%= @question.user.alternate_name %>
+      </span>
     </span>
   </article>
   <div class="actions">
-    <%= link_to 'Publish', question_path(@jurisdiction['abbreviation'], '1'), class: 'cta_pill' %>
-    <%= link_to '← Edit', new_question_path(@jurisdiction['abbreviation']), class: 'edit sim_act' %>
+    <%= link_to 'Publish', question_path(@jurisdiction.abbreviation, '1'), class: 'cta_pill' %><%# @todo %>
+    <%= link_to '← Edit', new_question_path(@jurisdiction.abbreviation), class: 'edit sim_act' %><%# @todo %>
   </div>
 </section>

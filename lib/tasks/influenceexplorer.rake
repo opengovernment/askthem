@@ -1,10 +1,15 @@
 namespace :influenceexplorer do
+  desc 'Get contributions from the Influence Explorer API'
+  task contributions: :environment do
+    # @todo see lib/open_gov/contributions.rb in OG 1.0
+  end
+
   desc 'Get biographies and biography URLs from the Influence Explorer API'
   task biographies: :environment do
     if ENV['SUNLIGHT_API_KEY']
       include ActionView::Helpers::SanitizeHelper
 
-      people = Person.with(session: 'openstates').where(transparencydata_id: {'$ne' => ['', nil]})
+      people = Person.with(session: 'openstates').where(transparencydata_id: {'$ne' => ['', nil]}) # no index
       progressbar = ProgressBar.create(format: '%a |%B| %p%% %e', length: 80, smoothing: 0.5, total: people.count)
 
       not_found_urls = []
@@ -15,7 +20,7 @@ namespace :influenceexplorer do
         # Assume biographies never change.
         next if person.person_detail.persisted?
 
-        # Reset the incremental backoff.
+        # Reset the exponential backoff.
         wait = 1
 
         begin
@@ -34,7 +39,7 @@ namespace :influenceexplorer do
             person_detail.save!
           end
         rescue Errno::ECONNRESET, RestClient::ServerBrokeConnection
-          wait *= 2 # incremental backoff
+          wait *= 2 # exponential backoff
           sleep wait
           retry
         rescue RestClient::ResourceNotFound

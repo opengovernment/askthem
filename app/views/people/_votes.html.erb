@@ -1,3 +1,7 @@
 <section class="related_focus">
-  @todo: Votes
+  <ol>
+    <%= render @votes %>
+  </ol>
+
+  <%= paginate @votes, outer_window: 1, params: {format: nil}, replace: '.related_focus', scroll: '.related_wrap' %>
 </section>

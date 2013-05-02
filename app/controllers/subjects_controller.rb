@@ -5,10 +5,9 @@ class SubjectsController < ApplicationController
   respond_to :js, only: :show
   actions :index, :show
 
-  # @note There is no index with both the `subjects` and `session` fields.
   def show
     show! do |format|
-      @bills = chain.where(subjects: @subject, session: parent.current_session).includes(:metadatum).desc('action_dates.last').page(params[:page])
+      @bills = chain.recent.where(subjects: @subject).includes(:questions).page(params[:page]) # no index includes `session`, so we omit it
       format.js {render partial: 'page'}
     end
   end
@@ -17,7 +16,7 @@ private
 
   # @note MT, RI and WI have inconsistent subject names (typos, etc.).
   def chain
-    Bill.in(parent['abbreviation'])
+    Bill.in(parent.abbreviation)
   end
 
   def collection

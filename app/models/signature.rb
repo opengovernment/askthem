@@ -18,7 +18,7 @@ class Signature
   validates_presence_of :user_id, :question_id
   validates_uniqueness_of :user_id, scope: :question_id
 
-  before_save :copy_user_fields
+  before_create :copy_user_fields
 
 private
 

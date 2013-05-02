@@ -14,7 +14,7 @@
 //= require jquery_ujs
 //= require jquery.autogrow-textarea
 //= require jquery.history
-//= require facebook
+//= require jquery.timeago
 //= require authentication
 //= require tabs
 //= require bills

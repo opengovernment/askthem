@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  before_filter :set_jurisdiction, only: [:overview, :lower, :upper, :bills, :votes]
+  before_filter :set_jurisdiction, only: [:overview, :lower, :upper, :bills, :key_votes]
   before_filter :authenticate_user!, only: :dashboard
   caches_action :channel
 
@@ -27,8 +27,8 @@ class PagesController < ApplicationController
     tab 'bills'
   end
 
-  def votes
-    tab 'votes'
+  def key_votes
+    tab 'key_votes'
   end
 
   def dashboard
@@ -36,8 +36,26 @@ class PagesController < ApplicationController
     @questions_signed = current_user.questions_signed
   end
 
+  # @see https://github.com/alexreisner/geocoder#use-outside-of-rails
+  # @see https://github.com/sunlightlabs/billy/wiki/Differences-between-the-API-and-MongoDB
+  def locator
+    data = Geocoder.search(params[:q]).first # request.location geocodes by IP
+    if data.country_code == 'US' && data.latitude.nonzero? && data.longitude.nonzero?
+      ids = JSON.parse(RestClient.get('http://openstates.org/api/v1/legislators/geo/', params: {
+        fields: 'id',
+        lat: data.latitude,
+        long: data.longitude,
+        apikey: ENV['SUNLIGHT_API_KEY'],
+      })).map do |legislator|
+        legislator['id']
+      end
+      @people = Person.with(session: 'openstates').includes(:questions).find(ids)
+    end
+    # @todo OgLocal API to add local people, DemocracyMap in failure case
+  end
+
   def search
-    # @todo OgLocal, OpenStates, DemocracyMap
+    # @todo elasticsearch
   end
 
   def channel
@@ -52,15 +70,21 @@ private
   end
 
   def tab(tab)
-    # @note Each pair of `@lower` and `@upper` lines must be run together, as
-    #   below, otherwise the first query to evaluate will clear the persistence
-    #   options of the unevaluated query.
-    @lower = Person.in(@jurisdiction['abbreviation']).where(chamber: 'lower')
+    # Each pair of `@lower` and `@upper` lines must be run together, as below,
+    # otherwise the first query to evaluate will clear the persistence options
+    # of the unevaluated query.
+    @lower = Person.in(@jurisdiction.abbreviation).active.where(chamber: 'lower')
+    @lower = @lower.includes(:questions) if tab == 'lower'
     @lower_parties = @lower.group_by{|person| person['party']}
-    @upper = Person.in(@jurisdiction['abbreviation']).where(chamber: 'upper')
+
+    @upper = Person.in(@jurisdiction.abbreviation).active.where(chamber: 'upper')
+    @upper = @upper.includes(:questions) if tab == 'upper'
     @upper_parties = @upper.group_by{|person| person['party']}
-    @bills = Bill.in(@jurisdiction['abbreviation']).includes(:metadatum).desc('action_dates.last').page(params[:page])
-    @votes = [] # @todo stub
+
+    @bills = Bill.in(@jurisdiction.abbreviation).in_session(@jurisdiction.current_session).page(params[:page])
+    @bills = @bills.includes(:questions) if tab == 'bills'
+
+    @key_votes = KeyVote.in(@jurisdiction.abbreviation).page(params[:page])
 
     @tab = tab
     respond_to do |format|
