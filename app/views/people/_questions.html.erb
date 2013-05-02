@@ -3,12 +3,14 @@
     <% 5.times do %>
     <li>
       <div class="question_content">
-        <%= link_to 'Why have this thing for act for what? <span class="icon-angle-right view"></span>'.html_safe, question_path(@jurisdiction.id, '1'), class: 'title' %>
+        <%= link_to 'Why have this thing for act for what? <span class="icon-angle-right view"></span>'.html_safe, question_path(@jurisdiction['abbreviation'], '1'), class: 'title' %>
         <p>Lorem ipsum dolor sit amet, adipisicing elit, sed do  tempor incididunt ut labore et dolore magna aliqua sed do eiusmod tempor  ut&hellip; <span class="context">&rarr; in Pennsylvania Bills</span></p>
         <span class="target">
           <%= link_to image_tag('http://lorempixel.com/40/40/people/', size: '20x20', alt: '') + 'Steve T', '#' %>
           <span class="to">&rarr;</span>
-          <%= link_to cdn_image_tag(@person.image, size: '20x20', alt: '', class: 'person_photo') + @person.name, '#', class: 'recipient' %>
+          <%= link_to '#', class: 'recipient' do %>
+            <% if @person.image? %><%= cdn_image_tag(@person.image, size: '20x20', alt: '', class: 'person_photo') %><% end %><%= @person.name %>
+          <% end %>
         </span>
       </div>
       <ul class="activity">

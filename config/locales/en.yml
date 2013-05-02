@@ -6,3 +6,112 @@ en:
   time:
     formats:
       bill: '%B %e, %Y'
+  mongoid:
+    attributes:
+      user:
+        given_name: First name
+        family_name: Last name
+        locality: City
+        region: State
+        postal_code: Zipcode
+
+  # Controllers
+  pages:
+    index:
+      title: "OpenGovernment: Ask questions to your city and state elected officials"
+      description: Ask questions to your city and state elected officials
+    overview:
+      title: "%{jurisdiction} - OpenGovernment"
+      description: "Ask questions and track government in %{jurisdiction}"
+    lower:
+      title: "%{jurisdiction} %{lower} Overview - OpenGovernment"
+      description: "Browse %{jurisdiction} %{lower}"
+    upper:
+      title: "%{jurisdiction} %{upper} Overview - OpenGovernment"
+      description: "Browse %{jurisdiction} %{upper}"
+    bills:
+      title: "%{jurisdiction} Bills Overview - OpenGovernment"
+      description: "Browse %{jurisdiction} bills"
+    votes:
+      title: "%{jurisdiction} Votes Overview - OpenGovernment"
+      description: "Browse %{jurisdiction} votes"
+    dashboard:
+      title: Your Dashboard - OpenGovernment
+      description: Track your activity on OpenGovernment
+  bills:
+    index:
+      title: "%{jurisdiction} Bills - OpenGovernment"
+      description: "Search %{jurisdiction} bills"
+    show:
+      title: "%{bill_id} - %{jurisdiction} %{session} - OpenGovernment"
+      description: "%{jurisdiction} %{session} %{bill_type} %{bill_id}: %{bill_title}"
+    sponsors:
+      title: "%{bill_id} Sponsors - %{jurisdiction} %{session} - OpenGovernment"
+      description: "Sponsors of %{jurisdiction} %{session} %{bill_type} %{bill_id}"
+    pagination: "%{jurisdiction} Bills – Page %{page} - OpenGovernment"
+  people:
+    index:
+      title: "%{jurisdiction} Officials - OpenGovernment"
+      description: "Ask questions to your %{jurisdiction} officials"
+    show:
+      title: "%{honorary_prefix} %{person} - %{jurisdiction} - OpenGovernment"
+      description: "Ask %{jurisdiction} %{honorary_prefix} %{person} a question"
+    bills:
+      title: "%{person} Sponsored Bills - %{jurisdiction} - OpenGovernment"
+      description: "Bills sponsored by %{jurisdiction} %{honorary_prefix} %{person}"
+    committees:
+      title: "%{person} Committee Memberships - %{jurisdiction} - OpenGovernment"
+      description: "Committee memberships for %{jurisdiction} %{honorary_prefix} %{person}"
+    votes:
+      title: "%{person} Votes - %{jurisdiction} - OpenGovernment"
+      description: "Votes by %{jurisdiction} %{honorary_prefix} %{person}"
+    pagination: "%{person} Sponsored Bills – Page %{page} - %{jurisdiction} - OpenGovernment"
+  questions:
+    index:
+      title: "%{jurisdiction} Questions - OpenGovernment"
+      description: "Ask and support questions to your %{jurisdiction} officials"
+    show:
+      title: '“%{question}” - %{jurisdiction} - OpenGovernment'
+      description: Show your support for this question by adding your signature
+    new:
+      title: Ask a Question - OpenGovernment
+      description: Ask a question to your city and state elected officials
+    preview:
+      title: Preview Your Question - OpenGovernment
+      description: Confirm your question to a city or state elected official
+  subjects:
+    index:
+      title: "%{jurisdiction} Issue Areas - OpenGovernment"
+      description: "Browse %{jurisdiction} bills by issue area"
+    show:
+      title: "%{subject} - %{jurisdiction} - OpenGovernment"
+      description: "Browse %{jurisdiction} %{subject} bills"
+    pagination: "%{subject} – Page %{page} - %{jurisdiction} - OpenGovernment"
+  users:
+    show:
+      title: "%{user} - OpenGovernment"
+      description: "Show your support for questions by %{user}"
+  registrations:
+    new:
+      title: Sign Up - OpenGovernment
+      description: Sign up to ask questions to your city and state elected officials
+    create:
+      title: Sign Up - OpenGovernment
+      description: Sign up to ask questions to your city and state elected officials
+    edit:
+      title: Update Profile - OpenGovernment
+      description: Update your basic profile details
+    update:
+      title: Update Profile - OpenGovernment
+      description: Update your basic profile details
+  sessions:
+    new:
+      title: Sign In - OpenGovernment
+      description: Sign in to ask questions to your city and state elected officials
+  passwords:
+    new:
+      title: Reset Password - OpenGovernment
+      description: Reset your password to sign in
+    edit:
+      title: Reset Password - OpenGovernment
+      description: Reset your password to sign in

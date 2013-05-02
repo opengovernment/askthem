@@ -4,6 +4,16 @@ require 'ostruct'
 class Bill
   include Mongoid::Document
 
+  # The bill's jurisdiction.
+  belongs_to :metadatum, foreign_key: 'state'
+  # The bill's votes.
+  has_many :votes
+  # Questions about the bill.
+  has_many :questions
+
+  field :question_count, type: Integer, default: 0
+  field :answered_question_count, type: Integer, default: 0
+
   DATE_ORDER = {
     'lower' => [
       'first',
@@ -26,17 +36,14 @@ class Bill
     'upper' => 'lower',
   }
 
-  # Bills related to a committee or legislator.
-  index('actions.related_entities.id' => 1)
-  # Bills with an action by a committee.
-  index('actions.committee' => 1)
-  # Bills sponsored by a committee.
-  index('sponsors.committee_id' => 1)
-  # A state's current bills.
-  index(state: 1, _current_session: 1, 'action_dates.last' => -1)
+  # Returns answered questions about the bill.
+  def questions_answered
+    questions.where(answered: true)
+  end
 
-  def jurisdiction
-    @jurisdiction ||= Metadatum.find(read_attribute(:state))
+  # @return [String] the bill's human-readable session
+  def session_label
+    metadatum['session_details'][read_attribute(:session)]['display_name']
   end
 
   # @return [Array] the major actions sorted by date
@@ -46,7 +53,7 @@ class Bill
 
       # Remove extra chambers.
       chamber = read_attribute(:chamber)
-      if jurisdiction.chambers.size == 1
+      if metadatum['chambers'].size == 1
         dates.delete_at(dates.index{|action,_| action.include?(OTHER_CHAMBER[chamber])})
       end
 
@@ -64,6 +71,7 @@ class Bill
   # @option opts [Integer] :limit the number of sponsors to return
   # @option opts [Symbol] :only the type of sponsors to return
   # @return [Array] the people and committees sponsoring the bill
+  # @note We do this because the OpenStates database is inconsistent.
   def people_and_committee_sponsors(opts = {})
     sponsors = read_attribute(:sponsors)
     case opts[:only]
@@ -79,7 +87,7 @@ class Bill
     # Get all the legislator sponsors in a single query.
     ids = sponsors.select{|x| x['leg_id']}.map{|x| x['leg_id']}
     unless ids.empty?
-      Person.where(_id: {'$in' => ids}).each do |document|
+      Person.use(read_attribute(:state)).where(_id: {'$in' => ids}).each do |document|
         documents_by_id[document.id] = document
       end
     end
@@ -87,7 +95,7 @@ class Bill
     # Get all the committee sponsors in a single query.
     ids = sponsors.select{|x| x['committee_id']}.map{|x| x['committee_id']}
     unless ids.empty?
-      Committee.where(_id: {'$in' => ids}).each do |document|
+      Committee.use(read_attribute(:state)).where(_id: {'$in' => ids}).each do |document|
         documents_by_id[document.id] = document
       end
     end
@@ -103,13 +111,5 @@ class Bill
       end
       document
     end
-  end
-
-  def questions # @todo
-    []
-  end
-
-  def answers # @todo
-    []
   end
 end

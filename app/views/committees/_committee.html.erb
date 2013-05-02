@@ -1,12 +1,12 @@
 <li>
-  <div class="bill_content"><%# @todo fix class name %>
+  <div class="bill_content">
     <%= committee.name %>
   </div>
   
   <ul class="activity">
-    <% committee.people.each do |person| %><%# @todo expensive, as not eagerly loaded %>
+    <% committee.people.each do |person| %><%# @note N+1 query %>
       <li class="depiction">
-        <% if person.image? %><%# @todo tooltip with name, use layout to support up to 93 members %>
+        <% if person.image? %><%# @todo ST use layout to support up to 93 members %>
           <%= cdn_image_tag(person.image, size: '50x50', alt: '') %>
         <% else %>
           <%= image_tag('placeholder.png', size: '50x50', alt: '') %>

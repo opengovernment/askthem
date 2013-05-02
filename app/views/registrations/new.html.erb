@@ -1,0 +1,19 @@
+<section>
+  <header>
+    <h1>Sign up</h1>
+  </header>
+
+  <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: {id: 'new_registration'}) do |f| %>
+    <%= f.input :given_name %>
+    <%= f.input :family_name %>
+    <%= f.input :email %>
+    <%= f.input :street_address %>
+    <%= f.input :locality %>
+    <%= f.input :region, collection: OpenGovernment::STATES %>
+    <%= f.input :postal_code %>
+    <%= f.input :password %>
+    <%= f.button :submit, 'Sign up' %>
+  <% end %>
+
+  <%= render 'devise/shared/links' %>
+</section>

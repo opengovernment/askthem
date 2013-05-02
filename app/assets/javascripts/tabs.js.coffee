@@ -29,14 +29,16 @@ jQuery ($) ->
   # Tabs on people#show and bills#show.
   $('.related_nav a').click (e) ->
     e.preventDefault()
-    href = $(this).attr('href')
-    History.pushState({href: href, id: $(this).attr('id')}, '', href)
+    $this = $(this)
+    href = $this.attr('href')
+    History.pushState({href: href, id: $this.attr('id')}, $this.data('title'), href)
 
-  # Pagination on "Sponsored Bills" tab.
-  $(document).on 'click', '.related_focus nav a', (e) ->
+  # Pagination.
+  $(document).on 'click', 'nav[data-replace] a', (e) ->
     e.preventDefault()
-    href = $(this).attr('href')
-    History.pushState({href: href}, '', href)
+    $this = $(this)
+    href = $this.attr('href')
+    History.pushState({href: href}, $this.data('title'), href)
 
   # "View all" link in sidebar.
   $('a[rel="sponsors"]').click (e) ->
@@ -46,7 +48,15 @@ jQuery ($) ->
   History.Adapter.bind window, 'statechange', ->
     state = History.getState().data
     $.ajax(ajaxURL(state.href), dataType: 'html').done (data) ->
+      $nav = $('nav[data-replace]')
+      if state.id
+        target = '.related_focus'
+        scroll = '.related_wrap'
+      else
+        target = $nav.data('replace')
+        scroll = $nav.data('scroll') or target
+
       $('.related_nav .active').removeClass('active') if state.id
-      scroller.animate({scrollTop: $('.related_wrap').offset().top}, 'slow');
-      replace('.related_focus', data)
+      scroller.animate({scrollTop: $(scroll).offset().top}, 'slow');
+      replace(target, data)
       $('#' + state.id).addClass('active') if state.id

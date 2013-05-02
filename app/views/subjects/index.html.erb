@@ -1,0 +1,15 @@
+<%= render 'shared/navigation' %>
+
+<section>
+  <header>
+    <h1>Issue Areas</h1>
+  </header>
+
+  <ul>
+    <% @subjects.each do |subject| %>
+      <li>
+        <%= link_to subject, subject_path(@jurisdiction['abbreviation'], subject.parameterize) %>
+      </li>
+    <% end %>
+  </ul>
+</section>

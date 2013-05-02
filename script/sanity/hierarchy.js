@@ -52,10 +52,58 @@ reportList('legislators', 'roles.state', {
 
 // Do all documents belong to valid chambers and districts?
 db.metadata.find().forEach(function (obj) {
-  var chambers = [], chamber;
+  var chambers = [], chamber,
+      sessions = [], session,
+      terms = [], term;
+
   for (chamber in obj.chambers) {
     chambers.push(chamber);
   }
+
+  obj.terms.forEach(function (term) {
+    terms.push(term.name);
+    sessions = sessions.concat(term.sessions);
+  });
+
+  reportList('bills', '_term', {
+    state: obj._id,
+    _term: {
+      '$nin': terms
+    }
+  }, obj._id.toUpperCase() + ' bills with invalid _term');
+
+  reportList('legislators', 'roles.term', {
+    state: obj._id,
+    _term: {
+      '$exists': true,
+      '$nin': terms
+    }
+  }, obj._id.toUpperCase() + ' legislators with invalid term');
+
+  ['bills', 'events', 'votes'].forEach(function (collection) {
+    reportList(collection, 'session', {
+      state: obj._id,
+      session: {
+        '$nin': sessions
+      }
+    }, obj._id.toUpperCase() + ' ' + collection + ' with invalid session');
+  });
+
+  reportList('bills', 'companions.session', {
+    state: obj._id,
+    'companions.session': {
+      '$exists': true,
+      '$nin': sessions
+    }
+  }, obj._id.toUpperCase() + ' committees with invalid companions.session');
+
+  reportList('committees', 'session', {
+    state: obj._id,
+    '+session': {
+      '$exists': true,
+      '$nin': sessions
+    }
+  }, obj._id.toUpperCase() + ' committees with invalid session');
 
   // @note Can add `enum` to districts.json and person.json schemas.
   // @see https://github.com/sunlightlabs/billy/blob/master/billy/schemas/bill.json#L112
@@ -103,7 +151,7 @@ db.metadata.find().forEach(function (obj) {
     state: obj._id,
     '+chamber': {
       '$exists': true,
-      '$nin': chambers
+      '$nin': chambers_plus_other
     }
   }, obj._id.toUpperCase() + ' events with invalid +chamber');
   reportList('events', 'participants.chamber', {

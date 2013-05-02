@@ -109,6 +109,24 @@ reportList('bills', 'sponsors.type', {
   reportList('bills', field, criteria);
 });
 
+// Bill subjects
+reportList('bills', 'subjects', {
+  subjects: {
+    '$exists': true,
+    '$in': [
+      'Agriculture and food',
+      'Animal Rights and Wildlife',
+      'Budget, Spending and Taxes',
+      'Civil Librties and Civil Rights',
+      'Federal, State and Local Relations',
+      'Federal, State and Local relations',
+      'Municial and County Issues',
+      'Technology and Communications',
+      'other'
+    ]
+  }
+})
+
 // Document MIME types
 reportList('events', 'documents.+mimetype', {
   'documents.+mimetype': {

@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
-  def show
-  end
+  inherit_resources
+  respond_to :html
+  actions :show
 end

@@ -548,23 +548,21 @@ if (verbose) {
   }, "votes whose committee name is not the committee's name");
 }
 
-
-
-// bills: sponsors.chamber and chamber
-// @todo It seems common practice in some states for representatives to be
-//   primary on a bill and for a senator to be cosponsor. Needs clarification.
-/*
-reportList('bills', 'chamber', {
-  'sponsors.chamber': {
-    '$exists': true
-  },
-  '$where': function () {
-    for (var i = 0, l = this.sponsors.length; i < l; i++) {
-      var value = this.sponsors[i].chamber;
-      if (value && value !== this.chamber) {
-        return true;
+// @note It's common for a lower house member to be the primary sponsor of a
+//   bill and for an upper house member to be cosponsor.
+if (verbose) {
+  // bills: sponsors.chamber and chamber
+  reportList('bills', 'chamber', {
+    'sponsors.chamber': {
+      '$exists': true
+    },
+    '$where': function () {
+      for (var i = 0, l = this.sponsors.length; i < l; i++) {
+        var value = this.sponsors[i].chamber;
+        if (value && value !== this.chamber) {
+          return true;
+        }
       }
     }
-  }
-}, "bills with a sponsor whose chamber is not the bill's chamber");
-*/
+  }, "bills with a sponsor whose chamber is not the bill's chamber");
+}

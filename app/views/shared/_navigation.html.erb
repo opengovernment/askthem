@@ -5,9 +5,11 @@
       <li><a name="top" style="display:none;"></a><%= tab 'Questions', questions_path %></li>
       <li><%= tab 'Bills', bills_path %></li>
       <li><%= tab 'People', people_path %></li>
-      <li><%= tab 'Issues', '#' %><%# @todo %></li>
-      <li><%= tab 'Money', '#' %><%# @todo %></li>
-      <li><%= tab 'State Overview', jurisdiction_path %></li>
+      <% if @jurisdiction.subjects? %>
+      <li><%= tab 'Issues', subjects_path %></li>
+      <% end %>
+      <%# <li><%= tab 'Money', '#' </li> @todo %>
+      <li><%= tab 'Overview', jurisdiction_path %></li>
     </ul>
   </nav>
 </section>

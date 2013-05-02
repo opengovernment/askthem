@@ -3,5 +3,5 @@
     <%= render @bills %>
   </ol>
 
-  <%= paginate @bills, outer_window: 1, params: {format: nil} %>
+  <%= paginate @bills, outer_window: 1, params: {format: nil}, replace: '.related_focus', scroll: '.related_wrap' %>
 </section>

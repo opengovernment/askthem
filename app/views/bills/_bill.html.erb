@@ -1,8 +1,8 @@
 <li>
   <div class="bill_content">
-    <%= link_to bill['bill_id'], bill_path(@jurisdiction.id, bill), class: 'title' %>
+    <%= link_to bill['bill_id'], bill_path(@jurisdiction['abbreviation'], bill), class: 'title' %>
     <p>
-      <%= truncate(bill['title'], length: 95) %><% if bill.dates.first.last %>, <%= bill.dates.first.last.year %><% end %>
+      <%= short_bill_title(bill) %>, <%= bill.session_label %>
     </p>
     <ol class="actions">
       <% bill.dates.select{|_,date| date}.each do |action,date| %>
@@ -32,11 +32,11 @@
   </div>
   
   <ul class="activity">
-    <li><%= pluralize bill.questions.count, 'question' %></li>
-    <% bill.people_and_committee_sponsors(limit: 5, only: :people).each do |sponsor| %>
+    <li><%= pluralize bill.question_count, 'question' %></li>
+    <% bill.people_and_committee_sponsors(limit: 5, only: :people).each do |sponsor| %><%# @note N+1 query %>
       <li class="depiction">
         <% if Person === sponsor %>
-          <% if sponsor.image? %><%# @todo tooltip with name %>
+          <% if sponsor.image? %>
             <%= cdn_image_tag(sponsor.image, size: '50x50', alt: '') %>
           <% else %>
             <%= image_tag('placeholder.png', size: '50x50', alt: '') %>

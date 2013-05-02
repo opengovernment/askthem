@@ -5,6 +5,13 @@ reportList('metadata', 'abbreviation', {
   }
 }, 'metadata whose abbreviation is not equal to _id');
 
+// _id should be predictable.
+reportList('districts', '_id', {
+  '$where': function () {
+    return this._id != this.abbr + '-' + this.chamber + '-' + this.name;
+  }
+}, 'districts whose _id is not in the format "abbr-chamber-name"');
+
 // leg_id should be equal to _id.
 reportList('legislators', 'leg_id', {
   '$where': function () {

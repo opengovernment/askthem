@@ -1,4 +1,32 @@
 module ApplicationHelper
+  def current_url
+    request.protocol + request.host_with_port + request.fullpath
+  end
+
+  # @note Called by the page layout and paginators.
+  def title(args = {})
+    translate_in_controller_scope("#{controller.action_name}.title", params.slice(:page).merge(default: 'OpenGovernment').merge(args))
+  end
+
+  # @note Called by the page layout.
+  def description(args = {})
+    translate_in_controller_scope("#{controller.action_name}.description", params.slice(:page).merge(default: '').merge(args))
+  end
+
+  def short_bill_title(bill)
+    truncate(bill['title'].gsub(/\A"|"\z/, ''), length: 95) # an unclosed quotation looks funny, so remove it
+  end
+
+  def og_image
+    if @user && @user.image?
+      @user.image.url
+    elsif @person && @person.image?
+      @person.image
+    else
+      root_url.chomp('/') + image_path('logo.png')
+    end
+  end
+
   # Returns an "img" tag for the remote image.
   #
   # @param [String] url an image URL
@@ -7,7 +35,11 @@ module ApplicationHelper
   # @option opts [Integer] :height the maximum image height
   # @return [String] the HTML for an "img" tag
   def cdn_image_tag(url, opts = {})
-    width, height = opts[:size].split('x')
+    if opts[:size]
+      width, height = opts[:size].split('x')
+    else
+      width, height = opts[:width], opts[:height]
+    end
     image_tag("http://d2xfsikitl0nz3.cloudfront.net/#{CGI.escape(url)}/#{width}/#{height}", opts)
   end
 
@@ -23,6 +55,19 @@ module ApplicationHelper
       html_options[:class] << ' active'
     end
     link_to body, url_options, html_options
+  end
+
+  # Returns HTML options for an "a" tag in the subnavigation bar.
+  #
+  # @param [String] action the controller action
+  # @param [String] scope a translation scope
+  # @return [Hash] HTML options for the "a" tag
+  def tab_options(action, scope = nil)
+    {
+      'id' => "#{action}-tab",
+      'class' => @tab == action && 'active',
+      'data-title' => translate_in_controller_scope("#{scope || action}.title"),
+    }
   end
 
   # Returns the person's basic attributes.
@@ -46,6 +91,62 @@ module ApplicationHelper
       "District #{name}"
     else
       name
+    end
+  end
+
+private
+
+  def translate_in_controller_scope(key, args = {})
+    args.reverse_merge!(translate_arguments)
+    args[:defaults] = [*args[:default]]
+    if args.key?(:page) && args[:page] != 1
+      args[:defaults].unshift("#{controller.controller_name}.#{key}")
+      key = 'pagination'
+    end
+    t("#{controller.controller_name}.#{key}", args)
+  end
+
+  def translate_arguments
+    @translate_arguments ||= begin
+      args = {}
+
+      if @jurisdiction
+        args[:jurisdiction] = @jurisdiction['name']
+
+        # pages#overview
+        if @jurisdiction.lower_chamber?
+          args[:lower] = @jurisdiction.chamber_title('lower').pluralize
+        end
+        if @jurisdiction.upper_chamber?
+          args[:upper] = @jurisdiction.chamber_title('upper').pluralize
+        end
+      end
+
+      if @bill
+        args[:bill_id] = @bill['bill_id']
+        args[:bill_type] = @bill['type'].first.titleize
+        args[:bill_title] = short_bill_title(@bill)
+        args[:session] = @bill.session_label
+      end
+
+      if @person
+        args[:person] = @person.name
+        args[:honorary_prefix] = @jurisdiction.chamber_title(@person['chamber'])
+      end
+
+      if @question
+        args[:question] = @question.title
+      end
+
+      if @subject
+        args[:subject] = @subject
+      end
+
+      if @user
+        args[:user] = @user.name
+      end
+
+      args
     end
   end
 end

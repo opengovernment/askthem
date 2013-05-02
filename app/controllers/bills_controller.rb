@@ -1,11 +1,16 @@
 class BillsController < ApplicationController
   inherit_resources
+  belongs_to :jurisdiction, parent_class: Metadatum, finder: :find_by_abbreviation, param: :jurisdiction
   respond_to :html
-  respond_to :js, only: [:show, :sponsors]
+  respond_to :js, only: [:index, :show, :sponsors]
   actions :index, :show
   custom_actions resource: :sponsors
 
-  before_filter :set_jurisdiction
+  def index
+    index! do |format|
+      format.js {render partial: 'page'}
+    end
+  end
 
   def show
     tab 'questions'
@@ -18,14 +23,18 @@ class BillsController < ApplicationController
 private
 
   def tab(tab)
+    @tab = tab
     show! do |format|
-      @tab = tab
       format.html {render action: 'show'}
       format.js {render partial: @tab}
     end
   end
 
+  def end_of_association_chain
+    Bill.in(parent['abbreviation'])
+  end
+
   def collection
-    @bills ||= end_of_association_chain.where(state: @jurisdiction.id, _current_session: true).desc('action_dates.last').page(params[:page])
+    @bills ||= end_of_association_chain.where(session: parent.current_session).includes(:metadatum).desc('action_dates.last').page(params[:page])
   end
 end
