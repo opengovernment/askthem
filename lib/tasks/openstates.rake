@@ -13,7 +13,7 @@ namespace :openstates do
   desc 'Update metadata, legislators, committees and bills from OpenStates'
   task update: :environment do
     openstates do
-      # @todo
+      # @todo mixed strategy using both JSON downloads and API
     end
   end
 
@@ -37,6 +37,7 @@ namespace :openstates do
     task update: :download do
       openstates do
         # @todo loop through files, updating documents if updated_at is newer, removing files as you go
+        # report any documents that are in the local DB but not in the JSON downloads (e.g. could be a merged legislator)
       end
     end
   end
@@ -68,7 +69,7 @@ namespace :openstates do
     task bills: :environment do
       openstates do
         # @todo use updated_since
-        # @todo complete https://github.com/sunlightlabs/billy/wiki/Differences-between-the-API-and-MongoDB
+        # complete docs at https://github.com/sunlightlabs/billy/wiki/Differences-between-the-API-and-MongoDB
       end
     end
   end

@@ -144,8 +144,12 @@ namespace :projectvotesmart do
   task ratings: :environment do
     # `Rating.getCandidateRating` is the only way to get categories for ratings,
     # but it is very expensive to use that API endpoint, as you must loop
-    # through all people. We instead use `Rating.getRating`, which allows us to
-    # only request the ratings for new scorecards.
+    # through all people on each run. We instead use `Rating.getRating`, which
+    # allows us to only request the ratings for new scorecards.
+
+    # According to Mike Shultz <mike@votesmart.org>, scorecards are almost
+    # always static once entered. However, there may be occasional corrections
+    # and additions. Here, we simply import once.
 
     # Iterating over many records for too long may raise a
     # `Moped::Errors::CursorNotFound` exception.
