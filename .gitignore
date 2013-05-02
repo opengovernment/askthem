@@ -8,3 +8,4 @@ latest-mongo-dump.tar.gz
 /config/initializers/_heroku.rb
 /coverage
 /public/uploads
+/config/initializers/mongoid_billy_shim.rb
