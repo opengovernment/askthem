@@ -16,6 +16,10 @@ class QuestionsController < ApplicationController
     @user = User.new unless user_signed_in?
     show!
   end
+  
+  def findofficial
+    
+  end
 
 private
 
@@ -46,4 +50,5 @@ private
       issued_at: 1.week.ago,
     })
   end
+  
 end

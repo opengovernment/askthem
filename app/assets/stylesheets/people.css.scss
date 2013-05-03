@@ -30,6 +30,12 @@ div.avatar{
   vertical-align: top;
 }
 
+.recipient div.avatar{
+  max-width:60px;
+  width:17.647058823529%;
+  vertical-align: top;
+}
+
 /*
   Representatives
 */
@@ -130,6 +136,8 @@ section.people{
     }
   }
 }
+
+
 /*
   User Profiles
 */

@@ -44,4 +44,9 @@ OpenGovernment::Application.routes.draw do
   match 'dashboard' => 'pages#dashboard', as: :dashboard, via: :get
   match 'channel' => 'pages#channel', as: :channel, via: :get
   match ':jurisdiction' => 'pages#overview', as: :jurisdiction, via: :get
+  
+  
+  # tempary templates for ask a question flow
+  get '/new/findofficial' => 'questions#findofficial'
+  
 end

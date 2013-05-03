@@ -57,3 +57,22 @@ Block fluidity, for now
 @mixin responsive-blocker($min-width:910px) {
   min-width: $min-width;
 }
+
+/*
+Form elements
+*/
+
+@mixin input-placeholder($color) {
+  &.placeholder {
+    color: $color; 
+	}
+  &:-moz-placeholder {
+    color: $color; 
+	}
+  &:-ms-input-placeholder {
+    color: $color; 
+	}
+  &::-webkit-input-placeholder {
+    color: $color; 
+	} 
+}

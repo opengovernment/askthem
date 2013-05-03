@@ -30,41 +30,55 @@ div.count{
 form{
   input[type=text],input[type=email],input[type=number], textarea{
     font-family:helvetica, arial, verdana, sans-serif;
+    border: 1px solid #dde3e1;
+    font-size:1em;
+    line-height: 1.5em; 
+    height:42px;
+    text-indent:10px;
+    @include border-radius(3px);
+    width:300px;
+    @include input-placeholder(#b9ccc8);
+    &:focus{
+      border-color:#82ccd7;
+      outline: none;
+    }
+  }
+  label{
+    color: $darkblue;
+    display: block;
+    font-weight: 600;
+    font-size: 1.125em;
+    margin-bottom: 12px;
+    line-height: 1em;
+    span.details{
+      color:$middleblue;
+      display:block;
+      font-size:0.889em;
+      font-weight:normal;
+      line-height: 1.5em;
+      margin-top:6px;
+    }
+    span.option{
+      color:#c8c8c8;
+      font-size:1.125em;
+      line-height: 1em;
+    }
   }
   &.action{
-    label{
-      color: $darkblue;
-      display: block;
-      font-weight: 600;
-      font-size: 1.125em;
-      margin-bottom: 12px;
-      line-height: 1em;
-      span.details{
-        color:$middleblue;
-        display:block;
-        font-size:0.889em;
-        font-weight:normal;
-        line-height: 1.5em;
-        margin-top:6px;
-      }
-      span.option{
-        color:#c8c8c8;
-        font-size:1.125em;
-        line-height: 1em;
-      }
-    }
     input[type=text]{
       background-image: url(/assets/textarea_bg@2x.png);
       border:0;
       background-size: 2px 30px;
       background-position: 0 29px;
       font-size:0.938em;
+      height: auto;
       line-height: 2em;
       font-weight:100;
       color:#284249;
       outline:none;
       margin-bottom:36px;
       padding-top:0;
+      text-indent:0px;
       width:100%;
       &:focus, &:hover{
         background-image: url(/assets/textarea_bg_focus@2x.png);
@@ -87,6 +101,7 @@ form{
       outline: none;
       resize: none;
       margin-bottom: 36px;
+      text-indent:0px;
       width: 100%;
       &:focus, &:hover{
         background-image: url(/assets/textarea_bg_focus@2x.png);
@@ -94,6 +109,21 @@ form{
         background-position: 0 29px;
         color:#818181;
       }
+    }
+  }
+  fieldset{
+    border-top: 1px solid #EFEFEF;
+    padding-top: 36px;
+    margin-bottom: 42px;
+    margin-top: 36px;
+    input[type=text]{
+      margin-bottom:12px;
+    }
+    label{
+      font-size:0.813em;
+      font-weight: 100;
+      line-height: 1.385em;
+      margin-bottom: 6px;
     }
   }
 }
@@ -119,6 +149,36 @@ div.controls{
     vertical-align: middle;
   }
 }
+
+// Recipient Selection
+.people-list.select-person{
+  li{
+    @include transition(all 0.1s ease-in);
+    @include opacity(.8);
+    cursor: pointer;
+    &:hover, &.selected, &.deselected:hover{
+      @include opacity(1);
+    }
+    &.deselected{
+      @include opacity(.3);
+    }
+    div.select_box{
+      width: 8%;
+      height: 18px;
+      display: inline-block;
+      vertical-align: top;
+      margin-top: 12px;
+      margin-right: 2.5%;
+    }
+    div.avatar{
+      width:20%;
+    }
+    div.person-info{
+      margin-left: 2.5%;
+      width: 55%;
+    }
+  }
+} 
 
 /*
 Success, Info, Error treatments & messages

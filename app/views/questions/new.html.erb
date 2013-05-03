@@ -24,17 +24,8 @@
         <option value="0">Select an Issue</option>
         <option value="1">Issue #1!</option>
       </select>
-
-      <div class="controls">
-        <input type="submit" value="Publish Question" class="cta_pill">
-        <span class="info">
-          We'll help you find your elected officials on the following page!
-        </span>
-      </div>
     </form>
   </article>
-  <div class="flow_info">
-    <h3>Your question may have already been answered!</h3>
-    <p>Just be sure to <%= link_to 'search first', questions_path(@jurisdiction.abbreviation) %> before asking your question!</p>
-  </div>
+  
+  <%= render partial: 'shared/question_progress' %>
 </section>

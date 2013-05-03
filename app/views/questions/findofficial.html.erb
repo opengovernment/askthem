@@ -1,0 +1,53 @@
+<%# render 'shared/navigation' %>
+
+<section class="question">
+  <article>
+    <header>
+      <h1 class="action">Find your Official</h1>
+    </header>
+    <form action="<#= preview_questions_path(@jurisdiction.abbreviation) #>" method="get" accept-charset="utf-8"><%# @todo make into a proper form %>
+      <label for="question">Home Address
+        <span class="details">Where you live lets us locate your officials!</span>
+      </label>
+      
+      <fieldset>
+        <label for="street" class="lesser">What's your street address?</label>
+        <input type="text" name="street" id="street" placeholder="Street Address" />
+
+        <label for="city" class="lesser">Which city is that in?</label>
+        <input type="text" name="street" id="city" placeholder="City" />
+      
+        <label for="state" class="lesser">&hellip; and the state?</label>
+        <input type="text" name="street" id="state" placeholder="State Abbreviation (ex. MA)" />
+      
+        <label for="zipcode" class="lesser">&hellip; and finally your zipcode?</label>
+        <input type="text" name="street" id="zipcode" placeholder="ex. 02141" />
+      </fieldset>
+      
+      <label for="question">Recipient
+        <span class="details">Who would you like to direct this question towards?</span>
+      </label>
+      
+      <fieldset>
+        <ol class="people-list select-person">
+          <% 10.times do %>
+          <li>
+            <div class="select_box">
+              <input type="radio" name="person-select" id="" />
+            </div>
+            <div class="avatar">
+              <img src="http://d2xfsikitl0nz3.cloudfront.net/http%3A%2F%2Fw3.legis.state.ak.us%2Fimages%2Fhouse%2FAUS.jpg/60/60" alt="" />
+            </div>
+            <div class="person-info">
+              <h2>Alan Austerman</h2>
+              <span class="jurisdiction">Representative, District 35, Republican</span>
+            </div>
+          </li>
+          <% end %>
+        </ol>
+      </fieldset>
+      
+    </form>
+  </article>
+  <%= render partial: 'shared/question_progress' %>
+</section>

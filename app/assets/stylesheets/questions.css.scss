@@ -5,6 +5,33 @@
 @import "compass";
 @import "mixins";
 
+// Question progress
+
+div.question_progress{
+  background: #ffffff;
+  @include border-radius(3px);
+  display: block;
+  width: 100%;
+  height: 6px;
+  overflow: hidden;
+  border: 1px solid #DDE3E1;
+  div.progress_filler{
+    background: #F47362;
+    height:4px;
+    padding:1px;
+  }
+}
+span.question_progress_count{
+  color: #7B969E;
+  font-size: 0.813em;
+  padding-top: 6px;
+  line-height: 1.385em;
+  font-weight: 600;
+  display: inline-block;
+  width: 100%;
+}
+
+
 section.questions{
   header{
     text-align:right;
@@ -26,14 +53,6 @@ section.questions{
     position:relative;
     width:100%;
     &:hover{
-/*      border-left: 6px solid rgba(0,0,0,0.05);
-      margin-left:-6px;*/
-/*      background: rgba(0, 0, 0, 0.015);
-      border-bottom:0;
-      box-shadow: 0 0px 3px rgba(0, 0, 0, 0.1);*/
-      span.view{
-        /*display:inline;*/
-      }
       a.sign_on{
         @include opacity(1);
       }
@@ -48,26 +67,6 @@ section.questions{
       font-size: 24px;
       font-weight: 100;
     }
-/*    div.rating{
-      @include rounded_corners();
-      display: inline-block;
-      width: 3.8461538%;
-      background-size: 12px 11px;
-      background-position: center center;
-      position:relative;
-      vertical-align: top;
-      a.upvote{
-        color:$darkblue;
-        font-size:1.125em;
-      }
-      span.count{
-        color:$darkblue;
-        font-size:0.889em;
-        line-height: 1.125em;
-        text-align: center;
-        width: 100%;
-      }
-    }*/
     div.question_content{
       display:inline-block;
       float:left;
@@ -92,15 +91,6 @@ section.questions{
           color:$context;
         }
       }
-/*      a.comment_count{
-        color:#92afb7;
-        display:inline-block;
-        margin-top: 12px;
-        margin-top:6px;
-        font-size:0.75em;
-        font-weight:500;
-        line-height: 1.5em;
-      }*/
     }
     
     ul.activity{
@@ -308,29 +298,85 @@ section.question{
   /*
   Ask a question flow
   */
-  h1.action{
-  }
-  div.flow_info{
-    display: inline-block;
-    vertical-align: top;
-    margin-top: 12px;
-    padding-left: 8.974359%;
-    width: 29.487179%;
-    h3{
-      color:#f77463;
-      font-size:1.5em;
-      font-weight:100;
-      line-height: 1.25em;
-      margin-bottom:6px;
+  div.actions{
+    margin-bottom: 60px;
+    h4{
+      color:$middleblue;
+      font-size:1em;
+      line-height: 1.5em;
     }
-    p{
-      font-size:0.875em;
-      line-height: 1.286em;
-      font-weight:100;
-      color:#2c4850;
-      a{
-        text-decoration:underline;
+    div.row{
+      padding-bottom:18px;
+      padding-top:18px;
+      border-bottom: 1px solid #eaeaea;
+      @include box-shadow(0 1px 0 #ffffff);
+      &.last{
+        margin-bottom:18px;
       }
+    }
+    ul.recipient{
+      margin-bottom: 0;
+      li{
+        margin-bottom:0;
+        .person-info{
+          display: inline-block;
+          margin-left: 5.128205128205%;
+          width: 73.470588235294%;
+        }
+        h2{
+          color:$middleblue;
+          font-size:0.813em;
+          line-height: 1.385em;
+          font-weight: 600;
+        }
+        span.jurisdiction{
+          color:$middleblue;
+          font-size:0.688em;
+          line-height: 1.455em;
+          font-weight: 100;
+        }
+      }
+    }
+    div.question_preview{
+      h5{
+        color:$middleblue;
+        font-size:1em;
+        line-height: 1.5em;
+        font-weight: 600;
+        text-transform: none;
+        border-bottom: 0;
+        margin-bottom:0;
+        padding-bottom:0;
+        &.empty{
+          color:$lightblue;
+        }
+      }
+      p{
+        color:$lightblue;
+        font-size:0.813em;
+        line-height: 1.385em;
+      }
+    }
+    div.question_issue{
+      span{
+        color:$lightblue;
+        font-size:0.813em;
+        line-height: 1.385em;
+        font-weight: 100;
+        strong{
+          font-weight: 600;
+        }
+      }
+    }
+    span.count{
+      color: #C8C8C8;
+      font-size: 0.813em;
+      line-height: 1.385em;
+      font-weight: 600;
+      text-align: center;
+      display: block;
+      margin-top: 18px;
+      margin-bottom: -18px;
     }
   }
 }

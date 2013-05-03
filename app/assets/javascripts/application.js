@@ -20,3 +20,4 @@
 //= require bills
 //= require questions
 //= require responsive
+//= require forms
