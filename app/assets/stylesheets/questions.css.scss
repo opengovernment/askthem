@@ -298,6 +298,21 @@ section.question{
   /*
   Ask a question flow
   */
+  
+  div.progress{
+    float: right;
+    width: 33.205128205128%;
+    position: relative;
+    div.actions{
+      padding: 13.333333333333%;
+      width:73.333333333333%;
+      // Scrolling questions
+      &.scroll_this.inmotion{
+        position: absolute;
+        top: 0;
+      }
+    }
+  }
   div.actions{
     margin-bottom: 60px;
     h4{
@@ -456,7 +471,6 @@ div.actions{
     margin-bottom:12px;
   }
 }
-
 
 
 /*
