@@ -1,6 +1,13 @@
 <section class="question preview">
   <article>
     <header>
+      <div class="notif preview">
+        <%= link_to '← Edit', new_question_path(@jurisdiction.abbreviation), class: 'edit sim_act' %>
+        <div class="notif_wrap">
+          <h3>Question Preview</h3>
+          <p>Make sure to read it over and make sure everything is just right!</p>
+        </div>
+      </div>
       <h2>
         To <strong><%= @question.person.name %></strong>
         <span>(<%= person_attributes(@question.person) %>)</span>
@@ -23,8 +30,6 @@
       </span>
     </span>
   </article>
-  <div class="actions">
-    <%= link_to 'Publish', question_path(@jurisdiction.abbreviation, '1'), class: 'cta_pill' %><%# @todo %>
-    <%= link_to '← Edit', new_question_path(@jurisdiction.abbreviation), class: 'edit sim_act' %><%# @todo %>
-  </div>
+  <%= render partial: 'shared/question_progress' %>
+  <%# link_to 'Publish', question_path(@jurisdiction.abbreviation, '1'), class: 'cta_pill' %><%# @todo %>
 </section>

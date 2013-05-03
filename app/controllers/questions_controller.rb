@@ -18,7 +18,9 @@ class QuestionsController < ApplicationController
   end
   
   def findofficial
-    
+  end
+  
+  def yourprofile
   end
 
 private

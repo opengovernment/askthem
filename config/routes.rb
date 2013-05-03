@@ -48,5 +48,6 @@ OpenGovernment::Application.routes.draw do
   
   # tempary templates for ask a question flow
   get '/new/findofficial' => 'questions#findofficial'
+  get '/new/profile' => 'questions#yourprofile'
   
 end

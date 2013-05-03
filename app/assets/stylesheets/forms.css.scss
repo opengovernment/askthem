@@ -28,7 +28,7 @@ div.count{
 }
 
 form{
-  input[type=text],input[type=email],input[type=number], textarea{
+  input[type=text],input[type=email],input[type=password],input[type=number], textarea{
     font-family:helvetica, arial, verdana, sans-serif;
     border: 1px solid #dde3e1;
     font-size:1em;
@@ -116,7 +116,7 @@ form{
     padding-top: 36px;
     margin-bottom: 42px;
     margin-top: 36px;
-    input[type=text]{
+    input[type=text],input[type=email],input[type=password],input[type=number], textarea{
       margin-bottom:12px;
     }
     label{
@@ -183,3 +183,39 @@ div.controls{
 /*
 Success, Info, Error treatments & messages
 */
+div.notif{
+  h3{
+    color: #477380;
+    font-size:1em;
+    line-height: 1.125em;
+    font-weight:600;
+  }
+  p{
+    color: #477380;
+    font-size:0.813em !important;
+    line-height: 1.385em !important;
+    padding-bottom:0 !important;
+  }
+  &.preview{
+    border-bottom: 1px solid #EFEFEF;
+    padding-bottom: 36px;
+    margin-bottom: 36px;
+    a.edit{
+      vertical-align:top;
+    }
+    div.notif_wrap{
+      display: inline-block;
+      margin-left:5%;
+      width: 60%;
+    }
+  }
+  &.success{
+    
+  }
+  &.info{
+    
+  }
+  &.error{
+    
+  }
+}
