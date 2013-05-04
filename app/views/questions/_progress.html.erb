@@ -24,16 +24,12 @@
     </div>
     <div class="row">
       <div class="question_preview">
-        <!--
-          If nothing:
-        -->
-        <h5 class="empty">Nothing yet&hellip;</h5>
-      
-        <!--
-          When content is added:
-        -->
-        <h5>Why is the sky blue?</h5>
-        <p>Pandas typically eat bamboo because it is delicious and good for them. By eating...</p>
+        <% if @step == 1 %>
+          <h5 class="empty">Nothing yet&hellip;</h5>
+        <% elsif @step > 1 %>
+          <h5>Why is the sky blue?</h5>
+          <p>Pandas typically eat bamboo because it is delicious and good for them. By eating...</p>
+        <% end %>
       </div>
     </div>
     <!--
@@ -44,7 +40,13 @@
         <span>Issue: <strong>Education</strong></span>
       </div>
     </div>
-    <a href="#" class="cta_pill">Next <span class="icon-caret-right"></span></a>
-    <span class="count">1 of 3</span>
+    <% if @step == 4 %>
+      <%= link_to 'Publish', question_path(@jurisdiction.abbreviation, '1'), class: 'cta_pill' %><%# @todo %>
+    <% else %>
+      <%= link_to new_question_path(@jurisdiction.abbreviation, step: @step + 1), class: 'cta_pill' do %>
+        Next <span class="icon-caret-right"></span>
+      <% end %>
+    <% end %>
+    <span class="count"><%= @step %> of 4</span>
   </div>
 </div>

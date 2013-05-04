@@ -4,7 +4,6 @@ class QuestionsController < ApplicationController
   respond_to :html
   respond_to :js, only: :index
   actions :index, :show, :new, :create
-  custom_actions resource: :preview
 
   def index
     index! do |format|
@@ -16,11 +15,13 @@ class QuestionsController < ApplicationController
     @user = User.new unless user_signed_in?
     show!
   end
-  
-  def findofficial
-  end
-  
-  def yourprofile
+
+  def new
+    @step = params[:step].try(&:to_i) || 1
+    @question = stub # @todo
+    new! do |format|
+      format.html {render "step#{@step}"}
+    end
   end
 
 private
