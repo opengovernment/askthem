@@ -113,7 +113,7 @@ class Bill
       if document
         document['type'] = sponsor['type']
       else
-        document = OpenStruct.new(name: sponsor['name'], type: sponsor['type'])
+        document = OpenStruct.new(name: sponsor['name'], type: sponsor['type'], to_partial_path: 'unknown/unknown')
       end
       document
     end
