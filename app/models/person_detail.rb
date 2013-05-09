@@ -14,7 +14,7 @@ class PersonDetail
   field :person_id, type: String
   # The person's extended biography.
   field :biography, type: String
-  # The person's candidateId from ProjectVoteSmart.
+  # The person's candidateId from Project VoteSmart.
   field :votesmart_id, type: String
 
   index(state: 1)
@@ -23,7 +23,7 @@ class PersonDetail
 
   validates_presence_of :state, :person_id
 
-  # @return [Metadatum] the jurisdiction in which the question is asked
+  # @return [Metadatum] the jurisdiction in which the person belongs
   def metadatum
     Metadatum.find_by_abbreviation(state)
   end

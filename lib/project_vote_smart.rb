@@ -6,6 +6,7 @@ class ProjectVoteSmart
 
   # Known error messages that imply that no document was found.
   ERROR_MESSAGES = [
+    'No bills for this state and year.',
     'No categories for this state and year.',
     'No officials found matching this criteria.',
     'No Ratings fit this criteria.',
@@ -13,7 +14,7 @@ class ProjectVoteSmart
     'No Sig Rating fits this criterion',
   ]
 
-  # Based on API documentation. Only the Rating endpoints have been tested.
+  # Based on API documentation. Not all endpoints have been tested.
   LIST_ENDPOINTS = [
     # http://api.votesmart.org/docs/Address.html
     'Address.getOfficeByOfficeState',
@@ -79,12 +80,17 @@ class ProjectVoteSmart
     'Votes.getVetoes',
   ]
 
+  # Sets the API key on the API client.
+  #
   # @params [Hash] opts optional arguments
   # @option opts [String] :api_key a Project VoteSmart API key
   def initialize(opts = {})
     @api_key = opts[:api_key]
   end
 
+  # Sends a request to the Project VoteSmart API and returns the response in a
+  # somewhat more consistent format than provided by the API.
+  #
   # @param [String] endpoint the API endpoint
   # @param [Hash] params the API request's parameters
   # @see http://api.votesmart.org/docs/common.html
