@@ -300,6 +300,7 @@ a.sign_on{
   @include border-radius(3px);
   @include box-shadow(0 2px 0 #f5f5f5, 0 1px 0 0px #ffffff inset);
   @include background(linear-gradient(top center, #f5f9fa, #f0f5f7));
+  color: #477380;
   display:inline-block;
   font-size:0.813em;
   border: 1px solid #dbe9ed;
@@ -309,11 +310,16 @@ a.sign_on{
   margin-right:5.5641026%;
   margin-top:12px;
   padding: 12px 30px;
+  position:relative;
+  &:hover{
+    color: #709EAC;
+    top:-1px;
+  }
   &:active{
     background-color:#edf3f5;
     @include background(linear-gradient(top center, #edf3f5, #edf3f5));
     @include box-shadow(0 1px 0 #f5f5f5, 0 1px 0 0px #ffffff inset);
-    margin-top:13px;
+    top:1px;
   }
 }
 

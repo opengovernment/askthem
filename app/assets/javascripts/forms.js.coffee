@@ -14,29 +14,32 @@ $ ->
     scrollElem = $('div.actions.scroll_this')
     scrollPoint = ''
     startTop = $(scrollElem).offset().top
-    addedMargin = ''
+    bottomStop = ''
     
     $(window).scroll ->
       didScroll = true
 
     #to avoid firing functions on every scroll event, we're setting an interval to check if we've scrolled.
     setInterval (->
-      if didScroll && $(window).height() > $('div.actions.scroll_this').outerHeight()
-        if $(window).scrollTop() + $(scrollElem).offset().top < $('.content_body').height()
-          if scrollElem
+      if didScroll && $(window).height() > $(scrollElem).outerHeight()
+        if scrollElem
 
-            #catch the windows scrolled point
-            scrollPoint = $(window).scrollTop()
-      
-            addedMargin = scrollPoint - startTop
-      
-            #position checks, class additions
-            if scrollPoint > startTop
-              $(scrollElem).addClass "inmotion"
-              $(scrollElem).stop().animate
-                top: addedMargin
-              , 800
-            else
-              $(scrollElem).removeClass "inmotion"    
-          didScroll = false
+          #catch the windows scrolled point
+          scrollPoint = $(window).scrollTop()
+          
+          #position checks, class additions
+          if scrollPoint > startTop
+            $(scrollElem).addClass "inmotion"
+          else
+            $(scrollElem).removeClass "inmotion"
+          
+          bottomStop = $('section.question').offset().top + $('section.question').height()
+          scrollElemBoundary = scrollPoint + $(scrollElem).outerHeight()
+          
+          if scrollElemBoundary >= bottomStop
+            $(scrollElem).addClass "magnetize"
+          else
+            $(scrollElem).removeClass "magnetize"
+            
+        didScroll = false
     ), 10

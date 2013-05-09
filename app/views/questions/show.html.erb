@@ -32,25 +32,36 @@
     </div>
   </article>
 
-  <div class="actions">
+  <div class="actions">    
+    <h3>Support this question</h3>
+    <div class="row">
+      <div class="question_progress">
+        <div class="progress_filler" style="width: 0%;"> </div>
+      </div>
+      <span class="question_progress_count">
+        <strong>0</strong> out of <strong>500</strong> Signatures
+      </span>
+    </div>  
+    
     <% if user_signed_in? %>
       <ul>
         <li><%= link_to 'Sign On', signatures_path(question_id: @question.id), class: 'cta_pill' %><%# @todo link to remote %></li>
-        <li><%= link_to 'E-mail this to Council Member →', '#', class: 'email' %><%# @todo ST we are removing this feature? %></li>
       </ul>
     <% else %>
+      <div class="row last signup">
       <%= simple_form_for(@user, as: :user, url: registration_path(:user)) do |f| %><%# @todo maybe use a custom controller %>
         <%= hidden_field_tag :question_id, @question.id %>
-        <%= f.input :given_name %>
-        <%= f.input :family_name %>
-        <%= f.input :email %>
-        <%= f.input :street_address %>
-        <%= f.input :locality %>
-        <%= f.input :region, collection: OpenGovernment::STATES %>
-        <%= f.input :postal_code %>
-        <%= f.input :password %>
-        <%= f.button :submit, 'Sign On' %>
+        <%= f.input :given_name, placeholder: "First Name", label: false %>
+        <%= f.input :family_name, placeholder: "Last Name", label: false %>
+        <%= f.input :email, placeholder: "E-mail", label: false %>
+        <%= f.input :street_address, placeholder: "Street Address", label: false %>
+        <%= f.input :locality, placeholder: "City", label: false %>
+        <%= f.input :region, collection: OpenGovernment::STATES, prompt: "Select your state", label: false, wrapper_html: {class: 'icon-angle-down sculpt'} %>
+        <%= f.input :postal_code, placeholder: "Zip or Postal Code", label: false %>
+        <%= f.input :password, placeholder: "Password", label: false %>
+        <%= f.button :submit, 'Sign On', class: 'cta_pill' %>
       <% end %>
+      </div>
     <% end %>
     <h5>Share</h5>
     <ul>

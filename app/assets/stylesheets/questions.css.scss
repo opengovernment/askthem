@@ -73,9 +73,9 @@ section.questions{
       vertical-align: top;
       width:56.410256%;
       a.title{
+        color: #3c636e;
         font-size:1.5em;
         line-height: 1.25em;
-        font-weight:100;
         display: block;
         &:hover{
           color:$linkhover;
@@ -108,14 +108,13 @@ section.questions{
         line-height: 24px;
         text-align: center;
         a{
-          font-size: 0.813em;
+          font-size: 1em;
           line-height: 1.385em;
-          background: #F9F9F9;
-          padding: 6px 12px;
-          width: 79%;
+          width: 100%;
           border-radius: 16px;
           display: inline-block;
-          color: $lightblue;
+          font-weight: 600;
+          color: #948C83;
         }
       }
     }
@@ -239,6 +238,7 @@ section.question{
   article{
     display:inline-block;
     width:58.974359%;
+    margin-bottom: 68px;
     h1{
       padding-top:18px;
       padding-bottom:24px;
@@ -298,18 +298,28 @@ section.question{
   /*
   Ask a question flow
   */
-  
   div.progress{
-    float: right;
+    height: 100%;
     width: 33.205128205128%;
-    position: relative;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
     div.actions{
       padding: 13.333333333333%;
       width:73.333333333333%;
       // Scrolling questions
       &.scroll_this.inmotion{
-        position: absolute;
+        position: fixed;
         top: 0;
+        width: 190px;
+        padding: 35px;
+        &.magnetize{
+          top: auto;
+          position: absolute;
+          bottom: 0;
+          margin-bottom: 0;
+        }
       }
     }
   }
@@ -327,6 +337,10 @@ section.question{
       @include box-shadow(0 1px 0 #ffffff);
       &.last{
         margin-bottom:18px;
+      }
+      &.signup{
+        border-bottom:0;
+        padding-bottom:0;
       }
     }
     ul.recipient{
