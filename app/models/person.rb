@@ -22,7 +22,10 @@ class Person
 
   scope :active, where(active: true).asc(:chamber, :family_name) # no index includes `last_name`
 
-  # Inactive legislators will not have `chamber` or `district` fields.
+  # Inactive legislators will not have top-level `chamber` or `district` fields.
+  #
+  # @param [String,Symbol] `:chamber` or `:district`
+  # @return [String,nil] the chamber, the district, or nil
   def most_recent(attribute)
     if read_attribute(attribute)
       read_attribute(attribute)
@@ -36,8 +39,9 @@ class Person
     end
   end
 
-  # Returns Popolo fields that are not available in Billy.
+  # Returns fields that are not available in Billy.
   #
+  # @return [PersonDetail] the person's additional fields
   # @note `has_one` associations require a matching `belongs_to`, as they must
   #   be able to call `inverse_of_field`.
   def person_detail

@@ -38,6 +38,15 @@ class Bill
     'upper' => 'lower',
   }
 
+  # Returns fields that are not available in Billy.
+  #
+  # @return [BillDetail] the bill's additional fields
+  # @note `has_one` associations require a matching `belongs_to`, as they must
+  #   be able to call `inverse_of_field`.
+  def bill_detail
+    BillDetail.where(bill_id: id).first || BillDetail.new(bill: self)
+  end
+
   # Returns answered questions about the bill.
   def questions_answered
     questions.where(answered: true)
