@@ -56,6 +56,20 @@ class Metadatum
     read_attribute(:terms).last['sessions'].last
   end
 
+  # Returns the most recent regular session's identifier.
+  #
+  # @return [String] the most recent regular session's identifier
+  def current_regular_session
+    most_recent_session('primary')
+  end
+
+  # Returns the most recent special session's identifier.
+  #
+  # @return [String] the most recent special session's identifier
+  def current_special_session
+    most_recent_session('special')
+  end
+
   # Returns whether the jurisdiction assigns subjects to bills.
   #
   # @return [Boolean] whether the jurisdiction assigns subjects to bills
@@ -71,5 +85,18 @@ class Metadatum
     #
     #     a = []; db.metadata.distinct('_id').forEach(function (x) {if (db.bills.findOne({state: x, subjects: {$nin: [[], null]}})) a.push(x)})
     %w(ak al ca hi ia id in ky la md me mi mn mo ms mt nc nd nj nm nv ny ok or ri sc sd tn tx ut va wa wi).include?(abbreviation)
+  end
+
+private
+
+  def most_recent_session(type)
+    session_details = read_attribute(:session_details)
+    read_attribute(:terms).last['sessions'].reverse.each do |session|
+      # OpenStates doesn't always declare the session type.
+      return session if session_details[session].key?('type') && session_details[session]['type'] == type ||
+        type == 'primary' && !session_details[session]['display_name'][/Called|Extraordinary|Fiscal|Special/] ||
+        type == 'special' &&  session_details[session]['display_name'][/Called|Extraordinary|Fiscal|Special/]
+    end
+    nil # don't return the enumerator
   end
 end

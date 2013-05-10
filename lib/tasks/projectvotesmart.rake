@@ -16,12 +16,27 @@ namespace :projectvotesmart do
     ProjectVoteSmart.new(api_key: ENV['PROJECT_VOTE_SMART_API_KEY'])
   end
 
-  def officials_by_state_and_office(stateId, *officeIds)
+  def officials_by_state_and_office(stateId, officeIds)
     officeIds.each_with_index do |officeId,index|
       begin
         return api.get('Officials.getByOfficeState', officeId: officeId, stateId: stateId.upcase)
       rescue ProjectVoteSmart::DocumentNotFound => e
         raise e if index + 1 == officeIds.size # if none of the officeIds work
+      end
+    end
+  end
+
+  desc 'Imports state governors and city mayors for Open States jurisdictions from Project VoteSmart'
+  task governors: :environment do
+    Metadatum.with(session: 'openstates').each do |metadatum|
+      # @see http://api.votesmart.org/docs/semi-static.html
+      officials = officials_by_state_and_office(metadatum.abbreviation.upcase, [3, 73]) # Governor, Mayor
+
+      # @see https://github.com/sunlightlabs/billy/blob/master/billy/importers/legislators.py#L17
+      # @todo Respect the above Billy code for importing legislators.
+
+      officials.each do |official|
+        # @todo Remember to store the votesmart_id.
       end
     end
   end
@@ -36,20 +51,26 @@ namespace :projectvotesmart do
     found = 0
     puts "Matching #{ids.size}..."
 
+    # Iterates over people without a Project VoteSmart ID.
     Person.with(session: 'openstates').find(ids).group_by do |person|
       [person['state'], person['chamber']]
     end.each do |(state,chamber),people| # up to 104 iterations
       begin
         # @see http://api.votesmart.org/docs/semi-static.html
-        officials = if chamber == 'lower'
-          officials_by_state_and_office(state, 7, 8) # State Assembly, State House
+        officeIds = if state == 'dc'
+          [347, 368] # Chairman, Councilmember
+        elsif chamber == 'lower'
+          [7, 8] # State Assembly, State House
         else
-          officials_by_state_and_office(state, 9) # State Senate
+          [9] # State Senate
         end
+        officials = officials_by_state_and_office(state, officeIds)
 
         people.each do |person|
           officials.each do |o|
-            # OpenStates may leave in unnecessary suffixes, e.g. "Jim Anderson (SD28)".
+            # OpenStates may have names like "Jim Anderson (SD28)", where the
+            # family name is incorrectly set to "(SD28)". It may also fail to
+            # identify suffixes, incorrectly leaving them in the family name.
             family_name = if person.family_name[/\A\([A-Z0-9]+\)\z/]
               person.given_name[/(\S+)\z/]
             else
@@ -62,23 +83,22 @@ namespace :projectvotesmart do
             a = [
               family_name,
               family_name[/\S+\z/],
-            ]
-            a.map!(&:fingerprint)
+            ].uniq.map(&:fingerprint)
 
             b = [
               o['lastName'],
               o['lastName'][/\A\p{L}+/],
               o['lastName'][/\p{L}+\z/],
-            ].compact.map(&:fingerprint)
+            ].uniq.map(&:fingerprint)
 
             # It is very unlikely that there would be two people with the same
             # family name elected to the same district in a short time span.
             # @note Project VoteSmart sometimes assigns the wrong party, e.g.
-            # Sam Watson in Georgia is Republican, not Democratic.
+            #   Sam Watson in Georgia is Republican, not Democratic.
             if person['district'] == o['officeDistrictName'] && (a & b).present?
               person_detail = person.person_detail
               person_detail.votesmart_id = o['candidateId']
-              person_detail.save
+              person_detail.save!
               found += 1
             end
           end
@@ -89,6 +109,82 @@ namespace :projectvotesmart do
     end
 
     puts "#{found} of #{ids.size} matched"
+  end
+
+  # Project VoteSmart has far fewer bills than OpenStates, so we loop through
+  # Project VoteSmart's bills, not OpenStates'.
+  # @note Project VoteSmart uses the LD number in Maine, whereas OpenStates uses
+  #   the HP and SP numbers, making it impossible to match Maine's bills.
+  # @see https://code.google.com/p/openstates/issues/detail?id=779
+  desc "Get each bill's Project VoteSmart ID"
+  task bills: :environment do
+    found = 0
+
+    year = Date.today.year # we don't care about historical bills
+    Metadatum.with(session: 'openstates').each do |metadatum|
+      stateId = metadatum.abbreviation.upcase
+      begin
+        api.get('Votes.getBillsByYearState', year: year, stateId: stateId).uniq do |bill|
+          # Project VoteSmart inexplicably returns multiple bills with the same
+          # `billId` and `billNumber`, but with slightly different `title`.
+          bill['billId']
+        end.each do |bill|
+          unless BillDetail.where(votesmart_id: bill['billId']).first
+            # OG 1.0 does some string manipulation to overcome differences in
+            # bill numbers. We can use MongoDB's regular expression matches
+            # instead if the below rules are insufficient.
+            # @see https://github.com/opengovernment/opengovernment/blob/master/app/models/bill.rb#L42
+            bill_id = bill['billNumber'].squeeze(' ')
+
+            # It may be possible for Project VoteSmart to return a bill from a
+            # earlier session with the same bill number as a bill in the current
+            # session, and we accidentally match that Project VoteSmart `billId`
+            # to a bill in the current session. Cross your fingers!
+            # @see https://github.com/opengovernment/opengovernment/blob/master/lib/open_gov/key_votes.rb#L27
+            session = if bill['billNumber'][/\A[A-Z]+x\d+\b/]
+              # @todo OG 1.0 would try to match VoteSmart's session number to
+              #   OpenStates's display_name, but display_name may distinguish
+              #   between special sessions within the same year by including the
+              #   month or another word like "Fiscal" instead, or it may use an
+              #   ordinal instead of a number. For now, we simply find the most
+              #   recent special session.
+              bill_id.sub!(/x\d+/, '')
+              metadatum.current_special_session
+            else
+              metadatum.current_regular_session
+            end
+
+            # OpenStates (so far) has a space between the letters and the number.
+            if bill_id[/\A[A-Z]+\d/]
+              bill_id.sub!(/(?=\d)/, ' ')
+            end
+
+            # In CO, OpenStates has, e.g. "HB 13-001" but VoteSmart has "HB 1".
+            if stateId == 'CO' && bill_id[/\A([HS]B) (\d+)\z/]
+              bill_id = "#{$1} #{Date.today.strftime('%y')}-#{'%03d' % $2}"
+            # In RI, OpenStates uses "HB" but VoteSmart uses "H".
+            elsif stateId == 'RI' && bill_id[/\AH\b/]
+              bill_id.sub!(/\AH\b/, 'HB')
+            end
+
+            scope = Bill.in(metadatum.abbreviation).in_session(session).where(bill_id: bill_id)
+
+            if scope.count > 1
+              puts "Multiple bills in state #{stateId} in session #{session} match bill number #{bill['billNumber']}"
+            elsif scope.count == 1
+              BillDetail.create!(bill: scope.first, votesmart_id: bill['billId'])
+              found += 1
+            else
+              puts "No bills in state #{stateId} in session #{session} match bill number #{bill['billNumber']} (#{bill['title'].inspect})"
+            end
+          end
+        end
+      rescue ProjectVoteSmart::DocumentNotFound
+        puts "No bills for state #{stateId} in #{year}"
+      end
+    end
+
+    puts "#{found} matched"
   end
 
   desc 'Update special interest groups from Project VoteSmart'
@@ -181,15 +277,10 @@ namespace :projectvotesmart do
 
   desc 'Update key votes from Project VoteSmart'
   task key_votes: :environment do
-    # @todo http://api.votesmart.org/docs/Votes.html
-    # @see lib/open_gov/key_votes.rb in OG 1.0
+    # @todo https://github.com/opengovernment/opengovernment/blob/master/lib/open_gov/key_votes.rb#L63
 
-    # The following all return billId, billNumber, title, type
-    # Votes.getBillsByYearState
-    # Votes.getBillsByStateRecent
-    # Votes.getByBillNumber
-
-    # Votes.getBill
-    # Votes.getBillAction
+    # @see http://api.votesmart.org/docs/Votes.html
+    # Votes.getBill(billId)
+    # Votes.getBillAction(actionId)
   end
 end
