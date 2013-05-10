@@ -31,6 +31,26 @@ reportList('metadata', 'abbreviation', {
   }
 }, 'metadata whose abbreviation is not equal to _id');
 
+reportList('metadata', 'abbreviation', {
+  '$where': function () {
+    for (session in this.session_details) {
+      if (this.session_details[session]['type'] == 'special' && !this.session_details[session]['display_name'].match(/Budget|Called|Extraordinary|Fiscal|Special/)) {
+        return true;
+      }
+    }
+  }
+}, 'metadata with a regular session whose type is special');
+
+reportList('metadata', 'abbreviation', {
+  '$where': function () {
+    for (session in this.session_details) {
+      if (this.session_details[session]['type'] == 'primary' && this.session_details[session]['display_name'].match(/Budget|Called|Extraordinary|Fiscal|Special/)) {
+        return true;
+      }
+    }
+  }
+}, 'metadata with a special session whose type is primary');
+
 // _id should be predictable.
 reportList('districts', '_id', {
   '$where': function () {

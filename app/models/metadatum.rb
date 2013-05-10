@@ -94,8 +94,8 @@ private
     read_attribute(:terms).last['sessions'].reverse.each do |session|
       # OpenStates doesn't always declare the session type.
       return session if session_details[session].key?('type') && session_details[session]['type'] == type ||
-        type == 'primary' && !session_details[session]['display_name'][/Called|Extraordinary|Fiscal|Special/] ||
-        type == 'special' &&  session_details[session]['display_name'][/Called|Extraordinary|Fiscal|Special/]
+        type == 'primary' && !session_details[session]['display_name'][/Budget|Called|Extraordinary|Fiscal|Special/] ||
+        type == 'special' &&  session_details[session]['display_name'][/Budget|Called|Extraordinary|Fiscal|Special/]
     end
     nil # don't return the enumerator
   end
