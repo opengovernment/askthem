@@ -43,3 +43,40 @@ $ ->
             
         didScroll = false
     ), 10
+
+  #@todo JM delete/modify this when ajax replaces official lookup on Q&A flows
+  fieldValid = {}
+  
+  if $('section.question ol.people-list.select-person').length
+    $("article form input").blur ->
+      
+      $("article form fieldset:eq(0) :text, article form fieldset:eq(0) select").each (int) ->
+        unless $(this).val() is ""
+          fieldValid['field_' + int] = true
+        else
+          fieldValid['field_' + int] = false
+
+      for elem of fieldValid
+        return false if fieldValid[elem] is false
+      
+      #animation for loading in officials
+      officialCount = $('section.question ol.people-list.select-person li').length
+      iterater = 0
+      
+      #load in header and slide to it first
+      $('section.question label.select-person').fadeTo 100, 1
+      
+      selectRecipient = $("section.question label.select-person").offset().top      
+      
+      $('body').animate
+        scrollTop: selectRecipient
+      , 300
+      
+      #then load in officials
+      showOfficials = setInterval(->
+        if iterater < officialCount
+          $("section.question ol.people-list.select-person li:eq(" + iterater + ")").fadeTo 90, 1
+          iterater++
+        else
+          window.clearInterval showOfficials
+      , 10)

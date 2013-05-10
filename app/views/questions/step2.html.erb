@@ -31,14 +31,14 @@
         <input type="text" name="street" id="zipcode" placeholder="ex. 02141" />
       </fieldset>
       
-      <label for="question">Recipient
+      <label for="question" class="select-person" style="display:none;">Recipient
         <span class="details">Select who you'd like to receive the question:</span>
       </label>
       
       <fieldset>
         <ol class="people-list select-person">
           <% 10.times do %>
-          <li>
+          <li style="display:none;">
             <div class="select_box">
               <input type="radio" name="person-select" id="" />
             </div>
