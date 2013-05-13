@@ -9,48 +9,54 @@ namespace :influenceexplorer do
     if ENV['SUNLIGHT_API_KEY']
       include ActionView::Helpers::SanitizeHelper
 
-      people = Person.with(session: 'openstates').where(transparencydata_id: {'$nin' => ['', nil]}) # no index
-      progressbar = ProgressBar.create(format: '%a |%B| %p%% %e', length: 80, smoothing: 0.5, total: people.count)
-
+      # Collect entity IDs that 404.
       not_found_urls = []
 
-      people.each do |person|
-        progressbar.increment
+      criteria = Person.with(session: 'openstates').where(transparencydata_id: {'$nin' => ['', nil]}).asc(:transparencydata_id) # no index
+      progressbar = ProgressBar.create(format: '%a |%B| %p%% %e', length: 80, smoothing: 0.5, total: criteria.count)
 
-        # Assume biographies never change.
-        next if person.person_detail.persisted?
+      index = 0
+      people = criteria.clone.limit(100)
 
-        # Reset the exponential backoff.
-        wait = 1
+      while people.any?
+        people.each do |person|
+          progressbar.increment
 
-        begin
-          response = JSON.parse(RestClient.get("http://transparencydata.com/api/1.0/entities/#{person.transparencydata_id.strip}.json?apikey=#{ENV['SUNLIGHT_API_KEY']}"))
+          # Assume biographies never change.
+          next if person.person_detail.persisted?
 
-          person_detail = PersonDetail.new
-          if response['metadata']['bio']
-            person_detail.biography = strip_tags(response['metadata']['bio']).strip
+          # Reset the exponential backoff.
+          wait = 1
+
+          begin
+            response = JSON.parse(RestClient.get("http://transparencydata.com/api/1.0/entities/#{person.transparencydata_id.strip}.json?apikey=#{ENV['SUNLIGHT_API_KEY']}"))
+
+            person_detail = PersonDetail.new
+            if response['metadata']['bio']
+              person_detail.biography = strip_tags(response['metadata']['bio']).strip
+            end
+            if response['metadata']['bio_url']
+              link = person_detail.links.find_or_initialize_by(note: 'Wikipedia')
+              link.url = response['metadata']['bio_url']
+            end
+            if person_detail.biography_changed? || person_detail.links.any?(&:changed?)
+              person_detail.person = person
+              person_detail.save!
+            end
+          rescue Errno::ECONNRESET, RestClient::ServerBrokeConnection
+            wait *= 2 # exponential backoff
+            sleep wait
+            retry
+          rescue RestClient::ResourceNotFound
+            not_found_urls << person.transparencydata_id
           end
-          if response['metadata']['bio_url']
-            link = person_detail.links.find_or_initialize_by(note: 'Wikipedia')
-            link.url = response['metadata']['bio_url']
-          end
-          if person_detail.biography_changed? || person_detail.links.any?(&:changed?)
-            person_detail.person = person
-            person_detail.save!
-          end
-        rescue Errno::ECONNRESET, RestClient::ServerBrokeConnection
-          wait *= 2 # exponential backoff
-          sleep wait
-          retry
-        rescue RestClient::ResourceNotFound
-          not_found_urls << person.transparencydata_id
         end
+
+        index += 100
+        people = criteria.clone.limit(100).skip(index)
       end
 
-      # Print entity IDs that 404.
-      not_found_urls.each do |url|
-        puts url
-      end
+      puts not_found_urls
     else
       abort "ENV['SUNLIGHT_API_KEY'] is not set"
     end
