@@ -9,7 +9,7 @@ namespace :influenceexplorer do
     if ENV['SUNLIGHT_API_KEY']
       include ActionView::Helpers::SanitizeHelper
 
-      people = Person.with(session: 'openstates').where(transparencydata_id: {'$ne' => ['', nil]}) # no index
+      people = Person.with(session: 'openstates').where(transparencydata_id: {'$nin' => ['', nil]}) # no index
       progressbar = ProgressBar.create(format: '%a |%B| %p%% %e', length: 80, smoothing: 0.5, total: people.count)
 
       not_found_urls = []
