@@ -5,7 +5,7 @@
       <span class="icon-angle-right view"></span>
     <% end %>
     <p>
-      <%= truncate(question.body, length: 100) %>
+      <%= truncate(question.body, length: 160) %>
       <% if question.bill_id? %>
         <span class="context">
           &rarr; about <%= question.bill.bill_id %>

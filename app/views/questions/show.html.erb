@@ -4,10 +4,10 @@
   <article>
     <header>
       <h4>
-        <span class="emph">To</span> <strong><%= link_to @question.person.name, person_path(@jurisdiction.abbreviation, @question.person.id) %></strong>
+        <span class="emph">To:</span> <strong><%= link_to @question.person.name, person_path(@jurisdiction.abbreviation, @question.person.id) %></strong>
         <span>(<%= person_attributes(@question.person) %>)</span>
         <% if @question.bill_id? %>
-          <span class="emph">on</span> <strong><%= link_to short_bill_title(@question.bill), bill_path(@jurisdiction.abbreviation, @question.bill.id) %></strong>
+          <span class="emph">on:</span> <strong><%= link_to short_bill_title(@question.bill), bill_path(@jurisdiction.abbreviation, @question.bill.id) %></strong>
         <% end %>
       </h4>
       <h1><%= @question.title %></h1>
@@ -25,16 +25,18 @@
       </span>
     </span>
 
+    <a href="#sign_on_q" class="mobile_cta cta_pill">Sign On</a> <%# @todo JM - mobile sign on button, if logged in this button should sign the question, otherwise it should send the user to the anchored form %>
+
     <div class="comments">
       <div id="disqus_thread"></div>
     </div>
   </article>
-
-  <div class="actions">    
+  <a name="sign_on_q"></a>
+  <div class="actions">
     <h4>Support this question</h4>
     <div class="row">
       <div class="question_progress">
-        <div class="progress_filler" style="width: 0%;"> </div>
+        <div class="progress_filler" style="width: 0%;"></div>
       </div>
       <span class="question_progress_count">
         <strong>0</strong> out of <strong>500</strong> Signatures
@@ -77,7 +79,7 @@
       </li>
     </ul>
     <% end %>
-    <%= link_to 'Flag this question', '#', class: 'flag' %><%# @todo %>
+    <%= link_to 'Flag this question', '#', class: 'flag' %><%# @todo JM %>
   </div>
 </section>
 

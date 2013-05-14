@@ -8,15 +8,15 @@
           <p>Make sure to read it over and make sure everything is just right!</p>
         </div>
       </div>
-      <h2>
-        To <strong><%= @question.person.name %></strong>
+      
+      <h4>
+        <span class="emph">To:</span> <strong><%= link_to @question.person.name, person_path(@jurisdiction.abbreviation, @question.person.id) %></strong>
         <span>(<%= person_attributes(@question.person) %>)</span>
-      </h2>
-      <% if @question.bill_id? %>
-      <h2>
-        On <strong><%= short_bill_title(@question.bill) %></strong>
-      </h2>
-      <% end %>
+        <% if @question.bill_id? %>
+          <span class="emph">on:</span> <strong><%= link_to short_bill_title(@question.bill), bill_path(@jurisdiction.abbreviation, @question.bill.id) %></strong>
+        <% end %>
+      </h4>
+
       <h1><%= @question.title %></h1>
     </header>
     <%= simple_format(@question.body) %>

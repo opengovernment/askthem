@@ -1,7 +1,7 @@
 @import 'compass';
 @import 'mixins';
 
-@media (min-width: 1028px){
+@media (min-width: 1128px){
   ul.admin_nav{
     &.thin{
       display:none;
@@ -33,6 +33,11 @@
   
   header.main, div.content_body, footer{
     @include responsive-blocker(0);
+    width:100%;
+  }
+  
+  div.content_body{
+    margin-top:72px;
   }
   
   header div.wrapper, div.content_body div.wrapper, footer div.wrapper{
@@ -40,19 +45,22 @@
   }
 
   header.main{
-    margin-top:18px;
-    margin-bottom:18px;
+    padding-bottom: 0px;
+    background: #D4E8EB;
+    top: 0;
+    position: fixed;
+    margin-top: 0;
+    margin-bottom: 0;
+    z-index: 9999;
   }
   a.logo{
+    display: none;
     margin: auto;
-    text-align: center;
-    display: block;
   }
   header p.slogan{
     width: 100%;
-    text-align: center;
     margin: 6px auto 0 auto;
-    display: block;
+    display: none;
     font-size: 13px;
     line-height: 18px;
   }
@@ -88,8 +96,42 @@
     }
   }
   
+  section.mobile_admin_nav{
+    display:block;
+    margin-bottom:24px;
+    margin-top:18px;
+    a.logo{
+      display:inline-block;
+      margin-left:6.6923077%;
+    }
+  }
+  
+  a.expose_nav{
+    display: inline-block;
+    position: absolute;
+    right: 6.6923077%;
+    font-size: 2em;
+  }
+  
   ul.admin_nav{
-    // @todo
+    background:#D4E8EB;
+    @include box-shadow(0 3px 0 rgba(0, 0, 0, .1));
+    display:none;
+    position: absolute;
+    top: 66px;
+    right: auto;
+    width: 100%;
+    li{
+      width: 100%;
+      a{
+        text-indent:6.6923077%;
+        font-size:1.125em;
+        line-height: 1.333em;
+        border:none;
+        padding:12px 0;
+        width:100%;
+      }
+    }
   }
   
   
@@ -122,6 +164,11 @@
   .cta_pill{
     width:100%;
     box-sizing: border-box;
+    text-align:center;
+  }
+  
+  .mobile_cta{
+    display:inline-block;
   }
   
   section.questions.listings a.cta_pill, section.bills.listings a.cta_pill, section.people.listings a.cta_pill{
@@ -144,7 +191,6 @@
   */
   h1{
     display:block;
-    text-align:center;
   }
   
   /*
@@ -200,10 +246,27 @@
       clear: none;
     }
   }
-  
   section.question div.actions{
-
+    width: 85.714286%;
+    float: none;
+    padding: 6.6923077%;
   }
+
+  /*
+    Asking Questions
+  */  
+  section.question div.progress{
+    position:relative;
+    margin-top:-84px;
+    width: auto;
+    h4,div.row{
+      display:none;
+    }
+    a.cta_pill{
+      width:100%;
+    }
+  }
+  
   
   /*
     People

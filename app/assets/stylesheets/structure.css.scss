@@ -98,6 +98,12 @@ header p.slogan{
   color: #49656D;
   margin-left: 30px;
 }
+section.mobile_admin_nav{
+  display:block;
+  a.logo{
+    display:none;
+  }
+}
 ul.admin_nav{
   position:absolute;
   right:0;
@@ -151,18 +157,16 @@ header.main{
   margin-top: 36px;
   margin-bottom: 42px;
   @include responsive-blocker();
-  @include responsive-max();
-  width:100%;
+  width:70%;
 }
 
 div.content_body{
   background: white;
   @include box-shadow(0 0 5px rgba(0, 0, 0, .1), 0 35px 85px rgba(255, 255, 255, .45));
   @include responsive-blocker();
-  @include responsive-max();
   @include border-radius(0 2px 2px 0);
   display:inline-block;
-  width: 100%;
+  width: 70%;
   div.wrapper{
     padding-bottom:60px;
   }
@@ -323,6 +327,11 @@ a.sign_on{
   }
 }
 
+.mobile_cta{
+  display:none;
+}
+
+
 
 /*
 Sub navigations
@@ -372,7 +381,6 @@ nav{
   }
   
   ul.radio_nav{
-    box-shadow:0px -1px 3px rgba(0,0,0,.05);
     display:block;
     margin-top: 30px;
     width:92.948717948718%;
@@ -385,6 +393,7 @@ nav{
       display:inline-block;
       vertical-align: top;
       float:left;
+      width:25%;
       &.clear{
         float:none;
         display:block;
@@ -398,13 +407,15 @@ nav{
         border-right:0;
       }
       a{
-        box-shadow: -1px 0 0 #e7e7e7 inset;
+        box-shadow: -1px 0 0 #E7E7E7 inset;
         color: #518795;
-        height:36px;
-        padding: 19px 29px;
+        height: 36px;
+        padding: 19px 0 19px 11%;
+        min-height: 36px;
         font-size: 1em;
         line-height: 1.125em;
         display: inline-block;
+        width: 89%;
         &:hover{
           color:$darkblue;
         }
@@ -647,6 +658,10 @@ a.show_full_title, a.show_short_title{
     font-size: 0.678em;
     vertical-align:1px;
   }
+}
+
+a.expose_nav{
+  display: none;
 }
 
 

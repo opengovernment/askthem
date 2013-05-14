@@ -87,6 +87,15 @@ span.info{
   font-size:0.688em;
   line-height: 1.364em;
 }
+span.emph{
+  display: inline-block;
+  background: #EFEFEF;
+  color: #818181;
+  padding: 0 3px;
+  font-weight: 600;
+  border: 1px solid #DFDFDF;
+  border-radius: 3px;
+}
 span.author{
 
 }
