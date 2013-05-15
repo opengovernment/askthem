@@ -74,20 +74,6 @@
         display:none;
         width: 100%;
         text-align: center;
-        &.subject{
-          display: inline-block;
-          padding-right: 0;
-          background: none;
-          .expand_menu{
-            cursor:pointer;
-            display: block;
-            font-weight: 100;
-            font-family: helvetica, arial, sans-serif;
-            font-size: 13px;
-            padding: 6px;
-            margin-top: 6px;
-          }
-        }
         a{
           padding: 12px 20px;
           display: block;

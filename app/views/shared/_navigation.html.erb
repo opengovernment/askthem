@@ -1,12 +1,20 @@
 <section>
   <nav>
+    <ul class="level">
+      <li class="active">
+        <a href="#"><%= @jurisdiction['name'] %> Federal</a>
+        <i class="icon-angle-down"></i>
+      </li>
+      <li >
+        <a href="#"><%= @jurisdiction['name'] %> State</a>
+        <i class="icon-angle-down"></i>
+      </li>
+      <li>
+        <a href="#">City</a>
+        <i class="icon-angle-down"></i>
+      </li>
+    </ul>
     <ul class="top_nav">
-      <li class="subject">
-        <div class="toggle">
-          <a href="#" class="active"><%= @jurisdiction['name'] %></a>
-          <a href="#">City</a>
-        </div>
-        <a href="#top" class="expand_menu"><span class="icon-angle-down"></span> Expand Menu</a></li>
       <li><a name="top" style="display:none;"></a><%= tab 'Questions', questions_path %></li>
       <li><%= tab 'Bills', bills_path %></li>
       <li><%= tab 'People', people_path %></li>
