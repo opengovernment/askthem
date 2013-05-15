@@ -264,7 +264,7 @@ namespace :projectvotesmart do
             record.attributes = rating
             record.save
           end
-          RatingScorecard.set(:retrieved, Time.now)
+          scorecard.set(:retrieved, Time.now)
         rescue ProjectVoteSmart::DocumentNotFound
           puts "No ratings for scorecard #{scorecard.ratingName} (#{scorecard.ratingId})"
         end
