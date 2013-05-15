@@ -204,6 +204,7 @@ div.content_body{
   width: 70%;
   div.wrapper{
     padding-bottom:60px;
+    min-height: 600px;
   }
 }
 
@@ -724,6 +725,32 @@ a.show_full_title, a.show_short_title{
 
 a.expose_nav{
   display: none;
+}
+
+span.toggle{
+  display: inline-block;
+  color: #999;
+  margin-bottom: 24px;
+  span{
+    display: inline-block;
+    margin: 6px;
+  }
+  a{
+    @include border-radius(24px);
+    background:#A4C5CF;
+    color:#fff;
+    display:inline-block;
+    padding: 12px;
+    &.active{
+      display: inline-block;
+      background: #F77665;
+      color: #FFF;
+      &:before,&:after{
+        display:inline-block;
+        margin-right:6px;
+      }
+    }
+  }
 }
 
 

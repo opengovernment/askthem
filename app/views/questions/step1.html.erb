@@ -3,30 +3,74 @@
 <section class="question">
   <article>
     <header>
-      <h1 class="action">Ask a question</h1>
+      <h1 class="action">Ask a Question</h1>
     </header>
-    <form class="action" action="<%= preview_questions_path(@jurisdiction.abbreviation) %>" method="get" accept-charset="utf-8"><%# @todo make into a proper form %>
-      <div class="count">
-        <span class="summary_count">60</span>
-        <input type="text" name="summary" id="summary" placeholder="Summary&hellip;" maxlength="60">
-      </div>
-
-      <label for="question">Full Question
-        <span class="details">Why is this important? Give it your all!</span>
+    
+    <span class="toggle">
+      <span>With</span>
+      <a href="#" class="twitter active icon-ok">Twitter</a>
+      <span>or</span>
+      <a href="#" class="address_lookup">Address Lookup</a>
+    </span>
+    
+    <form action="" class="twitter">
+      <label for="twitter">To:
+        <span class="details">Enter a verified twitter account name</span>
       </label>
-      <textarea name="question" id="question" cols="30" rows="10" placeholder="Go on&hellip;"></textarea>
+      <input type="text" name="twitter" id="twitter" placeholder="@username" />
+    </form>
 
-      <label for="issue_area">Select an issue area
-        <span class="opt">(optional)</span>
+    <form style="display:none;" action="<#= preview_questions_path(@jurisdiction.abbreviation) #>" method="get" accept-charset="utf-8" class="address_lookup"><%# @todo make into a proper form %>
+      <label for="question">Home Address
+        <span class="details">Where you live lets us locate your officials!</span>
       </label>
-      <div class="input select icon-angle-down sculpt">
-        <select name="issue_area" id="issue_area">
-          <option value="0">Select an Issue</option>
-          <option value="1">Issue #1!</option>
-        </select>
-      </div>
+      
+      <fieldset>
+        <label for="street" class="lesser">Address</label>
+        <input type="text" name="street" id="street" placeholder="Street Address" />
+
+        <label for="city" class="lesser">City</label>
+        <input type="text" name="street" id="city" placeholder="City" />
+      
+        <label for="state" class="lesser">State</label>
+        <!-- <input type="text" name="street" id="state" placeholder="State Abbreviation (ex. MA)" /> -->
+        
+        <div class="input select sculpt icon-angle-down">
+          <select name="" id="">
+            <option value="State">Select your state</option>
+          </select>
+        </div>
+        
+      
+        <label for="zipcode" class="lesser">Zipcode</label>
+        <input type="text" name="street" id="zipcode" placeholder="ex. 02141" />
+      </fieldset>
+      
+      <label for="question" class="select-person" style="display:none;">Recipient
+        <span class="details">Select who you'd like to receive the question:</span>
+      </label>
+      
+      <fieldset>
+        <ol class="people-list select-person">
+          <% 10.times do %>
+          <li style="display:none;">
+            <div class="select_box">
+              <input type="radio" name="person-select" id="" />
+            </div>
+            <div class="avatar">
+              <img src="http://d2xfsikitl0nz3.cloudfront.net/http%3A%2F%2Fw3.legis.state.ak.us%2Fimages%2Fhouse%2FAUS.jpg/60/60" alt="" />
+            </div>
+            <h2>Alan Austerman</h2>
+            <div class="person-info">
+              <span class="jurisdiction">Representative, District 35, Republican</span>
+            </div>
+            <span class="selected icon-ok-sign"></span>
+          </li>
+          <% end %>
+        </ol>
+      </fieldset>
+      
     </form>
   </article>
-  
   <%= render partial: 'progress' %>
 </section>
