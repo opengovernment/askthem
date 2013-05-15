@@ -4,15 +4,14 @@ class ProjectVoteSmart
   class EndpointNotFound < Error; end
   class DocumentNotFound < Error; end
 
-  # Known error messages that imply that no document was found.
-  ERROR_MESSAGES = [
-    'No bills for this state and year.',
-    'No categories for this state and year.',
-    'No officials found matching this criteria.',
-    'No Ratings fit this criteria.',
-    'No SIGs fit this criteria.',
-    'No Sig Rating fits this criterion',
-  ]
+  # Known error message patterns that imply no document was found
+  # e.g. 'No bills for this state and year.'
+  ERROR_MESSAGE_PATTERNS = [ /no bill/i,
+                             /no categor/i,
+                             /no official/i,
+                             /no rating/i,
+                             /no sig/i
+                            ]
 
   # Based on API documentation. Not all endpoints have been tested.
   LIST_ENDPOINTS = [
@@ -100,7 +99,16 @@ class ProjectVoteSmart
       result = JSON.parse(RestClient.get("http://api.votesmart.org/#{endpoint}", params: params.merge(key: @api_key, o: 'JSON')))
 
       if result['error']
-        if ERROR_MESSAGES.include?(result['error']['errorMessage'])
+        recognized_error = false
+
+        ERROR_MESSAGE_PATTERNS.each do |pattern|
+          if result['error']['errorMessage'] =~ pattern
+            recognized_error = true
+            break
+          end
+        end
+
+        if recognized_error
           raise ProjectVoteSmart::DocumentNotFound, result['error']['errorMessage']
         else
           raise ProjectVoteSmart::Error, result['error']['errorMessage']
