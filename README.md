@@ -23,21 +23,28 @@ Get the latest data from OpenStates (in development only):
     ./script/openstates.sh
     rake db:mongoid:create_indexes
 
+### Setting Up API Keys
+
+You will need a [Sunlight Foundation API key](http://services.sunlightlabs.com/accounts/register/) and a [Project Vote Smart API key](http://votesmart.org/share/api). In development, you should copy and edit `_heroku.rb`:
+
+    cp examples/_heroku.rb config/initializers/_heroku.rb
+
+In production, you should set `SUNLIGHT_API_KEY` and `PROJECT_VOTE_SMART_API_KEY` environment variables. If you are using Heroku, run (replacing `...` with your API keys):
+
+    heroku config:add SUNLIGHT_API_KEY=...
+    heroku config:add PROJECT_VOTE_SMART_API_KEY=...
+
 ### Influence Explorer
 
-You can import Influence Explorer data on a yearly basis. You'll need a [Sunlight Foundation API Key](http://sunlightfoundation.com/login/sunlight/?next=http%3A%2F%2Fsunlightfoundation.com%2Fapi%2Faccounts%2Fregister%2F).
+You can import Influence Explorer data on a yearly basis.
 
 1. Get biographies from the Influence Explorer API (a third of OpenStates legislators have biographies)
 
-    SUNLIGHT_API_KEY=[your_key] bundle exec rake influenceexplorer:biographies
+    bundle exec rake influenceexplorer:biographies
 
 ### Project VoteSmart
 
 You can import Project VoteSmart people on a yearly basis. Ratings are added regularly, though not every day, so the others should run on a weekly basis.
-
-You'll need an [Project Vote Smart API Key](http://votesmart.org/share/api). Set this, like so, in your shell before running the following after registering:
-
-    export PROJECT_VOTE_SMART_API_KEY=[your_api_key]
 
 1. Match OpenStates legislators with Project VoteSmart officials
 
