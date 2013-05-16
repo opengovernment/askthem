@@ -1,0 +1,8 @@
+<%= render 'shared/navigation' %>
+
+<section class="question">
+  <%= form_for @question, jurisdiction: @jurisdiction.abbreviation, html: { accept_charset: 'utf-8', class: 'action' } do |f| %>
+    <%= render partial: "step#{@step}", locals: { question: @question, person: @person, step: @step, f: f } %>
+    <%= render partial: 'progress', locals: { question: @question, person: @person, step: @step, f: f } %>
+  <% end %>
+</section>

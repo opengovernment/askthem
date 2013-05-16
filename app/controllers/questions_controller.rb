@@ -18,16 +18,56 @@ class QuestionsController < ApplicationController
 
   def new
     @step = params[:step].try(&:to_i) || 1
-    attributes = params[:question] || { state: parent.abbreviation }
-    @question = Question.new(attributes)
+    session[:question_current_step] = @step
+    session[:question_params] ||= { state: parent.abbreviation }
+    @question = Question.new(session[:question_params])
 
-    if params[:person]
+    if params[:person] && @step == 1
       @person = Person.in(parent.abbreviation).find(params[:person])
       @question.person = @person
+      session[:ask_person] = @person.id
     end
 
-    new! do |format|
-      format.html {render "step#{@step}"}
+    new!
+  end
+
+  def create
+    session[:question_params].deep_merge!(params[:question])
+    @question = Question.new(session[:question_params])
+    @person = @question.person
+    @step = session[:question_current_step]
+
+    # TODO: user handling
+    # temp hack for step 4
+    @question.user = User.first || User.new
+
+    # TODO: step validation needs work
+    if @step == 4 && @question.valid?
+      @question.save
+    else
+      @step += 1 unless @step == 4
+      session[:question_current_step] = @step
+    end
+
+    if @question.new_record?
+      create! do |format|
+        format.html {render 'new'}
+      end
+    else
+      # TODO: how are we handling flash messages?
+
+      go_to_person = session[:ask_person].present? ? Person.in(parent.abbreviation).find(session[:ask_person]) : nil
+
+      to_be_cleared = [:question_params, :question_current_step, :ask_person]
+      to_be_cleared.each do |key|
+        session[key] = nil
+      end
+
+      if go_to_person
+        redirect_to go_to_person, jurisdiction: parent.abbreviation
+      else
+        redirect_to action: :index
+      end
     end
   end
 

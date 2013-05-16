@@ -21,6 +21,11 @@ div.question_progress{
     padding:1px;
   }
 }
+
+input[type=submit].cta_pill{
+  width:100%;
+}
+
 span.question_progress_count{
   color: #7B969E;
   font-size: 0.813em;
@@ -92,7 +97,7 @@ section.questions{
         }
       }
     }
-    
+
     ul.activity{
       display: inline-block;
       vertical-align: bottom;
@@ -118,7 +123,7 @@ section.questions{
         }
       }
     }
-    
+
     span.target{
       display: inline-block;
       margin-top: 18px;
@@ -222,7 +227,7 @@ section.questions{
       }
     }
   }
-  
+
   &.listings{
     h1{
       float: left;
