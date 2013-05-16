@@ -34,8 +34,8 @@
         <% if step == 1 %>
           <h5 class="empty">Nothing yet&hellip;</h5>
         <% elsif step > 1 %>
-          <h5><%= question.summary -%></h5>
-          <p><%= question.question -%></p>
+          <h5><%= question.title -%></h5>
+          <p><%= question.body -%></p>
         <% end %>
       </div>
     </div>
@@ -50,11 +50,9 @@
       </div>
     <% end %>
     <% if step == 4 %>
-      <%= link_to 'Publish', question_path(@jurisdiction.abbreviation, '1'), class: 'cta_pill' %><%# @todo %>
+      <%= f.submit 'Publish', class: 'cta_pill' %>
     <% else %>
-      <%= link_to new_question_path(@jurisdiction.abbreviation, step: step + 1), class: 'cta_pill' do %>
-        Next <span class="icon-caret-right"></span>
-      <% end %>
+      <%= f.submit 'Next', class: 'cta_pill' %>
     <% end %>
     <span class="count"><%= step %> of 4</span>
   </div>
