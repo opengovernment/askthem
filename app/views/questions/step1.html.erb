@@ -13,11 +13,26 @@
       <a href="#" class="address_lookup">Address Lookup</a>
     </span>
     
-    <form action="" class="twitter">
-      <label for="twitter">To:
-        <span class="details">Enter a verified twitter account name</span>
-      </label>
-      <input type="text" name="twitter" id="twitter" placeholder="@username" />
+    <form action="" class="action twitter">
+      <div class="inline_label to">
+        <label for="twitter">To:</label>
+        <input type="text" name="twitter" id="twitter" placeholder="Enter a verified twitter account name" />
+      </div>
+      <ol class="people-list select-person twitter">
+        <li style="">
+          <div class="select_box">
+            <input type="radio" name="person-select" id="" />
+          </div>
+          <div class="avatar">
+            <img src="" alt="" />
+          </div>
+          <h2></h2>
+          <div class="person-info">
+            <p></p>
+          </div>
+          <span class="selected icon-ok-sign"></span>
+        </li>
+      </ol>
     </form>
 
     <form style="display:none;" action="<#= preview_questions_path(@jurisdiction.abbreviation) #>" method="get" accept-charset="utf-8" class="address_lookup"><%# @todo make into a proper form %>

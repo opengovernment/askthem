@@ -23,21 +23,21 @@ jQuery ($) ->
 
   # <%# @todo JM to connect this to accounts that may be officials on OG %> 
 
-  $("#twitter").keyup(->
-    #charCounter this, $(".charCounter"), 140
-    if $(this).val()[0] is "@"
-      $.ajax
-        url: "http://api.twitter.com/1/users/lookup.json?screen_name=" + $(this).val().slice(1) + "&callback=?"
-        type: "GET"
-        dataType: "json"
-        success: (data) ->
-          console.log(data[0].description)
-          #$(".user_bio").html data[0].description
-          #$(".user_bio").attr "data", data[0].description
+  getTwitter = (elem) ->
+    $.ajax
+      url: "http://api.twitter.com/1/users/lookup.json?screen_name=" + $(elem).val().slice(1) + "&callback=?"
+      type: "GET"
+      dataType: "json"
+      success: (data) ->
+        $("form.twitter .select-person li h2").html data[0].name
+        $("form.twitter div.avatar img").attr 'src', data[0].profile_image_url
+        $("form.twitter .select-person div.person-info p").html data[0].description
 
+  $("#twitter").blur(->      
+    if $(this).val()[0] is "@"
+      getTwitter($(this))
     else
-      #$(".user_bio").html $(this).val()
-      #$(".user_bio").attr "data", $(this).val()
+      $(this).addClass 'invalid'
   )
   
   $('span.toggle a').click (event) ->
