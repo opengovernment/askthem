@@ -3,17 +3,19 @@
 <section class="question">
   <article>
     <header>
-      <h1 class="action">Ask a Question</h1>
+      <h1 class="action">Who should answer this question?</h1>
     </header>
     
     <span class="toggle">
-      <span>With</span>
-      <a href="#" class="twitter active icon-ok">Twitter</a>
+      <span>Find them with</span>
+      <a href="#twitter_find" class="select twitter active icon-ok">Twitter</a>
+      <a name="twitter_find"></a>
       <span>or</span>
-      <a href="#" class="address_lookup">Address Lookup</a>
+      <a href="#address_lookup" class="select address_lookup">Address Lookup</a>
+      <a name="address_lookup"></a>
     </span>
     
-    <form action="" class="action twitter">
+    <form action="" class="twitter">
       <div class="inline_label to">
         <label for="twitter">To:</label>
         <input type="text" name="twitter" id="twitter" placeholder="Enter a verified twitter account name" />

@@ -241,6 +241,12 @@
   /*
     Asking Questions
   */  
+  section.question span.toggle{
+    a{
+      width:100%;
+      box-sizing: border-box;
+    }
+  }
   section.question div.progress{
     position:relative;
     margin-top:-84px;

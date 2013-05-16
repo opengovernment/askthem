@@ -42,8 +42,8 @@ jQuery ($) ->
       $(this).addClass 'invalid'
   )
   
-  $('span.toggle a').click (event) ->
-    event.preventDefault()
+  $('span.toggle a.select').click (event) ->
+
     if $(this).hasClass('twitter') and !$(this).hasClass('active')
       $('form.address_lookup').hide();
       $('form.twitter').show();
