@@ -32,6 +32,8 @@ jQuery ($) ->
         $("form.twitter .select-person li h2").html data[0].name
         $("form.twitter div.avatar img").attr 'src', data[0].profile_image_url
         $("form.twitter .select-person div.person-info p").html data[0].description
+        $("form.twitter .select-person li").fadeTo(300, 1)
+        
 
   $("#twitter").blur(->      
     if $(this).val()[0] is "@"
