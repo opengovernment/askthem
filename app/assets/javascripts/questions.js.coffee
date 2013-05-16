@@ -20,3 +20,38 @@ jQuery ($) ->
     popup.call(this, event, 227) # auto-resizes
 
   $('time[data-time-ago]').timeago()
+
+  # <%# @todo JM to connect this to accounts that may be officials on OG %> 
+
+  getTwitter = (elem) ->
+    $.ajax
+      url: "http://api.twitter.com/1/users/lookup.json?screen_name=" + $(elem).val().slice(1) + "&callback=?"
+      type: "GET"
+      dataType: "json"
+      success: (data) ->
+        $("form.twitter .select-person li h2").html data[0].name
+        $("form.twitter div.avatar img").attr 'src', data[0].profile_image_url
+        $("form.twitter .select-person div.person-info p").html data[0].description
+        $("form.twitter .select-person li").fadeTo(300, 1)
+        
+
+  $("#twitter").blur(->      
+    if $(this).val()[0] is "@"
+      getTwitter($(this))
+    else
+      $(this).addClass 'invalid'
+  )
+  
+  $('span.toggle a.select').click (event) ->
+
+    if $(this).hasClass('twitter') and !$(this).hasClass('active')
+      $('form.address_lookup').hide();
+      $('form.twitter').show();
+    else
+      if $(this).hasClass('address_lookup') and !$(this).hasClass('active')
+        $('form.twitter').hide();
+        $('form.address_lookup').show();
+      
+    if !$(this).hasClass('active')
+      $('span.toggle a.active').removeClass('active icon-ok')
+      $(this).addClass('active icon-ok')

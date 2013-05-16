@@ -241,6 +241,19 @@
   /*
     Asking Questions
   */  
+  section.question span.toggle{
+    a{
+      width:100%;
+      box-sizing: border-box;
+      display:none;
+      &.mobile{
+        display:inline-block;
+      }
+      &.anchor{
+        display:inline;
+      }
+    }
+  }
   section.question div.progress{
     position:relative;
     margin-top:-84px;

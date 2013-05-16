@@ -88,11 +88,14 @@ form{
       width:100%;
       @include box-shadow(none);
       @include transition-property(none);
+      @include transition-property(text-indent);
+      @include transition-duration(.125s);
       &:focus, &:hover{
         background-image: url(/assets/textarea_bg_focus@2x.png);
         background-size: 2px 30px;
         background-position: 0 29px;
         color:#818181;
+        text-indent:3px;
       }
     }
     textarea{
@@ -120,6 +123,27 @@ form{
         color:#818181;
       }
     }
+    div.inline_label{
+      display:inline-block;
+      position:relative;
+      width:100%;
+      label{
+        display:inline-block;
+        left: 0;
+        position:absolute;
+        top: 7px;
+      }
+      input[type=text], input[type=email], input[type=number]{
+        display:inline-block;
+      }
+      // input text-indents need to be defined case-by-case
+      &.to{
+        input{
+          display:inline-block;
+          text-indent: 35px;
+        }
+      }
+    }
   }
   fieldset{
     border-top: 1px solid #EFEFEF;
@@ -139,7 +163,7 @@ form{
   }
 }
 
-// Signup to sign a question
+// Signup to sign a question - @todo ST: classname too close to "action", rename
 .actions form{
   label{
   }
@@ -283,7 +307,16 @@ div.controls{
       display:none;
     }
   }
-} 
+  &.twitter{
+    li{
+      cursor:inherit;
+      width:95%;
+      div.avatar{
+        width:10%;
+      }
+    }
+  }
+}
 
 /*
 Success, Info, Error treatments & messages
