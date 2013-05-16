@@ -1,4 +1,6 @@
 class QuestionsController < ApplicationController
+  FULL_NEW_QUESTION_STEPS = %w(recipient content signup confirm)
+
   inherit_resources
   belongs_to :jurisdiction, parent_class: Metadatum, finder: :find_by_abbreviation, param: :jurisdiction
   respond_to :html
@@ -17,12 +19,14 @@ class QuestionsController < ApplicationController
   end
 
   def new
-    @step = params[:step].try(&:to_i) || 1
+    @step = relevant_steps.first
     session[:question_current_step] = @step
+    @step_details = step_details
+
     session[:question_params] ||= { state: parent.abbreviation }
     @question = Question.new(session[:question_params])
 
-    if params[:person] && @step == 1
+    if params[:person]
       @person = Person.in(parent.abbreviation).find(params[:person])
       @question.person = @person
       session[:ask_person] = @person.id
@@ -37,17 +41,17 @@ class QuestionsController < ApplicationController
     @person = @question.person
     @step = session[:question_current_step]
 
-    # TODO: user handling
-    # temp hack for step 4
-    @question.user = User.first || User.new
+    @question.user = @user || User.new
 
     # TODO: step validation needs work
-    if @step == 4 && @question.valid?
-      @question.save
+    if @step == relevant_steps.last
+      @question.save if @question.valid?
     else
-      @step += 1 unless @step == 4
+      @step = next_step(@step)
       session[:question_current_step] = @step
     end
+
+    @step_details = step_details
 
     if @question.new_record?
       create! do |format|
@@ -55,23 +59,58 @@ class QuestionsController < ApplicationController
       end
     else
       # TODO: how are we handling flash messages?
-
-      go_to_person = session[:ask_person].present? ? Person.in(parent.abbreviation).find(session[:ask_person]) : nil
-
-      to_be_cleared = [:question_params, :question_current_step, :ask_person]
-      to_be_cleared.each do |key|
-        session[key] = nil
-      end
-
-      if go_to_person
-        redirect_to go_to_person, jurisdiction: parent.abbreviation
-      else
-        redirect_to action: :index
-      end
+      redirect_target = after_question_create_url
+      clear_session_values_for_question
+      redirect_to redirect_target
     end
   end
 
-private
+  private
+
+  # steps may be different if...
+  # user is logged in (no signup step)
+  # person is passed in (no recipient step)
+  def relevant_steps
+    @relevant_steps ||= session[:steps] || FULL_NEW_QUESTION_STEPS
+    @relevant_steps.delete('recipient') if params[:person]
+    @relevant_steps.delete('signup') if user_signed_in?
+    @relevant_steps
+  end
+
+  def next_step(current_step)
+    relevant_steps[relevant_steps.index(current_step) + 1]
+  end
+
+  def step_details
+    { name: @step,
+      number: relevant_steps.index(@step) + 1,
+      total: relevant_steps.size }
+  end
+
+  def to_clear_from_session
+    [:question_params,
+     :question_current_step,
+     :ask_person,
+     :steps]
+  end
+
+  def clear_session_values_for_question
+   to_clear_from_session.each { |key| session[key] = nil }
+  end
+
+  def after_question_create_url
+    go_to_person = if session[:ask_person].present?
+                     Person.in(parent.abbreviation).find(session[:ask_person])
+                   else
+                     nil
+                   end
+
+    if go_to_person
+      [go_to_person, { jurisdiction: parent.abbreviation }]
+    else
+      { action: :index }
+    end
+  end
 
   def end_of_association_chain
     Question.in(parent.abbreviation)

@@ -31,11 +31,11 @@
     <% end %>
     <div class="row">
       <div class="question_preview">
-        <% if step == 1 %>
-          <h5 class="empty">Nothing yet&hellip;</h5>
-        <% elsif step > 1 %>
+        <% if question.title.present? && question.body.present? %>
           <h5><%= question.title -%></h5>
           <p><%= question.body -%></p>
+        <% else%>
+          <h5 class="empty">Nothing yet&hellip;</h5>
         <% end %>
       </div>
     </div>
@@ -49,11 +49,11 @@
         </div>
       </div>
     <% end %>
-    <% if step == 4 %>
+    <% if step_details[:number] == step_details[:total] %>
       <%= f.submit 'Publish', class: 'cta_pill' %>
     <% else %>
       <%= f.submit 'Next', class: 'cta_pill' %>
     <% end %>
-    <span class="count"><%= step %> of 4</span>
+    <span class="count"><%= step_details[:number] %> of <%= step_details[:total] %></span>
   </div>
 </div>

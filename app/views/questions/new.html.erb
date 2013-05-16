@@ -2,7 +2,8 @@
 
 <section class="question">
   <%= form_for @question, jurisdiction: @jurisdiction.abbreviation, html: { accept_charset: 'utf-8', class: 'action' } do |f| %>
-    <%= render partial: "step#{@step}", locals: { question: @question, person: @person, step: @step, f: f } %>
-    <%= render partial: 'progress', locals: { question: @question, person: @person, step: @step, f: f } %>
+    <% locals = { question: @question, person: @person, step_details: @step_details, f: f } -%>
+    <%= render partial: "#{@step}_step", locals: locals %>
+    <%= render partial: 'progress', locals: locals %>
   <% end %>
 </section>
