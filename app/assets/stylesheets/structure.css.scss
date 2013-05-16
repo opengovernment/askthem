@@ -744,6 +744,7 @@ span.toggle{
     background:#A4C5CF;
     border:1px solid #94B6C0;
     color:#fff;
+    cursor:pointer;
     display:inline-block;
     font-size:0.813em;
     line-height: 1.385em;
@@ -753,9 +754,11 @@ span.toggle{
     &:hover{
       background-color:#95BBC7;
     }
+    &.mobile{
+      display:none;
+    }
     &.active{
       @include box-shadow(0 2px 0 0 rgba(0, 0, 0, 0.1), inset 0 1px 0 0 #BFEB35);
-      display: inline-block;
       border-color:#99C472; 
       background: #AFD82D;
       color: #FFF;
