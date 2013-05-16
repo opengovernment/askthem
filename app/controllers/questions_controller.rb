@@ -18,7 +18,14 @@ class QuestionsController < ApplicationController
 
   def new
     @step = params[:step].try(&:to_i) || 1
-    @question = stub # @todo
+    attributes = params[:question] || { state: parent.abbreviation }
+    @question = Question.new(attributes)
+
+    if params[:person]
+      @person = Person.in(parent.abbreviation).find(params[:person])
+      @question.person = @person
+    end
+
     new! do |format|
       format.html {render "step#{@step}"}
     end
@@ -60,5 +67,5 @@ private
 
     Question.new(attributes)
   end
-  
+
 end

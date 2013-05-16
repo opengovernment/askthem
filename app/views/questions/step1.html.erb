@@ -91,5 +91,6 @@
       
     </form>
   </article>
-  <%= render partial: 'progress' %>
+
+  <%= render partial: 'progress', locals: { question: @question, person: @person, step: @step } %>
 </section>
