@@ -21,6 +21,10 @@ class QuestionsController < ApplicationController
   end
 
   def new
+    # TODO: decide if clearing session data
+    # should always happen here
+    clear_session_values_for_question
+
     @step = relevant_steps.first
     session[:question_current_step] = @step
     @step_details = step_details
@@ -41,7 +45,7 @@ class QuestionsController < ApplicationController
   def create
     session[:question_params].deep_merge!(params[:question])
     @question = Question.new(session[:question_params])
-    @person = @question.person
+    @person = @question.person if @question.person_id.present?
     @user = @question.user
     @step = session[:question_current_step]
 
@@ -55,6 +59,12 @@ class QuestionsController < ApplicationController
     else
       @step = next_step(@step)
       session[:question_current_step] = @step
+      # TODO: take out below data stubbing when recipient choosing is in order
+      # data stubbing
+      if @step == relevant_steps.last
+        @question.person = Person.in(parent.abbreviation).last
+      end
+      # end stubbing
     end
 
     @step_details = step_details
