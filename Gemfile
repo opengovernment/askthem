@@ -44,6 +44,8 @@ end
 group :test do
   gem 'factory_girl_rails'
   gem 'mongoid-rspec'
+  gem 'vcr' # play back external HTTP requests
+  gem 'webmock' # stub and mock external HTTP requests
 end
 
 group :assets do
