@@ -97,7 +97,11 @@ class QuestionsController < ApplicationController
   end
 
   def next_step(current_step)
-    relevant_steps[relevant_steps.index(current_step) + 1]
+    # the || -1 handles edge case where relavant_steps
+    # no longer has current_step (e.g. they signed in in middle of steps)
+    # return them to beginning
+    step_index = relevant_steps.index(current_step) || -1
+    relevant_steps[step_index + 1]
   end
 
   def step_details
