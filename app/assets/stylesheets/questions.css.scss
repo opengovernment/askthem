@@ -491,22 +491,59 @@ div.actions{
 /*
   Answers
 */
-div.recipient_answer{
+section.question div.recipient_answer{
   @include border-radius(6px);
   @include box-shadow(0 2px 0 #F9F9F9);
   background: rgba(0, 0, 0, 0.015);
+  background-image: url(/assets/seal@2x.png);
+  background-repeat: no-repeat;
+  background-position: 98% 4%;
+  background-size: 36px;
   border: 1px solid #F3F3F3;
   display: inline-block;
   float:right;
-  margin-top: 12px;
+  margin-top: 24px;
+  margin-bottom:42px;
   padding: 4.974359%;
   vertical-align: top;
   width: 90%;
+  div.avatar{
+    margin-right:6px;
+  }
   div.person-info{
-    
+    display:inline-block;
+    margin-bottom:18px;
+    h2{
+      font-size:1.125em;
+      line-height: 1.333em;
+    }
+    span.jurisdiction{
+      @include RobotoRegular();
+      color:#518795;
+      font-size:0.813em;
+      line-height: 1.385em;
+    }
+    span.stats{
+      @include RobotoRegular();
+      color:#7b969e;
+      font-size:0.688em;
+      line-height: 1.636em;
+      display:block;
+    }
   }
   p{
-    
+    display:inline-block;
+  }
+  span.pubdate{
+    font-size:0.813em;
+    line-height: 1.385em;
+    color:#7b969e;
+    sup{
+      &:before{
+        content:"\2022";
+        padding:0 8px 0 6px;
+      }
+    }
   }
 }
 
