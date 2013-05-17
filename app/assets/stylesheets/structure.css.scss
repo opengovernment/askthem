@@ -318,6 +318,23 @@ Buttons!
   }
 }
 
+/*
+cta in header pos
+*/
+section.overview{
+  header{
+    position:relative;
+  }
+  h1{
+    float: left;
+    clear: both;
+    display: inline-block;
+  }
+  a.cta_pill{
+    float:right;
+  }
+}
+
 .sim_act{
   background: #96c5ce;
   color: #ffffff;
@@ -729,10 +746,13 @@ a.expose_nav{
 
 span.toggle{
   border-bottom: 1px solid #F1F1F1;
+  border-top: 1px solid #F1F1F1;
   display: inline-block;
   padding-bottom: 24px;
   color: #999;
   margin-bottom: 24px;
+  margin-top: 24px;
+  padding-top: 24px;
   width: 100%;
   span{
     display: inline-block;
@@ -769,6 +789,12 @@ span.toggle{
       }
     }
   }
+}
+
+span.bill_ref{
+  color: #2B464E;
+  font-size:0.813em;
+  line-height: 1.385em;
 }
 
 

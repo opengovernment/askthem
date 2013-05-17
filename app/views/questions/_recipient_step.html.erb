@@ -3,6 +3,7 @@
 <article>
   <header>
     <h1 class="action">Who should answer this question?</h1>
+    <span class="bill_ref"><span class="emph">re:</span> S 26 188th Legislature (2013-2014)</span>
   </header>
 
   <span class="toggle">
@@ -85,5 +86,9 @@
         <% end %>
       </ol>
     </fieldset>
+  </div>
+  <div class="controls">
+    <%= f.submit 'Next', class: 'cta_pill' %>
+    <span class="count"><%= step_details[:number] %> of <%= step_details[:total] %></span>
   </div>
 </article>

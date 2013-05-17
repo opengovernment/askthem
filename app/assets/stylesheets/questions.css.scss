@@ -255,11 +255,8 @@ section.question{
       display:block;
       padding-top:6px;
       margin-bottom:18px;
-      span.author{
-
-      }
-      span.posted{
-        color:#C8C8C8;
+      span.posted, span.author{
+        color:$lightgrey;
         font-size:0.813em;
         line-height: 1.385em;
       }
@@ -399,16 +396,6 @@ section.question{
           font-weight: 600;
         }
       }
-    }
-    span.count{
-      color: #C8C8C8;
-      font-size: 0.813em;
-      line-height: 1.385em;
-      font-weight: 600;
-      text-align: center;
-      display: block;
-      margin-top: 18px;
-      margin-bottom: -18px;
     }
   }
 }

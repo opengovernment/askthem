@@ -252,6 +252,22 @@ div.controls{
     vertical-align: middle;
   }
 }
+.question div.controls{
+  input[type=submit]{
+    display: inline-block;
+    width: 33%;
+  }
+  span.count{
+    color: #C8C8C8;
+    font-size: 0.813em;
+    line-height: 1.385em;
+    font-weight: 600;
+    text-align: center;
+    display: inline-block;
+    margin-left: 20px;
+    margin-top: 16px;
+  }
+}
 
 // Recipient Selection
 .people-list.select-person{

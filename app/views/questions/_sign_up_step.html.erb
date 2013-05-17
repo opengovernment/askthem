@@ -21,4 +21,8 @@
       <%= user_form.password_field :password %>
     <% end %>
   </fieldset>
+  <div class="controls">
+    <%= f.submit 'Next', class: 'cta_pill' %>
+    <span class="count"><%= step_details[:number] %> of <%= step_details[:total] %></span>
+  </div>
 </article>

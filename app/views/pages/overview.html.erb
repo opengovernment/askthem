@@ -1,8 +1,9 @@
 <%= render 'shared/navigation' %>
 
-<section>
+<section class="overview">
   <header>
     <h1><%= @jurisdiction['legislature_name'] %></h1>
+    <%= link_to 'Ask a Question', new_question_path(@jurisdiction.abbreviation), class: 'cta_pill' %>
   </header>
 
   <nav>
@@ -47,8 +48,8 @@
     <div class="nav_extras">
       <a href="#">State Resources</a><%# @todo ST remove since we have no content? %>
       <div class="rep_search"><%# @todo change into a form %>
-        <label for="find_rep">Find your representatives:</label>
-        <input type="text" name="find_rep" id="find_rep">
+        <label for="find_rep">Find your elected officials:</label>
+        <input type="text" name="find_rep" id="find_rep" placeholder="Address or Zip">
         <input type="submit" value="search" class="icon-map-marker">
       </div>
       <div class="clear"></div>
