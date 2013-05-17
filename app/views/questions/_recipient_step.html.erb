@@ -1,0 +1,89 @@
+<%= f.hidden_field :person_id %>
+
+<article>
+  <header>
+    <h1 class="action">Who should answer this question?</h1>
+  </header>
+
+  <span class="toggle">
+    <span>Find them with</span>
+    <a href="#twitter_find" class="select twitter active icon-ok mobile">Twitter</a>
+    <a class="select twitter active icon-ok">Twitter</a>
+    <a name="twitter_find" class="anchor"></a>
+    <span>or</span>
+    <a href="#address_lookup" class="select address_lookup mobile">Address Lookup</a>
+    <a class="select address_lookup">Address Lookup</a>
+    <a name="address_lookup" class="anchor"></a>
+  </span>
+
+  <div class="twitter">
+    <div class="inline_label to">
+      <label for="twitter">To:</label>
+      <input type="text" name="twitter" id="twitter" placeholder="Enter a verified twitter account name" />
+    </div>
+    <ol class="people-list select-person twitter">
+      <li style="display:none;" class="selected">
+        <div class="select_box">
+          <input type="radio" name="person-select" id="" />
+        </div>
+        <div class="avatar">
+          <img src="" alt="" />
+        </div>
+        <h2></h2>
+        <div class="person-info">
+          <p></p>
+        </div>
+        <span class="selected icon-ok-sign"></span>
+      </li>
+    </ol>
+  </div>
+
+  <div style="display:none;" class="address_lookup">
+    <label for="question">Home Address
+      <span class="details">Where you live lets us locate your officials!</span>
+    </label>
+
+    <fieldset>
+      <%= f.fields_for :user do |user_form| %>
+        <label for="street" class="lesser">Address</label>
+        <%= user_form.text_field :street_address, placeholder: 'Street Address', id: 'street' %>
+
+        <label for="city" class="lesser">City</label>
+        <%= user_form.text_field :locality, placeholder: 'City', id: 'city' %>
+
+        <label for="state" class="lesser">State</label>
+
+        <div class="input select sculpt icon-angle-down">
+          <%= user_form.select :region, options_for_select(OpenGovernment::STATES, @state_code), placeholder: 'Select your state', id: 'state' %>
+        </div>
+
+        <label for="zipcode" class="lesser">Zipcode</label>
+        <%= user_form.text_field :postal_code, placeholder: 'ex. 02141', id: 'zipcode' %>
+      <% end %>
+    </fieldset>
+
+    <label for="question" class="select-person" style="display:none;">Recipient
+      <span class="details">Select who you'd like to receive the question:</span>
+    </label>
+
+    <fieldset>
+      <ol class="people-list select-person">
+        <% 10.times do %>
+        <li style="display:none;">
+          <div class="select_box">
+            <input type="radio" name="person-select" id="" />
+          </div>
+          <div class="avatar">
+            <img src="http://d2xfsikitl0nz3.cloudfront.net/http%3A%2F%2Fw3.legis.state.ak.us%2Fimages%2Fhouse%2FAUS.jpg/60/60" alt="" />
+          </div>
+          <h2>Alan Austerman</h2>
+          <div class="person-info">
+            <span class="jurisdiction">Representative, District 35, Republican</span>
+          </div>
+          <span class="selected icon-ok-sign"></span>
+        </li>
+        <% end %>
+      </ol>
+    </fieldset>
+  </div>
+</article>

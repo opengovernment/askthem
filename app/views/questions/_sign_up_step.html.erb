@@ -1,0 +1,24 @@
+<article>
+  <header>
+    <h1 class="action">Your Profile</h1>
+  </header>
+  <label for="question">Personal info
+    <span class="details">Tell us a little bit about yourself!</span>
+  </label>
+
+  <fieldset>
+    <%= f.fields_for :user do |user_form| %>
+      <label for="firstname" class="lesser">First Name</label>
+      <%= user_form.text_field :given_name, placeholder: 'John', id: 'firstname' %>
+
+      <label for="lastname" class="lesser">Last Name</label>
+      <%= user_form.text_field :family_name, placeholder: 'Doe', id: 'lastname' %>
+
+      <label for="email" class="lesser">Email</label>
+      <%= user_form.text_field :email, placeholder: 'john.doe@gmail.com' %>
+
+      <label for="password" class="lesser">Password</label>
+      <%= user_form.password_field :password %>
+    <% end %>
+  </fieldset>
+</article>

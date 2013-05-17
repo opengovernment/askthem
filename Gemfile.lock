@@ -66,6 +66,7 @@ GEM
       rest-client
       simplecov (>= 0.7)
       thor
+    crack (0.3.1)
     devise (2.2.3)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
@@ -267,10 +268,14 @@ GEM
       rack
       raindrops (~> 0.7)
     uniform_notifier (1.2.0)
+    vcr (2.3.0)
     vegas (0.1.11)
       rack (>= 1.0.0)
     warden (1.2.1)
       rack (>= 1.0)
+    webmock (1.9.0)
+      addressable (>= 2.2.7)
+      crack (>= 0.1.7)
 
 PLATFORMS
   ruby
@@ -307,3 +312,5 @@ DEPENDENCIES
   simple_form
   uglifier (>= 1.0.3)
   unicorn
+  vcr
+  webmock

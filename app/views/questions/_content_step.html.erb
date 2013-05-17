@@ -1,0 +1,24 @@
+<article>
+  <header>
+    <h1 class="action">Ask a Question</h1>
+  </header>
+  <div class="count">
+    <span class="summary_count">60</span>
+    <%= f.text_field :title, placeholder: raw('Summary&hellip;'), maxlength: '60', id: 'summary' %>
+  </div>
+
+  <label for="question">Full Question
+    <span class="details">Why is this important? Give it your all!</span>
+  </label>
+  <%= f.text_area :body, placeholder: raw('Go on&hellip;'), cols: '30', rows: '10' %>
+
+  <label for="issue_area">Select an issue area
+    <span class="opt">(optional)</span>
+  </label>
+  <div class="input select icon-angle-down sculpt">
+    <select name="issue_area" id="issue_area">
+      <option value="0">Select an Issue</option>
+      <option value="1">Issue #1!</option>
+    </select>
+  </div>
+</article>
