@@ -1,10 +1,44 @@
-<%# TODO: hidden_field is placeholder until real inputs are done %>
 <%= f.hidden_field :person_id %>
 
 <article>
   <header>
-    <h1 class="action">Find your Official</h1>
+    <h1 class="action">Who should answer this question?</h1>
   </header>
+
+  <span class="toggle">
+    <span>Find them with</span>
+    <a href="#twitter_find" class="select twitter active icon-ok mobile">Twitter</a>
+    <a class="select twitter active icon-ok">Twitter</a>
+    <a name="twitter_find" class="anchor"></a>
+    <span>or</span>
+    <a href="#address_lookup" class="select address_lookup mobile">Address Lookup</a>
+    <a class="select address_lookup">Address Lookup</a>
+    <a name="address_lookup" class="anchor"></a>
+  </span>
+
+  <div class="twitter">
+    <div class="inline_label to">
+      <label for="twitter">To:</label>
+      <input type="text" name="twitter" id="twitter" placeholder="Enter a verified twitter account name" />
+    </div>
+    <ol class="people-list select-person twitter">
+      <li style="display:none;" class="selected">
+        <div class="select_box">
+          <input type="radio" name="person-select" id="" />
+        </div>
+        <div class="avatar">
+          <img src="" alt="" />
+        </div>
+        <h2></h2>
+        <div class="person-info">
+          <p></p>
+        </div>
+        <span class="selected icon-ok-sign"></span>
+      </li>
+    </ol>
+  </div>
+
+  <div style="display:none;" class="address_lookup">
     <label for="question">Home Address
       <span class="details">Where you live lets us locate your officials!</span>
     </label>
@@ -24,7 +58,6 @@
           <option value="State">Select your state</option>
         </select>
       </div>
-
 
       <label for="zipcode" class="lesser">Zipcode</label>
       <input type="text" name="street" id="zipcode" placeholder="ex. 02141" />
@@ -53,4 +86,5 @@
         <% end %>
       </ol>
     </fieldset>
+  </div>
 </article>
