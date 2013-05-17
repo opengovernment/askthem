@@ -1,11 +1,13 @@
 class QuestionsController < ApplicationController
-  FULL_NEW_QUESTION_STEPS = %w(recipient content signup confirm)
+  FULL_NEW_QUESTION_STEPS = %w(recipient content sign_up confirm)
 
   inherit_resources
   belongs_to :jurisdiction, parent_class: Metadatum, finder: :find_by_abbreviation, param: :jurisdiction
   respond_to :html
   respond_to :js, only: :index
   actions :index, :show, :new, :create
+
+  before_filter :set_state_code, only: [:new, :create]
 
   def index
     index! do |format|
@@ -23,11 +25,12 @@ class QuestionsController < ApplicationController
     session[:question_current_step] = @step
     @step_details = step_details
 
-    session[:question_params] ||= { state: parent.abbreviation }
+    session[:question_params] ||= { state: @state_code }
     @question = Question.new(session[:question_params])
+    @question.user = user_signed_in? ? @user : User.new
 
     if params[:person]
-      @person = Person.in(parent.abbreviation).find(params[:person])
+      @person = Person.in(@state_code).find(params[:person])
       @question.person = @person
       session[:ask_person] = @person.id
     end
@@ -39,12 +42,15 @@ class QuestionsController < ApplicationController
     session[:question_params].deep_merge!(params[:question])
     @question = Question.new(session[:question_params])
     @person = @question.person
+    @user = @question.user
     @step = session[:question_current_step]
-
-    @question.user = @user || User.new
 
     # TODO: step validation needs work
     if @step == relevant_steps.last
+      if !user_signed_in? && @user.valid?
+        @user.save
+        @question.user = @user # necessary? check @question.user_id to see if it is updated without doing this
+      end
       @question.save if @question.valid?
     else
       @step = next_step(@step)
@@ -67,13 +73,16 @@ class QuestionsController < ApplicationController
 
   private
 
+  def set_state_code
+    @state_code = parent.abbreviation
+  end
   # steps may be different if...
-  # user is logged in (no signup step)
+  # user is logged in (no sign_up step)
   # person is passed in (no recipient step)
   def relevant_steps
     @relevant_steps ||= session[:steps] || FULL_NEW_QUESTION_STEPS
     @relevant_steps.delete('recipient') if params[:person]
-    @relevant_steps.delete('signup') if user_signed_in?
+    @relevant_steps.delete('sign_up') if user_signed_in?
     @relevant_steps
   end
 

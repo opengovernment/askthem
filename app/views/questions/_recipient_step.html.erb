@@ -44,23 +44,22 @@
     </label>
 
     <fieldset>
-      <label for="street" class="lesser">Address</label>
-      <input type="text" name="street" id="street" placeholder="Street Address" />
+      <%= f.fields_for :user do |user_form| %>
+        <label for="street" class="lesser">Address</label>
+        <%= user_form.text_field :street_address, placeholder: 'Street Address', id: 'street' %>
 
-      <label for="city" class="lesser">City</label>
-      <input type="text" name="street" id="city" placeholder="City" />
+        <label for="city" class="lesser">City</label>
+        <%= user_form.text_field :locality, placeholder: 'City', id: 'city' %>
 
-      <label for="state" class="lesser">State</label>
-      <!-- <input type="text" name="street" id="state" placeholder="State Abbreviation (ex. MA)" /> -->
+        <label for="state" class="lesser">State</label>
 
-      <div class="input select sculpt icon-angle-down">
-        <select name="" id="">
-          <option value="State">Select your state</option>
-        </select>
-      </div>
+        <div class="input select sculpt icon-angle-down">
+          <%= user_form.select :region, options_for_select(OpenGovernment::STATES, @state_code), placeholder: 'Select your state', id: 'state' %>
+        </div>
 
-      <label for="zipcode" class="lesser">Zipcode</label>
-      <input type="text" name="street" id="zipcode" placeholder="ex. 02141" />
+        <label for="zipcode" class="lesser">Zipcode</label>
+        <%= user_form.text_field :postal_code, placeholder: 'ex. 02141', id: 'zipcode' %>
+      <% end %>
     </fieldset>
 
     <label for="question" class="select-person" style="display:none;">Recipient
