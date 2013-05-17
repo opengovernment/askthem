@@ -6,7 +6,6 @@
 @import "mixins";
 
 // Question progress
-
 div.question_progress{
   background: #ffffff;
   @include border-radius(3px);
@@ -198,7 +197,6 @@ section.questions{
   */
   &.related_focus{
     ol{
-/*      width:92.714025500911%;*/
       li{
         div.question_content{
           width:70.867075664622%;
@@ -482,6 +480,28 @@ div.actions{
     border-bottom:1px solid #e5e5e5;
     padding-bottom:6px;
     margin-bottom:12px;
+  }
+}
+
+/*
+  Answers
+*/
+div.recipient_answer{
+  @include border-radius(6px);
+  @include box-shadow(0 2px 0 #F9F9F9);
+  background: rgba(0, 0, 0, 0.015);
+  border: 1px solid #F3F3F3;
+  display: inline-block;
+  float:right;
+  margin-top: 12px;
+  padding: 4.974359%;
+  vertical-align: top;
+  width: 90%;
+  div.person-info{
+    
+  }
+  p{
+    
   }
 }
 

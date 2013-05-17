@@ -9,3 +9,4 @@ latest-mongo-dump.tar.gz
 /config/initializers/mongoid_billy_shim.rb
 /coverage
 /public/uploads
+.DS_Store
