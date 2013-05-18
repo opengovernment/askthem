@@ -58,6 +58,26 @@ class Person
     end
   end
 
+  # TODO: add spec
+  def jurisdiction
+    Metadatum.with(session: 'openstates').find_by_abbreviation(state)
+  end
+
+  # TODO: add spec
+  def most_recent_chamber
+    most_recent :chamber
+  end
+
+  # TODO: add spec
+  def most_recent_chamber_title
+    jurisdiction.chamber_title most_recent_chamber
+  end
+
+  # TODO: add spec
+  def most_recent_district
+    most_recent :district
+  end
+
   # Returns fields that are not available in Billy.
   #
   # @return [PersonDetail] the person's additional fields
