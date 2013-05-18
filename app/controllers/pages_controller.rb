@@ -43,8 +43,9 @@ class PagesController < ApplicationController
   def locator
     @people = Person.with(session: 'openstates').includes(:questions).for_location(params[:q])
 
-    respond_with(@people.as_json(only: [:id, :full_name, :photo_url, :party],
-                                 methods: [:most_recent_chamber_title,
+    respond_with(@people.as_json(only: [:full_name, :photo_url, :party],
+                                 methods: [:id,
+                                           :most_recent_chamber_title,
                                            :most_recent_district]))
   end
 
