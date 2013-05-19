@@ -1,6 +1,4 @@
 class QuestionsController < ApplicationController
-  FULL_NEW_QUESTION_STEPS = %w(recipient content sign_up confirm)
-
   inherit_resources
   belongs_to :jurisdiction, parent_class: Metadatum, finder: :find_by_abbreviation, param: :jurisdiction
   respond_to :html
@@ -68,7 +66,7 @@ class QuestionsController < ApplicationController
   # user is logged in (no sign_up step)
   # person is passed in (no recipient step)
   def relevant_steps
-    @relevant_steps ||= FULL_NEW_QUESTION_STEPS
+    @relevant_steps = %w(recipient content sign_up confirm)
     @relevant_steps.delete('recipient') if params[:person]
     @relevant_steps.delete('sign_up') if user_signed_in?
     @relevant_steps
