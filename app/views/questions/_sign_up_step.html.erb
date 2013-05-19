@@ -20,7 +20,7 @@
       <label for="password" class="lesser">Password</label>
       <%= user_form.password_field :password %>
 
-      <% unless relevant_steps.include?(:recipient) %>
+      <% unless relevant_steps.include?('recipient') %>
         <label for="street" class="lesser">Address</label>
         <%= user_form.text_field :street_address, placeholder: 'Street Address', id: 'street' %>
 

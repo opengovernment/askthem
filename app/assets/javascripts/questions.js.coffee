@@ -78,11 +78,14 @@ jQuery ($) ->
 
     $(personLi).children('.icon-ok-sign').show()
 
+    # TODO: make link for person
     $('ul.recipient h2').text name
+    $('#confirm-person-name').html "<strong>#{name}</strong>"
     progressAvatar = $('ul.recipient li div.avatar')
     $(progressAvatar).html avatarHtml
     $(progressAvatar).show()
     $('ul.recipient .person-info .jurisdiction').text jurisdiction
+    $('#confirm-person-attributes').html "<strong>#{jurisdiction}</strong>"
 
   getPeople = (->
     address = $('#street').val()
@@ -156,10 +159,17 @@ jQuery ($) ->
     $(nextStepId).show()
 
     $(button).attr 'data-current-step', nextStepName
-    $('#step-number').text nextStepNumber
+    $('.step-number').text nextStepNumber
 
-    # last step, hide button, maybe replace later with Previous
-    $(button).hide() if nextStepNumber is steps.length
+    # last step, hide progress area
+    if nextStepNumber is steps.length
+      $('.progress').hide()
+      $(button).hide()
+      $('.count').hide()
+    else
+      $('.progress').show() if $('.progress').is(':hidden')
+      $(button).show()
+      $('.count').show()
 
   $('#next-button').click (event) ->
     nextStep event
@@ -175,18 +185,24 @@ jQuery ($) ->
 
     $(stepId(lastStep)).hide()
     $(stepId(firstStep)).show()
-    $('#step-number').text 1
-    $(nextButton).show()
+    $('.step-number').text 1
+    $('.progress').show() if $('.progress').is(':hidden')
+    $(nextButton).show() if $(nextButton).is(':hidden')
+    $('.count').show() if $('.count').is(':hidden')
 
   $('#edit-button').click (event) ->
     beginAgain event
 
   $('#summary').keyup (event) ->
+    value = $('#summary').val()
     $('.question_preview h5').removeClass('empty')
-    $('.question_preview h5').text $('#summary').val()
+    $('.question_preview h5').text value
+    $('#confirm-question-title').text value
 
   $('#question_body').keyup (event) ->
-    $('.question_preview p').text $('#question_body').val()
+    value = $('#question_body').val()
+    $('.question_preview p').text value
+    $('#confirm-question-body').text value
 
   $('#firstname').keyup (event) ->
     $('.author .firstname').text $('#firstname').val()

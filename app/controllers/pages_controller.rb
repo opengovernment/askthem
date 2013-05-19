@@ -7,6 +7,7 @@ class PagesController < ApplicationController
 
   def index
     @jurisdictions = Metadatum.all.to_a + Metadatum.with(session: 'openstates').all.to_a
+    render :layout => "homepage"
   end
 
   def overview

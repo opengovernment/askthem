@@ -25,7 +25,7 @@
   <%= stylesheet_link_tag 'application', media: 'all' %>
   <%= csrf_meta_tags %>
 </head>
-<body>
+<body class="index">
   <div id="fb-root"></div>
 
   <header class="main">
@@ -38,26 +38,22 @@
     </section>
     <div class="wrapper">
       <%= link_to 'OpenGovernment', root_path, class: 'logo' %>
-      <p class="slogan">See questions &amp; petitions near you: <input type="text" name="location" id="location" placeholder="City, state, or zip" /><input type="submit" value="" class="locate" /></p>
+      <div class="find_questions">
+        <h1>Ask your elected officials questions &amp; get answers!</h1>
+        <form action="/ma/questions">
+          <input type="text" name="" id="" />
+          <input type="submit" value="Search" class="cta_pill" />
+        </form>
+      </div>
     </div>
   </header>
   <section>
     <div class="content_body">
-      <% if notice %>
-        <p class="notice"><%= notice %></p>
-      <% end %>
-      <% if alert %>
-        <p class="alert"><%= alert %></p>
-      <% end %>
       <div class="wrapper">
-<%= yield %>
-
+        <%= yield %>
       <div class="clear"></div>
       </div>
     </div>
-    <ul class="admin_nav wide">
-      <%= render partial: 'shared/user' %>
-    </ul>
   </section>
   
   <footer>
