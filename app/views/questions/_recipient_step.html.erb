@@ -55,7 +55,7 @@
         <label for="state" class="lesser">State</label>
 
         <div class="input select sculpt icon-angle-down">
-          <%= user_form.select :region, options_for_select(OpenGovernment::STATES, @state_code), placeholder: 'Select your state', id: 'state' %>
+          <%= user_form.select :region, options_for_select(OpenGovernment::STATES, @state_code), placeholder: 'Select your state' %>
         </div>
 
         <label for="zipcode" class="lesser">Zipcode</label>
@@ -69,21 +69,7 @@
 
     <fieldset>
       <ol class="people-list select-person">
-        <% 10.times do %>
-        <li style="display:none;">
-          <div class="select_box">
-            <input type="radio" name="person-select" id="" />
-          </div>
-          <div class="avatar">
-            <img src="http://d2xfsikitl0nz3.cloudfront.net/http%3A%2F%2Fw3.legis.state.ak.us%2Fimages%2Fhouse%2FAUS.jpg/60/60" alt="" />
-          </div>
-          <h2>Alan Austerman</h2>
-          <div class="person-info">
-            <span class="jurisdiction">Representative, District 35, Republican</span>
-          </div>
-          <span class="selected icon-ok-sign"></span>
-        </li>
-        <% end %>
+        <!-- will be populated by address_lookup -->
       </ol>
     </fieldset>
   </div>

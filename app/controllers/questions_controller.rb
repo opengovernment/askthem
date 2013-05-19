@@ -62,7 +62,7 @@ class QuestionsController < ApplicationController
       # TODO: take out below data stubbing when recipient choosing is in order
       # data stubbing
       if @step == relevant_steps.last
-        @question.person = Person.in(parent.abbreviation).last
+        @question.person = Person.in(@state_code).last
       end
       # end stubbing
     end
@@ -75,9 +75,8 @@ class QuestionsController < ApplicationController
       end
     else
       # TODO: how are we handling flash messages?
-      redirect_target = after_question_create_url
       clear_session_values_for_question
-      redirect_to redirect_target
+      redirect_to @question
     end
   end
 
@@ -119,20 +118,6 @@ class QuestionsController < ApplicationController
 
   def clear_session_values_for_question
    to_clear_from_session.each { |key| session[key] = nil }
-  end
-
-  def after_question_create_url
-    go_to_person = if session[:ask_person].present?
-                     Person.in(parent.abbreviation).find(session[:ask_person])
-                   else
-                     nil
-                   end
-
-    if go_to_person
-      [go_to_person, { jurisdiction: parent.abbreviation }]
-    else
-      { action: :index }
-    end
   end
 
   def end_of_association_chain

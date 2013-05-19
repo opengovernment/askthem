@@ -2,9 +2,12 @@ class PagesController < ApplicationController
   before_filter :set_jurisdiction, only: [:overview, :lower, :upper, :bills, :key_votes]
   before_filter :authenticate_user!, only: :dashboard
   caches_action :channel
+  respond_to :html
+  respond_to :json, only: :locator
 
   def index
     @jurisdictions = Metadatum.all.to_a + Metadatum.with(session: 'openstates').all.to_a
+    render :layout => "homepage"
   end
 
   def overview
@@ -40,6 +43,11 @@ class PagesController < ApplicationController
   # @see https://github.com/sunlightlabs/billy/wiki/Differences-between-the-API-and-MongoDB
   def locator
     @people = Person.with(session: 'openstates').includes(:questions).for_location(params[:q])
+
+    respond_with(@people.as_json(only: [:full_name, :photo_url, :party],
+                                 methods: [:id,
+                                           :most_recent_chamber_title,
+                                           :most_recent_district]))
   end
 
   def search

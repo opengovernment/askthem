@@ -1,0 +1,124 @@
+body.index{
+  header.main, .content_body, footer{
+    margin:auto;
+    width:100%;
+  }
+  footer{
+    max-width: 0;
+  }
+  div.wrapper{
+    max-width:1120px;
+  }
+  header.main{
+    height:284px;
+    padding-top:24px;
+    div.find_questions{
+      display: block;
+      margin: auto;
+      margin-top: 60px;
+      margin-bottom: 90px;
+      text-align: center;
+      position: relative;
+    }
+    h1{
+      display:block;
+      font-size:1.875em;
+      line-height: 1.4em;
+      text-align:center;
+      margin:auto auto 36px;
+    }
+    input[type=text]{
+      display:inline-block;
+      max-width: 560px;
+      box-sizing: border-box;
+    }
+    input[type=submit]{
+      max-width: 133px;
+    }
+  }
+  .content_body{
+    header{
+      display: inline-block;
+      width: 99%;
+      padding-bottom: 12px;
+      padding-left: 1%;
+      border-bottom: 1px solid #EFEFEF;
+      margin-bottom: 18px;
+      margin-top: 30px;
+      h2{
+        display:inline-block;
+      }
+      ul{
+        display:inline-block;
+        float: right;
+        li{
+          display:inline-block;
+          padding-left: 20px;
+          a{
+            display:inline-block;
+          }
+        }
+      }
+    }
+    ul.popular_questions{
+      display:inline-block;
+      li{
+        display:inline-block;
+        padding-right:5.357142857143%;
+        padding-left: 1%;
+        width:27.571428571429%;
+        &:nth-child(3n+3){
+          padding-right:0;
+        }
+        div.person_wrap{
+          display:inline-block;
+          div.avatar{
+            display:inline-block;
+            img{
+              
+            }
+          }
+          div.person-info{
+            display:inline-block;
+          }
+        }
+        h3{
+          display:inline-block;
+        }
+        p{
+          display:inline-block;
+        }
+        div.question_stats{
+          display:inline-block;
+          span.author{
+            display:inline-block;
+          }
+          span.support_count{
+            display:inline-block;
+          }
+          a.sign{
+            display:inline-block;
+          }
+          div.question_progress{
+            display:inline-block;
+          }
+        }
+      }
+    }
+    ol.how_it_works{
+      display:inline-block;
+      li{
+        display:inline-block;
+        img{
+          display:inline-block;
+        }
+        span.num{
+          display:inline-block;
+        }
+        p{
+          display:inline-block;
+        }
+      }
+    }
+  }
+}

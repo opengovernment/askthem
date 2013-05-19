@@ -1,5 +1,74 @@
 <section>
-  <ul>
+  <header>
+    <h2>Top Questions &amp; Petitions Nationwide</h2>
+    <ul>
+      <li>6,500 Answers<%# @todo number of Answers %></li>
+      <li>6,500 Supporters<%# @todo number of Supporters %></li>
+      <li><%= link_to 'Ask a Question' %></li>
+    </ul>
+  </header>
+  <ul class="popular_questions">
+    <% 6.times do %>
+    <li> <%# @todo Pop question data %>
+      <div class="person_wrap">
+        <div class="avatar">
+          <%# if person.image? %>
+            <%# cdn_image_tag(person.image, size: '60x60', alt: '') %>
+          <%# else %>
+            <%= image_tag('placeholder.png', size: '60x60', alt: '') %>
+          <%# end %>
+        </div>
+        <div class="person-info">
+          <h2><%# link_to person.name, person_path(person['state'], person) %></h2>
+          <span class="jurisdiction"><%# person_attributes(person) %></span>
+          <span class="stats"><span><%# pluralize person.questions.count, 'Question' %></span>
+          <span><%# pluralize person.questions_answered.count, 'Answer' %></span></span>
+        </div>
+      </div>
+      <h3>A question for testing</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+      
+      <div class="question_stats">
+        <span class="author">by Logan Faerber
+          <%# link_to user_path(@question.user) do %>
+            <%# if @question.user.image? %>
+              <%# image_tag(@question.user.image.url, size: '40x40', alt: '') %>
+            <%# end %>
+            <%# @question.user.alternate_name %>
+          <%# end %>
+        </span>
+        <span class="support_count">1,257 Supports</span>
+        <a href="#" class="sign">Sign &rarr;</a>
+        <div class="question_progress">
+          <div class="progress_filler" style="width: 0%;"></div>
+        </div>
+      </div>
+    </li>
+    <% end %>
+  </ul>
+  
+  <header>
+    <h2>How It Works</h2>
+  </header>
+  <ol class="how_it_works">
+    <li>
+      <img src="" alt="" />
+      <span class="num">1</span>
+      <p>Find your elected officials and ask them a question.</p>
+    </li>
+    <li>
+      <img src="" alt="" />
+      <span class="num">2</span>
+      <p>Get your family, friends, and neighbors to support it.</p>
+    </li>
+    <li>
+      <img src="" alt="" />
+      <span class="num">3</span>
+      <p>The elected official's answer will be publicly displayed.</p>
+    </li>
+  </ol>
+  
+  <ul style="display:none;">
     <% @jurisdictions.each do |jurisdiction| %>
       <li>
         <%= link_to jurisdiction['name'], questions_path(jurisdiction.abbreviation) %>
