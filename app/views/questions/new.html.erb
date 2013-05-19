@@ -1,0 +1,14 @@
+<%= render 'shared/navigation' %>
+
+<section class="question">
+  <%= form_for @question, url: questions_path(@state_code), html: { accept_charset: 'utf-8', class: 'action' } do |f| %>
+    <%= f.hidden_field :user_id if user_signed_in? %>
+    <%= f.hidden_field :person_id %>
+
+    <% locals = { question: @question, person: @person, relevant_steps: @relevant_steps, f: f } -%>
+    <% @relevant_steps.each do |step| %>
+      <%= render partial: "#{step}_step", locals: locals.merge({step: step}) %>
+    <% end %>
+    <%= render partial: 'progress', locals: locals.merge(first_step: @first_step) %>
+  <% end %>
+</section>

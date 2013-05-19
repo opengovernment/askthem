@@ -1,9 +1,13 @@
 class QuestionsController < ApplicationController
+  FULL_NEW_QUESTION_STEPS = %w(recipient content sign_up confirm)
+
   inherit_resources
   belongs_to :jurisdiction, parent_class: Metadatum, finder: :find_by_abbreviation, param: :jurisdiction
   respond_to :html
   respond_to :js, only: :index
   actions :index, :show, :new, :create
+
+  before_filter :set_state_code, only: [:new, :create]
 
   def index
     index! do |format|
@@ -17,21 +21,58 @@ class QuestionsController < ApplicationController
   end
 
   def new
-    @step = params[:step].try(&:to_i) || 1
-    attributes = params[:question] || { state: parent.abbreviation }
-    @question = Question.new(attributes)
+    set_up_steps
+    @question = Question.new(state: @state_code)
+    @question.user = user_signed_in? ? current_user : User.new
 
     if params[:person]
-      @person = Person.in(parent.abbreviation).find(params[:person])
+      @person = Person.in(@state_code).find(params[:person])
       @question.person = @person
     end
 
-    new! do |format|
-      format.html {render "step#{@step}"}
+    new!
+  end
+
+  # TODO: add validation to view and UX
+  def create
+    @question = Question.new(params[:question])
+    @question.state = @state_code
+    @person = @question.person if @question.person_id.present?
+    @user = @question.user
+
+    @user.save if !user_signed_in? && @user.valid?
+
+    if @question.save
+      redirect_to question_path(@state_code, @question)
+    else
+      logger.debug "what are @question.errors: #{@question.errors.inspect}"
+      logger.debug "what are @question.user.errors: #{@question.user.errors.inspect}"
+      set_up_steps
+      respond_to do |format|
+        format.html { render 'new' }
+      end
     end
   end
 
-private
+  private
+
+  def set_state_code
+    @state_code = parent.abbreviation
+  end
+
+  def set_up_steps
+    @first_step = relevant_steps.first
+  end
+
+  # steps may be different if...
+  # user is logged in (no sign_up step)
+  # person is passed in (no recipient step)
+  def relevant_steps
+    @relevant_steps ||= FULL_NEW_QUESTION_STEPS
+    @relevant_steps.delete('recipient') if params[:person]
+    @relevant_steps.delete('sign_up') if user_signed_in?
+    @relevant_steps
+  end
 
   def end_of_association_chain
     Question.in(parent.abbreviation)

@@ -1,0 +1,39 @@
+<article id="confirm-step" class="not-first-step">
+  <header>
+    <div class="notif preview">
+      <a id="edit-button" class="edit sim_act">← Edit</a>
+      <div class="notif_wrap">
+        <h3>Question Preview</h3>
+        <p>Make sure to read it over and make sure everything is just right!</p>
+      </div>
+    </div>
+
+    <h4>
+      <% if person.present? %>
+        <span class="emph">To:</span> <strong><%= link_to question.person.name, person_path(@jurisdiction.abbreviation, question.person.id) %></strong>
+        <span>(<%= person_attributes(question.person) %>)</span>
+        <% if question.bill_id? %>
+        <span class="emph">on:</span> <strong><%= link_to short_bill_title(question.bill), bill_path(@jurisdiction.abbreviation, question.bill.id) %></strong>
+        <% end %>
+      <% end %>
+    </h4>
+
+    <h1 id="confirm-question-title"><%= question.title %></h1>
+  </header>
+  <%= simple_format(question.body) %>
+  <span class="author_wrap">
+    <span class="posted">Posted by</span>
+    <span class="author">
+      <% if question.user.image? %>
+      <%= image_tag(question.user.image.url, size: '40x40', alt: '') %>
+      <% end %>
+      <%= question.user.alternate_name %>
+      <% unless question.user.alternate_name.present? %>
+        <span class="firstname"></span>
+        <span class="lastname"></span>
+      <% end %>
+    </span>
+  </span>
+
+  <%= f.submit 'Publish', class: 'cta_pill' %>
+</article>

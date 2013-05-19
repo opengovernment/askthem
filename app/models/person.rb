@@ -22,6 +22,25 @@ class Person
 
   scope :active, where(active: true).asc(:chamber, :family_name) # no index includes `last_name`
 
+  # assumes only one matching location
+  # currently limited to openstates
+  # TODO: add OgLocal API
+  # TODO: add other relevant APIs
+  def self.for_location(location)
+    ids = Array.new
+    data = Geocoder.search(location).first # request.location geocodes by IP
+    if data.country_code == 'US' && data.latitude.nonzero? && data.longitude.nonzero?
+      ids = JSON.parse(RestClient.get('http://openstates.org/api/v1/legislators/geo/', params: {
+        fields: 'id',
+        lat: data.latitude,
+        long: data.longitude,
+        apikey: ENV['SUNLIGHT_API_KEY'],
+      })).map do |legislator|
+        legislator['id']
+      end
+    end
+    where(:id.in => ids)
+  end
   # Inactive legislators will not have top-level `chamber` or `district` fields.
   #
   # @param [String,Symbol] `:chamber` or `:district`
@@ -37,6 +56,26 @@ class Person
       end
       nil # don't return the enumerator
     end
+  end
+
+  # TODO: add spec
+  def jurisdiction
+    Metadatum.with(session: 'openstates').find_by_abbreviation(state)
+  end
+
+  # TODO: add spec
+  def most_recent_chamber
+    most_recent :chamber
+  end
+
+  # TODO: add spec
+  def most_recent_chamber_title
+    jurisdiction.chamber_title most_recent_chamber
+  end
+
+  # TODO: add spec
+  def most_recent_district
+    most_recent :district
   end
 
   # Returns fields that are not available in Billy.

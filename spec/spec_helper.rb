@@ -12,7 +12,14 @@ require 'rspec/autorun'
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
 require 'factory_girl_rails'
-  require 'mongoid-rspec'
+require 'mongoid-rspec'
+
+# for mocking external API calls
+require 'webmock/rspec'
+
+# for mocking external API calls
+require 'vcr'
+require 'webmock/rspec'
 
 RSpec.configure do |config|
   config.include Mongoid::Matchers
@@ -25,6 +32,10 @@ RSpec.configure do |config|
   # config.mock_with :flexmock
   # config.mock_with :rr
   config.mock_with :rspec
+
+  # VCR uses this
+  # see https://www.relishapp.com/myronmarston/vcr/v/2-2-3/docs/test-frameworks/usage-with-rspec-metadata
+  config.treat_symbols_as_metadata_keys_with_true_values = true
 
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   #config.fixture_path = "#{::Rails.root}/spec/fixtures"
@@ -56,4 +67,14 @@ RSpec.configure do |config|
     # Restore the default session.
     Mongoid.override_session(nil)
   end
+end
+
+VCR.configure do |c|
+  c.cassette_library_dir = 'spec/cassettes'
+  c.hook_into :webmock
+  c.configure_rspec_metadata!
+  # c.allow_http_connections_when_no_cassette = false
+  c.default_cassette_options = {
+    match_requests_on: [:method, VCR.request_matchers.uri_without_param(:apikey)]
+  }
 end

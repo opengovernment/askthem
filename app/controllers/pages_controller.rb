@@ -2,6 +2,8 @@ class PagesController < ApplicationController
   before_filter :set_jurisdiction, only: [:overview, :lower, :upper, :bills, :key_votes]
   before_filter :authenticate_user!, only: :dashboard
   caches_action :channel
+  respond_to :html
+  respond_to :json, only: :locator
 
   def index
     @jurisdictions = Metadatum.all.to_a + Metadatum.with(session: 'openstates').all.to_a
@@ -39,19 +41,12 @@ class PagesController < ApplicationController
   # @see https://github.com/alexreisner/geocoder#use-outside-of-rails
   # @see https://github.com/sunlightlabs/billy/wiki/Differences-between-the-API-and-MongoDB
   def locator
-    data = Geocoder.search(params[:q]).first # request.location geocodes by IP
-    if data.country_code == 'US' && data.latitude.nonzero? && data.longitude.nonzero?
-      ids = JSON.parse(RestClient.get('http://openstates.org/api/v1/legislators/geo/', params: {
-        fields: 'id',
-        lat: data.latitude,
-        long: data.longitude,
-        apikey: ENV['SUNLIGHT_API_KEY'],
-      })).map do |legislator|
-        legislator['id']
-      end
-      @people = Person.with(session: 'openstates').includes(:questions).find(ids)
-    end
-    # @todo OgLocal API to add local people
+    @people = Person.with(session: 'openstates').includes(:questions).for_location(params[:q])
+
+    respond_with(@people.as_json(only: [:full_name, :photo_url, :party],
+                                 methods: [:id,
+                                           :most_recent_chamber_title,
+                                           :most_recent_district]))
   end
 
   def search
