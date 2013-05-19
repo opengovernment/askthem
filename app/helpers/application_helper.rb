@@ -13,6 +13,43 @@ module ApplicationHelper
     translate_in_controller_scope("#{controller.action_name}.description", params.slice(:page).merge(default: '').merge(args))
   end
 
+  # @return [Boolean] whether the current jurisdiction is at the federal level
+  def federal?
+    false # @todo stub
+  end
+
+  # @return [Boolean] whether the current jurisdiction is at the state level
+  def state?
+    !!(@jurisdiction && @jurisdiction.abbreviation[/\A[a-z]{2}\z/])
+  end
+
+  # @return [Boolean] whether the current jurisdiction is at the local
+  def local?
+    !!(@jurisdiction && @jurisdiction.abbreviation[/\A[a-z]{2}-/])
+  end
+
+  # @return [String] the abbreviation of the state level jurisdiction
+  #   corresponding to the current jurisdiction
+  def state_path
+    if local?
+      jurisdiction_path(jurisdiction: @jurisdiction.abbreviation[/\A[a-z]{2}/])
+    elsif state?
+      jurisdiction_path(jurisdiction: @jurisdiction.abbreviation)
+    else
+      '#'
+    end
+  end
+
+  # @return [String] the abbreviation of the local level jurisdiction
+  #   corresponding to the current jurisdiction
+  def local_path
+    if local?
+      jurisdiction_path(jurisdiction: @jurisdiction.abbreviation)
+    else
+      '#'
+    end
+  end
+
   # Return's a bill's truncated title.
   #
   # @param [Bill] bill a bill
