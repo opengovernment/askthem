@@ -88,11 +88,14 @@ form{
       width:100%;
       @include box-shadow(none);
       @include transition-property(none);
+      @include transition-property(text-indent);
+      @include transition-duration(.125s);
       &:focus, &:hover{
         background-image: url(/assets/textarea_bg_focus@2x.png);
         background-size: 2px 30px;
         background-position: 0 29px;
         color:#818181;
+        text-indent:3px;
       }
     }
     textarea{
