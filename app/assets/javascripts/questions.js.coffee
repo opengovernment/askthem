@@ -159,13 +159,17 @@ jQuery ($) ->
     $(nextStepId).show()
 
     $(button).attr 'data-current-step', nextStepName
-    $('#step-number').text nextStepNumber
+    $('.step-number').text nextStepNumber
 
     # last step, hide progress area
     if nextStepNumber is steps.length
       $('.progress').hide()
+      $(button).hide()
+      $('.count').hide()
     else
       $('.progress').show() if $('.progress').is(':hidden')
+      $(button).show()
+      $('.count').show()
 
   $('#next-button').click (event) ->
     nextStep event
@@ -181,9 +185,10 @@ jQuery ($) ->
 
     $(stepId(lastStep)).hide()
     $(stepId(firstStep)).show()
-    $('#step-number').text 1
+    $('.step-number').text 1
     $('.progress').show() if $('.progress').is(':hidden')
     $(nextButton).show() if $(nextButton).is(':hidden')
+    $('.count').show() if $('.count').is(':hidden')
 
   $('#edit-button').click (event) ->
     beginAgain event
