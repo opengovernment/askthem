@@ -10,17 +10,21 @@
 
     <h4>
       <% if person.present? %>
-        <span class="emph">To:</span> <strong><%= link_to question.person.name, person_path(@jurisdiction.abbreviation, question.person.id) %></strong>
-        <span>(<%= person_attributes(question.person) %>)</span>
+        <span class="emph">To:</span> <span id="confirm-person-name"><strong><%= link_to question.person.name, person_path(@jurisdiction.abbreviation, question.person.id) %></strong></span>
+        <span id="confirm-person-attributes">(<%= person_attributes(question.person) %>)</span>
         <% if question.bill_id? %>
-        <span class="emph">on:</span> <strong><%= link_to short_bill_title(question.bill), bill_path(@jurisdiction.abbreviation, question.bill.id) %></strong>
+        <span class="emph">on:</span> <span id="confirm-bill-title"><strong><%= link_to short_bill_title(question.bill), bill_path(@jurisdiction.abbreviation, question.bill.id) %></strong></span>
         <% end %>
+      <% else %>
+        <span class="emph">To:</span> <span id="confirm-person-name"></span>
+        <span id="confirm-person-attributes"></span>
+        <span class="emph" style="display:none;">on:</span> <span id="confirm-bill-title"></strong></span>
       <% end %>
     </h4>
 
     <h1 id="confirm-question-title"><%= question.title %></h1>
   </header>
-  <%= simple_format(question.body) %>
+  <%= simple_format(question.body, id: 'confirm-question-body') %>
   <span class="author_wrap">
     <span class="posted">Posted by</span>
     <span class="author">
