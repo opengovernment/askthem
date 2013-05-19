@@ -5,7 +5,7 @@ class QuestionsController < ApplicationController
   respond_to :js, only: :index
   actions :index, :show, :new, :create
 
-  before_filter :set_state_code, only: [:new, :create]
+  before_filter :set_state_code, only: [:show, :new, :create]
 
   def index
     index! do |format|
@@ -14,7 +14,7 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    @user = User.new unless user_signed_in?
+    @user = user_signed_in? ? current_user : User.new unless
     show!
   end
 
@@ -81,8 +81,8 @@ class QuestionsController < ApplicationController
     # end_of_association_chain.includes(:user).where(params.slice(:subject)).page(params[:page])
   end
 
-  def resource # @todo remove once we add some questions
-    @question ||= stub
+  def resource
+    @question ||= Question.where(state: @state_code).find(params[:id])
   end
 
   def stub # @todo remove once we add some questions

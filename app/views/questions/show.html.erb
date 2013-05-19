@@ -14,6 +14,9 @@
     </header>
     <%= simple_format(@question.body) %>
     <span class="author_wrap">
+      <%# HACK: issued_at set to created_at until issued_at is sorted out -%>
+      <%# TODO: take out issued_at set to created_at -%>
+      <% @question.issued_at = @question.created_at unless @question.issued_at.present? -%>
       <span class="posted">Posted <%= time_tag @question.issued_at, l(@question.issued_at.to_date, format: :long), 'data-time-ago' => @question.issued_at.iso8601 %> by</span>
       <span class="author">
         <%= link_to user_path(@question.user) do %>
@@ -21,10 +24,10 @@
             <%= image_tag(@question.user.image.url, size: '40x40', alt: '') %>
           <% end %>
           <%= @question.user.alternate_name %>
-        <% end %>, of San Jose, California
+        <% end %>, of <%= @question.user.locality -%>, <%= @question.user.region.upcase -%>
       </span>
     </span>
-    
+
     <div class="recipient_answer recipient"> <%# @todo JM %>
       <div class="avatar">
         <img src="http://lorempixel.com/130/130/" alt="" />
@@ -38,7 +41,7 @@
         </span>
       </div>
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-      
+
       <span class="pubdate"><time datetime="2009-11-13" pubdate>November 11th 2013 <sup>6:45pm</sup></time></span>
     </div>
 
@@ -51,7 +54,7 @@
   <a name="sign_on_q"></a>
   <div class="actions">
     <h4>Support this question</h4>
-    
+
     <div class="row">
       <div class="question_progress">
         <div class="progress_filler" style="width: 0%;"></div>
@@ -59,8 +62,8 @@
       <span class="question_progress_count">
         <strong>0</strong> out of <strong>500</strong> Signatures
       </span>
-    </div>  
-    
+    </div>
+
     <% if user_signed_in? %>
       <ul>
         <li><%= link_to 'Sign On', signatures_path(question_id: @question.id), class: 'cta_pill' %><%# @todo link to remote %></li>
