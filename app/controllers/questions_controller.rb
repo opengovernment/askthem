@@ -21,62 +21,36 @@ class QuestionsController < ApplicationController
   end
 
   def new
-    # TODO: decide if clearing session data
-    # should always happen here
-    clear_session_values_for_question
-
-    @step = relevant_steps.first
-    session[:question_current_step] = @step
-    @step_details = step_details
-
-    session[:question_params] ||= { state: @state_code }
-    @question = Question.new(session[:question_params])
-    @question.user = user_signed_in? ? @user : User.new
+    set_up_steps
+    @question = Question.new(state: @state_code)
+    @question.user = user_signed_in? ? current_user : User.new
 
     if params[:person]
       @person = Person.in(@state_code).find(params[:person])
       @question.person = @person
-      session[:ask_person] = @person.id
     end
 
     new!
   end
 
+  # TODO: add validation to view and UX
   def create
-    session[:question_params].deep_merge!(params[:question])
-    @question = Question.new(session[:question_params])
+    @question = Question.new(params[:question])
+    @question.state = @state_code
     @person = @question.person if @question.person_id.present?
     @user = @question.user
-    @step = session[:question_current_step]
 
-    # TODO: step validation needs work
-    if @step == relevant_steps.last
-      if !user_signed_in? && @user.valid?
-        @user.save
-        @question.user = @user # necessary? check @question.user_id to see if it is updated without doing this
-      end
-      @question.save if @question.valid?
+    @user.save if !user_signed_in? && @user.valid?
+
+    if @question.save
+      redirect_to question_path(@state_code, @question)
     else
-      @step = next_step(@step)
-      session[:question_current_step] = @step
-      # TODO: take out below data stubbing when recipient choosing is in order
-      # data stubbing
-      if @step == relevant_steps.last
-        @question.person = Person.in(@state_code).last
+      logger.debug "what are @question.errors: #{@question.errors.inspect}"
+      logger.debug "what are @question.user.errors: #{@question.user.errors.inspect}"
+      set_up_steps
+      respond_to do |format|
+        format.html { render 'new' }
       end
-      # end stubbing
-    end
-
-    @step_details = step_details
-
-    if @question.new_record?
-      create! do |format|
-        format.html {render 'new'}
-      end
-    else
-      # TODO: how are we handling flash messages?
-      clear_session_values_for_question
-      redirect_to @question
     end
   end
 
@@ -85,39 +59,19 @@ class QuestionsController < ApplicationController
   def set_state_code
     @state_code = parent.abbreviation
   end
+
+  def set_up_steps
+    @first_step = relevant_steps.first
+  end
+
   # steps may be different if...
   # user is logged in (no sign_up step)
   # person is passed in (no recipient step)
   def relevant_steps
-    @relevant_steps ||= session[:steps] || FULL_NEW_QUESTION_STEPS
+    @relevant_steps ||= FULL_NEW_QUESTION_STEPS
     @relevant_steps.delete('recipient') if params[:person]
     @relevant_steps.delete('sign_up') if user_signed_in?
     @relevant_steps
-  end
-
-  def next_step(current_step)
-    # the || -1 handles edge case where relavant_steps
-    # no longer has current_step (e.g. they signed in in middle of steps)
-    # return them to beginning
-    step_index = relevant_steps.index(current_step) || -1
-    relevant_steps[step_index + 1]
-  end
-
-  def step_details
-    { name: @step,
-      number: relevant_steps.index(@step) + 1,
-      total: relevant_steps.size }
-  end
-
-  def to_clear_from_session
-    [:question_params,
-     :question_current_step,
-     :ask_person,
-     :steps]
-  end
-
-  def clear_session_values_for_question
-   to_clear_from_session.each { |key| session[key] = nil }
   end
 
   def end_of_association_chain

@@ -65,6 +65,10 @@ jQuery ($) ->
   updateSelectedPerson = (e) ->
     personLi = e.delegateTarget
 
+    name = $(personLi).children('h2').text()
+    avatarHtml = $(personLi).children('.avatar').html()
+    jurisdiction = $(personLi).children('.person-info').children('.jurisdiction').text()
+
     $('.select_box').children('input').attr 'checked', false
     $('.icon-ok-sign').hide()
 
@@ -74,6 +78,11 @@ jQuery ($) ->
 
     $(personLi).children('.icon-ok-sign').show()
 
+    $('ul.recipient h2').text name
+    progressAvatar = $('ul.recipient li div.avatar')
+    $(progressAvatar).html avatarHtml
+    $(progressAvatar).show()
+    $('ul.recipient .person-info .jurisdiction').text jurisdiction
 
   getPeople = (->
     address = $('#street').val()
@@ -121,3 +130,68 @@ jQuery ($) ->
         personList.children('li').on 'click', (e) ->
           updateSelectedPerson e
     )
+
+  hideLaterSteps = (->
+    $('article.not-first-step').each ->
+      $(@).hide()
+  )
+
+  stepId = (step) ->
+    '#' + step.replace('_', '-') + '-step'
+
+  nextStep = (event) ->
+    button = event.delegateTarget
+
+    steps = $(button).attr('data-relevant-steps').split(', ')
+    currentStep = $(button).attr 'data-current-step'
+    currentStepId = stepId(currentStep)
+    currentStepIndex = steps.indexOf(currentStep)
+
+    nextStepIndex = currentStepIndex + 1
+    nextStepName = steps[nextStepIndex]
+    nextStepId = stepId(nextStepName)
+    nextStepNumber = nextStepIndex + 1
+
+    $(currentStepId).hide()
+    $(nextStepId).show()
+
+    $(button).attr 'data-current-step', nextStepName
+    $('#step-number').text nextStepNumber
+
+    # last step, hide button, maybe replace later with Previous
+    $(button).hide() if nextStepNumber is steps.length
+
+  $('#next-button').click (event) ->
+    nextStep event
+
+  beginAgain = (event) ->
+    nextButton = $('#next-button')
+    steps = $(nextButton).attr('data-relevant-steps').split(', ')
+
+    firstStep = steps[0]
+    lastStep = steps[steps.length - 1]
+
+    $(nextButton).attr 'data-current-step', firstStep
+
+    $(stepId(lastStep)).hide()
+    $(stepId(firstStep)).show()
+    $('#step-number').text 1
+    $(nextButton).show()
+
+  $('#edit-button').click (event) ->
+    beginAgain event
+
+  $('#summary').keyup (event) ->
+    $('.question_preview h5').removeClass('empty')
+    $('.question_preview h5').text $('#summary').val()
+
+  $('#question_body').keyup (event) ->
+    $('.question_preview p').text $('#question_body').val()
+
+  $('#firstname').keyup (event) ->
+    $('.author .firstname').text $('#firstname').val()
+
+  $('#lastname').keyup (event) ->
+    $('.author .lastname').text $('#lastname').val()
+
+  hideLaterSteps()

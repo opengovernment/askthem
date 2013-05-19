@@ -9,26 +9,26 @@
         <strong>0</strong> out of <strong>500</strong> Signatures
       </span>
     </div>
-    <% if person %>
-      <div class="row">
-        <ul class="recipient">
-          <li>
-            <div class="avatar">
+    <div class="row">
+      <ul class="recipient">
+        <li>
+          <div class="avatar" <%= raw('style="display:none;"') unless person -%>>
+            <% if person %>
               <% if person.image? %>
                 <%= cdn_image_tag(person.image, size: '80x80', alt: '', class: 'person_photo') %>
               <% else %>
-                <%= image_tag('http://lorempixel.com/130/130/', size: '130x130', alt: '') %>
+                <%= image_tag('http://lorempixel.com/60/60/', size: '60x60', alt: '') %>
               <% end %>
-            </div>
+            <% end %>
+          </div>
 
-            <div class="person-info">
-              <h2><%= person.name -%></h2>
-              <span class="jurisdiction"><%= person_attributes(person) -%></span>
-            </div>
-          </li>
-        </ul>
-      </div>
-    <% end %>
+          <div class="person-info">
+            <h2><%= person.name if person -%></h2>
+            <span class="jurisdiction"><%= person_attributes(person) if person -%></span>
+          </div>
+        </li>
+      </ul>
+    </div>
     <div class="row">
       <div class="question_preview">
         <% if question.title.present? && question.body.present? %>
@@ -36,6 +36,7 @@
           <p><%= question.body -%></p>
         <% else%>
           <h5 class="empty">Nothing yet&hellip;</h5>
+          <p></p>
         <% end %>
       </div>
     </div>
@@ -49,7 +50,11 @@
         </div>
       </div>
     <% end %>
-    <%= f.submit 'Next', class: 'cta_pill' %>
-    <span class="count"><%= step_details[:number] %> of <%= step_details[:total] %></span>
+    <a class="cta_pill" id="next-button"
+       data-relevant-steps="<%= relevant_steps.join(', ') -%>"
+       data-current-step="<%= first_step -%>">Next
+      <span class="icon-caret-right"></span></a>
+
+    <span class="count"><span id="step-number">1</span> of <%= @relevant_steps.size %></span>
   </div>
 </div>

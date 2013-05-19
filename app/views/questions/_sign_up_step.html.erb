@@ -1,4 +1,4 @@
-<article>
+<article id="sign-up-step" <%= step_class_for(step, relevant_steps) -%>>
   <header>
     <h1 class="action">Your Profile</h1>
   </header>
@@ -19,6 +19,23 @@
 
       <label for="password" class="lesser">Password</label>
       <%= user_form.password_field :password %>
+
+      <% unless relevant_steps.include?(:recipient) %>
+        <label for="street" class="lesser">Address</label>
+        <%= user_form.text_field :street_address, placeholder: 'Street Address', id: 'street' %>
+
+        <label for="city" class="lesser">City</label>
+        <%= user_form.text_field :locality, placeholder: 'City', id: 'city' %>
+
+        <label for="state" class="lesser">State</label>
+
+        <div class="input select sculpt icon-angle-down">
+          <%= user_form.select :region, options_for_select(OpenGovernment::STATES, @state_code), placeholder: 'Select your state' %>
+        </div>
+
+        <label for="zipcode" class="lesser">Zipcode</label>
+        <%= user_form.text_field :postal_code, placeholder: 'ex. 02141', id: 'zipcode' %>
+      <% end %>
     <% end %>
   </fieldset>
 </article>
