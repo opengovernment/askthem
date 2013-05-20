@@ -1,4 +1,13 @@
+@import "compass";
+@import "mixins";
+
 body.index{
+  background: #D4E8EB;
+  background-image: url(/assets/footer_illustration_temp@2x.png);
+  background-repeat: no-repeat;
+  background-position: left bottom;
+  background-size: 100%;
+  padding-bottom:900px;
   header.main, .content_body, footer{
     margin:auto;
     width:100%;
@@ -44,14 +53,21 @@ body.index{
       padding-left: 1%;
       border-bottom: 1px solid #EFEFEF;
       margin-bottom: 18px;
-      margin-top: 30px;
+      margin-top: 42px;
       h2{
+        color:$lightgrey;
         display:inline-block;
+        @include RobotoLight();
+        font-size:1.125em;
+        line-height: 1.333em;
       }
       ul{
         display:inline-block;
         float: right;
         li{
+          color:$lightgrey;
+          font-size:0.813em;
+          line-height: 1.846em;
           display:inline-block;
           padding-left: 20px;
           a{
@@ -62,45 +78,80 @@ body.index{
     }
     ul.popular_questions{
       display:inline-block;
+      margin-top:30px;
       li{
         display:inline-block;
         padding-right:5.357142857143%;
         padding-left: 1%;
+        margin-bottom:54px;
         width:27.571428571429%;
         &:nth-child(3n+3){
           padding-right:0;
         }
         div.person_wrap{
           display:inline-block;
+          margin-bottom:18px;
+          width: 100%;
           div.avatar{
             display:inline-block;
-            img{
-              
-            }
+            width:14.0625%;
           }
           div.person-info{
+            margin-left:3.125%;
             display:inline-block;
+            h4{
+              color:$lightgrey;
+              @include RobotoRegular();
+              font-size:1em;
+              line-height: 1em;
+              padding-bottom:0;
+            }
+            span{
+              color:$lightgrey;
+              @include RobotoRegular();
+              display:block;
+              font-size:0.813em;
+              line-height: 1.231em;
+            }
           }
         }
-        h3{
+        a.question{
+          color:$middleblue;
           display:inline-block;
+          font-size:1em;
+          font-weight:600;
+          @include RobotoRegular();
+          line-height: 1.125em;
+          margin-bottom:6px;
+          &:hover{
+            color:#709EAC;
+          }
         }
         p{
           display:inline-block;
+          @include RobotoRegular();
+          font-size:0.813em;
+          line-height: 1.385em;
+          margin-bottom:30px;
         }
         div.question_stats{
-          display:inline-block;
+          display:block;
+          font-size:0.688em;
+          line-height: 1.455em;
+          span{
+            margin-right:10px;
+          }
           span.author{
             display:inline-block;
+            color:$lightblue;
           }
           span.support_count{
             display:inline-block;
+            color:$salmon;
           }
           a.sign{
             display:inline-block;
-          }
-          div.question_progress{
-            display:inline-block;
+            font-weight:600;
           }
         }
       }
@@ -109,14 +160,37 @@ body.index{
       display:inline-block;
       li{
         display:inline-block;
+        padding:2.5%;
+        text-align:center;
+        vertical-align:top;
+        width:28%;
         img{
+          max-width:230px;
           display:inline-block;
         }
         span.num{
+          background:#d5e9eb;
+          @include border-radius(24px);
+          color:#ffffff;
           display:inline-block;
+          left:0;
+          @include RobotoRegular();
+          padding:8px 14px 6px 14px;
+          font-size:1.875em;
+          line-height: 1em;
+          position:absolute;
         }
         p{
-          display:inline-block;
+          @include RobotoRegular();
+          color:$middleblue;
+          display: inline-block;
+          position: relative;
+          text-align: left;
+          padding-left: 60px;
+          padding-top: 18px;
+          max-width:210px;
+          font-size:1em;
+          line-height: 1.5em;
         }
       }
     }

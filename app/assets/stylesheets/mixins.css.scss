@@ -12,6 +12,8 @@ $border-delimiter: #DCE2E4;
 $linkcolor: #82b7c8;
 $linkhover: #709EAC;
 
+$salmon:#FA7564;
+
 @mixin rounded_corners($border-radius:3px){
   @include border-radius($border-radius);
 }
