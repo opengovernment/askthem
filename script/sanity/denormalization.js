@@ -369,7 +369,7 @@ if (verbose) {
   }, "bills with an action whose related entity's name is not that entity's name");
 }
 
-// It's common for names to differ, e.g. "Joint Appropriations Interim 
+// It's common for names to differ, e.g. "Joint Appropriations Interim
 // Committee" versus "Appropriations" or "DAVIS" versus "Bettye Davis".
 if (verbose) {
   // bills#sponsors.name and legislators#full_name or committees#committee or
@@ -453,7 +453,7 @@ if (verbose) {
         }
       }
     }
-  }, "events with a participant whose name is not that of the participant's name");  
+  }, "events with a participant whose name is not that of the participant's name");
 }
 
 // It's common for names to differ, e.g. "Sales, Scott" versus "Scott Sales".
@@ -533,7 +533,7 @@ if (verbose) {
   }, "votes whose bill ID is not the bill's ID");
 }
 
-// It's common for names to differ, e.g. "Joint Appropriations Interim 
+// It's common for names to differ, e.g. "Joint Appropriations Interim
 // Committee" versus "Appropriations".
 if (verbose) {
   // votes#committee and committees#committee or committees#subcommittee

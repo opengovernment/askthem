@@ -14,7 +14,7 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    @user = user_signed_in? ? current_user : User.new unless
+    @user = user_signed_in? ? current_user : User.new
     show!
   end
 
