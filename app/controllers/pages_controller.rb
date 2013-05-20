@@ -7,7 +7,7 @@ class PagesController < ApplicationController
 
   def index
     @jurisdictions = Metadatum.all.to_a + Metadatum.with(session: 'openstates').all.to_a
-    render :layout => "homepage"
+    render layout: 'homepage'
   end
 
   def overview
@@ -44,10 +44,18 @@ class PagesController < ApplicationController
   def locator
     @people = Person.with(session: 'openstates').includes(:questions).for_location(params[:q])
 
-    respond_with(@people.as_json(only: [:full_name, :photo_url, :party],
-                                 methods: [:id,
-                                           :most_recent_chamber_title,
-                                           :most_recent_district]))
+    respond_with(@people.as_json({
+      only: [
+        :full_name,
+        :photo_url,
+        :party,
+      ],
+      methods: [
+        :id,
+        :most_recent_chamber_title,
+        :most_recent_district,
+      ],
+    }))
   end
 
   def search

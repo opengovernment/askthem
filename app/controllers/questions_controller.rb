@@ -110,5 +110,4 @@ class QuestionsController < ApplicationController
 
     Question.new(attributes)
   end
-
 end

@@ -1,17 +1,17 @@
 <section>
   <nav>
     <ul class="level">
-      <li<%= ' class="active"'.html_safe if federal? %>>
+      <li<%= raw(' class="active"') if federal? %>>
         <a href="#"><%= @jurisdiction['name'] %> Federal</a>
         <i class="icon-angle-down"></i>
       </li>
-      <li<%= ' class="active"'.html_safe if state? %>>
+      <li<%= raw(' class="active"') if state? %>>
         <%= link_to state_path do %>
           <%= @jurisdiction['name'] %> State
         <% end %>
         <i class="icon-angle-down"></i>
       </li>
-      <li<%= ' class="active"'.html_safe if local? %>>
+      <li<%= raw(' class="active"') if local? %>>
         <%= link_to local_path do %>
           City
         <% end %>
