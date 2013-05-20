@@ -426,4 +426,50 @@
     }
   }
   
+  /*
+    Homepage
+  */
+  body.index{
+    padding-bottom:200px;
+    .mobile_admin_nav ul.admin_nav.thin{
+      display:none;
+      z-index: 999;
+    }
+    header.main{
+      background:#D4E8EB;
+      position: relative;
+      padding-top:0;
+    }
+    div.content_body{
+      margin-top:72px;
+      header{
+        h2{
+          display:block;
+          font-size:0.813em;
+          font-weight:600;
+          line-height: 1.385em;
+          text-align:center;
+        }
+        ul>li{
+          font-size: 0.688em;
+          line-height: 1.636em;
+          width: 29%;
+          vertical-align: top;
+          margin-top: 12px;
+          font-weight: 600;
+          padding: 1%;
+          text-align: center;;
+        }
+      }
+      ul.popular_questions>li, ol.how_it_works>li{
+        width: 100%;
+        padding-right: 0;
+        padding-left: 0;
+      }
+      ol.how_it_works, header.how_it_works{
+        display:none;
+      }
+    }
+  }
+  
 }

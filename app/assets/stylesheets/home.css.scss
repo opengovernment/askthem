@@ -10,6 +10,7 @@ body.index{
   padding-bottom:900px;
   header.main, .content_body, footer{
     margin:auto;
+    min-width:0;
     width:100%;
   }
   ul.admin_nav.thin{
@@ -54,7 +55,7 @@ body.index{
     input[type=text]{
       @include border-radius(1px);
       display: inline-block;
-      max-width: 560px;
+      max-width: 50%;
       border: 1px solid #B9CDD0;
       box-sizing: border-box;
       padding-top: 5px;
@@ -191,10 +192,11 @@ body.index{
         padding:2.5%;
         text-align:center;
         vertical-align:top;
-        width:28%;
+        width:27%;
         img{
           max-width:230px;
           display:inline-block;
+          width:75%;
         }
         span.num{
           background:#d5e9eb;
