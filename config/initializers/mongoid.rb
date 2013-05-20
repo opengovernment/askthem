@@ -11,7 +11,7 @@ Mongoid::Document::ClassMethods.class_eval do
     if abbreviation && abbreviation[/\A[a-z]{2}\z/]
       with(session: 'openstates')
     else
-      self
+      with(session: nil)
     end
   end
 
