@@ -439,6 +439,14 @@
       background:#D4E8EB;
       position: relative;
       padding-top:0;
+      input[type=text]{
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 6px;
+      }
+      input[type=submit]{
+        max-width:100%;
+      }
     }
     div.content_body{
       margin-top:72px;
