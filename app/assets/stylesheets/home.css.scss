@@ -12,6 +12,17 @@ body.index{
     margin:auto;
     width:100%;
   }
+  ul.admin_nav.thin{
+    display:block;
+    li{
+      clear:none;
+      a{
+        border-right:1px solid #CCE3DB;
+        border-bottom:0;
+        padding:12px 20px 12px;
+      }
+    }
+  }
   footer{
     max-width: inherit;
   }
@@ -19,12 +30,12 @@ body.index{
     max-width:1120px;
   }
   header.main{
-    height: 284px;
+    height: 344px;
     padding-top: 24px;
     background: url(/assets/usa@2x.jpg) no-repeat 0 0 rgba(0, 0, 0, 0);
     background-size: 80%;
-    background-position: 50% -20%;
-    background-attachment:fixed;
+    background-position: 50% 180px;
+    background-attachment: fixed;
     div.find_questions{
       display: block;
       margin: auto;
@@ -41,12 +52,17 @@ body.index{
       margin:auto auto 36px;
     }
     input[type=text]{
-      display:inline-block;
+      @include border-radius(1px);
+      display: inline-block;
       max-width: 560px;
+      border: 1px solid #B9CDD0;
       box-sizing: border-box;
+      padding-top: 5px;
+      height: 48px;
     }
     input[type=submit]{
       max-width: 133px;
+      margin-top: 1px;
     }
   }
   .content_body{
@@ -88,6 +104,7 @@ body.index{
         padding-right:5.357142857143%;
         padding-left: 1%;
         margin-bottom:54px;
+        vertical-align: top;
         width:27.571428571429%;
         &:nth-child(3n+3){
           padding-right:0;
@@ -103,6 +120,8 @@ body.index{
           div.person-info{
             margin-left:3.125%;
             display:inline-block;
+            vertical-align:top;
+            width:79.8125%;
             h4{
               color:$lightgrey;
               @include RobotoRegular();
@@ -140,8 +159,8 @@ body.index{
         }
         div.question_stats{
           display:block;
-          font-size:0.688em;
-          line-height: 1.455em;
+          font-size:0.813em;
+          line-height: 1.385em;
           span{
             margin-right:10px;
           }
@@ -152,10 +171,14 @@ body.index{
           span.support_count{
             display:inline-block;
             color:$salmon;
+            font-weight:600;
           }
           a.sign{
             display:inline-block;
             font-weight:600;
+          }
+          div.question_progress{
+            margin-top:6px;
           }
         }
       }

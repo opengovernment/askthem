@@ -2,48 +2,150 @@
   <header>
     <h2>Top Questions &amp; Petitions Nationwide</h2>
     <ul>
-      <li>6,500 Answers<%# @todo number of Answers %></li>
-      <li>6,500 Supporters<%# @todo number of Supporters %></li>
+      <li>1,500 Answers<%# @todo number of Answers %></li>
+      <li>26,500 Supporters<%# @todo number of Supporters %></li>
       <li><%= link_to 'Ask a Question' %></li>
     </ul>
   </header>
-  <ul class="popular_questions">
-    <% 6.times do %>
-    <li> <%# @todo Pop question data %>
+  <ul class="popular_questions"><%# @todo Pop question data %>
+    <li>
       <div class="person_wrap">
         <div class="avatar">
-          <%# if person.image? %>
-            <%# cdn_image_tag(person.image, size: '60x60', alt: '') %>
-          <%# else %>
-            <%= image_tag('placeholder.png', size: '60x60', alt: '') %>
-          <%# end %>
+          <%= image_tag('http://d2xfsikitl0nz3.cloudfront.net/http%3A%2F%2Fwww.malegislature.gov%2FImages%2FMemberProfile%2FWeb%2Fcatkins.jpg/60/60', size: '60x60', alt: '') %>
         </div>
         <div class="person-info">
-          <h4>Ron Paul<%# link_to person.name, person_path(person['state'], person) %></h4>
-          <span class="jurisdiction">R. - 6th House District</span>
-          <span class="stats">Pennsylvania</span>
+          <h4>Cory Atkins</h4>
+          <span class="jurisdiction">Representative, Fourteenth Middlesex, Democratic</span>
+          <span class="stats">Massachusetts</span>
         </div>
       </div>
-      <a href="#" class="question">A question for testing</a>
+      <a href="#" class="question">What will you do to redevelop Cedar Park for our families? </a>
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-      
       <div class="question_stats">
-        <span class="author">by Logan Faerber
-          <%# link_to user_path(@question.user) do %>
-            <%# if @question.user.image? %>
-              <%# image_tag(@question.user.image.url, size: '40x40', alt: '') %>
-            <%# end %>
-            <%# @question.user.alternate_name %>
-          <%# end %>
-        </span>
-        <span class="support_count">1,257 Supports</span>
+        <span class="author">by Logan Faerber</span>
+        <span class="support_count">502 Supporters</span>
         <a href="#" class="sign">Sign &rarr;</a>
         <div class="question_progress">
-          <div class="progress_filler" style="width: 0%;"></div>
+          <div class="progress_filler" style="width: 54%;"></div>
         </div>
       </div>
     </li>
-    <% end %>
+    
+    
+    <li>
+      <div class="person_wrap">
+        <div class="avatar">
+          <%= image_tag('http://d2xfsikitl0nz3.cloudfront.net/http%3A%2F%2Fwww.malegislature.gov%2FImages%2FMemberProfile%2FWeb%2Fnboldyga.jpg/60/60', size: '60x60', alt: '') %>
+        </div>
+        <div class="person-info">
+          <h4>Nicholas A. Boldyga</h4>
+          <span class="jurisdiction">Representative, Third Hampden, Republican</span>
+          <span class="stats">Massachusetts</span>
+        </div>
+      </div>
+      <a href="#" class="question">How would you change the Obama Administration’s position on drones? </a>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+      <div class="question_stats">
+        <span class="author">by Logan Faerber</span>
+        <span class="support_count">1,257 Supporters</span>
+        <a href="#" class="sign">Sign &rarr;</a>
+        <div class="question_progress">
+          <div class="progress_filler" style="width: 70%;"></div>
+        </div>
+      </div>
+    </li>
+    
+    <li>
+      <div class="person_wrap">
+        <div class="avatar">
+          <%= image_tag('http://d2xfsikitl0nz3.cloudfront.net/http%3A%2F%2Fwww.malegislature.gov%2FImages%2FMemberProfile%2FWeb%2Fgbradley.jpg/60/60', size: '60x60', alt: '') %>
+        </div>
+        <div class="person-info">
+          <h4>Garrett J. Bradley</h4>
+          <span class="jurisdiction">Representative, Third Plymouth, Democratic</span>
+          <span class="stats">Pennsylvania</span>
+        </div>
+      </div>
+      <a href="#" class="question">Will you address economic development incentives at the next city council meeting?</a>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+      <div class="question_stats">
+        <span class="author">by Logan Faerber</span>
+        <span class="support_count">1,003 Supporters</span>
+        <a href="#" class="sign">Sign &rarr;</a>
+        <div class="question_progress">
+          <div class="progress_filler" style="width: 90%;"></div>
+        </div>
+      </div>
+    </li>
+    
+    <li>
+      <div class="person_wrap">
+        <div class="avatar">
+          <%= image_tag('http://d2xfsikitl0nz3.cloudfront.net/http%3A%2F%2Fwww.malegislature.gov%2FImages%2FMemberProfile%2FWeb%2Fccanavan.jpg/60/60', size: '60x60', alt: '') %>
+        </div>
+        <div class="person-info">
+          <h4>Christine E. Canavan</h4>
+          <span class="jurisdiction">Representative, Tenth Plymouth, Democratic</span>
+          <span class="stats">Pennsylvania</span>
+        </div>
+      </div>
+      <a href="#" class="question">Will you vote for comprehensive immigration reform this term?</a>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+      <div class="question_stats">
+        <span class="author">by Logan Faerber</span>
+        <span class="support_count">17 Supporters</span>
+        <a href="#" class="sign">Sign &rarr;</a>
+        <div class="question_progress">
+          <div class="progress_filler" style="width: 10%;"></div>
+        </div>
+      </div>
+    </li>
+    
+    <li>
+      <div class="person_wrap">
+        <div class="avatar">
+          <%= image_tag('http://d2xfsikitl0nz3.cloudfront.net/http%3A%2F%2Fwww.malegislature.gov%2FImages%2FMemberProfile%2FWeb%2Fncollins.jpg/60/60', size: '60x60', alt: '') %>
+        </div>
+        <div class="person-info">
+          <h4>Nick Collins</h4>
+          <span class="jurisdiction">Representative, Fourth Suffolk, Democratic</span>
+          <span class="stats">Pennsylvania</span>
+        </div>
+      </div>
+      <a href="#" class="question">What are the holdups in opening a new community health clinic in Philadelphia’s 8th district? </a>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+      <div class="question_stats">
+        <span class="author">by Logan Faerber</span>
+        <span class="support_count">105 Supporters</span>
+        <a href="#" class="sign">Sign &rarr;</a>
+        <div class="question_progress">
+          <div class="progress_filler" style="width: 37%;"></div>
+        </div>
+      </div>
+    </li>
+    
+    <li>
+      <div class="person_wrap">
+        <div class="avatar">
+          <%= image_tag('http://d2xfsikitl0nz3.cloudfront.net/http%3A%2F%2Fwww.malegislature.gov%2FImages%2FMemberProfile%2FWeb%2Fccronin.jpg/60/60', size: '60x60', alt: '') %>
+        </div>
+        <div class="person-info">
+          <h4>Claire D. Cronin</h4>
+          <span class="jurisdiction">Representative, Eleventh Plymouth, Democratic</span>
+          <span class="stats">California</span>
+        </div>
+      </div>
+      <a href="#" class="question">Why isn’t the legislature voting on marriage equality issues this month?</a>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+      <div class="question_stats">
+        <span class="author">by Logan Faerber</span>
+        <span class="support_count">157 Supporters</span>
+        <a href="#" class="sign">Sign &rarr;</a>
+        <div class="question_progress">
+          <div class="progress_filler" style="width: 45%;"></div>
+        </div>
+      </div>
+    </li>
   </ul>
   
   <header>
