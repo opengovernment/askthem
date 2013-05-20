@@ -26,7 +26,7 @@
         <p><%= truncate(@person.person_detail.biography, length: 130) %> <%= link_to 'Read more on Wikipedia', @person.person_detail.links.find_by(note: 'Wikipedia').url %></p>
       <% end %>
     </div>
-    <%= link_to 'Ask them a Question', new_question_path(@jurisdiction.abbreviation, person: @person), class: 'cta_pill' %>
+    <%= link_to 'Ask this person a Question', new_question_path(@jurisdiction.abbreviation, person: @person), class: 'cta_pill' %>
   </header>
 
   <div class="related_wrap">

@@ -859,9 +859,21 @@ footer{
 }
 
 
+/*
+  MISC
+*/
+
+section.overview{
+  nav{
+    display:block;
+    clear:both;
+    margin-top:24px;
+  }
+}
+
 
 /*
-Retina
+Retina @todo ST, all retina images should get their replacements here
 */
 @media (min--moz-device-pixel-ratio: 1.5),
   (-o-min-device-pixel-ratio: 3/2),
