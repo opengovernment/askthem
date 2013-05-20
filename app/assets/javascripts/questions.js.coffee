@@ -37,7 +37,7 @@ jQuery ($) ->
         $('#question_person_id').val ''
 
 
-  $("#twitter").blur(->
+  $("#twitter").keyup(->
     if $(this).val()[0] is "@"
       getTwitter($(this))
     else
