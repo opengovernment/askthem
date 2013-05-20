@@ -210,4 +210,15 @@ jQuery ($) ->
   $('#lastname').keyup (event) ->
     $('.author .lastname').text $('#lastname').val()
 
+  $('#question_subject').change (event) ->
+    value = $('#question_subject').val()
+    $('#question-subject').text value
+    $('#confirm-issue-value').text value
+    if value? and value isnt ''
+      $('#progress-issue').show()
+      $('#confirm-issue').show()
+    else
+      $('#progress-issue').hide()
+      $('#confirm-issue').hide()
+
   hideLaterSteps()

@@ -44,9 +44,15 @@
       If issue is selected, otherwise add "last" class to .row above
     -->
     <% if question.subject.present? %>
-      <div class="row last">
+      <div id="progress-issue" class="row last">
         <div class="question_issue">
-          <span>Issue: <strong><%= question.subject -%></strong></span>
+          <span>Issue: <strong><span id="question-subject"><%= question.subject -%></span></strong></span>
+        </div>
+      </div>
+    <% else %>
+      <div style="display:none" id="progress-issue" class="row last">
+        <div class="question_issue">
+          <span>Issue: <strong><span id="question-subject"></span></strong></span>
         </div>
       </div>
     <% end %>

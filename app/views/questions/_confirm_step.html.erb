@@ -25,6 +25,11 @@
     <h1 id="confirm-question-title"><%= question.title %></h1>
   </header>
   <%= simple_format(question.body, id: 'confirm-question-body') %>
+  <% if question.subject.present? %>
+    <p id="confirm-issue">Issue: <span id="confirm-issue-value"><%= question.subject -%></span></p>
+  <% else %>
+    <p style="display:none;" id="confirm-issue">Issue: <span id="confirm-issue-value"></span></p>
+  <% end %>
   <span class="author_wrap">
     <span class="posted">Posted by</span>
     <span class="author">
