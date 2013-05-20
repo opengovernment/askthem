@@ -24,8 +24,6 @@ class QuestionsController < ApplicationController
     @question.user = user_signed_in? ? current_user : User.new
 
     if params[:person]
-      logger.info "what is @state_code: #{@state_code}"
-      logger.info "what is params[:person]: #{params[:person]}"
       @person = Person.in(@state_code).find(params[:person])
       @question.person = @person
     end
