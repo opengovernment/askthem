@@ -49,7 +49,7 @@ class Person
     if read_attribute(attribute)
       read_attribute(attribute)
     else
-      read_attribute(:old_roles).to_a.reverse.each do |_,roles|
+      read_attribute(:old_roles).to_a.reverse.each do |_, roles|
         roles.each do |role|
           return role[attribute.to_s] if role[attribute.to_s]
         end
@@ -73,7 +73,6 @@ class Person
     jurisdiction.chamber_title most_recent_chamber
   end
 
-  # TODO: add spec
   def most_recent_district
     most_recent :district
   end
