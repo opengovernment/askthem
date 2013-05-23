@@ -2,10 +2,15 @@
 require 'coveralls'
 Coveralls.wear!('rails')
 
+require 'capybara/rspec'
+require 'capybara/poltergeist'
+Capybara.javascript_driver = :poltergeist
+# WARN: adds dependency on phantomjs 1.8.1 or higher
+
 ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
-require 'rspec/autorun'
+# require 'rspec/autorun'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
@@ -73,7 +78,7 @@ VCR.configure do |c|
   c.cassette_library_dir = 'spec/cassettes'
   c.hook_into :webmock
   c.configure_rspec_metadata!
-  # c.allow_http_connections_when_no_cassette = false
+  c.ignore_localhost = true
   c.default_cassette_options = {
     match_requests_on: [:method, VCR.request_matchers.uri_without_param(:apikey)]
   }

@@ -42,10 +42,12 @@ group :test, :development do
 end
 
 group :test do
+  gem 'capybara'
   gem 'factory_girl_rails'
   gem 'mongoid-rspec'
   gem 'vcr' # play back external HTTP requests
   gem 'webmock' # stub and mock external HTTP requests
+  gem 'poltergeist'
 end
 
 group :assets do
