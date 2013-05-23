@@ -143,6 +143,8 @@ jQuery ($) ->
     '#' + step.replace('_', '-') + '-step'
 
   nextStep = (event) ->
+    scrollOffset = $('section.question').offset().top - 40
+    $(window).stop().scrollTo(scrollOffset, 500)
     button = event.delegateTarget
 
     steps = $(button).attr('data-relevant-steps').split(', ')

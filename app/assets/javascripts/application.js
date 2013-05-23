@@ -15,6 +15,7 @@
 //= require jquery.autogrow-textarea
 //= require jquery.history
 //= require jquery.timeago
+//= require jquery.scrollTo.min
 //= require authentication
 //= require tabs
 //= require bills
