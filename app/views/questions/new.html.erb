@@ -1,7 +1,7 @@
 <%= render 'shared/navigation' %>
 
-<section class="question">
-  <%= form_for @question, url: questions_path(@state_code), html: { accept_charset: 'utf-8', class: 'action' } do |f| %>
+<section class="question ask">
+  <%= form_for @question, url: questions_path(@state_code), html: { accept_charset: 'utf-8' } do |f| %>
     <%= f.hidden_field :user_id if user_signed_in? %>
     <%= f.hidden_field :person_id %>
 

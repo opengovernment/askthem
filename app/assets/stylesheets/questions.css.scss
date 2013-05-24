@@ -298,6 +298,11 @@ section.question{
   /*
   Ask a question flow
   */
+  &.ask{
+    article{
+      margin-bottom:0;
+    }
+  }
   div.progress{
     height: 100%;
     width: 33.205128205128%;
@@ -384,6 +389,7 @@ section.question{
         color:$lightblue;
         font-size:0.813em;
         line-height: 1.385em;
+        word-wrap: break-word;
       }
     }
     div.question_issue{

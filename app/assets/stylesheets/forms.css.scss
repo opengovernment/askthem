@@ -15,18 +15,6 @@ $placeholder-color: #c8c8c8;
   color: $placeholder-color;
 }
 
-div.count{
-  position:relative;
-  span.summary_count{
-    position: absolute;
-    right: 0;
-    top: 6px;
-    font-size: 13px;
-    font-weight: 600;
-    color: #999;
-  }
-}
-
 form{
   input[type=text],input[type=email],input[type=password],input[type=number], textarea{
     font-family:helvetica, arial, verdana, sans-serif;
@@ -47,6 +35,62 @@ form{
       border-color:#82ccd7;
       outline: none;
       text-indent:12px;
+    }
+  }
+  textarea{
+    padding-top:8px;
+  }
+  //flatline classes might be deleted soon @todo ST to review
+  input[type=text].flatline{
+    background-image: url(/assets/textarea_bg@2x.png);
+    border:0;
+    background-size: 2px 30px;
+    background-position: 0 29px;
+    font-size:0.938em;
+    height: auto;
+    line-height: 2em;
+    font-weight:100;
+    color:#284249;
+    outline:none;
+    margin-bottom:36px;
+    padding-top:0;
+    text-indent:0px;
+    width:100%;
+    @include box-shadow(none);
+    @include transition-property(none);
+    @include transition-property(text-indent);
+    @include transition-duration(.125s);
+    &:focus, &:hover{
+      background-image: url(/assets/textarea_bg_focus@2x.png);
+      background-size: 2px 30px;
+      background-position: 0 29px;
+      color:#818181;
+      text-indent:3px;
+    }
+  }
+  textarea.flatline{
+    background-image: url(/assets/textarea_bg@2x.png);
+    border: 0;
+    background-size: 2px 30px;
+    background-position: 0 29px;
+    padding-top: 0;
+    color:#284249;
+    font-size: 0.938em;
+    line-height: 2em;
+    font-weight: 100;
+    height:90px;
+    outline: none;
+    resize: none;
+    margin-bottom: 36px;
+    text-indent:0px;
+    width: 100%;
+    @include box-shadow(none);
+    @include transition-property(none);
+    &:focus, &:hover{
+      background-image: url(/assets/textarea_bg_focus@2x.png);
+      background-size: 2px 30px;
+      background-position: 0 29px;
+      color:#818181;
     }
   }
   label{
@@ -70,86 +114,36 @@ form{
       line-height: 1em;
     }
   }
-  &.action{
-    input[type=text]{
-      background-image: url(/assets/textarea_bg@2x.png);
-      border:0;
-      background-size: 2px 30px;
-      background-position: 0 29px;
-      font-size:0.938em;
-      height: auto;
-      line-height: 2em;
-      font-weight:100;
-      color:#284249;
-      outline:none;
-      margin-bottom:36px;
-      padding-top:0;
-      text-indent:0px;
-      width:100%;
-      @include box-shadow(none);
-      @include transition-property(none);
-      @include transition-property(text-indent);
-      @include transition-duration(.125s);
-      &:focus, &:hover{
-        background-image: url(/assets/textarea_bg_focus@2x.png);
-        background-size: 2px 30px;
-        background-position: 0 29px;
-        color:#818181;
-        text-indent:3px;
-      }
-    }
-    textarea{
-      background-image: url(/assets/textarea_bg@2x.png);
-      border: 0;
-      background-size: 2px 30px;
-      background-position: 0 29px;
-      padding-top: 0;
-      color:#284249;
-      font-size: 0.938em;
-      line-height: 2em;
-      font-weight: 100;
-      height:90px;
-      outline: none;
-      resize: none;
-      margin-bottom: 36px;
-      text-indent:0px;
-      width: 100%;
-      @include box-shadow(none);
-      @include transition-property(none);
-      &:focus, &:hover{
-        background-image: url(/assets/textarea_bg_focus@2x.png);
-        background-size: 2px 30px;
-        background-position: 0 29px;
-        color:#818181;
-      }
-    }
-    div.inline_label{
+  div.inline_label.flatline{
+    display:inline-block;
+    position:relative;
+    width:100%;
+    label{
       display:inline-block;
-      position:relative;
-      width:100%;
-      label{
+      left: 0;
+      position:absolute;
+      top: 7px;
+    }
+    input[type=text], input[type=email], input[type=number]{
+      display:inline-block;
+    }
+    // input text-indents need to be defined case-by-case
+    &.to{
+      input{
         display:inline-block;
-        left: 0;
-        position:absolute;
-        top: 7px;
-      }
-      input[type=text], input[type=email], input[type=number]{
-        display:inline-block;
-      }
-      // input text-indents need to be defined case-by-case
-      &.to{
-        input{
-          display:inline-block;
-          text-indent: 35px;
-        }
+        text-indent: 35px;
       }
     }
   }
+  
   fieldset{
     border-top: 1px solid #EFEFEF;
     padding-top: 18px;
     margin-bottom: 42px;
     margin-top: 18px;
+    &.last{
+      margin-bottom:0;
+    }
     input[type=text],input[type=email],input[type=password],input[type=number], textarea{
       margin-bottom:12px;
       max-width:360px;
@@ -159,6 +153,7 @@ form{
       font-weight: 600;
       line-height: 1.385em;
       margin-bottom: 6px;
+      margin-top: 12px;
     }
   }
 }
@@ -268,6 +263,28 @@ div.controls{
     margin-top: 16px;
   }
 }
+.question.ask div.controls{
+  margin-top:0;
+  input[type=submit], a.cta_pill{
+    min-width:100px;
+    text-align:center;
+  }
+}
+
+// Special stuff
+div.count{
+  position:relative;
+  max-width: 390px;
+  span.summary_count{
+    position: absolute;
+    right: 0;
+    top: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #999;
+  }
+}
+
 
 // Recipient Selection
 .people-list.select-person{
@@ -326,6 +343,7 @@ div.controls{
   &.twitter{
     li{
       cursor:inherit;
+      max-width:336px;
       width:95%;
       div.avatar{
         width:10%;

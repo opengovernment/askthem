@@ -1,22 +1,26 @@
 <article id="content-step" <%= step_class_for(step, relevant_steps) -%>>
   <header>
     <h1 class="action">Ask a Question</h1>
+    <span class="ref"><span class="emph">To:</span> Ron Paul<%# @todo WM need to carry over selected target name %>, <span class="emph">re:</span> S 26 188th Legislature (2013-2014)</span>
   </header>
-  <div class="count">
-    <span class="summary_count">60</span>
-    <%= f.text_field :title, placeholder: raw('Summary&hellip;'), maxlength: '60', id: 'summary' %>
-  </div>
+  <fieldset>
+    <div class="count">
+      <span class="summary_count">60</span>
+      <%= f.text_field :title, placeholder: raw('Summary&hellip;'), maxlength: '60', id: 'summary' %>
+    </div>
 
-  <label for="question">Full Question
-    <span class="details">Why is this important? Give it your all!</span>
-  </label>
-  <%= f.text_area :body, placeholder: raw('Go on&hellip;'), cols: '30', rows: '10' %>
+    <label for="question">Full Question
+      <span class="details">Why is this important? Give it your all!</span>
+    </label>
+    <%= f.text_area :body, placeholder: raw('Go on&hellip;'), cols: '30', rows: '10' %>
 
-  <label for="issue_area">Select an issue area
-    <span class="opt">(optional)</span>
-  </label>
-  <div class="input select icon-angle-down sculpt">
-    <% subject_options = raw('<option value="">Select an Issue</option>') + options_for_select(subjects) -%>
-    <%= f.select :subject, subject_options %>
-  </div>
+    <label for="issue_area">Select an issue area
+      <span class="opt">(optional)</span>
+    </label>
+    
+    <div class="input select icon-angle-down sculpt">
+      <% subject_options = raw('<option value="">Select an Issue</option>') + options_for_select(subjects) -%>
+      <%= f.select :subject, subject_options %>
+    </div>
+  </fieldset>
 </article>

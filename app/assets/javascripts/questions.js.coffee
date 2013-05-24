@@ -1,5 +1,7 @@
 jQuery ($) ->
-  $('#summary').focus()
+  if $('#recipient-step').is(':visible')
+    $('#recipient-step input[type=text]:eq(0)').focus()
+  
   $('textarea').css('overflow', 'hidden').autogrow()
 
   $('#summary').keyup ->
@@ -49,10 +51,12 @@ jQuery ($) ->
     if $(this).hasClass('twitter') and !$(this).hasClass('active')
       $('div.address_lookup').hide();
       $('div.twitter').show();
+      $('div.twitter input[type=text]:eq(0)').focus()
     else
       if $(this).hasClass('address_lookup') and !$(this).hasClass('active')
         $('div.twitter').hide();
         $('div.address_lookup').show();
+        $('div.address_lookup input[type=text]:eq(0)').focus()
 
     if !$(this).hasClass('active')
       $('span.toggle a.active').removeClass('active icon-ok')
@@ -143,8 +147,6 @@ jQuery ($) ->
     '#' + step.replace('_', '-') + '-step'
 
   nextStep = (event) ->
-    scrollOffset = $('section.question').offset().top - 40
-    $(window).stop().scrollTo(scrollOffset, 500)
     button = event.delegateTarget
 
     steps = $(button).attr('data-relevant-steps').split(', ')
@@ -156,9 +158,15 @@ jQuery ($) ->
     nextStepName = steps[nextStepIndex]
     nextStepId = stepId(nextStepName)
     nextStepNumber = nextStepIndex + 1
+    
+    scrollOffset = $('section.question').offset().top - 60
+    $(window).stop().scrollTo(scrollOffset, 500)
 
-    $(currentStepId).hide()
-    $(nextStepId).show()
+    $(currentStepId).fadeTo 100, 0, ->
+      $(currentStepId).hide()
+      $(nextStepId).fadeTo 200, 1
+
+    $(nextStepId + ' input[type=text]:eq(0)').focus()
 
     $(button).attr 'data-current-step', nextStepName
     $('.step-number').text nextStepNumber
