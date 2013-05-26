@@ -656,24 +656,44 @@ div.filters{
     font-weight:600;
     line-height: 1.364em;
     text-transform:uppercase;
-    padding: 9px 9px 7px 12px;
+    padding: 7px 9px 7px 12px;
     position:relative;
     margin-right: 3px;
     @include rounded_corners();
     span.use{
+      @include border-radius(6px);
       display:inline-block;
-      height: 6px;
-      width: 6px;
+      height: 10px;
+      width: 10px;
       margin-right: 8px;
+      position: relative;
+      top: 2px;
     }
     &.inactive{
       background:#fcfcfc;
-      border:1px solid #dcdcdc;
+      border:1px solid #E7E7E7;
       @include box-shadow(0 2px 3px rbga(0,0,0,.05) inset);
       span.use{
+        background:#FAFAFA;
         display:inline-block;
-        @include box-shadow(0 3px 0 #e4e4e4 inset);
-        border:1px solid #bababa;
+        @include box-shadow(0 3px 0 #F3F3F3 inset);
+        border:1px solid #DFDFDF;
+      }
+      &:hover{
+        @include box-shadow(0 1px 3px rgba(0, 0, 0, .05));
+        display: inline-block;
+        border: 1px solid #CFCFCF;
+        position: relative;
+        top: -1px;
+        background: #FFF;
+        span.use{
+          display:inline-block;
+        }
+      }
+      &:active{
+        background: #FAFAFA;
+        top: 0;
+        box-shadow: 0 1px 0 0 #FFF;
       }
     }
     &.active{
@@ -681,9 +701,16 @@ div.filters{
       border:1px solid #b4dd94;
       @include box-shadow(0 1px 5px rgba(33,54,60,.15));
       span.use{
+        background:#bfea9c;
         display:inline-block;
         @include box-shadow(0 3px 0 #caf7a6 inset);
         border:1px solid #9ec181;
+      }
+      &:hover{
+        display:inline-block;
+        span.use{
+          display:inline-block;
+        }
       }
     }
     &.filter{
