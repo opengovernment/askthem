@@ -18,6 +18,7 @@
 //= require jquery.scrollTo.min
 //= require authentication
 //= require tabs
+//= require filters
 //= require bills
 //= require questions
 //= require responsive

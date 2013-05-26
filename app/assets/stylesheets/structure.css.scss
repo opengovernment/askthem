@@ -578,7 +578,7 @@ nav{
 Filtering
 */
 div.filters{
-  background: url(/assets/related_bg@2x.png) repeat;
+  background-color: #FAFAFA;
   background-size: 30px 30px;
   border:1px solid #E7E7E7;
   clear: both;
@@ -645,6 +645,49 @@ div.filters{
         display:inline-block;
         padding-left:10px;
       }
+    }
+  }
+  a.radio_button{
+    background: white;
+    color:#477380;
+    cursor:pointer;
+    display: inline-block;
+    font-size:0.688em;
+    font-weight:600;
+    line-height: 1.364em;
+    text-transform:uppercase;
+    padding: 9px 9px 7px 12px;
+    position:relative;
+    margin-right: 3px;
+    @include rounded_corners();
+    span.use{
+      display:inline-block;
+      height: 6px;
+      width: 6px;
+      margin-right: 8px;
+    }
+    &.inactive{
+      background:#fcfcfc;
+      border:1px solid #dcdcdc;
+      @include box-shadow(0 2px 3px rbga(0,0,0,.05) inset);
+      span.use{
+        display:inline-block;
+        @include box-shadow(0 3px 0 #e4e4e4 inset);
+        border:1px solid #bababa;
+      }
+    }
+    &.active{
+      background:#f9fff5;
+      border:1px solid #b4dd94;
+      @include box-shadow(0 1px 5px rgba(33,54,60,.15));
+      span.use{
+        display:inline-block;
+        @include box-shadow(0 3px 0 #caf7a6 inset);
+        border:1px solid #9ec181;
+      }
+    }
+    &.filter{
+      display:inline-block;
     }
   }
   div.search{
