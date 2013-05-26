@@ -13,6 +13,13 @@ body.index{
     min-width:0;
     width:100%;
   }
+  section.mobile_admin_nav{
+    display: block;
+    max-width: 1120px;
+    margin: auto;
+    position: relative;
+    top: -24px;
+  }
   ul.admin_nav.thin{
     display:block;
     li{
@@ -29,6 +36,8 @@ body.index{
   }
   div.wrapper{
     max-width:1120px;
+    margin: auto;
+    padding-left: 0;
   }
   header.main{
     height: 344px;
