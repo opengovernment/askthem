@@ -1,7 +1,9 @@
 <article id="content-step" <%= step_class_for(step, relevant_steps) -%>>
   <header>
     <h1 class="action">Ask a Question</h1>
-    <span class="ref"><span class="emph">To:</span> Ron Paul<%# @todo WM need to carry over selected target name %>, <span class="emph">re:</span> S 26 188th Legislature (2013-2014)</span>
+    <span class="ref"><span class="emph">To:</span>
+      <span id="content-person-name"><%= "#{person.name}," if person -%></span>
+      <span class="emph">re:</span> S 26 188th Legislature (2013-2014)</span>
   </header>
   <fieldset>
     <label for="question_title"></label>

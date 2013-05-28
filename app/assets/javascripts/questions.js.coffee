@@ -85,6 +85,7 @@ jQuery ($) ->
     # TODO: make link for person
     $('ul.recipient h2').text name
     $('#confirm-person-name').html "<strong>#{name}</strong>"
+    $('#content-person-name').html name
     progressAvatar = $('ul.recipient li div.avatar')
     $(progressAvatar).html avatarHtml
     $(progressAvatar).show()
