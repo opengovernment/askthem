@@ -1,11 +1,11 @@
 jQuery ($) ->
   if $('#recipient-step').is(':visible')
     $('#recipient-step input[type=text]:eq(0)').focus()
-  
+
   $('textarea').css('overflow', 'hidden').autogrow()
 
-  $('#summary').keyup ->
-    $('.summary_count').text($(this).attr('maxlength') - $('#summary').val().length)
+  $('#question_title').keyup ->
+    $('.summary_count').text($(this).attr('maxlength') - $('#question_title').val().length)
 
   popup = (event, height) ->
     event.preventDefault()
@@ -149,37 +149,50 @@ jQuery ($) ->
   nextStep = (event) ->
     button = event.delegateTarget
 
-    steps = $(button).attr('data-relevant-steps').split(', ')
-    currentStep = $(button).attr 'data-current-step'
-    currentStepId = stepId(currentStep)
-    currentStepIndex = steps.indexOf(currentStep)
+    valid = true
+    $('[data-validate]:input:visible').each ->
+      settings = window.ClientSideValidations.forms['new_question']
+      valid = false if !$(this).isValid(settings.validators)
 
-    nextStepIndex = currentStepIndex + 1
-    nextStepName = steps[nextStepIndex]
-    nextStepId = stepId(nextStepName)
-    nextStepNumber = nextStepIndex + 1
-    
-    scrollOffset = $('section.question').offset().top - 60
-    $(window).stop().scrollTo(scrollOffset, 500)
+    # do the rest of next step processing
+    if valid
+      steps = $(button).attr('data-relevant-steps').split(', ')
+      currentStep = $(button).attr 'data-current-step'
+      currentStepId = stepId(currentStep)
+      currentStepIndex = steps.indexOf(currentStep)
 
-    $(currentStepId).fadeTo 100, 0, ->
-      $(currentStepId).hide()
-      $(nextStepId).fadeTo 200, 1
+      nextStepIndex = currentStepIndex + 1
+      nextStepName = steps[nextStepIndex]
+      nextStepId = stepId(nextStepName)
+      nextStepNumber = nextStepIndex + 1
 
-    $(nextStepId + ' input[type=text]:eq(0)').focus()
+      scrollOffset = $('section.question').offset().top - 60
+      $(window).stop().scrollTo(scrollOffset, 500)
 
-    $(button).attr 'data-current-step', nextStepName
-    $('.step-number').text nextStepNumber
+      $(currentStepId).fadeTo 100, 0, ->
+        $(currentStepId).hide()
+        $(nextStepId).fadeTo 200, 1
+        # since we have a multi-step form
+        # each time we change the visibility of inputs
+        # we have to re-enable client side validations
+        $('#new_question').enableClientSideValidations()
 
-    # last step, hide progress area
-    if nextStepNumber is steps.length
-      $('.progress').hide()
-      $(button).hide()
-      $('.count').hide()
-    else
-      $('.progress').show() if $('.progress').is(':hidden')
-      $(button).show()
-      $('.count').show()
+
+      $(nextStepId + ' input[type=text]:eq(0)').focus()
+
+      $(button).attr 'data-current-step', nextStepName
+      $('.step-number').text nextStepNumber
+
+      # last step, hide progress area
+      if nextStepNumber is steps.length
+        $('.progress').hide()
+        $(button).hide()
+        $('.count').hide()
+      else
+        $('.progress').show() if $('.progress').is(':hidden')
+        $(button).show()
+        $('.count').show()
+    valid
 
   $('#next-button').click (event) ->
     nextStep event
@@ -194,7 +207,8 @@ jQuery ($) ->
     $(nextButton).attr 'data-current-step', firstStep
 
     $(stepId(lastStep)).hide()
-    $(stepId(firstStep)).show()
+    $(stepId(firstStep)).fadeTo 200, 1
+
     $('.step-number').text 1
     $('.progress').show() if $('.progress').is(':hidden')
     $(nextButton).show() if $(nextButton).is(':hidden')
@@ -203,8 +217,8 @@ jQuery ($) ->
   $('#edit-button').click (event) ->
     beginAgain event
 
-  $('#summary').keyup (event) ->
-    value = $('#summary').val()
+  $('#question_title').keyup (event) ->
+    value = $('#question_title').val()
     $('.question_preview h5').removeClass('empty')
     $('.question_preview h5').text value
     $('#confirm-question-title').text value

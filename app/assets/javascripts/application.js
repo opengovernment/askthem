@@ -23,3 +23,4 @@
 //= require questions
 //= require responsive
 //= require forms
+//= require rails.validations

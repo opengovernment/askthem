@@ -8,6 +8,8 @@ gem 'mongoid', '~> 3.1.2'
 gem 'geocoder' # must be after mongoid
 gem 'rmagick'
 gem 'carrierwave-mongoid'
+gem 'client_side_validations'
+gem 'client_side_validations-mongoid'
 gem 'resque'
 gem 'inherited_resources', '~> 1.3.1'
 gem 'simple_form'

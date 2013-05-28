@@ -4,20 +4,21 @@
     <span class="ref"><span class="emph">To:</span> Ron Paul<%# @todo WM need to carry over selected target name %>, <span class="emph">re:</span> S 26 188th Legislature (2013-2014)</span>
   </header>
   <fieldset>
+    <label for="question_title"></label>
     <div class="count">
       <span class="summary_count">60</span>
-      <%= f.text_field :title, placeholder: raw('Summary&hellip;'), maxlength: '60', id: 'summary' %>
+      <%= f.text_field :title, placeholder: raw('Summary&hellip;'), maxlength: '60', validate: true %>
     </div>
 
-    <label for="question">Full Question
+    <label for="question_body">Full Question
       <span class="details">Why is this important? Give it your all!</span>
     </label>
-    <%= f.text_area :body, placeholder: raw('Go on&hellip;'), cols: '30', rows: '10' %>
+    <%= f.text_area :body, placeholder: raw('Go on&hellip;'), cols: '30', rows: '10', validate: true %>
 
     <label for="issue_area">Select an issue area
       <span class="opt">(optional)</span>
     </label>
-    
+
     <div class="input select icon-angle-down sculpt">
       <% subject_options = raw('<option value="">Select an Issue</option>') + options_for_select(subjects) -%>
       <%= f.select :subject, subject_options %>
