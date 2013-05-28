@@ -26,15 +26,13 @@ describe 'questions' do
         fill_in 'question_body', with: 'short body'
         page.body.should have_content 'is too short'
 
-        pending 'way of testing for cleared error messages'
-
         fill_in 'question_title', with: 'anything'
         fill_in 'question_body', with: long_body
+
         find('#question_title').trigger('blur')
         find('#question_body').trigger('blur')
 
-        page.body.should_not have_content "can't be blank"
-        page.body.should_not have_content 'is too short'
+        page.should_not have_selector '.field_with_errors label.message'
       end
 
       context 'if step fields are valid' do
