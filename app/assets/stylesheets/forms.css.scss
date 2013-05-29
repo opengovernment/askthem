@@ -24,6 +24,7 @@ form{
     line-height: 1.5em; 
     height:42px;
     text-indent:10px;
+    box-sizing: border-box;
     @include border-radius(3px);
     @include box-shadow(0 1px 2px #F3F3F3 inset);
     width:100%;
@@ -38,7 +39,14 @@ form{
     }
   }
   textarea{
-    padding-top:8px;
+    padding-top: 8px;
+    text-indent: 0;
+    padding-left: 10px;
+    padding-right:12px;
+    &:focus{
+      text-indent:0;
+      padding-left:12px;
+    }
   }
   //flatline classes might be deleted soon @todo ST to review
   input[type=text].flatline{
@@ -356,17 +364,23 @@ div.count{
 Success, Info, Error treatments & messages
 */
 div.notif{
+  @include box-shadow(0 3px 0 rgba(0,0,0,.05));
+  @include border-radius(3px);
+  padding: 40px 20px;
+  margin: 12px 0 24px 0;
   h3{
+    @include RobotoThin();
     color: #477380;
     font-size:1em;
     line-height: 1.125em;
     font-weight:600;
+    padding-bottom: 12px;
   }
   p{
     color: #477380;
     font-size:0.813em !important;
     line-height: 1.385em !important;
-    padding-bottom:0 !important;
+    padding-bottom:12px !important;
   }
   &.preview{
     border-bottom: 1px solid #EFEFEF;
@@ -382,12 +396,39 @@ div.notif{
     }
   }
   &.success{
-    
+    background:#f1fee9;
+    border:1px solid #9fc41e;
+    h3{
+      color:#8db10e;
+    }
+    p{
+      color:#6b754e;
+    }
   }
   &.info{
-    
+    background:#fbfbfb;
+    border:1px solid #ECECEC;
+    text-align:center;
+    h3{
+      color:$darkblue;
+    }
+    p{
+      color:#919192;
+    }
   }
   &.error{
-    
+    background:#FFF4F4;
+    border:1px solid #F86369;
+    text-align:center;
+    h3{
+      color: #AC4747;
+      font-weight: 600;
+    }
+    p{
+      color: #AC4747;
+    }
   }
+}
+.related_wrap div.notif{
+  margin:12px 20px 24px 0;
 }

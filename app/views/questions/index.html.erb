@@ -1,22 +1,24 @@
 <%= render 'shared/navigation' %>
 
 <section class="questions listings">
+  <div class="notif error">
+    <h3>Ruh roh! This is an example error.</h3>
+    <p>It looks like you messed that one up real good.</p>
+  </div>
   <header>
     <h1>Questions</h1>
     <%= link_to 'Ask a Question', new_question_path(@jurisdiction.abbreviation), class: 'cta_pill' %>
   </header>
   <div class="filters">
-    <span class="info">Filter by:</span><%# @todo DM are these really the filters we're using? %>
+    <span class="info">Show:</span><%# @todo DM are these really the filters we're using? %>
     
-    <a href="#" class="radio_button filter inactive"><span class="use"></span>Open</a>
+    <a href="#" class="radio_button filter inactive"><span class="use"></span>Need Signatures</a>
     
-    <a href="#" class="radio_button filter inactive"><span class="use"></span>Responses</a>
+    <a href="#" class="radio_button filter inactive"><span class="use"></span>Have Answers</a>
     
-    <a href="#" class="radio_button filter inactive"><span class="use"></span>Pending</a>
+    <a href="#" class="radio_button filter inactive"><span class="use"></span>Need Answers</a>
     
     <a href="#" class="radio_button filter inactive"><span class="use"></span>Recent</a>
-    
-    <a href="#" class="radio_button filter inactive"><span class="use"></span>Issue</a>
     
     <div class="search"><%# @todo DM full-text search within state? %>
       <input type="text" name="" id="" placeholder="Search state">

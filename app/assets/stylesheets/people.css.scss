@@ -51,7 +51,7 @@ section.people{
     width: 59.61538%;
   }
   div.avatar{
-    @include border-radius(40px);
+    @include border-radius(60px);
     border:1px solid #2d3132;
     display: inline-block;
     overflow: hidden;

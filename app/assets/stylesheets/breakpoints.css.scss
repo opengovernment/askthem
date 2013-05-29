@@ -127,14 +127,23 @@
   
   div.filters{
     margin-top:6px;
+    padding-top:6px;
     width:100%;
     span.info{
       display:none;
+    }
+    a.radio_button.filter{
+      display:none;
+      margin: 0 0 6px 6px;
+      width: 46%;
+      box-sizing: border-box;
+      font-size: 9px;
     }
     ul.menu{
       display:none;
     }
     div.search{
+      margin-top:0;
       float:none;
       display:block;
     }
@@ -479,5 +488,24 @@
       }
     }
   }
-  
+ /*
+  Forms & Notifs
+  */
+  div.notif{
+    &.preview{
+      border: none;
+      box-shadow: none;
+      margin: 0;
+      padding: 0;
+      a.edit{
+        box-sizing:border-box;
+        width:100%;
+        margin-bottom: 18px;
+      }
+      div.notif_wrap{
+        margin:0;
+        width:100%;
+      }
+    }
+  }
 }

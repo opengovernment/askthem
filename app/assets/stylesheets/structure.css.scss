@@ -649,7 +649,7 @@ div.filters{
   }
   a.radio_button{
     background: white;
-    color:#477380;
+    color:#97A2A5;
     cursor:pointer;
     display: inline-block;
     font-size:0.688em;
@@ -700,6 +700,7 @@ div.filters{
       background:#f9fff5;
       border:1px solid #b4dd94;
       @include box-shadow(0 1px 5px rgba(33,54,60,.15));
+      color:#477380;
       span.use{
         background:#bfea9c;
         display:inline-block;

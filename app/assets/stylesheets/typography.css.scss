@@ -36,6 +36,9 @@ $fontpath: "/assets/" !default;
     font-style: normal;
 }
 
+h1, h2, h3, h4, h5, p{
+  word-wrap: break-word;
+}
 h1{
   color: $darkblue;
   @include RobotoLight;
@@ -82,7 +85,7 @@ strong{
   font-weight:600;
 }
 span.info{
-  color:#cfd3d4;
+  color:$middlegrey;
   text-transform:uppercase;
   font-weight:600;
   font-size:0.688em;
