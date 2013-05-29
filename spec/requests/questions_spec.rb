@@ -1,7 +1,49 @@
 require 'spec_helper'
 
 describe 'questions' do
+  before :each do
+    @metadatum = Metadatum.with(session: 'openstates')
+      .create(abbreviation: 'vt', chambers: {} )
+  end
+
+  describe '#index' do
+    context 'when the jurisdiction has no questions' do
+      it 'returns none' do
+        visit '/vt/questions'
+
+        page.body.should_not have_selector '.question_content .title'
+        page.body.should_not have_selector '.pagination'
+      end
+    end
+
+    context 'when the jurisdiction has questions' do
+      before :each do
+        # TODO: replace this w/ common helper method
+        # see models/person_spec for another instance
+        person = Person.with(session: 'openstates')
+          .new(state: @metadatum.abbreviation)
+        person.id = 'VTL000008'
+        person.save!
+
+        3.times do
+          FactoryGirl.create(:question,
+                             state: @metadatum.abbreviation,
+                             person: person)
+        end
+      end
+
+      it 'returns them' do
+        visit '/vt/questions'
+        page.body.should have_selector '.question_content .title'
+      end
+    end
+  end
+
   describe '#new' do
+    before :each do
+      visit '/vt/questions/new'
+    end
+
     context 'as a non-registered user' do
       let(:long_body) { 'Something at least sixty characters long for the body, you know something substantial' }
       let(:steps) { %w(recipient content sign_up confirm) }
@@ -9,12 +51,6 @@ describe 'questions' do
         steps.inject([]) do |result, step|
           result << '#' + "#{step.gsub('_', '-')}-step"
         end
-      end
-
-      before :each do
-        Metadatum.with(session: 'openstates').create(abbreviation: 'vt',
-                                                     chambers: {} )
-        visit '/vt/questions/new'
       end
 
       it 'can get feedback on input based on question title and body', js: true do

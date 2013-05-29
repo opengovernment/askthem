@@ -3,5 +3,7 @@
     <%= render @questions %>
   </ol>
 
-  <%= paginate @questions, outer_window: 1, params: {format: nil}, replace: '#page', scroll: 'section header' %>
+  <% if @questions.any? -%>
+    <%= paginate @questions, outer_window: 1, params: {format: nil}, replace: '#page', scroll: 'section header' %>
+  <% end -%>
 </div>
