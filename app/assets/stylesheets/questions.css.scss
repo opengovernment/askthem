@@ -329,38 +329,38 @@ section.question{
     }
   }
   
-	div.flow_info{
-		display: inline-block;
-		vertical-align: top;
-		margin-top: 12px;
-		padding-left: 8.974359%;
-		width: 29.487179%;
-		h3{
-			color:$darkblue;
-			font-size:1.5em;
-			font-weight:100;
-			line-height: 1.25em;
-			margin-bottom:6px;
-		}
+  div.flow_info{
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 12px;
+    padding-left: 8.974359%;
+    width: 29.487179%;
+    h3{
+      color:$darkblue;
+      font-size:1.5em;
+      font-weight:100;
+      line-height: 1.25em;
+      margin-bottom:6px;
+    }
     ul>li{
-			font-size:0.875em;
-			line-height: 1.286em;
-			font-weight:100;
-			color:#2c4850;
+      font-size:0.875em;
+      line-height: 1.286em;
+      font-weight:100;
+      color:#2c4850;
       padding-bottom:12px;
       list-style: disc inside;
     }
-		p{
-			font-size:0.875em;
-			line-height: 1.286em;
-			font-weight:100;
-			color:#2c4850;
+    p{
+      font-size:0.875em;
+      line-height: 1.286em;
+      font-weight:100;
+      color:#2c4850;
       padding-bottom:12px;
-			a{
-				text-decoration:underline;
-			}
-		}
-	}
+      a{
+        text-decoration:underline;
+      }
+    }
+  }
   
   div.actions{
     margin-bottom: 60px;

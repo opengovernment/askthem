@@ -49,13 +49,13 @@ jQuery ($) ->
   $('span.toggle a.select').click (event) ->
 
     if $(this).hasClass('twitter') and !$(this).hasClass('active')
-      $('div.address_lookup').hide();
-      $('div.twitter').show();
+      $('div.address_lookup').hide()
+      $('div.twitter').show()
       $('div.twitter input[type=text]:eq(0)').focus()
     else
       if $(this).hasClass('address_lookup') and !$(this).hasClass('active')
-        $('div.twitter').hide();
-        $('div.address_lookup').show();
+        $('div.twitter').hide()
+        $('div.address_lookup').show()
         $('div.address_lookup input[type=text]:eq(0)').focus()
 
     if !$(this).hasClass('active')
@@ -83,13 +83,8 @@ jQuery ($) ->
     $(personLi).children('.icon-ok-sign').show()
 
     # TODO: make link for person
-    $('ul.recipient h2').text name
     $('#confirm-person-name').html "<strong>#{name}</strong>"
     $('#content-person-name').html name
-    progressAvatar = $('ul.recipient li div.avatar')
-    $(progressAvatar).html avatarHtml
-    $(progressAvatar).show()
-    $('ul.recipient .person-info .jurisdiction').text jurisdiction
     $('#confirm-person-attributes').html "<strong>#{jurisdiction}</strong>"
 
   getPeople = (->
@@ -186,11 +181,9 @@ jQuery ($) ->
 
       # last step, hide progress area
       if nextStepNumber is steps.length
-        $('.progress').hide()
         $(button).hide()
         $('.count').hide()
       else
-        $('.progress').show() if $('.progress').is(':hidden')
         $(button).show()
         $('.count').show()
     valid
@@ -211,7 +204,6 @@ jQuery ($) ->
     $(stepId(firstStep)).fadeTo 200, 1
 
     $('.step-number').text 1
-    $('.progress').show() if $('.progress').is(':hidden')
     $(nextButton).show() if $(nextButton).is(':hidden')
     $('.count').show() if $('.count').is(':hidden')
 
@@ -220,13 +212,10 @@ jQuery ($) ->
 
   $('#question_title').keyup (event) ->
     value = $('#question_title').val()
-    $('.question_preview h5').removeClass('empty')
-    $('.question_preview h5').text value
     $('#confirm-question-title').text value
 
   $('#question_body').keyup (event) ->
     value = $('#question_body').val()
-    $('.question_preview p').text value
     $('#confirm-question-body').text value
 
   $('#firstname').keyup (event) ->
@@ -240,10 +229,8 @@ jQuery ($) ->
     $('#question-subject').text value
     $('#confirm-issue-value').text value
     if value? and value isnt ''
-      $('#progress-issue').show()
       $('#confirm-issue').show()
     else
-      $('#progress-issue').hide()
       $('#confirm-issue').hide()
 
   hideLaterSteps()

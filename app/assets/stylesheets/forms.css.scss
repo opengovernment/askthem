@@ -383,9 +383,10 @@ div.notif{
     padding-bottom:12px !important;
   }
   &.preview{
-    border-bottom: 1px solid #EFEFEF;
     padding-bottom: 36px;
     margin-bottom: 36px;
+    background: #FDFDFD;
+    border: 1px solid #EFEFEF;
     a.edit{
       vertical-align:top;
     }

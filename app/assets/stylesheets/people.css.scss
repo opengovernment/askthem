@@ -102,9 +102,15 @@ section.people{
       @include RobotoRegular();
       font-size:1.125em;
       line-height: 1.333em;
+      a{
+        color:#3c636e;
+        &:hover{
+          color:$linkhover;
+        }
+      }
     }
     span.jurisdiction{
-      color:#7b969e;
+      color:$middlegrey;
       display:inline-block;
       font-size:0.813em;
       @include Helvetica();
@@ -112,7 +118,7 @@ section.people{
       line-height: 1.385em;
     }
     span.stats{
-      color:#bdcace;
+      color:#7b969e;
       display:inline-block;
       font-size:0.813em;
       @include Helvetica();
