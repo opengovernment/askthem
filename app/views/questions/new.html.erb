@@ -4,12 +4,13 @@
   <%= form_for @question, url: questions_path(@state_code), validate: true, html: { accept_charset: 'utf-8' } do |f| %>
     <%= f.hidden_field :user_id if user_signed_in? %>
     <%= f.hidden_field :person_id %>
+    <%= f.validate :person_id %>
 
     <% locals = { question: @question, person: @person, relevant_steps: @relevant_steps, first_step: @first_step, f: f } -%>
     <% @relevant_steps.each do |step| %>
       <%= render partial: "#{step}_step", locals: locals.merge({step: step}) %>
     <% end %>
-    
+
     <div class="flow_info">
       <h3>Your question &amp; petition</h3>
       <ul>
@@ -18,10 +19,10 @@
         <li><strong>For city elected officials</strong>, questions on city planning priorities are most effective.</li>
         <li><strong>For city service requests</strong>, like reporting potholes, please use official city 311 channels.</li>
         <li><strong>For judicial issues</strong>, like trial or criminal information, please contact the judicial branch in your city.</li>
-        
+
       </ul>
     </div>
-    
+
     <div class="controls">
       <a class="cta_pill" id="next-button"
          data-relevant-steps="<%= @relevant_steps.join(', ') -%>"

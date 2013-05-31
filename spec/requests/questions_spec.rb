@@ -18,17 +18,10 @@ describe 'questions' do
 
     context 'when the jurisdiction has questions' do
       before :each do
-        # TODO: replace this w/ common helper method
-        # see models/person_spec for another instance
-        person = Person.with(session: 'openstates')
-          .new(state: @metadatum.abbreviation)
-        person.id = 'VTL000008'
-        person.save!
-
         3.times do
           FactoryGirl.create(:question,
                              state: @metadatum.abbreviation,
-                             person: person)
+                             person: valid_person)
         end
       end
 
@@ -40,10 +33,6 @@ describe 'questions' do
   end
 
   describe '#new' do
-    before :each do
-      visit '/vt/questions/new'
-    end
-
     context 'as a non-registered user' do
       let(:long_body) { 'Something at least sixty characters long for the body, you know something substantial' }
       let(:steps) { %w(recipient content sign_up confirm) }
@@ -53,26 +42,83 @@ describe 'questions' do
         end
       end
 
-      it 'can get feedback on input based on question title and body', js: true do
-        find('#next-button').trigger('click')
+      context 'when choosing a recipient' do
+        before :each do
+          visit '/vt/questions/new'
+        end
 
-        find('#question_title').trigger('blur')
-        page.body.should have_content "can't be blank"
+        it 'cannot progress to next step when invalid input', js: true do
+          step_id = '#recipient-step'
 
-        fill_in 'question_body', with: 'short body'
-        page.body.should have_content 'is too short'
+          # try to go to next step without filling out choosing a person
+          find('#next-button').trigger('click')
 
-        fill_in 'question_title', with: 'anything'
-        fill_in 'question_body', with: long_body
+          sleep 2
+          expect(find(step_id).visible?).to be_true
 
-        find('#question_title').trigger('blur')
-        find('#question_body').trigger('blur')
+          page.should have_selector '.field_with_errors label.message'
+        end
 
-        page.should_not have_selector '.field_with_errors label.message'
+        it 'can get feedback based on person chosen address locator', js: true do
+          valid_person
+
+          find('a.address_lookup').trigger('click')
+
+          fill_in 'street', with: '2227 Paine Turnpike'
+          fill_in 'city', with: 'Berlin'
+          fill_in 'zipcode', with: '05602'
+
+          find('#zipcode').trigger('blur')
+
+          find('#next-button').trigger('click')
+
+          page.should have_selector '.field_with_errors label.message'
+        end
+      end
+
+      context 'when filling out question title and body' do
+        before :each do
+          visit "/vt/questions/new"
+          add_person_id
+        end
+
+        it 'cannot progress to next step when invalid input', js: true do
+          step_id = '#content-step'
+          find('#next-button').trigger('click')
+
+          sleep 1
+          expect(find(step_id).visible?).to be_true
+
+          # try to go to next step without filling out title and body
+          find('#next-button').trigger('click')
+
+          expect(find(step_id).visible?).to be_true
+
+          page.should have_selector '.field_with_errors label.message'
+        end
+
+        it 'can get feedback based on input', js: true do
+          find('#next-button').trigger('click')
+
+          find('#question_title').trigger('blur')
+          page.body.should have_content "can't be blank"
+
+          fill_in 'question_body', with: 'short body'
+          page.body.should have_content 'is too short'
+
+          fill_in 'question_title', with: 'anything'
+          fill_in 'question_body', with: long_body
+
+          find('#question_title').trigger('blur')
+          find('#question_body').trigger('blur')
+
+          page.should_not have_selector '.field_with_errors label.message'
+        end
       end
 
       context 'if step fields are valid' do
         before :each do
+          visit '/vt/questions/new'
           add_valid_values
         end
 
@@ -104,7 +150,11 @@ describe 'questions' do
         end
 
         def add_valid_values
-          page.execute_script("jQuery('#question_title').val('test'); jQuery('#question_body').val('#{long_body}');")
+          add_person_id
+
+          script = "jQuery('#question_title').val('test'); "
+          script +=  "jQuery('#question_body').val('#{long_body}'); "
+          page.execute_script script
         end
       end
 
@@ -112,5 +162,20 @@ describe 'questions' do
       it 'can fill out form'
       it 'can recieve validation error warnings when form person or user is invalid'
     end
+  end
+
+  def add_person_id
+    person_id_field = "<li><input type=\"radio\" name=\"question[person_id]\" id=\"question_person_id_1\" value=\"1\" checked /></li>"
+    script = "jQuery('ol.people-list').last().append('#{person_id_field}'); "
+    page.execute_script script
+  end
+
+  # see models/person_spec for another instance
+  def valid_person
+    @person ||= Person.with(session: 'openstates')
+      .new(state: @metadatum.abbreviation)
+    @person.id = 'VTL000008'
+    @person.save!
+    @person
   end
 end
