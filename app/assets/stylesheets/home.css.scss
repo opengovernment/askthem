@@ -14,7 +14,20 @@ body.index{
     width:100%;
   }
   .content_body{
-    border-top:30px solid #EDFBFF;
+    background:#EDFBFF;
+    div.wrapper{
+      background: #FFF;
+      margin: 60px auto;
+      border-radius: 6px;
+      border: 1px solid #DCF0F5;
+      padding: 0 40px 20px;
+      box-sizing: border-box;
+    }
+  }
+  div.wrapper{
+    max-width:1120px;
+    margin: auto;
+    padding-left: 0;
   }
   section.mobile_admin_nav{
     display: block;
@@ -37,11 +50,6 @@ body.index{
   footer{
     max-width: inherit;
   }
-  div.wrapper{
-    max-width:1120px;
-    margin: auto;
-    padding-left: 0;
-  }
   header.main{
     height: 480px;
     padding-top: 24px;
@@ -58,17 +66,20 @@ body.index{
       position: relative;
     }
     h1{
+      @include RobotoRegular();
       display: block;
-      font-size:2.625em;
-      line-height: 1em;
+      font-size:4.5em;
+      line-height: 1.083em;
       text-align: center;
       margin: auto;
-      max-width: 580px;
+      max-width: 750px;
       font-weight: 100;
-      text-shadow: 0 2px 30px rgba(255, 255, 255, 1);
+      text-shadow: 0 2px 30px #FFF;
       strong{
         font-size:1.143em;
         line-height: 1em;
+        @include RobotoThin();
+        font-weight:100;
       }
     }
     p{
@@ -90,24 +101,29 @@ body.index{
       max-width: 133px;
       margin-top: 1px;
     }
+    
+    div.ask_question{
+      margin-top: 24px;
+      vertical-align:middle;
+      p{
+        font-size: 1em;
+        a{
+          vertical-align:middle;
+          margin-left: 12px;
+        }
+      }
+    }
   }
   .content_body{
     div.emph_question{
-      display: inline-block;
-      height: 13px;
       width: 100%;
       text-align: center;
       position: relative;
       div.wrap{
         display: inline-block;
-        position: absolute;
-        margin-left: -201px;
-        top: -115px;
-        padding: 20px 120px;
-        background: rgba(0, 0, 0, .05);
-        border-top: 1px solid #FFF;
-        border-right: 1px solid #FFF;
-        border-left: 1px solid #FFF;
+        border-bottom: 1px solid #F5F5F5;
+        padding: 20px 0;
+        width: 100%;
       }
     }
     div.leftCol{
