@@ -31,6 +31,8 @@ jQuery ($) ->
       type: "GET"
       dataType: "json"
       success: (data) ->
+        # TODO: this should add radio button for matching person
+        # as question[person_id] input, see getPeople
         $("div.twitter .select-person li h2").html data[0].name
         $("div.twitter div.avatar img").attr 'src', data[0].profile_image_url
         $("div.twitter .select-person div.person-info p").html data[0].description
@@ -47,6 +49,7 @@ jQuery ($) ->
   )
 
   $('span.toggle a.select').click (event) ->
+    personError 'remove'
 
     if $(this).hasClass('twitter') and !$(this).hasClass('active')
       $('div.address_lookup').hide()
@@ -78,7 +81,8 @@ jQuery ($) ->
 
     selectedPersonInput = $(personLi).children('.select_box').children('input')
     selectedPersonInput.attr 'checked', true
-    $('#question_person_id').val selectedPersonInput.val()
+    # $('#question_person_id').val selectedPersonInput.val()
+    personError 'remove'
 
     $(personLi).children('.icon-ok-sign').show()
 
@@ -101,10 +105,11 @@ jQuery ($) ->
         $('label.select-person').fadeTo(300, 1)
         personList = $('div.address_lookup ol.people-list').first()
         personList.html('')
+        $('#question_person_id').remove() # our radio buttons replace this below
         $(data).each ->
           liVal = '<li style="display:none;">'
           liVal += '<div class="select_box">'
-          liVal += "<input type=\"radio\" name=\"person-select\" id=\"#{@id}\" value=\"#{@id}\" /></div>"
+          liVal += "<input type=\"radio\" name=\"question[person_id]\" id=\"question_person_id_#{@id}\" value=\"#{@id}\" /></div>"
 
           liVal += '<div class="avatar">'
           if @photo_url?
@@ -144,35 +149,35 @@ jQuery ($) ->
 
   nextStep = (event) ->
     button = event.delegateTarget
+    steps = $(button).attr('data-relevant-steps').split(', ')
+    currentStep = $(button).attr 'data-current-step'
+    currentStepId = stepId(currentStep)
+    currentStepIndex = steps.indexOf(currentStep)
+
+    nextStepIndex = currentStepIndex + 1
+    nextStepName = steps[nextStepIndex]
+    nextStepId = stepId(nextStepName)
+    nextStepNumber = nextStepIndex + 1
 
     valid = true
     $('[data-validate]:input:visible').each ->
       settings = window.ClientSideValidations.forms['new_question']
       valid = false if !$(this).isValid(settings.validators)
 
+    if currentStep == 'recipient' and
+      $('input[name="question[person_id]"]:checked').length is 0
+        personError()
+        valid = false
+
     # do the rest of next step processing
     if valid
-      steps = $(button).attr('data-relevant-steps').split(', ')
-      currentStep = $(button).attr 'data-current-step'
-      currentStepId = stepId(currentStep)
-      currentStepIndex = steps.indexOf(currentStep)
-
-      nextStepIndex = currentStepIndex + 1
-      nextStepName = steps[nextStepIndex]
-      nextStepId = stepId(nextStepName)
-      nextStepNumber = nextStepIndex + 1
-
       scrollOffset = $('section.question').offset().top - 60
       $(window).stop().scrollTo(scrollOffset, 500)
 
       $(currentStepId).fadeTo 100, 0, ->
         $(currentStepId).hide()
         $(nextStepId).fadeTo 200, 1
-        # since we have a multi-step form
-        # each time we change the visibility of inputs
-        # we have to re-enable client side validations
-        $('#new_question').enableClientSideValidations()
-
+        reloadValidationForForm()
 
       $(nextStepId + ' input[type=text]:eq(0)').focus()
 
@@ -232,5 +237,34 @@ jQuery ($) ->
       $('#confirm-issue').show()
     else
       $('#confirm-issue').hide()
+
+  # since we have a multi-step form
+  # each time we change the visibility of inputs
+  # we have to re-enable client side validations
+  reloadValidationForForm  = (->
+    $('#new_question').enableClientSideValidations()
+  )
+
+  # because we are working with hidden radio buttons
+  # ClientSideValidations directly won't work for us
+  # this gives us the message we expect where we want it
+  # while using the same format as ClientSideValidations
+  personError = (action = 'add') ->
+    formSettings = ClientSideValidations.forms['new_question']
+    inputTag = $(formSettings.input_tag)
+    selectPersonList = $('ol.people-list:visible')
+    if action is 'add'
+      message = 'Recipient ' +
+        formSettings.validators['question[person_id]'].presence[0].message
+
+      selectPersonList.before inputTag
+      inputTag.find('span#input_tag').replaceWith selectPersonList
+      inputTag.find('label.message').text message
+      inputTag.find('label.message').attr('for', 'question_person_id')
+    else
+      fieldErrorClass = '.' + $(inputTag).attr('class')
+      fieldErrorWrapper = selectPersonList.closest(fieldErrorClass)
+      if fieldErrorWrapper[0]
+        fieldErrorWrapper.replaceWith selectPersonList
 
   hideLaterSteps()
