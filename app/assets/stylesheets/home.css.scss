@@ -17,7 +17,7 @@ body.index{
     background:#EDFBFF;
     div.wrapper{
       background: #FFF;
-      margin: 60px auto;
+      margin: -30px auto 60px;
       border-radius: 6px;
       border: 1px solid #DCF0F5;
       padding: 0 40px 20px;
@@ -89,17 +89,28 @@ body.index{
       margin-bottom:18px;
     }
     input[type=text]{
-      @include border-radius(1px);
+      @include border-radius(3px);
       display: inline-block;
       max-width: 50%;
       border: 1px solid #B9CDD0;
       box-sizing: border-box;
       padding-top: 5px;
-      height: 48px;
+      height: 47px;
+      box-shadow: 0 0 0 3px rgba(0, 0, 0, .1);
+      padding-right: 138px;
+      margin-right: -138px;
     }
     input[type=submit]{
       max-width: 133px;
       margin-top: 1px;
+      &:hover{
+        display:inline-block;
+        top: 0;
+      }
+      &:active{
+        display:inline-block;
+        top: 0;
+      }
     }
     
     div.ask_question{
