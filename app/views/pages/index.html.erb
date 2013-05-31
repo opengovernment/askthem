@@ -1,153 +1,115 @@
 <section>
-  <header>
-    <h2>Top Questions &amp; Petitions Nationwide</h2>
-    <ul>
-      <li>1,500 Answers<%# @todo number of Answers %></li>
-      <li>26,500 Supporters<%# @todo number of Supporters %></li>
-      <li><%= link_to 'Ask a Question' %></li>
+  <div class="emph_question">
+    <div class="wrap">
+      <%= link_to 'Ask a Question', '#', :class => 'cta_pill' %>
+    </div>
+  </div>
+  <div class="leftCol">
+    <header>
+      <h2>Top National Questions</h2>
+      <ul>
+        <li>1,500 Answers<%# @todo number of Answers %></li>
+        <li>26,500 Supporters<%# @todo number of Supporters %></li>
+      </ul>
+    </header>
+    <ul class="popular_questions"><%# @todo Pop question data %>
+      <% 3.times do %>
+      <li>
+        <div class="person_wrap">
+          <div class="row">
+            <div class="leftCol">
+              <span class="emph">to</span>
+            </div>
+            <div class="rightCol">
+              <div class="avatar">
+                <%= image_tag('http://d2xfsikitl0nz3.cloudfront.net/http%3A%2F%2Fwww.malegislature.gov%2FImages%2FMemberProfile%2FWeb%2Fcatkins.jpg/60/60', size: '60x60', alt: '') %>
+              </div>
+              <div class="person-info">
+                <h4>Cory Atkins</h4>
+                <span class="jurisdiction">Rep. of MA</span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="leftCol">
+              <span class="emph">from</span>
+            </div>
+            <div class="rightCol">
+              <div class="avatar">
+                <%= image_tag('placeholder.png', size: '60x60', alt: '') %>
+              </div>
+              <div class="person-info">
+                <span class="author">Logan Faerber</span>
+                <span class="location">Resident of MA</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <a href="#" class="question">What will you do to redevelop Cedar Park for our families? </a>
+        <div class="question_stats">
+          <span class="support_count">502 Supporters</span>
+          <a href="#" class="sign">Sign &rarr;</a>
+          <div class="question_progress">
+            <div class="progress_filler" style="width: 54%;"></div>
+          </div>
+        </div>
+      </li>
+      <% end %>
     </ul>
-  </header>
-  <ul class="popular_questions"><%# @todo Pop question data %>
-    <li>
-      <div class="person_wrap">
-        <div class="avatar">
-          <%= image_tag('http://d2xfsikitl0nz3.cloudfront.net/http%3A%2F%2Fwww.malegislature.gov%2FImages%2FMemberProfile%2FWeb%2Fcatkins.jpg/60/60', size: '60x60', alt: '') %>
+  </div>
+  <div class="rightCol">
+    <header>
+      <h2>Top Questions Near Boston</h2>
+      <ul>
+        <li>1,500 Answers<%# @todo number of Answers %></li>
+        <li>26,500 Supporters<%# @todo number of Supporters %></li>
+      </ul>
+    </header>
+    <ul class="popular_questions"><%# @todo Pop question data %>
+      <% 3.times do %>
+      <li>
+        <div class="person_wrap">
+          <div class="row">
+            <div class="leftCol">
+              <span class="emph">to</span>
+            </div>
+            <div class="rightCol">
+              <div class="avatar">
+                <%= image_tag('http://d2xfsikitl0nz3.cloudfront.net/http%3A%2F%2Fwww.malegislature.gov%2FImages%2FMemberProfile%2FWeb%2Fcatkins.jpg/60/60', size: '60x60', alt: '') %>
+              </div>
+              <div class="person-info">
+                <h4>Cory Atkins</h4>
+                <span class="jurisdiction">Rep. of MA</span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="leftCol">
+              <span class="emph">from</span>
+            </div>
+            <div class="rightCol">
+              <div class="avatar">
+                <%= image_tag('placeholder.png', size: '60x60', alt: '') %>
+              </div>
+              <div class="person-info">
+                <span class="author">Logan Faerber</span>
+                <span class="location">Resident of MA</span>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="person-info">
-          <h4>Cory Atkins</h4>
-          <span class="jurisdiction">Representative, Fourteenth Middlesex, Democratic</span>
-          <span class="stats">Massachusetts</span>
+        <a href="#" class="question">What will you do to redevelop Cedar Park for our families? </a>
+        <div class="question_stats">
+          <span class="support_count">502 Supporters</span>
+          <a href="#" class="sign">Sign &rarr;</a>
+          <div class="question_progress">
+            <div class="progress_filler" style="width: 54%;"></div>
+          </div>
         </div>
-      </div>
-      <a href="#" class="question">What will you do to redevelop Cedar Park for our families? </a>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-      <div class="question_stats">
-        <span class="author">by Logan Faerber</span>
-        <span class="support_count">502 Supporters</span>
-        <a href="#" class="sign">Sign &rarr;</a>
-        <div class="question_progress">
-          <div class="progress_filler" style="width: 54%;"></div>
-        </div>
-      </div>
-    </li>
-    
-    
-    <li>
-      <div class="person_wrap">
-        <div class="avatar">
-          <%= image_tag('http://d2xfsikitl0nz3.cloudfront.net/http%3A%2F%2Fwww.malegislature.gov%2FImages%2FMemberProfile%2FWeb%2Fnboldyga.jpg/60/60', size: '60x60', alt: '') %>
-        </div>
-        <div class="person-info">
-          <h4>Nicholas A. Boldyga</h4>
-          <span class="jurisdiction">Representative, Third Hampden, Republican</span>
-          <span class="stats">Massachusetts</span>
-        </div>
-      </div>
-      <a href="#" class="question">How would you change the Obama Administration’s position on drones? </a>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-      <div class="question_stats">
-        <span class="author">by Logan Faerber</span>
-        <span class="support_count">1,257 Supporters</span>
-        <a href="#" class="sign">Sign &rarr;</a>
-        <div class="question_progress">
-          <div class="progress_filler" style="width: 70%;"></div>
-        </div>
-      </div>
-    </li>
-    
-    <li>
-      <div class="person_wrap">
-        <div class="avatar">
-          <%= image_tag('http://d2xfsikitl0nz3.cloudfront.net/http%3A%2F%2Fwww.malegislature.gov%2FImages%2FMemberProfile%2FWeb%2Fgbradley.jpg/60/60', size: '60x60', alt: '') %>
-        </div>
-        <div class="person-info">
-          <h4>Garrett J. Bradley</h4>
-          <span class="jurisdiction">Representative, Third Plymouth, Democratic</span>
-          <span class="stats">Pennsylvania</span>
-        </div>
-      </div>
-      <a href="#" class="question">Will you address economic development incentives at the next city council meeting?</a>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-      <div class="question_stats">
-        <span class="author">by Logan Faerber</span>
-        <span class="support_count">1,003 Supporters</span>
-        <a href="#" class="sign">Sign &rarr;</a>
-        <div class="question_progress">
-          <div class="progress_filler" style="width: 90%;"></div>
-        </div>
-      </div>
-    </li>
-    
-    <li>
-      <div class="person_wrap">
-        <div class="avatar">
-          <%= image_tag('http://d2xfsikitl0nz3.cloudfront.net/http%3A%2F%2Fwww.malegislature.gov%2FImages%2FMemberProfile%2FWeb%2Fccanavan.jpg/60/60', size: '60x60', alt: '') %>
-        </div>
-        <div class="person-info">
-          <h4>Christine E. Canavan</h4>
-          <span class="jurisdiction">Representative, Tenth Plymouth, Democratic</span>
-          <span class="stats">Pennsylvania</span>
-        </div>
-      </div>
-      <a href="#" class="question">Will you vote for comprehensive immigration reform this term?</a>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-      <div class="question_stats">
-        <span class="author">by Logan Faerber</span>
-        <span class="support_count">17 Supporters</span>
-        <a href="#" class="sign">Sign &rarr;</a>
-        <div class="question_progress">
-          <div class="progress_filler" style="width: 10%;"></div>
-        </div>
-      </div>
-    </li>
-    
-    <li>
-      <div class="person_wrap">
-        <div class="avatar">
-          <%= image_tag('http://d2xfsikitl0nz3.cloudfront.net/http%3A%2F%2Fwww.malegislature.gov%2FImages%2FMemberProfile%2FWeb%2Fncollins.jpg/60/60', size: '60x60', alt: '') %>
-        </div>
-        <div class="person-info">
-          <h4>Nick Collins</h4>
-          <span class="jurisdiction">Representative, Fourth Suffolk, Democratic</span>
-          <span class="stats">Pennsylvania</span>
-        </div>
-      </div>
-      <a href="#" class="question">What are the holdups in opening a new community health clinic in Philadelphia’s 8th district? </a>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-      <div class="question_stats">
-        <span class="author">by Logan Faerber</span>
-        <span class="support_count">105 Supporters</span>
-        <a href="#" class="sign">Sign &rarr;</a>
-        <div class="question_progress">
-          <div class="progress_filler" style="width: 37%;"></div>
-        </div>
-      </div>
-    </li>
-    
-    <li>
-      <div class="person_wrap">
-        <div class="avatar">
-          <%= image_tag('http://d2xfsikitl0nz3.cloudfront.net/http%3A%2F%2Fwww.malegislature.gov%2FImages%2FMemberProfile%2FWeb%2Fccronin.jpg/60/60', size: '60x60', alt: '') %>
-        </div>
-        <div class="person-info">
-          <h4>Claire D. Cronin</h4>
-          <span class="jurisdiction">Representative, Eleventh Plymouth, Democratic</span>
-          <span class="stats">California</span>
-        </div>
-      </div>
-      <a href="#" class="question">Why isn’t the legislature voting on marriage equality issues this month?</a>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-      <div class="question_stats">
-        <span class="author">by Logan Faerber</span>
-        <span class="support_count">157 Supporters</span>
-        <a href="#" class="sign">Sign &rarr;</a>
-        <div class="question_progress">
-          <div class="progress_filler" style="width: 45%;"></div>
-        </div>
-      </div>
-    </li>
-  </ul>
-  
+      </li>
+      <% end %>
+    </ul>
+  </div>
   <header class="how_it_works">
     <h2>How It Works</h2>
   </header>
