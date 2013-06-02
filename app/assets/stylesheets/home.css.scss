@@ -14,10 +14,11 @@ body.index{
     width:100%;
   }
   .content_body{
-    background:#EDFBFF;
+    background:#E7F2F5;
+    @include box-shadow(0 0 0 3px rgba(0, 0, 0, 0.03), 0 0 0 3px rgba(0, 0, 0, 0.03));
     div.wrapper{
       background: #FFF;
-      margin: -30px auto 60px;
+      margin: -60px auto 60px;
       border-radius: 6px;
       border: 1px solid #DCF0F5;
       padding: 0 40px 20px;
@@ -68,19 +69,13 @@ body.index{
     h1{
       @include RobotoRegular();
       display: block;
-      font-size:4.5em;
-      line-height: 1.083em;
+      font-size:3.375em;
+      line-height: 1.111em;
       text-align: center;
       margin: auto;
       max-width: 750px;
       font-weight: 100;
       text-shadow: 0 2px 30px #FFF;
-      strong{
-        font-size:1.143em;
-        line-height: 1em;
-        @include RobotoThin();
-        font-weight:100;
-      }
     }
     p{
       font-size:1.5em;
@@ -179,35 +174,34 @@ body.index{
       }
     }
     ul.popular_questions{
-      display:inline-block;
-      margin-top:30px;
-      float:left;
-      width:100%;
+      display: inline-block;
+      margin-top: 30px;
+      float: left;
+      width: 85%;
+      margin-left: 5%;
       &:nth-child(2n+2){
         padding-right:0;
       }
       li{
-        display:inline-block;
-        float:left;
-        margin-bottom:54px;
+        display: inline-block;
+        float: left;
+        margin-bottom: 30px;
         vertical-align: top;
-        width:100%;
+        width: 100%;
+        padding-bottom: 30px;
+        border-bottom: 1px solid #EFEFEF;
         div.person_wrap{
           display:inline-block;
-          float:left;
+          float:right;
           margin-bottom:18px;
-          width: 20%;
+          margin-left:5%;
+          width: 25%;
           div.row{
             float: left;
-            margin-bottom: 12px;
             width: 100%;
-          }
-          div.leftCol{
-            width: 20%;
-            text-align: right;
-          }
-          div.rightCol{
-            width:66%;
+            &:nth-child(2n+2){
+              margin-bottom: 12px;
+            }
           }
           span.author{
             display:inline-block;
@@ -216,9 +210,15 @@ body.index{
             line-height: 1.231em;
           }
           span.emph{
-            font-size:0.75em;
-            line-height: 1.5em;
+            background:#f7f7f7;
+            border:none;
+            color:#999999;
+            font-size:0.563em;
+            line-height: 1.778em;
+            letter-spacing:1px;
+            text-transform: uppercase;
             margin-top: 6px;
+            margin-bottom: 6px;
           }
           div.avatar{
             display:inline-block;
@@ -229,7 +229,7 @@ body.index{
             margin-left:3%;
             display:inline-block;
             vertical-align:top;
-            width:66%;
+            width:100%;
             h4{
               @include RobotoRegular();
               font-size:0.813em;
@@ -255,7 +255,7 @@ body.index{
           @include RobotoRegular();
           line-height: 1.25em;
           margin-bottom:6px;
-          width:80%;
+          width:70%;
           &:hover{
             color:#709EAC;
           }
@@ -271,8 +271,9 @@ body.index{
           display:block;
           font-size:0.813em;
           line-height: 1.385em;
-          float:right;
-          width:60%;
+          margin-top: 24px;
+          float:left;
+          width:70%;
           span{
             margin-right:10px;
           }
@@ -288,6 +289,9 @@ body.index{
           div.question_progress{
             margin-top:6px;
           }
+        }
+        a.sign_on{
+          float:left;
         }
       }
     }
