@@ -444,7 +444,7 @@
       background:#D4E8EB;
       position: relative;
       padding-top:0;
-      height:420px;
+      height:480px;
       section.mobile_admin_nav{
         margin-bottom: 24px;
         margin-top: 18px;
@@ -458,13 +458,26 @@
         width: 100%;
         max-width: 100%;
         margin-bottom: 6px;
+        padding-right: 0;
+        margin-left: 0;
+        margin-right: 0;
       }
       input[type=submit]{
         max-width:100%;
       }
+      div.ask_question{
+        margin-top:12px;
+        p a{
+          margin-left:0;
+          margin-top:12px;
+        }
+      }
     }
     div.content_body{
-      margin-top:72px;
+      margin-top:102px;
+      div.wrapper{
+        margin-top:30px;
+      }
       header{
         h2{
           display:block;
@@ -476,7 +489,7 @@
         ul>li{
           font-size: 0.688em;
           line-height: 1.636em;
-          width: 29%;
+          width: 40%;
           vertical-align: top;
           margin-top: 12px;
           font-weight: 600;
@@ -484,10 +497,28 @@
           text-align: center;;
         }
       }
+      div.leftCol, div.rightCol{
+        padding:0;
+        width:100%;
+        a.question{
+          width:100%;
+        }
+        div.person_wrap{
+          width:100%;
+          div.row{
+            float:none;
+            width:auto;
+            display:inline-block;
+          }
+        }
+      }
       ul.popular_questions>li, ol.how_it_works>li{
         width: 100%;
         padding-right: 0;
         padding-left: 0;
+        div.question_stats{
+          width:100%;
+        }
       }
       ol.how_it_works, header.how_it_works{
         display:none;
