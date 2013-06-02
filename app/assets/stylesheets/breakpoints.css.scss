@@ -518,12 +518,14 @@
           line-height: 1.333em;
           width:100%;
         }
+        a.sign_on{
+          width:100%;
+        }
         div.person_wrap{
           width:100%;
           div.row{
-            float:none;
             width:auto;
-            display:inline-block;
+            display:block;
           }
         }
       }

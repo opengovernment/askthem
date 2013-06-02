@@ -191,14 +191,14 @@ body.index{
         padding-bottom: 30px;
         border-bottom: 1px solid #EFEFEF;
         div.person_wrap{
-          display:inline-block;
-          float:right;
-          margin-bottom:18px;
-          margin-left:5%;
-          width: 25%;
+          display: inline-block;
+          float: right;
+          margin-left: 5%;
+          width: 100%;
           div.row{
-            float: left;
-            width: 100%;
+            display: inline-block;
+            width: auto;
+            margin-right: 6px;
             &:nth-child(2n+2){
               margin-bottom: 12px;
             }
@@ -226,10 +226,10 @@ body.index{
             width: 20%;
           }
           div.person-info{
-            margin-left:3%;
-            display:inline-block;
-            vertical-align:top;
-            width:100%;
+            margin-right: 12px;
+            display: inline-block;
+            vertical-align: top;
+            width: 100%;
             h4{
               @include RobotoRegular();
               font-size:0.813em;
@@ -255,7 +255,7 @@ body.index{
           @include RobotoRegular();
           line-height: 1.25em;
           margin-bottom:6px;
-          width:70%;
+          width:100%;
           &:hover{
             color:#709EAC;
           }
@@ -268,12 +268,14 @@ body.index{
           margin-bottom:30px;
         }
         div.question_stats{
-          display:block;
-          font-size:0.813em;
+          display: block;
+          font-size: 0.813em;
           line-height: 1.385em;
           margin-top: 24px;
-          float:left;
-          width:70%;
+          float: left;
+          width: 55%;
+          margin-right: 5%;
+          vertical-align: top;
           span{
             margin-right:10px;
           }
@@ -282,16 +284,17 @@ body.index{
             color:$salmon;
             font-weight:600;
           }
-          a.sign{
-            display:inline-block;
-            font-weight:600;
-          }
           div.question_progress{
             margin-top:6px;
           }
         }
         a.sign_on{
-          float:left;
+          float: left;
+          width: 40%;
+          box-sizing: border-box;
+          margin-right: 0;
+          text-align: center;
+          margin-top: 24px;
         }
       }
     }
