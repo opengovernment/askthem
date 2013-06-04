@@ -65,8 +65,21 @@ jQuery ($) ->
       $('span.toggle a.active').removeClass('active icon-ok')
       $(this).addClass('active icon-ok')
 
-  $("#zipcode").blur(->
-    getPeople()
+  $("#zipcode").keyup(->
+    zipLength = $(this).val().length
+    if zipLength is 5 or zipLength > 5
+      $('.loading').hide()
+
+      # redundant, but covers case where zip is pasted in
+      if $('label.select-person').is(':hidden')
+        $('label.select-person').fadeTo(300, 1)
+
+      getPeople()
+    else
+      # show recipient header and loading
+      if $('label.select-person').is(':hidden')
+        $('label.select-person').fadeTo(300, 1)
+        $('.loading').fadeTo(300, 1)
   )
 
   updateSelectedPerson = (e) ->
@@ -102,7 +115,6 @@ jQuery ($) ->
       type: 'GET'
       dataType: 'json'
       success: (data) ->
-        $('label.select-person').fadeTo(300, 1)
         personList = $('div.address_lookup ol.people-list').first()
         personList.html('')
         $('#question_person_id').remove() # our radio buttons replace this below
