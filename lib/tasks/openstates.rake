@@ -127,7 +127,6 @@ namespace :openstates do
 
            # Ensure a clean slate before unzipping
            dirs_in_zip.each {|zipdirname| FileUtils.rm_rf("#{tmpdir}/#{zipdirname}")}
-dirs_in_zip = ['committees', 'legislators']
 
            # Unzip
            puts "Unzipping #{zipfile}"
