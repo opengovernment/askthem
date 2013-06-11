@@ -13,7 +13,7 @@ namespace :openstates do
     end
   end
 
-  def tmpdir
+  def tmp_dir
     dir = Rails.root.join('tmp')
     Dir.mkdir(dir) unless File.exists?(dir)
     abort "#{dir} is not a directory" unless File.directory?(dir)
@@ -21,15 +21,15 @@ namespace :openstates do
   end
 
   # http://sunlightlabs.github.io/openstates-api/metadata.html
-  def openstates_metadata_url
+  def metadata_url
     "http://openstates.org/api/v1/metadata/?fields=latest_json_date,latest_json_url&apikey=#{ENV['SUNLIGHT_API_KEY']}"
   end
 
-  def extract_from_json_document(filename)
+  def extract_from_json_document(file_name)
 
     # Read the input JSON into a string
     begin
-      jsonstr = File.open(filename) {|f| f.read}
+      json_str = File.open(file_name) { |f| f.read }
     rescue Exception => e
       puts e.message
       return nil, nil
@@ -37,7 +37,7 @@ namespace :openstates do
 
     # Deserialize JSON string into a Ruby object
     begin
-      obj = JSON(jsonstr)
+      obj = JSON(json_str)
     rescue Exception => e
       puts e.message
       return nil, nil
@@ -59,13 +59,13 @@ namespace :openstates do
       Mongoid.raise_not_found_error = false
 
       openstates do
-        JSON.parse(RestClient.get(openstates_metadata_url)).each do |remote|
-          filepath = File.join(tmpdir, File.basename(remote['latest_json_url']))
+        JSON.parse(RestClient.get(metadata_url)).each do |remote|
+          file_path = File.join(tmp_dir, File.basename(remote['latest_json_url']))
           local = Metadatum.find(remote['id'])
 
-          if ! File.exist?(filepath) && (local.nil? || local['latest_json_date'].to_i < Time.parse(remote['latest_json_date'] + 'UTC').to_i)
+          if ! File.exist?(file_path) && (local.nil? || local['latest_json_date'].to_i < Time.parse(remote['latest_json_date'] + 'UTC').to_i)
             puts "Downloading #{remote['id']}..."
-            `curl -s -o #{filepath} #{remote['latest_json_url']}`
+            `curl -s -o #{file_path} #{remote['latest_json_url']}`
           end
 
         end
@@ -84,27 +84,27 @@ namespace :openstates do
       openstates do
 
         # Process each zip file we have
-        Dir.glob("#{tmpdir}/*.zip").each do |zipfile|
-           dirs_in_zip = `unzip -l #{zipfile} | egrep -v 'Archive|Length|----|files$' | awk '{print $4}' | awk -F/ '{print $1}' | sort -u`.scan(/^.*$/)
+        Dir.glob("#{tmp_dir}/*.zip").each do |zip_file|
+           dirs_in_zip = `unzip -l #{zip_file} | egrep -v 'Archive|Length|----|files$' | awk '{print $4}' | awk -F/ '{print $1}' | sort -u`.scan(/^.*$/)
 
            # Ensure a clean slate before unzipping
-           dirs_in_zip.each {|zipdirname| FileUtils.rm_rf("#{tmpdir}/#{zipdirname}")}
+           dirs_in_zip.each { |zip_dir_name| FileUtils.rm_rf("#{tmp_dir}/#{zip_dir_name}") }
 
            # Unzip
-           puts "Unzipping #{zipfile}"
-           unzip = "unzip -d #{tmpdir} #{zipfile}"
+           puts "Unzipping #{zip_file}"
+           unzip = "unzip -d #{tmp_dir} #{zip_file}"
 
            rc = system("#{unzip} 1>/dev/null")
            abort "unzip failed: #{unzip}" unless rc
 
-           File.delete(zipfile)
+           File.delete(zip_file)
 
            # Traverse the unzipped directories
            # http://www.ruby-doc.org/stdlib-1.9.3/libdoc/find/rdoc/Find.html
-           dirs_in_zip.each do |zipdirname|
-             zipdir = "#{tmpdir}/#{zipdirname}"
+           dirs_in_zip.each do |zip_dir_name|
+             zip_dir = "#{tmp_dir}/#{zip_dir_name}"
 
-             Find.find(zipdir) do |path|
+             Find.find(zip_dir) do |path|
 
                # Process a directory
                if FileTest.directory?(path)
@@ -112,9 +112,9 @@ namespace :openstates do
                  abort "Should never reach this"
                end
 
-               mongodoc = path
-               puts "  #{mongodoc.sub("#{tmpdir}/", '')}"
-               json_id, json_updated_at = extract_from_json_document(mongodoc)
+               mongo_doc = path
+               puts "  #{mongo_doc.sub("#{tmp_dir}/", '')}"
+               json_id, json_updated_at = extract_from_json_document(mongo_doc)
 
                ## @todo Skip updating document if database updated_at is newer
                #objs = Committee.where(id: json_id)
@@ -125,15 +125,15 @@ namespace :openstates do
                # Assume directory name maps to MongoDB collection name
                # http://docs.mongodb.org/manual/reference/program/mongoimport/
                # http://docs.mongodb.org/manual/core/import-export/
-               mongoimport = "mongoimport --stopOnError #{db.connection_options} -c #{zipdirname} --type json --file \"#{mongodoc}\" --upsert"
+               mongoimport = "mongoimport --stopOnError #{db.connection_options} -c #{zip_dir_name} --type json --file \"#{mongo_doc}\" --upsert"
 
                rc = system("#{mongoimport} 1>/dev/null")
                abort "mongoimport failed: #{mongoimport}" unless rc
 
-               File.delete(mongodoc) if File.exists?(mongodoc)
+               File.delete(mongo_doc) if File.exists?(mongo_doc)
              end
 
-             FileUtils.rm_rf("#{zipdir}")
+             FileUtils.rm_rf("#{zip_dir}")
            end
         end
       end
@@ -175,7 +175,7 @@ namespace :openstates do
 
   private
   class OpenstatesDatabase
-    attr_reader :config, :session, :hostnum
+    attr_reader :config, :session, :host_num
 
     # Inspired by mongodb.rake
     def initialize(params)
@@ -185,9 +185,9 @@ namespace :openstates do
         abort "Invalid mongoid config: #{path}" unless config.is_a?(Hash) && !config[Rails.env].blank?
         config
       end
-      @session = params['session'].blank? ? 'default' : params['session']
-      @hostnum = params['hostnum'].blank? ? 0         : params['hostnum'].to_i
-      abort "hostnum #{params['hostnum']} cannot exceed #{hosts.count-1}" if @hostnum >= hosts.count
+      @session  = params['session'].blank?  ? 'default' : params['session']
+      @host_num = params['host_num'].blank? ? 0         : params['host_num'].to_i
+      abort "host_num #{params['host_num']} cannot exceed #{hosts.count-1}" if @host_num >= hosts.count
     end
 
     def hosts
@@ -195,11 +195,11 @@ namespace :openstates do
     end
  
     def host
-      hosts.blank? ? nil : hosts[hostnum].split(':')[0]
+      hosts.blank? ? nil : hosts[host_num].split(':')[0]
     end
  
     def port
-      hosts.blank? ? nil : hosts[hostnum].split(':')[1]
+      hosts.blank? ? nil : hosts[host_num].split(':')[1]
     end
  
     def username
