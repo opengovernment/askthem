@@ -1,9 +1,11 @@
 # @see http://sunlightlabs.github.io/openstates-api/
 # @see https://github.com/sunlightlabs/billy/wiki/Differences-between-the-API-and-MongoDB
 namespace :openstates do
+  OPENSTATES_SESSION = 'openstates'
+
   def openstates
     if ENV['SUNLIGHT_API_KEY']
-      Mongoid.override_session('openstates')
+      Mongoid.override_session(OPENSTATES_SESSION)
       yield
       Mongoid.override_session(nil)
     else
@@ -21,47 +23,6 @@ namespace :openstates do
   # http://sunlightlabs.github.io/openstates-api/metadata.html
   def openstates_metadata_url
     "http://openstates.org/api/v1/metadata/?fields=latest_json_date,latest_json_url&apikey=#{ENV['SUNLIGHT_API_KEY']}"
-  end
-
-  # Inspired by mongodb.rake
-  def config
-    @config ||= begin
-      path = Rails.root.join('config', 'mongoid.yml')
-      config = YAML.load(ERB.new(File.read(path)).result)
-      config
-    end
-  end
- 
-  def host(i=0, session='default')
-    hosts = config[Rails.env]['sessions'][session]['hosts']
-    i < hosts.count ? hosts[i].split(':')[0] : nil
-  end
- 
-  def port(i=0, session='default')
-    hosts = config[Rails.env]['sessions'][session]['hosts']
-    i < hosts.count ? hosts[i].split(':')[1] : '27017'
-  end
- 
-  def username(session='default')
-    config[Rails.env]['sessions'][session]['username']
-  end
- 
-  def password(session='default')
-    config[Rails.env]['sessions'][session]['password']
-  end
- 
-  def database(session='default')
-    config[Rails.env]['sessions'][session]['database']
-  end
- 
-  # Inspired by https://gist.github.com/erik-eide/1233435
-  def db_connection_options(i=0, session='default')
-    auth_string = ''
-    auth_string += "-u #{username(session)} " unless username(session).blank?
-    auth_string += "-p #{password(session)} " unless password(session).blank?
-
-    conn_string = "--host #{host(i, session)} --port #{port(i, session)} #{auth_string} -d #{database(session)}"
-    conn_string
   end
 
   def extract_from_json_document(filename)
@@ -117,7 +78,8 @@ namespace :openstates do
     task update: :download do
       require 'find'
       require 'fileutils'
-      OPENSTATES_SESSION = 'openstates'
+
+      db = OpenstatesDatabase.new('session' => OPENSTATES_SESSION)
 
       openstates do
 
@@ -163,7 +125,7 @@ namespace :openstates do
                # Assume directory name maps to MongoDB collection name
                # http://docs.mongodb.org/manual/reference/program/mongoimport/
                # http://docs.mongodb.org/manual/core/import-export/
-               mongoimport = "mongoimport --stopOnError #{db_connection_options(0, OPENSTATES_SESSION)} -c #{zipdirname} --type json --file \"#{mongodoc}\" --upsert"
+               mongoimport = "mongoimport --stopOnError #{db.connection_options} -c #{zipdirname} --type json --file \"#{mongodoc}\" --upsert"
 
                rc = system("#{mongoimport} 1>/dev/null")
                abort "mongoimport failed: #{mongoimport}" unless rc
@@ -210,4 +172,59 @@ namespace :openstates do
       end
     end
   end
+
+  private
+  class OpenstatesDatabase
+    attr_reader :config, :session, :hostnum
+
+    # Inspired by mongodb.rake
+    def initialize(params)
+      @config ||= begin
+        path = Rails.root.join('config', 'mongoid.yml')
+        config = YAML.load(ERB.new(File.read(path)).result)
+        abort "Invalid mongoid config: #{path}" unless config.is_a?(Hash) && !config[Rails.env].blank?
+        config
+      end
+      @session = params['session'].blank? ? 'default' : params['session']
+      @hostnum = params['hostnum'].blank? ? 0         : params['hostnum'].to_i
+      abort "hostnum #{params['hostnum']} cannot exceed #{hosts.count-1}" if @hostnum >= hosts.count
+    end
+
+    def hosts
+      config[Rails.env]['sessions'][session]['hosts']
+    end
+ 
+    def host
+      hosts.blank? ? nil : hosts[hostnum].split(':')[0]
+    end
+ 
+    def port
+      hosts.blank? ? nil : hosts[hostnum].split(':')[1]
+    end
+ 
+    def username
+      config[Rails.env]['sessions'][session]['username']
+    end
+ 
+    def password
+      config[Rails.env]['sessions'][session]['password']
+    end
+ 
+    def database
+      config[Rails.env]['sessions'][session]['database']
+    end
+ 
+    # Inspired by https://gist.github.com/erik-eide/1233435
+    def connection_options
+      conn_string = ''
+      conn_string += "--host #{host} "         unless host.blank?
+      conn_string += "--port #{port} "         unless port.blank?
+      conn_string += "--username #{username} " unless username.blank?
+      conn_string += "--password #{password} " unless password.blank?
+      conn_string += "--db #{database} "       unless database.blank?
+      conn_string
+    end
+
+  end # OpenstatesDatabase
+
 end
