@@ -46,6 +46,7 @@ describe User do
     describe '#perform' do
       it "should geocode the user's address", :vcr do
         User.perform(user.id, 'geocode')
+        p user.inspect
         user.reload.to_coordinates.should == [40.7189099, -74.0002784]
       end
     end

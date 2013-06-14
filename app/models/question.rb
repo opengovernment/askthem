@@ -5,6 +5,8 @@ class Question
 
   # The author of the question.
   belongs_to :user
+  accepts_nested_attributes_for :user
+
   # The signatures in support of the question.
   has_many :signatures
 

@@ -42,9 +42,11 @@ class QuestionsController < ApplicationController
     @person = @question.person if @question.person_id.present?
     @user = @question.user
 
-    @user.save if !user_signed_in? && @user.valid?
-
-    if @question.save
+    # mongoid nested user
+    # saving doesn't prevent question saving for belongs_to
+    # when user is invalid, thus we split it up
+    if @question.valid? && (user_signed_in? || @user.valid?)
+      @question.save
       redirect_to question_path(@state_code, @question)
     else
       set_up_steps

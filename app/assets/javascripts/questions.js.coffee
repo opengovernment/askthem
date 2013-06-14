@@ -60,12 +60,14 @@ jQuery ($) ->
         $('div.twitter').hide()
         $('div.address_lookup').show()
         $('div.address_lookup input[type=text]:eq(0)').focus()
+        reloadValidationForForm()
+
 
     if !$(this).hasClass('active')
       $('span.toggle a.active').removeClass('active icon-ok')
       $(this).addClass('active icon-ok')
 
-  $("#zipcode").keyup(->
+  $("#question_user_attributes_postal_code").keyup(->
     zipLength = $(this).val().length
     if zipLength is 5 or zipLength > 5
       $('.loading').hide()
@@ -105,10 +107,10 @@ jQuery ($) ->
     $('#confirm-person-attributes').html "<strong>#{jurisdiction}</strong>"
 
   getPeople = (->
-    address = $('#street').val()
-    address += ' ' + $('#city').val()
-    address += ' ' + $('#question_user_region').val()
-    address += ' ' + $('#zipcode').val()
+    address = $('#question_user_attributes_street_address').val()
+    address += ' ' + $('#question_user_attributes_locality').val()
+    address += ' ' + $('#question_user_attributes_region').val()
+    address += ' ' + $('#question_user_attributes_postal_code').val()
 
     $.ajax
       url: "/locator.json?q=#{encodeURIComponent(address)}"
@@ -235,11 +237,11 @@ jQuery ($) ->
     value = $('#question_body').val()
     $('#confirm-question-body').text value
 
-  $('#firstname').keyup (event) ->
-    $('.author .firstname').text $('#firstname').val()
+  $('#question_user_attributes_given_name').keyup (event) ->
+    $('.author .firstname').text $('#question_user_attributes_given_name').val()
 
-  $('#lastname').keyup (event) ->
-    $('.author .lastname').text $('#lastname').val()
+  $('#question_user_attributes_family_name').keyup (event) ->
+    $('.author .lastname').text $('#question_user_attributes_family_name').val()
 
   $('#question_subject').change (event) ->
     value = $('#question_subject').val()

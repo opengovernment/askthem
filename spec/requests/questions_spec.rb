@@ -64,13 +64,13 @@ describe 'questions' do
 
           find('a.address_lookup').trigger('click')
 
-          fill_in 'street', with: '2227 Paine Turnpike'
-          fill_in 'city', with: 'Berlin'
-          fill_in 'zipcode', with: '05602'
+          fill_in 'question_user_attributes_street_address', with: '2227 Paine Turnpike'
+          fill_in 'question_user_attributes_locality', with: 'Berlin'
+          fill_in 'question_user_attributes_postal_code', with: '05602'
 
-          find('#zipcode').trigger('blur')
+          find('#question_user_attributes_postal_code').trigger('blur')
 
-          find('#next-button').trigger('click')
+          click_next_button
 
           page.should have_selector '.field_with_errors label.message'
         end
@@ -84,13 +84,11 @@ describe 'questions' do
 
         it 'cannot progress to next step when invalid input', js: true do
           step_id = '#content-step'
-          find('#next-button').trigger('click')
-
-          sleep 1
+          click_next_button
           expect(find(step_id).visible?).to be_true
 
           # try to go to next step without filling out title and body
-          find('#next-button').trigger('click')
+          click_next_button
 
           expect(find(step_id).visible?).to be_true
 
@@ -98,7 +96,7 @@ describe 'questions' do
         end
 
         it 'can get feedback based on input', js: true do
-          find('#next-button').trigger('click')
+          click_next_button
 
           find('#question_title').trigger('blur')
           page.body.should have_content "can't be blank"
@@ -116,6 +114,38 @@ describe 'questions' do
         end
       end
 
+      context 'when signing up user' do
+        before :each do
+          visit "/vt/questions/new"
+          add_person_id
+          add_valid_content
+        end
+
+        it 'cannot progress to next step when invalid input', js: true do
+          step_id = '#sign-up-step'
+
+          click_next_button 3, 3
+
+          expect(find(step_id).visible?).to be_true
+
+          # p page.body
+          page.should have_selector '.field_with_errors label.message'
+        end
+
+        it 'can get feedback based on sign up input', js: true do
+          click_next_button 2
+
+          fill_in 'question_user_attributes_email', with: 'blart'
+          fill_in 'question_user_attributes_password', with: 'short'
+
+          find('#question_user_attributes_password').trigger('blur')
+
+          click_next_button
+
+          page.should have_selector '.field_with_errors label.message'
+        end
+      end
+
       context 'if step fields are valid' do
         before :each do
           visit '/vt/questions/new'
@@ -127,8 +157,7 @@ describe 'questions' do
             expect(find(step_id).visible?).to be_true
 
             unless step_id == step_ids.last
-              find('#next-button').trigger('click')
-              sleep 1 # allow for fade out
+              click_next_button
               expect(find(step_id).visible?).to be_false
             end
           end
@@ -137,8 +166,7 @@ describe 'questions' do
         it 'can click edit and return to beginning of form', js: true do
           number_of_clicks = step_ids.size - 1
           number_of_clicks.times do
-            find('#next-button').trigger('click')
-            sleep 1
+            click_next_button
           end
 
           expect(find('#edit-button').visible?).to be_true
@@ -151,22 +179,33 @@ describe 'questions' do
 
         def add_valid_values
           add_person_id
-
-          script = "jQuery('#question_title').val('test'); "
-          script +=  "jQuery('#question_body').val('#{long_body}'); "
-          page.execute_script script
+          add_valid_content
+          add_valid_user
         end
       end
 
       it 'can choose a person'
       it 'can fill out form'
-      it 'can recieve validation error warnings when form person or user is invalid'
     end
   end
 
   def add_person_id
     person_id_field = "<li><input type=\"radio\" name=\"question[person_id]\" id=\"question_person_id_1\" value=\"1\" checked /></li>"
     script = "jQuery('ol.people-list').last().append('#{person_id_field}'); "
+    page.execute_script script
+  end
+
+  def add_valid_content
+    script = "jQuery('#question_title').val('test'); "
+    script +=  "jQuery('#question_body').val('#{long_body}'); "
+    page.execute_script script
+  end
+
+  def add_valid_user
+    script = "jQuery('#question_user_attributes_given_name').val('John'); "
+    script +=  "jQuery('#question_user_attributes_family_name').val('Doe'); "
+    script +=  "jQuery('#question_user_attributes_email').val('john.doe@example.com'); "
+    script +=  "jQuery('#question_user_attributes_password').val('testtest'); "
     page.execute_script script
   end
 
@@ -177,5 +216,12 @@ describe 'questions' do
     @person.id = 'VTL000008'
     @person.save!
     @person
+  end
+
+  def click_next_button(number_of_clicks = 1, sleepy_time = 1)
+    number_of_clicks.times do
+      find('#next-button').trigger('click')
+      sleep sleepy_time
+    end
   end
 end

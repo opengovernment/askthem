@@ -9,10 +9,10 @@
   <fieldset>
     <%= f.fields_for :user do |user_form| %>
       <label for="firstname" class="lesser">First Name</label>
-      <%= user_form.text_field :given_name, placeholder: 'John', id: 'firstname' %>
+      <%= user_form.text_field :given_name, placeholder: 'John' %>
 
       <label for="lastname" class="lesser">Last Name</label>
-      <%= user_form.text_field :family_name, placeholder: 'Doe', id: 'lastname' %>
+      <%= user_form.text_field :family_name, placeholder: 'Doe' %>
 
       <label for="email" class="lesser">Email</label>
       <%= user_form.text_field :email, placeholder: 'john.doe@gmail.com' %>
@@ -22,10 +22,10 @@
 
       <% unless relevant_steps.include?('recipient') %>
         <label for="street" class="lesser">Address</label>
-        <%= user_form.text_field :street_address, placeholder: 'Street Address', id: 'street' %>
+        <%= user_form.text_field :street_address, placeholder: 'Street Address' %>
 
         <label for="city" class="lesser">City</label>
-        <%= user_form.text_field :locality, placeholder: 'City', id: 'city' %>
+        <%= user_form.text_field :locality, placeholder: 'City' %>
 
         <label for="state" class="lesser">State</label>
 
@@ -34,7 +34,7 @@
         </div>
 
         <label for="zipcode" class="lesser">Zipcode</label>
-        <%= user_form.text_field :postal_code, placeholder: 'ex. 02141', id: 'zipcode' %>
+        <%= user_form.text_field :postal_code, placeholder: 'ex. 02141' %>
       <% end %>
     <% end %>
   </fieldset>

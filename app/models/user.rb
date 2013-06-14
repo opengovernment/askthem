@@ -72,7 +72,7 @@ class User
 
   index('authentications.provider' => 1, 'authentications.uid' => 1)
 
-  validates_presence_of :given_name, :family_name
+  validates_presence_of :given_name, :family_name, :email
   validates_presence_of :street_address, :locality, :region, :postal_code, :country
   validates_inclusion_of :region, in: OpenGovernment::STATES.values, allow_blank: true
   validates_inclusion_of :country, in: %w(US), allow_blank: true
@@ -120,7 +120,7 @@ class User
     case meth.to_s
     when 'geocode'
       user.geocode
-      user.save
+      user.save!
     end
   end
 
