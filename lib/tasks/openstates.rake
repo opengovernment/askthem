@@ -66,6 +66,7 @@ namespace :openstates do
           if ! File.exist?(file_path) && (local.nil? || local['latest_json_date'].to_i < Time.parse(remote['latest_json_date'] + 'UTC').to_i)
             puts "Downloading #{remote['id']}..."
             `curl -s -o #{file_path} #{remote['latest_json_url']}`
+break
           end
 
         end
@@ -121,11 +122,17 @@ namespace :openstates do
                #abort "#{objs.count} entries of committee #{json_id}" unless objs.count == 1
                #next if json_updated_at.to_i <= objs.first.updated_at.to_i
 
+               # Modify the downloaded JSON document to force _id to be the same as id
+               mongo_doc_copy = "#{mongo_doc}.orig"
+               FileUtils.mv(mongo_doc, mongo_doc_copy)
+               File.open(mongo_doc, 'w') { |f| f.write(File.read(mongo_doc_copy).gsub(/"id"/, "\"_id\": \"#{json_id}\", \"id\"")) }
+               FileUtils.rm_rf(mongo_doc_copy)
+
                # Import the document into MongoDB
                # Assume directory name maps to MongoDB collection name
                # http://docs.mongodb.org/manual/reference/program/mongoimport/
                # http://docs.mongodb.org/manual/core/import-export/
-               mongoimport = "mongoimport --stopOnError #{db.connection_options} -c #{zip_dir_name} --type json --file \"#{mongo_doc}\" --upsert"
+               mongoimport = "mongoimport --stopOnError #{db.connection_options} -c #{zip_dir_name} --type json --file \"#{mongo_doc}\" --drop"
 
                rc = system("#{mongoimport} 1>/dev/null")
                abort "mongoimport failed: #{mongoimport}" unless rc
