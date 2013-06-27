@@ -22,7 +22,7 @@
     </label>
 
     <div class="input select icon-angle-down sculpt">
-      <% subject_options = raw('<option value="">Select an Issue</option>') + options_for_select(subjects) -%>
+      <% subject_options = raw('<option value="">Select an Issue</option>') + options_for_select(Subject.all) -%>
       <%= f.select :subject, subject_options %>
     </div>
   </fieldset>

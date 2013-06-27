@@ -31,14 +31,9 @@ class QuestionsController < ApplicationController
     new!
   end
 
-  # TODO: add validation to view and UX
   def create
     @question = Question.new(params[:question])
     @question.state = @state_code
-    # TEMP: our handed code subjects are not consistent as foreign keys
-    # against bills for jurisdiction
-    # TODO: remove this when subject is sorted out
-    @question.subject = nil
     @person = @question.person if @question.person_id.present?
     @user = @question.user
 
