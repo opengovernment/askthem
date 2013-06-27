@@ -7,6 +7,8 @@ OpenGovernment::Application.routes.draw do
 
   root to: 'pages#index'
 
+  match 'splash' => 'pages#splash'
+
   resources :users, only: :show
   resources :signatures, only: :create
 

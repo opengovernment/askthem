@@ -5,6 +5,10 @@ class PagesController < ApplicationController
   respond_to :html
   respond_to :json, only: :locator
 
+  def splash
+    render layout: 'splash'
+  end
+
   def index
     @jurisdictions = Metadatum.all.to_a + Metadatum.with(session: 'openstates').all.to_a
     render layout: 'homepage'
