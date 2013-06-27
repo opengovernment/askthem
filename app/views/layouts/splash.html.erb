@@ -29,10 +29,6 @@
   <header class="main">
     <section class="mobile_admin_nav">
       <%= link_to 'OpenGovernment', root_path, class: 'logo' %>
-      <a href="#top" class="expose_nav icon-reorder"></a>
-      <ul class="admin_nav thin">
-        <%= render partial: 'shared/user' %>
-      </ul>
     </section>
     <div class="wrapper">
       <%= link_to 'OpenGovernment', root_path, class: 'logo' %>
@@ -44,9 +40,11 @@
             <ul class="level">
               <li class="active">
                 <a href="#">Individual</a>
+                <i class="icon-angle-down"></i>
               </li>
               <li>
                 <a href="#">Elected Official</a>
+                <i class="icon-angle-down"></i>
               </li>
             </ul>
           </nav>
@@ -62,7 +60,10 @@
     </div>
     <div class="clear"></div>
   </header>
-  <section>
+  <section id="content_body">
+    <div class="content_body header">
+      <h2>About the <br/>Project &amp; Team</h2>
+    </div>
     <div class="content_body">
       <div class="wrapper">
         <div class="leftCol">
@@ -105,44 +106,50 @@
       var newPad = ((wheight - elem.offsetHeight)/2) - 50;
       elem.style.paddingTop = newPad + 'px';
       elem.style.paddingBottom = newPad + 'px';
+      document.getElementById('content_body').style.opacity = 0;
     }
-    newsSignUpHeight();
+    if (document.body.clientWidth > 420){
+      newsSignUpHeight();
+    }
   </script>
   <%= javascript_include_tag 'application' %>
   
   <script type="text/javascript">
-    $(window).resize(function(){
-      var wheight = window.innerHeight;
-      elem = $('#news_signup');
-      var newPad = ((wheight - elem.height())/2) - 115;
-      $(elem).css('paddingTop', newPad);
-      $(elem).css('paddingBottom', newPad);
-    });
+    if($(document).width() > 420){
+      $(window).resize(function(){
+        var wheight = window.innerHeight;
+        elem = $('#news_signup');
+        var newPad = ((wheight - elem.height())/2) - 115;
+        $(elem).css('paddingTop', newPad);
+        $(elem).css('paddingBottom', newPad);
+      });
     
-    didScroll = false;
+      didScroll = false;
     
-    $(window).scroll(function(){
-        didScroll = true;
-    });
+      $(window).scroll(function(){
+          didScroll = true;
+      });
     
-    setInterval(function(){
-        if( didScroll ) {
-            scrollPoint = $(window).scrollTop();
+      setInterval(function(){
+          if( didScroll ) {
+              scrollPoint = $(window).scrollTop();
             
-            scrollBG = 160 - (scrollPoint * .09) + '%';
-            pAlpha = 1 - (scrollPoint * .005);
+              scrollBG = 160 - (scrollPoint * .09) + '%';
+              pAlpha = 1 - (scrollPoint * .005);
+              cAlpha = 0 + (scrollPoint * .0025);
             
-            if (160 - (scrollPoint * .05) < 100){
-              scrollBG = '100%';
-            }
+              if (160 - (scrollPoint * .05) < 100){
+                scrollBG = '100%';
+              }
             
-            $('body.splash').css('background-position', '50% ' + scrollBG + '');
-            $('header.main div.rightCol p').fadeTo(0, pAlpha);
-            $('header.main div.leftCol').fadeTo(0, pAlpha);
-            
-            didScroll = false;
-        }
-    }, 50);
-    
+              $('body.splash').css('background-position', '50% ' + scrollBG + '');
+              $('header.main div.rightCol p').fadeTo(0, pAlpha);
+              $('header.main div.leftCol').fadeTo(0, pAlpha);
+              
+              $('section#content_body').fadeTo(0, cAlpha);
+              didScroll = false;
+          }
+      }, 50);
+    }
   </script>
 </body>

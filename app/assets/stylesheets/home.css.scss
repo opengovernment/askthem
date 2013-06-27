@@ -361,7 +361,7 @@ body.splash{
     a.logo{
       position:fixed;
     }
-    h1{
+    h1, h2{
       @include RobotoThin();
       font-weight:100;
       font-size:3.375em;
@@ -369,11 +369,14 @@ body.splash{
       margin-bottom: 36px;
     }
     nav{
-      border-top:1px solid #aecacc;
+      border-top:1px solid rgba(174, 202, 204, .3);
       margin-bottom: 12px;
       margin-top: 12px;
-      ul{
-        border-bottom:1px solid #aecacc;
+      ul.level{
+        border-bottom:1px solid rgba(174, 202, 204, .3);
+        li.active i{
+          background:#DCF9FD;
+        }
       }
     }
     form{
@@ -403,7 +406,8 @@ body.splash{
   }
   header.main{
     margin-top:36px;
-    
+    position: relative;
+    background: none;
     div.news_signup{
       display: block;
       padding:40px 0;
@@ -433,6 +437,11 @@ body.splash{
   div.content_body{
     background:rgba(240,251,252,.97);
     margin-top:60px;
+    box-shadow: 0 -6px 0 0 rgba(0, 0, 0, .08);
+    &.header{
+      background:none;
+      box-shadow:none;
+    }
     div.leftCol{
       padding-top:0;
       margin-top:42px;
