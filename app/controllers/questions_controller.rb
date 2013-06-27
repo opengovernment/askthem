@@ -28,6 +28,11 @@ class QuestionsController < ApplicationController
       @question.person = @person
     end
 
+    if params[:bill]
+      @bill = Bill.in(@state_code).find(params[:bill])
+      @question.bill = @bill
+    end
+
     new!
   end
 
