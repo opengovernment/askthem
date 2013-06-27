@@ -3,7 +3,10 @@
     <h1 class="action">Ask a Question</h1>
     <span class="ref"><span class="emph">To:</span>
       <span id="content-person-name"><%= "#{person.name}," if person -%></span>
-      <span class="emph">re:</span> S 26 188th Legislature (2013-2014)</span>
+      <% if bill -%>
+        <span class="emph">re:</span> <span class="bill-title"><%= short_bill_title(bill) -%></span>
+      <% end -%>
+    </span>
   </header>
   <fieldset>
     <label for="question_title"></label>
@@ -22,7 +25,7 @@
     </label>
 
     <div class="input select icon-angle-down sculpt">
-      <% subject_options = raw('<option value="">Select an Issue</option>') + options_for_select(subjects) -%>
+      <% subject_options = raw('<option value="">Select an Issue</option>') + options_for_select(Subject.all) -%>
       <%= f.select :subject, subject_options %>
     </div>
   </fieldset>

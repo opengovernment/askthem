@@ -63,7 +63,7 @@
         </ol>
       </div>
     </div>
-    <%= link_to 'Ask about this Bill', new_question_path(@jurisdiction.abbreviation), class: 'bill_detail cta_pill' %>
+    <%= link_to 'Ask about this Bill', new_question_path(@jurisdiction.abbreviation, bill: @bill), class: 'bill_detail cta_pill' %>
     <%# link_to 'Tell your Senator what you think', '#', class: 'sim_act' %>
   </header>
 

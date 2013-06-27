@@ -17,8 +17,8 @@ describe Question do
   end
 
   it 'should validate if the subject is in the list of subjects' do
-    bill = FactoryGirl.create(:bill, subjects: ['valid'])
-    expect{FactoryGirl.create(:question, subject: 'valid')}.to_not raise_error(Mongoid::Errors::Validations)
+    valid_subject = Subject.all.first
+    expect{ FactoryGirl.create(:question, subject: valid_subject) }.to_not raise_error(Mongoid::Errors::Validations)
   end
   it 'should not validate if the subject is not in the list of subjects' do
     expect{FactoryGirl.create(:question, subject: 'invalid')}.to raise_error(Mongoid::Errors::Validations, /is not included in the list of subjects/)
