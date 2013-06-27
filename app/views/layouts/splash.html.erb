@@ -127,13 +127,16 @@
     
     setInterval(function(){
         if( didScroll ) {
-            //catch the windows scrolled point
             scrollPoint = $(window).scrollTop();
             
-            scrollBG = 120 - (scrollPoint * .06) + '%';
+            scrollBG = 160 - (scrollPoint * .09) + '%';
             pAlpha = 1 - (scrollPoint * .005);
             
-            $('body.splash').css('background-position', '50% '+ scrollBG + '');
+            if (160 - (scrollPoint * .05) < 100){
+              scrollBG = '100%';
+            }
+            
+            $('body.splash').css('background-position', '50% ' + scrollBG + '');
             $('header.main div.rightCol p').fadeTo(0, pAlpha);
             $('header.main div.leftCol').fadeTo(0, pAlpha);
             

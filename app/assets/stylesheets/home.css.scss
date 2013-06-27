@@ -345,8 +345,8 @@ body.splash{
   background: #DCF9FD;
   background-image: url(/assets/footer_illustration_temp@2x.png);
   background-repeat: no-repeat;
-  background-position: 50% 120%;
-  background-size: 115%;
+  background-position: 50% 160%;
+  background-size: 120%;
   header.main, div.content_body{
     display:block;
     margin:auto 6.25% auto 14.285714285714%;
@@ -445,7 +445,7 @@ body.splash{
     }
     div.wrapper{
       margin-left:03.370786516854%;
-      padding-bottom:120px;
+      padding-bottom:90px;
     }
     p{
       @include RobotoLight();
