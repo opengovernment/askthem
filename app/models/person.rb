@@ -23,24 +23,22 @@ class Person
   scope :active, where(active: true).asc(:chamber, :family_name) # no index includes `last_name`
 
   # assumes only one matching location
-  # currently limited to openstates
-  # TODO: add OgLocal API
-  # TODO: add other relevant APIs
+  # openstates as default API
+  # override api_key and api_url in subclasses
+  # to work with other apis
   def self.for_location(location)
-    ids = Array.new
-    data = Geocoder.search(location).first # request.location geocodes by IP
-    if data.country_code == 'US' && data.latitude.nonzero? && data.longitude.nonzero?
-      ids = JSON.parse(RestClient.get('http://openstates.org/api/v1/legislators/geo/', params: {
-        fields: 'id',
-        lat: data.latitude,
-        long: data.longitude,
-        apikey: ENV['SUNLIGHT_API_KEY'],
-      })).map do |legislator|
-        legislator['id']
+    ids = []
+    data = Geocoder.search(location).first
+
+    if location_is_valid? data
+      JSON.parse(results_for_location(data, fields: 'id')).map do |attributes|
+        ids << attributes['id']
       end
     end
+
     where(:id.in => ids)
   end
+
   # Inactive legislators will not have top-level `chamber` or `district` fields.
   #
   # @param [String,Symbol] `:chamber` or `:district`
@@ -132,13 +130,34 @@ class Person
     votesmart_url('campaign-finance')
   end
 
-private
-
+  private
   def votesmart_url(section = nil)
     if read_attribute(:votesmart_id)
       url = "http://votesmart.org/candidate/"
       url += "#{section}/" if section
       url += read_attribute(:votesmart_id)
     end
+  end
+
+  def self.api_key
+    ENV['SUNLIGHT_API_KEY']
+  end
+
+  def self.api_url
+    'http://openstates.org/api/v1/legislators/geo/'
+  end
+
+  def self.location_is_valid?(data)
+    data.country_code == 'US' && data.latitude.nonzero? && data.longitude.nonzero?
+  end
+
+  def self.results_for_location(data, options = {})
+    params = {
+      lat: data.latitude,
+      long: data.longitude,
+      apikey: api_key
+    }.merge(options)
+
+    RestClient.get api_url, params: params
   end
 end
