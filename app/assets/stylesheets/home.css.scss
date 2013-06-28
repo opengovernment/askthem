@@ -356,10 +356,11 @@ body.splash{
     div.wrapper{
       padding:0;
       min-height:0;
-      width:auto;
+      width:100%;
     }
     a.logo{
       position:fixed;
+      left:14.2857%;
     }
     h1, h2{
       @include RobotoThin();
@@ -383,7 +384,7 @@ body.splash{
       input[type=text], input[type=email]{
         float:left;
         height:45px;
-        width:76.315789473684%;
+        width:75.315789473684%;
       }
       input[type=submit]{
         box-sizing: border-box;
