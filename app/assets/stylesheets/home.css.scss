@@ -487,6 +487,67 @@ body.splash{
     z-index: 2;
     position:relative;
   }
+  nav.scroll_content{
+    display: block;
+    margin: auto 6.25% auto 14.285714285714%;
+    min-width: 0;
+    max-width: 890px;
+    text-align:right;
+    width: 79.464285714286%;
+    position: fixed;
+    z-index:5;
+    &.above{
+      top: 42px;
+    }
+    &.below{
+      bottom: 42px;
+    }
+    a{
+      background: #FFF;
+      @include border-radius(3px);
+      cursor:pointer;
+      display:inline-block;
+      margin-right: 05.357142857143%;
+      padding: 18px 0;
+      text-align: center;
+      width: 24.719101123596%;
+      &.show_below{
+        &:before{
+          display: inline-block;
+          content: "";
+          border-top: 12px solid #FFF;
+          border-left: 12px solid rgba(0, 0, 0, 0);
+          border-right: 12px solid rgba(0, 0, 0, 0);
+          position: absolute;
+          bottom: -10px;
+          margin-left: 1%;
+          width: 0;
+          height: 0;
+        }
+      }
+      &.show_above{
+        top:20px;
+        &:after{
+          display: inline-block;
+          content: "";
+          border-bottom: 12px solid #FFF;
+          border-left: 12px solid rgba(0, 0, 0, 0);
+          border-right: 12px solid rgba(0, 0, 0, 0);
+          position: absolute;
+          top: -10px;
+          margin-left: -5.6%;
+          width: 0;
+          height: 0;
+        }
+      }
+      &:hover{
+        display:inline-block;
+      }
+      &:active{
+        display:inline-block;
+      }
+    }
+  }
   div.shade_pos{
     display: block;
     clear: both;
