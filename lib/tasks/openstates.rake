@@ -65,7 +65,8 @@ namespace :openstates do
 
           if ! File.exist?(file_path) && (local.nil? || local['latest_json_date'].to_i < Time.parse(remote['latest_json_date'] + 'UTC').to_i)
             puts "Downloading #{remote['id']}..."
-            `curl -s -o #{file_path} #{remote['latest_json_url']}`
+            rc = system("curl --silent --show-error -o #{file_path} #{remote['latest_json_url']}")
+            abort "Error downloading #{remote['latest_json_url']}" unless rc == true
           end
 
         end
