@@ -47,6 +47,9 @@ $salmon:#FA7564;
 @mixin RobotoRegular(){
   font-family:'RobotoRegular', helvetica, arial, verdana, sans-serif;
 }
+@mixin RobotoBlack(){
+  font-family:'RobotoBlack', helvetica, arial, verdana, sans-serif;
+}
 
 @mixin Helvetica(){
   font-family:helvetica, arial, verdana, sans-serif;

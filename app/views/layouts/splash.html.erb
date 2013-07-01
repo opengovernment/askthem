@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie10 lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie10 lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie10 lt-ie9" lang="en"> <![endif]-->
+<!--[if IE 9]>    <html class="no-js lt-ie10" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <link rel="dns-prefetch" href="//connect.facebook.net">
+  <title><%= title %></title>
+  <meta name="description" content="<%= description %>">
+  <meta name="author" content="Participatory Politics Foundation">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+  <meta property="og:title" content="<%= title %>">
+  <meta property="og:description" content="<%= description %>">
+  <meta property="og:site_name" content="OpenGovernment">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="<%= current_url %>">
+  <meta property="og:image" content="<%= og_image %>">
+  <meta property="og:locale" content="en_US">
+  <meta property="fb:admins" content="100002666906486">
+  <meta property="fb:app_id" content="124751554385930">
+  <%= javascript_include_tag 'modernizr-2.5.3.min.js' %>
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+  <%= csrf_meta_tags %>
+</head>
+<body class="splash">
+  <header class="main">
+    <section class="mobile_admin_nav">
+      <%= link_to 'OpenGovernment', root_path, class: 'logo' %>
+    </section>
+    <div class="wrapper">
+      <%= link_to 'OpenGovernment', root_path, class: 'logo' %>
+      <div class="news_signup" id="news_signup">
+        <div class="leftCol">
+          <h1>The "We The People" for every elected official.</h1>
+          <p>Get notified and ask a question when we launch</p>
+          <nav>
+            <ul class="level">
+              <li class="active">
+                <a href="#">Individual</a>
+                <i class="icon-angle-down"></i>
+              </li>
+              <li>
+                <a href="#">Elected Official</a>
+                <i class="icon-angle-down"></i>
+              </li>
+            </ul>
+          </nav>
+          <form action="/ma/questions">
+            <input type="email" name="" id="" placeholder="E-mail" />
+            <input type="submit" value="Notify Me" class="cta_pill" />
+          </form>
+        </div>
+        <div class="rightCol">
+          <p>OpenGovernment.org is a free and open-source tool for engaging with government at every level: city, state and federal. Ask questions and get answers in an open public forum.</p>
+        </div>
+      </div>
+    </div>
+    <div class="clear"></div>
+  </header>
+  <nav class="scroll_content below">
+    <a href="#" class="show_below">About</a>
+  </nav>
+  <nav class="scroll_content above" style="display:none;">
+    <a href="#" class="show_above">Get Notified</a>
+  </nav>
+  <section id="content_body">
+    <div class="content_body header">
+      <h2>About the <br/>Project &amp; Team</h2>
+    </div>
+    <div class="content_body">
+      <div class="wrapper">
+        <div class="leftCol">
+          <%= yield %>
+        </div>
+        <div class="rightCol">
+          <h4>Advisory Council</h4>
+          <ul>
+            <li>
+              <div class="avatar">
+                <img src="http://lorempixel.com/60/60/" alt="" class="avatar" />
+              </div>
+              <div class="person-info">
+                <h3>Micah Sifry</h3>
+                <p>Personal Democracy Media &amp; TechPresident, "Good Question Project"</p>
+              </div>
+            </li>
+            <li>
+              <div class="avatar">
+                <img src="http://lorempixel.com/60/60/" alt="" class="avatar" />
+              </div>
+              <div class="person-info">
+                <h3>Nick Grossman</h3>
+                <p>Union Square Ventures</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      <div class="clear"></div>
+      </div>
+    </div>
+  </section>
+  <div class="shade_pos">
+    <div class="shade"></div>
+  </div>
+  <script type="text/javascript">
+    function newsSignUpHeight(){
+      var wheight = window.innerHeight;
+      elem = document.getElementById('news_signup');
+      var newPad = ((wheight - elem.offsetHeight)/2) - 50;
+      elem.style.paddingTop = newPad + 'px';
+      elem.style.paddingBottom = newPad + 'px';
+      document.getElementById('content_body').style.opacity = 0;
+    }
+    if (document.body.clientWidth > 420){
+      newsSignUpHeight();
+    }
+  </script>
+  <%= javascript_include_tag 'application' %>
+  
+  <script type="text/javascript">
+    if($(document).width() > 420){
+      $(window).resize(function(){
+        var wheight = window.innerHeight;
+        elem = $('#news_signup');
+        var newPad = ((wheight - elem.height())/2) - 115;
+        $(elem).css('paddingTop', newPad);
+        $(elem).css('paddingBottom', newPad);
+      });
+    
+      didScroll = false;
+    
+      $(window).scroll(function(){
+          didScroll = true;
+      });
+    
+      var oldLeft = $('a.logo').css('left');
+      var topSet = 395;
+      
+      setInterval(function(){
+          if( didScroll ) {
+              scrollPoint = $(window).scrollTop();
+            
+              scrollBG = 160 - (scrollPoint * .09) + '%';
+              pAlpha = 1 - (scrollPoint * .005);
+              cAlpha = 0 + (scrollPoint * .0025);
+            
+              if (160 - (scrollPoint * .05) < 100){
+                scrollBG = '100%';
+              }
+            
+              $('body.splash').css('background-position', '50% ' + scrollBG + '');
+              $('header.main div.rightCol p').fadeTo(0, pAlpha);
+              $('header.main div.leftCol, .scroll_content.below').fadeTo(0, pAlpha);
+              
+              $('section#content_body, .scroll_content.above').fadeTo(0, cAlpha);
+              
+              if ($('.content_body.header h2').offset().top <= scrollPoint + 120 && !$('a.logo').hasClass('stick')){
+                $('a.logo').css({
+                  'position': 'absolute',
+                  'left': 0,
+                  'top': topSet
+                }).addClass('stick');
+              }else{
+                if($('.content_body.header h2').offset().top >= scrollPoint + 120){
+                  $('a.logo').css({
+                    'position': 'fixed',
+                    'left': oldLeft,
+                    'top': 'auto'
+                  }).removeClass('stick');
+                }
+              }
+              
+              didScroll = false;
+          }
+      }, 50);
+    }
+  </script>
+</body>

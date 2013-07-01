@@ -1,7 +1,9 @@
 <article id="recipient-step" <%= step_class_for(step, relevant_steps) -%>>
   <header>
     <h1 class="action">Who should answer this question?</h1>
-    <span class="ref"><span class="emph">re:</span> S 26 188th Legislature (2013-2014)</span>
+    <% if bill -%>
+      <span class="ref"><span class="emph">re:</span> <span class="bill-title"><%= short_bill_title(bill) -%></span></span>
+    <% end -%>
   </header>
 
   <span class="toggle">

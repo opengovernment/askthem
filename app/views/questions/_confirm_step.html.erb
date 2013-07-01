@@ -12,14 +12,16 @@
       <% if person.present? %>
         <span class="emph">To:</span> <span id="confirm-person-name"><strong><%= link_to question.person.name, person_path(@jurisdiction.abbreviation, question.person.id) %></strong></span>
         <span id="confirm-person-attributes">(<%= person_attributes(question.person) %>)</span>
-        <% if question.bill_id? %>
-        <span class="emph">on:</span> <span id="confirm-bill-title"><strong><%= link_to short_bill_title(question.bill), bill_path(@jurisdiction.abbreviation, question.bill.id) %></strong></span>
-        <% end %>
       <% else %>
         <span class="emph">To:</span> <span id="confirm-person-name"></span>
         <span id="confirm-person-attributes"></span>
-        <span class="emph" style="display:none;">on:</span> <span id="confirm-bill-title"></strong></span>
       <% end %>
+
+      <% if bill -%>
+        <span class="emph">on:</span> <span id="confirm-bill-title"><strong><%= link_to short_bill_title(bill), bill_path(@jurisdiction.abbreviation, bill.id) %></strong></span>
+      <% else -%>
+        <span class="emph" style="display:none;">on:</span> <span id="confirm-bill-title"></strong></span>
+      <% end -%>
     </h4>
 
     <h1 id="confirm-question-title"><%= question.title %></h1>
@@ -43,6 +45,6 @@
       <% end %>
     </span>
   </span>
-  
+
   <div class="controls"><%= f.submit 'Publish', class: 'cta_pill' %></div>
 </article>

@@ -89,7 +89,7 @@ private
   end
 
   def subject_must_be_included_in_the_list_of_subjects
-    unless subject.blank? || Bill.in(state).distinct('subjects').include?(subject)
+    unless subject.blank? || Subject.all.include?(subject)
       errors.add(:subject, 'is not included in the list of subjects')
     end
   end
