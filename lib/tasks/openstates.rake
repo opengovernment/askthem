@@ -59,14 +59,23 @@ namespace :openstates do
       Mongoid.raise_not_found_error = false
 
       openstates do
-        JSON.parse(RestClient.get(metadata_url)).each do |remote|
+        begin
+          metadata = RestClient.get(metadata_url)
+        rescue Exception => e
+          abort "Error downloading metadata: #{metadata_url}\n#{e.message}"
+        end
+
+        JSON.parse(metadata).each do |remote|
           file_path = File.join(tmp_dir, File.basename(remote['latest_json_url']))
           local = Metadatum.find(remote['id'])
 
           if ! File.exist?(file_path) && (local.nil? || local['latest_json_date'].to_i < Time.parse(remote['latest_json_date'] + 'UTC').to_i)
             puts "Downloading #{remote['id']}..."
-            `curl -s -o #{file_path} #{remote['latest_json_url']}`
-break
+            rc = system("curl --silent --show-error -o #{file_path} #{remote['latest_json_url']}")
+            unless rc == true
+              FileUtils.rm_rf("#{file_path}")  # Ensure no partial or invalid download survives
+              abort "Error downloading #{remote['latest_json_url']}"
+            end
           end
 
         end
