@@ -144,7 +144,11 @@ namespace :openstates do
                mongoimport = "mongoimport --stopOnError #{db.connection_options} -c #{zip_dir_name} --type json --file \"#{mongo_doc}\" --drop"
 
                rc = system("#{mongoimport} 1>/dev/null")
-               abort "mongoimport failed: #{mongoimport}" unless rc
+               unless rc
+                 puts mongoimport
+                 system("#{mongoimport}")
+                 abort
+               end
 
                File.delete(mongo_doc) if File.exists?(mongo_doc)
              end
