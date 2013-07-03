@@ -134,7 +134,7 @@ namespace :openstates do
                # Modify the downloaded JSON document to force _id to be the same as id
                mongo_doc_copy = "#{mongo_doc}.orig"
                FileUtils.mv(mongo_doc, mongo_doc_copy)
-               File.open(mongo_doc, 'w') { |f| f.write(File.read(mongo_doc_copy).gsub(/"id"/, "\"_id\": \"#{json_id}\", \"id\"")) }
+               File.open(mongo_doc, 'w') { |f| f.write(File.read(mongo_doc_copy).gsub(/"id":/, "\"_id\": \"#{json_id}\", \"id\":")) }
                FileUtils.rm_rf(mongo_doc_copy)
 
                # Import the document into MongoDB
