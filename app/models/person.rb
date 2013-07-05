@@ -24,7 +24,7 @@ class Person
 
   # assumes only one matching location
   # openstates as default API
-  # override api_key and api_url in subclasses
+  # override base_api_key and api_geo_url in subclasses
   # to work with other apis
   def self.for_location(location)
     ids = []
@@ -37,6 +37,15 @@ class Person
     end
 
     where(:id.in => ids)
+  end
+
+  # for now, only run if we have a clean slate
+  def self.load_from_apis_for_jurisdiction(abbreviation)
+    return if self.in(abbreviation).count > 0
+
+    JSON.parse(results_for_jurisdiction(abbreviation)).map do |attributes|
+      create_from_apis attributes
+    end
   end
 
   # Inactive legislators will not have top-level `chamber` or `district` fields.
@@ -86,7 +95,7 @@ class Person
 
   # Returns the person's special interest group ratings.
   def ratings
-    Rating.where(candidateId: read_attribute(:votesmart_id) || person_detail.votesmart_id)
+    Rating.where(candidateId: votesmart_id || person_detail.votesmart_id)
   end
 
   # Returns questions answered by the person.
@@ -114,6 +123,10 @@ class Person
     end
   end
 
+  def votesmart_id
+    read_attribute(:votesmart_id)
+  end
+
   def votesmart_biography_url
     votesmart_url('biography')
   end
@@ -132,10 +145,10 @@ class Person
 
   private
   def votesmart_url(section = nil)
-    if read_attribute(:votesmart_id)
+    if votesmart_id
       url = "http://votesmart.org/candidate/"
       url += "#{section}/" if section
-      url += read_attribute(:votesmart_id)
+      url += votesmart_id
     end
   end
 
@@ -143,12 +156,24 @@ class Person
     ENV['SUNLIGHT_API_KEY']
   end
 
-  def self.api_url
-    'http://openstates.org/api/v1/legislators/geo/'
+  def self.base_api_url
+    'http://openstates.org/api/v1/legislators/'
+  end
+
+  def self.api_geo_url
+    "#{base_api_url}geo/"
   end
 
   def self.location_is_valid?(data)
     data.country_code == 'US' && data.latitude.nonzero? && data.longitude.nonzero?
+  end
+
+  def self.result_for_single(id)
+    params = {
+      apikey: api_key
+    }
+
+    RestClient.get "#{base_api_url}#{id}/", params: params
   end
 
   def self.results_for_location(data, options = {})
@@ -158,6 +183,26 @@ class Person
       apikey: api_key
     }.merge(options)
 
-    RestClient.get api_url, params: params
+    RestClient.get api_geo_url, params: params
+  end
+
+  def self.results_for_jurisdiction(abbreviation, options = {})
+    params = {
+      state: abbreviation,
+      apikey: api_key
+    }.merge(options)
+
+    RestClient.get base_api_url, params: params
+  end
+
+  def self.create_from_apis(attributes)
+    person = with(session: 'openstates').new(attributes)
+    # id cannot be mass assigned..., have to set it explictly
+    person.id = attributes['id']
+    person.save!
+
+    PersonDetailRetriever.new(person).retrieve!
+
+    person
   end
 end

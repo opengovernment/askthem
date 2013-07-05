@@ -16,6 +16,38 @@ describe Person do
     end
   end
 
+  describe '.load_from_api_for_jurisdiction' do
+    it 'does not overwrite existing people' do
+      Person.with(session: 'openstates').load_from_apis_for_jurisdiction('vt')
+      expect(Person.in('vt').count).to eq 1
+    end
+
+    # @todo fix collection clearning!!!
+    it 'loads people into database given a jurisdiction abbreviation', :vcr do
+      # HACK, a simple destroys was not working
+      Mongoid::Sessions.with_name('openstates').collections.each do |collection|
+        collection.drop
+      end
+      @metadatum = Metadatum.with(session: 'openstates').create(abbreviation: 'vt')
+      # END HACK
+
+      Person.with(session: 'openstates').load_from_apis_for_jurisdiction('vt')
+      expect(Person.in('vt').count).to eq 180
+    end
+  end
+
+  describe '#votesmart_id' do
+    it 'returns nil when not set or set to nil' do
+      expect(@person.votesmart_id).to be_nil
+    end
+
+    it 'returns votesmart_id when set' do
+      votesmart_id = '1234'
+      @person.write_attribute :votesmart_id, votesmart_id
+      expect(@person.votesmart_id).to eq votesmart_id
+    end
+  end
+
   describe '#most_recent_district' do
     it 'returns nothing when there is no district' do
       expect(@person.most_recent_district).to be_nil

@@ -12,7 +12,6 @@ namespace :congress do
 
   namespace :api do
     namespace :download do
-
       desc 'Download legislators from Congress API'
       task legislators: :environment do
         openstates do

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # A simple wrapper for the Project VoteSmart API.
 class ProjectVoteSmart
   class Error < StandardError; end
@@ -75,7 +76,7 @@ class ProjectVoteSmart
   # @params [Hash] opts optional arguments
   # @option opts [String] :api_key a Project VoteSmart API key
   def initialize(opts = {})
-    @api_key = opts[:api_key]
+    @api_key = opts[:api_key] || ENV['PROJECT_VOTE_SMART_API_KEY']
   end
 
   # Sends a request to the Project VoteSmart API and returns the response in a
@@ -125,5 +126,30 @@ class ProjectVoteSmart
     end
   rescue RestClient::ResourceNotFound
     raise ProjectVoteSmart::EndpointNotFound, 'HTTP 404 Not Found'
+  end
+
+  def officials_by_state_and_office(state_id, office_ids)
+    office_ids.each_with_index do |office_id, index|
+      begin
+        return get('Officials.getByOfficeState',
+                   officeId: office_id,
+                   stateId: state_id.upcase)
+
+      rescue ProjectVoteSmart::DocumentNotFound => e
+        raise e if index + 1 == office_ids.size # if none of the officeIds work
+      end
+    end
+  end
+
+  # @see http://api.votesmart.org/docs/semi-static.html
+  def office_ids(options)
+    # Chairman, Councilmember
+    return [347, 368] if options[:state] == 'dc'
+
+    # State Assembly, State House
+    return [7, 8] if options[:chamber] == 'lower'
+
+    # State Senate
+    [9]
   end
 end

@@ -1,36 +1,17 @@
 # coding: utf-8
 require 'project_vote_smart'
+# require 'project_vote_smart_person_detail'
 
 namespace :projectvotesmart do
-  class String
-    # Remove all diacritics, spaces, punctuation and control characters.
-    def fingerprint
-      gsub(/`|\p{Punct}|\p{Cntrl}|[[:space:]]/, '').tr(
-        "ÀÁÂÃÄÅàáâãäåĀāĂăĄąÇçĆćĈĉĊċČčÐðĎďĐđÈÉÊËèéêëĒēĔĕĖėĘęĚěĜĝĞğĠġĢģĤĥĦħÌÍÎÏìíîïĨĩĪīĬĭĮįİıĴĵĶķĸĹĺĻļĽľĿŀŁłÑñŃńŅņŇňŉŊŋÒÓÔÕÖØòóôõöøŌōŎŏŐőŔŕŖŗŘřŚśŜŝŞşŠšſŢţŤťŦŧÙÚÛÜùúûüŨũŪūŬŭŮůŰűŲųŴŵÝýÿŶŷŸŹźŻżŽž",
-        "AAAAAAaaaaaaAaAaAaCcCcCcCcCcDdDdDdEEEEeeeeEeEeEeEeEeGgGgGgGgHhHhIIIIiiiiIiIiIiIiIiJjKkkLlLlLlLlLlNnNnNnNnnNnOOOOOOooooooOoOoOoRrRrRrSsSsSsSssTtTtTtUUUUuuuuUuUuUuUuUuUuWwYyyYyYZzZzZz"
-      ).downcase
-    end
-  end
-
   def api
-    ProjectVoteSmart.new(api_key: ENV['PROJECT_VOTE_SMART_API_KEY'])
-  end
-
-  def officials_by_state_and_office(stateId, officeIds)
-    officeIds.each_with_index do |officeId,index|
-      begin
-        return api.get('Officials.getByOfficeState', officeId: officeId, stateId: stateId.upcase)
-      rescue ProjectVoteSmart::DocumentNotFound => e
-        raise e if index + 1 == officeIds.size # if none of the officeIds work
-      end
-    end
+    ProjectVoteSmart.new
   end
 
   desc 'Imports state governors and city mayors for Open States jurisdictions from Project VoteSmart'
   task governors: :environment do
     Metadatum.with(session: 'openstates').each do |metadatum|
       # @see http://api.votesmart.org/docs/semi-static.html
-      officials = officials_by_state_and_office(metadatum.abbreviation.upcase, [3, 73]) # Governor, Mayor
+      officials = api.officials_by_state_and_office(metadatum.abbreviation.upcase, [3, 73]) # Governor, Mayor
 
       # @see https://github.com/sunlightlabs/billy/blob/master/billy/importers/legislators.py#L17
       # @todo Respect the above Billy code for importing legislators.
@@ -56,51 +37,16 @@ namespace :projectvotesmart do
       [person['state'], person['chamber']]
     end.each do |(state,chamber),people| # up to 104 iterations
       begin
-        # @see http://api.votesmart.org/docs/semi-static.html
-        officeIds = if state == 'dc'
-          [347, 368] # Chairman, Councilmember
-        elsif chamber == 'lower'
-          [7, 8] # State Assembly, State House
-        else
-          [9] # State Senate
-        end
-        officials = officials_by_state_and_office(state, officeIds)
+        office_ids = api.office_ids(state: state, chamber: chamber)
+        officials = api.officials_by_state_and_office(state, office_ids)
 
         people.each do |person|
-          officials.each do |o|
-            # OpenStates may have names like "Jim Anderson (SD28)", where the
-            # family name is incorrectly set to "(SD28)". It may also fail to
-            # identify suffixes, incorrectly leaving them in the family name.
-            family_name = if person.family_name[/\A\([A-Z0-9]+\)\z/]
-              person.given_name[/(\S+)\z/]
-            else
-              person.family_name
-            end.sub(/,? (?:III|IV|Jr\.|M\.D\.|SR|Sr\.)\z/, '')
+          person_detail = ProjectVoteSmartPersonDetail.new(person, officials: officials)
+            .person_detail
 
-            # OpenStates and Project VoteSmart may have more or fewer family
-            # names, e.g. "Navarro" versus "Navarro-Ratzlaff", "Turner" versus
-            # "Turner Lairy" or "Oakes" versus "Erwin Oakes".
-            a = [
-              family_name,
-              family_name[/\S+\z/],
-            ].uniq.map(&:fingerprint)
-
-            b = [
-              o['lastName'],
-              o['lastName'][/\A\p{L}+/],
-              o['lastName'][/\p{L}+\z/],
-            ].uniq.map(&:fingerprint)
-
-            # It is very unlikely that there would be two people with the same
-            # family name elected to the same district in a short time span.
-            # @note Project VoteSmart sometimes assigns the wrong party, e.g.
-            #   Sam Watson in Georgia is Republican, not Democratic.
-            if person['district'] == o['officeDistrictName'] && (a & b).present?
-              person_detail = person.person_detail
-              person_detail.votesmart_id = o['candidateId']
-              person_detail.save!
-              found += 1
-            end
+          if person_detail.changed?
+            person_detail.save!
+            found += 1
           end
         end
       rescue ProjectVoteSmart::DocumentNotFound
