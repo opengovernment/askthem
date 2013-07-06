@@ -141,7 +141,7 @@ namespace :openstates do
                # Assume directory name maps to MongoDB collection name
                # http://docs.mongodb.org/manual/reference/program/mongoimport/
                # http://docs.mongodb.org/manual/core/import-export/
-               mongoimport = "mongoimport --stopOnError #{db.connection_options} -c #{zip_dir_name} --type json --file \"#{mongo_doc}\" --drop"
+               mongoimport = "mongoimport --stopOnError #{db.connection_options} -c #{zip_dir_name} --type json --file \"#{mongo_doc}\" --upsert"
 
                rc = system("#{mongoimport} 1>/dev/null")
                unless rc
