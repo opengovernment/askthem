@@ -134,17 +134,21 @@ namespace :openstates do
                # Modify the downloaded JSON document to force _id to be the same as id
                mongo_doc_copy = "#{mongo_doc}.orig"
                FileUtils.mv(mongo_doc, mongo_doc_copy)
-               File.open(mongo_doc, 'w') { |f| f.write(File.read(mongo_doc_copy).gsub(/"id"/, "\"_id\": \"#{json_id}\", \"id\"")) }
+               File.open(mongo_doc, 'w') { |f| f.write(File.read(mongo_doc_copy).gsub(/"id":/, "\"_id\": \"#{json_id}\", \"id\":")) }
                FileUtils.rm_rf(mongo_doc_copy)
 
                # Import the document into MongoDB
                # Assume directory name maps to MongoDB collection name
                # http://docs.mongodb.org/manual/reference/program/mongoimport/
                # http://docs.mongodb.org/manual/core/import-export/
-               mongoimport = "mongoimport --stopOnError #{db.connection_options} -c #{zip_dir_name} --type json --file \"#{mongo_doc}\" --drop"
+               mongoimport = "mongoimport --stopOnError #{db.connection_options} -c #{zip_dir_name} --type json --file \"#{mongo_doc}\" --upsert"
 
                rc = system("#{mongoimport} 1>/dev/null")
-               abort "mongoimport failed: #{mongoimport}" unless rc
+               unless rc
+                 puts mongoimport
+                 system("#{mongoimport}")
+                 abort
+               end
 
                File.delete(mongo_doc) if File.exists?(mongo_doc)
              end
