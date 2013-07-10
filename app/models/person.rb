@@ -63,11 +63,11 @@ class Person
     end
   end
 
-  def self.create_from_apis(attributes)
+  def self.create_from_apis(attributes, options = {})
     person = build_from_api(attributes)
     person.save!
 
-    PersonDetailRetriever.new(person).retrieve!
+    PersonDetailRetriever.new(person, options).retrieve!
 
     person
   end

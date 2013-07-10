@@ -1,6 +1,5 @@
 # coding: utf-8
 require 'project_vote_smart'
-# require 'project_vote_smart_person_detail'
 
 namespace :projectvotesmart do
   def api

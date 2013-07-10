@@ -1,3 +1,5 @@
+require 'project_vote_smart'
+
 # @see http://sunlightlabs.github.io/congress/
 namespace :congress do
   def openstates
@@ -16,7 +18,12 @@ namespace :congress do
       task legislators: :environment do
         openstates do
           Metadatum::Us.find_or_create!
-          CongressProcessor::Legislators.new.run
+
+          # get all possible matching officials (us senate, house) in 1 request
+          pvs_api = ProjectVoteSmart.new
+          officials = pvs_api.officials_by_state_and_office('us', [5, 6])
+
+          CongressProcessor::Legislators.new.run officials: officials
         end
       end
     end
@@ -42,21 +49,21 @@ namespace :congress do
       { apikey: api_key, page: page, per_page: per_page }
     end
 
-    def run
+    def run(options = {})
       json = JSON.parse(RestClient.get(url, params: params))
-      json['results'].each { |result| process result }
+      json['results'].each { |result| process(result, options) }
 
       unless json['page']['count'] < per_page
         self.page = page + 1
-        run
+        run options
       end
     end
 
-    def process(result)
+    def process(result, options = {})
       # check for existing person, skip if there is one, at least for now
       unless target_class.in('us')
           .where(id: result[target_class.api_id_field]).count > 0
-        target_class.create_from_apis result
+        target_class.create_from_apis result, options
       end
     end
 
