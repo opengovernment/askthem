@@ -73,7 +73,7 @@ http_interactions:
   recorded_at: Wed, 03 Jul 2013 20:19:24 GMT
 - request:
     method: get
-    uri: http://api.votesmart.org/Officials.getByOfficeState?key=faa8ddced5d50abf54087cb89b8e8431&o=JSON&officeId=9&stateId=VT
+    uri: http://api.votesmart.org/Officials.getByOfficeState?key=&o=JSON&officeId=9&stateId=VT
     body:
       encoding: US-ASCII
       string: ''

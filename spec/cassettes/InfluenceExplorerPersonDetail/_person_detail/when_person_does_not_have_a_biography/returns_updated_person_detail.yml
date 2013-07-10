@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/fd638c2fb8b54d0bbc8b13ec32343930.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/fd638c2fb8b54d0bbc8b13ec32343930.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -80,6 +80,6 @@ http_interactions:
         +r4dJi25ioc9JhfD/Q1xgayBj9umYRftZCn7365liQOdoqFlowyhOT48ZNNd
         I+9aNz2U1SGOeyo6rEM8yZVKolaAR27rC/E+6YhnA+A/ERS3fT5PeAvBf0KH
         jggLiXbWkS/t1hKr9a3p/wA9Nkyk8m8+5qC2nL1fPLWHh78BjlUbX3URAAA=
-    http_version: 
+    http_version:
   recorded_at: Fri, 05 Jul 2013 08:36:58 GMT
 recorded_with: VCR 2.3.0

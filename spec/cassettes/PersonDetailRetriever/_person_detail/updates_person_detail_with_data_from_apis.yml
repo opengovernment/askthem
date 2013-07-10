@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/fd638c2fb8b54d0bbc8b13ec32343930.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/fd638c2fb8b54d0bbc8b13ec32343930.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -80,11 +80,11 @@ http_interactions:
         +r4dJi25ioc9JhfD/Q1xgayBj9umYRftZCn7365liQOdoqFlowyhOT48ZNNd
         I+9aNz2U1SGOeyo6rEM8yZVKolaAR27rC/E+6YhnA+A/ERS3fT5PeAvBf0KH
         jggLiXbWkS/t1hKr9a3p/wA9Nkyk8m8+5qC2nL1fPLWHh78BjlUbX3URAAA=
-    http_version: 
+    http_version:
   recorded_at: Fri, 05 Jul 2013 08:24:10 GMT
 - request:
     method: get
-    uri: http://api.votesmart.org/Officials.getByOfficeState?key=faa8ddced5d50abf54087cb89b8e8431&o=JSON&officeId=9&stateId=VT
+    uri: http://api.votesmart.org/Officials.getByOfficeState?key=&o=JSON&officeId=9&stateId=VT
     body:
       encoding: US-ASCII
       string: ''
@@ -151,6 +151,6 @@ http_interactions:
         Senate","officeTypeId":"L","runningMateId":"","runningMateName":""},{"candidateId":"14887","firstName":"David","nickName":"Dave","middleName":"E.","preferredName":"Dave","lastName":"Zuckerman","suffix":"","title":"Senator","ballotName":"","electionParties":"","electionStatus":"","electionStage":"","electionDistrictId":"","electionDistrictName":"","electionOffice":"","electionOfficeId":"","electionStateId":"","electionOfficeTypeId":"","electionYear":"","electionSpecial":"","electionDate":"","officeParties":"Democratic,
         Progressive","officeStatus":"active","officeDistrictId":"27137","officeDistrictName":"Chittenden","officeStateId":"VT","officeId":"9","officeName":"State
         Senate","officeTypeId":"L","runningMateId":"","runningMateName":""}]}}'
-    http_version: 
+    http_version:
   recorded_at: Fri, 05 Jul 2013 08:24:11 GMT
 recorded_with: VCR 2.3.0

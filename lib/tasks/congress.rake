@@ -19,47 +19,26 @@ namespace :congress do
         end
       end
     end
-
-    namespace :update do
-      desc 'Update metadata from Congress API'
-      task metadata: :environment do
-        openstates do
-        end
-      end
-
-
-      desc 'Update legislators from Congress API'
-      task legislators: :environment do
-        openstates do
-        end
-      end
-
-      desc 'Update committees from Congress API'
-      task committees: :environment do
-        openstates do
-        end
-      end
-
-      desc 'Update bills from Congress API'
-      task bills: :environment do
-        openstates do
-        end
-      end
-    end
   end
 
   private
   class CongressProcessor
-    attr_accessor :page, :per_page, :url
+    attr_accessor :page, :per_page, :url, :api_key
 
     def initialize
       @page = 1
       @per_page = 50
-      @url = "#{base_url}/#{plural_type}"
+      @url = "#{target_class.base_api_url}/#{target_class.api_plural_type}"
+      @api_key = target_class.api_key
+    end
+
+    # override in subclass if different
+    def target_class
+      FederalLegislator
     end
 
     def params
-      { apikey: ENV['SUNLIGHT_API_KEY'], page: page, per_page: per_page }
+      { apikey: api_key, page: page, per_page: per_page }
     end
 
     def run
@@ -81,23 +60,14 @@ namespace :congress do
         super.merge({ fields: fields })
       end
 
-      def plural_type
-        'legislators'
-      end
-
       def process(result)
         # check for existing person, skip if there is one, at least for now
-        unless FederalLegislator.in('us').where(id: result['bioguide_id']).count > 0
-          federal_legislator = FederalLegislator.new
+        unless target_class.in('us').where(id: result['bioguide_id']).count > 0
+          federal_legislator = target_class.new
           federal_legislator.attributes_from_congress_api result
           federal_legislator.save!
         end
       end
-    end
-
-    private
-    def base_url
-      "http://congress.api.sunlightfoundation.com"
     end
   end
 end

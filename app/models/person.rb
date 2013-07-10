@@ -22,6 +22,16 @@ class Person
 
   scope :active, where(active: true).asc(:chamber, :family_name) # no index includes `last_name`
 
+  # override in subclass for other apis
+  def self.api_key
+    ENV['SUNLIGHT_API_KEY']
+  end
+
+  # override in subclass for other apis
+  def self.base_api_url
+    'http://openstates.org/api/v1/legislators/'
+  end
+
   # assumes only one matching location
   # openstates as default API
   # override base_api_key and api_geo_url in subclasses
@@ -31,8 +41,8 @@ class Person
     data = Geocoder.search(location).first
 
     if location_is_valid? data
-      JSON.parse(results_for_location(data, fields: 'id')).map do |attributes|
-        ids << attributes['id']
+      api_parse(results_for_location(data, fields: api_id_field)).map do |attributes|
+        ids << attributes[api_id_field]
       end
     end
 
@@ -43,7 +53,7 @@ class Person
   def self.load_from_apis_for_jurisdiction(abbreviation)
     return if self.in(abbreviation).count > 0
 
-    JSON.parse(results_for_jurisdiction(abbreviation)).map do |attributes|
+    api_parse(results_for_jurisdiction(abbreviation)).map do |attributes|
       create_from_apis attributes
     end
   end
@@ -152,16 +162,12 @@ class Person
     end
   end
 
-  def self.api_key
-    ENV['SUNLIGHT_API_KEY']
-  end
-
-  def self.base_api_url
-    'http://openstates.org/api/v1/legislators/'
-  end
-
   def self.api_geo_url
     "#{base_api_url}geo/"
+  end
+
+  def self.api_id_field
+    'id'
   end
 
   def self.location_is_valid?(data)
@@ -176,29 +182,48 @@ class Person
     RestClient.get "#{base_api_url}#{id}/", params: params
   end
 
-  def self.results_for_location(data, options = {})
-    params = {
-      lat: data.latitude,
+  def self.params_for_location(data)
+    { lat: data.latitude,
       long: data.longitude,
-      apikey: api_key
-    }.merge(options)
+      apikey: api_key }
+  end
+
+  def self.results_for_location(data, options = {})
+    params = params_for_location(data).merge(options)
 
     RestClient.get api_geo_url, params: params
   end
 
+  def self.api_parse(data)
+    JSON.parse data
+  end
+
+  def self.api_url_for_jurisdiction
+    base_api_url
+  end
+
+  def self.api_format_abbreviation(abbreviation)
+    abbreviation.downcase
+  end
+
   def self.results_for_jurisdiction(abbreviation, options = {})
     params = {
-      state: abbreviation,
+      state: api_format_abbreviation(abbreviation),
       apikey: api_key
     }.merge(options)
 
-    RestClient.get base_api_url, params: params
+    RestClient.get api_url_for_jurisdiction, params: params
   end
 
-  def self.create_from_apis(attributes)
+  def self.build_from_api(attributes)
     person = with(session: 'openstates').new(attributes)
     # id cannot be mass assigned..., have to set it explictly
     person.id = attributes['id']
+    person
+  end
+
+  def self.create_from_apis(attributes)
+    person = build_from_api(attributes)
     person.save!
 
     PersonDetailRetriever.new(person).retrieve!

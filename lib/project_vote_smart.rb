@@ -131,9 +131,10 @@ class ProjectVoteSmart
   def officials_by_state_and_office(state_id, office_ids)
     office_ids.each_with_index do |office_id, index|
       begin
+        state_id = state_id == 'us' ? 'NA' : state_id.upcase
         return get('Officials.getByOfficeState',
                    officeId: office_id,
-                   stateId: state_id.upcase)
+                   stateId: state_id)
 
       rescue ProjectVoteSmart::DocumentNotFound => e
         raise e if index + 1 == office_ids.size # if none of the officeIds work
@@ -146,10 +147,25 @@ class ProjectVoteSmart
     # Chairman, Councilmember
     return [347, 368] if options[:state] == 'dc'
 
-    # State Assembly, State House
-    return [7, 8] if options[:chamber] == 'lower'
+    office_ids = []
+    if options[:chamber] == 'lower'
+      if options[:state] == 'us'
+        # Federal House
+        office_ids << 5
+      else
+        # State Assembly, State House
+        office_ids += [7, 8]
+      end
+    else
+      if options[:state] == 'us'
+        # Federal Senate
+        office_ids << 6
+      else
+        # State Senate
+        office_ids << 9
+      end
+    end
 
-    # State Senate
-    [9]
+    office_ids
   end
 end

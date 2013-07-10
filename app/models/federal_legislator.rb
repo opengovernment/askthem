@@ -1,12 +1,22 @@
 class FederalLegislator < Person
+  field :represents_state, type: String
+
   # override for the specific relevant api
   # def self.for_location(location)
   # end
 
+  def self.base_api_url
+      'http://congress.api.sunlightfoundation.com'
+  end
+
+  def self.api_plural_type
+      'legislators'
+  end
+
   def attributes_from_congress_api(api_data)
     api_data.each do |key, value|
       case key
-      when 'bioguide_id'
+      when self.class.api_id_field
         self.id = value
         self.leg_id = value
       when 'chamber'
@@ -17,6 +27,7 @@ class FederalLegislator < Person
         self.suffixes = value
       when 'state'
         self.state = 'us'
+        self.represents_state = value.downcase
       when 'votesmart_id'
         next
       when 'party'
@@ -30,6 +41,38 @@ class FederalLegislator < Person
   end
 
   private
+  def self.api_url_for_jurisdiction
+    "#{base_api_url}/#{api_plural_type}"
+  end
+
+  def self.api_geo_url
+    "#{api_url_for_jurisdiction}/locate"
+  end
+
+  def self.api_id_field
+    'bioguide_id'
+  end
+
+  def self.api_format_abbreviation(abbreviation)
+    abbreviation.upcase
+  end
+
+  def self.params_for_location(data)
+    { latitude: data.latitude,
+      longitude: data.longitude,
+      apikey: api_key }
+  end
+
+  def self.api_parse(data)
+    JSON.parse(data)['results']
+  end
+
+  def self.build_from_api(attributes)
+    federal_legislator = with(session: 'openstates').new
+    federal_legislator.attributes_from_congress_api attributes
+    federal_legislator
+  end
+
   def roles_from_api(terms)
     write_attribute(:roles, []) unless read_attribute(:roles)
 

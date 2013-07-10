@@ -87,7 +87,7 @@ http_interactions:
   recorded_at: Fri, 05 Jul 2013 02:51:03 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/fd638c2fb8b54d0bbc8b13ec32343930.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/fd638c2fb8b54d0bbc8b13ec32343930.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -172,7 +172,7 @@ http_interactions:
   recorded_at: Fri, 05 Jul 2013 02:51:05 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/fd638c2fb8b54d0bbc8b13ec32343930.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/fd638c2fb8b54d0bbc8b13ec32343930.json?apikey=
     body:
       encoding: US-ASCII
       string: ''

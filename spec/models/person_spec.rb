@@ -22,7 +22,7 @@ describe Person do
       expect(Person.in('vt').count).to eq 1
     end
 
-    # @todo fix collection clearning!!!
+    # @todo fix collection clearing!!!
     it 'loads people into database given a jurisdiction abbreviation', :vcr do
       # HACK, a simple destroys was not working
       Mongoid::Sessions.with_name('openstates').collections.each do |collection|

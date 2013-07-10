@@ -21,9 +21,9 @@ http_interactions:
       Content-Type:
       - application/json; charset=UTF-8
       Date:
-      - Wed, 10 Jul 2013 04:02:19 GMT
+      - Wed, 10 Jul 2013 04:04:05 GMT
       Expires:
-      - Thu, 11 Jul 2013 04:02:19 GMT
+      - Thu, 11 Jul 2013 04:04:05 GMT
       Cache-Control:
       - public, max-age=86400
       Access-Control-Allow-Origin:
@@ -69,10 +69,10 @@ http_interactions:
         \        },\n         \"types\" : [ \"street_address\" ]\n      }\n   ],\n
         \  \"status\" : \"OK\"\n}\n"
     http_version:
-  recorded_at: Wed, 10 Jul 2013 04:02:31 GMT
+  recorded_at: Wed, 10 Jul 2013 04:04:17 GMT
 - request:
     method: get
-    uri: http://openstates.org/api/v1/legislators/geo/?apikey=&fields=id&lat=44.1931496&long=-72.5824427
+    uri: http://congress.api.sunlightfoundation.com/legislators/locate?apikey=&fields=bioguide_id&latitude=44.1931496&longitude=-72.5824427
     body:
       encoding: US-ASCII
       string: ''
@@ -89,33 +89,24 @@ http_interactions:
       message: OK
     headers:
       Server:
-      - nginx/1.2.6 (Ubuntu)
+      - nginx/1.1.19
+      Date:
+      - Wed, 10 Jul 2013 04:04:02 GMT
       Content-Type:
       - application/json; charset=utf-8
       Vary:
-      - Authorization
-      Date:
-      - Wed, 10 Jul 2013 04:02:43 GMT
-      X-Varnish:
-      - '237063168'
-      Age:
-      - '0'
+      - Accept-Encoding
+      Status:
+      - 200 OK
       Via:
-      - 1.1 varnish, 1.1 BC4-ACLD
+      - 1.1 BC2-ACLD
       Content-Length:
-      - '603'
+      - '143'
       Connection:
       - Keep-Alive
     body:
       encoding: US-ASCII
-      string: ! '[{"district": "Washington", "chamber": "upper", "state": "vt", "boundary_id":
-        "sldu/vt-washington", "id": "VTL000008"}, {"district": "Washington", "chamber":
-        "upper", "state": "vt", "boundary_id": "sldu/vt-washington", "id": "VTL000009"},
-        {"district": "Washington", "chamber": "upper", "state": "vt", "boundary_id":
-        "sldu/vt-washington", "id": "VTL000184"}, {"district": "Washington-1", "chamber":
-        "lower", "state": "vt", "boundary_id": "sldl/vt-washington-1", "id": "VTL000199"},
-        {"district": "Washington-1", "chamber": "lower", "state": "vt", "boundary_id":
-        "sldl/vt-washington-1", "id": "VTL000064"}]'
+      string: ! '{"results":[{"bioguide_id":"W000800"},{"bioguide_id":"L000174"},{"bioguide_id":"S000033"}],"count":3,"page":{"count":3,"per_page":20,"page":1}}'
     http_version:
-  recorded_at: Wed, 10 Jul 2013 04:02:33 GMT
+  recorded_at: Wed, 10 Jul 2013 04:04:18 GMT
 recorded_with: VCR 2.3.0
