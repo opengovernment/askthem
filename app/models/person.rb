@@ -23,6 +23,11 @@ class Person
   scope :active, where(active: true).asc(:chamber, :family_name) # no index includes `last_name`
 
   # override in subclass for other apis
+  def self.api_id_field
+    'id'
+  end
+
+  # override in subclass for other apis
   def self.api_key
     ENV['SUNLIGHT_API_KEY']
   end
@@ -56,6 +61,15 @@ class Person
     api_parse(results_for_jurisdiction(abbreviation)).map do |attributes|
       create_from_apis attributes
     end
+  end
+
+  def self.create_from_apis(attributes)
+    person = build_from_api(attributes)
+    person.save!
+
+    PersonDetailRetriever.new(person).retrieve!
+
+    person
   end
 
   # Inactive legislators will not have top-level `chamber` or `district` fields.
@@ -166,10 +180,6 @@ class Person
     "#{base_api_url}geo/"
   end
 
-  def self.api_id_field
-    'id'
-  end
-
   def self.location_is_valid?(data)
     data.country_code == 'US' && data.latitude.nonzero? && data.longitude.nonzero?
   end
@@ -219,15 +229,6 @@ class Person
     person = with(session: 'openstates').new(attributes)
     # id cannot be mass assigned..., have to set it explictly
     person.id = attributes['id']
-    person
-  end
-
-  def self.create_from_apis(attributes)
-    person = build_from_api(attributes)
-    person.save!
-
-    PersonDetailRetriever.new(person).retrieve!
-
     person
   end
 end

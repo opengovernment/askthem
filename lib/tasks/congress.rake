@@ -15,6 +15,7 @@ namespace :congress do
       desc 'Download legislators from Congress API'
       task legislators: :environment do
         openstates do
+          Metadatum::Us.find_or_create!
           CongressProcessor::Legislators.new.run
         end
       end
@@ -51,6 +52,14 @@ namespace :congress do
       end
     end
 
+    def process(result)
+      # check for existing person, skip if there is one, at least for now
+      unless target_class.in('us')
+          .where(id: result[target_class.api_id_field]).count > 0
+        target_class.create_from_apis result
+      end
+    end
+
     class Legislators < CongressProcessor
       def fields
         'bioguide_id,first_name,middle_name,last_name,state,votesmart_id,email,gender,name_suffix,photo_url,twitter_id,chamber,district,party,terms'
@@ -58,15 +67,6 @@ namespace :congress do
 
       def params
         super.merge({ fields: fields })
-      end
-
-      def process(result)
-        # check for existing person, skip if there is one, at least for now
-        unless target_class.in('us').where(id: result['bioguide_id']).count > 0
-          federal_legislator = target_class.new
-          federal_legislator.attributes_from_congress_api result
-          federal_legislator.save!
-        end
       end
     end
   end
