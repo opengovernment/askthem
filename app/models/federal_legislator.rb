@@ -1,10 +1,6 @@
 class FederalLegislator < Person
   field :represents_state, type: String
 
-  # override for the specific relevant api
-  # def self.for_location(location)
-  # end
-
   def self.base_api_url
       'http://congress.api.sunlightfoundation.com'
   end
