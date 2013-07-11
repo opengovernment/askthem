@@ -37,10 +37,38 @@ class ProjectVoteSmartPersonDetail
   end
 
   def person_match_official?(person, official)
-    official_district = official['officeDistrictName']
-    person_last_name = comparable_family_name_for(person)
+    return false unless district_or_office_for(person) ==
+      pvs_district_or_office_for(official)
 
-    person['district'] == official_district && FamilyNameComparison.new(person_last_name, official['lastName']).same?
+    return false unless NameComparison.new(comparable_family_name_for(person),
+                                           official['lastName']).same?
+
+    # only apply absolute match of first/nickname if federal
+    if person.state == 'us'
+      unless NameComparison.new(person.first_name, official['firstName']).same?
+        return false if official['nickName'].blank? ||
+          !NameComparison.new(person.first_name, official['nickName']).same?
+      end
+    end
+
+    true
+  end
+
+  def pvs_district_or_office_for(official)
+    return official['officeName'] if official['officeName'].include?('U.S. ')
+
+    official['officeDistrictName']
+  end
+
+  def district_or_office_for(person)
+    district_or_office = person['district']
+
+    # reset if federal
+    if person.state == 'us'
+      district_or_office = person.chamber == 'lower' ? 'U.S. House' : 'U.S. Senate'
+    end
+
+    district_or_office
   end
 
   # OpenStates may have names like "Jim Anderson (SD28)", where the
@@ -54,7 +82,7 @@ class ProjectVoteSmartPersonDetail
     end.sub(/,? (?:III|IV|Jr\.|M\.D\.|SR|Sr\.)\z/, '')
   end
 
-  class FamilyNameComparison
+  class NameComparison
     def initialize(supplied_name, pvs_name)
       @supplied_name = ComparableName.new(supplied_name)
       @pvs_name = ComparableName.new(pvs_name)
@@ -64,11 +92,12 @@ class ProjectVoteSmartPersonDetail
       # OpenStates and Project VoteSmart may have more or fewer family
       # names, e.g. "Navarro" versus "Navarro-Ratzlaff", "Turner" versus
       # "Turner Lairy" or "Oakes" versus "Erwin Oakes".
-      a = [@supplied_name, @supplied_name[/\S+\z/]].uniq.map(&:fingerprint)
+      a = [@supplied_name, @supplied_name[/\S+\z/]].compact
+        .uniq.map(&:fingerprint)
 
       b = [@pvs_name,
            @pvs_name[/\A\p{L}+/],
-           @pvs_name[/\p{L}+\z/]].uniq.map(&:fingerprint)
+           @pvs_name[/\p{L}+\z/]].compact.uniq.map(&:fingerprint)
 
       (a & b).present?
     end

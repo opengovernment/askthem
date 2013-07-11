@@ -19,9 +19,11 @@ namespace :congress do
         openstates do
           Metadatum::Us.find_or_create!
 
-          # get all possible matching officials (us senate, house) in 1 request
+          # get all possible matching officials (us senate, house) in 2 requests
+          # rather than per created legislator
           pvs_api = ProjectVoteSmart.new
-          officials = pvs_api.officials_by_state_and_office('us', [5, 6])
+          officials = pvs_api.officials_by_state_and_office('us', [5])
+          officials += api.officials_by_state_and_office('us', [6])
 
           CongressProcessor::Legislators.new.run officials: officials
         end
