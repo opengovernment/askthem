@@ -45,7 +45,12 @@ namespace :openstates do
 
     return obj['id'], obj['updated_at']
   end
- 
+
+  desc 'Adds metadata from OpenStates'
+  task add_metadata: :environment do
+    Metadatum::State.create_states_if_none
+  end
+
   desc 'Update metadata, legislators, committees and bills from OpenStates'
   task update: :environment do
     openstates do
@@ -213,27 +218,27 @@ namespace :openstates do
     def hosts
       config[Rails.env]['sessions'][session]['hosts']
     end
- 
+
     def host
       hosts.blank? ? nil : hosts[host_num].split(':')[0]
     end
- 
+
     def port
       hosts.blank? ? nil : hosts[host_num].split(':')[1]
     end
- 
+
     def username
       config[Rails.env]['sessions'][session]['username']
     end
- 
+
     def password
       config[Rails.env]['sessions'][session]['password']
     end
- 
+
     def database
       config[Rails.env]['sessions'][session]['database']
     end
- 
+
     # Inspired by https://gist.github.com/erik-eide/1233435
     def connection_options
       conn_string = ''

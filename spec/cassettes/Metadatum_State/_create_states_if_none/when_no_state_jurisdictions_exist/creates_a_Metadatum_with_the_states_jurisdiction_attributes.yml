@@ -1,0 +1,933 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://openstates.org/api/v1/metadata/?apikey=&fields=abbreviation,capital_timezone,chambers,feature_flags,latest_csv,latest_csv_url,latest_json_date,latest_json_url,latest_update,legislature_name,legislature_url,name,session_details,terms
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - ! '*/*; q=0.5, application/xml'
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.2.6 (Ubuntu)
+      Content-Type:
+      - application/json; charset=utf-8
+      Vary:
+      - Authorization
+      Date:
+      - Sun, 14 Jul 2013 22:39:22 GMT
+      X-Varnish:
+      - '1719765592'
+      Age:
+      - '0'
+      Via:
+      - 1.1 varnish, 1.1 BC4-ACLD
+      Content-Length:
+      - '73974'
+      Connection:
+      - Keep-Alive
+    body:
+      encoding: US-ASCII
+      string: ! '[{"lower_chamber_name": "House", "lower_chamber_title": "Representative",
+        "latest_json_url": "http://static.openstates.org/downloads/2013-05-09-al-json.zip",
+        "terms": [{"end_year": 2014, "start_year": 2011, "name": "2011-2014", "sessions":
+        ["2011rs", "2012rs", "First Special Session 2012", "2013rs"]}], "name": "Alabama",
+        "latest_csv_url": "http://static.openstates.org/downloads/2013-07-01-al-csv.zip",
+        "latest_json_date": "2013-05-09 05:11:54", "abbreviation": "al", "latest_update":
+        "2013-05-30 16:13:25", "upper_chamber_title": "Senator", "upper_chamber_name":
+        "Senate", "chambers": {"upper": {"name": "Senate", "title": "Senator"}, "lower":
+        {"name": "House", "title": "Representative"}}, "id": "al", "session_details":
+        {"First Special Session 2012": {"type": "special", "display_name": "First
+        Special Session 2012", "internal_id": "1060"}, "2011rs": {"type": "primary",
+        "display_name": "2011 Regular Session", "internal_id": "1058"}, "2012rs":
+        {"type": "primary", "display_name": "2012 Regular Session", "internal_id":
+        "1059"}, "2013rs": {"type": "primary", "display_name": "2013 Regular Session",
+        "internal_id": "1061"}}, "legislature_name": "Alabama Legislature", "legislature_url":
+        "http://www.legislature.state.al.us/", "feature_flags": ["subjects", "influenceexplorer"]},
+        {"lower_chamber_name": "House", "lower_chamber_title": "Representative", "latest_json_url":
+        "http://static.openstates.org/downloads/2013-07-01-ak-json.zip", "terms":
+        [{"end_year": 2012, "start_year": 2011, "name": "27", "sessions": ["27"]},
+        {"end_year": 2014, "start_year": 2013, "name": "28", "sessions": ["28"]}],
+        "name": "Alaska", "latest_csv_url": "http://static.openstates.org/downloads/2013-07-01-ak-csv.zip",
+        "session_details": {"27": {"display_name": "27th Legislature (2011-2012)"},
+        "28": {"display_name": "28th Legislature (2013-2014)"}}, "abbreviation": "ak",
+        "latest_update": "2013-07-14 00:28:01", "feature_flags": ["subjects", "influenceexplorer"],
+        "upper_chamber_name": "Senate", "id": "ak", "chambers": {"upper": {"name":
+        "Senate", "title": "Senator"}, "lower": {"name": "House", "title": "Representative"}},
+        "upper_chamber_title": "Senator", "legislature_name": "Alaska State Legislature",
+        "latest_json_date": "2013-07-01 18:31:17", "legislature_url": "http://w3.legis.state.ak.us/"},
+        {"lower_chamber_name": "House", "lower_chamber_title": "Representative", "latest_json_url":
+        "http://static.openstates.org/downloads/2013-07-01-az-json.zip", "terms":
+        [{"end_year": 2010, "start_year": 2009, "name": "49", "sessions": ["49th-1st-special",
+        "49th-2nd-special", "49th-1st-regular", "49th-3rd-special", "49th-4th-special",
+        "49th-5th-special", "49th-6th-special", "49th-7th-special", "49th-8th-special",
+        "49th-2nd-regular", "49th-9th-special"]}, {"end_year": 2012, "start_year":
+        2011, "name": "50", "sessions": ["50th-1st-special", "50th-2nd-special", "50th-3rd-special",
+        "50th-4th-special", "50th-1st-regular", "50th-2nd-regular"]}, {"end_year":
+        2014, "start_year": 2013, "name": "51", "sessions": ["51st-1st-regular", "51st-1st-special"]}],
+        "name": "Arizona", "latest_csv_url": "http://static.openstates.org/downloads/2013-07-01-az-csv.zip",
+        "abbreviation": "az", "latest_update": "2013-07-14 00:05:06", "feature_flags":
+        ["events", "influenceexplorer"], "upper_chamber_name": "Senate", "chambers":
+        {"upper": {"name": "Senate", "title": "Senator"}, "lower": {"name": "House",
+        "title": "Representative"}}, "id": "az", "session_details": {"49th-7th-special":
+        {"display_name": "49th Legislature, 7th Special Session (2010)", "end_date":
+        "2010-03-16 00:00:00", "session_id": 96, "type": "special", "start_date":
+        "2010-03-08 00:00:00"}, "49th-3rd-special": {"display_name": "49th Legislature,
+        3rd Special Session (2009)", "end_date": "2009-08-25 00:00:00", "session_id":
+        91, "type": "special", "start_date": "2009-07-06 00:00:00"}, "50th-3rd-special":
+        {"display_name": "50th Legislature, 3rd Special Session (2011)", "end_date":
+        "2011-06-13 00:00:00", "session_id": 106, "type": "special", "start_date":
+        "2011-06-10 00:00:00"}, "49th-1st-regular": {"display_name": "49th Legislature,
+        1st Regular Session (2009)", "end_date": "2009-07-01 00:00:00", "session_id":
+        87, "type": "primary", "start_date": "2009-01-12 00:00:00"}, "49th-8th-special":
+        {"display_name": "49th Legislature, 8th Special Session (2010)", "end_date":
+        "2010-04-01 00:00:00", "session_id": 101, "type": "special", "start_date":
+        "2010-03-29 00:00:00"}, "51st-1st-special": {"display_name": "51st Legislature
+        - 1st Special Session (2013)", "type": "primary", "session_id": 111}, "49th-2nd-regular":
+        {"display_name": "49th Legislature, 2nd Regular Session (2010)", "end_date":
+        "2010-04-29 00:00:00", "session_id": 93, "type": "primary", "start_date":
+        "2010-01-11 00:00:00"}, "49th-2nd-special": {"display_name": "49th Legislature,
+        2nd Special Session (2009)", "end_date": "2009-05-27 00:00:00", "session_id":
+        90, "type": "special", "start_date": "2009-05-21 00:00:00"}, "49th-6th-special":
+        {"display_name": "49th Legislature, 6th Special Session (2010)", "end_date":
+        "2010-02-11 00:00:00", "session_id": 95, "type": "special", "start_date":
+        "2010-02-01 00:00:00"}, "50th-2nd-regular": {"display_name": "50th Legislature,
+        2nd Regular Session (2012)", "type": "primary", "session_id": 107}, "49th-1st-special":
+        {"display_name": "49th Legislature, 1st Special Session (2009)", "end_date":
+        "2009-01-31 00:00:00", "session_id": 89, "type": "special", "start_date":
+        "2009-01-28 00:00:00"}, "50th-2nd-special": {"display_name": "50th Legislature,
+        2nd Special Session (2011)", "end_date": "2011-02-16 00:00:00", "session_id":
+        105, "type": "special", "start_date": "2011-02-14 00:00:00"}, "50th-4th-special":
+        {"display_name": "50th Legislature, 4th Special Session (2011)", "end_date":
+        "2011-11-01 00:00:00", "session_id": 108, "type": "special", "start_date":
+        "2011-11-01 00:00:00"}, "51st-1st-regular": {"display_name": "51st Legislature
+        - 1st Regular Session (2013)", "type": "primary", "session_id": 110}, "49th-4th-special":
+        {"display_name": "49th Legislature, 4th Special Session (2009)", "end_date":
+        "2009-11-23 00:00:00", "session_id": 92, "type": "special", "start_date":
+        "2009-11-17 00:00:00"}, "50th-1st-special": {"display_name": "50th Legislature,
+        1st Special Session (2011)", "end_date": "2011-01-20 00:00:00", "session_id":
+        104, "type": "special", "start_date": "2011-01-19 00:00:00"}, "50th-1st-regular":
+        {"display_name": "50th Legislature, 1st Regular Session (2011)", "end_date":
+        "2011-04-20 00:00:00", "session_id": 102, "type": "primary", "start_date":
+        "2011-01-10 00:00:00"}, "49th-5th-special": {"display_name": "49th Legislature,
+        5th Special Session (2009)", "end_date": "2009-12-19 00:00:00", "session_id":
+        94, "type": "special", "start_date": "2009-12-17 00:00:00"}, "49th-9th-special":
+        {"display_name": "49th Legislature, 9th Special Session (2010)", "end_date":
+        "2010-08-11 00:00:00", "session_id": 103, "type": "special", "start_date":
+        "2010-08-09 00:00:00"}}, "upper_chamber_title": "Senator", "legislature_name":
+        "Arizona State Legislature", "latest_json_date": "2013-07-01 18:53:00", "legislature_url":
+        "http://www.azleg.gov/"}, {"lower_chamber_name": "House", "lower_chamber_title":
+        "Representative", "latest_json_url": "http://static.openstates.org/downloads/2013-07-01-ar-json.zip",
+        "session_details": {"2012F": {"type": "special", "display_name": "2012 Fiscal
+        Session", "start_date": "2012-02-13 00:00:00", "slug": "2012F"}, "2011": {"display_name":
+        "2011 Regular Session", "end_date": "2011-04-27 00:00:00", "slug": "2011R",
+        "type": "primary", "start_date": "2011-01-10 00:00:00"}, "2013": {"type":
+        "primary", "display_name": "2013 Regular Session", "start_date": "2013-01-14
+        00:00:00", "slug": "2013R"}}, "name": "Arkansas", "latest_csv_url": "http://static.openstates.org/downloads/2013-07-01-ar-csv.zip",
+        "abbreviation": "ar", "latest_update": "2013-07-14 02:54:24", "feature_flags":
+        ["influenceexplorer"], "upper_chamber_name": "Senate", "chambers": {"upper":
+        {"name": "Senate", "title": "Senator"}, "lower": {"name": "House", "title":
+        "Representative"}}, "id": "ar", "terms": [{"end_year": 2012, "start_year":
+        2011, "name": "2011-2012", "sessions": ["2011", "2012F"]}, {"end_year": 2014,
+        "start_year": 2013, "name": "2013-2014", "sessions": ["2013"]}], "upper_chamber_title":
+        "Senator", "legislature_name": "Arkansas General Assembly", "latest_json_date":
+        "2013-07-01 18:40:43", "legislature_url": "http://www.arkleg.state.ar.us/"},
+        {"lower_chamber_name": "Assembly", "lower_chamber_title": "Assemblymember",
+        "latest_json_url": "http://static.openstates.org/downloads/2013-05-09-ca-json.zip",
+        "terms": [{"end_year": 2010, "start_year": 2009, "name": "20092010", "start_date":
+        "2008-12-01 00:00:00", "sessions": ["20092010", "20092010 Special Session
+        1", "20092010 Special Session 2", "20092010 Special Session 3", "20092010
+        Special Session 4", "20092010 Special Session 5", "20092010 Special Session
+        6", "20092010 Special Session 7", "20092010 Special Session 8"]}, {"end_year":
+        2012, "start_year": 2011, "name": "20112012", "start_date": "2010-12-06 00:00:00",
+        "sessions": ["20112012 Special Session 1", "20112012"]}, {"end_year": 2014,
+        "start_year": 2013, "name": "20132014", "sessions": ["20132014", "20132014
+        Special Session 1"]}], "name": "California", "latest_csv_url": "http://static.openstates.org/downloads/2013-07-01-ca-csv.zip",
+        "session_details": {"20092010 Special Session 5": {"display_name": "2009-2010,
+        5th Special Session", "type": "special"}, "20092010 Special Session 4": {"display_name":
+        "2009-2010, 4th Special Session", "type": "special"}, "20092010 Special Session
+        7": {"display_name": "2009-2010, 7th Special Session", "type": "special"},
+        "20092010 Special Session 6": {"display_name": "2009-2010, 6th Special Session",
+        "type": "special"}, "20092010 Special Session 1": {"display_name": "2009-2010,
+        1st Special Session", "type": "special"}, "20112012 Special Session 1": {"display_name":
+        "2011-2012, 1st Special Session", "type": "special"}, "20092010 Special Session
+        3": {"display_name": "2009-2010, 3rd Special Session", "type": "special"},
+        "20092010 Special Session 2": {"display_name": "2009-2010, 2nd Special Session",
+        "type": "special"}, "20092010": {"type": "primary", "display_name": "2009-2010
+        Regular Session", "start_date": "2008-12-01 00:00:00"}, "20132014": {"type":
+        "primary", "display_name": "2013-2014 Regular Session"}, "20092010 Special
+        Session 8": {"display_name": "2009-2010, 8th Special Session", "type": "special"},
+        "20132014 Special Session 1": {"type": "special", "display_name": "2013-2014,
+        1st Special Session"}, "20112012": {"type": "primary", "display_name": "2011-2012
+        Regular Session", "start_date": "2010-12-06 00:00:00"}}, "abbreviation": "ca",
+        "latest_update": "2013-07-14 00:13:40", "feature_flags": ["subjects", "influenceexplorer"],
+        "upper_chamber_name": "Senate", "id": "ca", "chambers": {"upper": {"name":
+        "Senate", "title": "Senator"}, "lower": {"name": "Assembly", "title": "Assemblymember"}},
+        "upper_chamber_title": "Senator", "legislature_name": "California State Legislature",
+        "latest_json_date": "2013-05-09 03:46:41", "legislature_url": "http://www.legislature.ca.gov/"},
+        {"lower_chamber_name": "House", "lower_chamber_title": "Representative", "latest_json_url":
+        "http://static.openstates.org/downloads/2013-05-09-co-json.zip", "session_details":
+        {"2013A": {"display_name": "2013 Regular Session", "type": "primary"}, "2011A":
+        {"display_name": "2011 Regular Session", "type": "primary", "start_date":
+        "2011-01-26 00:00:00"}, "2012A": {"display_name": "2012 Regular Session",
+        "type": "primary", "start_date": "2012-01-11 00:00:00"}, "2012B": {"display_name":
+        "2012 First Extraordinary Session", "type": "special", "start_date": "2012-05-14
+        00:00:00"}}, "name": "Colorado", "latest_csv_url": "http://static.openstates.org/downloads/2013-07-01-co-csv.zip",
+        "abbreviation": "co", "latest_update": "2013-07-14 01:17:28", "feature_flags":
+        ["influenceexplorer"], "upper_chamber_name": "Senate", "chambers": {"upper":
+        {"name": "Senate", "title": "Senator"}, "lower": {"name": "House", "title":
+        "Representative"}}, "id": "co", "terms": [{"end_year": 2012, "start_year":
+        2011, "name": "2011-2012", "sessions": ["2011A", "2012A", "2012B"]}, {"end_year":
+        2014, "start_year": 2013, "name": "2013-2014", "sessions": ["2013A"]}], "upper_chamber_title":
+        "Senator", "legislature_name": "Colorado General Assembly", "latest_json_date":
+        "2013-05-09 05:15:46", "legislature_url": "http://www.leg.state.co.us/"},
+        {"lower_chamber_name": "House", "lower_chamber_title": "Representative", "feature_flags":
+        ["subjects", "events", "influenceexplorer"], "terms": [{"end_year": 2012,
+        "start_year": 2011, "name": "2011-2012", "sessions": ["2011", "2012"]}, {"end_year":
+        2014, "start_year": 2013, "name": "2013-2014", "sessions": ["2013"]}], "name":
+        "Connecticut", "latest_csv_url": "http://static.openstates.org/downloads/2013-07-01-ct-csv.zip",
+        "abbreviation": "ct", "latest_update": "2013-06-26 05:41:45", "latest_json_url":
+        "http://static.openstates.org/downloads/2013-05-08-ct-json.zip", "upper_chamber_name":
+        "Senate", "chambers": {"upper": {"name": "Senate", "title": "Senator"}, "lower":
+        {"name": "House", "title": "Representative"}}, "id": "ct", "session_details":
+        {"2011": {"display_name": "2011 Regular Session"}, "2013": {"display_name":
+        "2013 Regular Session"}, "2012": {"display_name": "2012 Regular Session"}},
+        "upper_chamber_title": "Senator", "legislature_name": "Connecticut General
+        Assembly", "latest_json_date": "2013-05-08 23:16:24", "legislature_url": "http://www.cga.ct.gov/"},
+        {"lower_chamber_name": "House", "lower_chamber_title": "Representative", "latest_json_url":
+        "http://static.openstates.org/downloads/2013-05-09-de-json.zip", "terms":
+        [{"end_year": 2012, "start_year": 2011, "name": "2011-2012", "sessions": ["146"]},
+        {"end_year": 2014, "start_year": 2013, "name": "2013-2014", "sessions": ["147"]}],
+        "name": "Delaware", "latest_csv_url": "http://static.openstates.org/downloads/2013-07-01-de-csv.zip",
+        "session_details": {"146": {"display_name": "146th General Assembly (2011-2012)"},
+        "147": {"display_name": "147th General Assembly (2013-2014)"}}, "abbreviation":
+        "de", "latest_update": "2013-07-11 01:15:59", "feature_flags": ["events",
+        "influenceexplorer"], "upper_chamber_name": "Senate", "id": "de", "chambers":
+        {"upper": {"name": "Senate", "title": "Senator"}, "lower": {"name": "House",
+        "title": "Representative"}}, "upper_chamber_title": "Senator", "legislature_name":
+        "Delaware General Assembly", "latest_json_date": "2013-05-09 05:17:57", "legislature_url":
+        "http://legis.delaware.gov/"}, {"latest_json_url": "http://static.openstates.org/downloads/2013-07-01-dc-json.zip",
+        "terms": [{"end_year": 2012, "start_year": 2011, "name": "2011-2012", "sessions":
+        ["19"]}, {"end_year": 2014, "start_year": 2013, "name": "2013-2014", "sessions":
+        ["20"]}], "name": "District of Columbia", "latest_csv_url": "http://static.openstates.org/downloads/2013-07-01-dc-csv.zip",
+        "session_details": {"19": {"display_name": "19th Council Period (2011-2012)"},
+        "20": {"display_name": "20th Council Period (2013-2014)"}}, "abbreviation":
+        "dc", "latest_update": "2013-07-14 03:39:39", "feature_flags": [], "upper_chamber_name":
+        "Council", "id": "dc", "chambers": {"upper": {"name": "Council", "title":
+        "Councilmember"}}, "upper_chamber_title": "Councilmember", "legislature_name":
+        "Council of the District of Columbia", "latest_json_date": "2013-07-01 09:08:13",
+        "legislature_url": "http://dccouncil.washington.dc.us/"}, {"lower_chamber_name":
+        "House", "lower_chamber_title": "Representative", "feature_flags": ["influenceexplorer"],
+        "terms": [{"end_year": 2012, "start_year": 2011, "name": "2011-2012", "sessions":
+        ["2011", "2012", "2012B"]}, {"end_year": 2014, "start_year": 2013, "name":
+        "2013-2014", "sessions": ["2013"]}], "name": "Florida", "latest_csv_url":
+        "http://static.openstates.org/downloads/2013-07-01-fl-csv.zip", "session_details":
+        {"2011": {"display_name": "2011 Regular Session"}, "2013": {"display_name":
+        "2013 Regular Session"}, "2012B": {"display_name": "2012 Extraordinary Apportionment
+        Session"}, "2012": {"display_name": "2012 Regular Session"}}, "abbreviation":
+        "fl", "latest_update": "2013-07-01 03:40:52", "latest_json_url": "http://static.openstates.org/downloads/2013-07-01-fl-json.zip",
+        "upper_chamber_name": "Senate", "id": "fl", "chambers": {"upper": {"name":
+        "Senate", "title": "Senator"}, "lower": {"name": "House", "title": "Representative"}},
+        "upper_chamber_title": "Senator", "legislature_name": "Florida Legislature",
+        "latest_json_date": "2013-07-01 19:04:04", "legislature_url": "http://www.leg.state.fl.us/"},
+        {"lower_chamber_name": "House", "lower_chamber_title": "Representative", "latest_json_url":
+        "http://static.openstates.org/downloads/2013-05-09-ga-json.zip", "terms":
+        [{"end_year": 2012, "start_year": 2011, "name": "2011-2012", "sessions": ["2011_12",
+        "2011_ss"]}, {"end_year": 2014, "start_year": 2013, "name": "2013-2014", "sessions":
+        ["2013_14"]}], "name": "Georgia", "latest_csv_url": "http://static.openstates.org/downloads/2013-07-01-ga-csv.zip",
+        "abbreviation": "ga", "latest_update": "2013-07-14 00:40:04", "feature_flags":
+        ["influenceexplorer"], "upper_chamber_name": "Senate", "chambers": {"upper":
+        {"name": "Senate", "title": "Senator"}, "lower": {"name": "House", "title":
+        "Representative"}}, "id": "ga", "session_details": {"2011_12": {"display_name":
+        "2011-2012 Regular Session"}, "2013_14": {"display_name": "2013-2014 Regular
+        Session"}, "2011_ss": {"display_name": "2011 Special Session"}}, "upper_chamber_title":
+        "Senator", "legislature_name": "Georgia General Assembly", "latest_json_date":
+        "2013-05-09 04:38:20", "legislature_url": "http://www.legis.ga.gov/"}, {"lower_chamber_name":
+        "House", "lower_chamber_title": "Representative", "feature_flags": ["subjects",
+        "events", "capitol_maps", "influenceexplorer"], "session_details": {"2011
+        Regular Session": {"display_name": "2011-2012 Regular Session"}, "2013 Regular
+        Session": {"display_name": "2013-2014 Regular Session"}}, "name": "Hawaii",
+        "legislature_url": "http://www.capitol.hawaii.gov/", "latest_csv_url": "http://static.openstates.org/downloads/2013-07-01-hi-csv.zip",
+        "abbreviation": "hi", "latest_update": "2013-07-14 02:07:41", "latest_json_url":
+        "http://static.openstates.org/downloads/2013-05-08-hi-json.zip", "upper_chamber_name":
+        "Senate", "id": "hi", "chambers": {"upper": {"name": "Senate", "title": "Senator"},
+        "lower": {"name": "House", "title": "Representative"}}, "upper_chamber_title":
+        "Senator", "legislature_name": "Hawaii State Legislature", "latest_json_date":
+        "2013-05-08 23:33:39", "terms": [{"end_year": 2012, "start_year": 2011, "name":
+        "2011-2012", "sessions": ["2011 Regular Session"]}, {"end_year": 2014, "start_year":
+        2013, "name": "2013-2014", "sessions": ["2013 Regular Session"]}]}, {"lower_chamber_name":
+        "House", "lower_chamber_title": "Representative", "latest_json_url": "http://static.openstates.org/downloads/2013-05-09-id-json.zip",
+        "session_details": {"2011": {"display_name": "61st Legislature, 1st Regular
+        Session (2011)", "type": "primary", "start_date": "2011-01-10 00:00:00", "end_date":
+        "2011-04-07 00:00:00"}, "2013": {"display_name": "62nd Legislature, 1st Regular
+        Session (2013)", "type": "primary"}, "2012": {"display_name": "61st Legislature,
+        2nd Regular Session (2012)", "type": "primary"}}, "name": "Idaho", "latest_csv_url":
+        "http://static.openstates.org/downloads/2013-07-01-id-csv.zip", "abbreviation":
+        "id", "latest_update": "2013-07-14 00:13:34", "feature_flags": ["influenceexplorer"],
+        "upper_chamber_name": "Senate", "chambers": {"upper": {"name": "Senate", "title":
+        "Senator"}, "lower": {"name": "House", "title": "Representative"}}, "id":
+        "id", "terms": [{"end_year": 2012, "start_year": 2011, "name": "2011-2012",
+        "sessions": ["2011", "2012"]}, {"end_year": 2014, "start_year": 2013, "name":
+        "2013-2014", "sessions": ["2013"]}], "upper_chamber_title": "Senator", "legislature_name":
+        "Idaho State Legislature", "latest_json_date": "2013-05-09 00:54:00", "legislature_url":
+        "http://www.legislature.idaho.gov/"}, {"lower_chamber_name": "House", "lower_chamber_title":
+        "Representative", "latest_json_url": "http://static.openstates.org/downloads/2013-05-09-il-json.zip",
+        "terms": [{"end_year": 2004, "start_year": 2003, "name": "93rd", "sessions":
+        ["93rd", "Special_93rd"]}, {"end_year": 2006, "start_year": 2005, "name":
+        "94th", "sessions": ["94th"]}, {"end_year": 2008, "start_year": 2007, "name":
+        "95th", "sessions": ["95th", "Special_95th"]}, {"end_year": 2010, "start_year":
+        2009, "name": "96th", "sessions": ["96th", "Special_96th"]}, {"end_year":
+        2012, "start_year": 2011, "name": "97th", "sessions": ["97th"]}, {"end_year":
+        2014, "start_year": 2013, "name": "98th", "sessions": ["98th"]}], "name":
+        "Illinois", "latest_csv_url": "http://static.openstates.org/downloads/2013-07-01-il-csv.zip",
+        "abbreviation": "il", "latest_update": "2013-07-14 05:20:04", "feature_flags":
+        ["events", "influenceexplorer"], "upper_chamber_name": "Senate", "chambers":
+        {"upper": {"name": "Senate", "title": "Senator"}, "lower": {"name": "House",
+        "title": "Representative"}}, "id": "il", "session_details": {"96th": {"president":
+        "Cullerton", "speaker": "Madigan", "display_name": "96th Regular Session (2009-2010)",
+        "params": {"SessionId": "76", "GA": "96"}}, "95th": {"president": "Jones,
+        E.", "speaker": "Madigan", "display_name": "95th Regular Session (2007-2008)",
+        "params": {"SessionId": "51", "GA": "95"}}, "Special_95th": {"president":
+        "Jones, E.", "speaker": "Madigan", "display_name": "95th Special Session (2007-2008)",
+        "params": {"SessionId": "52", "GA": "95", "SpecSess": "1"}}, "98th": {"president":
+        "Cullerton", "speaker": "Madigan", "display_name": "98th Regular Session (2013-2014)",
+        "params": {"DocTypeID": "HJR", "SessionId": "85", "num2": "10000", "num1":
+        "1", "GA": "98"}}, "97th": {"president": "Cullerton", "speaker": "Madigan",
+        "display_name": "97th Regular Session (2011-2012)", "params": {"SessionId":
+        "84", "GA": "97"}}, "93rd": {"president": "Jones, E.", "speaker": "Madigan",
+        "display_name": "93rd Regular Session (2003-2004)", "params": {"SessionId":
+        "3", "GA": "93"}}, "94th": {"president": "Jones, E.", "speaker": "Madigan",
+        "display_name": "94th Regular Session (2005-2006)", "params": {"SessionId":
+        "50", "GA": "94"}}, "Special_96th": {"president": "Cullerton", "speaker":
+        "Madigan", "display_name": "96th Special Session (2009-2010)", "params": {"SessionId":
+        "82", "GA": "96", "SpecSess": "1"}}, "Special_93rd": {"president": "Jones,
+        E.", "speaker": "Madigan", "display_name": "93rd Special Session (2003-2004)",
+        "params": {"SessionID": "14", "GA": "93", "SpecSess": "1"}}}, "upper_chamber_title":
+        "Senator", "legislature_name": "Illinois General Assembly", "latest_json_date":
+        "2013-05-09 03:22:23", "legislature_url": "http://www.ilga.gov/"}, {"lower_chamber_name":
+        "House", "lower_chamber_title": "Representative", "feature_flags": ["subjects",
+        "capitol_maps", "influenceexplorer"], "session_details": {"2011": {"display_name":
+        "2011 Regular Session", "start_date": "2011-01-05 00:00:00"}, "2013": {"display_name":
+        "2013 Regular Session"}, "2012": {"display_name": "2012 Regular Session"}},
+        "name": "Indiana", "legislature_url": "http://www.in.gov/legislative/", "latest_csv_url":
+        "http://static.openstates.org/downloads/2013-07-01-in-csv.zip", "abbreviation":
+        "in", "latest_update": "2013-07-02 02:07:50", "latest_json_url": "http://static.openstates.org/downloads/2013-05-08-in-json.zip",
+        "upper_chamber_name": "Senate", "id": "in", "chambers": {"upper": {"name":
+        "Senate", "title": "Senator"}, "lower": {"name": "House", "title": "Representative"}},
+        "upper_chamber_title": "Senator", "legislature_name": "Indiana General Assembly",
+        "latest_json_date": "2013-05-08 23:05:21", "terms": [{"end_year": 2012, "start_year":
+        2011, "name": "2011-2012", "sessions": ["2011", "2012"]}, {"end_year": 2014,
+        "start_year": 2013, "name": "2013-2014", "sessions": ["2013"]}]}, {"lower_chamber_name":
+        "House", "lower_chamber_title": "Representative", "latest_json_url": "http://static.openstates.org/downloads/2013-05-09-ia-json.zip",
+        "terms": [{"end_year": 2012, "start_year": 2011, "name": "2011-2012", "sessions":
+        ["2011-2012"]}, {"end_year": 2014, "start_year": 2013, "name": "2013-2014",
+        "sessions": ["2013-2014"]}], "name": "Iowa", "latest_csv_url": "http://static.openstates.org/downloads/2013-07-01-ia-csv.zip",
+        "session_details": {"2013-2014": {"display_name": "2013-2014 Regular Session",
+        "number": "85"}, "2011-2012": {"display_name": "2011-2012 Regular Session",
+        "number": "84", "end_date": "2013-01-13 00:00:00", "start_date": "2011-01-10
+        00:00:00"}}, "abbreviation": "ia", "latest_update": "2013-07-14 02:25:11",
+        "feature_flags": ["events", "influenceexplorer"], "upper_chamber_name": "Senate",
+        "id": "ia", "chambers": {"upper": {"name": "Senate", "title": "Senator"},
+        "lower": {"name": "House", "title": "Representative"}}, "upper_chamber_title":
+        "Senator", "legislature_name": "Iowa General Assembly", "latest_json_date":
+        "2013-05-09 04:23:10", "legislature_url": "https://www.legis.iowa.gov/"},
+        {"lower_chamber_name": "House", "lower_chamber_title": "Representative", "feature_flags":
+        ["influenceexplorer"], "terms": [{"end_year": 2012, "start_year": 2011, "name":
+        "2011-2012", "sessions": ["2011-2012"]}, {"end_year": 2014, "start_year":
+        2013, "name": "2013-2014", "sessions": ["2013-2014"]}], "name": "Kansas",
+        "latest_csv_url": "http://static.openstates.org/downloads/2013-07-01-ks-csv.zip",
+        "abbreviation": "ks", "latest_update": "2013-07-14 01:40:18", "latest_json_url":
+        "http://static.openstates.org/downloads/2013-05-09-ks-json.zip", "upper_chamber_name":
+        "Senate", "chambers": {"upper": {"name": "Senate", "title": "Senator"}, "lower":
+        {"name": "House", "title": "Representative"}}, "id": "ks", "session_details":
+        {"2013-2014": {"type": "primary", "display_name": "2013-2014 Regular Session",
+        "start_date": "2013-01-14 00:00:00"}, "2011-2012": {"type": "primary", "display_name":
+        "2011-2012 Regular Session", "start_date": "2011-01-12 00:00:00"}}, "upper_chamber_title":
+        "Senator", "legislature_name": "Kansas State Legislature", "latest_json_date":
+        "2013-05-09 05:00:02", "legislature_url": "http://www.kslegislature.org/"},
+        {"lower_chamber_name": "House", "lower_chamber_title": "Representative", "latest_json_url":
+        "http://static.openstates.org/downloads/2013-07-01-ky-json.zip", "terms":
+        [{"end_year": 2012, "start_year": 2011, "name": "2011-2012", "sessions": ["2011
+        Regular Session", "2011SS", "2012RS", "2012SS"]}, {"end_year": 2014, "start_year":
+        2013, "name": "2013-2014", "sessions": ["2013RS"]}], "name": "Kentucky", "latest_csv_url":
+        "http://static.openstates.org/downloads/2013-07-01-ky-csv.zip", "session_details":
+        {"2012RS": {"display_name": "2012 Regular Session", "type": "primary"}, "2011
+        Regular Session": {"display_name": "2011 Regular Session", "type": "primary"},
+        "2012SS": {"display_name": "2012 Extraordinary Session", "type": "special"},
+        "2011SS": {"display_name": "2011 Extraordinary Session", "type": "special"},
+        "2013RS": {"display_name": "2013 Regular Session", "type": "primary"}}, "abbreviation":
+        "ky", "latest_update": "2013-07-14 00:28:33", "feature_flags": ["subjects",
+        "events", "influenceexplorer"], "upper_chamber_name": "Senate", "id": "ky",
+        "chambers": {"upper": {"name": "Senate", "title": "Senator"}, "lower": {"name":
+        "House", "title": "Representative"}}, "upper_chamber_title": "Senator", "legislature_name":
+        "Kentucky General Assembly", "latest_json_date": "2013-07-01 09:14:43", "legislature_url":
+        "http://www.lrc.ky.gov/"}, {"lower_chamber_name": "House", "lower_chamber_title":
+        "Representative", "latest_json_url": "http://static.openstates.org/downloads/2013-05-09-la-json.zip",
+        "session_details": {"2011 1st Extraordinary Session": {"display_name": "2011,
+        1st Extraordinary Session", "type": "special", "id": "111es"}, "2009": {"display_name":
+        "2009 Regular Session", "type": "primary", "start_date": "2010-04-27 00:00:00",
+        "end_date": "2010-06-24 00:00:00"}, "2011": {"display_name": "2011 Regular
+        Session", "type": "primary"}, "2010": {"display_name": "2010 Regular Session",
+        "type": "primary", "start_date": "2010-03-29 00:00:00", "end_date": "2010-06-21
+        00:00:00"}, "2013": {"display_name": "2013 Regular Session", "type": "primary"},
+        "2012": {"display_name": "2012 Regular Session", "type": "primary"}}, "name":
+        "Louisiana", "latest_csv_url": "http://static.openstates.org/downloads/2013-07-01-la-csv.zip",
+        "abbreviation": "la", "latest_update": "2013-07-14 02:58:56", "feature_flags":
+        ["subjects", "influenceexplorer"], "upper_chamber_name": "Senate", "chambers":
+        {"upper": {"name": "Senate", "title": "Senator"}, "lower": {"name": "House",
+        "title": "Representative"}}, "id": "la", "terms": [{"end_year": 2011, "start_year":
+        2008, "name": "2008-2011", "sessions": ["2009", "2010", "2011 1st Extraordinary
+        Session", "2011"]}, {"end_year": 2015, "start_year": 2012, "name": "2012-2015",
+        "sessions": ["2012", "2013"]}], "upper_chamber_title": "Senator", "legislature_name":
+        "Louisiana Legislature", "latest_json_date": "2013-05-09 04:08:03", "legislature_url":
+        "http://www.legis.la.gov/"}, {"lower_chamber_name": "House", "lower_chamber_title":
+        "Representative", "latest_json_url": "http://static.openstates.org/downloads/2013-07-01-me-json.zip",
+        "terms": [{"end_year": 2012, "start_year": 2011, "name": "2011-2012", "sessions":
+        ["125"]}, {"end_year": 2014, "start_year": 2013, "name": "2013-2014", "sessions":
+        ["126"]}], "name": "Maine", "latest_csv_url": "http://static.openstates.org/downloads/2013-07-01-me-csv.zip",
+        "session_details": {"125": {"display_name": "125th Legislature (2011-2012)"},
+        "126": {"display_name": "126th Legislature (2013-2014)"}}, "abbreviation":
+        "me", "latest_update": "2013-07-14 04:05:11", "feature_flags": ["subjects",
+        "influenceexplorer"], "upper_chamber_name": "Senate", "id": "me", "chambers":
+        {"upper": {"name": "Senate", "title": "Senator"}, "lower": {"name": "House",
+        "title": "Representative"}}, "upper_chamber_title": "Senator", "legislature_name":
+        "Maine Legislature", "latest_json_date": "2013-07-01 18:07:34", "legislature_url":
+        "http://www.maine.gov/legis/"}, {"lower_chamber_name": "House", "lower_chamber_title":
+        "Delegate", "latest_json_url": "http://static.openstates.org/downloads/2013-07-01-md-json.zip",
+        "terms": [{"end_year": 2010, "start_year": 2007, "name": "2007-2010", "sessions":
+        ["2007", "2007s1", "2008", "2009", "2010"]}, {"end_year": 2014, "start_year":
+        2011, "name": "2011-2014", "sessions": ["2011", "2011s1", "2012", "2012s1",
+        "2012s2", "2013"]}], "name": "Maryland", "latest_csv_url": "http://static.openstates.org/downloads/2013-07-01-md-csv.zip",
+        "session_details": {"2011s1": {"type": "special", "display_name": "2011, 1st
+        Special Session", "number": 429}, "2012s1": {"type": "special", "display_name":
+        "2012, 1st Special Session", "number": 431}, "2012s2": {"type": "special",
+        "display_name": "2012, 2nd Special Session"}, "2007": {"display_name": "2007
+        Regular Session", "end_date": "2007-04-10 00:00:00", "number": 423, "type":
+        "primary", "start_date": "2007-01-10 00:00:00"}, "2007s1": {"display_name":
+        "2007, 1st Special Session", "end_date": "2007-11-19 00:00:00", "number":
+        424, "type": "special", "start_date": "2007-10-29 00:00:00"}, "2008": {"display_name":
+        "2008 Regular Session", "end_date": "2008-04-07 00:00:00", "number": 425,
+        "type": "primary", "start_date": "2008-01-09 00:00:00"}, "2009": {"display_name":
+        "2009 Regular Session", "end_date": "2009-04-13 00:00:00", "number": 426,
+        "type": "primary", "start_date": "2009-01-14 00:00:00"}, "2011": {"display_name":
+        "2011 Regular Session", "end_date": "2011-04-12 00:00:00", "number": 428,
+        "type": "primary", "start_date": "2011-01-12 00:00:00"}, "2010": {"display_name":
+        "2010 Regular Session", "end_date": "2010-04-12 00:00:00", "number": 427,
+        "type": "primary", "start_date": "2010-01-13 00:00:00"}, "2013": {"type":
+        "primary", "display_name": "2013 Regular Session"}, "2012": {"display_name":
+        "2012 Regular Session", "end_date": "2012-04-09 00:00:00", "number": 430,
+        "type": "primary", "start_date": "2012-01-11 00:00:00"}}, "abbreviation":
+        "md", "latest_update": "2013-07-14 02:59:49", "feature_flags": ["subjects",
+        "events", "influenceexplorer"], "upper_chamber_name": "Senate", "id": "md",
+        "chambers": {"upper": {"name": "Senate", "title": "Senator"}, "lower": {"name":
+        "House", "title": "Delegate"}}, "upper_chamber_title": "Senator", "legislature_name":
+        "Maryland General Assembly", "latest_json_date": "2013-07-01 19:35:33", "legislature_url":
+        "http://mgaleg.maryland.gov/"}, {"lower_chamber_name": "House", "lower_chamber_title":
+        "Representative", "feature_flags": ["events", "influenceexplorer"], "session_details":
+        {"188th": {"display_name": "188th Legislature (2013-2014)", "type": "primary"},
+        "186th": {"display_name": "186th Legislature (2009-2010)", "type": "primary"},
+        "187th": {"display_name": "187th Legislature (2011-2012)", "type": "primary"}},
+        "name": "Massachusetts", "latest_csv_url": "http://static.openstates.org/downloads/2013-07-01-ma-csv.zip",
+        "abbreviation": "ma", "latest_update": "2013-07-14 06:41:46", "latest_json_url":
+        "http://static.openstates.org/downloads/2013-05-09-ma-json.zip", "upper_chamber_name":
+        "Senate", "chambers": {"upper": {"name": "Senate", "title": "Senator"}, "lower":
+        {"name": "House", "title": "Representative"}}, "id": "ma", "terms": [{"end_year":
+        2010, "start_year": 2009, "name": "186", "sessions": ["186th"]}, {"end_year":
+        2012, "start_year": 2011, "name": "187", "sessions": ["187th"]}, {"end_year":
+        2013, "start_year": 2014, "name": "188", "sessions": ["188th"]}], "upper_chamber_title":
+        "Senator", "legislature_name": "Massachusetts General Court", "latest_json_date":
+        "2013-05-09 00:07:18", "legislature_url": "http://www.malegislature.gov/"},
+        {"lower_chamber_name": "House", "lower_chamber_title": "Representative", "latest_json_url":
+        "http://static.openstates.org/downloads/2013-05-08-mi-json.zip", "terms":
+        [{"end_year": 2012, "start_year": 2011, "name": "2011-2012", "sessions": ["2011-2012"]},
+        {"end_year": 2014, "start_year": 2013, "name": "2013-2014", "sessions": ["2013-2014"]}],
+        "name": "Michigan", "latest_csv_url": "http://static.openstates.org/downloads/2013-07-01-mi-csv.zip",
+        "abbreviation": "mi", "latest_update": "2013-07-14 02:20:42", "feature_flags":
+        ["subjects", "events", "influenceexplorer"], "upper_chamber_name": "Senate",
+        "chambers": {"upper": {"name": "Senate", "title": "Senator"}, "lower": {"name":
+        "House", "title": "Representative"}}, "id": "mi", "session_details": {"2013-2014":
+        {"display_name": "2013-2014 Regular Session", "type": "primary"}, "2011-2012":
+        {"display_name": "2011-2012 Regular Session", "type": "primary"}}, "upper_chamber_title":
+        "Senator", "legislature_name": "Michigan Legislature", "latest_json_date":
+        "2013-05-08 22:57:43", "legislature_url": "http://www.legislature.mi.gov"},
+        {"lower_chamber_name": "House", "lower_chamber_title": "Representative", "latest_json_url":
+        "http://static.openstates.org/downloads/2013-07-01-mn-json.zip", "terms":
+        [{"end_year": 2010, "start_year": 2009, "biennium": "86", "name": "2009-2010",
+        "sessions": ["2009-2010", "2010 1st Special Session", "2010 2nd Special Session"]},
+        {"end_year": 2012, "start_year": 2011, "biennium": "87", "name": "2011-2012",
+        "sessions": ["2011-2012", "2011s1", "2012s1"]}, {"end_year": 2014, "start_year":
+        2013, "biennium": 88, "name": "2013-2014", "sessions": ["2013-2014"]}], "name":
+        "Minnesota", "latest_csv_url": "http://static.openstates.org/downloads/2013-07-01-mn-csv.zip",
+        "session_details": {"2009-2010": {"type": "primary", "site_id": "0862009",
+        "display_name": "2009-2010 Regular Session", "votes_url": "http://www.house.leg.state.mn.us/votes/getVotesls86.asp"},
+        "2011s1": {"type": "special", "site_id": "1872011", "display_name": "2011,
+        1st Special Session", "votes_url": "http://www.house.leg.state.mn.us/votes/getVotesls8720111.asp"},
+        "2010 2nd Special Session": {"type": "special", "site_id": "2862010", "display_name":
+        "2010, 2nd Special Session"}, "2013-2014": {"type": "primary", "site_id":
+        "0882013", "display_name": "2013-2014 Regular Session"}, "2012s1": {"type":
+        "special", "site_id": "1872012", "display_name": "2012, 1st Special Session",
+        "votes_url": null}, "2011-2012": {"type": "primary", "site_id": "0872011",
+        "display_name": "2011-2012 Regular Session", "votes_url": "http://www.house.leg.state.mn.us/votes/getVotesls87.asp"},
+        "2010 1st Special Session": {"type": "special", "site_id": "1862010", "display_name":
+        "2010, 1st Special Session", "votes_url": "http://www.house.leg.state.mn.us/votes/getVotesls8620101.asp"}},
+        "abbreviation": "mn", "latest_update": "2013-07-14 03:42:47", "feature_flags":
+        ["subjects", "events", "influenceexplorer"], "upper_chamber_name": "Senate",
+        "id": "mn", "chambers": {"upper": {"name": "Senate", "title": "Senator"},
+        "lower": {"name": "House", "title": "Representative"}}, "upper_chamber_title":
+        "Senator", "legislature_name": "Minnesota State Legislature", "latest_json_date":
+        "2013-07-01 20:05:23", "legislature_url": "http://www.leg.state.mn.us/"},
+        {"lower_chamber_name": "House", "lower_chamber_title": "Representative", "latest_json_url":
+        "http://static.openstates.org/downloads/2013-07-01-ms-json.zip", "session_details":
+        {"20091E": {"display_name": "2009, 1st Extraordinary Session"}, "20111E":
+        {"display_name": "2011, 1st Extraordinary Session"}, "20093E": {"display_name":
+        "2009, 3rd Extraordinary Session"}, "20101E": {"display_name": "2010, 1st
+        Extraordinary Session"}, "20092E": {"display_name": "2009, 2nd Extraordinary
+        Session"}, "20102E": {"display_name": "2010, 2nd Extraordinary Session"},
+        "20131E": {"display_name": "2013 First Extraordinary Session"}, "20132E":
+        {"display_name": "2013 Second Extraordinary Session"}, "2008": {"display_name":
+        "2008 Regular Session"}, "2009": {"display_name": "2009 Regular Session"},
+        "2011": {"display_name": "2011 Regular Session"}, "2010": {"display_name":
+        "2010 Regular Session"}, "2013": {"display_name": "2013 Regular Session"},
+        "2012": {"display_name": "2012 Regular Session"}}, "name": "Mississippi",
+        "latest_csv_url": "http://static.openstates.org/downloads/2013-07-01-ms-csv.zip",
+        "abbreviation": "ms", "latest_update": "2013-07-14 00:33:59", "feature_flags":
+        ["subjects", "influenceexplorer"], "upper_chamber_name": "Senate", "chambers":
+        {"upper": {"name": "Senate", "title": "Senator"}, "lower": {"name": "House",
+        "title": "Representative"}}, "id": "ms", "terms": [{"end_year": 2011, "start_year":
+        2008, "name": "2008-2011", "sessions": ["2008", "2009", "20091E", "20092E",
+        "20093E", "20101E", "20102E", "2010", "2011", "20111E"]}, {"end_year": 2015,
+        "start_year": 2012, "name": "2012-2015", "sessions": ["2012", "2013", "20131E",
+        "20132E"]}], "upper_chamber_title": "Senator", "legislature_name": "Mississippi
+        Legislature", "latest_json_date": "2013-07-01 20:41:17", "legislature_url":
+        "http://www.legislature.ms.gov/"}, {"lower_chamber_name": "House", "lower_chamber_title":
+        "Representative", "latest_json_url": "http://static.openstates.org/downloads/2013-05-09-mo-json.zip",
+        "session_details": {"2013": {"display_name": "2013 Regular Session", "type":
+        "primary", "start_date": "2012-01-26 00:00:00"}, "2012": {"display_name":
+        "2012 Regular Session", "type": "primary", "start_date": "2012-01-26 00:00:00"}},
+        "name": "Missouri", "latest_csv_url": "http://static.openstates.org/downloads/2013-07-01-mo-csv.zip",
+        "abbreviation": "mo", "latest_update": "2013-07-14 02:11:34", "feature_flags":
+        ["subjects", "influenceexplorer"], "upper_chamber_name": "Senate", "chambers":
+        {"upper": {"name": "Senate", "title": "Senator"}, "lower": {"name": "House",
+        "title": "Representative"}}, "id": "mo", "terms": [{"end_year": 2012, "start_year":
+        2011, "name": "2011-2012", "sessions": ["2012"]}, {"end_year": 2014, "start_year":
+        2013, "name": "2013-2014", "sessions": ["2013"]}], "upper_chamber_title":
+        "Senator", "legislature_name": "Missouri General Assembly", "latest_json_date":
+        "2013-05-09 00:27:35", "legislature_url": "http://www.moga.mo.gov/"}, {"lower_chamber_name":
+        "House", "lower_chamber_title": "Representative", "latest_json_url": "http://static.openstates.org/downloads/2013-05-09-mt-json.zip",
+        "terms": [{"end_year": 2012, "start_year": 2011, "sessions": ["2011"], "session_number":
+        "62nd", "name": "2011-2012"}, {"end_year": 2014, "start_year": 2013, "sessions":
+        ["2013"], "session_number": "63rd", "name": "2013-2014"}], "name": "Montana",
+        "latest_csv_url": "http://static.openstates.org/downloads/2013-07-01-mt-csv.zip",
+        "session_details": {"2011": {"display_name": "2011 Regular Session", "years":
+        [2011, 2012]}, "2013": {"display_name": "2013 Regular Session", "years": [2013,
+        2014]}}, "abbreviation": "mt", "latest_update": "2013-06-19 03:23:43", "feature_flags":
+        ["influenceexplorer"], "upper_chamber_name": "Senate", "id": "mt", "chambers":
+        {"upper": {"name": "Senate", "title": "Senator"}, "lower": {"name": "House",
+        "title": "Representative"}}, "upper_chamber_title": "Senator", "legislature_name":
+        "Montana Legislature", "latest_json_date": "2013-05-09 00:33:17", "legislature_url":
+        "http://leg.mt.gov/"}, {"latest_json_url": "http://static.openstates.org/downloads/2013-07-01-ne-json.zip",
+        "session_details": {"102": {"display_name": "102nd Legislature (2011-2012)",
+        "start_date": "2011-01-05 00:00:00", "end_date": "2012-04-18 00:00:00"}, "103":
+        {"display_name": "103rd Legislature (2013-2014)", "start_date": "2013-01-08
+        00:00:00", "end_date": "2014-05-30 00:00:00"}, "102S1": {"display_name": "102nd
+        Legislature, 1st Special Session (2011)", "start_date": "2011-11-01 00:00:00",
+        "end_date": "2011-11-22 00:00:00"}}, "name": "Nebraska", "latest_csv_url":
+        "http://static.openstates.org/downloads/2013-07-01-ne-csv.zip", "abbreviation":
+        "ne", "latest_update": "2013-07-14 01:26:42", "feature_flags": ["influenceexplorer"],
+        "upper_chamber_name": "Unicameral", "chambers": {"upper": {"name": "Unicameral",
+        "title": "Senator"}}, "id": "ne", "terms": [{"end_year": 2012, "start_year":
+        2011, "name": "2011-2012", "sessions": ["102", "102S1"]}, {"end_year": 2014,
+        "start_year": 2013, "name": "2013-2014", "sessions": ["103"]}], "upper_chamber_title":
+        "Senator", "legislature_name": "Nebraska Legislature", "latest_json_date":
+        "2013-07-01 18:12:46", "legislature_url": "http://nebraskalegislature.gov/"},
+        {"lower_chamber_name": "Assembly", "lower_chamber_title": "Assembly Member",
+        "latest_json_url": "http://static.openstates.org/downloads/2013-07-01-nv-json.zip",
+        "session_details": {"77": {"display_name": "2013 Regular Session", "type":
+        "primary", "slug": "77th2013"}, "76": {"display_name": "2011 Regular Session",
+        "type": "primary", "slug": "76th2011"}, "75": {"display_name": "2009 Regular
+        Session", "type": "primary", "slug": "75th2009"}, "2010Special26": {"display_name":
+        "26th Special Session (2010)", "type": "special", "slug": "26th2010Special"},
+        "2013Special27": {"display_name": "27th Special Session (2013)", "type": "special",
+        "slug": "27th2013Special"}}, "name": "Nevada", "latest_csv_url": "http://static.openstates.org/downloads/2013-07-01-nv-csv.zip",
+        "abbreviation": "nv", "latest_update": "2013-06-17 02:04:59", "feature_flags":
+        ["subjects", "capitol_maps", "influenceexplorer"], "upper_chamber_name": "Senate",
+        "chambers": {"upper": {"name": "Senate", "title": "Senator"}, "lower": {"name":
+        "Assembly", "title": "Assembly Member"}}, "id": "nv", "terms": [{"end_year":
+        2010, "start_year": 2009, "name": "2009-2010", "sessions": ["2010Special26",
+        "75"]}, {"end_year": 2012, "start_year": 2011, "name": "2011-2012", "sessions":
+        ["76"]}, {"end_year": 2014, "start_year": 2013, "name": "2013-2014", "sessions":
+        ["77", "2013Special27"]}], "upper_chamber_title": "Senator", "legislature_name":
+        "Nevada Legislature", "latest_json_date": "2013-07-01 21:42:01", "legislature_url":
+        "http://www.leg.state.nv.us/"}, {"lower_chamber_name": "House", "lower_chamber_title":
+        "Representative", "latest_json_url": "http://static.openstates.org/downloads/2013-07-01-nh-json.zip",
+        "terms": [{"end_year": 2012, "start_year": 2011, "name": "2011-2012", "sessions":
+        ["2011", "2012"]}, {"end_year": 2014, "start_year": 2013, "name": "2013-2014",
+        "sessions": ["2013"]}], "name": "New Hampshire", "latest_csv_url": "http://static.openstates.org/downloads/2013-07-01-nh-csv.zip",
+        "abbreviation": "nh", "latest_update": "2013-07-14 00:57:04", "feature_flags":
+        ["influenceexplorer"], "upper_chamber_name": "Senate", "chambers": {"upper":
+        {"name": "Senate", "title": "Senator"}, "lower": {"name": "House", "title":
+        "Representative"}}, "id": "nh", "session_details": {"2011": {"zip_url": "http://gencourt.state.nh.us/downloads/2011%20Session%20Bill%20Status%20Tables.zip",
+        "display_name": "2011 Regular Session"}, "2013": {"zip_url": "http://gencourt.state.nh.us/downloads/2013%20Session%20Bill%20Status%20Tables.zip",
+        "display_name": "2013 Regular Session"}, "2012": {"zip_url": "http://gencourt.state.nh.us/downloads/2012%20Session%20Bill%20Status%20Tables.zip",
+        "display_name": "2012 Regular Session"}}, "upper_chamber_title": "Senator",
+        "legislature_name": "New Hampshire General Court", "latest_json_date": "2013-07-01
+        18:18:45", "legislature_url": "http://www.gencourt.state.nh.us/"}, {"lower_chamber_name":
+        "Assembly", "lower_chamber_title": "Assembly Member", "latest_json_url": "http://static.openstates.org/downloads/2013-07-01-nj-json.zip",
+        "terms": [{"end_year": 2009, "start_year": 2008, "name": "2008-2009", "sessions":
+        ["213"]}, {"end_year": 2011, "start_year": 2010, "name": "2010-2011", "sessions":
+        ["214"]}, {"end_year": 2013, "start_year": 2012, "name": "2012-2013", "sessions":
+        ["215"]}], "name": "New Jersey", "latest_csv_url": "http://static.openstates.org/downloads/2013-07-01-nj-csv.zip",
+        "session_details": {"214": {"display_name": "2010-2011 Regular Session", "start_date":
+        "2010-01-12 00:00:00"}, "215": {"display_name": "2012-2013 Regular Session",
+        "start_date": "2012-01-10 00:00:00"}, "213": {"display_name": "2008-2009 Regular
+        Session", "start_date": "2008-01-12 00:00:00"}}, "abbreviation": "nj", "latest_update":
+        "2013-07-14 00:57:59", "feature_flags": ["subjects", "events", "influenceexplorer"],
+        "upper_chamber_name": "Senate", "id": "nj", "chambers": {"upper": {"name":
+        "Senate", "title": "Senator"}, "lower": {"name": "Assembly", "title": "Assembly
+        Member"}}, "upper_chamber_title": "Senator", "legislature_name": "New Jersey
+        Legislature", "latest_json_date": "2013-07-01 21:35:57", "legislature_url":
+        "http://www.njleg.state.nj.us/"}, {"lower_chamber_name": "House", "lower_chamber_title":
+        "Representative", "latest_json_url": "http://static.openstates.org/downloads/2013-05-09-nm-json.zip",
+        "terms": [{"end_year": 2012, "start_year": 2011, "name": "2011-2012", "sessions":
+        ["2011", "2011S", "2012"]}, {"end_year": 2014, "start_year": 2013, "name":
+        "2013-2014", "sessions": ["2013"]}], "name": "New Mexico", "latest_csv_url":
+        "http://static.openstates.org/downloads/2013-07-01-nm-csv.zip", "abbreviation":
+        "nm", "latest_update": "2013-07-14 01:40:48", "feature_flags": ["subjects",
+        "influenceexplorer"], "upper_chamber_name": "Senate", "chambers": {"upper":
+        {"name": "Senate", "title": "Senator"}, "lower": {"name": "House", "title":
+        "Representative"}}, "id": "nm", "session_details": {"2011": {"display_name":
+        "2011 Regular Session", "slug": "11%20Regular"}, "2013": {"display_name":
+        "2013 Regular Session", "slug": "13%20Regular"}, "2011S": {"display_name":
+        "2011 Special Session", "slug": "11%20Special"}, "2012": {"display_name":
+        "2012 Regular Session", "slug": "12%20Regular"}}, "upper_chamber_title": "Senator",
+        "legislature_name": "New Mexico Legislature", "latest_json_date": "2013-05-09
+        04:15:58", "legislature_url": "http://www.nmlegis.gov/"}, {"lower_chamber_name":
+        "Assembly", "lower_chamber_title": "Assembly Member", "latest_json_url": "http://static.openstates.org/downloads/2013-07-01-ny-json.zip",
+        "terms": [{"end_year": 2011, "start_year": 2010, "name": "2009-2010", "sessions":
+        ["2009-2010"]}, {"end_year": 2012, "start_year": 2011, "name": "2011-2012",
+        "sessions": ["2011-2012"]}, {"end_year": 2014, "start_year": 2013, "name":
+        "2013-2014", "sessions": ["2013-2014"]}], "name": "New York", "latest_csv_url":
+        "http://static.openstates.org/downloads/2013-07-01-ny-csv.zip", "session_details":
+        {"2009-2010": {"display_name": "2009 Regular Session"}, "2013-2014": {"display_name":
+        "2013 Regular Session"}, "2011-2012": {"display_name": "2011 Regular Session"}},
+        "abbreviation": "ny", "latest_update": "2013-07-12 16:37:33", "feature_flags":
+        ["subjects", "events", "influenceexplorer"], "upper_chamber_name": "Senate",
+        "id": "ny", "chambers": {"upper": {"name": "Senate", "title": "Senator"},
+        "lower": {"name": "Assembly", "title": "Assembly Member"}}, "upper_chamber_title":
+        "Senator", "legislature_name": "New York Legislature", "latest_json_date":
+        "2013-07-01 23:02:17", "legislature_url": "http://public.leginfo.state.ny.us/"},
+        {"lower_chamber_name": "House", "lower_chamber_title": "Representative", "latest_json_url":
+        "http://static.openstates.org/downloads/2013-07-01-nc-json.zip", "terms":
+        [{"end_year": 2010, "start_year": 2009, "name": "2009-2010", "sessions": ["2009"]},
+        {"end_year": 2012, "start_year": 2011, "name": "2011-2012", "sessions": ["2011"]},
+        {"end_year": 2014, "start_year": 2013, "name": "2013-2014", "sessions": ["2013"]}],
+        "name": "North Carolina", "latest_csv_url": "http://static.openstates.org/downloads/2013-07-01-nc-csv.zip",
+        "session_details": {"2009": {"display_name": "2009-2010 Session", "type":
+        "primary", "start_date": "2009-01-28 00:00:00"}, "2011": {"display_name":
+        "2011-2012 Session", "type": "primary", "start_date": "2011-01-26 00:00:00"},
+        "2013": {"display_name": "2013-2014 Session", "type": "primary", "start_date":
+        "2013-01-30 00:00:00"}}, "abbreviation": "nc", "latest_update": "2013-07-14
+        02:12:46", "feature_flags": ["subjects", "influenceexplorer"], "upper_chamber_name":
+        "Senate", "id": "nc", "chambers": {"upper": {"name": "Senate", "title": "Senator"},
+        "lower": {"name": "House", "title": "Representative"}}, "upper_chamber_title":
+        "Senator", "legislature_name": "North Carolina General Assembly", "latest_json_date":
+        "2013-07-01 20:54:46", "legislature_url": "http://www.ncleg.net/"}, {"lower_chamber_name":
+        "House", "lower_chamber_title": "Representative", "latest_json_url": "http://static.openstates.org/downloads/2013-05-09-nd-json.zip",
+        "session_details": {"62": {"display_name": "62nd Legislative Assembly (2011-2012)",
+        "start_date": "2011-01-04 00:00:00"}, "63": {"display_name": "63rd Legislative
+        Assembly (2013-2014)", "start_date": "2013-01-08 00:00:00"}}, "name": "North
+        Dakota", "latest_csv_url": "http://static.openstates.org/downloads/2013-07-01-nd-csv.zip",
+        "abbreviation": "nd", "latest_update": "2013-07-13 04:20:24", "feature_flags":
+        ["influenceexplorer"], "upper_chamber_name": "Senate", "chambers": {"upper":
+        {"name": "Senate", "title": "Senator"}, "lower": {"name": "House", "title":
+        "Representative"}}, "id": "nd", "terms": [{"end_year": 2012, "start_year":
+        2011, "name": "62", "sessions": ["62"]}, {"end_year": 2014, "start_year":
+        2013, "name": "63", "sessions": ["63"]}], "upper_chamber_title": "Senator",
+        "legislature_name": "North Dakota Legislative Assembly", "latest_json_date":
+        "2013-05-09 04:55:05", "legislature_url": "http://www.legis.nd.gov/"}, {"lower_chamber_name":
+        "House", "lower_chamber_title": "Representative", "latest_json_url": "http://static.openstates.org/downloads/2013-07-01-oh-json.zip",
+        "terms": [{"end_year": 2010, "start_year": 2009, "name": "2009-2010", "sessions":
+        ["128"]}, {"end_year": 2012, "start_year": 2011, "name": "2011-2012", "sessions":
+        ["129"]}, {"end_year": 2014, "start_year": 2013, "name": "2013-2014", "sessions":
+        ["130"]}], "name": "Ohio", "latest_csv_url": "http://static.openstates.org/downloads/2013-07-01-oh-csv.zip",
+        "session_details": {"128": {"display_name": "128th Legislature (2009-2010)"},
+        "129": {"display_name": "129th Legislature (2011-2012)", "start_date": "2011-01-03
+        00:00:00"}, "130": {"display_name": "130th Legislature (2013-2014)"}}, "abbreviation":
+        "oh", "latest_update": "2013-07-14 02:20:47", "feature_flags": ["influenceexplorer"],
+        "upper_chamber_name": "Senate", "id": "oh", "chambers": {"upper": {"name":
+        "Senate", "title": "Senator"}, "lower": {"name": "House", "title": "Representative"}},
+        "upper_chamber_title": "Senator", "legislature_name": "Ohio General Assembly",
+        "latest_json_date": "2013-07-01 23:05:18", "legislature_url": "http://www.legislature.state.oh.us/"},
+        {"lower_chamber_name": "House", "lower_chamber_title": "Representative", "feature_flags":
+        ["subjects", "influenceexplorer"], "terms": [{"end_year": 2012, "start_year":
+        2011, "name": "2011-2012", "sessions": ["2011-2012", "2012SS1"]}, {"end_year":
+        2014, "start_year": 2013, "name": "2013-2014", "sessions": ["2013-2014"]}],
+        "name": "Oklahoma", "latest_csv_url": "http://static.openstates.org/downloads/2013-07-01-ok-csv.zip",
+        "session_details": {"2012SS1": {"display_name": "2012 Special Session", "session_id":
+        "121X"}, "2013-2014": {"display_name": "2013-2014 Regular Session", "session_id":
+        "1300"}, "2011-2012": {"display_name": "2011-2012 Regular Session", "session_id":
+        "1200"}}, "abbreviation": "ok", "latest_update": "2013-06-12 04:23:47", "latest_json_url":
+        "http://static.openstates.org/downloads/2013-05-08-ok-json.zip", "upper_chamber_name":
+        "Senate", "id": "ok", "chambers": {"upper": {"name": "Senate", "title": "Senator"},
+        "lower": {"name": "House", "title": "Representative"}}, "upper_chamber_title":
+        "Senator", "legislature_name": "Oklahoma Legislature", "latest_json_date":
+        "2013-05-08 23:46:19", "legislature_url": "http://www.oklegislature.gov/"},
+        {"lower_chamber_name": "House", "lower_chamber_title": "Representative", "latest_json_url":
+        "http://static.openstates.org/downloads/2013-07-01-or-json.zip", "terms":
+        [{"end_year": 2012, "start_year": 2011, "name": "2011-2012", "sessions": ["2011
+        Regular Session", "2012 Regular Session", "2012 Special Session"]}, {"end_year":
+        2014, "start_year": 2013, "name": "2013-2014", "sessions": ["2013 Regular
+        Session"]}], "name": "Oregon", "latest_csv_url": "http://static.openstates.org/downloads/2013-07-01-or-csv.zip",
+        "session_details": {"2012 Special Session": {"display_name": "2012 Speical
+        Session", "slug": "12ss1"}, "2011 Regular Session": {"display_name": "2011
+        Regular Session", "slug": "11reg"}, "2013 Regular Session": {"display_name":
+        "2013 Regular Session", "slug": "13reg"}, "2012 Regular Session": {"display_name":
+        "2012 Regular Session", "slug": "12reg"}}, "abbreviation": "or", "latest_update":
+        "2013-07-14 01:54:18", "feature_flags": ["influenceexplorer"], "upper_chamber_name":
+        "Senate", "id": "or", "chambers": {"upper": {"name": "Senate", "title": "Senator"},
+        "lower": {"name": "House", "title": "Representative"}}, "upper_chamber_title":
+        "Senator", "legislature_name": "Oregon Legislative Assembly", "latest_json_date":
+        "2013-07-01 18:29:08", "legislature_url": "http://www.leg.state.or.us/"},
+        {"lower_chamber_name": "House", "lower_chamber_title": "Representative", "latest_json_url":
+        "http://static.openstates.org/downloads/2013-07-01-pa-json.zip", "terms":
+        [{"end_year": 2010, "start_year": 2009, "name": "2009-2010", "sessions": ["2009-2010",
+        "2009-2010 Special Session #1 (Transportation)"]}, {"end_year": 2012, "start_year":
+        2011, "name": "2011-2012", "sessions": ["2011-2012"]}, {"end_year": 2014,
+        "start_year": 2013, "name": "2013-2014", "sessions": ["2013-2014"]}], "name":
+        "Pennsylvania", "latest_csv_url": "http://static.openstates.org/downloads/2013-07-01-pa-csv.zip",
+        "session_details": {"2009-2010": {"display_name": "2009-2010 Regular Session",
+        "type": "primary"}, "2009-2010 Special Session #1 (Transportation)": {"display_name":
+        "2009-2010, 1st Special Session", "type": "special"}, "2013-2014": {"display_name":
+        "2013-2014 Regular Session", "type": "primary"}, "2011-2012": {"display_name":
+        "2011-2012 Regular Session", "type": "primary"}}, "abbreviation": "pa", "latest_update":
+        "2013-07-14 09:04:05", "feature_flags": ["events", "influenceexplorer"], "upper_chamber_name":
+        "Senate", "id": "pa", "chambers": {"upper": {"name": "Senate", "title": "Senator"},
+        "lower": {"name": "House", "title": "Representative"}}, "upper_chamber_title":
+        "Senator", "legislature_name": "Pennsylvania General Assembly", "latest_json_date":
+        "2013-07-01 23:31:12", "legislature_url": "http://www.legis.state.pa.us/"},
+        {"lower_chamber_name": "House", "lower_chamber_title": "Representative", "latest_json_url":
+        "http://static.openstates.org/downloads/2013-05-09-pr-json.zip", "terms":
+        [{"end_year": 2012, "start_year": 2009, "name": "2009-2012", "sessions": ["2009-2012"]},
+        {"end_year": 2016, "start_year": 2013, "name": "2013-2016", "sessions": ["2013-2016"]}],
+        "name": "Puerto Rico", "latest_csv_url": "http://static.openstates.org/downloads/2013-07-01-pr-csv.zip",
+        "abbreviation": "pr", "latest_update": "2013-02-12 01:30:36", "feature_flags":
+        [], "upper_chamber_name": "Senate", "chambers": {"upper": {"name": "Senate",
+        "title": "Senator"}, "lower": {"name": "House", "title": "Representative"}},
+        "id": "pr", "session_details": {"2013-2016": {"display_name": "2013-2016 Session"},
+        "2009-2012": {"display_name": "2009-2012 Session"}}, "upper_chamber_title":
+        "Senator", "legislature_name": "Legislative Assembly of Puerto Rico", "latest_json_date":
+        "2013-05-09 00:50:13", "legislature_url": "http://www.oslpr.org/"}, {"lower_chamber_name":
+        "House", "lower_chamber_title": "Representative", "latest_json_url": "http://static.openstates.org/downloads/2013-05-09-ri-json.zip",
+        "terms": [{"end_year": 2012, "start_year": 2012, "sessions": ["2012"], "name":
+        "2012", "start_date": "2012-01-04 00:00:00"}, {"end_year": 2014, "start_year":
+        2013, "name": "2013", "sessions": ["2013"]}], "name": "Rhode Island", "latest_csv_url":
+        "http://static.openstates.org/downloads/2013-07-01-ri-csv.zip", "session_details":
+        {"2013": {"display_name": "2013 Regular Session", "type": "primary"}, "2012":
+        {"display_name": "2012 Regular Session", "type": "primary", "start_date":
+        "2012-01-04 00:00:00"}}, "abbreviation": "ri", "latest_update": "2013-07-14
+        03:41:11", "feature_flags": ["subjects", "events", "influenceexplorer"], "upper_chamber_name":
+        "Senate", "id": "ri", "chambers": {"upper": {"name": "Senate", "title": "Senator"},
+        "lower": {"name": "House", "title": "Representative"}}, "upper_chamber_title":
+        "Senator", "legislature_name": "Rhode Island General Assembly", "latest_json_date":
+        "2013-05-09 05:25:47", "legislature_url": "http://www.rilin.state.ri.us/"},
+        {"lower_chamber_name": "House", "lower_chamber_title": "Representative", "latest_json_url":
+        "http://static.openstates.org/downloads/2013-05-09-sc-json.zip", "terms":
+        [{"end_year": 2012, "start_year": 2011, "name": "119", "sessions": ["119"]},
+        {"end_year": 2014, "start_year": 2013, "name": "2013-2014", "sessions": ["2013-2014"]}],
+        "name": "South Carolina", "latest_csv_url": "http://static.openstates.org/downloads/2013-07-01-sc-csv.zip",
+        "session_details": {"2013-2014": {"display_name": "2013-2014 Regular Session",
+        "type": "primary", "start_date": "2013-01-08 00:00:00"}, "119": {"display_name":
+        "2011-2012 Regular Session", "type": "primary", "start_date": "2010-11-17
+        00:00:00"}}, "abbreviation": "sc", "latest_update": "2013-07-14 03:59:06",
+        "feature_flags": ["influenceexplorer"], "upper_chamber_name": "Senate", "id":
+        "sc", "chambers": {"upper": {"name": "Senate", "title": "Senator"}, "lower":
+        {"name": "House", "title": "Representative"}}, "upper_chamber_title": "Senator",
+        "legislature_name": "South Carolina Legislature", "latest_json_date": "2013-05-09
+        04:51:17", "legislature_url": "http://www.scstatehouse.gov/"}, {"lower_chamber_name":
+        "House", "lower_chamber_title": "Representative", "latest_json_url": "http://static.openstates.org/downloads/2013-07-01-sd-json.zip",
+        "session_details": {"2011s": {"display_name": "2011 Special Session"}, "2009":
+        {"display_name": "2009 Regular Session"}, "2011": {"display_name": "2011 Regular
+        Session", "start_date": "2011-01-11 00:00:00"}, "2010": {"display_name": "2010
+        Regular Session"}, "2013": {"display_name": "2013 Regular Session"}, "2012":
+        {"display_name": "2012 Regular Session"}}, "name": "South Dakota", "latest_csv_url":
+        "http://static.openstates.org/downloads/2013-07-01-sd-csv.zip", "abbreviation":
+        "sd", "latest_update": "2013-07-14 07:39:27", "feature_flags": ["subjects",
+        "influenceexplorer"], "upper_chamber_name": "Senate", "chambers": {"upper":
+        {"name": "Senate", "title": "Senator"}, "lower": {"name": "House", "title":
+        "Representative"}}, "id": "sd", "terms": [{"end_year": 2010, "start_year":
+        2009, "name": "2009-2010", "sessions": ["2009", "2010"]}, {"end_year": 2012,
+        "start_year": 2011, "name": "2011-2012", "sessions": ["2011", "2011s", "2012"]},
+        {"end_year": 2014, "start_year": 2013, "name": "2013-2014", "sessions": ["2013"]}],
+        "upper_chamber_title": "Senator", "legislature_name": "South Dakota State
+        Legislature", "latest_json_date": "2013-07-01 23:35:32", "legislature_url":
+        "http://legis.state.sd.us/"}, {"lower_chamber_name": "House", "lower_chamber_title":
+        "Representative", "latest_json_url": "http://static.openstates.org/downloads/2013-05-09-tn-json.zip",
+        "terms": [{"end_year": 2010, "start_year": 2009, "name": "106", "sessions":
+        ["106"]}, {"end_year": 2011, "start_year": 2010, "name": "107", "sessions":
+        ["107"]}, {"end_year": 2013, "start_year": 2012, "name": "108", "sessions":
+        ["108"]}], "name": "Tennessee", "latest_csv_url": "http://static.openstates.org/downloads/2013-07-01-tn-csv.zip",
+        "session_details": {"108": {"display_name": "108th Regular Session (2013-2014)",
+        "type": "primary"}, "106": {"display_name": "106th Regular Session (2009-2010)",
+        "type": "primary"}, "107": {"display_name": "107th Regular Session (2011-2012)",
+        "type": "primary", "start_date": "2011-01-11 00:00:00", "end_date": "2012-01-10
+        00:00:00"}}, "abbreviation": "tn", "latest_update": "2013-07-14 04:49:38",
+        "feature_flags": ["events", "influenceexplorer"], "upper_chamber_name": "Senate",
+        "id": "tn", "chambers": {"upper": {"name": "Senate", "title": "Senator"},
+        "lower": {"name": "House", "title": "Representative"}}, "upper_chamber_title":
+        "Senator", "legislature_name": "Tennessee General Assembly", "latest_json_date":
+        "2013-05-09 05:44:56", "legislature_url": "http://www.legislature.state.tn.us/"},
+        {"lower_chamber_name": "House", "lower_chamber_title": "Representative", "feature_flags":
+        ["events", "subjects", "capitol_maps", "influenceexplorer"], "session_details":
+        {"832": {"display_name": "83nd Legislature, 2st Called Session (2013)", "type":
+        "special"}, "831": {"display_name": "83nd Legislature, 1st Called Session
+        (2013)", "type": "special"}, "83": {"end_year": 2014, "start_year": 2013,
+        "type": "primary", "display_name": "83rd Legislature (2013)"}, "82": {"display_name":
+        "82nd Legislature (2011)", "type": "primary", "start_date": "2011-01-11 00:00:00"},
+        "811": {"display_name": "81st Legislature, 1st Called Session (2009)", "type":
+        "special", "start_date": "2009-07-01 00:00:00", "end_date": "2009-07-10 00:00:00"},
+        "81": {"display_name": "81st Legislature (2009)", "type": "primary", "start_date":
+        "2009-01-13 00:00:00", "end_date": "2009-06-01 00:00:00"}, "821": {"display_name":
+        "82nd Legislature, 1st Called Session (2011)", "type": "special"}}, "name":
+        "Texas", "legislature_url": "http://www.capitol.state.tx.us/", "latest_csv_url":
+        "http://static.openstates.org/downloads/2013-07-01-tx-csv.zip", "abbreviation":
+        "tx", "latest_update": "2013-07-14 03:00:15", "latest_json_url": "http://static.openstates.org/downloads/2013-07-02-tx-json.zip",
+        "upper_chamber_name": "Senate", "id": "tx", "chambers": {"upper": {"name":
+        "Senate", "title": "Senator"}, "lower": {"name": "House", "title": "Representative"}},
+        "upper_chamber_title": "Senator", "legislature_name": "Texas Legislature",
+        "latest_json_date": "2013-07-02 00:36:46", "terms": [{"end_year": 2010, "start_year":
+        2009, "type": "primary", "name": "81", "sessions": ["81", "811"]}, {"end_year":
+        2012, "start_year": 2011, "name": "82", "sessions": ["82", "821"]}, {"end_year":
+        2014, "start_year": 2013, "name": "83", "sessions": ["83", "831", "832"]}]},
+        {"lower_chamber_name": "House", "lower_chamber_title": "Representative", "latest_json_url":
+        "http://static.openstates.org/downloads/2013-07-02-ut-json.zip", "session_details":
+        {"2011S3": {"display_name": "2011, 3rd Special Session"}, "2011S2": {"display_name":
+        "2011, 2nd Special Session"}, "2011S1": {"display_name": "2011, 1st Special
+        Session"}, "2013h1": {"display_name": "2013 House Session"}, "2012S4": {"display_name":
+        "2012, 4th Special Session"}, "2011": {"display_name": "2011 Regular Session",
+        "start_date": "2011-01-24 00:00:00"}, "2013": {"display_name": "2013 General
+        Session"}, "2012": {"display_name": "2012 General Session"}}, "name": "Utah",
+        "latest_csv_url": "http://static.openstates.org/downloads/2013-07-01-ut-csv.zip",
+        "abbreviation": "ut", "latest_update": "2013-07-14 02:31:09", "feature_flags":
+        ["events", "subjects", "influenceexplorer"], "upper_chamber_name": "Senate",
+        "chambers": {"upper": {"name": "Senate", "title": "Senator"}, "lower": {"name":
+        "House", "title": "Representative"}}, "id": "ut", "terms": [{"end_year": 2012,
+        "start_year": 2011, "name": "2011-2012", "sessions": ["2011", "2011S1", "2011S2",
+        "2011S3", "2012", "2012S4"]}, {"end_year": 2014, "start_year": 2013, "name":
+        "2013-2014", "sessions": ["2013", "2013h1"]}], "upper_chamber_title": "Senator",
+        "legislature_name": "Utah State Legislature", "latest_json_date": "2013-07-02
+        00:42:23", "legislature_url": "http://le.utah.gov/"}, {"lower_chamber_name":
+        "House", "lower_chamber_title": "Representative", "latest_json_url": "http://static.openstates.org/downloads/2013-07-02-vt-json.zip",
+        "terms": [{"end_year": 2010, "start_year": 2009, "name": "2009-2010", "sessions":
+        ["2009-2010"]}, {"end_year": 2012, "start_year": 2011, "name": "2011-2012",
+        "sessions": ["2011-2012"]}, {"end_year": 2014, "start_year": 2013, "name":
+        "2013-2014", "sessions": ["2013-2014"]}], "name": "Vermont", "latest_csv_url":
+        "http://static.openstates.org/downloads/2013-07-01-vt-csv.zip", "upper_chamber_term":
+        2, "session_details": {"2009-2010": {"display_name": "2009-2010 Regular Session",
+        "type": "primary"}, "2013-2014": {"display_name": "2013-2014 Regular Session",
+        "type": "primary"}, "2011-2012": {"display_name": "2011-2012 Regular Session",
+        "type": "primary"}}, "abbreviation": "vt", "latest_update": "2013-07-14 02:56:24",
+        "feature_flags": ["influenceexplorer"], "upper_chamber_name": "Senate", "id":
+        "vt", "chambers": {"upper": {"term": 2, "name": "Senate", "title": "Senator"},
+        "lower": {"term": 2, "name": "House", "title": "Representative"}}, "upper_chamber_title":
+        "Senator", "legislature_name": "Vermont General Assembly", "latest_json_date":
+        "2013-07-02 00:49:33", "legislature_url": "http://www.leg.state.vt.us/", "lower_chamber_term":
+        2}, {"lower_chamber_name": "House", "lower_chamber_title": "Delegate", "latest_json_url":
+        "http://static.openstates.org/downloads/2013-07-02-va-json.zip", "terms":
+        [{"end_year": 2011, "start_year": 2010, "name": "2009-2011", "sessions": ["2010",
+        "2011", "2011specialI"]}, {"end_year": 2013, "start_year": 2012, "name": "2012-2013",
+        "sessions": ["2012", "2012specialI", "2013", "2013specialI"]}], "name": "Virginia",
+        "latest_csv_url": "http://static.openstates.org/downloads/2013-07-01-va-csv.zip",
+        "abbreviation": "va", "latest_update": "2013-07-14 08:04:55", "feature_flags":
+        ["subjects", "influenceexplorer"], "upper_chamber_name": "Senate", "chambers":
+        {"upper": {"name": "Senate", "title": "Senator"}, "lower": {"name": "House",
+        "title": "Delegate"}}, "id": "va", "session_details": {"2012specialI": {"display_name":
+        "2012, 1st Special Session", "site_id": "122", "start_date": "2012-03-11 00:00:00"},
+        "2011specialI": {"display_name": "2011, 1st Special Session", "site_id": "112"},
+        "2013specialI": {"display_name": "2013, 1st Special Session", "site_id": "132"},
+        "2011": {"display_name": "2011 Regular Session", "site_id": "111", "start_date":
+        "2011-01-12 00:00:00"}, "2010": {"display_name": "2010 Regular Session", "site_id":
+        "101", "start_date": "2010-01-13 00:00:00"}, "2013": {"display_name": "2013
+        Regular Session", "site_id": "131", "start_date": "2013-01-09 00:00:00"},
+        "2012": {"display_name": "2012 Regular Session", "site_id": "121", "start_date":
+        "2012-01-11 00:00:00"}}, "upper_chamber_title": "Senator", "legislature_name":
+        "Virginia General Assembly", "latest_json_date": "2013-07-02 01:12:05", "legislature_url":
+        "http://virginiageneralassembly.gov/"}, {"lower_chamber_name": "House", "lower_chamber_title":
+        "Representative", "feature_flags": ["events", "subjects", "capitol_maps",
+        "influenceexplorer"], "session_details": {"2009-2010": {"display_name": "2009-2010
+        Regular Session"}, "2013-2014": {"display_name": "2013-2014 Regular Session"},
+        "2011-2012": {"display_name": "2011-2012 Regular Session"}}, "name": "Washington",
+        "legislature_url": "http://www.leg.wa.gov/", "latest_csv_url": "http://static.openstates.org/downloads/2013-07-01-wa-csv.zip",
+        "abbreviation": "wa", "latest_update": "2013-07-14 06:04:56", "latest_json_url":
+        "http://static.openstates.org/downloads/2013-07-02-wa-json.zip", "upper_chamber_name":
+        "Senate", "id": "wa", "chambers": {"upper": {"name": "Senate", "title": "Senator"},
+        "lower": {"name": "House", "title": "Representative"}}, "upper_chamber_title":
+        "Senator", "legislature_name": "Washington State Legislature", "latest_json_date":
+        "2013-07-02 01:23:28", "terms": [{"end_year": 2010, "start_year": 2009, "name":
+        "2009-2010", "sessions": ["2009-2010"]}, {"end_year": 2012, "start_year":
+        2011, "name": "2011-2012", "sessions": ["2011-2012"]}, {"end_year": 2014,
+        "start_year": 2013, "name": "2013-2014", "sessions": ["2013-2014"]}]}, {"lower_chamber_name":
+        "House", "lower_chamber_title": "Delegate", "latest_json_url": "http://static.openstates.org/downloads/2013-05-09-wv-json.zip",
+        "terms": [{"end_year": 2012, "start_year": 2011, "name": "2011-2012", "sessions":
+        ["2011", "2012"]}, {"end_year": 2014, "start_year": 2013, "name": "2013-2014",
+        "sessions": ["2013"]}], "name": "West Virginia", "latest_csv_url": "http://static.openstates.org/downloads/2013-07-01-wv-csv.zip",
+        "abbreviation": "wv", "latest_update": "2013-07-14 04:17:38", "feature_flags":
+        ["subjects", "influenceexplorer"], "upper_chamber_name": "Senate", "chambers":
+        {"upper": {"name": "Senate", "title": "Senator"}, "lower": {"name": "House",
+        "title": "Delegate"}}, "id": "wv", "session_details": {"2011": {"display_name":
+        "2011 Regular Session"}, "2013": {"display_name": "2013 Regular Session"},
+        "2012": {"display_name": "2012 Regular Session"}}, "upper_chamber_title":
+        "Senator", "legislature_name": "West Virginia Legislature", "latest_json_date":
+        "2013-05-09 01:06:36", "legislature_url": "http://www.legis.state.wv.us/"},
+        {"lower_chamber_name": "Assembly", "lower_chamber_title": "Representative",
+        "latest_json_url": "http://static.openstates.org/downloads/2013-07-02-wi-json.zip",
+        "terms": [{"end_year": 2010, "start_year": 2009, "name": "2009-2010", "sessions":
+        ["June 2009 Special Session", "December 2009 Special Session", "2009 Regular
+        Session"]}, {"end_year": 2012, "start_year": 2011, "name": "2011-2012", "sessions":
+        ["2011 Regular Session", "January 2011 Special Session", "September 2011 Special
+        Session"]}, {"end_year": 2014, "start_year": 2013, "name": "2013-2014", "sessions":
+        ["2013 Regular Session"]}], "name": "Wisconsin", "latest_csv_url": "http://static.openstates.org/downloads/2013-07-01-wi-csv.zip",
+        "abbreviation": "wi", "latest_update": "2013-07-14 13:43:58", "feature_flags":
+        ["subjects", "events", "influenceexplorer"], "upper_chamber_name": "Senate",
+        "chambers": {"upper": {"name": "Senate", "title": "Senator"}, "lower": {"name":
+        "Assembly", "title": "Representative"}}, "id": "wi", "session_details": {"2009
+        Regular Session": {"display_name": "2009 Regular Session", "type": "primary",
+        "start_date": "2009-01-13 00:00:00", "end_date": "2011-01-03 00:00:00"}, "2011
+        Regular Session": {"display_name": "2011 Regular Session", "type": "primary",
+        "start_date": "2011-01-11 00:00:00", "end_date": "2013-01-07 00:00:00"}, "January
+        2011 Special Session": {"site_id": "jr1", "type": "special", "display_name":
+        "Jan 2011 Special Session"}, "June 2009 Special Session": {"site_id": "jn9",
+        "type": "special", "display_name": "Jun 2009 Special Session"}, "September
+        2011 Special Session": {"site_id": "se1", "type": "special", "display_name":
+        "Sep 2011 Special Session"}, "December 2009 Special Session": {"site_id":
+        "de9", "type": "special", "display_name": "Dec 2009 Special Session"}, "2013
+        Regular Session": {"display_name": "2013 Regular Session", "type": "primary",
+        "start_date": "2013-01-07 00:00:00", "end_date": "2014-01-13 00:00:00"}},
+        "upper_chamber_title": "Senator", "legislature_name": "Wisconsin State Legislature",
+        "latest_json_date": "2013-07-02 01:32:27", "legislature_url": "http://legis.wisconsin.gov/"},
+        {"lower_chamber_name": "House", "lower_chamber_title": "Representative", "latest_json_url":
+        "http://static.openstates.org/downloads/2013-05-09-wy-json.zip", "session_details":
+        {"2011": {"display_name": "2011 General Session", "type": "primary"}, "2013":
+        {"display_name": "2013 General Session", "type": "primary"}, "2012": {"display_name":
+        "2012 Budget Session", "type": "special"}}, "name": "Wyoming", "latest_csv_url":
+        "http://static.openstates.org/downloads/2013-07-01-wy-csv.zip", "abbreviation":
+        "wy", "latest_update": "2013-07-14 03:20:51", "feature_flags": ["influenceexplorer"],
+        "upper_chamber_name": "Senate", "chambers": {"upper": {"name": "Senate", "title":
+        "Senator"}, "lower": {"name": "House", "title": "Representative"}}, "id":
+        "wy", "terms": [{"end_year": 2012, "start_year": 2011, "name": "2011-2012",
+        "sessions": ["2011", "2012"]}, {"end_year": 2014, "start_year": 2013, "name":
+        "2013-2014", "sessions": ["2013"]}], "upper_chamber_title": "Senator", "legislature_name":
+        "Wyoming State Legislature", "latest_json_date": "2013-05-09 04:40:36", "legislature_url":
+        "http://legisweb.state.wy.us/"}]'
+    http_version:
+  recorded_at: Sun, 14 Jul 2013 22:39:01 GMT
+recorded_with: VCR 2.3.0
