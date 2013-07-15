@@ -2,8 +2,10 @@
 # for all states jurisdictions
 # includes District of Columbia and Puerto Rico
 class Metadatum::State
+  OPENSTATES_SESSION = 'openstates'
+
   def self.create_states_if_none
-    has_states = Metadatum.with(session: 'openstates')
+    has_states = Metadatum.with(session: OPENSTATES_SESSION)
       .nin(abbreviation: Metadatum::Us::ABBREVIATION)
       .collect(&:abbreviation).sort
 
@@ -16,7 +18,7 @@ class Metadatum::State
     # get the metadatum in one go
     attributes = JSON.parse(results_from_api)
     attributes.each do |attributes|
-      Metadatum.with(session: 'openstates').create! attributes
+      Metadatum.with(session: OPENSTATES_SESSION).create! attributes
     end
   end
 
