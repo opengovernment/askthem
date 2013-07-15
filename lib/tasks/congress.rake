@@ -17,8 +17,6 @@ namespace :congress do
       desc 'Download legislators from Congress API'
       task legislators: :environment do
         openstates do
-          Metadatum::Us.find_or_create!
-
           # get all possible matching officials (us senate, house) in 2 requests
           # rather than per created legislator
           pvs_api = ProjectVoteSmart.new

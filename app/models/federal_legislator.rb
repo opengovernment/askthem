@@ -1,6 +1,4 @@
 class FederalLegislator < Person
-  field :represents_state, type: String
-
   def self.base_api_url
       'http://congress.api.sunlightfoundation.com'
   end
@@ -22,8 +20,7 @@ class FederalLegislator < Person
       when 'name_suffix'
         self.suffixes = value
       when 'state'
-        self.state = 'us'
-        self.represents_state = value.downcase
+        self.state = value.downcase
       when 'votesmart_id'
         write_attribute :votesmart_id, value.to_s
       when 'party'
