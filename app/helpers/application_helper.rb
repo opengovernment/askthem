@@ -134,7 +134,10 @@ module ApplicationHelper
   def person_attributes(person)
     parts = []
     parts << jurisdiction(person).chamber_title(person.most_recent(:chamber))
-    parts << district_name(person.most_recent(:district))
+
+    district_name = district_name(person.most_recent(:district))
+    parts << district_name if district_name
+
     parts << person['party'] if person['party']
     parts.join(', ')
   end
