@@ -119,7 +119,7 @@ class FederalLegislator < Person
   end
 
   def chamber_from_api(value)
-    value == 'house' ? 'lower' : 'uppper'
+    value == 'house' ? 'lower' : 'upper'
   end
 
   def party_from_api(value)
