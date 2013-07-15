@@ -50,7 +50,8 @@ describe FederalLegislator do
         party: 'Democratic',
         '+gender' => 'Female',
         roles: roles,
-        active: true
+        active: true,
+        votesmart_id: '33384'
       }.with_indifferent_access
 
       federal_legislator = FederalLegislator.new

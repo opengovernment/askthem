@@ -25,7 +25,7 @@ class FederalLegislator < Person
         self.state = 'us'
         self.represents_state = value.downcase
       when 'votesmart_id'
-        next
+        write_attribute :votesmart_id, value.to_s
       when 'party'
         write_attribute :party, party_from_api(value)
       when 'terms'
