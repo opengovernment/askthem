@@ -42,6 +42,7 @@ describe FederalLegislator do
         district: 2,
         state: 'us',
         represents_state: 'il',
+        full_name: "#{result['first_name']} #{result['last_name']}",
         last_name: result['last_name'],
         first_name: result['first_name'],
         middle_name: result['middle_name'],
