@@ -34,9 +34,19 @@ class FederalLegislator < Person
         write_attribute key.to_sym, value
       end
     end
+    self.write_attribute :full_name, compile_full_name
+    self.write_attribute :active, true
   end
 
   private
+  def compile_full_name
+    nick_name = read_attribute('nick_name')
+    full_name = nick_name || first_name
+    full_name += " #{last_name}"
+    full_name += " #{suffixes}" if suffixes && !nick_name
+    full_name
+  end
+
   def self.api_url_for_jurisdiction
     "#{base_api_url}/#{api_plural_type}"
   end

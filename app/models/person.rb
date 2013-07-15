@@ -81,8 +81,10 @@ class Person
       read_attribute(attribute)
     else
       read_attribute(:old_roles).to_a.reverse.each do |_, roles|
-        roles.each do |role|
-          return role[attribute.to_s] if role[attribute.to_s]
+        if roles
+          roles.each do |role|
+            return role[attribute.to_s] if role[attribute.to_s]
+          end
         end
       end
       nil # don't return the enumerator

@@ -48,7 +48,8 @@ describe FederalLegislator do
         suffixes: result['name_suffix'],
         party: 'Democratic',
         '+gender' => 'Female',
-        roles: roles
+        roles: roles,
+        active: true
       }.with_indifferent_access
 
       federal_legislator = FederalLegislator.new

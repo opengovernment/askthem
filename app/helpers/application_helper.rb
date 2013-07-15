@@ -144,7 +144,7 @@ module ApplicationHelper
   # @param [String] name a district name
   # @return [String] the formatted district name
   def district_name(name)
-    if name[/\A[\dA-Z]+\z/]
+    if name.to_s[/\A[\dA-Z]+\z/]
       "District #{name}"
     else
       name
