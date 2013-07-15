@@ -1,15 +1,14 @@
 # @see http://sunlightlabs.github.io/openstates-api/
 # @see https://github.com/sunlightlabs/billy/wiki/Differences-between-the-API-and-MongoDB
 namespace :openstates do
-  OPENSTATES_SESSION = 'openstates'
 
   def openstates
-    if ENV['SUNLIGHT_API_KEY']
-      Mongoid.override_session(OPENSTATES_SESSION)
+    if Metadatum::State.api_key
+      Mongoid.override_session(Metadatum::State::OPENSTATES_SESSION)
       yield
       Mongoid.override_session(nil)
     else
-      abort "ENV['SUNLIGHT_API_KEY'] is not set"
+      abort "Metadatum::State.api_key is not set"
     end
   end
 
@@ -22,7 +21,7 @@ namespace :openstates do
 
   # http://sunlightlabs.github.io/openstates-api/metadata.html
   def metadata_url
-    "http://openstates.org/api/v1/metadata/?fields=latest_json_date,latest_json_url&apikey=#{ENV['SUNLIGHT_API_KEY']}"
+    "#{Metadatum::State.api_base_url}?fields=latest_json_date,latest_json_url&apikey=#{Metadatum::State.api_key}"
   end
 
   def extract_from_json_document(file_name)
@@ -94,7 +93,7 @@ namespace :openstates do
       require 'find'
       require 'fileutils'
 
-      db = OpenstatesDatabase.new('session' => OPENSTATES_SESSION)
+      db = OpenstatesDatabase.new('session' => Metadatum::State::OPENSTATES_SESSION)
 
       openstates do
 
