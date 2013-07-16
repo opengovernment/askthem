@@ -21,7 +21,7 @@ class Person
   field :photo_url, type: String, as: :image
 
   scope :active, where(active: true).asc(:chamber, :family_name) # no index includes `last_name`
-  scope :state_reps, where('_type' => {'$in' => ['Person', 'person']})
+  scope :state_reps, where('_type' => {'$in' => ['Person', 'person', nil]})
 
   def self.only_type(type)
     if type == 'Person'
