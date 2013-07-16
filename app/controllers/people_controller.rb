@@ -31,7 +31,10 @@ class PeopleController < ApplicationController
     tab 'ratings'
   end
 
-private
+  private
+  def type
+    @type ||= params[:type] || 'Person'
+  end
 
   def tab(tab)
     @tab = tab
@@ -46,6 +49,9 @@ private
   end
 
   def collection
+    # downcase covers api legacy set 'person' for _type
+    # @todo evaluate if in for type is too slow
     @people ||= end_of_association_chain.active.includes(:questions)
+      .only_type(type)
   end
 end

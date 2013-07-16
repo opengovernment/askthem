@@ -1,3 +1,4 @@
 <ol class="people-list">
-  <%= render @upper %>
+  <%# spell out arguments for subclasses of Person sake -%>
+  <%= render partial: 'people/person', collection: @upper %>
 </ol>

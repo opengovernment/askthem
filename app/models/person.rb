@@ -21,6 +21,16 @@ class Person
   field :photo_url, type: String, as: :image
 
   scope :active, where(active: true).asc(:chamber, :family_name) # no index includes `last_name`
+  scope :state_reps, where('_type' => {'$in' => ['Person', 'person']})
+
+  def self.only_type(type)
+    if type == 'Person'
+      # handle legacy where api sets _type to 'person'
+      where('_type' => {'$in' => [type, type.downcase]})
+    else
+      where('_type' => type)
+    end
+  end
 
   # override in subclass for other apis
   def self.api_id_field

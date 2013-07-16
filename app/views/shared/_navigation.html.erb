@@ -2,7 +2,9 @@
   <nav>
     <ul class="level">
       <li<%= raw(' class="active"') if federal? %>>
-        <a href="#"><%= @jurisdiction['name'] %> Federal</a>
+        <%= link_to federal_path do %>
+          <%= @jurisdiction['name'] %> Federal
+        <% end %>
         <i class="icon-angle-down"></i>
       </li>
       <li<%= raw(' class="active"') if state? %>>
@@ -21,7 +23,8 @@
     <ul class="top_nav">
       <li><a name="top" style="display:none;"></a><%= tab 'Questions', questions_path %></li>
       <li><%= tab 'Bills', bills_path %></li>
-      <li><%= tab 'People', people_path %></li>
+      <%# @todo extract to helper -%>
+      <li><%= tab 'People', params[:type] ? people_path(type: params[:type]) : people_path %></li>
       <% if @jurisdiction.subjects? %>
       <li><%= tab 'Issues', subjects_path %></li>
       <% end %>

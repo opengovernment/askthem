@@ -15,12 +15,14 @@ module ApplicationHelper
 
   # @return [Boolean] whether the current jurisdiction is at the federal level
   def federal?
-    false # @todo stub
+    @jurisdiction && params[:type] && params[:type] == 'FederalLegislator'
   end
 
   # @return [Boolean] whether the current jurisdiction is at the state level
   def state?
-    !!(@jurisdiction && @jurisdiction.abbreviation[/\A[a-z]{2}\z/])
+    !!(@jurisdiction &&
+       @jurisdiction.abbreviation[/\A[a-z]{2}\z/] &&
+       !params[:type])
   end
 
   # @return [Boolean] whether the current jurisdiction is at the local
@@ -30,10 +32,17 @@ module ApplicationHelper
 
   # @return [String] the abbreviation of the state level jurisdiction
   #   corresponding to the current jurisdiction
+  def federal_path
+    jurisdiction_path(jurisdiction: @jurisdiction.abbreviation,
+                      type: 'FederalLegislator')
+  end
+
+  # @return [String] the abbreviation of the state level jurisdiction
+  #   corresponding to the current jurisdiction
   def state_path
     if local?
       jurisdiction_path(jurisdiction: @jurisdiction.abbreviation[/\A[a-z]{2}/])
-    elsif state?
+    elsif state? || federal?
       jurisdiction_path(jurisdiction: @jurisdiction.abbreviation)
     else
       '#'
