@@ -51,25 +51,27 @@
           </section>
           <% end %>
 
-          <% @person['offices'].each do |office| %>
-            <section>
-              <% if office['type'] %>
+          <% if @person['offices'] -%>
+            <% @person['offices'].each do |office| %>
+              <section>
+                <% if office['type'] %>
                 <h4>
                   <%=t office['type'], scope: [:offices, :types], default: office['type'] %>
                 </h4>
-              <% end %>
-              <ul>
-                <% if office['phone'] %>
-                  <li>Tel: <%= office['phone'] %></li>
                 <% end %>
-                <% if office['fax'] %>
-                  <li>Fax: <%= office['fax'] %></li>
-                <% end %>
-                <% if office['address'] %>
-                  <li><%= simple_format office['address'] %></li>
-                <% end %>
-              </ul>
-            </section>
+                <ul>
+                  <% if office['phone'] %>
+                    <li>Tel: <%= office['phone'] %></li>
+                  <% end %>
+                    <% if office['fax'] %>
+                      <li>Fax: <%= office['fax'] %></li>
+                    <% end %>
+                    <% if office['address'] %>
+                      <li><%= simple_format office['address'] %></li>
+                    <% end %>
+                </ul>
+              </section>
+            <% end %>
           <% end %>
         </aside>
       </div>
