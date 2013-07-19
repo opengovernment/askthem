@@ -1,10 +1,6 @@
 require 'spec_helper'
 
 describe FederalLegislator do
-  before :each do
-    @metadatum = Metadatum.with(session: 'openstates').create(abbreviation: 'us')
-  end
-
   describe '#attributes_from_congress_api' do
     it 'takes result from api and equivalent attributes' do
       result = { 'bioguide_id' => 'K000385',
@@ -62,7 +58,7 @@ describe FederalLegislator do
   describe '.for_location' do
     before :each do
       # convoluted setting of id necessary, otherwise id gets generated
-      @federal_legislator = FederalLegislator.with(session: 'openstates').new(state: 'us', representing_state: 'vt')
+      @federal_legislator = FederalLegislator.with(session: 'openstates').new(state: 'vt')
       @federal_legislator.id = 'S000033'
       @federal_legislator.save!
     end
