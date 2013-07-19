@@ -64,7 +64,6 @@ namespace :city_council do
       meeting_datetime = DateTime.parse("#{meeting_date} #{meeting_time}")
 
       a = Agenda.create(
-        slug: (to_slug "#{meeting_datetime.strftime('%m %d %Y %l %M %p')} #{agenda['Name']}"),
         meeting_date: meeting_datetime,
         name: agenda['Name'],
         location: agenda['Meeting Location'],
@@ -72,7 +71,7 @@ namespace :city_council do
         agenda_url: agenda['Agenda']['url'],
         minutes: agenda['Minutes']
       )
-      puts "saved #{a.slug}"
+      puts "saved #{a.meeting_date} - #{a.name}"
     end
   end
 end
