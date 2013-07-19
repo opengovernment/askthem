@@ -46,7 +46,10 @@ namespace :city_council do
     #     'url': u'View.ashx?M=A&ID=248602&GUID=2D23A8B0-4FB3-4EF2-A957-C6FD8FF9BDAA', 
     #     'label': u'Agenda'
     #   }, 
-    #   u'Minutes': u'Not available'
+    #   u'Minutes': {
+    #     'url': u'View.ashx?M=A&ID=248602&GUID=2D23A8B0-4FB3-4EF2-A957-C6FD8FF9BDAA', 
+    #     'label': u'Minutes'
+    #   }, 
     # }
 
     session = Moped::Session.new([ "127.0.0.1:27017" ])
@@ -67,8 +70,7 @@ namespace :city_council do
         meeting_date: meeting_datetime,
         name: agenda['Name'],
         location: agenda['Meeting Location'],
-        agenda: agenda['fulltext'],
-        agenda_url: agenda['Agenda']['url'],
+        agenda: agenda['Agenda'],
         minutes: agenda['Minutes']
       )
       puts "saved #{a.meeting_date} - #{a.name}"
