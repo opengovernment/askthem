@@ -6,29 +6,6 @@ namespace :city_council do
     Mongoid.override_session(nil)
   end
 
-  def to_slug s
-    #strip the string
-    ret = s.strip.downcase
-
-    #blow away apostrophes
-    ret.gsub! /['`.]/,""
-
-    # @ --> at, and & --> and
-    ret.gsub! /\s*@\s*/, " at "
-    ret.gsub! /\s*&\s*/, " and "
-
-    #replace all non alphanumeric, underscore or periods with underscore
-     ret.gsub! /\s*[^A-Za-z0-9\.\-]\s*/, '-'  
-
-     #convert double underscores to single
-     ret.gsub! /_+/,"_"
-
-     #strip off leading/trailing underscore
-     ret.gsub! /\A[_\.]+|[_\.]+\z/,""
-
-     ret
-  end
-
   desc 'Import City Council agendas from scraper mongo collection'
   task agendas: :environment do
 
