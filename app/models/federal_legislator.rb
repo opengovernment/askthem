@@ -1,10 +1,20 @@
 class FederalLegislator < Person
+  PHOTOS_BASE_URL = "http://#{ENV['AWS_DIRECTORY']}#{ENV['AWS_HOST_STUB']}/photos/federal/100x125/"
+
   def self.base_api_url
       'http://congress.api.sunlightfoundation.com'
   end
 
   def self.api_plural_type
       'legislators'
+  end
+
+  def image?
+    persisted? && id.present?
+  end
+
+  def image
+    "#{PHOTOS_BASE_URL}#{id}.jpg"
   end
 
   def attributes_from_congress_api(api_data)

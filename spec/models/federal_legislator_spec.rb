@@ -1,6 +1,28 @@
 require 'spec_helper'
 
 describe FederalLegislator do
+  describe '#image?' do
+    it 'returns false if not persisted or id is not set' do
+      federal_legislator = FederalLegislator.new
+      expect(federal_legislator.image?).to be_false
+    end
+
+    it 'returns true if persisted and an id is set' do
+      federal_legislator = FederalLegislator.create!(first_name: 'Ralf',
+                                                     last_name: 'The Mouth')
+      expect(federal_legislator.image?).to be_true
+    end
+  end
+
+  describe '#image' do
+    it 'returns standard URL for where to find 100x125 image' do
+      federal_legislator = FederalLegislator.new
+      federal_legislator.id = 'K000385'
+      image_url = "#{FederalLegislator::PHOTOS_BASE_URL}#{federal_legislator.id}.jpg"
+      expect(federal_legislator.image).to eq image_url
+    end
+  end
+
   describe '#attributes_from_congress_api' do
     it 'takes result from api and equivalent attributes' do
       result = { 'bioguide_id' => 'K000385',
