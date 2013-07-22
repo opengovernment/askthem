@@ -218,4 +218,12 @@ private
       args
     end
   end
+
+  def legislature_name
+    if @type && @type == 'FederalLegislator'
+      "US Congress for #{@jurisdiction.name}"
+    else
+      @jurisdiction['legislature_name']
+    end
+  end
 end

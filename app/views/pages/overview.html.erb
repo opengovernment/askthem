@@ -2,7 +2,7 @@
 
 <section class="overview">
   <header>
-    <h1><%= @jurisdiction['legislature_name'] %></h1>
+    <h1><%= legislature_name %></h1>
     <%= link_to 'Ask a Question', new_question_path(@jurisdiction.abbreviation), class: 'cta_pill' %>
     <div class="clear"></div>
   </header>
