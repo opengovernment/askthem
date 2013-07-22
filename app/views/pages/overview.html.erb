@@ -10,7 +10,7 @@
     <ul class="radio_nav">
       <% if @jurisdiction.upper_chamber? %>
         <li>
-          <%= link_to upper_overview_path(@jurisdiction.abbreviation), tab_options('upper') do %>
+          <%= link_to upper_overview_path(@jurisdiction.abbreviation, type: @type), tab_options('upper') do %>
             <%= @upper.count %> <%= @jurisdiction.chamber_title('upper').pluralize %>
             <span class="info">
               <% @upper_parties.each do |party,people| %>
@@ -22,7 +22,7 @@
       <% end %>
       <% if @jurisdiction.lower_chamber? %>
         <li>
-          <%= link_to lower_overview_path(@jurisdiction.abbreviation), tab_options('lower', 'overview') do %>
+          <%= link_to lower_overview_path(@jurisdiction.abbreviation, type: @type), tab_options('lower', 'overview') do %>
             <%= @lower.count %> <%= @jurisdiction.chamber_title('lower').pluralize %>
             <span class="info">
               <% @lower_parties.each do |party,people| %>
@@ -44,7 +44,7 @@
       </li>
       <li class="clear"></li>
     </ul>
-    
+
     <div class="nav_extras">
       <a href="#">State Resources</a><%# @todo ST remove since we have no content? %>
       <div class="rep_search"><%# @todo change into a form %>
