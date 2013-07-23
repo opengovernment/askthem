@@ -15,14 +15,15 @@ module ApplicationHelper
 
   # @return [Boolean] whether the current jurisdiction is at the federal level
   def federal?
-    @jurisdiction && params[:type] && params[:type] == 'FederalLegislator'
+    (@jurisdiction && params[:type] && params[:type] == 'FederalLegislator') ||
+      (@person && @person.is_a?(FederalLegislator))
   end
 
   # @return [Boolean] whether the current jurisdiction is at the state level
   def state?
     !!(@jurisdiction &&
        @jurisdiction.abbreviation[/\A[a-z]{2}\z/] &&
-       !params[:type])
+       !federal?)
   end
 
   # @return [Boolean] whether the current jurisdiction is at the local
