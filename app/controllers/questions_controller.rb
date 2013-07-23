@@ -57,6 +57,9 @@ class QuestionsController < ApplicationController
   end
 
   private
+  def type
+    @type ||= params[:type] || 'Person'
+  end
 
   def set_state_code
     @state_code = parent.abbreviation
@@ -74,6 +77,18 @@ class QuestionsController < ApplicationController
     @relevant_steps.delete('recipient') if params[:person]
     @relevant_steps.delete('sign_up') if user_signed_in?
     @relevant_steps
+  end
+
+  # @todo: questions are currently always created in default session
+  # rather than session of owning metadatum
+  # which can lead to unexpected results when using 'in' query
+  # unify databases or make consistent
+  def end_of_association_chain
+    questions = Question.where(state: parent.abbreviation)
+    return questions unless type == 'FederalLegislator'
+
+    person_ids = FederalLegislator.in(parent.abbreviation).collect(&:id)
+    questions.where(person_ids: { '$in' => person_ids })
   end
 
   def collection
