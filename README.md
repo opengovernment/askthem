@@ -4,7 +4,7 @@
 [![Dependency Status](https://gemnasium.com/opengovernment/opengovernment-app.png)](https://gemnasium.com/opengovernment/opengovernment-app)
 [![Coverage Status](https://coveralls.io/repos/opengovernment/opengovernment-app/badge.png?branch=master)](https://coveralls.io/r/opengovernment/opengovernment-app)
 [![Code Climate](https://codeclimate.com/github/opengovernment/opengovernment-app.png)](https://codeclimate.com/github/opengovernment/opengovernment-app)
-[![#opengovernment IRC channel](https://kiwiirc.com/buttons/irc.freenode.net/opengovernment.png)](https://kiwiirc.com/client/irc.freenode.net/?nick=web_guest|?#opengovernment)
+<a href="https://kiwiirc.com/client/irc.freenode.net/?nick=web_guest%7C?#opengovernment"><img src="https://kiwiirc.com/buttons/irc.freenode.net/opengovernment.png" alt="#opengovernment IRC channel" height="18" width="130" style="max-width:100%;"></a>
 
 ## Getting Started
 
