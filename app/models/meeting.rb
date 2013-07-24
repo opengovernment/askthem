@@ -1,13 +1,29 @@
-namespace :city_council do
+class Meeting
+  include Mongoid::Document
 
-  def opengovernment_import
-    Mongoid.override_session('opengovernment_import')
-    yield
-    Mongoid.override_session(nil)
+  belongs_to :metadatum, foreign_key: 'state'
+
+  def self.scraped_local_gov
+    session = Moped::Session.new([ "127.0.0.1:27017" ])
+    session.use "scraped_local_gov"
+    session
   end
 
-  desc 'Import City Council agendas from scraper mongo collection'
-  task agendas: :environment do
+  def self.load_from_apis_for_jurisdiction(municipality=nil) 
+    session = scraped_local_gov
+    if municipality
+      meetings = session[:council_agendas].find({municipality: municipality})
+
+      #clear out existing agendas
+      Meeting.delete_all({municipality: municipality})
+
+    else # get em all
+      meetings = session[:council_agendas].find()
+
+      #clear out existing agendas
+      Meeting.delete_all
+
+    end
 
     # Example agenda object returned from the scraper
     # {
@@ -29,28 +45,25 @@ namespace :city_council do
     #   }, 
     # }
 
-    session = Moped::Session.new([ "127.0.0.1:27017" ])
-    session.use "opengovernment_import"
-    agendas = session[:council_agendas].find()
-
-    #clear out existing agendas
-    Agenda.delete_all
-
-    agendas.each do |agenda|
+    puts meetings.first
+    meetings.each do |meeting|
 
       # stuff date and time in to same field
-      meeting_date = agenda['Meeting Date']['label'].strftime('%Y-%m-%d')
-      meeting_time = Time.parse(agenda['Meeting Time']).strftime('%l:%M %p EST')
+      meeting_date = meeting['Meeting Date']['label'].strftime('%Y-%m-%d')
+      meeting_time = Time.parse(meeting['Meeting Time']).strftime('%l:%M %p EST')
       meeting_datetime = DateTime.parse("#{meeting_date} #{meeting_time}")
 
-      a = Agenda.create(
+      a = Meeting.create(
         meeting_date: meeting_datetime,
-        name: agenda['Name'],
-        location: agenda['Meeting Location'],
-        agenda: agenda['Agenda'],
-        minutes: agenda['Minutes']
+        name: meeting['Name'],
+        location: meeting['Meeting Location'],
+        municipality: meeting['Municipality'],
+        agenda: meeting['Agenda'],
+        minutes: meeting['Minutes']
       )
       puts "saved #{a.meeting_date} - #{a.name}"
     end
+
   end
+
 end
