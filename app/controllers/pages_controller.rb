@@ -46,7 +46,8 @@ class PagesController < ApplicationController
   # @see https://github.com/alexreisner/geocoder#use-outside-of-rails
   # @see https://github.com/sunlightlabs/billy/wiki/Differences-between-the-API-and-MongoDB
   def locator
-    @people = Person.with(session: 'openstates').includes(:questions).for_location(params[:q])
+    @people = type.constantize.with(session: 'openstates')
+      .includes(:questions).for_location(params[:q])
 
     respond_with(@people.as_json({
       only: [

@@ -21,10 +21,12 @@
       </li>
     </ul>
     <ul class="top_nav">
-      <li><a name="top" style="display:none;"></a><%= tab 'Questions', questions_path %></li>
-      <li><%= tab 'Bills', bills_path %></li>
+      <li><a name="top" style="display:none;"></a><%= tab 'Questions', @type ? questions_path(type: @type) : questions_path %></li>
+      <% unless federal? %>
+        <li><%= tab 'Bills', bills_path %></li>
+      <% end %>
       <%# @todo extract to helper -%>
-      <li><%= tab 'People', params[:type] ? people_path(type: params[:type]) : people_path %></li>
+      <li><%= tab 'People', @type ? people_path(type: @type) : people_path %></li>
       <% if @jurisdiction.subjects? %>
       <li><%= tab 'Issues', subjects_path %></li>
       <% end %>

@@ -17,6 +17,8 @@ class FederalLegislator < Person
     "#{PHOTOS_BASE_URL}#{id}.jpg"
   end
 
+  alias :photo_url :image
+
   def attributes_from_congress_api(api_data)
     api_data.each do |key, value|
       case key

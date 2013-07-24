@@ -47,6 +47,19 @@
 
     <div class="loading" style="display:none;">Loading...</div>
 
+    <% unless local? -%>
+      <ul class="people-type" style="display:none;">
+        <li id="federal-people">
+          <a href="#federal_address_lookup"><%= @jurisdiction['name'] %> Federal</a>
+          <i class="icon-angle-down"></i>
+        </li>
+        <li class="active" id="state-people">
+          <a href="#state_address_lookup"><%= @jurisdiction['name'] %> State</a>
+          <i class="icon-angle-down"></i>
+        </li>
+      </ul>
+    <% end -%>
+
     <fieldset>
       <ol class="people-list select-person">
         <!-- will be populated by address_lookup -->
