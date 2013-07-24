@@ -17,33 +17,7 @@
     <a name="address_lookup" class="anchor"></a>
   </span>
 
-  <div class="twitter">
-    <label for="question">Twitter users
-      <span class="details">Ask a question from anyone on Twitter.</span>
-    </label>
-    <fieldset>
-      <div class="inline_label to">
-        <input type="text" name="twitter" id="twitter" placeholder="Enter a name or verified twitter account" />
-      </div>
-      <ol class="people-list select-person twitter">
-        <li style="display:none;" class="selected">
-          <div class="select_box">
-            <input type="radio" name="person-select" id="" />
-          </div>
-          <div class="avatar">
-            <img src="" alt="" />
-          </div>
-          <h2></h2>
-          <div class="person-info">
-            <p></p>
-          </div>
-          <span class="selected icon-ok-sign"></span>
-        </li>
-      </ol>
-    </fieldset>
-  </div>
-
-  <div style="display:none;" class="address_lookup">
+  <div class="address_lookup">
     <label for="question">Home Address
       <span class="details">Where you live lets us locate your officials!</span>
     </label>
@@ -76,6 +50,32 @@
     <fieldset>
       <ol class="people-list select-person">
         <!-- will be populated by address_lookup -->
+      </ol>
+    </fieldset>
+  </div>
+  
+  <div class="twitter" style="display:none;">
+    <label for="question">Twitter users
+      <span class="details">Ask a question from anyone on Twitter.</span>
+    </label>
+    <fieldset>
+      <div class="inline_label to">
+        <input type="text" name="twitter" id="twitter" placeholder="Enter a name or verified twitter account" />
+      </div>
+      <ol class="people-list select-person twitter">
+        <li style="display:none;" class="selected">
+          <div class="select_box">
+            <input type="radio" name="person-select" id="" />
+          </div>
+          <div class="avatar">
+            <img src="" alt="" />
+          </div>
+          <h2></h2>
+          <div class="person-info">
+            <p></p>
+          </div>
+          <span class="selected icon-ok-sign"></span>
+        </li>
       </ol>
     </fieldset>
   </div>
