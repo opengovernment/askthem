@@ -3,6 +3,12 @@ class Meeting
 
   belongs_to :metadatum, foreign_key: 'state'
 
+  field :meeting_date, type: String
+  field :name, type: String
+  field :municipality, type: String
+
+  validates_presence_of :meeting_date, :name, :municipality
+
   def self.scraped_local_gov
     session = Moped::Session.new([ "127.0.0.1:27017" ])
     session.use "scraped_local_gov"
