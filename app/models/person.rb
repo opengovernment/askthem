@@ -242,4 +242,12 @@ class Person
     person.id = attributes['id']
     person
   end
+
+  # class methods have do not honor private declaration
+  private_class_methods = [:build_from_api, :results_for_jurisdiction,
+                           :api_format_abbreviation, :api_url_for_jurisdiction,
+                           :api_parse, :results_for_location,
+                           :params_for_location, :result_for_single,
+                           :location_is_valid?, :api_geo_url]
+  private_class_method *private_class_methods
 end

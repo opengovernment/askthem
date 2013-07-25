@@ -9,7 +9,6 @@ class Metadatum::Us
       create_us_metadatum
   end
 
-  private
   def self.create_us_metadatum
     attributes = { abbreviation: ABBREVIATION,
       chambers: { "upper" => { "name" => "Senate", "title" => "Senator" },
@@ -20,4 +19,6 @@ class Metadatum::Us
 
     Metadatum.with(session: 'openstates').create! attributes
   end
+
+  private_class_method :create_us_metadatum
 end
