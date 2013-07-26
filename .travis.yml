@@ -3,3 +3,14 @@ rvm:
   - 1.9.3
 services:
   - mongodb
+notifications:
+  email:
+    - web@mars-hq.com # @walter
+  irc:
+    channels:
+      - 'irc.freednode.net#ogchatter'
+      # - 'irc.freednode.net#opengovernment'
+    on_success: change
+    on_failure: always
+    use_notice: true
+    skip_join: true
