@@ -72,7 +72,7 @@ RSpec.configure do |config|
     # Restore the default session.
     Mongoid.override_session(nil)
   end
-  # config.filter_run :focus => true
+  # config.filter_run focus: true
 end
 
 VCR.configure do |c|
