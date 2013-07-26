@@ -9,12 +9,6 @@ class Meeting
 
   validates_presence_of :meeting_date, :name, :municipality
 
-  def self.scraped_local_gov
-    session = Moped::Session.new([ "127.0.0.1:27017" ])
-    session.use "scraped_local_gov"
-    session
-  end
-
   def self.load_from_apis_for_jurisdiction(municipality=nil) 
     session = scraped_local_gov
     if municipality
@@ -70,6 +64,13 @@ class Meeting
       puts "saved #{a.meeting_date} - #{a.name}"
     end
 
+  end
+
+  private
+  def self.scraped_local_gov
+    session = Moped::Session.new([ "127.0.0.1:27017" ])
+    session.use "scraped_local_gov"
+    session
   end
 
 end
