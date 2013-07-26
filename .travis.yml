@@ -5,12 +5,10 @@ services:
   - mongodb
 notifications:
   email:
-    - web@mars-hq.com # @walter
+    - web@mars-hq.com
   irc:
     channels:
       - 'irc.freednode.net#ogchatter'
-      # - 'irc.freednode.net#opengovernment'
     on_success: change
-    on_failure: always
     use_notice: true
     skip_join: true
