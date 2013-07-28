@@ -16,7 +16,7 @@ private
 
   # @note MT, RI and WI have inconsistent subject names (typos, etc.).
   def chain
-    Bill.in(parent.abbreviation)
+    Bill.connected_to(parent.abbreviation)
   end
 
   def collection

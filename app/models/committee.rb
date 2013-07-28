@@ -21,7 +21,7 @@ class Committee
     if ids.empty?
       []
     else
-      Person.use(read_attribute(:state)).where(_id: {'$in' => ids}).to_a
+      Person.where(_id: {'$in' => ids}).to_a
     end
   end
 end

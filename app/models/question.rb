@@ -1,7 +1,6 @@
 class Question
   include Mongoid::Document
   include Mongoid::Timestamps
-  store_in session: 'default' # @see https://github.com/mongoid/mongoid/pull/2909
 
   # The author of the question.
   belongs_to :user
@@ -49,11 +48,16 @@ class Question
     Metadatum.find_by_abbreviation(state)
   end
 
+  # @todo delete if unnecessary with only 1 db
+  # i.e. does belongs_to now work
   # @return [Person] the person to whom the question is addressed
   def person
-    Person.use(state).find(person_id)
+    Person.find(person_id)
   end
 
+  # @todo delete if unnecessary with only 1 db
+  # i.e. does belongs_to now work
+  # and delegation of state and person_state to Person
   # @param [Person] person a person
   def person=(person)
     if person
@@ -65,11 +69,16 @@ class Question
     end
   end
 
+  # @todo delete if unnecessary with only 1 db
+  # i.e. does belongs_to now work
   # @return [Bill] the bill the question is about
   def bill
-    Bill.use(state).find(bill_id)
+    Bill.find(bill_id)
   end
 
+  # @todo delete if unnecessary with only 1 db
+  # i.e. does belongs_to now work
+  # and delegation of state and person_state to Person
   # @param [Bill] bill a bill
   def bill=(bill)
     if bill
@@ -81,7 +90,7 @@ class Question
     end
   end
 
-private
+  private
   def state_must_be_included_in_the_list_of_states
     unless state.blank? || Metadatum.find_by_abbreviation(state)
       errors.add(:state, 'is not included in the list of states')

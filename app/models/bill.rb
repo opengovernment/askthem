@@ -98,7 +98,7 @@ class Bill
     # Get all the legislator sponsors in a single query.
     ids = sponsors.select{|x| x['leg_id']}.map{|x| x['leg_id']}
     unless ids.empty?
-      criteria = Person.use(read_attribute(:state)).where(_id: {'$in' => ids})
+      criteria = Person.where(_id: {'$in' => ids})
       if opts[:eager]
         criteria = criteria.includes(:questions)
       end
@@ -110,7 +110,7 @@ class Bill
     # Get all the committee sponsors in a single query.
     ids = sponsors.select{|x| x['committee_id']}.map{|x| x['committee_id']}
     unless ids.empty?
-      Committee.use(read_attribute(:state)).where(_id: {'$in' => ids}).each do |document|
+      Committee.where(_id: {'$in' => ids}).each do |document|
         documents_by_id[document.id] = document
       end
     end

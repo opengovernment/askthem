@@ -2,11 +2,8 @@
 # for all states jurisdictions
 # includes District of Columbia and Puerto Rico
 class Metadatum::State
-  OPENSTATES_SESSION = 'openstates'
-
   def self.create_states_if_none
-    has_states = Metadatum.with(session: OPENSTATES_SESSION)
-      .nin(abbreviation: Metadatum::Us::ABBREVIATION)
+    has_states = Metadatum.nin(abbreviation: Metadatum::Us::ABBREVIATION)
       .collect(&:abbreviation).sort
 
     unless has_states == OpenGovernment::STATES.values.sort
@@ -18,7 +15,7 @@ class Metadatum::State
     # get the metadatum in one go
     attributes = JSON.parse(results_from_api)
     attributes.each do |attributes|
-      Metadatum.with(session: OPENSTATES_SESSION).create! attributes
+      Metadatum.create! attributes
     end
   end
 
@@ -44,5 +41,5 @@ class Metadatum::State
     RestClient.get api_base_url, params: params
   end
 
-  private_class_method :results_from_api, :api_fields, :api_base_url, :api_key
+  private_class_method :results_from_api, :api_fields, :api_base_url
 end

@@ -5,8 +5,7 @@ describe Metadatum::Us do
   describe '.find_or_create!' do
     context 'when a US jurisdiction already exists' do
       before :each do
-        @metadatum = Metadatum.with(session: 'openstates')
-          .create(abbreviation: 'us')
+        @metadatum = Metadatum.create(abbreviation: 'us')
       end
 
       it 'returns existing US jurisdiction' do

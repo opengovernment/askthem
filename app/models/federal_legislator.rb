@@ -139,7 +139,7 @@ class FederalLegislator < Person
   end
 
   def self.build_from_api(attributes)
-    federal_legislator = with(session: 'openstates').new
+    federal_legislator = new
     federal_legislator.attributes_from_congress_api attributes
     federal_legislator
   end

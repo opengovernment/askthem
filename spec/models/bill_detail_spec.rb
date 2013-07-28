@@ -5,23 +5,23 @@ describe BillDetail do
     it {should validate_presence_of attribute}
   end
 
-  context 'with two sessions' do
+  context 'when in relation' do
     before :each do
-      @metadatum = Metadatum.with(session: 'openstates').create(abbreviation: 'zz')
-      @bill = Bill.with(session: 'openstates').create(state: 'zz')
-      @record = BillDetail.with(session: 'default').create(bill: @bill)
+      @metadatum = Metadatum.create(abbreviation: 'zz')
+      @bill = Bill.create(state: 'zz')
+      @record = BillDetail.create(bill: @bill)
     end
 
-    it "should retrieve a metadatum from the OpenStates session for a bill detail in the default session" do
-      BillDetail.with(session: 'default').last.metadatum.should == @metadatum
+    it 'should retrieve a metadatum for a bill detail' do
+      BillDetail.last.metadatum.should == @metadatum
     end
 
-    it "should retrieve a bill's details from the default session for a bill in the OpenStates session" do
-      Bill.with(session: 'openstates').last.bill_detail.should == @record
+    it "should retrieve a bill's bill detail" do
+      Bill.last.bill_detail.should == @record
     end
 
-    it "should retrieve a bill from the OpenStates session for a bill detail in the default session" do
-      BillDetail.with(session: 'default').last.bill.should == @bill
+    it "should retrieve the bill detail's bill" do
+      BillDetail.last.bill.should == @bill
     end
   end
 end

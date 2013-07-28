@@ -2,8 +2,7 @@ require 'spec_helper'
 
 describe 'questions' do
   before :each do
-    @metadatum = Metadatum.with(session: 'openstates')
-      .create(abbreviation: 'vt', chambers: {} )
+    @metadatum = Metadatum.create(abbreviation: 'vt', chambers: {} )
   end
 
   describe '#index' do
@@ -221,8 +220,7 @@ describe 'questions' do
 
   # see models/person_spec for another instance
   def valid_person
-    @person ||= Person.with(session: 'openstates')
-      .new(state: @metadatum.abbreviation)
+    @person ||= Person.new(state: @metadatum.abbreviation)
     @person.id = 'VTL000008'
     @person.save!
     @person

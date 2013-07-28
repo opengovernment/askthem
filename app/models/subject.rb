@@ -2,7 +2,7 @@ class Subject
   # @return [Array<String>] the list of OpenStates subjects
   # @see https://github.com/sunlightlabs/openstates/wiki/Categorization#subjects
   # alternatively we could populate this
-  # with Bill.with(session: 'openstates').distinct('subject').sort
+  # with Bill.distinct('subject').sort
   def self.all
     [ # In both OpenStates and VoteSmart:     # Additional VoteSmart subjects:
       'Agriculture and Food',

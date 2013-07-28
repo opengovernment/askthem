@@ -15,10 +15,10 @@ namespace :influenceexplorer do
       not_found_urls = []
 
       criteria = Person.where(transparencydata_id: {'$nin' => ['', nil]}).asc(:transparencydata_id) # no index
-      progressbar = ProgressBar.create(format: '%a |%B| %p%% %e', length: 80, smoothing: 0.5, total: criteria.with(session: 'openstates').count)
+      progressbar = ProgressBar.create(format: '%a |%B| %p%% %e', length: 80, smoothing: 0.5, total: criteria.count)
 
       index = 0
-      people = criteria.clone.with(session: 'openstates').limit(100)
+      people = criteria.clone.limit(100)
 
       while people.any?
         people.each do |person|
@@ -38,7 +38,7 @@ namespace :influenceexplorer do
         end
 
         index += 100
-        people = criteria.clone.with(session: 'openstates').limit(100).skip(index)
+        people = criteria.clone.limit(100).skip(index)
       end
 
       puts not_found_urls

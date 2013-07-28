@@ -45,7 +45,7 @@ class Rating
 
   # @return [Person] the person being rated
   def person
-    Person.with(session: 'openstates').where(votesmart_id: candidateId).first || # no index
+    Person.where(votesmart_id: candidateId).first || # no index
       PersonDetail.where(votesmart_id: candidateId).first.person
   end
 end

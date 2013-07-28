@@ -2,7 +2,6 @@
 # @note Based on Popolo.
 class PersonDetail
   include Mongoid::Document
-  store_in session: 'default' # @see https://github.com/mongoid/mongoid/pull/2909
 
   # Links to pages about this person, e.g. Wikipedia, or to accounts this
   # person has on other websites, e.g. Twitter.
@@ -30,7 +29,7 @@ class PersonDetail
 
   # @return [Person] the person
   def person
-    Person.use(state).find(person_id)
+    Person.find(person_id)
   end
 
   # @param [Person] person a person
