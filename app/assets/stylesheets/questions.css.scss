@@ -328,7 +328,7 @@ section.question{
       }
     }
   }
-  
+
   div.flow_info{
     display: inline-block;
     vertical-align: top;
@@ -361,7 +361,7 @@ section.question{
       }
     }
   }
-  
+
   div.actions{
     margin-bottom: 60px;
     h4{
@@ -586,6 +586,49 @@ section.preview{
     &.edit{
       width: 79px;
       text-indent: -10px;
+    }
+  }
+}
+
+/* Address Lookup people-list, etc. */
+ul.people-type{
+  display:block;
+  li{
+    display:inline-block;
+    position:relative;
+    vertical-align:top;
+    a{
+      @include RobotoRegular();
+      color:#9db9bd;
+      display:inline-block;
+      font-size:0.688em;
+      line-height: 1.636em;
+      font-weight:600;
+      padding: 12px 18px;
+      @include transition(color .2s ease-in);
+      &:hover{
+        color:#3c636e;
+      }
+    }
+    i{
+      display:none;
+    }
+    &.active{
+      a{
+        color:#3c636e;
+      }
+      i{
+        clear: both;
+        background: #FFF;
+        color: #F77665;
+        display: block;
+        position: relative;
+        margin: auto;
+        margin-top: -9px;
+        width: 25px;
+        margin-bottom: -8px;
+        text-align: center;
+      }
     }
   }
 }

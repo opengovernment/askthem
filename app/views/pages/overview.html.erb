@@ -2,7 +2,7 @@
 
 <section class="overview">
   <header>
-    <h1><%= @jurisdiction['legislature_name'] %></h1>
+    <h1><%= legislature_name %></h1>
     <%= link_to 'Ask a Question', new_question_path(@jurisdiction.abbreviation), class: 'cta_pill' %>
     <div class="clear"></div>
   </header>
@@ -10,11 +10,11 @@
     <ul class="radio_nav">
       <% if @jurisdiction.upper_chamber? %>
         <li>
-          <%= link_to upper_overview_path(@jurisdiction.abbreviation), tab_options('upper') do %>
-            <%= @upper.count %> <%= @jurisdiction.chamber_title('upper').pluralize %>
+          <%= link_to upper_overview_path(@jurisdiction.abbreviation, type: @type), tab_options('upper') do %>
+            <%= @upper.count -%> <%= @jurisdiction.chamber_title('upper').pluralize %>
             <span class="info">
-              <% @upper_parties.each do |party,people| %>
-                <span><%= people.size %> <%= party%></span>
+              <% @upper_parties.each do |party, people| %>
+                <span><%= people.size -%> <%= party -%></span>
               <% end %>
             </span>
           <% end %>
@@ -22,11 +22,11 @@
       <% end %>
       <% if @jurisdiction.lower_chamber? %>
         <li>
-          <%= link_to lower_overview_path(@jurisdiction.abbreviation), tab_options('lower', 'overview') do %>
-            <%= @lower.count %> <%= @jurisdiction.chamber_title('lower').pluralize %>
+          <%= link_to lower_overview_path(@jurisdiction.abbreviation, type: @type), tab_options('lower', 'overview') do %>
+            <%= @lower.count -%> <%= @jurisdiction.chamber_title('lower').pluralize %>
             <span class="info">
-              <% @lower_parties.each do |party,people| %>
-                <span><%= people.size %> <%= party%></span>
+              <% @lower_parties.each do |party, people| %>
+                <span><%= people.size -%> <%= party -%></span>
               <% end %>
             </span>
           <% end %>
@@ -34,17 +34,17 @@
       <% end %>
       <li>
         <%= link_to bills_overview_path(@jurisdiction.abbreviation), tab_options('bills') do %>
-          <%= number_with_delimiter @bills.count %> Bills
+          <%= number_with_delimiter @bills.count -%> Bills
         <% end %>
       </li>
       <li class="last">
         <%= link_to key_votes_overview_path(@jurisdiction.abbreviation), tab_options('key_votes') do %>
-          <%= number_with_delimiter @key_votes.count %> Key Votes
+          <%= number_with_delimiter @key_votes.count -%> Key Votes
         <% end %>
       </li>
       <li class="clear"></li>
     </ul>
-    
+
     <div class="nav_extras">
       <a href="#">State Resources</a><%# @todo ST remove since we have no content? %>
       <div class="rep_search"><%# @todo change into a form %>

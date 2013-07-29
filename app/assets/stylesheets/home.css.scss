@@ -14,15 +14,14 @@ body.index{
     width:100%;
   }
   .content_body{
-    background:#E7F2F5;
     @include box-shadow(0 0 0 3px rgba(0, 0, 0, 0.03), 0 0 0 3px rgba(0, 0, 0, 0.03));
     div.wrapper{
-      background: #FFF;
-      margin: -60px auto 60px;
       border-radius: 6px;
-      border: 1px solid #DCF0F5;
-      padding: 0 40px 20px;
+      background: #FFF;
       box-sizing: border-box;
+      box-shadow: 0 0px 6px rgba(0,0,0,.1);
+      margin-top: -101px;
+      padding: 0px 50px;
     }
   }
   div.wrapper{
@@ -53,26 +52,26 @@ body.index{
   }
   header.main{
     height: 480px;
-    padding-top: 24px;
+    padding-top: 96px;
     background: url(/assets/usa@2x.jpg) no-repeat 0 0 rgba(0, 0, 0, 0);
     background-size: 80%;
     background-position: 50% 180px;
     background-attachment: fixed;
+    padding-bottom:30px;
     div.find_questions{
       display: block;
       margin: auto;
-      margin-top: 60px;
+      margin-top: 90px;
       margin-bottom: 90px;
-      text-align: center;
+      text-align: left;
       position: relative;
     }
     h1{
-      @include RobotoRegular();
+      @include RobotoBlack();
       display: block;
       font-size:3.375em;
       line-height: 1.111em;
-      text-align: center;
-      margin: auto;
+      text-align: left;
       max-width: 750px;
       font-weight: 100;
       text-shadow: 0 2px 30px #FFF;
@@ -86,18 +85,31 @@ body.index{
     input[type=text]{
       @include border-radius(3px);
       display: inline-block;
-      max-width: 50%;
+      max-width: 48%;
       border: 1px solid #B9CDD0;
       box-sizing: border-box;
       padding-top: 5px;
-      height: 47px;
-      box-shadow: 0 0 0 3px rgba(0, 0, 0, .1);
-      padding-right: 138px;
-      margin-right: -138px;
+      height: 60px;
+      box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
+      padding-right: 63px;
+      margin-right: -63px;
+      padding-left: 12px;
+      font-size: 18px;
+      padding-bottom: 5px;
+      background: rgba(255, 255, 255, 0.5);
+      &:focus{
+        background:rgba(255,255,255,1);
+      }
     }
     input[type=submit]{
-      max-width: 133px;
+      max-width: 58px;
       margin-top: 1px;
+      background: url(/assets/mag_glass@2x.png) no-repeat center center;
+      border: none;
+      box-shadow: none;
+      background-size: 18px;
+      text-indent: -9999px;
+      height: 58px;
       &:hover{
         display:inline-block;
         top: 0;
@@ -106,17 +118,26 @@ body.index{
         display:inline-block;
         top: 0;
       }
+      &:focus{
+        outline: none;
+      }
     }
     
     div.ask_question{
-      margin-top: 24px;
-      vertical-align:middle;
-      p{
+      display:inline-block;
+      vertical-align:top;
+      span{
         font-size: 1em;
-        a{
-          vertical-align:middle;
-          margin-left: 12px;
-        }
+        display: inline-block;
+        margin: 22px 20px;
+        vertical-align: top;
+      }
+      a{
+        display: inline-block;
+        vertical-align: top;
+        padding: 16px 24px 16px;
+        font-size:1.125em;
+        line-height: 1.333em;
       }
     }
   }
@@ -178,17 +199,16 @@ body.index{
       margin-top: 30px;
       float: left;
       width: 85%;
-      margin-left: 5%;
       &:nth-child(2n+2){
         padding-right:0;
       }
       li{
         display: inline-block;
         float: left;
-        margin-bottom: 30px;
+        margin-bottom: 42px;
         vertical-align: top;
         width: 100%;
-        padding-bottom: 30px;
+        padding-bottom: 42px;
         border-bottom: 1px solid #EFEFEF;
         div.person_wrap{
           display: inline-block;
@@ -199,6 +219,8 @@ body.index{
             display: inline-block;
             width: auto;
             margin-right: 6px;
+            float:left;
+            vertical-align:top;
             &:nth-child(2n+2){
               margin-bottom: 12px;
             }
@@ -254,7 +276,7 @@ body.index{
           float:left;
           @include RobotoRegular();
           line-height: 1.25em;
-          margin-bottom:6px;
+          margin-bottom:18px;
           width:100%;
           &:hover{
             color:#709EAC;
@@ -271,7 +293,6 @@ body.index{
           display: block;
           font-size: 0.813em;
           line-height: 1.385em;
-          margin-top: 24px;
           float: left;
           width: 55%;
           margin-right: 5%;

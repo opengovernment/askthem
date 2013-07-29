@@ -79,6 +79,7 @@ describe 'questions' do
       context 'when filling out question title and body' do
         before :each do
           visit "/vt/questions/new"
+          add_valid_address
           add_person_id
         end
 
@@ -117,18 +118,18 @@ describe 'questions' do
       context 'when signing up user' do
         before :each do
           visit "/vt/questions/new"
+          add_valid_address
           add_person_id
           add_valid_content
         end
 
-        it 'cannot progress to next step when invalid input', js: true do
+        it 'cannot progress to next step when invalid input', js: true, focus: true do
           step_id = '#sign-up-step'
 
           click_next_button 3, 3
 
           expect(find(step_id).visible?).to be_true
 
-          # p page.body
           page.should have_selector '.field_with_errors label.message'
         end
 
@@ -178,6 +179,7 @@ describe 'questions' do
         end
 
         def add_valid_values
+          add_valid_address
           add_person_id
           add_valid_content
           add_valid_user
@@ -198,6 +200,14 @@ describe 'questions' do
   def add_valid_content
     script = "jQuery('#question_title').val('test'); "
     script +=  "jQuery('#question_body').val('#{long_body}'); "
+    page.execute_script script
+  end
+
+  def add_valid_address
+    script = "jQuery('#question_user_attributes_street_address').val('2227 Paine Turnpike'); "
+    script +=  "jQuery('#question_user_attributes_locality').val('Berlin'); "
+    script +=  "jQuery('#question_user_attributes_region').val('vt'); "
+    script +=  "jQuery('#question_user_attributes_postal_code').val('05602'); "
     page.execute_script script
   end
 

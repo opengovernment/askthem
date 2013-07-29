@@ -2,11 +2,15 @@ class FederalLegislator < Person
   PHOTOS_BASE_URL = "http://#{ENV['AWS_DIRECTORY']}#{ENV['AWS_HOST_STUB']}/photos/federal/100x125/"
 
   def self.base_api_url
-      'http://congress.api.sunlightfoundation.com'
+    'http://congress.api.sunlightfoundation.com'
   end
 
   def self.api_plural_type
-      'legislators'
+    'legislators'
+  end
+
+  def self.api_id_field
+    'bioguide_id'
   end
 
   def image?
@@ -16,6 +20,8 @@ class FederalLegislator < Person
   def image
     "#{PHOTOS_BASE_URL}#{id}.jpg"
   end
+
+  alias :photo_url :image
 
   def attributes_from_congress_api(api_data)
     api_data.each do |key, value|
@@ -54,36 +60,21 @@ class FederalLegislator < Person
     full_name
   end
 
-  def self.api_url_for_jurisdiction
-    "#{base_api_url}/#{api_plural_type}"
+  def chamber_from_api(value)
+    value == 'house' ? 'lower' : 'upper'
   end
 
-  def self.api_geo_url
-    "#{api_url_for_jurisdiction}/locate"
-  end
-
-  def self.api_id_field
-    'bioguide_id'
-  end
-
-  def self.api_format_abbreviation(abbreviation)
-    abbreviation.upcase
-  end
-
-  def self.params_for_location(data)
-    { latitude: data.latitude,
-      longitude: data.longitude,
-      apikey: api_key }
-  end
-
-  def self.api_parse(data)
-    JSON.parse(data)['results']
-  end
-
-  def self.build_from_api(attributes)
-    federal_legislator = with(session: 'openstates').new
-    federal_legislator.attributes_from_congress_api attributes
-    federal_legislator
+  def party_from_api(value)
+    case value
+    when 'D'
+      'Democratic'
+    when 'R'
+      'Republican'
+    when 'I'
+      'Independent'
+    else
+      value
+    end
   end
 
   def roles_from_api(terms)
@@ -125,20 +116,37 @@ class FederalLegislator < Person
     end
   end
 
-  def chamber_from_api(value)
-    value == 'house' ? 'lower' : 'upper'
+  def self.api_url_for_jurisdiction
+    "#{base_api_url}/#{api_plural_type}"
   end
 
-  def party_from_api(value)
-    case value
-    when 'D'
-      'Democratic'
-    when 'R'
-      'Republican'
-    when 'I'
-      'Independent'
-    else
-      value
-    end
+  def self.api_geo_url
+    "#{api_url_for_jurisdiction}/locate"
   end
+
+  def self.api_format_abbreviation(abbreviation)
+    abbreviation.upcase
+  end
+
+  def self.params_for_location(data)
+    { latitude: data.latitude,
+      longitude: data.longitude,
+      apikey: api_key }
+  end
+
+  def self.api_parse(data)
+    JSON.parse(data)['results']
+  end
+
+  def self.build_from_api(attributes)
+    federal_legislator = with(session: 'openstates').new
+    federal_legislator.attributes_from_congress_api attributes
+    federal_legislator
+  end
+
+  # class methods have do not honor private declaration
+  private_class_methods = [:build_from_api, :results_for_jurisdiction,
+                           :api_format_abbreviation, :api_url_for_jurisdiction,
+                           :api_parse, :params_for_location, :api_geo_url]
+  private_class_method *private_class_methods
 end

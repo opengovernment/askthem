@@ -22,7 +22,6 @@ class Metadatum::State
     end
   end
 
-  private
   def self.api_key
     ENV['SUNLIGHT_API_KEY']
   end
@@ -44,4 +43,6 @@ class Metadatum::State
 
     RestClient.get api_base_url, params: params
   end
+
+  private_class_method :results_from_api, :api_fields, :api_base_url, :api_key
 end

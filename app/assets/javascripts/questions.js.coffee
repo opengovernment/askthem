@@ -76,6 +76,9 @@ jQuery ($) ->
       if $('label.select-person').is(':hidden')
         $('label.select-person').fadeTo(300, 1)
 
+      if $('ul.people-type').is(':hidden')
+        $('ul.people-type').fadeTo(300, 1)
+
       getPeople()
     else
       # show recipient header and loading
@@ -106,14 +109,17 @@ jQuery ($) ->
     $('#content-person-name').html name
     $('#confirm-person-attributes').html "<strong>#{jurisdiction}</strong>"
 
-  getPeople = (->
+  getPeople = (type = 'Person') ->
     address = $('#question_user_attributes_street_address').val()
     address += ' ' + $('#question_user_attributes_locality').val()
     address += ' ' + $('#question_user_attributes_region').val()
     address += ' ' + $('#question_user_attributes_postal_code').val()
 
+    url = "/locator.json?q=#{encodeURIComponent(address)}"
+    url += "&type=FederalLegislator" if type == 'FederalLegislator'
+
     $.ajax
-      url: "/locator.json?q=#{encodeURIComponent(address)}"
+      url: url
       type: 'GET'
       dataType: 'json'
       success: (data) ->
@@ -151,7 +157,24 @@ jQuery ($) ->
           personList.children('li:last').fadeTo(300, 1)
         personList.children('li').on 'click', (e) ->
           updateSelectedPerson e
-    )
+
+  switchToPeopleType = (type = 'Person') ->
+    id = '#state-people'
+    oldId = '#federal-people'
+    if type == 'FederalLegislator'
+      id = '#federal-people'
+      oldId = '#state-people'
+
+    $(id).addClass 'active'
+    $(oldId).removeClass 'active'
+
+    getPeople(type)
+
+  $('#federal-people a').click (event) ->
+    switchToPeopleType('FederalLegislator')
+
+  $('#state-people a').click (event) ->
+    switchToPeopleType()
 
   hideLaterSteps = (->
     $('article.not-first-step').each ->

@@ -46,7 +46,8 @@ class PagesController < ApplicationController
   # @see https://github.com/alexreisner/geocoder#use-outside-of-rails
   # @see https://github.com/sunlightlabs/billy/wiki/Differences-between-the-API-and-MongoDB
   def locator
-    @people = Person.with(session: 'openstates').includes(:questions).for_location(params[:q])
+    @people = type.constantize.with(session: 'openstates')
+      .includes(:questions).for_location(params[:q])
 
     respond_with(@people.as_json({
       only: [
@@ -87,12 +88,12 @@ class PagesController < ApplicationController
     @lower = Person.in(@jurisdiction.abbreviation).active.where(chamber: 'lower')
       .only_type(type)
     @lower = @lower.includes(:questions) if tab == 'lower'
-    @lower_parties = @lower.group_by{ |person| person['party'] }
+    @lower_parties = @lower.group_by { |person| person['party'] }
 
     @upper = Person.in(@jurisdiction.abbreviation).active.where(chamber: 'upper')
       .only_type(type)
     @upper = @upper.includes(:questions) if tab == 'upper'
-    @upper_parties = @upper.group_by{ |person| person['party'] }
+    @upper_parties = @upper.group_by { |person| person['party'] }
 
     @bills = Bill.in(@jurisdiction.abbreviation).in_session(@jurisdiction.current_session).page(params[:page])
     @bills = @bills.includes(:questions) if tab == 'bills'

@@ -8,42 +8,16 @@
 
   <span class="toggle">
     <span>Find them with</span>
-    <a href="#twitter_find" class="select twitter active icon-ok mobile">Twitter</a>
-    <a class="select twitter active icon-ok">Twitter</a>
+    <a href="#twitter_find" class="select twitter mobile">Twitter</a>
+    <a class="select twitter">Twitter</a>
     <a name="twitter_find" class="anchor"></a>
     <span>or</span>
-    <a href="#address_lookup" class="select address_lookup mobile">Address Lookup</a>
-    <a class="select address_lookup">Address Lookup</a>
+    <a href="#address_lookup" class="select active icon-ok address_lookup mobile">Address Lookup</a>
+    <a class="select active address_lookup icon-ok">Address Lookup</a>
     <a name="address_lookup" class="anchor"></a>
   </span>
 
-  <div class="twitter">
-    <label for="question">Twitter users
-      <span class="details">Ask a question from anyone on Twitter.</span>
-    </label>
-    <fieldset>
-      <div class="inline_label to">
-        <input type="text" name="twitter" id="twitter" placeholder="Enter a name or verified twitter account" />
-      </div>
-      <ol class="people-list select-person twitter">
-        <li style="display:none;" class="selected">
-          <div class="select_box">
-            <input type="radio" name="person-select" id="" />
-          </div>
-          <div class="avatar">
-            <img src="" alt="" />
-          </div>
-          <h2></h2>
-          <div class="person-info">
-            <p></p>
-          </div>
-          <span class="selected icon-ok-sign"></span>
-        </li>
-      </ol>
-    </fieldset>
-  </div>
-
-  <div style="display:none;" class="address_lookup">
+  <div class="address_lookup">
     <label for="question">Home Address
       <span class="details">Where you live lets us locate your officials!</span>
     </label>
@@ -73,9 +47,48 @@
 
     <div class="loading" style="display:none;">Loading...</div>
 
+    <% unless local? -%>
+      <ul class="people-type" style="display:none;">
+        <li id="federal-people">
+          <a href="#federal_address_lookup"><%= @jurisdiction['name'] %> Federal</a>
+          <i class="icon-angle-down"></i>
+        </li>
+        <li class="active" id="state-people">
+          <a href="#state_address_lookup"><%= @jurisdiction['name'] %> State</a>
+          <i class="icon-angle-down"></i>
+        </li>
+      </ul>
+    <% end -%>
+
     <fieldset>
       <ol class="people-list select-person">
         <!-- will be populated by address_lookup -->
+      </ol>
+    </fieldset>
+  </div>
+  
+  <div class="twitter" style="display:none;">
+    <label for="question">Twitter users
+      <span class="details">Ask a question from anyone on Twitter.</span>
+    </label>
+    <fieldset>
+      <div class="inline_label to">
+        <input type="text" name="twitter" id="twitter" placeholder="Enter a name or verified twitter account" />
+      </div>
+      <ol class="people-list select-person twitter">
+        <li style="display:none;" class="selected">
+          <div class="select_box">
+            <input type="radio" name="person-select" id="" />
+          </div>
+          <div class="avatar">
+            <img src="" alt="" />
+          </div>
+          <h2></h2>
+          <div class="person-info">
+            <p></p>
+          </div>
+          <span class="selected icon-ok-sign"></span>
+        </li>
       </ol>
     </fieldset>
   </div>

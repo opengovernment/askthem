@@ -3,3 +3,12 @@ rvm:
   - 1.9.3
 services:
   - mongodb
+notifications:
+  email:
+    - web@mars-hq.com
+  irc:
+    channels:
+      - 'irc.freednode.net#ogchatter'
+    on_success: change
+    use_notice: true
+    skip_join: true
