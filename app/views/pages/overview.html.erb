@@ -11,10 +11,10 @@
       <% if @jurisdiction.upper_chamber? %>
         <li>
           <%= link_to upper_overview_path(@jurisdiction.abbreviation, type: @type), tab_options('upper') do %>
-            <%= @upper.count %> <%= @jurisdiction.chamber_title('upper').pluralize %>
+            <%= @upper.count -%> <%= @jurisdiction.chamber_title('upper').pluralize %>
             <span class="info">
-              <% @upper_parties.each do |party,people| %>
-                <span><%= people.size %> <%= party%></span>
+              <% @upper_parties.each do |party, people| %>
+                <span><%= people.size -%> <%= party -%></span>
               <% end %>
             </span>
           <% end %>
@@ -23,10 +23,10 @@
       <% if @jurisdiction.lower_chamber? %>
         <li>
           <%= link_to lower_overview_path(@jurisdiction.abbreviation, type: @type), tab_options('lower', 'overview') do %>
-            <%= @lower.count %> <%= @jurisdiction.chamber_title('lower').pluralize %>
+            <%= @lower.count -%> <%= @jurisdiction.chamber_title('lower').pluralize %>
             <span class="info">
-              <% @lower_parties.each do |party,people| %>
-                <span><%= people.size %> <%= party%></span>
+              <% @lower_parties.each do |party, people| %>
+                <span><%= people.size -%> <%= party -%></span>
               <% end %>
             </span>
           <% end %>
@@ -34,12 +34,12 @@
       <% end %>
       <li>
         <%= link_to bills_overview_path(@jurisdiction.abbreviation), tab_options('bills') do %>
-          <%= number_with_delimiter @bills.count %> Bills
+          <%= number_with_delimiter @bills.count -%> Bills
         <% end %>
       </li>
       <li class="last">
         <%= link_to key_votes_overview_path(@jurisdiction.abbreviation), tab_options('key_votes') do %>
-          <%= number_with_delimiter @key_votes.count %> Key Votes
+          <%= number_with_delimiter @key_votes.count -%> Key Votes
         <% end %>
       </li>
       <li class="clear"></li>
