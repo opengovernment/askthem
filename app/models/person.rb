@@ -20,6 +20,11 @@ class Person
   field '+gender', type: String, as: :gender
   field :photo_url, type: String, as: :image
 
+  index(_type: 1)
+  index(state: 1)
+  index(active: 1)
+  index(chamber: 1)
+
   scope :active, where(active: true).asc(:chamber, :family_name) # no index includes `last_name`
 
   def self.only_type(type)
