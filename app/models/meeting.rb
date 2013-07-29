@@ -7,9 +7,6 @@ class Meeting
   field :name, type: String
   field :municipality, type: String
 
-  # embeds_one :agenda
-  # embeds_one :minutes
-
   validates_presence_of :meeting_date, :name, :municipality
 
   def self.load_from_apis_for_jurisdiction(municipality=nil) 
@@ -56,15 +53,34 @@ class Meeting
       meeting_time = Time.parse(meeting['Meeting Time']).strftime('%l:%M %p EST')
       meeting_datetime = DateTime.parse("#{meeting_date} #{meeting_time}")
 
-      a = Meeting.create(
+      m = Meeting.create(
         meeting_date: meeting_datetime,
         name: meeting['Name'],
         location: meeting['Meeting Location'],
-        municipality: meeting['Municipality'],
-        agenda: meeting['Agenda'],
-        minutes: meeting['Minutes']
+        municipality: meeting['Municipality']
       )
-      puts "saved #{a.meeting_date} - #{a.name}"
+      
+      agenda = nil
+      if (meeting['Agenda']['url'])
+        agenda = MeetingAgenda.create(
+          meeting_id: m.id,
+          url: meeting['Agenda']['url'],
+          fulltext: meeting['Agenda']['fulltext']
+        )
+        m[:agenda] = agenda
+      end
+
+      minutes = nil
+      if (meeting['Minutes']['url'])
+        minutes = MeetingMinutes.create(
+          meeting_id: m.id,
+          url: meeting['Minutes']['url'],
+          fulltext: meeting['Minutes']['fulltext']
+        )
+        m[:minutes] = minutes
+      end
+
+      puts "saved #{m.meeting_date} - #{m.name}"
     end
 
   end
