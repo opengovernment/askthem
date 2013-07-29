@@ -7,6 +7,9 @@ class Meeting
   field :name, type: String
   field :municipality, type: String
 
+  # embeds_one :agenda
+  # embeds_one :minutes
+
   validates_presence_of :meeting_date, :name, :municipality
 
   def self.load_from_apis_for_jurisdiction(municipality=nil) 
