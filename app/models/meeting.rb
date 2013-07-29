@@ -73,4 +73,8 @@ class Meeting
     session
   end
 
+  # class methods have do not honor private declaration
+  private_class_methods = [:scraped_local_gov]
+  private_class_method *private_class_methods
+
 end
