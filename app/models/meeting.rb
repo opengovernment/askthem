@@ -55,40 +55,39 @@ class Meeting
     #   }, 
     # }
 
-    puts meetings.first
-    meetings.each do |meeting|
+    meetings.each do |meeting_data|
 
       # stuff date and time in to same field
-      meeting_date = meeting['Meeting Date']['label'].strftime('%Y-%m-%d')
-      meeting_time = Time.parse(meeting['Meeting Time']).strftime('%l:%M %p EST')
+      meeting_date = meeting_data['Meeting Date']['label'].strftime('%Y-%m-%d')
+      meeting_time = Time.parse(meeting_data['Meeting Time']).strftime('%l:%M %p EST')
       meeting_datetime = DateTime.parse("#{meeting_date} #{meeting_time}")
 
-      m = Meeting.create(
+      meeting = Meeting.create(
         meeting_date: meeting_datetime,
-        name: meeting['Name'],
-        location: meeting['Meeting Location'],
-        municipality: meeting['Municipality']
+        name: meeting_data['Name'],
+        location: meeting_data['Meeting Location'],
+        municipality: meeting_data['Municipality']
       )
       
-      if (meeting['Agenda']['url'])
+      if (meeting_data['Agenda']['url'])
         agenda = MeetingAgenda.create(
-          meeting_id: m.id,
-          url: meeting['Agenda']['url'],
-          fulltext: meeting['Agenda']['fulltext']
+          meeting_id: meeting.id,
+          url: meeting_data['Agenda']['url'],
+          fulltext: meeting_data['Agenda']['fulltext']
         )
         puts "saved agenda"
       end
 
-      if (meeting['Minutes']['url'])
+      if (meeting_data['Minutes']['url'])
         minutes = MeetingMinutes.create(
-          meeting_id: m.id,
-          url: meeting['Minutes']['url'],
-          fulltext: meeting['Minutes']['fulltext']
+          meeting_id: meeting.id,
+          url: meeting_data['Minutes']['url'],
+          fulltext: meeting_data['Minutes']['fulltext']
         )
         puts "saved minutes"
       end
 
-      puts "saved #{m.meeting_date} - #{m.name}"
+      puts "saved #{meeting.meeting_date} - #{meeting.name}"
     end
 
   end
