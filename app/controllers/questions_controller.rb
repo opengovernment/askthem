@@ -32,8 +32,10 @@ class QuestionsController < ApplicationController
       @bill = Bill.in(@state_code).find(params[:bill])
       @question.bill = @bill
     end
-
-    new!
+    
+    render layout: 'data_collection'
+    
+    # new!
   end
 
   def create

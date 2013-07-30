@@ -6,90 +6,94 @@
     <% end -%>
   </header>
 
-  <span class="toggle">
-    <span>Find them with</span>
-    <a href="#twitter_find" class="select twitter mobile">Twitter</a>
-    <a class="select twitter">Twitter</a>
-    <a name="twitter_find" class="anchor"></a>
-    <span>or</span>
-    <a href="#address_lookup" class="select active icon-ok address_lookup mobile">Address Lookup</a>
-    <a class="select active address_lookup icon-ok">Address Lookup</a>
-    <a name="address_lookup" class="anchor"></a>
-  </span>
+  <div class="data_collection_form">
+    <span class="toggle">
+      <span>Locate them by:</span>
+    
+      <a href="#twitter_find" class="select twitter mobile">Twitter Name</a>
+      <a class="select twitter">Twitter Name</a>
+      <a name="twitter_find" class="anchor"></a>
+    
+      <span>or</span>
+    
+      <a href="#address_lookup" class="select active icon-ok address_lookup mobile">Your Address</a>
+      <a class="select active address_lookup icon-ok">Your Address</a>
+      <a name="address_lookup" class="anchor"></a>
+    </span>
 
-  <div class="address_lookup">
-    <label for="question">Home Address
-      <span class="details">Where you live lets us locate your officials!</span>
-    </label>
+    <div class="address_lookup">
+    
+      <fieldset class="last">
+        <%= f.fields_for :user do |user_form| %>
+      
+          <label for="question_user_attributes_street_address" class="lesser">Address</label>
+          <%= user_form.text_field :street_address, placeholder: 'Street Address' %>
 
-    <fieldset class="last">
-      <%= f.fields_for :user do |user_form| %>
-        <label for="question_user_attributes_street_address" class="lesser">Address</label>
-        <%= user_form.text_field :street_address, placeholder: 'Street Address' %>
+          <label for="question_user_attributes_locality" class="lesser">City</label>
+          <%= user_form.text_field :locality, placeholder: 'City' %>
 
-        <label for="question_user_attributes_locality" class="lesser">City</label>
-        <%= user_form.text_field :locality, placeholder: 'City' %>
 
-        <label for="question_user_attributes_region" class="lesser">State</label>
+          <label for="question_user_attributes_region" class="lesser">State</label>
+          <div class="input select sculpt icon-angle-down">
+            <%= user_form.select :region, options_for_select(OpenGovernment::STATES, @state_code), placeholder: 'Select your state' %>
+          </div>
 
-        <div class="input select sculpt icon-angle-down">
-          <%= user_form.select :region, options_for_select(OpenGovernment::STATES, @state_code), placeholder: 'Select your state' %>
-        </div>
+          <label for="question_user_attributes_postal_code" class="lesser">Zipcode</label>
+          <%= user_form.text_field :postal_code, placeholder: 'ex. 02141' %>
+        
+        <% end %>
+      </fieldset>
 
-        <label for="question_user_attributes_postal_code" class="lesser">Zipcode</label>
-        <%= user_form.text_field :postal_code, placeholder: 'ex. 02141' %>
-      <% end %>
-    </fieldset>
+      <label for="question_person_id" class="select-person" style="display:none;">Recipient
+        <span class="details">Select who you'd like to receive the question:</span>
+      </label>
 
-    <label for="question_person_id" class="select-person" style="display:none;">Recipient
-      <span class="details">Select who you'd like to receive the question:</span>
-    </label>
+      <div class="loading" style="display:none;">Loading...</div>
 
-    <div class="loading" style="display:none;">Loading...</div>
+      <% unless local? -%>
+        <ul class="people-type" style="display:none;">
+          <li id="federal-people">
+            <a href="#federal_address_lookup"><%= @jurisdiction['name'] %> Federal</a>
+            <i class="icon-angle-down"></i>
+          </li>
+          <li class="active" id="state-people">
+            <a href="#state_address_lookup"><%= @jurisdiction['name'] %> State</a>
+            <i class="icon-angle-down"></i>
+          </li>
+        </ul>
+      <% end -%>
 
-    <% unless local? -%>
-      <ul class="people-type" style="display:none;">
-        <li id="federal-people">
-          <a href="#federal_address_lookup"><%= @jurisdiction['name'] %> Federal</a>
-          <i class="icon-angle-down"></i>
-        </li>
-        <li class="active" id="state-people">
-          <a href="#state_address_lookup"><%= @jurisdiction['name'] %> State</a>
-          <i class="icon-angle-down"></i>
-        </li>
-      </ul>
-    <% end -%>
-
-    <fieldset>
-      <ol class="people-list select-person">
-        <!-- will be populated by address_lookup -->
-      </ol>
-    </fieldset>
-  </div>
+      <fieldset>
+        <ol class="people-list select-person">
+          <!-- will be populated by address_lookup -->
+        </ol>
+      </fieldset>
+    </div>
   
-  <div class="twitter" style="display:none;">
-    <label for="question">Twitter users
-      <span class="details">Ask a question from anyone on Twitter.</span>
-    </label>
-    <fieldset>
-      <div class="inline_label to">
-        <input type="text" name="twitter" id="twitter" placeholder="Enter a name or verified twitter account" />
-      </div>
-      <ol class="people-list select-person twitter">
-        <li style="display:none;" class="selected">
-          <div class="select_box">
-            <input type="radio" name="person-select" id="" />
-          </div>
-          <div class="avatar">
-            <img src="" alt="" />
-          </div>
-          <h2></h2>
-          <div class="person-info">
-            <p></p>
-          </div>
-          <span class="selected icon-ok-sign"></span>
-        </li>
-      </ol>
-    </fieldset>
+    <div class="twitter" style="display:none;">
+      <label for="question">Twitter users
+        <span class="details">Ask a question from anyone on Twitter.</span>
+      </label>
+      <fieldset>
+        <div class="inline_label to">
+          <input type="text" name="twitter" id="twitter" placeholder="Enter a name or verified twitter account" />
+        </div>
+        <ol class="people-list select-person twitter">
+          <li style="display:none;" class="selected">
+            <div class="select_box">
+              <input type="radio" name="person-select" id="" />
+            </div>
+            <div class="avatar">
+              <img src="" alt="" />
+            </div>
+            <h2></h2>
+            <div class="person-info">
+              <p></p>
+            </div>
+            <span class="selected icon-ok-sign"></span>
+          </li>
+        </ol>
+      </fieldset>
+    </div>
   </div>
 </article>

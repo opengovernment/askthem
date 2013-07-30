@@ -1,0 +1,34 @@
+@import "compass";
+@import "mixins";
+
+body.data_collection{
+  h1{
+    color:#32515a;
+    font-size:1.875em;
+    line-height: 1.6em;
+  }
+  div.content_body{
+    background: none;
+    @include box-shadow(none);
+    article{
+      width:100%;  
+    }
+    div.data_collection_form{
+      background:#cce0e2;
+      border:1px solid #bcced1;
+      @include border-radius(3px);
+      @include box-shadow(0 0 5px rgba(0, 0, 0, .1), 0 35px 85px rgba(255, 255, 255, .45));
+      width:100%;
+    }
+  }
+  header.main, div.content_body{
+    margin: auto;
+    display: block;
+    max-width: 600px;
+    width: 70%;
+    min-width: 0;
+    div.wrapper{
+      
+    }
+  }
+}

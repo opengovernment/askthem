@@ -1,5 +1,3 @@
-<%= render 'shared/navigation' %>
-
 <section class="question ask">
   <%= form_for @question, url: questions_path(@state_code), validate: true, html: { accept_charset: 'utf-8' } do |f| %>
     <%= f.hidden_field :user_id if user_signed_in? %>
@@ -8,10 +6,12 @@
     <%= f.validate :person_id %>
 
     <% locals = { question: @question, person: @person, bill: @bill, relevant_steps: @relevant_steps, first_step: @first_step, f: f } -%>
+    
     <% @relevant_steps.each do |step| %>
       <%= render partial: "#{step}_step", locals: locals.merge({step: step}) %>
     <% end %>
 
+    <%#
     <div class="flow_info">
       <h3>Your question &amp; petition</h3>
       <ul>
@@ -23,7 +23,8 @@
 
       </ul>
     </div>
-
+    %>
+    
     <div class="controls">
       <a class="cta_pill" id="next-button"
          data-relevant-steps="<%= @relevant_steps.join(', ') -%>"
