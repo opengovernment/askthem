@@ -9,6 +9,16 @@ class Meeting
 
   validates_presence_of :meeting_date, :name, :municipality
 
+  # Return the agenda for this meeting
+  def agenda
+    MeetingAgenda.where(meeting_id: id).first
+  end
+
+  # Return the minutes for this meeting
+  def minutes
+    MeetingMinutes.where(meeting_id: id).first
+  end
+
   def self.load_from_apis_for_jurisdiction(municipality=nil) 
     session = scraped_local_gov
     if municipality
@@ -60,24 +70,22 @@ class Meeting
         municipality: meeting['Municipality']
       )
       
-      agenda = nil
       if (meeting['Agenda']['url'])
         agenda = MeetingAgenda.create(
           meeting_id: m.id,
           url: meeting['Agenda']['url'],
           fulltext: meeting['Agenda']['fulltext']
         )
-        m[:agenda] = agenda
+        puts "saved agenda"
       end
 
-      minutes = nil
       if (meeting['Minutes']['url'])
         minutes = MeetingMinutes.create(
           meeting_id: m.id,
           url: meeting['Minutes']['url'],
           fulltext: meeting['Minutes']['fulltext']
         )
-        m[:minutes] = minutes
+        puts "saved minutes"
       end
 
       puts "saved #{m.meeting_date} - #{m.name}"
