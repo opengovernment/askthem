@@ -75,7 +75,7 @@ class Meeting
           url: meeting_data['Agenda']['url'],
           fulltext: meeting_data['Agenda']['fulltext']
         )
-        puts "saved agenda"
+        # puts "saved agenda"
       end
 
       if (meeting_data['Minutes']['url'])
@@ -84,10 +84,10 @@ class Meeting
           url: meeting_data['Minutes']['url'],
           fulltext: meeting_data['Minutes']['fulltext']
         )
-        puts "saved minutes"
+        # puts "saved minutes"
       end
 
-      puts "saved #{meeting.meeting_date} - #{meeting.name}"
+      # puts "saved #{meeting.meeting_date} - #{meeting.name}"
     end
 
   end
