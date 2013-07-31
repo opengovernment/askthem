@@ -1,23 +1,36 @@
 @import "compass";
 @import "mixins";
 
+/*
+  This file is focused on pages dedicated to a sole purpose: collecting user information.
+  Examples: Sign Up, Log in, Create Question
+*/
+
 body.data_collection{
-  h1{
+  a.logo{
+    margin-top:42px;
+  }
+  section.question article h1{
     color:#32515a;
+    @include RobotoBlack();
     font-size:1.875em;
     line-height: 1.6em;
+    margin:72px 0 0 0;
+    padding:0;
   }
   div.content_body{
     background: none;
     @include box-shadow(none);
     article{
-      width:100%;  
+      width:100%;
     }
     div.data_collection_form{
       background:#cce0e2;
       border:1px solid #bcced1;
+      box-sizing: border-box;
       @include border-radius(3px);
       @include box-shadow(0 0 5px rgba(0, 0, 0, .1), 0 35px 85px rgba(255, 255, 255, .45));
+      padding:35px;
       width:100%;
     }
   }
@@ -28,7 +41,32 @@ body.data_collection{
     width: 70%;
     min-width: 0;
     div.wrapper{
-      
+      padding-left:0;
+      text-align:center;
+    }
+  }
+  span.toggle{
+    border: none;
+    padding: 0;
+    margin: 18px 0 36px;
+    a.select{
+      @include border-radius(24px);
+    }
+    span{
+      color:#32515a;
+    }
+  }
+  form fieldset{
+    border:none;
+    padding:0;
+    margin:0;
+  }
+  .question.ask div.controls{
+    margin-top:24px;
+    span.count{
+      clear:both;
+      display: block;
+      margin-left: 0;
     }
   }
 }

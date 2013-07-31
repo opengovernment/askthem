@@ -28,7 +28,7 @@ form{
     @include border-radius(3px);
     @include box-shadow(0 1px 2px #F3F3F3 inset);
     width:100%;
-    @include input-placeholder(#94A7A3);
+    @include input-placeholder(#cccccc);
     @include transition-property(all);
     @include transition-duration(.125s);
     &:focus{
@@ -166,6 +166,47 @@ form{
   }
 }
 
+form div.pill_wrap{
+  background: #FFF;
+  border: 1px solid #BCCED1;
+  @include box-shadow(0 2px 0 rgba(0,0,0,.03));
+  clear: both;
+  float: left;
+  width: 100%;
+  margin-bottom: 6px;
+  input[type=text],input[type=email],input[type=password],input[type=number]{
+    border: none;
+    border-left: 1px solid #f2f2f2;
+    @include border-radius(0);
+    display:block;
+    float:left;
+    margin-bottom:0;
+    width:76.136363636364%;
+    @include input-placeholder(#cccccc, 600);
+    &:focus{
+      @include input-placeholder(#b9ccc8, 600);
+    }
+  }
+  label.lesser{
+    display: block;
+    float: left;
+    text-align: left;
+    text-indent: 4%;
+    margin-bottom: 0;
+    width:23.863636363636%;
+  }
+  div.input.select.sculpt{
+    box-sizing: border-box;
+    border: none;
+    border-left: 1px solid #f2f2f2;
+    @include border-radius(0);
+    display: block;
+    float: left;
+    margin-bottom:0;
+    width:76.136363636364%;
+  }
+}
+
 // Signup to sign a question - @todo ST: classname too close to "action", rename
 .actions form{
   label{
@@ -261,7 +302,7 @@ div.controls{
     width: 33%;
   }
   span.count{
-    color: #C8C8C8;
+    color: $lightblue;
     font-size: 0.813em;
     line-height: 1.385em;
     font-weight: 600;
