@@ -64,8 +64,8 @@ jQuery ($) ->
 
 
     if !$(this).hasClass('active')
-      $('span.toggle a.active').removeClass('active icon-ok')
-      $(this).addClass('active icon-ok')
+      $('span.toggle a.active').removeClass('active')
+      $(this).addClass('active')
 
   $("#question_user_attributes_postal_code").keyup(->
     zipLength = $(this).val().length

@@ -816,53 +816,6 @@ a.expose_nav{
   display: none;
 }
 
-span.toggle{
-  border-bottom: 1px solid #F1F1F1;
-  border-top: 1px solid #F1F1F1;
-  display: inline-block;
-  padding-bottom: 24px;
-  color: #999;
-  margin-bottom: 24px;
-  margin-top: 24px;
-  padding-top: 24px;
-  width: 100%;
-  span{
-    display: inline-block;
-    margin: 6px;
-  }
-  a.select{
-    @include border-radius(3px);
-    @include box-shadow(0 2px 0 0 rgba(0, 0, 0, 0.1), inset 0 1px 0 0 #BADEE9);
-    background:#A4C5CF;
-    border:1px solid #94B6C0;
-    color:#fff;
-    cursor:pointer;
-    display:inline-block;
-    font-size:0.813em;
-    line-height: 1.385em;
-    font-weight:600;
-    padding: 12px;
-    text-shadow:0 1px 0 #89AFBB;
-    &:hover{
-      background-color:#95BBC7;
-    }
-    &.mobile{
-      display:none;
-    }
-    &.active{
-      @include box-shadow(0 2px 0 0 rgba(0, 0, 0, 0.1), inset 0 1px 0 0 #BFEB35);
-      border-color:#99C472; 
-      background: #AFD82D;
-      color: #FFF;
-      text-shadow:0 1px 0 #96B928;
-      &:before,&:after{
-        display:inline-block;
-        margin-right:6px;
-      }
-    }
-  }
-}
-
 span.bill_ref{
   color: #2B464E;
   font-size:0.813em;
