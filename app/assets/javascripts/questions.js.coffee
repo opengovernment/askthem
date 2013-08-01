@@ -67,25 +67,29 @@ jQuery ($) ->
       $('span.toggle a.active').removeClass('active')
       $(this).addClass('active')
 
-  $("#question_user_attributes_postal_code").keyup(->
-    zipLength = $(this).val().length
-    if zipLength is 5 or zipLength > 5
-      $('.loading').hide()
+  $("#question_user_attributes_postal_code").keyup (e) ->
+    theInput = e.delegateTarget
+    showPeopleForAddress theInput
 
-      # redundant, but covers case where zip is pasted in
-      if $('label.select-person').is(':hidden')
-        $('label.select-person').fadeTo(300, 1)
+  showPeopleForAddress = (theInput) ->
+    unless $('div.address_lookup').length == 0
+      zipLength = $(theInput).val().length
+      if zipLength is 5 or zipLength > 5
+        $('.loading').hide()
 
-      if $('ul.people-type').is(':hidden')
-        $('ul.people-type').fadeTo(300, 1)
+        # redundant, but covers case where zip is pasted in
+        if $('label.select-person').is(':hidden')
+          $('label.select-person').fadeTo(300, 1)
 
-      getPeople()
-    else
-      # show recipient header and loading
-      if $('label.select-person').is(':hidden')
-        $('label.select-person').fadeTo(300, 1)
-        $('.loading').fadeTo(300, 1)
-  )
+        if $('ul.people-type').is(':hidden')
+          $('ul.people-type').fadeTo(300, 1)
+
+        getPeople()
+      else
+        # show recipient header and loading
+        if $('label.select-person').is(':hidden')
+          $('label.select-person').fadeTo(300, 1)
+          $('.loading').fadeTo(300, 1)
 
   updateSelectedPerson = (e) ->
     personLi = e.delegateTarget

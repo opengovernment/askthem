@@ -3,7 +3,7 @@ require 'spec_helper'
 describe 'questions' do
   before :each do
     @metadatum = Metadatum.with(session: 'openstates')
-      .create(abbreviation: 'vt', chambers: {} )
+      .create(name: 'Vermont', abbreviation: 'vt', chambers: {} )
   end
 
   describe '#index' do
@@ -42,6 +42,26 @@ describe 'questions' do
         end
       end
 
+      it 'can fill out and submit complete form', js: true, vcr: true do
+        valid_person
+        visit '/vt/questions/new'
+
+        choose_person
+        click_next_button
+        fields_should_be_valid
+
+        add_valid_content
+        click_next_button
+        fields_should_be_valid
+
+        add_valid_user
+        click_next_button
+        fields_should_be_valid
+
+        click_button 'Publish'
+        page.body.should have_content 'Support this question'
+      end
+
       context 'when choosing a recipient' do
         before :each do
           visit '/vt/questions/new'
@@ -56,23 +76,68 @@ describe 'questions' do
           sleep 2
           expect(find(step_id).visible?).to be_true
 
-          page.should have_selector '.field_with_errors label.message'
+          fields_should_be_invalid
         end
 
-        it 'can get feedback based on person chosen address locator', js: true do
+        it 'can choose a person from address locator', js: true, vcr: true do
           valid_person
+          choose_person
+          selector = "#question_person_id_#{@person.id}"
+          expect(find(selector).value).to eq @person.id
+          expect(find(selector).checked?).to be_true
+        end
 
-          find('a.address_lookup').trigger('click')
-
-          fill_in 'question_user_attributes_street_address', with: '2227 Paine Turnpike'
-          fill_in 'question_user_attributes_locality', with: 'Berlin'
-          fill_in 'question_user_attributes_postal_code', with: '05602'
-
-          find('#question_user_attributes_postal_code').trigger('blur')
-
+        it 'can get feedback based on person chosen address locator', js: true, vcr: true do
+          valid_person
+          fill_out_address
           click_next_button
 
-          page.should have_selector '.field_with_errors label.message'
+          fields_should_be_invalid
+        end
+      end
+
+      def choose_person
+        fill_out_address
+        page.execute_script "jQuery('#question_person_id_#{@person.id}').parents('li').trigger('click')"
+      end
+
+      def fill_out_address(with_lookup = true)
+        find('a.address_lookup').trigger('click') if with_lookup
+
+        fill_in 'question_user_attributes_street_address', with: '2227 Paine Turnpike'
+        fill_in 'question_user_attributes_locality', with: 'Berlin'
+        fill_in 'question_user_attributes_postal_code', with: '05602'
+
+        sleep 2 # allow for fade in
+      end
+
+      context 'when a recipient is already specified' do
+        before :each do
+          valid_person
+          visit "/vt/questions/new?person=#{@person.id}"
+        end
+
+        it 'has person_id on all parts of the form', js: true do
+          expect(find('#question_person_id').value).to eq @person.id
+
+          click_next_button 2
+
+          expect(find('#question_person_id').value).to eq @person.id
+        end
+
+        # vcr is necessary to recreate when this test would fail
+        it 'can fill out and submit complete form', js: true, vcr: true do
+          add_valid_content
+          click_next_button
+          fields_should_be_valid
+
+          add_valid_user
+          fill_out_address(false)
+          click_next_button
+          fields_should_be_valid
+
+          click_button 'Publish'
+          page.body.should have_content 'Support this question'
         end
       end
 
@@ -93,7 +158,7 @@ describe 'questions' do
 
           expect(find(step_id).visible?).to be_true
 
-          page.should have_selector '.field_with_errors label.message'
+          fields_should_be_invalid
         end
 
         it 'can get feedback based on input', js: true do
@@ -111,7 +176,7 @@ describe 'questions' do
           find('#question_title').trigger('blur')
           find('#question_body').trigger('blur')
 
-          page.should_not have_selector '.field_with_errors label.message'
+          fields_should_be_valid
         end
       end
 
@@ -123,14 +188,14 @@ describe 'questions' do
           add_valid_content
         end
 
-        it 'cannot progress to next step when invalid input', js: true, focus: true do
+        it 'cannot progress to next step when invalid input', js: true do
           step_id = '#sign-up-step'
 
           click_next_button 3, 3
 
           expect(find(step_id).visible?).to be_true
 
-          page.should have_selector '.field_with_errors label.message'
+          fields_should_be_invalid
         end
 
         it 'can get feedback based on sign up input', js: true do
@@ -143,7 +208,7 @@ describe 'questions' do
 
           click_next_button
 
-          page.should have_selector '.field_with_errors label.message'
+          fields_should_be_invalid
         end
       end
 
@@ -185,9 +250,6 @@ describe 'questions' do
           add_valid_user
         end
       end
-
-      it 'can choose a person'
-      it 'can fill out form'
     end
   end
 
@@ -201,6 +263,9 @@ describe 'questions' do
     script = "jQuery('#question_title').val('test'); "
     script +=  "jQuery('#question_body').val('#{long_body}'); "
     page.execute_script script
+  end
+
+  def fill_out_valid_content
   end
 
   def add_valid_address
@@ -233,5 +298,13 @@ describe 'questions' do
       find('#next-button').trigger('click')
       sleep sleepy_time
     end
+  end
+
+  def fields_should_be_invalid
+    page.body.should have_selector '.field_with_errors label.message'
+  end
+
+  def fields_should_be_valid
+    page.body.should_not have_selector '.field_with_errors label.message'
   end
 end
