@@ -49,10 +49,12 @@
     function newsSignUpHeight(){
       var wheight = window.innerHeight;
       elem = document.getElementById('news_signup');
-      var newPad = ((wheight - elem.offsetHeight)/2) - 50;
-      elem.style.paddingTop = newPad + 'px';
-      elem.style.paddingBottom = newPad + 'px';
-      document.getElementById('content_body').style.opacity = 0;
+      if (elem != null) {
+        var newPad = ((wheight - elem.offsetHeight)/2) - 50;
+        elem.style.paddingTop = newPad + 'px';
+        elem.style.paddingBottom = newPad + 'px';
+        document.getElementById('content_body').style.opacity = 0;
+      }
     }
     if (document.body.clientWidth > 420){
       newsSignUpHeight();
