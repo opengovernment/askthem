@@ -2,24 +2,57 @@
   <header>
     <h1>Sign up</h1>
   </header>
-
   <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: {id: 'new_registration'}) do |f| %>
     <%= devise_error_messages! %>
     <% if resource.remote_image_url %>
       <%= f.input :remote_image_url, as: :hidden %>
     <% end %>
-    <%= f.input :image, as: :file %>
-    <%= f.input :image_cache, as: :hidden %>
-    <%= f.input :given_name %>
-    <%= f.input :family_name %>
-    <%= f.input :email %>
-    <%= f.input :street_address %>
-    <%= f.input :locality %>
-    <%= f.input :region, collection: OpenGovernment::STATES %>
-    <%= f.input :postal_code %>
-    <%= f.input :password %>
-    <%= f.button :submit, 'Sign up' %>
+    <div class="data_collection_form">
+      <fieldset>
+        <div class="pill_wrap">
+          <%= f.input :given_name %>
+        </div>
+        <div class="pill_wrap">
+          <%= f.input :family_name %>
+        </div>
+        <div class="pill_wrap">
+          <%= f.input :email %>
+          <span class="tip private">
+            Your e-mail will remain private
+          </span>
+        </div>
+        <div class="pill_wrap">
+          <%= f.input :street_address %>
+          <span class="tip private">
+            Your address will remain private as well!
+          </span>
+        </div>
+        <div class="pill_wrap">
+          <%= f.input :locality %>
+        </div>
+        <div class="pill_wrap">
+          <label for="question_user_attributes_region" class="lesser">State</label>
+          <div class="input select sculpt icon-angle-down">
+            <%= f.select :region, options_for_select(OpenGovernment::STATES, @state_code), placeholder: 'Select your state' %>
+          </div>
+        </div>
+        <div class="pill_wrap">
+          <%= f.input :postal_code %>
+        </div>
+        <div class="pill_wrap">
+          <%= f.input :password %>
+        </div>
+        <div class="pill_wrap">
+          <%= f.input :image, as: :file %>
+          <%= f.input :image_cache, as: :hidden %>
+        </div>
+      </fieldset>
+    </div>
+    <div class="controls">
+      <%= f.button :submit, 'Sign up', :class => 'cta_pill' %>
+      
+      <%= render 'devise/shared/links' %>
+    </div>
   <% end %>
 
-  <%= render 'devise/shared/links' %>
 </section>

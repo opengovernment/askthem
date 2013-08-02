@@ -10,13 +10,16 @@ body.data_collection{
   a.logo{
     margin-top:42px;
   }
-  section.question article h1{
+  header h1{
     color:#32515a;
     @include RobotoBlack();
     font-size:1.875em;
     line-height: 1.6em;
-    margin:72px 0 0 0;
+    margin:72px 0 36px 0;
     padding:0;
+  }
+  section.question.ask h1{
+    margin-bottom:0;
   }
   div.content_body{
     background: none;
@@ -57,5 +60,9 @@ body.data_collection{
       display: block;
       margin-left: 0;
     }
+  }
+  div.controls .cta_pill{
+    min-width:160px;
+    width:auto;
   }
 }

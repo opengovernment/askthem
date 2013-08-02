@@ -3,6 +3,7 @@ OpenGovernment::Application.routes.draw do
     registrations: 'registrations',
     confirmations: 'confirmations',
     omniauth_callbacks: 'omniauth_callbacks',
+    sessions: 'sessions'
   }
 
   root to: 'pages#index'
