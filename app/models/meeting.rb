@@ -3,21 +3,14 @@ class Meeting
 
   belongs_to :metadatum, foreign_key: 'state'
 
+  embeds_one :agenda
+  embeds_one :minutes
+
   field :meeting_date, type: String
   field :name, type: String
   field :municipality, type: String
 
   validates_presence_of :meeting_date, :name, :municipality
-
-  # Return the agenda for this meeting
-  def agenda
-    MeetingAgenda.where(meeting_id: id).first
-  end
-
-  # Return the minutes for this meeting
-  def minutes
-    MeetingMinutes.where(meeting_id: id).first
-  end
 
   def self.load_from_apis_for_jurisdiction(municipality = nil)
     clear_existing_meetings(municipality)
@@ -54,32 +47,21 @@ class Meeting
       meeting_time = Time.parse(meeting_data['Meeting Time']).strftime('%l:%M %p EST')
       meeting_datetime = DateTime.parse("#{meeting_date} #{meeting_time}")
 
-      meeting = Meeting.create(
-        meeting_date: meeting_datetime,
-        name: meeting_data['Name'],
-        location: meeting_data['Meeting Location'],
-        municipality: meeting_data['Municipality']
-      )
+      meeting = Meeting.new(meeting_date: meeting_datetime,
+                            name: meeting_data['Name'],
+                            location: meeting_data['Meeting Location'],
+                            municipality: meeting_data['Municipality'])
 
       if (meeting_data['Agenda']['url'])
-        agenda = MeetingAgenda.create(
-          meeting_id: meeting.id,
-          url: meeting_data['Agenda']['url'],
-          fulltext: meeting_data['Agenda']['fulltext']
-        )
-        # puts "saved agenda"
+        meeting.agenda = Agenda.new(url: meeting_data['Agenda']['url'],
+                                    fulltext: meeting_data['Agenda']['fulltext'])
       end
 
       if (meeting_data['Minutes']['url'])
-        minutes = MeetingMinutes.create(
-          meeting_id: meeting.id,
-          url: meeting_data['Minutes']['url'],
-          fulltext: meeting_data['Minutes']['fulltext']
-        )
-        # puts "saved minutes"
+        meeting.minutes = Minutes.new(url: meeting_data['Minutes']['url'],
+                                      fulltext: meeting_data['Minutes']['fulltext'])
       end
-
-      # puts "saved #{meeting.meeting_date} - #{meeting.name}"
+      meeting.save!
     end
 
   end
