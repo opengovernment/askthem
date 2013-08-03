@@ -54,12 +54,12 @@ class Meeting
 
       if (meeting_data['Agenda']['url'])
         meeting.agenda = Agenda.new(url: meeting_data['Agenda']['url'],
-                                    fulltext: meeting_data['Agenda']['fulltext'])
+                                    full_text: meeting_data['Agenda']['fulltext'])
       end
 
       if (meeting_data['Minutes']['url'])
         meeting.minutes = Minutes.new(url: meeting_data['Minutes']['url'],
-                                      fulltext: meeting_data['Minutes']['fulltext'])
+                                      full_text: meeting_data['Minutes']['fulltext'])
       end
       meeting.save!
     end

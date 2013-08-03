@@ -4,7 +4,7 @@ class Minutes
   embedded_in :meeting
 
   field :url, type: String
-  field :fulltext, type: String
+  field :full_text, type: String
 
-  validates_presence_of :url, :fulltext
+  validates_presence_of :url, :full_text
 end
