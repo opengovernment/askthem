@@ -1,4 +1,8 @@
-<ol class="people-list">
-  <%# spell out arguments for subclasses of Person sake -%>
-  <%= render partial: 'people/person', collection: @upper %>
-</ol>
+<div id="page">
+  <ol class="people-list">
+    <%# spell out arguments for subclasses of Person sake -%>
+    <%= render partial: 'people/person', collection: @upper %>
+  </ol>
+
+  <%= paginate @upper, outer_window: 1, params: {format: nil}, replace: '#page', scroll: '.nav_extras' %>
+</div>
