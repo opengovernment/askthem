@@ -23,10 +23,11 @@ class Meeting
     clear_existing_meetings(municipality)
 
     meetings = if municipality
-                 scraped_local_gov[:council_agendas].find(municipality: municipality)
+                 scraped_local_gov[:council_agendas].find('Municipality' => municipality)
                else
                  scraped_local_gov[:council_agendas].find
                end
+
     # Example agenda object returned from the scraper
     # {
     #   u'Meeting Date': {
@@ -48,7 +49,6 @@ class Meeting
     # }
 
     meetings.each do |meeting_data|
-
       # stuff date and time in to same field
       meeting_date = meeting_data['Meeting Date']['label'].strftime('%Y-%m-%d')
       meeting_time = Time.parse(meeting_data['Meeting Time']).strftime('%l:%M %p EST')
@@ -86,7 +86,7 @@ class Meeting
 
   private
   def self.scraped_local_gov
-    @scraped_local_gov ||= Moped::Session.new(['127.0.0.1:27017']).use('scraped_local_gov')
+    @scraped_local_gov ||= Mongoid.session(:scraped_local_gov)
   end
 
   def self.clear_existing_meetings(municipality = nil)
