@@ -33,6 +33,13 @@ development:
         - localhost:27017
       options:
         safe: true
+
+    scraped_local_gov:
+      database: scraped_local_gov
+      hosts:
+        - localhost:27017
+      options:
+        safe: true
   # Configure Mongoid specific options. (optional)
   options:
     # Configuration for whether or not to allow access to fields that do
