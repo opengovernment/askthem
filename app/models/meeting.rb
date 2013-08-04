@@ -8,15 +8,14 @@ class Meeting
 
   field :date_and_time, type: ActiveSupport::TimeWithZone
   field :name, type: String
-  field :municipality, type: String
 
-  validates_presence_of :date_and_time, :name, :municipality
+  validates_presence_of :date_and_time, :name, :state
 
-  def self.load_from_apis_for_jurisdiction(municipality = nil)
-    clear_existing_meetings(municipality)
+  def self.load_from_apis_for_jurisdiction(jurisdiction = nil)
+    clear_existing_meetings(jurisdiction)
 
-    meetings = if municipality
-                 scraped_local_gov[:council_agendas].find('Municipality' => municipality)
+    meetings = if jurisdiction
+                 scraped_local_gov[:council_agendas].find('Municipality' => jurisdiction)
                else
                  scraped_local_gov[:council_agendas].find
                end
@@ -51,7 +50,8 @@ class Meeting
       meeting = Meeting.new(date_and_time: date_and_time,
                             name: meeting_data['Name'],
                             location: meeting_data['Meeting Location'],
-                            municipality: meeting_data['Municipality'])
+                            # state == metadatum == jurisdiction
+                            state: meeting_data['Municipality'])
 
       if (meeting_data['Agenda']['url'])
         meeting.agenda = Agenda.new(url: meeting_data['Agenda']['url'],
@@ -72,9 +72,9 @@ class Meeting
     @scraped_local_gov ||= Mongoid.session(:scraped_local_gov)
   end
 
-  def self.clear_existing_meetings(municipality = nil)
-    if municipality
-      Meeting.delete_all(municipality: municipality)
+  def self.clear_existing_meetings(jurisdiction = nil)
+    if jurisdiction
+      Meeting.delete_all(state: jurisdiction)
     else
       Meeting.delete_all
     end

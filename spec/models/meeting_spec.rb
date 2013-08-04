@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Meeting do
-  %w(date_and_time name municipality).each do |attribute|
+  %w(date_and_time name state).each do |attribute|
     it {should validate_presence_of attribute}
   end
 
