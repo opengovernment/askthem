@@ -9,13 +9,18 @@ development:
       # Provides the hosts the default session can connect to. Must be an array
       # of host:port pairs. (required)
       hosts:
-        # - dev.mongo.opengovernment.org
         - localhost:27017
       options:
         # Change whether the session persists in safe mode by default.
         # (default: false)
         safe: true
 
+    scraped_local_gov:
+      database: scraped_local_gov
+      hosts:
+        - localhost:27017
+      options:
+        safe: true
   # Configure Mongoid specific options. (optional)
   options:
     # Configuration for whether or not to allow access to fields that do
@@ -67,7 +72,14 @@ test:
         # low amounts for fast failures.
         max_retries: 1
         retry_interval: 0
+    scraped_local_gov:
+      database: scraped_local_gov_for_open_government_test
+      hosts:
+        - localhost:27017
+      options:
+        safe: true
 <% default = URI.parse(ENV['MONGO_URL'] || 'mongodb://127.0.0.1:27017/ask_them') %> # https://gist.github.com/2588954
+<% scraped_local_gov = URI.parse(ENV['SCRAPED_LOCAL_GOV_URL'] || 'mongodb://127.0.0.1:27017/scraped_local_gov') %>
 production:
   sessions:
     default:
@@ -80,6 +92,18 @@ production:
 <% end %>
       hosts:
       - <%= default.host %>:<%= default.port %>
+      options:
+        safe: true
+    scraped_local_gov:
+      database: <%= scraped_local_gov.path.sub '/', '' %>
+<% if scraped_local_gov.user %>
+      username: <%= scraped_local_gov.user %>
+<% end %>
+<% if scraped_local_gov.password %>
+      password: <%= scraped_local_gov.password %>
+<% end %>
+      hosts:
+        - <%= scraped_local_gov.host %>:<%= scraped_local_gov.port %>
       options:
         safe: true
   options:

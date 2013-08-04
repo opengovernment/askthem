@@ -12,6 +12,12 @@ Install or update dependencies:
 
     rvm 1.9.3 # i.e. switch to ruby 1.9.3, your steps may vary
     bundle
+    libxml2-dev
+    libxslt-dev
+    imagemagick 
+    libmagickwand-dev
+    mongodb
+    nodejs
 
 Start the server:
 
