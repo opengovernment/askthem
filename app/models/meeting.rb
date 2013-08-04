@@ -6,11 +6,11 @@ class Meeting
   embeds_one :agenda
   embeds_one :minutes
 
-  field :meeting_date, type: String
+  field :date_and_time, type: ActiveSupport::TimeWithZone
   field :name, type: String
   field :municipality, type: String
 
-  validates_presence_of :meeting_date, :name, :municipality
+  validates_presence_of :date_and_time, :name, :municipality
 
   def self.load_from_apis_for_jurisdiction(municipality = nil)
     clear_existing_meetings(municipality)
@@ -44,10 +44,11 @@ class Meeting
     meetings.each do |meeting_data|
       # stuff date and time in to same field
       meeting_date = meeting_data['Meeting Date']['label'].strftime('%Y-%m-%d')
-      meeting_time = Time.parse(meeting_data['Meeting Time']).strftime('%l:%M %p EST')
-      meeting_datetime = DateTime.parse("#{meeting_date} #{meeting_time}")
+      # @todo - don't assume EST, look up zone for jurisdiction
+      meeting_time = Time.zone.parse(meeting_data['Meeting Time']).strftime('%l:%M %p EST')
+      date_and_time = Time.zone.parse("#{meeting_date} #{meeting_time}")
 
-      meeting = Meeting.new(meeting_date: meeting_datetime,
+      meeting = Meeting.new(date_and_time: date_and_time,
                             name: meeting_data['Name'],
                             location: meeting_data['Meeting Location'],
                             municipality: meeting_data['Municipality'])
