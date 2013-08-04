@@ -33,6 +33,13 @@ development:
         - localhost:27017
       options:
         safe: true
+
+    scraped_local_gov:
+      database: scraped_local_gov
+      hosts:
+        - localhost:27017
+      options:
+        safe: true
   # Configure Mongoid specific options. (optional)
   options:
     # Configuration for whether or not to allow access to fields that do
@@ -92,8 +99,15 @@ test:
         consistency: :strong
         max_retries: 1
         retry_interval: 0
+    scraped_local_gov:
+      database: scraped_local_gov_for_open_government_test
+      hosts:
+        - localhost:27017
+      options:
+        safe: true
 <% default = URI.parse(ENV['MONGOHQ_URL'] || ENV['MONGOLAB_URI'] || 'mongodb://127.0.0.1:27017/opengovernment_local') %> # https://gist.github.com/2588954
 <% openstates = URI.parse(ENV['MONGO_URL'] || 'mongodb://127.0.0.1:27017/fiftystates') %> # https://gist.github.com/2588954
+<% scraped_local_gov = URI.parse(ENV['SCRAPED_LOCAL_GOV_URL'] || 'mongodb://127.0.0.1:27017/scraped_local_gov') %>
 production:
   sessions:
     default:
@@ -118,6 +132,18 @@ production:
 <% end %>
       hosts:
       - <%= openstates.host %>:<%= openstates.port %>
+      options:
+        safe: true
+    scraped_local_gov:
+      database: <%= scraped_local_gov.path.sub '/', '' %>
+<% if scraped_local_gov.user %>
+      username: <%= scraped_local_gov.user %>
+<% end %>
+<% if scraped_local_gov.password %>
+      password: <%= scraped_local_gov.password %>
+<% end %>
+      hosts:
+        - <%= scraped_local_gov.host %>:<%= scraped_local_gov.port %>
       options:
         safe: true
   options:
