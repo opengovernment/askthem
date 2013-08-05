@@ -12,10 +12,17 @@ Install or update dependencies:
 
     rvm 1.9.3
     bundle
+    libxml2-dev
+    libxslt-dev
+    imagemagick 
+    libmagickwand-dev
+    mongodb
+    nodejs
 
 Start the server:
 
     rails server
+
 
 ## Pulling Data
 
