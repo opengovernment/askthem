@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <h1>Thank you for posting your question to AskThem, <%= @user.given_name %></h1>
+
+    <dl>
+      <dt>Title</dt>
+      <dd><%= @question.title %></dd>
+
+      <dt>Topic</dt>
+      <dd><%= @question.subject %></dd>
+
+      <dt>To</dt>
+      <dd>
+        <strong><%= link_to @question.person.name, person_url(@question.state, @question.person.id) %></strong>
+        <span>(<%= person_attributes(@question.person) %>)</span>
+      </dd>
+
+      <dt>Body</dt>
+      <dd><%= @question.body %></dd>
+    </dl>
+
+    <p>
+      <a href="<%= question_url(@question.state, @question.id) %>">Here's a permalink to your question</a>, which you can share over email and social media.
+    </p>
+    <p>
+      Remember to circulate your question to reach the signature threshold, and we'll help you push for a public response.
+    </p>
+    <p>
+      For more info about how to gather support for your question, <a href="#">please visit our FAQ</a>.
+    </p>
+    <p>
+        Thank you,
+        The AskThem Team
+    </p>
+  </body>
+</html>
