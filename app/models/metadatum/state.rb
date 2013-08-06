@@ -4,6 +4,15 @@
 class Metadatum::State
   OPENSTATES_SESSION = 'openstates'
 
+  def self.api_key
+    ENV['SUNLIGHT_API_KEY']
+  end
+
+  # http://sunlightlabs.github.io/openstates-api/metadata.html
+  def self.api_base_url
+    'http://openstates.org/api/v1/metadata/'
+  end
+
   def self.create_states_if_none
     has_states = Metadatum.with(session: OPENSTATES_SESSION)
       .nin(abbreviation: Metadatum::Us::ABBREVIATION)
@@ -22,15 +31,6 @@ class Metadatum::State
     end
   end
 
-  def self.api_key
-    ENV['SUNLIGHT_API_KEY']
-  end
-
-  # http://sunlightlabs.github.io/openstates-api/metadata.html
-  def self.api_base_url
-    'http://openstates.org/api/v1/metadata/'
-  end
-
   def self.api_fields
     %w(abbreviation capital_timezone chambers feature_flags latest_csv latest_csv_url latest_json_date latest_json_url latest_update legislature_name legislature_url name session_details terms)
   end
@@ -44,5 +44,5 @@ class Metadatum::State
     RestClient.get api_base_url, params: params
   end
 
-  private_class_method :results_from_api, :api_fields, :api_base_url, :api_key
+  private_class_method :results_from_api, :api_fields
 end
