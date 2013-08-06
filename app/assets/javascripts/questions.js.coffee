@@ -61,7 +61,8 @@ jQuery ($) ->
         $('div.address_lookup').show()
         $('div.address_lookup input[type=text]:eq(0)').focus()
         reloadValidationForForm()
-
+        # this will only show people if zip is complete
+        showPeopleForAddress($("#question_user_attributes_postal_code"))
 
     if !$(this).hasClass('active')
       $('span.toggle a.active').removeClass('active icon-ok')
@@ -309,3 +310,6 @@ jQuery ($) ->
         fieldErrorWrapper.replaceWith selectPersonList
 
   hideLaterSteps()
+
+  # handle case that at page load, postal code is already set for signed in user
+  showPeopleForAddress($("#question_user_attributes_postal_code"))

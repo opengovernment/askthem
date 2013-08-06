@@ -60,7 +60,10 @@
         <div class="progress_filler" style="width: 0%;"></div>
       </div>
       <span class="question_progress_count">
-        <strong>0</strong> out of <strong>500</strong> Signatures
+        <strong><span class="question-signatures"><%= @question.signatures.count -%></span></strong>
+        out of
+        <strong><span class="question-signature-threshold"><%= @question.person.signature_threshold -%></span></strong>
+        Signatures
       </span>
     </div>
 
