@@ -9,12 +9,16 @@ class PersonDetail
 
   # The person's jurisdiction.
   field :state, type: String
-  # The person.
   field :person_id, type: String
-  # The person's extended biography.
   field :biography, type: String
   # The person's candidateId from Project VoteSmart.
   field :votesmart_id, type: String
+  # how many signatures does a question need to reach before we deliver it?
+  field :signature_threshold, type: Integer, default: -> do
+    for_person = nil
+    for_person = person if person_id && Person.connected_to(state).where(id: person_id).count
+    DefaultSignatureThreshold.new(for_person).value
+  end
 
   index(state: 1)
   index(person_id: 1)

@@ -5,6 +5,30 @@ describe PersonDetail do
     it {should validate_presence_of attribute}
   end
 
+  describe '#signature_threshold' do
+    context 'person is set' do
+      before :each do
+        @metadatum = Metadatum.create(abbreviation: 'pa-philadelphia')
+        @person = Person.create(state: 'pa-philadelphia')
+        @person_detail = PersonDetail.create(person: @person)
+      end
+
+      it 'returns default based on type of person' do
+        expect(@person_detail.signature_threshold).to eq 25
+      end
+    end
+
+    context 'person is not set' do
+      before :each do
+        @person_detail = PersonDetail.new
+      end
+
+      it 'returns hardcoded default from DefaultSignatureThreshold' do
+        expect(@person_detail.signature_threshold).to eq 500
+      end
+    end
+  end
+
   context 'when in relation' do
     before :each do
       @metadatum = Metadatum.create(abbreviation: 'zz')

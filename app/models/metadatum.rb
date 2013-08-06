@@ -46,7 +46,9 @@ class Metadatum
   # @param [String] chamber "lower" or "upper"
   # @return [String] the title for members of the chamber
   def chamber_title(chamber)
-    read_attribute(:chambers)[chamber].try{|chamber| chamber['title']}
+    unless chamber.nil?
+      read_attribute(:chambers)[chamber].try{|chamber| chamber['title']}
+    end
   end
 
   # Returns the current session's identifier.

@@ -47,6 +47,7 @@ class QuestionsController < ApplicationController
     # when user is invalid, thus we split it up
     if @question.valid? && (user_signed_in? || @user.valid?)
       @question.save
+      QuestionMailer.question_posted(@user, @question).deliver
       redirect_to question_path(@state_code, @question)
     else
       set_up_steps

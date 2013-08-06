@@ -1,6 +1,12 @@
 require 'spec_helper'
+require File.expand_path("../requests_helper.rb", __FILE__)
 
 describe 'questions' do
+  let(:street_address) { '2227 Paine Turnpike' }
+  let(:locality) { 'Berlin' }
+  let(:region) { 'vt' }
+  let(:postal_code) { '05602' }
+
   before :each do
     @metadatum = Metadatum.create(name: 'Vermont',
                                   abbreviation: 'vt',
@@ -34,15 +40,41 @@ describe 'questions' do
   end
 
   describe '#new' do
-    context 'as a non-registered user' do
-      let(:long_body) { 'Something at least sixty characters long for the body, you know something substantial' }
-      let(:steps) { %w(recipient content sign_up confirm) }
-      let(:step_ids) do
-        steps.inject([]) do |result, step|
-          result << '#' + "#{step.gsub('_', '-')}-step"
-        end
+    let(:long_body) { 'Something at least sixty characters long for the body, you know something substantial' }
+    let(:steps) { %w(recipient content sign_up confirm) }
+    let(:step_ids) do
+      steps.inject([]) do |result, step|
+        result << '#' + "#{step.gsub('_', '-')}-step"
+      end
+    end
+
+    context 'as signed in user' do
+      before :each do
+        @user = FactoryGirl.create(:user, street_address: street_address,
+                                   locality: locality, region: region,
+                                   postal_code: postal_code)
       end
 
+      it 'can fill out and submit complete form', js: true, vcr: true do
+        valid_person
+        as_user(@user) do
+          visit '/vt/questions/new'
+
+          choose_person false
+          click_next_button
+          fields_should_be_valid
+
+          add_valid_content
+          click_next_button
+          fields_should_be_valid
+
+          click_button 'Publish'
+          page.body.should have_content 'Support this question'
+        end
+      end
+    end
+
+    context 'as a non-registered user' do
       it 'can fill out and submit complete form', js: true, vcr: true do
         valid_person
         visit '/vt/questions/new'
@@ -95,21 +127,6 @@ describe 'questions' do
 
           fields_should_be_invalid
         end
-      end
-
-      def choose_person
-        fill_out_address
-        page.execute_script "jQuery('#question_person_id_#{@person.id}').parents('li').trigger('click')"
-      end
-
-      def fill_out_address(with_lookup = true)
-        find('a.address_lookup').trigger('click') if with_lookup
-
-        fill_in 'question_user_attributes_street_address', with: '2227 Paine Turnpike'
-        fill_in 'question_user_attributes_locality', with: 'Berlin'
-        fill_in 'question_user_attributes_postal_code', with: '05602'
-
-        sleep 2 # allow for fade in
       end
 
       context 'when a recipient is already specified' do
@@ -254,6 +271,44 @@ describe 'questions' do
     end
   end
 
+  describe '#show' do
+    context 'when displaying signature information' do
+      before :each do
+        @question = FactoryGirl.create(:question,
+                                       state: @metadatum.abbreviation,
+                                       person: valid_person)
+        visit "/vt/questions/#{@question.id}"
+      end
+
+      it 'displays number of signatures for question', js: true do
+        pending 'move-to-1-db merged to master'
+        FactoryGirl.create(:signature, question: @question)
+        signatures_on_page = find('span.question-signatures').text.to_i
+        expect(signatures_on_page).to eq @question.signatures.count
+      end
+
+      it 'displays signature threshold number for recipient', js: true do
+        threshold_on_page = find('span.question-signature-threshold').text.to_i
+        expect(threshold_on_page).to eq @person.signature_threshold
+      end
+    end
+  end
+
+  def choose_person(need_to_fill_out_address = true)
+    fill_out_address if need_to_fill_out_address
+    page.execute_script "jQuery('#question_person_id_#{@person.id}').parents('li').trigger('click')"
+  end
+
+  def fill_out_address(with_lookup = true)
+    find('a.address_lookup').trigger('click') if with_lookup
+
+    fill_in 'question_user_attributes_street_address', with: street_address
+    fill_in 'question_user_attributes_locality', with: locality
+    fill_in 'question_user_attributes_postal_code', with: postal_code
+
+    sleep 2 # allow for fade in
+  end
+
   def add_person_id
     person_id_field = "<li><input type=\"radio\" name=\"question[person_id]\" id=\"question_person_id_1\" value=\"1\" checked /></li>"
     script = "jQuery('ol.people-list').last().append('#{person_id_field}'); "
@@ -266,14 +321,11 @@ describe 'questions' do
     page.execute_script script
   end
 
-  def fill_out_valid_content
-  end
-
   def add_valid_address
-    script = "jQuery('#question_user_attributes_street_address').val('2227 Paine Turnpike'); "
-    script +=  "jQuery('#question_user_attributes_locality').val('Berlin'); "
-    script +=  "jQuery('#question_user_attributes_region').val('vt'); "
-    script +=  "jQuery('#question_user_attributes_postal_code').val('05602'); "
+    script = "jQuery('#question_user_attributes_street_address').val('#{street_address}'); "
+    script +=  "jQuery('#question_user_attributes_locality').val('#{locality}'); "
+    script +=  "jQuery('#question_user_attributes_region').val('#{region}'); "
+    script +=  "jQuery('#question_user_attributes_postal_code').val('#{postal_code}'); "
     page.execute_script script
   end
 

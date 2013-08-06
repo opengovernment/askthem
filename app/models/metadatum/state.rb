@@ -41,5 +41,5 @@ class Metadatum::State
     RestClient.get api_base_url, params: params
   end
 
-  private_class_method :results_from_api, :api_fields, :api_base_url
+  private_class_method :results_from_api, :api_fields
 end

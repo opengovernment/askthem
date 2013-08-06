@@ -27,6 +27,8 @@ class Person
 
   scope :active, where(active: true).asc(:chamber, :family_name) # no index includes `last_name`
 
+  delegate :signature_threshold, :biography, :links, to: :person_detail
+
   def self.only_type(type)
     if type == 'Person'
       # handle legacy where api sets _type to 'person'
