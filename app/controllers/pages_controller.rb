@@ -86,12 +86,12 @@ class PagesController < ApplicationController
     # otherwise the first query to evaluate will clear the persistence options
     # of the unevaluated query.
     @lower = Person.in(@jurisdiction.abbreviation).active.where(chamber: 'lower')
-      .only_type(type)
+      .only_type(type).page(params[:page])
     @lower = @lower.includes(:questions) if tab == 'lower'
     @lower_parties = @lower.group_by { |person| person['party'] }
 
     @upper = Person.in(@jurisdiction.abbreviation).active.where(chamber: 'upper')
-      .only_type(type)
+      .only_type(type).page(params[:page])
     @upper = @upper.includes(:questions) if tab == 'upper'
     @upper_parties = @upper.group_by { |person| person['party'] }
 
