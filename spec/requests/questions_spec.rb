@@ -54,7 +54,7 @@ describe 'questions' do
                                    postal_code: postal_code)
       end
 
-      it 'can fill out and submit complete form', js: true, vcr: true, focus: true do
+      it 'can fill out and submit complete form', js: true, vcr: true do
         valid_person
         as_user(@user) do
           visit '/vt/questions/new'
@@ -266,6 +266,29 @@ describe 'questions' do
           add_valid_content
           add_valid_user
         end
+      end
+    end
+  end
+
+  describe '#show' do
+    context 'when displaying signature information' do
+      before :each do
+        @question = FactoryGirl.create(:question,
+                                       state: @metadatum.abbreviation,
+                                       person: valid_person)
+        visit "/vt/questions/#{@question.id}"
+      end
+
+      it 'displays number of signatures for question', js: true do
+        pending 'move-to-1-db merged to master'
+        FactoryGirl.create(:signature, question: @question)
+        signatures_on_page = find('span.question-signatures').text.to_i
+        expect(signatures_on_page).to eq @question.signatures.count
+      end
+
+      it 'displays signature threshold number for recipient', js: true do
+        threshold_on_page = find('span.question-signature-threshold').text.to_i
+        expect(threshold_on_page).to eq @person.signature_threshold
       end
     end
   end
