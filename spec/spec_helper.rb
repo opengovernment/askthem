@@ -4,17 +4,17 @@ Coveralls.wear!('rails')
 
 require 'capybara/rspec'
 require 'capybara/poltergeist'
-# Capybara.javascript_driver = :poltergeist
+Capybara.javascript_driver = :poltergeist
 # WARN: adds dependency on phantomjs 1.8.1 or higher
 
 # handy for spec/requests when you want to see state of html
 # at a given moment
 # comment out javascript_driver above, uncomment this,
 # then use page.driver.debug where you want to trigger it
-Capybara.register_driver :poltergeist_debug do |app|
-  Capybara::Poltergeist::Driver.new(app, inspector: true)
-end
-Capybara.javascript_driver = :poltergeist_debug
+# Capybara.register_driver :poltergeist_debug do |app|
+#   Capybara::Poltergeist::Driver.new(app, inspector: true)
+# end
+# Capybara.javascript_driver = :poltergeist_debug
 
 ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
