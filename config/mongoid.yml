@@ -5,7 +5,7 @@ development:
     default:
       # Defines the name of the default database that Mongoid can connect to.
       # (required).
-      database: ask_them_development
+      database: askthem_development
       # Provides the hosts the default session can connect to. Must be an array
       # of host:port pairs. (required)
       hosts:
@@ -63,7 +63,7 @@ development:
 test:
   sessions:
     default:
-      database: ask_them_test
+      database: askthem_test
       hosts:
         - localhost:27017
       options:
@@ -78,7 +78,7 @@ test:
         - localhost:27017
       options:
         safe: true
-<% default = URI.parse(ENV['MONGO_URL'] || 'mongodb://127.0.0.1:27017/ask_them') %> # https://gist.github.com/2588954
+<% default = URI.parse(ENV['MONGO_URL'] || 'mongodb://127.0.0.1:27017/askthem') %> # https://gist.github.com/2588954
 <% scraped_local_gov = URI.parse(ENV['SCRAPED_LOCAL_GOV_URL'] || 'mongodb://127.0.0.1:27017/scraped_local_gov') %>
 production:
   sessions:
