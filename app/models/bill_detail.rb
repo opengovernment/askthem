@@ -1,7 +1,6 @@
 # Exists only because we blow away the `bills` collection regularly.
 class BillDetail
   include Mongoid::Document
-  store_in session: 'default' # @see https://github.com/mongoid/mongoid/pull/2909
 
   # The bill's jurisdiction.
   field :state, type: String
@@ -21,11 +20,15 @@ class BillDetail
     Metadatum.find_by_abbreviation(state)
   end
 
+  # @todo delete if unnecessary with only 1 db
+  # i.e. does belongs_to now work
   # @return [Bill] the bill
   def bill
-    Bill.use(state).find(bill_id)
+    Bill.find(bill_id)
   end
 
+  # @todo delete if unnecessary with only 1 db
+  # i.e. does belongs_to now work (with delegate state to bill)
   # @param [Bill] bill a bill
   def bill=(bill)
     if bill

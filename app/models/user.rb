@@ -1,6 +1,5 @@
 class User
   include Mongoid::Document
-  store_in session: 'default' # @see https://github.com/mongoid/mongoid/pull/2909
 
   # Devise
 

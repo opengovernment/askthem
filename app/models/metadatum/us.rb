@@ -5,7 +5,7 @@ class Metadatum::Us
 
   # return US jurisidiction
   def self.find_or_create!
-    Metadatum.use(ABBREVIATION).where(abbreviation: ABBREVIATION).first ||
+    Metadatum.where(abbreviation: ABBREVIATION).first ||
       create_us_metadatum
   end
 
@@ -17,7 +17,7 @@ class Metadatum::Us
       legislature_name: "United States Congress"
     }
 
-    Metadatum.with(session: 'openstates').create! attributes
+    Metadatum.create! attributes
   end
 
   private_class_method :create_us_metadatum

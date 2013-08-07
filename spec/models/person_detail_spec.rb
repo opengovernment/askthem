@@ -29,23 +29,23 @@ describe PersonDetail do
     end
   end
 
-  context 'with two sessions' do
+  context 'when in relation' do
     before :each do
-      @metadatum = Metadatum.with(session: 'openstates').create(abbreviation: 'zz')
-      @person = Person.with(session: 'openstates').create(state: 'zz')
-      @record = PersonDetail.with(session: 'default').create(person: @person)
+      @metadatum = Metadatum.create(abbreviation: 'zz')
+      @person = Person.create(state: 'zz')
+      @record = PersonDetail.create(person: @person)
     end
 
-    it "should retrieve a metadatum from the OpenStates session for a person detail in the default session" do
-      PersonDetail.with(session: 'default').last.metadatum.should == @metadatum
+    it 'should retrieve a metadatum for a person detail' do
+      PersonDetail.last.metadatum.should == @metadatum
     end
 
-    it "should retrieve a person's details from the default session for a person in the OpenStates session" do
-      Person.with(session: 'openstates').last.person_detail.should == @record
+    it "should retrieve a person's details for a person" do
+      Person.last.person_detail.should == @record
     end
 
-    it "should retrieve a person from the OpenStates session for a person detail in the default session" do
-      PersonDetail.with(session: 'default').last.person.should == @person
+    it 'should retrieve a person for a person detail' do
+      PersonDetail.last.person.should == @person
     end
   end
 end

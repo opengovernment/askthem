@@ -2,9 +2,9 @@ require 'spec_helper'
 
 describe Person do
   before :each do
-    @metadatum = Metadatum.with(session: 'openstates').create(abbreviation: 'vt')
+    @metadatum = Metadatum.create(abbreviation: 'vt')
     # convoluted setting of id necessary, otherwise id gets generated
-    @person = Person.with(session: 'openstates').new(state: 'vt')
+    @person = Person.new(state: 'vt')
     @person.id = 'VTL000008'
     @person.save!
   end
@@ -12,27 +12,27 @@ describe Person do
   describe '.for_location' do
     it 'returns matching people given a location', :vcr do
       address = '2227 Paine Turnpike South, Berlin, VT'
-      expect(Person.with(session: 'openstates').for_location(address).first).to eq @person
+      expect(Person.for_location(address).first).to eq @person
     end
   end
 
   describe '.load_from_api_for_jurisdiction' do
     it 'does not overwrite existing people' do
-      Person.with(session: 'openstates').load_from_apis_for_jurisdiction('vt')
-      expect(Person.in('vt').count).to eq 1
+      Person.load_from_apis_for_jurisdiction('vt')
+      expect(Person.connected_to('vt').count).to eq 1
     end
 
     # @todo fix collection clearing!!!
     it 'loads people into database given a jurisdiction abbreviation', :vcr do
       # HACK, a simple destroys was not working
-      Mongoid::Sessions.with_name('openstates').collections.each do |collection|
+      Mongoid::Sessions.with_name('default').collections.each do |collection|
         collection.drop
       end
-      @metadatum = Metadatum.with(session: 'openstates').create(abbreviation: 'vt')
+      @metadatum = Metadatum.create(abbreviation: 'vt')
       # END HACK
 
-      Person.with(session: 'openstates').load_from_apis_for_jurisdiction('vt')
-      expect(Person.in('vt').count).to eq 180
+      Person.load_from_apis_for_jurisdiction('vt')
+      expect(Person.connected_to('vt').count).to eq 180
     end
   end
 

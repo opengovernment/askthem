@@ -45,7 +45,7 @@ class PeopleController < ApplicationController
   end
 
   def end_of_association_chain
-    Person.in(parent.abbreviation)
+    Person.connected_to(parent.abbreviation)
   end
 
   def collection

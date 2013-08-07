@@ -80,21 +80,21 @@ describe FederalLegislator do
   describe '.for_location' do
     before :each do
       # convoluted setting of id necessary, otherwise id gets generated
-      @federal_legislator = FederalLegislator.with(session: 'openstates').new(state: 'vt')
+      @federal_legislator = FederalLegislator.new(state: 'vt')
       @federal_legislator.id = 'S000033'
       @federal_legislator.save!
     end
 
     it 'returns matching people given a location', :vcr do
       address = '2227 Paine Turnpike South, Berlin, VT'
-      expect(FederalLegislator.with(session: 'openstates').for_location(address).first).to eq @federal_legislator
+      expect(FederalLegislator.for_location(address).first).to eq @federal_legislator
     end
   end
 
   describe '.load_from_api_for_jurisdiction' do
     it 'loads people into database given a state abbreviation', :vcr do
-      FederalLegislator.with(session: 'openstates').load_from_apis_for_jurisdiction('vt')
-      expect(FederalLegislator.with(session: 'openstates').count).to eq 3
+      FederalLegislator.load_from_apis_for_jurisdiction('vt')
+      expect(FederalLegislator.count).to eq 3
     end
   end
 end

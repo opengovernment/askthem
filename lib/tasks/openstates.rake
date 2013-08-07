@@ -1,13 +1,10 @@
 # @see http://sunlightlabs.github.io/openstates-api/
 # @see https://github.com/sunlightlabs/billy/wiki/Differences-between-the-API-and-MongoDB
 namespace :openstates do
-
-  def openstates
+  def with_api_key
     if Metadatum::State.api_key
-      Mongoid.override_session(Metadatum::State::OPENSTATES_SESSION)
       yield
-      Mongoid.override_session(nil)
-    else
+   else
       abort "Metadatum::State.api_key is not set"
     end
   end
@@ -52,7 +49,7 @@ namespace :openstates do
 
   desc 'Update metadata, legislators, committees and bills from OpenStates'
   task update: :environment do
-    openstates do
+    with_api_key do
       # @todo mixed strategy using both JSON downloads and API
     end
   end
@@ -62,7 +59,7 @@ namespace :openstates do
     task download: :environment do
       Mongoid.raise_not_found_error = false
 
-      openstates do
+      with_api_key do
         begin
           metadata = RestClient.get(metadata_url)
         rescue Exception => e
@@ -93,9 +90,9 @@ namespace :openstates do
       require 'find'
       require 'fileutils'
 
-      db = OpenstatesDatabase.new('session' => Metadatum::State::OPENSTATES_SESSION)
+      db = OpenstatesDatabase.new
 
-      openstates do
+      with_api_key do
 
         # Process each zip file we have
         Dir.glob("#{tmp_dir}/*.zip").each do |zip_file|
@@ -168,7 +165,7 @@ namespace :openstates do
   namespace :api do
     desc 'Update metadata from OpenStates API'
     task metadata: :environment do
-      openstates do
+      with_api_key do
         # @todo 1 call
       end
     end
@@ -176,21 +173,21 @@ namespace :openstates do
 
     desc 'Update legislators from OpenStates API'
     task legislators: :environment do
-      openstates do
+      with_api_key do
         # @todo 1 call per state
       end
     end
 
     desc 'Update committees from OpenStates API'
     task committees: :environment do
-      openstates do
+      with_api_key do
         # @todo 1 call
       end
     end
 
     desc 'Update bills from OpenStates API'
     task bills: :environment do
-      openstates do
+      with_api_key do
         # @todo use updated_since
         # complete docs at https://github.com/sunlightlabs/billy/wiki/Differences-between-the-API-and-MongoDB
       end

@@ -3,13 +3,13 @@ require 'spec_helper'
 
 describe InfluenceExplorerPersonDetail do
   before :each do
-    @metadatum = Metadatum.with(session: 'openstates').create(abbreviation: 'vt')
+    @metadatum = Metadatum.create(abbreviation: 'vt')
 
     # convoluted setting of id necessary, otherwise id gets generated
     person_params = { state: 'vt',
       transparencydata_id: 'fd638c2fb8b54d0bbc8b13ec32343930' }
 
-    @person = Person.with(session: 'openstates').new(person_params)
+    @person = Person.new(person_params)
     @person.id = 'VTL000008'
     @person.save!
   end

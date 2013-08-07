@@ -2,13 +2,11 @@ require 'project_vote_smart'
 
 # @see http://sunlightlabs.github.io/congress/
 namespace :congress do
-  def openstates
-    if ENV['SUNLIGHT_API_KEY']
-      Mongoid.override_session('openstates')
+  def with_api_key
+    if FederalLegislator.api_key
       yield
-      Mongoid.override_session(nil)
     else
-      abort "ENV['SUNLIGHT_API_KEY'] is not set"
+      abort "FederalLegislator.api_key is not set"
     end
   end
 
@@ -16,7 +14,7 @@ namespace :congress do
     namespace :download do
       desc 'Download legislators from Congress API'
       task legislators: :environment do
-        openstates do
+        with_api_key do
           # get all possible matching officials (us senate, house) in 2 requests
           # rather than per created legislator
           pvs_api = ProjectVoteSmart.new
@@ -61,8 +59,7 @@ namespace :congress do
 
     def process(result, options = {})
       # check for existing person, skip if there is one, at least for now
-      unless target_class.in('us')
-          .where(id: result[target_class.api_id_field]).count > 0
+      unless target_class.where(id: result[target_class.api_id_field]).count > 0
         target_class.create_from_apis result, options
       end
     end

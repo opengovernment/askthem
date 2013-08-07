@@ -8,8 +8,9 @@ describe 'questions' do
   let(:postal_code) { '05602' }
 
   before :each do
-    @metadatum = Metadatum.with(session: 'openstates')
-      .create(name: 'Vermont', abbreviation: 'vt', chambers: {} )
+    @metadatum = Metadatum.create(name: 'Vermont',
+                                  abbreviation: 'vt',
+                                  chambers: {} )
   end
 
   describe '#index' do
@@ -276,17 +277,17 @@ describe 'questions' do
         @question = FactoryGirl.create(:question,
                                        state: @metadatum.abbreviation,
                                        person: valid_person)
-        visit "/vt/questions/#{@question.id}"
       end
 
       it 'displays number of signatures for question', js: true do
-        pending 'move-to-1-db merged to master'
         FactoryGirl.create(:signature, question: @question)
+        visit "/vt/questions/#{@question.id}"
         signatures_on_page = find('span.question-signatures').text.to_i
         expect(signatures_on_page).to eq @question.signatures.count
       end
 
       it 'displays signature threshold number for recipient', js: true do
+        visit "/vt/questions/#{@question.id}"
         threshold_on_page = find('span.question-signature-threshold').text.to_i
         expect(threshold_on_page).to eq @person.signature_threshold
       end
@@ -338,8 +339,7 @@ describe 'questions' do
 
   # see models/person_spec for another instance
   def valid_person
-    @person ||= Person.with(session: 'openstates')
-      .new(state: @metadatum.abbreviation)
+    @person ||= Person.new(state: @metadatum.abbreviation)
     @person.id = 'VTL000008'
     @person.save!
     @person
