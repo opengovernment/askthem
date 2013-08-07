@@ -8,16 +8,23 @@
 
 ## Getting Started
 
-Install or update dependencies:
+We require these to be installed:
+
+* imagemagick
+* nodejs
+* mongodb # should also be running
+* redis # should also be running
+
+Depending on your OS , you may also need to install these:
+
+* libxml2-dev
+* libxslt-dev
+* libmagickwand-dev
+
+In the application's directory, set up Ruby 1.9.3 and required gems:
 
     rvm 1.9.3 # i.e. switch to ruby 1.9.3, your steps may vary
     bundle
-    libxml2-dev
-    libxslt-dev
-    imagemagick 
-    libmagickwand-dev
-    mongodb
-    nodejs
 
 Start the server:
 
