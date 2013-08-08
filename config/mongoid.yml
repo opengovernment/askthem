@@ -5,7 +5,7 @@ development:
     default:
       # Defines the name of the default database that Mongoid can connect to.
       # (required).
-      database: opengovernment_local
+      database: askthem_development
       # Provides the hosts the default session can connect to. Must be an array
       # of host:port pairs. (required)
       hosts:
@@ -13,25 +13,6 @@ development:
       options:
         # Change whether the session persists in safe mode by default.
         # (default: false)
-        safe: true
-
-        # Change the default consistency model to :eventual or :strong.
-        # :eventual will send reads to secondaries, :strong sends everything
-        # to master. (default: :eventual)
-        # consistency: :eventual
-
-        # How many times Moped should attempt to retry an operation after
-        # failure. (default: 30)
-        # max_retries: 30
-
-        # The time in seconds that Moped should wait before retrying an
-        # operation on failure. (default: 1)
-        # retry_interval: 1
-    openstates:
-      database: fiftystates
-      hosts:
-        - localhost:27017
-      options:
         safe: true
 
     scraped_local_gov:
@@ -82,7 +63,7 @@ development:
 test:
   sessions:
     default:
-      database: open_government_test
+      database: askthem_test
       hosts:
         - localhost:27017
       options:
@@ -91,22 +72,13 @@ test:
         # low amounts for fast failures.
         max_retries: 1
         retry_interval: 0
-    openstates:
-      database: open_government_test_fiftystates
-      hosts:
-        - localhost:27017
-      options:
-        consistency: :strong
-        max_retries: 1
-        retry_interval: 0
     scraped_local_gov:
       database: scraped_local_gov_for_open_government_test
       hosts:
         - localhost:27017
       options:
         safe: true
-<% default = URI.parse(ENV['MONGOHQ_URL'] || ENV['MONGOLAB_URI'] || 'mongodb://127.0.0.1:27017/opengovernment_local') %> # https://gist.github.com/2588954
-<% openstates = URI.parse(ENV['MONGO_URL'] || 'mongodb://127.0.0.1:27017/fiftystates') %> # https://gist.github.com/2588954
+<% default = URI.parse(ENV['MONGO_URL'] || 'mongodb://127.0.0.1:27017/askthem') %> # https://gist.github.com/2588954
 <% scraped_local_gov = URI.parse(ENV['SCRAPED_LOCAL_GOV_URL'] || 'mongodb://127.0.0.1:27017/scraped_local_gov') %>
 production:
   sessions:
@@ -120,18 +92,6 @@ production:
 <% end %>
       hosts:
       - <%= default.host %>:<%= default.port %>
-      options:
-        safe: true
-    openstates:
-      database: <%= openstates.path.sub '/', '' %>
-<% if openstates.user %>
-      username: <%= openstates.user %>
-<% end %>
-<% if openstates.password %>
-      password: <%= openstates.password %>
-<% end %>
-      hosts:
-      - <%= openstates.host %>:<%= openstates.port %>
       options:
         safe: true
     scraped_local_gov:

@@ -2,20 +2,8 @@
 # for all states jurisdictions
 # includes District of Columbia and Puerto Rico
 class Metadatum::State
-  OPENSTATES_SESSION = 'openstates'
-
-  def self.api_key
-    ENV['SUNLIGHT_API_KEY']
-  end
-
-  # http://sunlightlabs.github.io/openstates-api/metadata.html
-  def self.api_base_url
-    'http://openstates.org/api/v1/metadata/'
-  end
-
   def self.create_states_if_none
-    has_states = Metadatum.with(session: OPENSTATES_SESSION)
-      .nin(abbreviation: Metadatum::Us::ABBREVIATION)
+    has_states = Metadatum.nin(abbreviation: Metadatum::Us::ABBREVIATION)
       .collect(&:abbreviation).sort
 
     unless has_states == OpenGovernment::STATES.values.sort
@@ -27,8 +15,17 @@ class Metadatum::State
     # get the metadatum in one go
     attributes = JSON.parse(results_from_api)
     attributes.each do |attributes|
-      Metadatum.with(session: OPENSTATES_SESSION).create! attributes
+      Metadatum.create! attributes
     end
+  end
+
+  def self.api_key
+    ENV['SUNLIGHT_API_KEY']
+  end
+
+  # http://sunlightlabs.github.io/openstates-api/metadata.html
+  def self.api_base_url
+    'http://openstates.org/api/v1/metadata/'
   end
 
   def self.api_fields

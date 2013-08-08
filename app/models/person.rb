@@ -72,7 +72,7 @@ class Person
 
   # for now, only run if we have a clean slate
   def self.load_from_apis_for_jurisdiction(abbreviation)
-    return if self.in(abbreviation).count > 0
+    return if self.connected_to(abbreviation).count > 0
 
     api_parse(results_for_jurisdiction(abbreviation)).map do |attributes|
       create_from_apis attributes
@@ -109,7 +109,7 @@ class Person
 
   # TODO: add spec
   def jurisdiction
-    Metadatum.with(session: 'openstates').find_by_abbreviation(state)
+    Metadatum.find_by_abbreviation(state)
   end
 
   # TODO: add spec
@@ -147,12 +147,14 @@ class Person
 
   # Returns the person's sponsored bills.
   def bills
-    Bill.use(read_attribute(:state)).where('sponsors.leg_id' => id)
+    Bill.where('sponsors.leg_id' => id)
   end
 
   # Returns the person's votes.
   def votes
-    Vote.use(read_attribute(:state)).or({'yes_votes.leg_id' => id}, {'no_votes.leg_id' => id}, {'other_votes.leg_id' => id}) # no index
+    Vote.or({'yes_votes.leg_id' => id},
+            {'no_votes.leg_id' => id},
+            {'other_votes.leg_id' => id}) # no index
   end
 
   # Returns the person's committees.
@@ -161,7 +163,7 @@ class Person
     if ids.empty?
       []
     else
-      Committee.use(read_attribute(:state)).where(_id: {'$in' => ids}).to_a
+      Committee.where(_id: {'$in' => ids}).to_a
     end
   end
 
@@ -244,7 +246,7 @@ class Person
   end
 
   def self.build_from_api(attributes)
-    person = with(session: 'openstates').new(attributes)
+    person = new(attributes)
     # id cannot be mass assigned..., have to set it explictly
     person.id = attributes['id']
     person

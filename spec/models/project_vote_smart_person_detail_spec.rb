@@ -2,10 +2,10 @@ require 'spec_helper'
 
 describe ProjectVoteSmartPersonDetail do
   before :each do
-    @metadatum = Metadatum.with(session: 'openstates').create(abbreviation: 'vt')
+    @metadatum = Metadatum.create(abbreviation: 'vt')
 
     # convoluted setting of id necessary, otherwise id gets generated
-    @person = Person.with(session: 'openstates').new(state: 'vt',
+    @person = Person.new(state: 'vt',
                                                      first_name: 'Ann',
                                                      last_name: 'Cummings',
                                                      district: 'Washington')

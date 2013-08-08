@@ -6,9 +6,10 @@ namespace :projectvotesmart do
     ProjectVoteSmart.new
   end
 
+  # @todo this doesn't do anything and it needs to handle non-state metadatum
   desc 'Imports state governors and city mayors for Open States jurisdictions from Project VoteSmart'
   task governors: :environment do
-    Metadatum.with(session: 'openstates').each do |metadatum|
+    Metadatum.nin(abbreviation: Metadatum::Us::ABBREVIATION).each do |metadatum|
       # @see http://api.votesmart.org/docs/semi-static.html
       officials = api.officials_by_state_and_office(metadatum.abbreviation.upcase, [3, 73]) # Governor, Mayor
 
@@ -25,14 +26,14 @@ namespace :projectvotesmart do
   # @see https://github.com/sunlightlabs/billy/commit/8658cd6675503bee82b2860c7e25220fb0921242
   desc "Get each person's Project VoteSmart ID"
   task people: :environment do
-    ids = Person.with(session: 'openstates').where(active: true, votesmart_id: nil).map(&:id) # no index
+    ids = Person.where(active: true, votesmart_id: nil).map(&:id) # no index
     ids -= PersonDetail.where(person_id: {'$in' => ids}, votesmart_id: {'$ne' => nil}).map(&:person_id)
 
     found = 0
     puts "Matching #{ids.size}..."
 
     # Iterates over people without a Project VoteSmart ID.
-    Person.with(session: 'openstates').find(ids).group_by do |person|
+    Person.find(ids).group_by do |person|
       [person['state'], person['chamber']]
     end.each do |(state,chamber),people| # up to 104 iterations
       begin
@@ -66,7 +67,7 @@ namespace :projectvotesmart do
     found = 0
 
     year = Date.today.year # we don't care about historical bills
-    Metadatum.with(session: 'openstates').each do |metadatum|
+    Metadatum.each do |metadatum|
       stateId = metadatum.abbreviation.upcase
       begin
         api.get('Votes.getBillsByYearState', year: year, stateId: stateId).uniq do |bill|

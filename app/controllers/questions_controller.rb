@@ -24,12 +24,12 @@ class QuestionsController < ApplicationController
     @question.user = user_signed_in? ? current_user : User.new
 
     if params[:person]
-      @person = Person.in(@state_code).find(params[:person])
+      @person = Person.connected_to(@state_code).find(params[:person])
       @question.person = @person
     end
 
     if params[:bill]
-      @bill = Bill.in(@state_code).find(params[:bill])
+      @bill = Bill.connected_to(@state_code).find(params[:bill])
       @question.bill = @bill
     end
 
@@ -88,7 +88,7 @@ class QuestionsController < ApplicationController
     questions = Question.where(state: parent.abbreviation)
     return questions unless type == 'FederalLegislator'
 
-    person_ids = FederalLegislator.in(parent.abbreviation).collect(&:id)
+    person_ids = FederalLegislator.connected_to(parent.abbreviation).collect(&:id)
     questions.where(person_ids: { '$in' => person_ids })
   end
 

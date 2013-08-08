@@ -16,7 +16,7 @@ class Metadatum
   field :abbreviation, type: String
 
   def self.find_by_abbreviation(abbreviation)
-    self.use(abbreviation).find(abbreviation)
+    self.find(abbreviation)
   end
 
   # Returns whether the jurisdiction has a lower chamber.

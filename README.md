@@ -8,28 +8,27 @@
 
 ## Getting Started
 
-Install or update dependencies:
+We require these to be installed:
 
-    rvm 1.9.3
+* imagemagick
+* nodejs
+* mongodb # should also be running
+* redis # should also be running
+
+Depending on your OS , you may also need to install these:
+
+* libxml2-dev
+* libxslt-dev
+* libmagickwand-dev
+
+In the application's directory, set up Ruby 1.9.3 and required gems:
+
+    rvm 1.9.3 # i.e. switch to ruby 1.9.3, your steps may vary
     bundle
-    libxml2-dev
-    libxslt-dev
-    imagemagick 
-    libmagickwand-dev
-    mongodb
-    nodejs
 
 Start the server:
 
     rails server
-
-
-## Pulling Data
-
-Get the latest data from OpenStates (in development only):
-
-    ./script/openstates.sh
-    rake db:mongoid:create_indexes
 
 ### Setting Up API Keys
 
@@ -41,6 +40,15 @@ In production, you should set `SUNLIGHT_API_KEY` and `PROJECT_VOTE_SMART_API_KEY
 
     heroku config:add SUNLIGHT_API_KEY=...
     heroku config:add PROJECT_VOTE_SMART_API_KEY=...
+
+## Pulling Data (in development only)
+
+Get the necessary supporting data (work-in-progress, will change):
+
+    bundle exec rake openstates:json:update
+    bundle exec rake openstates:add_metadata
+    bundle exec rake congres:api:download:legislators
+    bundle exec rake db:mongoid:create_indexes
 
 ### Influence Explorer
 

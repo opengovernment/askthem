@@ -10,7 +10,7 @@ class PagesController < ApplicationController
   end
 
   def index
-    @jurisdictions = Metadatum.all.to_a + Metadatum.with(session: 'openstates').all.to_a
+    @jurisdictions = Metadatum.all.to_a
     render layout: 'homepage'
   end
 
@@ -46,8 +46,7 @@ class PagesController < ApplicationController
   # @see https://github.com/alexreisner/geocoder#use-outside-of-rails
   # @see https://github.com/sunlightlabs/billy/wiki/Differences-between-the-API-and-MongoDB
   def locator
-    @people = type.constantize.with(session: 'openstates')
-      .includes(:questions).for_location(params[:q])
+    @people = type.constantize.includes(:questions).for_location(params[:q])
 
     respond_with(@people.as_json({
       only: [
@@ -85,20 +84,24 @@ class PagesController < ApplicationController
     # Each pair of `@lower` and `@upper` lines must be run together, as below,
     # otherwise the first query to evaluate will clear the persistence options
     # of the unevaluated query.
-    @lower = Person.in(@jurisdiction.abbreviation).active.where(chamber: 'lower')
+    @lower = Person.connected_to(@jurisdiction.abbreviation).active
+      .where(chamber: 'lower')
       .only_type(type).page(params[:page])
     @lower = @lower.includes(:questions) if tab == 'lower'
     @lower_parties = @lower.group_by { |person| person['party'] }
 
-    @upper = Person.in(@jurisdiction.abbreviation).active.where(chamber: 'upper')
+    @upper = Person.connected_to(@jurisdiction.abbreviation).active
+      .where(chamber: 'upper')
       .only_type(type).page(params[:page])
     @upper = @upper.includes(:questions) if tab == 'upper'
     @upper_parties = @upper.group_by { |person| person['party'] }
 
-    @bills = Bill.in(@jurisdiction.abbreviation).in_session(@jurisdiction.current_session).page(params[:page])
+    @bills = Bill.connected_to(@jurisdiction.abbreviation)
+      .in_session(@jurisdiction.current_session).page(params[:page])
     @bills = @bills.includes(:questions) if tab == 'bills'
 
-    @key_votes = KeyVote.in(@jurisdiction.abbreviation).page(params[:page])
+    @key_votes = KeyVote.connected_to(@jurisdiction.abbreviation)
+      .page(params[:page])
 
     @tab = tab
     respond_to do |format|
