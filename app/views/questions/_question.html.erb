@@ -32,9 +32,17 @@
   </div>
   <ul class="activity">
     <li>
-      <%= link_to pluralize(question.signature_count, 'signature'), '#', class: 'support' %><%# @todo link to remote %>
+      <div class="question_progress">
+        <div class="progress_filler" style="width: 0%;"></div>
+      </div>
+      <span class="question_progress_count">
+        <strong><span class="question-signatures" data-signature-question-id="<%= question.id %>"><%= question.signature_count -%></span></strong>
+        out of
+        <strong><span class="question-signature-threshold"><%= question.person.signature_threshold -%></span></strong>
+        Signatures
+      </span>
     </li>
   </ul>
-  <%= link_to 'Sign On', '#', class: 'sign_on sign-on-user', :'data-question-path' => signatures_path(question_id: question.id) %><%# @todo link to remote %>
+  <%= link_to 'Sign On', '#', class: 'sign_on sign-on-user', :'data-question-id' => question.id %><%# @todo link to remote %>
   <div class="clear"></div>
 </li>
