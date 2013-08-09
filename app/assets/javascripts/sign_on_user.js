@@ -1,14 +1,15 @@
 $('.sign-on-user').click(function(){
   var self = $(this);
   $.ajax({
-      url: self.data('question-path'),
+      url: '/signatures?question_id=' + self.data('question-id'),
       type: "POST",
       success: function(resp){ 
-        self.after("<strong>You're signed on!</strong>");
+        self.after("<a class='sign-on'>You're signed on!</a>");
         self.hide();
 
-        var current_count = parseInt($('.question-signatures').html()) + 1;
-        $('.question-signatures').html(current_count);
+        var question_id = self.data('question-id');
+        var current_count = $("[data-signature-question-id='" + question_id + "']");
+        current_count.html(parseInt(current_count.html()) + 1);
       },
       error: function(resp){ console.log('coundnt save!')}
   });
