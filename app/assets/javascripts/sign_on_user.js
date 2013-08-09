@@ -4,7 +4,7 @@ $('.sign-on-user').click(function(){
       url: '/signatures?question_id=' + self.data('question-id'),
       type: "POST",
       success: function(resp){ 
-        self.after("<a class='sign-on'>You're signed on!</a>");
+        self.after("<a class='sign_on'>Signed On</a>");
         self.hide();
 
         var question_id = self.data('question-id');

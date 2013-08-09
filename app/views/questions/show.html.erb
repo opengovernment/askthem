@@ -57,7 +57,7 @@
 
     <div class="row">
       <div class="question_progress">
-        <div class="progress_filler" style="width: 0%;"></div>
+        <div class="progress_filler" style="width: <%= question_progress_percent(@question) %>%;"></div>
       </div>
       <span class="question_progress_count">
         <strong><span class="question-signatures" data-signature-question-id="<%= @question.id %>"><%= @question.signature_count -%></span></strong>
@@ -69,7 +69,13 @@
 
     <% if user_signed_in? %>
       <ul>
-        <li><%= link_to 'Sign On', "#", class: 'cta_pill sign-on-user', :'data-question-id' => @question.id %></li>
+        <li>
+          <% if current_user.question_signed @question.id %>
+            <a class='sign_on'>Signed On</a>
+          <% else %>
+          <%= link_to 'Sign On', "#", class: 'cta_pill sign-on-user', :'data-question-id' => @question.id %>
+          <% end %>
+        </li>
       </ul>
     <% else %>
       <div class="row last signup">
