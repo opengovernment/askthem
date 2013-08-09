@@ -35,6 +35,6 @@
       <%= link_to pluralize(question.signature_count, 'signature'), '#', class: 'support' %><%# @todo link to remote %>
     </li>
   </ul>
-  <%= link_to 'Sign On', '#', class: 'sign_on' %><%# @todo link to remote %>
+  <%= link_to 'Sign On', '#', class: 'sign_on sign-on-user', :'data-question-path' => signatures_path(question_id: question.id) %><%# @todo link to remote %>
   <div class="clear"></div>
 </li>

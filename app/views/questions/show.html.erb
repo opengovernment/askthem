@@ -60,7 +60,7 @@
         <div class="progress_filler" style="width: 0%;"></div>
       </div>
       <span class="question_progress_count">
-        <strong><span class="question-signatures"><%= @question.signatures.count -%></span></strong>
+        <strong><span class="question-signatures"><%= @question.signature_count -%></span></strong>
         out of
         <strong><span class="question-signature-threshold"><%= @question.person.signature_threshold -%></span></strong>
         Signatures
@@ -69,7 +69,7 @@
 
     <% if user_signed_in? %>
       <ul>
-        <li><%= link_to 'Sign On', signatures_path(question_id: @question.id), class: 'cta_pill' %><%# @todo link to remote %></li>
+        <li><%= link_to 'Sign On', "#", class: 'cta_pill sign-on-user', :'data-question-path' => signatures_path(question_id: @question.id) %></li>
       </ul>
     <% else %>
       <div class="row last signup">
@@ -108,11 +108,12 @@
 </section>
 
 <%# @see http://disqus.com/admin/universalcode/ %>
+
 <script type="text/javascript">
-var disqus_shortname = 'dobot';
-(function() {
-  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-  dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-})();
+  var disqus_shortname = 'dobot';
+  (function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
 </script>
