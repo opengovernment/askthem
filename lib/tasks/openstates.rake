@@ -61,12 +61,17 @@ namespace :openstates do
 
       with_api_key do
         begin
-          metadata = RestClient.get(metadata_url)
+          metadata = JSON.parse(RestClient.get(metadata_url))
         rescue Exception => e
           abort "Error downloading metadata: #{metadata_url}\n#{e.message}"
         end
 
-        JSON.parse(metadata).each do |remote|
+        if ENV['ONLY']
+          only_states = ENV['ONLY'].split(',')
+          metadata = metadata.keep_if { |m| only_states.include?(m['id']) }
+        end
+
+        metadata.each do |remote|
           file_path = File.join(tmp_dir, File.basename(remote['latest_json_url']))
           local = Metadatum.find(remote['id'])
 
@@ -199,7 +204,7 @@ namespace :openstates do
     attr_reader :config, :session, :host_num
 
     # Inspired by mongodb.rake
-    def initialize(params)
+    def initialize(params = {})
       @config ||= begin
         path = Rails.root.join('config', 'mongoid.yml')
         config = YAML.load(ERB.new(File.read(path)).result)

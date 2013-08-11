@@ -9,7 +9,7 @@ namespace :projectvotesmart do
   # @todo this doesn't do anything and it needs to handle non-state metadatum
   desc 'Imports state governors and city mayors for Open States jurisdictions from Project VoteSmart'
   task governors: :environment do
-    Metadatum.nin(abbreviation: Metadatum::Us::ABBREVIATION).each do |metadatum|
+    relevant_metadata.each do |metadatum|
       # @see http://api.votesmart.org/docs/semi-static.html
       officials = api.officials_by_state_and_office(metadatum.abbreviation.upcase, [3, 73]) # Governor, Mayor
 
@@ -67,7 +67,7 @@ namespace :projectvotesmart do
     found = 0
 
     year = Date.today.year # we don't care about historical bills
-    Metadatum.each do |metadatum|
+    relevant_metadata.each do |metadatum|
       stateId = metadatum.abbreviation.upcase
       begin
         api.get('Votes.getBillsByYearState', year: year, stateId: stateId).uniq do |bill|
@@ -113,7 +113,7 @@ namespace :projectvotesmart do
               bill_id.sub!(/\AH\b/, 'HB')
             end
 
-            scope = Bill.in(metadatum.abbreviation).in_session(session).where(bill_id: bill_id)
+            scope = Bill.connected_to(metadatum.abbreviation).in_session(session).where(bill_id: bill_id)
 
             if scope.count > 1
               puts "Multiple bills in state #{stateId} in session #{session} match bill number #{bill['billNumber']}"
@@ -138,7 +138,14 @@ namespace :projectvotesmart do
     # There is no endpoint to get a list of all categories across all states, so
     # we must build the list one state at a time. There is a lot of duplication.
     categories = Set.new
-    api.get('State.getStateIDs').each do |state| # 56 iterations
+    states = api.get('State.getStateIDs')
+
+    if ENV['ONLY']
+      only_states = ENV['ONLY'].split(',').collect(&:upcase)
+      states = states.keep_if { |state| only_states.include?(state['stateId']) }
+    end
+
+    states.each do |state| # 56 iterations
       begin
         categories += api.get('Rating.getCategories', stateId: state['stateId'])
       rescue ProjectVoteSmart::DocumentNotFound
@@ -228,5 +235,14 @@ namespace :projectvotesmart do
     # @see http://api.votesmart.org/docs/Votes.html
     # Votes.getBill(billId)
     # Votes.getBillAction(actionId)
+  end
+
+  def relevant_metadata
+    relevant_metadata = Metadatum.nin(abbreviation: Metadatum::Us::ABBREVIATION)
+    if ENV['ONLY']
+      only_abbreviations = ENV['ONLY'].split(',')
+      relevant_metadata = Metadatum.in(abbreviation: only_abbreviations)
+    end
+    relevant_metadata
   end
 end
