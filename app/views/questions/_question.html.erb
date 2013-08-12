@@ -43,7 +43,7 @@
       </span>
     </li>
   </ul>
-  <% if current_user.question_signed question.id %>
+  <% if current_user.question_signed? question.id %>
     <a class='sign_on'>Signed On</a>
   <% else %>
     <%= link_to 'Sign On', '#', class: 'sign_on sign-on-user', :'data-question-id' => question.id %><%# @todo link to remote %>
