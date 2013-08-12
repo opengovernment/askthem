@@ -109,7 +109,7 @@ class User
   end
 
   # @return [Boolean] a given question has been signed by the user
-  def question_signed(question_id)
+  def question_signed?(question_id)
     questions_signed.map(&:id).include? question_id
   end
 
