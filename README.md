@@ -41,11 +41,37 @@ In production, you should set `SUNLIGHT_API_KEY` and `PROJECT_VOTE_SMART_API_KEY
     heroku config:add SUNLIGHT_API_KEY=...
     heroku config:add PROJECT_VOTE_SMART_API_KEY=...
 
-## Pulling Data (in development only)
+## Getting the data the application relies on (in development only)
+
+You can pull the full data set or a limited data set.
+
+Grabbing the full data set can take more than 24 hours! It's only recommended if what you are working on requires it.
+
+For most developers, the limited data set is sufficient and can be grabbed in under an hour. You choose one or more states that you would like to use as your development data, and the functionality of the application will be complete if you focus on those states.
+
+The sequence of rake tasks to load data will be the same for both options, but you'll need to specify the states you want to limit to during the ones noted with comments.
+
+We recommend Pennsylvania, state code 'pa', as good state for working with the application with a limited data set.
+
+There may also be one or more steps that you should skip for the limited data set. These will be noted, too.
+
+### Specifying one or more states as you limited data set
+
+Choose one or more states you like to limit your data to. During the appropriate rake tasks, you'll pass the ONLY environmental variable with the state codes you want.
+
+Here are a couple examples:
+
+    bundle exec rake some:task ONLY="pa" # this says only give me the Pennsylvania state data
+
+    bundle exec rake some:task ONLY="pa,vt" # this says only give me the Pennsylvania and Vermont state data, state codes are comma separated
+
+Rake tasks that can have their data limited will be marked below. If you want the full data, DO NOT add the "ONLY" variable.
+
+### Loading the basic data steps
 
 Get the necessary supporting data (work-in-progress, will change):
 
-    bundle exec rake openstates:json:update
+    bundle exec rake openstates:json:update # takes ONLY value to limit data, recommended for most developers
     bundle exec rake openstates:add_metadata
     bundle exec rake congres:api:download:legislators
     bundle exec rake db:mongoid:create_indexes
@@ -66,9 +92,13 @@ You can import Project VoteSmart people on a yearly basis. Ratings are added reg
 
         bundle exec rake projectvotesmart:people
 
+1. Get Project VoteSmart bills
+
+        bundle exec rake projectvotesmart:bills # takes ONLY value to limit data, recommended for most developers
+
 1. Get Project VoteSmart special interest groups
 
-        bundle exec rake projectvotesmart:special_interest_groups
+        bundle exec rake projectvotesmart:special_interest_groups # takes ONLY value to limit data, recommended for most developers
 
 1. Get Project VoteSmart special interest group scorecards
 
@@ -76,7 +106,7 @@ You can import Project VoteSmart people on a yearly basis. Ratings are added reg
 
 1. Get Project VoteSmart special interest group scorecard ratings
 
-        bundle exec rake projectvotesmart:ratings
+        bundle exec rake projectvotesmart:ratings # skip unless you want to work with the full data set!
 
 ## Data Quality
 
