@@ -36,6 +36,23 @@ describe 'questions' do
         visit '/vt/questions'
         page.body.should have_selector '.question_content .title'
       end
+
+      context 'as signed in user' do
+        before :each do
+          @user = FactoryGirl.create(:user, street_address: street_address,
+                                     locality: locality, region: region,
+                                     postal_code: postal_code)
+        end
+
+        it 'allows user to sign on to a question', js: true, vcr: true do
+          valid_person
+          as_user(@user) do
+            visit '/vt/questions'
+            click_button 'Sign on'
+            page.body.should have_content 'Signed on'
+          end
+        end
+      end
     end
   end
 
