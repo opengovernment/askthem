@@ -79,7 +79,7 @@
       </ul>
     <% else %>
       <div class="row last signup">
-      <%= simple_form_for(@user, as: :user, url: registration_path(:user)) do |f| %><%# @todo maybe use a custom controller %>
+      <%= simple_form_for(@user, as: :user, url: registration_path(:user)) do |f| %>
         <%= hidden_field_tag :question_id, @question.id %>
         <%= f.input :given_name, placeholder: "First Name", label: false %>
         <%= f.input :family_name, placeholder: "Last Name", label: false %>
