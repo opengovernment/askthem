@@ -38,18 +38,13 @@ describe 'questions' do
       end
 
       context 'as signed in user' do
-        before :each do
-          @user = FactoryGirl.create(:user, street_address: street_address,
-                                     locality: locality, region: region,
-                                     postal_code: postal_code)
-        end
-
-        it 'allows user to sign on to a question', js: true, vcr: true do
+        it 'allows user to sign on to a question', js: true do
           valid_person
-          as_user(@user) do
+          as_user do
             visit '/vt/questions'
-            click_button 'Sign on'
-            page.body.should have_content 'Signed on'
+            click_link 'Sign On'
+            wait_until{ page.has_content?('Signed On')}
+            page.body.should have_content '1 out of'
           end
         end
       end
@@ -307,6 +302,18 @@ describe 'questions' do
         visit "/vt/questions/#{@question.id}"
         threshold_on_page = find('span.question-signature-threshold').text.to_i
         expect(threshold_on_page).to eq @person.signature_threshold
+      end
+
+      context 'as signed in user' do
+        it 'allows user to sign on to a question', js: true do
+          valid_person
+          as_user do
+            visit '/vt/questions'
+            click_link 'Sign On'
+            wait_until{ page.has_content?('Signed On')}
+            page.body.should have_content '1 out of'
+          end
+        end
       end
     end
   end
