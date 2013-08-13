@@ -12,3 +12,4 @@ latest-mongo-dump.tar.gz
 .DS_Store
 .rbenv-version
 /.sass-cache
+dump.rdb
