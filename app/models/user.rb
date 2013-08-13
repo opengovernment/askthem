@@ -108,6 +108,11 @@ class User
     Question.find(signatures.map(&:question_id))
   end
 
+  # @return [Boolean] a given question has been signed by the user
+  def question_signed?(question_id)
+    questions_signed.map(&:id).include? question_id
+  end
+
   # @return [String] the user's address for geocoding
   def address_for_geocoding
     [street_address, locality, region, country, postal_code] * ', '
