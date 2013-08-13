@@ -10,3 +10,5 @@ latest-mongo-dump.tar.gz
 /coverage
 /public/uploads
 .DS_Store
+.rbenv-version
+/.sass-cache

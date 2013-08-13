@@ -119,7 +119,7 @@
     }
   </script>
   <%= javascript_include_tag 'application' %>
-  
+
   <script type="text/javascript">
     if($(document).width() > 420){
       $(window).resize(function(){
@@ -129,34 +129,34 @@
         $(elem).css('paddingTop', newPad);
         $(elem).css('paddingBottom', newPad);
       });
-    
+
       didScroll = false;
-    
+
       $(window).scroll(function(){
           didScroll = true;
       });
-    
+
       var oldLeft = $('a.logo').css('left');
       var topSet = 395;
-      
+
       setInterval(function(){
           if( didScroll ) {
               scrollPoint = $(window).scrollTop();
-            
+
               scrollBG = 160 - (scrollPoint * .09) + '%';
               pAlpha = 1 - (scrollPoint * .005);
               cAlpha = 0 + (scrollPoint * .0025);
-            
+
               if (160 - (scrollPoint * .05) < 100){
                 scrollBG = '100%';
               }
-            
+
               $('body.splash').css('background-position', '50% ' + scrollBG + '');
               $('header.main div.rightCol p').fadeTo(0, pAlpha);
               $('header.main div.leftCol, .scroll_content.below').fadeTo(0, pAlpha);
-              
+
               $('section#content_body, .scroll_content.above').fadeTo(0, cAlpha);
-              
+
               if ($('.content_body.header h2').offset().top <= scrollPoint + 120 && !$('a.logo').hasClass('stick')){
                 $('a.logo').css({
                   'position': 'absolute',
@@ -172,7 +172,7 @@
                   }).removeClass('stick');
                 }
               }
-              
+
               didScroll = false;
           }
       }, 50);

@@ -9,13 +9,5 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require structure.css.scss
- *= require typography.css.scss
- *= require forms.css.scss
- *= require questions.css.scss
- *= require people.css.scss
- *= require bills.css.scss
- *= require font-awesome.css.scss
- *= require home.css.scss
- *= require breakpoints.css.scss
+ *= require_tree .
  */

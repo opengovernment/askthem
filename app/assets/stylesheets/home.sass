@@ -1,0 +1,326 @@
+@import compass/css3
+@import mixins
+
+.index
+  padding-bottom: 900px
+  background:
+    color: #D4E8EB
+    image: url(/assets/footer_illustration_temp@2x.png)
+    repeat: no-repeat
+    position: left bottom
+    size: 100%
+
+  .main, .content_body, footer
+    margin: 0 auto
+    min-width: 0
+    width: 100%
+
+  .content_body
+    @include box-shadow(0 0 0 3px rgba($black, 0.03), 0 0 0 3px rgba($black, 0.03))
+    div.wrapper
+      margin-top: -101px
+      padding: 0 50px
+      +box-sizing(border-box)
+      box:
+        shadow: 0 0 6px rgba($black,.1)
+      background-color: #FFF
+      border-radius: 6px
+
+  div.wrapper
+    margin: 0 auto
+    padding-left: 0
+    max-width: 1120px
+
+  section.mobile_admin_nav
+    margin: 0 auto
+    display: block
+    position: relative
+    top: -24px
+    max-width: 1120px
+
+  ul.admin_nav.thin
+    display: block
+    li
+      clear: none
+      a
+        padding: 12px 20px 12px
+        border:
+          right: 1px solid #CCE3DB
+          bottom: 0
+
+  footer
+    max-width: inherit
+
+  .main
+    padding:
+      top: 96px
+      bottom: 30px
+    height: 480px
+    background:
+      image: url(/assets/usa@2x.jpg)
+      repeat: no-repeat
+      size: 80%
+      position: center 180px
+      attachment: fixed
+
+    .find_questions
+      margin-top: 90px
+
+    h1
+      @include RobotoBlack()
+      display: block
+      font-size: 3.375em
+      line-height: 1.111em
+      text-align: left
+      max-width: 750px
+      font-weight: 100
+      text-shadow: 0 2px 30px #FFF
+
+    p
+      font-size: 1.5em
+      line-height: 1.5em
+      font-weight: 100
+      margin-bottom: 18px
+
+    input[type=text]
+      @include border-radius(3px)
+      display: inline-block
+      max-width: 48%
+      border: 1px solid #B9CDD0
+      box-sizing: border-box
+      padding-top: 5px
+      height: 60px
+      box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1)
+      padding-right: 63px
+      margin-right: -63px
+      padding-left: 12px
+      font-size: 18px
+      padding-bottom: 5px
+      background: rgba(255, 255, 255, 0.5)
+      &:focus
+        background: rgba(255,255,255,1)
+
+    input[type=submit]
+      max-width: 58px
+      margin-top: 1px
+      background: url(/assets/mag_glass@2x.png) no-repeat center center
+      border: none
+      box-shadow: none
+      background-size: 18px
+      text-indent: -9999px
+      height: 58px
+      &:hover
+        display: inline-block
+        top: 0
+      &:active
+        display: inline-block
+        top: 0
+      &:focus
+        outline: none
+
+  .content_body
+    div.emph_question
+      width: 100%
+      text-align: center
+      position: relative
+      div.wrap
+        display: inline-block
+        border-bottom: 1px solid #F5F5F5
+        padding: 20px 0
+        width: 100%
+
+    div.leftCol
+      float: left
+      padding-right: 3.571428571429%
+      width: 48.214285714286%
+
+    div.rightCol
+      float: left
+      padding-right: 0
+      width: 48.214285714286%
+
+    header
+      display: inline-block
+      width: 100%
+      padding-bottom: 12px
+      padding-left: 1%
+      border-bottom: 1px solid #EFEFEF
+      margin-bottom: 18px
+      margin-top: 42px
+      float: left
+      h2
+        color: $lightblue
+        display: inline-block
+        @include RobotoRegular()
+        font-size: 1.125em
+        line-height: 1.333em
+
+      ul
+        display: block
+        clear: both
+        li
+          color: $lightgrey
+          font-size: .813em
+          line-height: 1.846em
+          padding-right: 20px
+          display: inline-block
+
+    ol.how_it_works
+      display: inline-block
+      width: 100%
+      li
+        display: inline-block
+        padding: 2.5%
+        text-align: center
+        vertical-align: top
+        width: 27%
+        img
+          max-width: 230px
+          display: inline-block
+          width: 75%
+        span.num
+          background: #d5e9eb
+          @include border-radius(24px)
+          color: #ffffff
+          display: inline-block
+          left: 0
+          @include RobotoRegular()
+          padding: 8px 14px 6px 14px
+          font-size: 1.875em
+          line-height: 1em
+          position: absolute
+
+        p
+          @include RobotoRegular()
+          color: $middleblue
+          display: inline-block
+          position: relative
+          text-align: left
+          padding-left: 60px
+          padding-top: 18px
+          max-width: 210px
+          font-size: 1em
+          line-height: 1.5em
+
+// un-nest things!
+
+.ask_question
+  display: inline-block
+  vertical-align: top
+  span
+    display: inline-block
+    margin: 22px 20px
+  a
+    padding: 16px 24px 16px
+    font-size: 1.125em
+
+.popular_questions
+  display: inline-block
+  margin-top: 30px
+  float: left
+  width: 85%
+  &:nth-child(2n+2)
+    padding-right: 0
+  li
+    display: inline-block
+    float: left
+    margin-bottom: 42px
+    vertical-align: top
+    width: 100%
+    padding-bottom: 42px
+    border-bottom: 1px solid #EFEFEF
+    div.person_wrap
+      display: inline-block
+      float: right
+      margin-left: 5%
+      width: 100%
+      div.row
+        display: inline-block
+        width: auto
+        margin-right: 6px
+        float: left
+        vertical-align: top
+        &:nth-child(2n+2)
+          margin-bottom: 12px
+      span.author
+        display: inline-block
+        @include RobotoRegular()
+        font-size: 0.813em
+        line-height: 1.231em
+      span.emph
+        background: #f7f7f7
+        border: none
+        color: #999999
+        font-size: 0.563em
+        line-height: 1.778em
+        letter-spacing: 1px
+        text-transform: uppercase
+        margin-top: 6px
+        margin-bottom: 6px
+      div.avatar
+        display: inline-block
+        max-width: 60px
+        width: 20%
+      div.person-info
+        margin-right: 12px
+        display: inline-block
+        vertical-align: top
+        width: 100%
+        h4
+          @include RobotoRegular()
+          font-size: 0.813em
+          line-height: 1.231em
+          padding-bottom: 0
+          font-weight: normal
+
+    span.jurisdiction, span.location
+      color: $lightgrey
+      @include RobotoRegular()
+      display: block
+      font-size: 0.813em
+      line-height: 1.231em
+
+    a.question
+      color: $middleblue
+      display: inline-block
+      font-size: 1.5em
+      font-weight: 600
+      float: left
+      @include RobotoRegular()
+      line-height: 1.25em
+      margin-bottom: 18px
+      width: 100%
+      &:hover
+        color: #709EAC
+
+    p
+      display: inline-block
+      @include RobotoRegular()
+      font-size: 0.813em
+      line-height: 1.385em
+      margin-bottom: 30px
+
+    div.question_stats
+      display: block
+      font-size: 0.813em
+      line-height: 1.385em
+      float: left
+      width: 55%
+      margin-right: 5%
+      vertical-align: top
+      span
+        margin-right: 10px
+      span.support_count
+        display: inline-block
+        color: $salmon
+        font-weight: 600
+      div.question_progress
+        margin-top: 6px
+
+    a.sign_on
+      float: left
+      width: 40%
+      box-sizing: border-box
+      margin-right: 0
+      text-align: center
+      margin-top: 24px

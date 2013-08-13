@@ -348,9 +348,7 @@ section.overview{
   display: inline-block;
   @include rounded_corners();
   &:hover{
-    /*
-      todo
-    */
+    // todo
     color:#ffffff;
   }
 }
@@ -460,7 +458,7 @@ nav{
       }
     }
   }
-  
+
   ul.radio_nav{
     display:block;
     margin-top: 30px;
@@ -518,7 +516,7 @@ nav{
       }
     }
   }
-  
+
   div.nav_extras{
     border-bottom: 4px solid #FAFAFA;
     box-shadow: 0 -1px 0 0 #E5E5E5 inset;
