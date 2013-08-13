@@ -304,6 +304,21 @@ describe 'questions' do
         expect(threshold_on_page).to eq @person.signature_threshold
       end
 
+      it 'allows new user to register and sign on to a question', js: true do
+        visit "/vt/questions/#{@question.id}"
+        script = "jQuery('#user_given_name').val('John'); "
+        script +=  "jQuery('#user_family_name').val('Doe'); "
+        script +=  "jQuery('#user_email').val('john.doe@example.com'); "
+        script += "jQuery('#user_street_address').val('#{street_address}'); "
+        script +=  "jQuery('#user_locality').val('#{locality}'); "
+        script +=  "jQuery('#user_region').val('#{region}'); "
+        script +=  "jQuery('#user_postal_code').val('#{postal_code}'); "
+        script +=  "jQuery('#user_password').val('testtest'); "
+        page.execute_script script
+        click_button 'Sign On'
+        page.body.should have_content '1 out of'
+      end
+
       context 'as signed in user' do
         it 'allows user to sign on to a question', js: true do
           valid_person
