@@ -10,3 +10,4 @@ latest-mongo-dump.tar.gz
 /coverage
 /public/uploads
 .DS_Store
+dump.rdb
