@@ -3,11 +3,13 @@
 <li><%= link_to 'Profile', user_path(current_user) %></li>
 <li><%= link_to 'Account', edit_user_registration_path %></li>
 <li><%= link_to 'Sign out', destroy_user_session_path %></li>
-<li>
-  <%= link_to '#' do %><%# @todo ST make dropdown appear %>
-    <%= current_user.alternate_name %> <span class="icon-angle-down"></span>
-  <% end %>
-</li>
+<% if false %>
+  <li>
+    <%= link_to '#' do %><%# @todo ST make dropdown appear %>
+      <%= current_user.alternate_name %> <span class="icon-angle-down"></span>
+    <% end %>
+  </li>
+<% end %>
 <% else %>
 <li><%= link_to 'Sign up', new_user_registration_path %></li>
 <li><%= link_to 'Login', new_user_session_path %></li>

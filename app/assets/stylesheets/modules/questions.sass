@@ -1,0 +1,508 @@
+// Place all the styles related to the questions controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import compass
+@import mixins
+
+// Question progress
+div.question_progress
+  background: #ffffff
+  +border-radius(3px)
+  display: block
+  width: 100%
+  height: 6px
+  overflow: hidden
+  border: 1px solid #DDE3E1
+  div.progress_filler
+    background: #F47362
+    height: 4px
+    padding: 1px
+
+input[type=submit].cta_pill
+  width: 100%
+
+span.question_progress_count
+  color: #7B969E
+  font-size: 0.813em
+  padding-top: 6px
+  line-height: 1.385em
+  font-weight: 600
+  display: inline-block
+  width: 100%
+
+section.questions
+  header
+    text-align: right
+  h1
+    float: left
+    clear: both
+    display: inline-block
+  div.filters
+    margin-bottom: 0
+  ol>li
+    border-bottom: 1px solid #F3F3F3
+    border-left: 0px solid #fff
+    padding-top: 30px
+    padding-bottom: 30px
+    position: relative
+    width: 100%
+    &:hover
+      a.sign_on
+        +opacity(1)
+    &:last-child
+      border-bottom: 0
+    span.view
+      display: none
+      color: #D0D0D0
+      padding-left: 20px
+      font-size: 24px
+      font-weight: 100
+    div.question_content
+      display: inline-block
+      float: left
+      vertical-align: top
+      width: 70%
+      a.title
+        color: #3c636e
+        font-size: 1.5em
+        line-height: 1.25em
+        display: block
+        &:hover
+          color: $linkhover
+      p
+        color: #477380
+        font-size: 0.813em
+        line-height: 1.385em
+        margin-top: 12px
+        span.context
+          display: none
+          color: $context
+    ul.activity
+      display: inline-block
+      vertical-align: bottom
+      margin-right: 5.5641026%
+      text-align: right
+      margin-bottom: 6px
+      width: 20%
+      float: right
+      margin-top: 18px
+      li
+        display: inline-block
+        width: 113px
+        line-height: 24px
+        text-align: center
+        a
+          font-size: 1em
+          line-height: 1.385em
+          width: 100%
+          border-radius: 16px
+          display: inline-block
+          font-weight: 600
+          color: #948C83
+    span.target
+      display: inline-block
+      margin-top: 18px
+      padding: 6px
+      border-radius: 3px
+      a
+        color: $lightblue
+        display: inline-block
+        vertical-align: top
+        font-size: 13px
+        line-height: 18px
+        text-indent: -25px
+        margin-right: 10px
+        padding-left: 25px
+        img
+          vertical-align: bottom
+          margin-right: 5px
+          width: 20px
+          height: 20px
+      span.to
+        color: #999
+        margin-right: 5px
+    div.question_attr
+      display: inline-block
+      color: #919191
+      font-size: 0.75em
+      line-height: 1.5em
+      position: absolute
+      right: 2.5641026%
+      bottom: 27px
+      vertical-align: top
+      span.followers
+        background: url(/assets/followers_icon@2x.png) no-repeat left top transparent
+        background-size: 15px 14px
+        border-bottom: 1px solid #f7f7f7
+        color: $darkblue
+        display: block
+        font-size: 0.75em
+        font-weight: 600
+        line-height: 1.5em
+        padding-left: 20px
+        padding-bottom: 12px
+      span.posted
+        display: block
+        color: #c8c8c8
+        font-size: 0.75em
+        font-weight: 100
+        line-height: 1.5em
+        padding-top: 12px
+      span.author
+        display: block
+        padding-top: 6px
+        a
+          display: inline-block
+          margin-left: 5px
+          font-weight: 600
+          line-height: 1.5em
+          img
+            +rounded_corners
+            margin-right: 6px
+            width: 20px
+            height: 20px
+            vertical-align: middle
+  /*
+   *Questions on a person or bill detail page
+  &.related_focus
+    ol
+      li
+        .question_content
+          @media (min-width: 420px)
+            width: 70.867075664622%
+          p
+            color: $lightgrey
+            width: 100%
+        span.target a
+          max-width: 60%
+        div.question_attr
+          color: $lightgrey
+          font-size: 0.75em
+          line-height: 1.5em
+          span.author a
+            font-size: 1em
+            margin-left: 5px
+  &.listings
+    h1
+      float: left
+      clear: both
+      display: inline-block
+
+section.question
+  position: relative
+  article
+    display: inline-block
+    width: 58.974359%
+    margin-bottom: 68px
+    h1
+      padding-top: 18px
+      padding-bottom: 24px
+    p
+      font-size: 1em
+      line-height: 1.5em
+      padding-bottom: 18px
+    span.author_wrap
+      display: block
+      padding-top: 6px
+      margin-bottom: 18px
+      span.posted, span.author
+        color: $lightgrey
+        font-size: 0.813em
+        line-height: 1.385em
+      a
+        display: inline-block
+        font-size: 0.813em
+        line-height: 1.385em
+        img
+          +rounded_corners
+          margin-left: 6px
+          margin-right: 6px
+          width: 30px
+          height: 30px
+          vertical-align: middle
+    div.support
+      background: #f1f7f5
+      border: 1px solid #e0e6e4
+      display: block
+      padding: 10px
+      position: relative
+      margin-bottom: 36px
+      a.email
+        font-size: 0.813em
+        line-height: 1.385em
+        position: absolute
+        right: 20px
+        top: 24px
+    div.comments
+      border-top: 1px solid #e5e5e5
+      padding-top: 36px
+  // Ask a question flow
+  &.ask
+    article
+      margin-bottom: 0
+  div.progress
+    height: 100%
+    width: 33.205128205128%
+    position: absolute
+    top: 0
+    bottom: 0
+    right: 0
+    div.actions
+      padding: 13.333333333333%
+      width: 73.333333333333%
+      // Scrolling questions
+      &.scroll_this.inmotion
+        position: fixed
+        top: 0
+        width: 190px
+        padding: 35px
+        &.magnetize
+          top: auto
+          position: absolute
+          bottom: 0
+          margin-bottom: 0
+  div.flow_info
+    display: inline-block
+    vertical-align: top
+    margin-top: 12px
+    padding-left: 8.974359%
+    width: 29.487179%
+    h3
+      color: $darkblue
+      font-size: 1.5em
+      font-weight: 100
+      line-height: 1.25em
+      margin-bottom: 6px
+    ul>li
+      font-size: 0.875em
+      line-height: 1.286em
+      font-weight: 100
+      color: #2c4850
+      padding-bottom: 12px
+      list-style: disc inside
+    p
+      font-size: 0.875em
+      line-height: 1.286em
+      font-weight: 100
+      color: #2c4850
+      padding-bottom: 12px
+      a
+        text-decoration: underline
+  div.actions
+    margin-bottom: 60px
+    h4
+      color: $middleblue
+      font-size: 1em
+      line-height: 1.5em
+    div.row
+      padding-bottom: 18px
+      padding-top: 18px
+      border-bottom: 1px solid #eaeaea
+      +box-shadow(0 1px 0 white)
+      &.last
+        margin-bottom: 18px
+      &.signup
+        border-bottom: 0
+        padding-bottom: 0
+    ul.recipient
+      margin-bottom: 0
+      li
+        margin-bottom: 0
+        .person-info
+          display: inline-block
+          margin-left: 5.128205128205%
+          width: 73.470588235294%
+        h2
+          color: $middleblue
+          font-size: 0.813em
+          line-height: 1.385em
+          font-weight: 600
+        span.jurisdiction
+          color: $middleblue
+          font-size: 0.688em
+          line-height: 1.455em
+          font-weight: 100
+    div.question_preview
+      h5
+        color: $middleblue
+        font-size: 1em
+        line-height: 1.5em
+        font-weight: 600
+        text-transform: none
+        border-bottom: 0
+        margin-bottom: 0
+        padding-bottom: 0
+        &.empty
+          color: $lightblue
+      p
+        color: $lightblue
+        font-size: 0.813em
+        line-height: 1.385em
+        word-wrap: break-word
+    div.question_issue
+      span
+        color: $lightblue
+        font-size: 0.813em
+        line-height: 1.385em
+        font-weight: 100
+        strong
+          font-weight: 600
+
+/*
+ *Actions
+div.actions
+  +border-radius(6px)
+  +box-shadow(0 2px 0 #f9f9f9)
+  background: rgba(0, 0, 0, 0.015)
+  border: 1px solid #F3F3F3
+  display: inline-block
+  float: right
+  margin-top: 12px
+  padding: 4.974359%
+  vertical-align: top
+  width: 22.948718%
+  a.cta_pill
+    width: 73%
+    text-align: center
+  ul
+    margin-bottom: 24px
+  ul li
+    margin-bottom: 12px
+    a.upvote
+      background: url(/assets/up_vote_sm@2x.png) no-repeat $darkblue
+      color: #FBFCF9
+      display: block
+      background-size: 12px 11px
+      text-indent: 40px
+      background-position: 20px center
+      font-size: 1.125em
+      line-height: 1.333em
+      max-width: 95px
+      height: 31px
+      padding-top: 11px
+      +rounded_corners
+  ul.tags li
+    position: relative
+    a
+      font-size: 0.688em
+      font-weight: 600
+      line-height: 2.182em
+      position: relative
+      display: block
+      z-index: 2
+      padding-top: 1px
+    div.usage
+      background: #eaf5f5
+      left: 0
+      top: 0
+      height: 26px
+      position: absolute
+      z-index: 1
+      +rounded_corners
+  a.flag
+    background: url(/assets/flag_icon@2x.png) no-repeat 0 0 transparent
+    color: #C7C7C7
+    background-size: 8px 14px
+    font-size: 0.688em
+    font-weight: 600
+    padding-left: 10px
+    line-height: 2.182em
+  h5
+    border-bottom: 1px solid #e5e5e5
+    padding-bottom: 6px
+    margin-bottom: 12px
+
+/*
+ *Answers
+section.question div.recipient_answer
+  +border-radius(6px)
+  +box-shadow(0 2px 0 #f9f9f9)
+  background: rgba(0, 0, 0, 0.015)
+  background-image: url(/assets/seal@2x.png)
+  background-repeat: no-repeat
+  background-position: 98% 4%
+  background-size: 36px
+  border: 1px solid #F3F3F3
+  display: inline-block
+  float: right
+  margin-top: 24px
+  margin-bottom: 42px
+  padding: 4.974359%
+  vertical-align: top
+  width: 90%
+  div.avatar
+    margin-right: 6px
+  div.person-info
+    display: inline-block
+    margin-bottom: 18px
+    h2
+      font-size: 1.125em
+      line-height: 1.333em
+    span.jurisdiction
+      +RobotoRegular
+      color: #518795
+      font-size: 0.813em
+      line-height: 1.385em
+    span.stats
+      +RobotoRegular
+      color: #7b969e
+      font-size: 0.688em
+      line-height: 1.636em
+      display: block
+  p
+    display: inline-block
+  span.pubdate
+    font-size: 0.813em
+    line-height: 1.385em
+    color: #7b969e
+    sup
+      &:before
+        content: "\2022"
+        padding: 0 8px 0 6px
+
+/*
+ *Preview
+section.preview
+  padding-top: 48px
+  padding-bottom: 36px
+  div.actions a
+    margin-bottom: 12px
+    &.edit
+      width: 79px
+      text-indent: -10px
+
+/* Address Lookup people-list, etc.
+ul.people-type
+  display: block
+  li
+    display: inline-block
+    position: relative
+    vertical-align: top
+    a
+      +RobotoRegular
+      color: #9db9bd
+      display: inline-block
+      font-size: 0.688em
+      line-height: 1.636em
+      font-weight: 600
+      padding: 12px 18px
+      +transition(color 0.2s ease-in)
+      &:hover
+        color: #3c636e
+    i
+      display: none
+    &.active
+      a
+        color: #3c636e
+      i
+        clear: both
+        background: #FFF
+        color: #F77665
+        display: block
+        position: relative
+        margin: auto
+        margin-top: -9px
+        width: 25px
+        margin-bottom: -8px
+        text-align: center

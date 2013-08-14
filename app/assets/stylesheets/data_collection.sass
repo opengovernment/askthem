@@ -1,0 +1,63 @@
+@import compass
+@import mixins
+
+/*
+ *This file is focused on pages dedicated to a sole purpose: collecting user information.
+ *Examples: Sign Up, Log in, Create Question
+
+body.data_collection
+  a.logo
+    margin:
+      top: 42px
+      left: 0
+  header h1
+    color: #32515a
+    +RobotoBlack
+    font-size: 1.875em
+    line-height: 1.6em
+    margin: 120px 0 36px 0
+    padding: 0
+  section.question.ask h1
+    margin-bottom: 0
+  div.content_body
+    background: none
+    +box-shadow(none)
+    article
+      width: 100%
+    div.data_collection_form
+      width: 100%
+      box-sizing: border-box
+      @media (min-width: 420px)
+        padding: 25px 35px 30px 35px
+        +box-shadow(0 0 5px rgba($black, 0.1), 0 35px 185px rgba(255, 255, 255, 0.75))
+        border: 1px solid #bcced1
+        +border-radius(3px)
+        background-color: #cce0e2
+  header.main, div.content_body
+    margin: auto
+    display: block
+    max-width: 600px
+    min-width: 0
+    @media (min-width: 420px)
+      width: 70%
+    div.wrapper
+      text-align: center
+      @media (min-width: 420px)
+        padding-left: 0
+  header.main
+    @media (max-width: 420px)
+      width: 100%
+      text-align: center
+  form fieldset
+    border: none
+    padding: 0
+    margin: 0
+  .question.ask div.controls
+    margin-top: 24px
+    span.count
+      clear: both
+      display: block
+      margin-left: 0
+  div.controls .cta_pill
+    min-width: 160px
+    width: auto
