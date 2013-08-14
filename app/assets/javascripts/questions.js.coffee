@@ -12,13 +12,13 @@ jQuery ($) ->
     window.open $(this).attr('href'), null,
       'scrollbars=yes,resizable=yes,toolbar=no,location=yes,width=550,height=' + height + ',left=' + Math.round((screen.width - 550) / 2) + ',top=' + Math.max(0, Math.round((screen.height - height) / 2))
 
-  $('.icon-facebook').click (event) ->
+  $('.actions .icon-facebook').click (event) ->
     popup.call(this, event, 270) # auto-resizes
 
-  $('.icon-twitter').click (event) ->
+  $('.actions .icon-twitter').click (event) ->
     popup.call(this, event, 270)
 
-  $('.icon-google-plus').click (event) ->
+  $('.actions .icon-google-plus').click (event) ->
     popup.call(this, event, 227) # auto-resizes
 
   $('time[data-time-ago]').timeago()
@@ -65,8 +65,8 @@ jQuery ($) ->
         showPeopleForAddress($("#question_user_attributes_postal_code"))
 
     if !$(this).hasClass('active')
-      $('span.toggle a.active').removeClass('active icon-ok')
-      $(this).addClass('active icon-ok')
+      $('span.toggle a.active').removeClass('active')
+      $(this).addClass('active')
 
   $("#question_user_attributes_postal_code").keyup (e) ->
     theInput = e.delegateTarget
