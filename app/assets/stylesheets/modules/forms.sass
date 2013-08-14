@@ -113,14 +113,20 @@ form div.pill_wrap
     height: 54px
     margin-bottom: 0
     text-indent: 20px
-    width: 76.136363636364%
     +input-placeholder(#cccccc, 600)
     &:focus
       +input-placeholder(#b9ccc8, 600)
+    @media (max-width: 420px)
+      width: 65%
+    @media (min-width: 420px)
+      width: 76.136363636364%
   input[type=file]
-    width: 75%
     height: 36px
     padding-top: 18px
+    @media (max-width: 420px)
+      width: 65%
+    @media (min-width: 420px)
+      width: 75%
   label
     display: block
     float: left
@@ -130,7 +136,10 @@ form div.pill_wrap
     text-transform: uppercase
     margin-top: 19px
     margin-bottom: 17px
-    width: 19.863636363636%
+    @media (max-width: 420px)
+      width: 30%
+    @media (min-width: 420px)
+      width: 19.863636363636%
     abbr
       display: none
   div.input.select.sculpt
@@ -143,7 +152,10 @@ form div.pill_wrap
     float: left
     height: 54px
     margin-bottom: 0
-    width: 76.136363636364%
+    @media (max-width: 420px)
+      width: 65%
+    @media (min-width: 420px)
+      width: 76.136363636364%
     select
       padding: 17px 0
       text-indent: 20px
@@ -158,22 +170,25 @@ span.tip
   position: absolute
   text-align: left
   &.private
-    +box-shadow(0 3px rgba(0, 0, 0, 0.05))
-    +border-radius(6px)
-    padding: 10px
-    right: -200px
-    top: 7px
-    width: 120px
-    &:before
-      content: ' '
-      height: 0
-      width: 0
-      border-right: 8px solid #FFF
-      border-top: 12px solid rgba(0, 0, 0, 0)
-      border-bottom: 12px solid rgba(0, 0, 0, 0)
-      left: -8px
-      top: 26%
-      position: absolute
+    @media (max-width: 420px)
+      display: none
+    @media (min-width: 420px)
+      +box-shadow(0 3px rgba(0, 0, 0, 0.05))
+      +border-radius(6px)
+      padding: 10px
+      right: -200px
+      top: 7px
+      width: 120px
+      &:before
+        content: ' '
+        height: 0
+        width: 0
+        border-right: 8px solid #FFF
+        border-top: 12px solid rgba(0, 0, 0, 0)
+        border-bottom: 12px solid rgba(0, 0, 0, 0)
+        left: -8px
+        top: 26%
+        position: absolute
 
 // Signup to sign a question - @todo ST: classname too close to "action", rename
 .actions form
