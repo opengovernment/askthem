@@ -5,19 +5,48 @@
 
   <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: {id: 'edit_registration'}) do |f| %>
     <%= devise_error_messages! %>
-    <% if resource.image? %>
-      <%= f.input :remove_image, as: :boolean, hint: image_tag(resource.image.url) %>
-    <% end %>
-    <%= f.input :image, as: :file %>
-    <%= f.input :image_cache, as: :hidden %>
-    <%= f.input :given_name %>
-    <%= f.input :family_name %>
-    <%= f.input :email %>
-    <%= f.input :street_address %>
-    <%= f.input :locality %>
-    <%= f.input :region, collection: OpenGovernment::STATES %>
-    <%= f.input :postal_code %>
-    <%= f.input :password, input_html: {autocomplete: 'off'} %>
-    <%= f.button :submit, 'Update' %>
+    <div class="data_collection_form">
+      <fieldset>
+        <% if resource.image? %>
+          <%= image_tag(resource.image.url, class: 'edit_avatar') %>
+          <%= f.input :remove_image, as: :boolean %>
+        <% end %>
+        <div class="pill_wrap">
+          <%= f.input :image, as: :file %>
+          <%= f.input :image_cache, as: :hidden %>
+        </div>
+        <div class="pill_wrap">
+          <%= f.input :given_name %>
+        </div>
+        <div class="pill_wrap">
+          <%= f.input :family_name %>
+        </div>
+        <div class="pill_wrap">
+          <%= f.input :email, :label=>'Email' %>
+        </div>
+        <div class="pill_wrap">
+          <%= f.input :street_address, :label=>'address' %>
+        </div>
+        <div class="pill_wrap">
+          <%= f.input :locality %>
+        </div>
+        <div class="pill_wrap">
+          <label for="question_user_attributes_region" class="lesser">State</label>
+          <div class="input select sculpt icon-angle-down">
+            <%= f.select :region, options_for_select(OpenGovernment::STATES, @state_code), placeholder: 'Select your state' %>
+          </div>
+        </div>
+        <div class="pill_wrap">
+          <%= f.input :postal_code %>
+        </div>
+        <div class="pill_wrap">
+          <%= f.input :password, hint: false, label: 'Password', input_html: {autocomplete: 'off'} %>
+          <span class='tip private'>leave blank if you don't want to change it</span>
+        </div>
+      </fieldset>
+    </div>
+    <div class="controls">
+      <%= f.button :submit, 'Update', :class => 'cta_pill' %>
+    </div>
   <% end %>
 </section>
