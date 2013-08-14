@@ -14,6 +14,7 @@ We require these to be installed:
 * nodejs
 * mongodb # should also be running
 * redis # should also be running
+* phantomjs # for running the request spec
 
 Depending on your OS , you may also need to install these:
 
