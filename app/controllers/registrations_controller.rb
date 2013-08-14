@@ -25,6 +25,8 @@ class RegistrationsController < Devise::RegistrationsController
 
 
   # Unlike Devise, no destruction (until we sort out orphaned content).
+  layout 'data_collection'
+  
   def destroy
     not_found
   end

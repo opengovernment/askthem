@@ -28,7 +28,7 @@ form{
     @include border-radius(3px);
     @include box-shadow(0 1px 2px #F3F3F3 inset);
     width:100%;
-    @include input-placeholder(#94A7A3);
+    @include input-placeholder(#cccccc);
     @include transition-property(all);
     @include transition-duration(.125s);
     &:focus{
@@ -46,59 +46,6 @@ form{
     &:focus{
       text-indent:0;
       padding-left:12px;
-    }
-  }
-  //flatline classes might be deleted soon @todo ST to review
-  input[type=text].flatline{
-    background-image: url(/assets/textarea_bg@2x.png);
-    border:0;
-    background-size: 2px 30px;
-    background-position: 0 29px;
-    font-size:0.938em;
-    height: auto;
-    line-height: 2em;
-    font-weight:100;
-    color:#284249;
-    outline:none;
-    margin-bottom:36px;
-    padding-top:0;
-    text-indent:0px;
-    width:100%;
-    @include box-shadow(none);
-    @include transition-property(none);
-    @include transition-property(text-indent);
-    @include transition-duration(.125s);
-    &:focus, &:hover{
-      background-image: url(/assets/textarea_bg_focus@2x.png);
-      background-size: 2px 30px;
-      background-position: 0 29px;
-      color:#818181;
-      text-indent:3px;
-    }
-  }
-  textarea.flatline{
-    background-image: url(/assets/textarea_bg@2x.png);
-    border: 0;
-    background-size: 2px 30px;
-    background-position: 0 29px;
-    padding-top: 0;
-    color:#284249;
-    font-size: 0.938em;
-    line-height: 2em;
-    font-weight: 100;
-    height:90px;
-    outline: none;
-    resize: none;
-    margin-bottom: 36px;
-    text-indent:0px;
-    width: 100%;
-    @include box-shadow(none);
-    @include transition-property(none);
-    &:focus, &:hover{
-      background-image: url(/assets/textarea_bg_focus@2x.png);
-      background-size: 2px 30px;
-      background-position: 0 29px;
-      color:#818181;
     }
   }
   label{
@@ -162,6 +109,98 @@ form{
       line-height: 1.385em;
       margin-bottom: 6px;
       margin-top: 12px;
+    }
+  }
+}
+
+form div.pill_wrap{
+  background: #FFF;
+  border: 1px solid #BCCED1;
+  @include box-shadow(0 2px 0 rgba(0,0,0,.03));
+  clear: both;
+  float: left;
+  margin-bottom: 18px;
+  position:relative;
+  width: 100%;
+  input[type=text],input[type=email],input[type=password],input[type=number],input[type=file]{
+    border: none;
+    border-left: 1px solid #f2f2f2;
+    @include border-radius(0);
+    display:block;
+    float:left;
+    height: 54px;
+    margin-bottom:0;
+    text-indent: 20px;
+    width:76.136363636364%;
+    @include input-placeholder(#cccccc, 600);
+    &:focus{
+      @include input-placeholder(#b9ccc8, 600);
+    }
+  }
+  input[type=file]{
+    width: 75%;
+    height: 36px;
+    padding-top: 18px;
+  }
+  label{
+    display: block;
+    float: left;
+    line-height: 18px;
+    text-align: left;
+    padding-left: 4%;
+    text-transform: uppercase;
+    margin-top: 19px;
+    margin-bottom: 17px;
+    width: 19.863636363636%;
+    abbr{
+      display:none;
+    }
+  }
+  div.input.select.sculpt{
+    box-sizing: border-box;
+    border: none;
+    border-left: 1px solid #f2f2f2;
+    @include border-radius(0);
+    @include box-shadow(none);
+    display: block;
+    float: left;
+    height:54px;
+    margin-bottom:0;
+    width:76.136363636364%;
+    select{
+      padding:17px 0;
+      text-indent:20px;
+    }
+    &:before{
+      right: 20px;
+      top: 18px;
+    }
+  }
+}
+
+span.tip{
+  background: #FFF;
+  font-size: 0.875em;
+  line-height: 1.286em;
+  position:absolute;
+  text-align: left;
+  &.private{
+    @include box-shadow(0 3px rgba(0,0,0,.05));
+    @include border-radius(6px);
+    padding: 10px;
+    right: -200px;
+    top: 7px;
+    width: 120px;
+    &:before{
+      content: ' ';
+      height: 0;
+      width: 0;
+      border-right: 8px solid #FFF;
+      border-top: 12px solid rgba(0, 0, 0, 0);
+      border-bottom: 12px solid rgba(0, 0, 0, 0);
+      left: -8px;
+      top: 26%;
+      position: absolute;
     }
   }
 }
@@ -254,6 +293,16 @@ div.controls{
     text-transform: none;
     vertical-align: middle;
   }
+  ul{
+    clear:both;
+    margin-top: 36px;
+    width:100%;
+    li{
+      display:inline-block;
+      vertical-align: top;
+      width:30%;
+    }
+  }
 }
 .question div.controls{
   input[type=submit]{
@@ -261,7 +310,7 @@ div.controls{
     width: 33%;
   }
   span.count{
-    color: #C8C8C8;
+    color: $lightblue;
     font-size: 0.813em;
     line-height: 1.385em;
     font-weight: 600;
@@ -290,6 +339,50 @@ div.count{
     font-size: 13px;
     font-weight: 600;
     color: #999;
+  }
+}
+
+span.toggle{
+  display: inline-block;
+  color:$darkblue;
+  margin: 18px 0 36px;
+  padding: 0;
+  width: 100%;
+  a.select{
+    @include border-radius(24px);
+    @include box-shadow(0 2px 0 0 rgba(0, 0, 0, 0.03));
+    background:#d0e4e8;
+    border:1px solid #cfe3e8;
+    color:$darkblue;
+    cursor:pointer;
+    display:inline-block;
+    @include RobotoRegular();
+    font-size:0.813em;
+    line-height: 1.385em;
+    font-weight:600;
+    padding: 12px;
+    margin:0 10px;
+    text-transform:uppercase;
+    &:hover{
+      background-color:#cae1e5;
+    }
+    &.mobile{
+      display:none;
+    }
+    &.active{
+      @include box-shadow(0 2px 0 0 rgba(0, 0, 0, 0.03), inset 0 0 0 1px #bae530);
+      border-color:#99C472; 
+      background: #AFD82D;
+      color: #576b16;
+      &:before,&:after{
+        display:inline-block;
+        margin-right:6px;
+      }
+    }
+    i{
+      font-size:1.5em;
+      line-height: 1em;
+    }
   }
 }
 
@@ -430,14 +523,37 @@ div.notif{
     }
   }
 }
-div.field_with_errors{
+span.secure{
+  font-weight: 600;
+  display: block;
+  margin-bottom: 18px;
+  i{
+    font-size:1.125em;
+    line-height: 1.333em;
+  }
+}
+
+div.field_with_errors, form div.pill_wrap div.field_with_errors{
   label.message{
     color:#F86369;
     margin-top:0;
   }
-  input{
+  input[type=text],input[type=email],input[type=password],input[type=number]{
     background: #FFF4F4;
     border: 1px solid #F86369;
+    @include input-placeholder(#F86369);
+  }
+}
+form div.pill_wrap div.field_with_errors{
+  input[type=text],input[type=email],input[type=password],input[type=number]{
+    border:none;
+    border-left:1px solid #F86369;
+  }
+  label.message{
+    position: absolute;
+    right: 19px;
+    top: 11px;
+    text-transform: none;
   }
 }
 .related_wrap div.notif{

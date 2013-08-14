@@ -1,6 +1,6 @@
 @import 'compass';
 
-$darkblue: #1D2F34;
+$darkblue: #32515a;
 $middleblue: #3c636e;
 $lightblue: #7b969e;
 
@@ -36,7 +36,7 @@ $black: #000000;
 }
 
 /*
-  Typographic Mixes
+  Typography
 */
 
 @mixin RobotoLight(){
@@ -70,17 +70,21 @@ Block fluidity, for now
 Form elements
 */
 
-@mixin input-placeholder($color) {
+@mixin input-placeholder($color, $fontweight:normal) {
   &.placeholder {
     color: $color;
-	}
+    font-weight: $fontweight;
+  }
   &:-moz-placeholder {
     color: $color;
-	}
+    font-weight: $fontweight;
+  }
   &:-ms-input-placeholder {
     color: $color;
-	}
+    font-weight: $fontweight;
+  }
   &::-webkit-input-placeholder {
     color: $color;
-	}
+    font-weight: $fontweight;
+  }
 }
