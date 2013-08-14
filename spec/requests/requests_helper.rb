@@ -27,3 +27,9 @@ end
 RSpec.configure do |config|
   config.after(:each) { Warden.test_reset! }
 end
+
+# common helpers
+def select_user_region_for(region)
+  select(OpenGovernment::STATES.select { |_, v| v == region }.keys.first,
+         from: "user_region")
+end

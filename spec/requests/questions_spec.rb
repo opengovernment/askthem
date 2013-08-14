@@ -306,15 +306,15 @@ describe 'questions' do
 
       it 'allows new user to register and sign on to a question', js: true do
         visit "/vt/questions/#{@question.id}"
-        script = "jQuery('#user_given_name').val('John'); "
-        script +=  "jQuery('#user_family_name').val('Doe'); "
-        script +=  "jQuery('#user_email').val('john.doe@example.com'); "
-        script += "jQuery('#user_street_address').val('#{street_address}'); "
-        script +=  "jQuery('#user_locality').val('#{locality}'); "
-        script +=  "jQuery('#user_region').val('#{region}'); "
-        script +=  "jQuery('#user_postal_code').val('#{postal_code}'); "
-        script +=  "jQuery('#user_password').val('testtest'); "
-        page.execute_script script
+        fill_in 'user_given_name', with: 'John'
+        fill_in 'user_family_name', with: 'Doe'
+        fill_in 'user_email', with: 'john.doe@example.coom'
+        fill_in 'user_street_address', with: street_address
+        fill_in 'user_locality', with: locality
+        select_user_region_for('vt')
+        fill_in 'user_postal_code', with: postal_code
+        fill_in 'user_password', with: 'testtest'
+
         click_button 'Sign On'
         page.body.should have_content '1 out of'
       end
