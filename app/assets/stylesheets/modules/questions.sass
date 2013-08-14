@@ -168,8 +168,9 @@ section.questions
   &.related_focus
     ol
       li
-        div.question_content
-          width: 70.867075664622%
+        .question_content
+          @media (min-width: 420px)
+            width: 70.867075664622%
           p
             color: $lightgrey
             width: 100%
