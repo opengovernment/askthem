@@ -1,0 +1,97 @@
+@import compass
+@import mixins
+
+$fontpath: "/assets/" !default
+
+@font-face
+  font-family: 'RobotoRegular'
+  src: url("#{$fontpath}Roboto-Regular-webfont.eot")
+  src: url("#{$fontpath}Roboto-Regular-webfont.eot?#iefix") format("embedded-opentype"), url("#{$fontpath}Roboto-Regular-webfont.woff") format("woff"), url("#{$fontpath}Roboto-Regular-webfont.ttf") format("truetype"), url("#{$fontpath}Roboto-Regular-webfont.svg#RobotoRegular") format("svg")
+  font-weight: normal
+  font-style: normal
+
+
+@font-face
+  font-family: 'RobotoThin'
+  src: url("#{$fontpath}Roboto-Thin-webfont.eot")
+  src: url("#{$fontpath}Roboto-Thin-webfont.eot?#iefix") format("embedded-opentype"), url("#{$fontpath}Roboto-Thin-webfont.woff") format("woff"), url("#{$fontpath}Roboto-Thin-webfont.ttf") format("truetype"), url("#{$fontpath}Roboto-Thin-webfont.svg#RobotoThin") format("svg")
+  font-weight: normal
+  font-style: normal
+
+
+@font-face
+  font-family: 'RobotoLight'
+  src: url("#{$fontpath}Roboto-Light-webfont.eot")
+  src: url("#{$fontpath}Roboto-Light-webfont.eot?#iefix") format("embedded-opentype"), url("#{$fontpath}Roboto-Light-webfont.woff") format("woff"), url("#{$fontpath}Roboto-Light-webfont.ttf") format("truetype"), url("#{$fontpath}Roboto-Light-webfont.svg#RobotoLight") format("svg")
+  font-weight: normal
+  font-style: normal
+
+
+@font-face
+  font-family: 'RobotoBlack'
+  src: url("#{$fontpath}Roboto-Black-webfont.eot")
+  src: url("#{$fontpath}Roboto-Black-webfont.eot?#iefix") format("embedded-opentype"), url("#{$fontpath}Roboto-Black-webfont.woff") format("woff"), url("#{$fontpath}Roboto-Black-webfont.ttf") format("truetype"), url("#{$fontpath}Roboto-Black-webfont.svg#RobotoBlack") format("svg")
+  font-weight: normal
+  font-style: normal
+
+
+h1, h2, h3, h4, h5, p
+  word-wrap: break-word
+
+h1
+  color: $darkblue
+  +RobotoRegular
+  font-size: 2.625em
+  line-height: 1em
+  font-weight: 100
+
+h2
+  +RobotoRegular
+  font-size: 1.125em
+  line-height: 1.333em
+
+h3
+  color: $middleblue
+  font-size: 1em
+  line-height: 1.5em
+  font-weight: 600
+
+h4
+  color: $darkblue
+  font-size: 0.813em
+  font-weight: 600
+  line-height: 1.385em
+  padding-bottom: 6px
+
+article header h4
+  font-weight: 200
+
+h5
+  color: $darkblue
+  font-size: 0.625em
+  font-weight: 600
+  line-height: 2.4em
+  text-transform: uppercase
+
+footer h5
+  font-size: 0.813em
+  line-height: 1.385em
+
+strong
+  font-weight: 600
+
+span.info
+  color: $middlegrey
+  text-transform: uppercase
+  font-weight: 600
+  font-size: 0.688em
+  line-height: 1.364em
+
+span.emph
+  display: inline-block
+  background: #EFEFEF
+  color: #818181
+  padding: 0 3px
+  font-weight: 600
+  border: 1px solid #DFDFDF
+  border-radius: 3px
