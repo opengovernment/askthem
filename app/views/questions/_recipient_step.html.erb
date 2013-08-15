@@ -7,14 +7,14 @@
   </header>
 
   <span class="toggle">
-    <span>Locate them by:</span>
+    <span>Locate by:</span>
     <a href="#address_lookup" class="select active icon-ok address_lookup mobile">Your Address</a>
     <a class="select active address_lookup">
       <i class="icon-home"></i> Your Address
     </a>
     <a name="address_lookup" class="anchor"></a>
     <span>or</span>
-    <a href="#twitter_find" class="select twitter mobile">Twitter Name</a>
+    <a href="#twitter_find" class="select twitter twitter_lookup mobile">Twitter Name</a>
     <a class="select twitter">
       <i class="icon-twitter"></i> Twitter Name
     </a>
@@ -26,10 +26,10 @@
       <i class="icon-lock"></i> Your address information is private and safe!
     </span>
     <div class="address_lookup">
-    
+
       <fieldset class="last">
         <%= f.fields_for :user do |user_form| %>
-      
+
         <div class="pill_wrap">
           <label for="question_user_attributes_street_address" class="lesser">Address</label>
           <%= user_form.text_field :street_address, placeholder: 'Street Address' %>
@@ -76,7 +76,7 @@
         </ol>
       </fieldset>
     </div>
-  
+
     <div class="twitter" style="display:none;">
       <label for="question">Twitter users
         <span class="details">Ask a question from anyone on Twitter.</span>
