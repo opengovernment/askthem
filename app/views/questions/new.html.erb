@@ -6,7 +6,7 @@
     <%= f.validate :person_id %>
 
     <% locals = { question: @question, person: @person, bill: @bill, relevant_steps: @relevant_steps, first_step: @first_step, f: f } -%>
-    
+
     <% @relevant_steps.each do |step| %>
       <%= render partial: "#{step}_step", locals: locals.merge({step: step}) %>
     <% end %>
@@ -24,7 +24,7 @@
       </ul>
     </div>
     %>
-    
+
     <div class="controls">
       <a class="cta_pill" id="next-button"
          data-relevant-steps="<%= @relevant_steps.join(', ') -%>"

@@ -1,5 +1,6 @@
 class RegistrationsController < Devise::RegistrationsController
-  
+  layout 'data_collection'
+
   def create
     build_resource
 
@@ -25,14 +26,11 @@ class RegistrationsController < Devise::RegistrationsController
 
 
   # Unlike Devise, no destruction (until we sort out orphaned content).
-  layout 'data_collection'
-  
   def destroy
     not_found
   end
 
-private
-
+  private
   def after_update_path_for(resource)
     user_path(resource)
   end

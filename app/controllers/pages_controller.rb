@@ -2,8 +2,8 @@ class PagesController < ApplicationController
   before_filter :set_jurisdiction, only: [:overview, :lower, :upper, :bills, :key_votes]
   before_filter :authenticate_user!, only: :dashboard
   caches_action :channel
-  respond_to :html
-  respond_to :json, only: :locator
+  respond_to :html, except: :identifier
+  respond_to :json, only: [:locator, :identifier]
 
   def splash
     render layout: 'splash'
@@ -47,19 +47,13 @@ class PagesController < ApplicationController
   # @see https://github.com/sunlightlabs/billy/wiki/Differences-between-the-API-and-MongoDB
   def locator
     @people = type.constantize.includes(:questions).for_location(params[:q])
+    respond_with limited_json_for(@people)
+  end
 
-    respond_with(@people.as_json({
-      only: [
-        :full_name,
-        :photo_url,
-        :party,
-      ],
-      methods: [
-        :id,
-        :most_recent_chamber_title,
-        :most_recent_district,
-      ],
-    }))
+  def identifier
+    # annoying that you can't do case insensitive queries without a regex
+    @people = type.constantize.where(email: /^#{params[:email]}$/i)
+    respond_with limited_json_for(@people)
   end
 
   def search
@@ -72,6 +66,13 @@ class PagesController < ApplicationController
   end
 
   private
+  def limited_json_for(people)
+    only = [:full_name, :photo_url, :party]
+    methods = [:id, :most_recent_chamber_title, :most_recent_district]
+
+    people.as_json only: only, methods: methods
+  end
+
   def type
     @type ||= params[:type] || 'Person'
   end
