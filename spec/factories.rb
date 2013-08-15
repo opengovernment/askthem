@@ -22,6 +22,16 @@ FactoryGirl.define do
 
   factory :person do
     metadatum
+
+
+    factory :person_ny_sheldon_silver do
+      id 'NYL000194'
+      given_name 'Sheldon'
+      last_name 'Silver'
+      full_name 'Sheldon Silver'
+      email 'speaker@assembly.state.ny.us'
+      metadatum { FactoryGirl.create(:metadatum, abbreviation: 'ny') }
+    end
   end
 
   factory :vote do
