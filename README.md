@@ -74,7 +74,7 @@ Get the necessary supporting data (work-in-progress, will change):
 
     bundle exec rake openstates:json:update # takes ONLY value to limit data, recommended for most developers
     bundle exec rake openstates:add_metadata
-    bundle exec rake congres:api:download:legislators
+    bundle exec rake congress:api:download:legislators
     bundle exec rake db:mongoid:create_indexes
 
 ### Influence Explorer
@@ -83,7 +83,7 @@ You can import Influence Explorer data on a yearly basis.
 
 1. Get biographies from the Influence Explorer API (a third of OpenStates legislators have biographies)
 
-    bundle exec rake influenceexplorer:biographies
+        bundle exec rake influenceexplorer:biographies
 
 ### Project VoteSmart
 
