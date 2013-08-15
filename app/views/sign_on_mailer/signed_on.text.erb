@@ -1,0 +1,24 @@
+Thank you for signing on to &ldquo;<%= @question.title %>&rdquo; on AskThem, <%= @user.given_name %>
+
+Title
+<%= @question.title %>
+
+Topic
+<%= @question.subject %>
+
+To
+<%= link_to @question.person.name, person_url(@question.state, @question.person.id) %>
+(<%= person_attributes(@question.person) %>)
+
+Body
+<%= @question.body %>
+
+
+Here's a permalink to that question, which you can share over email and social media: <%= question_url(@question.state, @question.id) %>
+
+Remember to circulate your question to reach the signature threshold, and we'll help you push for a public response.
+
+For more info about how to gather support for your question, please visit our FAQ: [url]
+
+Thank you,
+The AskThem Team

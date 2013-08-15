@@ -1,7 +1,7 @@
 class SignOnMailer < ActionMailer::Base
   add_template_helper(ApplicationHelper)
 
-  default from: "from@example.com"
+  default from: "develop@opengovernment.org"
   def signed_on(user, question)
     @user = user
     @question = question
