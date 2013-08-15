@@ -25,3 +25,4 @@
 //= require forms
 //= require rails.validations
 //= require sign_on_user
+//= require modal

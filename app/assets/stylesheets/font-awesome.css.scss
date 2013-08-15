@@ -46,7 +46,7 @@ $iconMuted:         #eee;
  * -------------------------- */
 
 [class^="icon-"], [class*=" icon-"] {
-  font-family: FontAwesome;
+  font-family: FontAwesome !important;
   font-weight: normal;
   font-style: normal;
   text-decoration: inherit;

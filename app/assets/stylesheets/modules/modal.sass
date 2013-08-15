@@ -1,0 +1,25 @@
+@import compass
+@import mixins
+
+#overlay
+  position: fixed
+  background-color: rgba($black, .5)
+  top: 0
+  left: 0
+  height: 100%
+  width: 100%
+  z-index: 10000
+
+#modal
+  padding: 2em
+  position: fixed
+  top: 40%
+  +border-radius(3px)
+  background-color: #F9F9F9
+  z-index: 10000
+  @media (max-width: 420px)
+    width: 86%
+    +box-sizing(border-box)
+  @media (min-width: 420px)
+    left: 180px
+    width: 480px

@@ -117,7 +117,7 @@ form div.pill_wrap
     &:focus
       +input-placeholder(#b9ccc8, 600)
     @media (max-width: 420px)
-      width: 65%
+      width: 66%
     @media (min-width: 420px)
       width: 76.136363636364%
   input[type=file]
@@ -465,8 +465,11 @@ span.secure
 
 div.field_with_errors, form div.pill_wrap div.field_with_errors
   label.message
-    color: #F86369
-    margin-top: 0
+    @media (max-width: 420px)
+      display: none
+    @media (min-width: 420px)
+      color: #F86369
+      margin-top: 0
   input[type=text],input[type=email],input[type=password],input[type=number]
     background: #FFF4F4
     border: 1px solid #F86369
