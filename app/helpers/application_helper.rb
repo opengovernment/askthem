@@ -107,7 +107,11 @@ module ApplicationHelper
     else
       width, height = opts[:width], opts[:height]
     end
-    image_tag("http://d2xfsikitl0nz3.cloudfront.net/#{CGI.escape(url)}/#{width}/#{height}", opts)
+    if url.include? 'ballotpedia'
+      image_tag("/assets/placeholder.png")
+    else
+      image_tag("http://d2xfsikitl0nz3.cloudfront.net/#{CGI.escape(url)}/#{width}/#{height}", opts)
+    end
   end
 
   # Returns an "a" tag for the navigation tab.
