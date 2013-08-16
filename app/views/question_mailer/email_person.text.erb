@@ -1,0 +1,18 @@
+<% if @mail_admin %>
+  This email could not be sent because we don't have an email address for <%= person_attributes(@question.person) %>
+<% end %>
+A question asked of you by people on AskThem has reached <%= @question.signature_count %> signatures.
+
+Title
+<%= @question.title %>
+
+Topic
+<%= @question.subject %>
+
+Body
+<%= @question.body %>
+
+Here's a permalink to that question: <%= question_url(@question.state, @question.id) %>
+
+Thank you,
+The AskThem Team
