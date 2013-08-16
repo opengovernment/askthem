@@ -20,7 +20,7 @@ class QuestionMailer < ActionMailer::Base
     @question = question
     @mail_admin = mail_admin
     if mail_admin
-      mail(:to => 'admin@opengovernment.org',
+      mail(:to => 'develop@opengovernment.org',
           :subject => "Error sending email to '#{question.person.name}'")
     else
       mail(:to => question.person.email,
