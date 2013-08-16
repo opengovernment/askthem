@@ -15,16 +15,4 @@ class QuestionMailer < ActionMailer::Base
     mail(:to => user.email,
         :subject => "You're Signed On to '#{@question.title}'")
   end
-
-  def email_person(question, mail_admin=false)
-    @question = question
-    @mail_admin = mail_admin
-    if mail_admin
-      mail(:to => 'develop@opengovernment.org',
-          :subject => "Error sending email to '#{question.person.name}'")
-    else
-      mail(:to => question.person.email,
-          :subject => "People on AskThem want to know")
-    end
-  end
 end

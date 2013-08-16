@@ -23,19 +23,6 @@ describe QuestionMailer do
     last_email.from.should == ["develop@opengovernment.org"]
     last_email.subject.should == "You're Signed On to '#{question.title}'"
     last_email.body.encoded.should match(question_url(question.state, question.id))
-  end
 
-  it "sends an email to a Person when the signature threshold is met" do
-    person = FactoryGirl.create(:person_ny_sheldon_silver)
-    question = FactoryGirl.create(:question, person: person)
-    question.signature_count = question.person.signature_threshold
-    puts "Person Email #{question.person.email}"
-    QuestionMailer.email_person(question).deliver
-    last_email = ActionMailer::Base.deliveries.last
-    last_email.to.should == [question.person.email]
-    last_email.from.should == ["develop@opengovernment.org"]
-    last_email.subject.should == "People on AskThem want to know"
-    last_email.body.encoded.should match(question_url(question.state, question.id))
   end
-
 end
