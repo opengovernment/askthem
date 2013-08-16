@@ -10,8 +10,8 @@ describe ProjectVoteSmartPersonDetail do
                                                      last_name: 'Cummings',
                                                      district: 'Washington')
     @person.id = 'VTL000008'
-    @person.stub :chamber, 'upper'
     @person.save!
+    @person.stub(chamber: 'upper')
 
     @votesmart_id = "13256"
   end

@@ -1,8 +1,9 @@
 class RegistrationsController < Devise::RegistrationsController
   layout 'data_collection'
 
+  # based on https://github.com/plataformatec/devise/blob/master/app/controllers/devise/registrations_controller.rb#L12
   def create
-    build_resource
+    build_resource(sign_up_params)
 
     if resource.save
       if resource.active_for_authentication?

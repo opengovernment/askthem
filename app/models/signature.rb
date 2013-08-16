@@ -19,8 +19,7 @@ class Signature
 
   before_create :copy_user_fields
 
-private
-
+  private
   def copy_user_fields
     self.given_name     = user.given_name
     self.family_name    = user.family_name

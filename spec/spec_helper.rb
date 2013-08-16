@@ -12,9 +12,15 @@ Capybara.javascript_driver = :poltergeist
 # comment out javascript_driver above, uncomment this,
 # then use page.driver.debug where you want to trigger it
 # Capybara.register_driver :poltergeist_debug do |app|
-#   Capybara::Poltergeist::Driver.new(app, inspector: true)
+#    Capybara::Poltergeist::Driver.new(app, inspector: true)
 # end
 # Capybara.javascript_driver = :poltergeist_debug
+
+# backwards compatibility for 1.x
+Capybara.configure do |config|
+  config.match = :prefer_exact
+  config.ignore_hidden_elements = false
+end
 
 ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)

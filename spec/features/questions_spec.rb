@@ -1,5 +1,5 @@
 require 'spec_helper'
-require File.expand_path("../requests_helper.rb", __FILE__)
+require File.expand_path("../features_helper.rb", __FILE__)
 
 describe 'questions' do
   let(:street_address) { '2227 Paine Turnpike' }
@@ -43,7 +43,7 @@ describe 'questions' do
           as_user do
             visit '/vt/questions'
             click_link 'Sign On'
-            wait_until{ page.has_content?('Signed On')}
+            page.should have_content 'Signed On'
             page.body.should have_content '1 out of'
           end
         end
@@ -325,7 +325,7 @@ describe 'questions' do
           as_user do
             visit '/vt/questions'
             click_link 'Sign On'
-            wait_until{ page.has_content?('Signed On')}
+            page.should have_content 'Signed On'
             page.body.should have_content '1 out of'
           end
         end

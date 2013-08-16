@@ -14,8 +14,8 @@ describe PersonDetailRetriever do
 
     @person = Person.new(person_params)
     @person.id = 'VTL000001'
-    @person.stub :chamber, 'upper'
     @person.save!
+    @person.stub(chamber: 'upper')
   end
 
   describe '#person_detail' do

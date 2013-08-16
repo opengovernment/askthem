@@ -10,7 +10,8 @@ describe Question do
 
   it 'should validate if the state is in the list of states' do
     metadatum = FactoryGirl.create(:metadatum)
-    expect{FactoryGirl.create(:question, state: metadatum.abbreviation)}.to_not raise_error(Mongoid::Errors::Validations)
+    # should not raise Mongoid::Errors::Validations
+    expect{FactoryGirl.create(:question, state: metadatum.abbreviation)}.to_not raise_error
   end
   it 'should not validate if the state is not in the list of states' do
     expect{FactoryGirl.create(:question, state: 'foo')}.to raise_error(Mongoid::Errors::DocumentNotFound)
@@ -18,22 +19,26 @@ describe Question do
 
   it 'should validate if the subject is in the list of subjects' do
     valid_subject = Subject.all.first
-    expect{ FactoryGirl.create(:question, subject: valid_subject) }.to_not raise_error(Mongoid::Errors::Validations)
+    # should not raise Mongoid::Errors::Validations
+    expect{ FactoryGirl.create(:question, subject: valid_subject) }.to_not raise_error
   end
   it 'should not validate if the subject is not in the list of subjects' do
     expect{FactoryGirl.create(:question, subject: 'invalid')}.to raise_error(Mongoid::Errors::Validations, /is not included in the list of subjects/)
   end
   it 'should validate if the subject is blank' do
-    expect{FactoryGirl.create(:question, subject: nil)}.to_not raise_error(Mongoid::Errors::Validations)
+    # should not raise Mongoid::Errors::Validations
+    expect{FactoryGirl.create(:question, subject: nil)}.to_not raise_error
   end
 
   it 'should validate if the bill is blank' do
-    expect{FactoryGirl.create(:question, bill: nil)}.to_not raise_error(Mongoid::Errors::Validations)
+    # should not raise Mongoid::Errors::Validations
+    expect{FactoryGirl.create(:question, bill: nil)}.to_not raise_error
   end
 
   it 'should validate if the question and the person are in the same jurisdiction' do
     person = FactoryGirl.create(:person)
-    expect{FactoryGirl.create(:question, person: person, state: 'anytown')}.to_not raise_error(Mongoid::Errors::Validations)
+    # should not raise Mongoid::Errors::Validations
+    expect{FactoryGirl.create(:question, person: person, state: 'anytown')}.to_not raise_error
   end
 
   it 'should not validate if the question and the person are not in the same jurisdiction' do
@@ -43,13 +48,15 @@ describe Question do
   end
 
   it 'should validate if the bill is blank' do
-    expect{FactoryGirl.create(:question, bill: nil)}.to_not raise_error(Mongoid::Errors::Validations)
+    # should not raise Mongoid::Errors::Validations
+    expect{FactoryGirl.create(:question, bill: nil)}.to_not raise_error
   end
 
   it 'should validate if the person and the bill are in the same jurisdiction' do
     person = FactoryGirl.create(:person)
     bill = FactoryGirl.create(:bill)
-    expect{FactoryGirl.create(:question, person: person, bill: bill)}.to_not raise_error(Mongoid::Errors::Validations)
+    # should not raise Mongoid::Errors::Validations
+    expect{FactoryGirl.create(:question, person: person, bill: bill)}.to_not raise_error
   end
 
   it 'should not validate if the person and the bill are not in the same jurisdiction' do
@@ -89,7 +96,8 @@ describe Question do
     end
 
     it 'should validate if the subject is in the list of subjects' do
-      expect{FactoryGirl.create(:question, person: person, subject: 'Health')}.to_not raise_error(Mongoid::Errors::Validations)
+      # should not raise Mongoid::Errors::Validations
+      expect{FactoryGirl.create(:question, person: @person, subject: 'Health')}.to_not raise_error
     end
   end
 end

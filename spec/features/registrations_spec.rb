@@ -1,5 +1,5 @@
 require 'spec_helper'
-require File.expand_path("../requests_helper.rb", __FILE__)
+require File.expand_path("../features_helper.rb", __FILE__)
 
 describe 'registrations' do
   # aka users/sign_up

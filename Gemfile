@@ -37,7 +37,6 @@ group :production do
 end
 
 group :development do
-  gem 'heroku' # Rake task
   gem 'ruby-growl', '3.0'
   gem 'bullet'
 end
