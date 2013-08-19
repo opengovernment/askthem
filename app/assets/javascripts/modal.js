@@ -1,9 +1,3 @@
-$('#overlay').click(function() {
-  $(this).fadeOut('fast');
-  $('#modal').fadeOut('fast');
-});
-
-$('.modal-close').click(function() {
-  $('#overlay').fadeOut('fast');
-  $('#modal').fadeOut('fast');
+$('#overlay, .modal-close').click(function() {
+  $('#overlay, #modal').fadeOut('fast');
 });
