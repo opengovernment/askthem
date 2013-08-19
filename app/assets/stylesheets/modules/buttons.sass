@@ -27,3 +27,27 @@
     top: 1px
     +drop_shadow(0, 1px, 0, 0, rgba($white, 0.1))
     +background(linear-gradient(top center, #ed6f5f, #ed6f5f))
+
+.cta-pill-facebook
+  +background(linear-gradient(top center, lighten($facebook-blue, 5%), $facebook-blue))
+  border: 1px solid darken($facebook-blue, 10%)
+  text-shadow: 0 1px 0 darken($facebook-blue, 8%)
+  +box-shadow(0 1px 0 darken($facebook-blue, 8%))
+  +drop_shadow
+  +inset_double_drop_shadow
+  &:hover
+    +background(linear-gradient(top center, lighten($facebook-blue, 8%), lighten($facebook-blue, 3%)))
+  &:active
+    +background(linear-gradient(top center, $facebook-blue, $facebook-blue))
+
+.cta-pill-twitter
+  +background(linear-gradient(top center, lighten($twitter-blue, 5%), $twitter-blue))
+  border: 1px solid darken($twitter-blue, 3%)
+  text-shadow: 0 1px 0 darken($twitter-blue, 8%)
+  +box-shadow(0 1px 0 darken($twitter-blue, 8%))
+  +drop_shadow
+  +inset_double_drop_shadow
+  &:hover
+    +background(linear-gradient(top center, lighten($twitter-blue, 8%), lighten($twitter-blue, 3%)))
+  &:active
+    +background(linear-gradient(top center, $twitter-blue, $twitter-blue))

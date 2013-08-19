@@ -3,6 +3,8 @@
 $darkblue: #32515a
 $middleblue: #3c636e
 $lightblue: #7b969e
+$facebook-blue: #3B5998
+$twitter-blue: #00aced
 
 $darkgrey: #919191
 $middlegrey: #7a7a7a
@@ -21,10 +23,10 @@ $white: #FFFFFF
 =rounded_corners($border-radius: 3px)
   +border-radius($border-radius)
 
-=drop_shadow($x: 0, $y: 2px, $choke: 0, $blur: 0, $color: rgba(0, 0, 0, 0.1))
+=drop_shadow($x: 0, $y: 2px, $choke: 0, $blur: 0, $color: rgba($black, 0.1))
   +box-shadow($x $y $choke $blur $color)
 
-=inset_double_drop_shadow($x: 0, $y: 2px, $choke: 0, $blur: 0, $color: rgba(0, 0, 0, 0.1), $inset: inset, $x2: 0, $y2: 1px, $choke2: 0, $blur2: 0, $color2: #ffaa9f)
+=inset_double_drop_shadow($x: 0, $y: 2px, $choke: 0, $blur: 0, $color: rgba($black, 0.1), $inset: inset, $x2: 0, $y2: 1px, $choke2: 0, $blur2: 0, $color2: rgba($white, .4))
   +box-shadow($x $y $choke $blur $color, $inset $x2 $y2 $choke2 $blur2 $color2)
 
 =cta_background
