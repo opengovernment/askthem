@@ -52,7 +52,7 @@ section.people
     width: 59.61538%
   div.avatar
     +border-radius(60px)
-    border: 1px solid #2d3132
+    border: none
     display: inline-block
     overflow: hidden
     width: 17.204301075269%
@@ -124,6 +124,32 @@ section.people
             content: "\2022"
             position: absolute
             right: 0
+
+.is-verified
+  color: $green
+
+.verified-tooltip
+  display: none
+  +box-shadow(0 3px rgba($black, .05))
+  +border-radius(6px)
+  background-color: #f6fae9
+  font-size: .75em
+  color: $green
+  padding: 10px
+  width: 130px
+  position: relative
+  left: 12px
+  &:before
+    content: ''
+    height: 0
+    width: 0
+    border:
+      right: 12px solid #f6fae9
+      top: 12px solid transparent
+      bottom: 12px solid transparent
+    left: -8px
+    top: 18%
+    position: absolute
 
 /*
  *User Profiles
