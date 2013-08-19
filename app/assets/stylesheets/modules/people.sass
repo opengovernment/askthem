@@ -81,9 +81,10 @@ section.people
 
 .people-list > li
   display: inline-block
-  float: left
   padding-bottom: 30px
-  width: 50%
+  @media (min-width: 420px)
+    width: 50%
+    float: left
   div.person-info
     display: inline-block
     margin-left: 5.128205128205%
