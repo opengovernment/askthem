@@ -45,7 +45,7 @@
       <span class="pubdate"><time datetime="2009-11-13" pubdate>November 11th 2013 <sup>6:45pm</sup></time></span>
     </div>
 
-    <a href="#sign_on_q" class="mobile_cta cta_pill">Sign On</a> <%# @todo JM - mobile sign on button, if logged in this button should sign the question, otherwise it should send the user to the anchored form %>
+    <a href="#sign_on_q" class="mobile_cta cta-pill">Sign On</a> <%# @todo JM - mobile sign on button, if logged in this button should sign the question, otherwise it should send the user to the anchored form %>
 
     <div class="comments">
       <div id="disqus_thread"></div>
@@ -73,7 +73,7 @@
           <% if current_user.question_signed? @question.id %>
             <a class='sign_on'>Signed On</a>
           <% else %>
-          <%= link_to 'Sign On', "#", class: 'cta_pill sign-on-user', :'data-question-id' => @question.id %>
+          <%= link_to 'Sign On', "#", class: 'cta-pill sign-on-user', :'data-question-id' => @question.id %>
           <% end %>
         </li>
       </ul>
@@ -89,7 +89,7 @@
         <%= f.input :region, collection: OpenGovernment::STATES, prompt: "Select your state", label: false, wrapper_html: {class: 'icon-angle-down sculpt'} %>
         <%= f.input :postal_code, placeholder: "Zip or Postal Code", label: false %>
         <%= f.input :password, placeholder: "Password", label: false %>
-        <%= f.button :submit, 'Sign On', class: 'cta_pill' %>
+        <%= f.button :submit, 'Sign On', class: 'cta-pill' %>
       <% end %>
       </div>
     <% end %>
@@ -114,6 +114,26 @@
 </section>
 
 <%# @see http://disqus.com/admin/universalcode/ %>
+
+<div id='overlay'></div>
+<div id='modal'>
+  <div class='modal-content'>
+    <p>Share your question:
+    <a href='#' class='modal-email cta-pill'>
+      <i class='icon-envelope-alt'></i>
+      Email
+    </a>
+    <a href='#' class='modal-facebook cta-pill'>
+      <i class='icon-facebook'></i>
+      Facebook
+    </a>
+    <a href='#' class='modal-twitter cta-pill'>
+      <i class='icon-twitter'></i>
+      Twitter
+    </a>
+    </p>
+  </div>
+</div>
 
 <script type="text/javascript">
   var disqus_shortname = 'dobot';

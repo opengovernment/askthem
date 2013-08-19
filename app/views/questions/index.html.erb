@@ -3,7 +3,7 @@
 <section class="questions listings">
   <header>
     <h1>Questions</h1>
-    <%= link_to 'Ask a Question', new_question_path(@jurisdiction.abbreviation), class: 'cta_pill' %>
+    <%= link_to 'Ask a Question', new_question_path(@jurisdiction.abbreviation), class: 'cta-pill' %>
   </header>
   <div class="filters">
     <span class="info">Show:</span><%# @todo DM are these really the filters we're using? %>
@@ -24,20 +24,3 @@
 
   <%= render partial: 'page' %>
 </section>
-
-<div id='overlay'></div>
-<div id='modal'>
-  <div id='modal-content'>
-    <p>Share your question:
-    <a href='#' class='modal-facebook'>
-      <i class='icon-facebook'></i>
-      Facebook
-    </a>
-    or
-    <a href='#' class='modal-twitter'>
-      <i class='icon-twitter'></i>
-      Twitter
-    </a>
-    </p>
-  </div>
-</div>

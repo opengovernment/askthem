@@ -13,13 +13,26 @@
 #modal
   padding: 2em
   position: fixed
-  top: 40%
   +border-radius(3px)
   background-color: #F9F9F9
+  text-align: center
   z-index: 10000
   @media (max-width: 420px)
+    top: 2em
     width: 86%
     +box-sizing(border-box)
   @media (min-width: 420px)
-    left: 180px
-    width: 480px
+    top: 40%
+    left: 250px
+    width: 350px
+
+.modal-email, .modal-facebook, .modal-twitter
+  margin:
+    top: 1em
+    right: auto
+    left: auto
+  display: block
+  max-width: 250px
+
+.icon-envelope-alt, .icon-facebook, .icon-twitter
+  margin-right: .5em !important

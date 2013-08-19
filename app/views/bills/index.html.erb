@@ -3,16 +3,16 @@
 <section class="bills listings">
   <header>
     <h1>Bills</h1>
-    <%= link_to 'Ask a Question', new_question_path(@jurisdiction.abbreviation), class: 'cta_pill' %>
+    <%= link_to 'Ask a Question', new_question_path(@jurisdiction.abbreviation), class: 'cta-pill' %>
   </header>
   <div class="filters">
     <span class="info">Filter by:</span><%# @todo DM are these really the filters we're using? %>
     <a href="#" class="radio_button filter inactive"><span class="use"></span>Date</a>
-    
+
     <a href="#" class="radio_button filter inactive"><span class="use"></span>Recent Actions</a>
-    
+
     <a href="#" class="radio_button filter inactive"><span class="use"></span>Most Viewed</a>
-    
+
     <a href="#" class="radio_button filter inactive"><span class="use"></span>Key Votes</a>
 
     <div class="search"><%# @todo DM full-text search within state? %>
