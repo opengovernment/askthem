@@ -127,6 +127,10 @@ section.people
             right: 0
 
 .is-verified
+  margin:
+    top: .5em
+    bottom: .25em
+  display: inline-block
   position: relative
   color: $green
 
@@ -140,6 +144,8 @@ section.people
   padding: 10px
   width: 100px
   position: absolute
+  left: 30px
+  top: -8px
   z-index: 100
   &:before
     content: ''
@@ -152,16 +158,6 @@ section.people
     left: -8px
     top: 18%
     position: absolute
-
-.verified-tooltip-show
-  @extend .verified-tooltip
-  left: 50px
-  top: 5px
-
-.verified-tooltip-index
-  @extend .verified-tooltip
-  left: 30px
-  top: -8px
 
 .is-showing
   display: inline
