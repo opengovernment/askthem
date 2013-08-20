@@ -7,7 +7,7 @@
     <% end %>
   </div>
   <div class="person-info">
-    <h2><%= link_to person.name, person_path(person['state'], person) %>&nbsp;<i class='icon-ok-sign is-verified'></i><span class='verified-tooltip'>AskThem Verified</span></h2>
+    <h2><%= link_to person.name, person_path(person['state'], person) %>&nbsp;<i class='icon-ok-sign is-verified'><span class='verified-tooltip verified-tooltip-index'>AskThem Verified</span></i></h2>
     <span class="jurisdiction"><%= person_attributes(person) %></span>
     <span class="stats"><span><%= pluralize person.questions.count, 'Question' %></span>
     <span><%= pluralize person.questions_answered.count, 'Answer' %></span></span>

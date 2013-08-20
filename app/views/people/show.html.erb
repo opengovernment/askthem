@@ -14,8 +14,7 @@
       <div class="person_details">
         <h1>
           <%= @person.name %> <% unless @person['active'] %>(Not in Office)<% end %>
-          <i class='icon-ok-sign is-verified'></i>
-          <p class='verified-tooltip'>AskThem Verified</p>
+          <i class='icon-ok-sign is-verified'><p class='verified-tooltip verified-tooltip-show'>AskThem Verified</p></i>
         </h1>
         <h2><%= person_attributes(@person) %></h2>
         <div class="attr">
