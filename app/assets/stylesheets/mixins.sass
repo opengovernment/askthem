@@ -21,6 +21,13 @@ $salmon: #fa7564
 $black: #000000
 $white: #FFFFFF
 
+@mixin gray-container($width)
+  +border-radius(6px)
+  +box-shadow(0 2px 0 #f9f9f9)
+  background: rgba($black, 0.015)
+  border: 1px solid #f3f3f3
+  padding: 4.974359%
+
 =rounded_corners($border-radius: 3px)
   +border-radius($border-radius)
 
