@@ -19,6 +19,9 @@ gem 'simple_form'
 gem 'kaminari'
 gem 'coveralls', require: false
 
+# aka state machine management
+gem 'workflow_on_mongoid'
+
 # Authentication
 gem 'devise'
 gem 'omniauth'

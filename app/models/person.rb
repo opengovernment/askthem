@@ -8,6 +8,11 @@ class Person
   # Questions addressed to the person.
   has_many :questions
 
+  # a user identified as the person
+  # potentially elected official's staff would also have a user account
+  # identified as the same person, thus has_many
+  has_many :identities
+
   # Popolo fields and aliases.
   field :full_name, type: String, as: :name
   field :leg_id, type: String, as: :slug

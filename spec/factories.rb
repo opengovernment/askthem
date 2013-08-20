@@ -25,12 +25,12 @@ FactoryGirl.define do
 
 
     factory :person_ny_sheldon_silver do
-      id 'NYL000194'
-      given_name 'Sheldon'
-      last_name 'Silver'
-      full_name 'Sheldon Silver'
-      email 'speaker@assembly.state.ny.us'
-      metadatum { FactoryGirl.create(:metadatum, abbreviation: 'ny') }
+      id "NYL000194"
+      given_name "Sheldon"
+      last_name "Silver"
+      full_name "Sheldon Silver"
+      email "speaker@assembly.state.ny.us"
+      metadatum { FactoryGirl.create(:metadatum, abbreviation: "ny") }
     end
   end
 
@@ -94,5 +94,15 @@ FactoryGirl.define do
     country 'US'
     postal_code '10013'
     password 'password'
+
+    # skip confirmation by default
+    after(:build) do |record|
+      record.skip_confirmation!
+    end
+  end
+
+  factory :identity do
+    association :user, email: "speaker@assembly.state.ny.us"
+    association :person, factory: :person_ny_sheldon_silver
   end
 end

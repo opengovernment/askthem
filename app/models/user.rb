@@ -52,6 +52,15 @@ class User
   geocoded_by :address_for_geocoding
 
   embeds_many :authentications
+
+  # mappings to a person in our db
+  # potential more than one as we may have the same person
+  # listed more than once in our db if they have held more than one office
+  has_many :identities, inverse_of: :user
+
+  # users that are staff members can verify or reject an identity
+  has_many :inspections, class_name: "Identity", inverse_of: :inspector
+
   has_many :questions
   has_many :signatures
   mount_uploader :image, ImageUploader

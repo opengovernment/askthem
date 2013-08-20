@@ -26,6 +26,11 @@ describe 'registrations' do
         are_you_person = "Are you #{person.first_name} #{person.last_name}?"
         page.should have_content are_you_person
       end
+
+      # submitted with person_id outcomes:
+      # new identity created for user
+      # user notified that their request will be reviewed by staff
+      # staff notified
     end
 
     def fill_out_sign_up_form_for(user)

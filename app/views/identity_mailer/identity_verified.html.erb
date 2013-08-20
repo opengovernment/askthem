@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <h1>Thank you for requesting your account for verification by AskThem, <%= @user.given_name %></h1>
+
+    <p>An AskThem staff member has verified your identity. You can now view your answer questions from the following URL:</p>
+
+     <p><%= link_to(person_url(@person.state, @person.id), person_url(@person.state, @person.id)) %></p>
+
+    <p>
+        Thank you,
+        The AskThem Team
+    </p>
+  </body>
+</html>
