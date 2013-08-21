@@ -50,6 +50,7 @@
           </nav>
           <form action="/ma/questions">
             <input type="email" name="" id="" placeholder="E-mail" />
+            <input type="text" name="" placeholder="Zipcode (optional)" />
             <input type="submit" value="Notify Me" class="cta-pill" />
           </form>
         </div>
@@ -164,9 +165,9 @@
                   'top': topSet
                 }).addClass('stick');
               }else{
-                if($('.content_body.header h2').offset().top >= scrollPoint + 120){
+                if ($('.content_body.header h2').offset().top >= scrollPoint + 120){
                   $('a.logo').css({
-                    'position': 'fixed',
+                    'position': 'relative',
                     'left': oldLeft,
                     'top': 'auto'
                   }).removeClass('stick');
