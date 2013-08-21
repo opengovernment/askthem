@@ -296,14 +296,16 @@ div.controls
 // Special stuff
 div.count
   position: relative
-  max-width: 390px
   span.summary_count
     position: absolute
-    right: 0
-    top: 6px
     font-size: 13px
     font-weight: 600
     color: #999
+    @media (max-width: 420px)
+      right: 0
+    @media (min-width: 420px)
+      top: 6px
+      right: 4em
 
 span.toggle
   display: inline-block
