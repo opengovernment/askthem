@@ -128,7 +128,9 @@
     <%= link_to 'Flag this question', '#', class: 'flag' %><%# @todo JM %>
   </div>
 </section>
-
+<% if params[:created] == 'true' %>
+  <!-- this is where the modal will go -->
+<% end %>
 <%# @see http://disqus.com/admin/universalcode/ %>
 
 
