@@ -32,9 +32,9 @@ class QuestionsController < ApplicationController
       @bill = Bill.connected_to(@state_code).find(params[:bill])
       @question.bill = @bill
     end
-    
+
     render layout: 'data_collection'
-    
+
     # new!
   end
 
@@ -50,7 +50,7 @@ class QuestionsController < ApplicationController
     if @question.valid? && (user_signed_in? || @user.valid?)
       @question.save
       QuestionMailer.question_posted(@user, @question).deliver
-      redirect_to question_path(@state_code, @question)
+      redirect_to question_path(@state_code, @question, :created => true)
     else
       set_up_steps
       respond_to do |format|
