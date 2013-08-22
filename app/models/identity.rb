@@ -1,6 +1,8 @@
 class Identity
   include Mongoid::Document
   include Workflow
+  include ActiveModel::Validations
+  validates_with UserEmailMatchesValidator
 
   belongs_to :user, inverse_of: :identities
   belongs_to :person
