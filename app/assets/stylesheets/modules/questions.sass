@@ -41,12 +41,17 @@ section.questions
   div.filters
     margin-bottom: 0
   ol>li
-    border-bottom: 1px solid #F3F3F3
-    border-left: 0px solid #fff
-    padding-top: 30px
-    padding-bottom: 30px
+    margin:
+      right: 2%
+      left: 2%
+    border:
+      bottom: 1px solid #F3F3F3
+      left: 0px solid #fff
+    padding:
+      top: 30px
+      bottom: 30px
     position: relative
-    width: 100%
+    width: 96%
     &:hover
       a.sign_on
         +opacity(1)
@@ -62,7 +67,8 @@ section.questions
       display: inline-block
       float: left
       vertical-align: top
-      width: 70%
+      @media (min-width: 420px)
+        width: 70%
       a.title
         color: #3c636e
         font-size: 1.5em
@@ -85,8 +91,9 @@ section.questions
       text-align: right
       margin-bottom: 6px
       width: 20%
-      float: right
       margin-top: 18px
+      @media (min-width: 420px)
+        float: right
       li
         display: inline-block
         width: 113px
@@ -119,6 +126,7 @@ section.questions
           margin-right: 5px
           width: 20px
           height: 20px
+          +border-radius(50%)
       span.to
         color: #999
         margin-right: 5px
@@ -175,7 +183,8 @@ section.questions
             color: $lightgrey
             width: 100%
         span.target a
-          max-width: 60%
+          @media (min-width: 420px)
+            max-width: 65%
         div.question_attr
           color: $lightgrey
           font-size: 0.75em
