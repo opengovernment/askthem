@@ -3,6 +3,10 @@ class Person
   include Mongoid::Document
   store_in collection: 'legislators'
 
+  # authorization based on roles
+  # i.e. a user.can_respond_as?(person) to answer questions
+  resourcify
+
   # The person's jurisdiction.
   belongs_to :metadatum, foreign_key: 'state'
   # Questions addressed to the person.

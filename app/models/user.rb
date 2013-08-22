@@ -1,6 +1,10 @@
 class User
   include Mongoid::Document
 
+  # authorization based on roles
+  rolify
+  include Authority::UserAbilities
+
   # Devise
 
   # Include default devise modules. Others available are:

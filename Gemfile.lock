@@ -1,3 +1,9 @@
+GIT
+  remote: git://github.com/EppO/rolify.git
+  revision: 34c56d7fbf525cbb363da16395dcae7706b0175e
+  specs:
+    rolify (3.3.0.rc4)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -34,6 +40,9 @@ GEM
       builder
       json
     arel (3.0.2)
+    authority (2.7.0)
+      activesupport (>= 3.0.0)
+      rake (>= 0.8.7)
     bcrypt-ruby (3.1.1)
     builder (3.0.4)
     bullet (4.6.0)
@@ -298,6 +307,7 @@ PLATFORMS
 
 DEPENDENCIES
   airbrake
+  authority
   bullet
   capybara
   carrierwave-mongoid
@@ -325,6 +335,7 @@ DEPENDENCIES
   resque
   rest-client
   rmagick
+  rolify!
   rspec-rails
   ruby-growl (= 3.0)
   ruby-progressbar

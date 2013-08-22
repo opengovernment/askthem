@@ -1,6 +1,11 @@
 class Identity
   include Mongoid::Document
   include Workflow
+
+  # authorization based on roles
+  # adds updatable_by?(user) for staff_members to inspect identities, etc.
+  include Authority::Abilities
+
   include ActiveModel::Validations
   validates_with UserEmailMatchesValidator
 
@@ -36,6 +41,9 @@ class Identity
   end
 
   def verify(inspector)
+    # grant user responder role for person so they can answer questions
+    user.add_role :responder, person
+
     record_inspection! inspector
     IdentityMailer.identity_verified(self).deliver
   end

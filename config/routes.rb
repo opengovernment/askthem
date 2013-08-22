@@ -13,6 +13,8 @@ OpenGovernment::Application.routes.draw do
   resources :users, only: :show
   resources :signatures, only: :create
 
+  resources :identities, only: :update
+
   scope ':jurisdiction' do
     resources :bills, only: [:index, :show] do
       member do

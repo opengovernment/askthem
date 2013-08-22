@@ -28,6 +28,10 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-gplus'
 
+# Authorization
+gem 'authority'
+gem 'rolify', github: 'EppO/rolify'
+
 # Rake tasks
 gem 'ruby-progressbar'
 gem 'rest-client'
