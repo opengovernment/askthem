@@ -25,8 +25,9 @@ describe 'questions' do
 
     context 'when the jurisdiction has questions' do
       before :each do
+        @all_questions = []
         3.times do
-          FactoryGirl.create(:question,
+          @all_questions << FactoryGirl.create(:question,
                              state: @metadatum.abbreviation,
                              person: valid_person)
         end
@@ -35,6 +36,12 @@ describe 'questions' do
       it 'returns them' do
         visit '/vt/questions'
         page.body.should have_selector '.question_content .title'
+      end
+
+      it 'shows the correct threshold for the person' do
+        visit '/vt/questions'
+        page.body.should have_content "out of #{@all_questions[0].person.signature_threshold}"
+
       end
 
       context 'as signed in user' do
