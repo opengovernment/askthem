@@ -49,6 +49,7 @@
             </ul>
           </nav>
           <form action="/ma/questions">
+            <input type="text" name="" placeholder="Org. Name" />
             <input type="email" name="" id="" placeholder="E-mail" />
             <input type="text" name="" placeholder="Zipcode (optional)" />
             <input type="submit" value="Notify Me" class="cta-pill" />
@@ -195,6 +196,13 @@
       $('html, body').animate({
         scrollTop: 0
       }, 1000);
+    });
+  </script>
+
+  <script type="text/javascript">
+    $('.splash .level li').click(function(){
+      $('.splash .level li').removeClass('active');
+      $(this).addClass('active');
     });
   </script>
 </body>
