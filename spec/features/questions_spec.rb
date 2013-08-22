@@ -304,11 +304,16 @@ describe 'questions' do
         expect(threshold_on_page).to eq @person.signature_threshold
       end
 
+      it 'renders modal when created parameter is present', js: true do
+        visit "/vt/questions/#{@question.id}?created=true"
+        page.body.should have_selector "#modal"
+      end
+
       it 'allows new user to register and sign on to a question', js: true do
         visit "/vt/questions/#{@question.id}"
         fill_in 'user_given_name', with: 'John'
         fill_in 'user_family_name', with: 'Doe'
-        fill_in 'user_email', with: 'john.doe@example.coom'
+        fill_in 'user_email', with: 'john.doe@example.com'
         fill_in 'user_street_address', with: street_address
         fill_in 'user_locality', with: locality
         select_user_region_for('vt')

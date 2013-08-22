@@ -109,14 +109,6 @@
       <% end %>
       </div>
     <% end %>
-    <h5>Share</h5>
-    <ul>
-       <li>
-         <%= link_to '', "https://www.facebook.com/sharer.php?u=#{URI.escape(current_url)}", class: 'icon-facebook' %>
-         <%= link_to '', "https://twitter.com/share?text=#{URI.escape(@question.title)}", class: 'icon-twitter' %>
-         <%= link_to '', "https://plus.google.com/share?url=#{URI.escape(current_url)}", class: 'icon-google-plus' %>
-       </li>
-    </ul>
     <% if @question.subject? %>
     <h5>Issue Area</h5>
     <ul class="tags">
@@ -129,30 +121,29 @@
   </div>
 </section>
 <% if params[:created] == 'true' %>
-  <!-- this is where the modal will go -->
+  <div id='overlay'></div>
+  <div id='modal'>
+    <div class='modal-content'>
+      <a href='#' class='modal-close'><i class='icon-remove'></i></a>
+      <p class='modal-copy'>Share your question:</p>
+      <a href='mailto:?subject=Help get an answer to my question on AskThem' target="_blank" class='modal-email cta-pill'>
+        <i class='icon-envelope-alt'></i>
+        Email
+      </a>
+      <a href='https://www.facebook.com/sharer.php?u=<%= URI.escape(current_url) %>' target="_blank" class='modal-facebook cta-pill cta-pill-facebook'>
+        <i class='icon-facebook'></i>
+        Facebook
+      </a>
+      <a href='https://twitter.com/share?text=Help get my question answered on AskThem: <%= URI.escape(@question.title) %>' target="_blank" class='modal-twitter cta-pill cta-pill-twitter'>
+        <i class='icon-twitter'></i>
+        Twitter
+      </a>
+    </div>
+  </div>
 <% end %>
 <%# @see http://disqus.com/admin/universalcode/ %>
 
 
-<div id='overlay'></div>
-<div id='modal'>
-  <div class='modal-content'>
-    <a href='#' class='modal-close'><i class='icon-remove'></i></a>
-    <p class='modal-copy'>Share your question:</p>
-    <a href='#' class='modal-email cta-pill'>
-      <i class='icon-envelope-alt'></i>
-      Email
-    </a>
-    <a href='#' class='modal-facebook cta-pill cta-pill-facebook'>
-      <i class='icon-facebook'></i>
-      Facebook
-    </a>
-    <a href='#' class='modal-twitter cta-pill cta-pill-twitter'>
-      <i class='icon-twitter'></i>
-      Twitter
-    </a>
-  </div>
-</div>
 
 <script type="text/javascript">
   var disqus_shortname = 'dobot';
