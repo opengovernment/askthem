@@ -62,10 +62,10 @@
     <div class="clear"></div>
   </header>
   <nav class="scroll_content below">
-    <a href="#" class="show_below">About</a>
+    <a href="/splash#content_body" class="show_below">About</a>
   </nav>
   <nav class="scroll_content above" style="display:none;">
-    <a href="#" class="show_above">Get Notified</a>
+    <a href="/splash#" class="show_above">Get Notified</a>
   </nav>
   <section id="content_body">
     <div class="content_body header">
@@ -178,5 +178,23 @@
           }
       }, 50);
     }
+  </script>
+
+  <script type="text/javascript">
+    $('.show_below').click(function(e){
+      e.preventDefault();
+      $('html, body').animate({
+        scrollTop: $("#content_body").offset().top
+      }, 1000);
+    });
+  </script>
+
+  <script type="text/javascript">
+    $('.show_above').click(function(e) {
+      e.preventDefault();
+      $('html, body').animate({
+        scrollTop: 0
+      }, 1000);
+    });
   </script>
 </body>
