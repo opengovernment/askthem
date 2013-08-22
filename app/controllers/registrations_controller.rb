@@ -3,12 +3,19 @@ class RegistrationsController < Devise::RegistrationsController
 
   # based on https://github.com/plataformatec/devise/blob/master/app/controllers/devise/registrations_controller.rb#L12
   def create
+    person_id = params[:user].delete(:person_id)
+
     build_resource(sign_up_params)
 
     if resource.save
       if resource.active_for_authentication?
         set_flash_message :notice, :signed_up if is_navigational_format?
         sign_up(resource_name, resource)
+
+        if person_id
+          Identity.create(user: resource, person_id: person_id).submit!
+        end
+
         if params[:question_id]
           add_signature_to_question resource, params[:question_id]
         else
