@@ -38,21 +38,24 @@
           <p>Get notified and ask a question when we launch</p>
           <nav>
             <ul class="level">
-              <li class="active">
+              <li class="active" data-type="individual">
                 <a href="#">Individual</a>
                 <i class="icon-angle-down"></i>
               </li>
-              <li>
+              <li data-type="elected_official">
                 <a href="#">Elected Official</a>
+                <i class="icon-angle-down"></i>
+              </li>
+              <li data-type="organization">
+                <a href="#">Organization</a>
                 <i class="icon-angle-down"></i>
               </li>
             </ul>
           </nav>
           <form action="/ma/questions">
-            <input type="text" name="org_name" id="org_name" placeholder="Org. Name" />
             <input type="email" name="email" id="email" placeholder="E-mail" />
             <input type="text" name="zipcode" id="zipcode" placeholder="Zipcode (optional)" />
-            <input type="hidden" name="notify_type" id="notify_type" value="">
+            <input type="hidden" name="notify_type" id="notify_type" value="individual">
             <input type="submit" value="Notify Me" class="cta-pill" />
           </form>
         </div>
@@ -203,7 +206,11 @@
   <script type="text/javascript">
     $('.splash .level li').click(function(){
       $('.splash .level li').removeClass('active');
-      $(this).addClass('active');
+      var $this = $(this);
+      $this.addClass('active');
+      $('#notify_type').val($this.data('type'));
     });
   </script>
+
+
 </body>
