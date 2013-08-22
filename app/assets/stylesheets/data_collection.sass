@@ -56,6 +56,31 @@ body.data_collection
     border: none
     padding: 0
     margin: 0
+    .matching-person
+      input
+        position: relative
+        top: 1.65em
+        @media (max-width: 420px)
+          left: -10%
+        @media (min-width: 420px)
+          left: -20%
+      label
+        width: auto
+    div.avatar
+      clear: both
+      width: 100px
+      float: left
+      margin:
+        bottom: 1em
+        left: 1em
+    img
+      +border-radius(50%)
+    .person-info
+      clear: both
+      position: relative
+      top: -5em
+      @media (max-width: 420px)
+        left: 3em
   .question.ask div.controls
     margin-top: 24px
     span.count
