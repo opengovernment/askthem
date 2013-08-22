@@ -5,7 +5,7 @@ class Person
 
   # authorization based on roles
   # i.e. a user.can_respond_as?(person) to answer questions
-  resourcify
+  resourcify :user_roles, role_cname: 'UserRole'
 
   # The person's jurisdiction.
   belongs_to :metadatum, foreign_key: 'state'

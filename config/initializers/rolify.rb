@@ -1,4 +1,5 @@
-Rolify.configure do |config|
+# we use UserRole to avoid name collision with person.roles
+Rolify.configure("UserRole") do |config|
   # By default ORM adapter is ActiveRecord. uncomment to use mongoid
   config.use_mongoid
 

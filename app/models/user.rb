@@ -2,7 +2,7 @@ class User
   include Mongoid::Document
 
   # authorization based on roles
-  rolify
+  rolify role_cname: 'UserRole'
   include Authority::UserAbilities
 
   # Devise

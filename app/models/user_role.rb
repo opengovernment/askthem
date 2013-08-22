@@ -1,4 +1,6 @@
-class Role
+# rolify role model
+# we use UserRole to avoid name collision with person.roles
+class UserRole
   include Mongoid::Document
   has_and_belongs_to_many :users
   belongs_to :resource, :polymorphic => true
