@@ -27,23 +27,22 @@ describe 'registrations' do
         page.should have_content are_you_person
       end
 
-      # submitted with person_id outcomes:
-      # validate user.email == person.email (later extended) --done
-      # new identity created for user --done
-      # user notified that their request will be reviewed by staff --done
-      # staff notified
       it 'adds an identity and notifies appropriately', js: true do
+        ActionMailer::Base.deliveries.clear
+
+        staff_member = FactoryGirl.create(:user)
+        staff_member.add_role :staff_member
         user = FactoryGirl.build(:user, email: person.email)
-        emails_count = ActionMailer::Base.deliveries.count
 
         fill_out_sign_up_form_for user
         check "user_person_id_#{person.id}"
         click_button "Sign up"
 
         expect(Identity.count).to eq 1
-        # emails count has two outgoing emails to user
-        # 1 for confirm + 1 for identity
-        expect(ActionMailer::Base.deliveries.count).to eq emails_count + 2
+        # emails count has three outgoing emails
+        # for user: 1 for confirm + 1 for identity awaiting inspection
+        # + 1 for staff member to let them know a identity needs inspection
+        expect(ActionMailer::Base.deliveries.count).to eq 3
       end
     end
 

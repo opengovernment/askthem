@@ -7,6 +7,14 @@ class IdentityMailer < ActionMailer::Base
     send_user_mail_for(identity, "Your AskThem identity is being verified")
   end
 
+  def identity_needs_inspection(identity, staff_member)
+    @staff_member = staff_member
+    @user = identity.user
+    @person = identity.person
+    mail(:to => @staff_member.email,
+         :subject => "An AskThem identity needs to be inspected")
+  end
+
   def identity_verified(identity)
     send_user_mail_for(identity, "Your AskThem identity has been verified")
   end

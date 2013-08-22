@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <h1><%= @user.given_name -%> <%= @user.family_name -%> identity needs inspection.</h1>
+
+    <p>You can review details and verify or reject the identity here:</p>
+
+    <p><%= user_url(@user) -%></p>
+    <p>
+        Thank you,
+        The AskThem Team
+    </p>
+  </body>
+</html>

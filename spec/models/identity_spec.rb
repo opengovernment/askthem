@@ -2,7 +2,7 @@ require "spec_helper"
 
 shared_examples "notifier of submitting user" do
   it "sends notification" do
-    @recipients ||= ActionMailer::Base.deliveries.collect(&:to).first
+    @recipients ||= ActionMailer::Base.deliveries.collect(&:to).flatten.uniq
     expect(@recipients.include?(identity.user.email)).to be_true
   end
 end
@@ -39,6 +39,9 @@ describe Identity do
 
     describe "#submit!" do
       before do
+        @staff_member = FactoryGirl.create(:user)
+        @staff_member.add_role :staff_member
+
         identity.submit!
       end
 
@@ -48,12 +51,13 @@ describe Identity do
 
       context "notifications" do
         before :each do
-          @recipients = ActionMailer::Base.deliveries.collect(&:to).first
+          @recipients = ActionMailer::Base.deliveries.collect(&:to).flatten.uniq
         end
 
         it_behaves_like "notifier of submitting user"
 
         it "sends notification to staff members" do
+          expect(@recipients.include?(@staff_member.email)).to be_true
         end
       end
     end
