@@ -87,6 +87,10 @@ RSpec.configure do |config|
     # Restore the default session.
     Mongoid.override_session(nil)
   end
+
+  # test helpers for controller
+  config.include Devise::TestHelpers, :type => :controller
+
   # config.filter_run focus: true
 end
 
