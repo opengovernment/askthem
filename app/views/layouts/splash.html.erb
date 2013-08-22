@@ -148,7 +148,7 @@
               pAlpha = 1 - (scrollPoint * .005);
               cAlpha = 0 + (scrollPoint * .0025);
 
-              if (160 - (scrollPoint * .05) < 100){
+              if (160 - (scrollPoint * .05) < 160){
                 scrollBG = '100%';
               }
 
@@ -184,7 +184,7 @@
     $('.show_below').click(function(e){
       e.preventDefault();
       $('html, body').animate({
-        scrollTop: $("#content_body").offset().top
+        scrollTop: $("#content_body").offset().top - 80
       }, 1000);
     });
   </script>
