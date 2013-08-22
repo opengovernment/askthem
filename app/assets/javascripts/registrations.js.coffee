@@ -4,7 +4,8 @@ jQuery ($) ->
 
     # only fire once the email is valid address
     pattern = /^[^@]+@[^\.]+\..+$/
-    if pattern.test(emailAddress)
+    matchingPerson = $('.matching-person')
+    if pattern.test(emailAddress) and matchingPerson.length == 0
       getMatchingPerson emailAddress
 
   getMatchingPerson = (emailAddress) ->
