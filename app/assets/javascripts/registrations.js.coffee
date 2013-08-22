@@ -20,8 +20,8 @@ jQuery ($) ->
         $(data).each ->
           unless breakerbreaker
             divVal = '<div class="matching-person" style="display:none;">'
-            divVal += "<input type=\"checkbox\" name=\"user[person_id]\" id=\"user_person_id_#{@id}\" value=\"#{@id}\" />"
             divVal += "<label for=\"user[person_id]\">Are you #{@full_name}?</label>"
+            divVal += "<input type=\"checkbox\" name=\"user[person_id]\" id=\"user_person_id_#{@id}\" value=\"#{@id}\" />"
 
             divVal += '<div class="avatar">'
             if @photo_url?

@@ -58,29 +58,29 @@ body.data_collection
     margin: 0
     .matching-person
       input
-        position: relative
-        top: 1.65em
-        @media (max-width: 420px)
-          left: -10%
+        margin-top: 22px
         @media (min-width: 420px)
-          left: -20%
+          position: relative
+          left: -6em
       label
         width: auto
     div.avatar
       clear: both
       width: 100px
       float: left
-      margin:
-        bottom: 1em
-        left: 1em
+      margin-bottom: 1em
+      @media (max-width: 420px)
+        margin-left: 33%
+      @media (min-width: 420px)
+        margin-left: 40%
     img
       +border-radius(50%)
     .person-info
       clear: both
       position: relative
-      top: -5em
+      margin-bottom: 1em
       @media (max-width: 420px)
-        left: 3em
+        max-width: 200px
   .question.ask div.controls
     margin-top: 24px
     span.count
