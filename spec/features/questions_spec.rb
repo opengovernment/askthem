@@ -318,16 +318,19 @@ describe 'questions' do
 
       it 'allows new user to register and sign on to a question', js: true do
         visit "/vt/questions/#{@question.id}"
-        fill_in 'user_given_name', with: 'John'
-        fill_in 'user_family_name', with: 'Doe'
-        fill_in 'user_email', with: 'john.doe@example.com'
-        fill_in 'user_street_address', with: street_address
-        fill_in 'user_locality', with: locality
-        select_user_region_for('vt')
-        fill_in 'user_postal_code', with: postal_code
-        fill_in 'user_password', with: 'testtest'
 
-        click_button 'Sign On'
+        within ".signup" do
+          fill_in 'user_given_name', with: 'John'
+          fill_in 'user_family_name', with: 'Doe'
+          fill_in 'user_email', with: 'john.doe@example.com'
+          fill_in 'user_street_address', with: street_address
+          fill_in 'user_locality', with: locality
+          select_user_region_for('vt')
+          fill_in 'user_postal_code', with: postal_code
+          fill_in 'user_password', with: 'testtest'
+          click_button 'Sign On'
+        end
+
         page.body.should have_content '1 out of'
       end
 
