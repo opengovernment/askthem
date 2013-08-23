@@ -45,10 +45,10 @@
       <span class="pubdate"><time datetime="2009-11-13" pubdate>November 11th 2013 <sup>6:45pm</sup></time></span>
     </div>
     <a href="#sign_on_q" class="mobile_cta cta-pill">Sign On</a> <%# @todo JM - mobile sign on button, if logged in this button should sign the question, otherwise it should send the user to the anchored form %>
-
+    <% if @user.has_role?(:responder, @question.person) %>
     <div class='recipient-answer-form'>
-      <h2>Sign Up &amp; Answer this Question as <strong>Ron Paul</strong></h2>
-      <h2> (R- 6th House District)</h2>
+      <h2>Answer this Question as <strong><%= @question.person.name %></strong></h2>
+      <h2><%= person_attributes(@question.person) %></h2>
       <%= simple_form_for(@user, as: :user, url: registration_path(:user)) do |f| %>
         <%= hidden_field_tag :question_id, @question.id %>
         <%= f.input :password, placeholder: "What is your answer?", as: :text, label: false %>
@@ -62,6 +62,24 @@
       <% end %>
       <p class='watermark-tip'>This watermark will appear on all answers you post to the OpenGovernment Website, indicating that you are an official representative.</p>
     </div>
+    <% else %>
+    <div class='recipient-answer-form'>
+      <h2>Sign up &amp; Answer this Question as <strong><%= @question.person.name %></strong></h2>
+      <h2><%= person_attributes(@question.person) %></h2>
+      <%= simple_form_for(@user, as: :user, url: registration_path(:user)) do |f| %>
+        <%= hidden_field_tag :question_id, @question.id %>
+        <%= f.input :password, placeholder: "What is your answer?", as: :text, label: false %>
+        <div class='recipient-answer-form-left'>
+          <%= f.input :given_name, placeholder: "First Name", label: false %>
+          <%= f.input :family_name, placeholder: "Last Name", label: false %>
+          <%= f.input :email, placeholder: "Official Gov. E-mail", label: false %>
+          <%= f.input :password, placeholder: "Password", label: false %>
+          <%= f.button :submit, 'Submit Answer', class: 'cta-pill' %>
+        </div>
+      <% end %>
+      <p class='watermark-tip'>This watermark will appear on all answers you post to the OpenGovernment Website, indicating that you are an official representative.</p>
+    </div>
+    <% end %>
     <div class="comments">
       <div id="disqus_thread"></div>
     </div>
