@@ -49,16 +49,10 @@
     <div class='recipient-answer-form'>
       <h2>Answer this Question as <strong><%= @question.person.name %></strong></h2>
       <h2><%= person_attributes(@question.person) %></h2>
-      <%= simple_form_for(@user, as: :user, url: registration_path(:user)) do |f| %>
+      <%= simple_form_for(:answer, url: answers_path) do |f| %>
         <%= hidden_field_tag :question_id, @question.id %>
-        <%= f.input :password, placeholder: "What is your answer?", as: :text, label: false %>
-        <div class='recipient-answer-form-left'>
-          <%= f.input :given_name, placeholder: "First Name", label: false %>
-          <%= f.input :family_name, placeholder: "Last Name", label: false %>
-          <%= f.input :email, placeholder: "Official Gov. E-mail", label: false %>
-          <%= f.input :password, placeholder: "Password", label: false %>
-          <%= f.button :submit, 'Submit Answer', class: 'cta-pill' %>
-        </div>
+        <%= f.input :text, placeholder: "What is your answer?", as: :text, label: false %>
+        <%= f.button :submit, 'Submit Answer', class: 'cta-pill' %>
       <% end %>
       <p class='watermark-tip'>This watermark will appear on all answers you post to the OpenGovernment Website, indicating that you are an official representative.</p>
     </div>
