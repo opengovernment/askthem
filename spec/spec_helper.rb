@@ -4,6 +4,11 @@ Coveralls.wear!('rails')
 
 require 'capybara/rspec'
 require 'capybara/poltergeist'
+# @todo delete longer timeout if possible in future
+Capybara.register_driver :poltergeist do |app|
+  Capybara::Poltergeist::Driver.new(app, timeout: 45)
+end
+
 Capybara.javascript_driver = :poltergeist
 # WARN: adds dependency on phantomjs 1.8.1 or higher
 
