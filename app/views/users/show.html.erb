@@ -4,13 +4,35 @@
       <img src="http://lorempixel.com/130/130/" alt="" />
     </div>
     <div class="person-info">
-      <h1>Steven Trevathan</h1>
-      <span class="loc">Boston, MA</span>
+      <h1><%= @user.given_name -%> <%= @user.family_name -%>&nbsp;&nbsp;<% if @user.verified? -%><i class='icon-ok-sign is-verified'><span class='verified-tooltip'>AskThem Verified</span></i><% end -%></h1>
+      <span class="loc"><%= @user.locality -%>, <%= @user.region.upcase -%></span>
       <ul class="links">
         <li><a href="#">@strevat</a></li>
         <li><a href="#">steventrevathan.com</a></li>
       </ul>
     </div>
+    <% if user_signed_in? && current_user.has_role?(:staff_member) -%>
+      <div class="identity-controls">
+        <% if @user.identities.where(status: "being_inspected").count > 0 -%>
+          <h3>Inspect</h3>
+          <% @user.identities.where(status: "being_inspected").each do |identity| -%>
+            <div class="identity-inspection-outcome">
+              <%= link_to("Person Details", person_path(identity.person.metadatum, identity.person)) -%>:
+              <%= button_to("Verify", identity_path(identity, event: "verify!"), method: 'put', class: "inspect-button") %>
+              <%= button_to("Reject", identity_path(identity, event: "reject!"), method: 'put', class: "inspect-button") %>
+            </div>
+          <% end -%>
+        <% end -%>
+        <% if @user.identities.where(status: "rejected").count > 0 -%>
+          <h3>Rejected:</h3>
+          <% @user.identities.where(status: "rejected").each do |identity| -%>
+            <div class="identity-inspection-outcome">
+              <%= link_to("Person Details", person_path(identity.person.metadatum, identity.person)) -%>
+            </div>
+          <% end -%>
+        <% end -%>
+      </div>
+    <% end -%>
   </header>
   <div class="related_data">
     <nav>

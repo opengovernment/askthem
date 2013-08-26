@@ -154,8 +154,11 @@ class User
   # Unlike Devise, allows updating a user without a password.
   alias_method :update_with_password, :update_without_password
 
-private
+  def verified?
+    identities.where(status: "verified").count > 0
+  end
 
+  private
   # Unlike Devise, doesn't require password confirmations.
   def set_password_confirmation
     self.password_confirmation = password

@@ -49,5 +49,22 @@ describe User do
         user.reload.to_coordinates.should == [40.7189099, -74.0002784]
       end
     end
+
+    describe "#verified" do
+      context "when user has at least one verified identity" do
+        let(:identity) { FactoryGirl.create(:identity, status: "verified") }
+        let(:user) { identity.user }
+
+        it "is true" do
+          expect(user.verified?).to be_true
+        end
+      end
+
+      context "when user has at least one verified identity" do
+        it "is false" do
+          expect(user.verified?).to be_false
+        end
+      end
+    end
   end
 end
