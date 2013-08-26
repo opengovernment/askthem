@@ -6,7 +6,7 @@ require 'capybara/rspec'
 require 'capybara/poltergeist'
 # @todo delete longer timeout if possible in future
 Capybara.register_driver :poltergeist do |app|
-  Capybara::Poltergeist::Driver.new(app, timeout: 45)
+  Capybara::Poltergeist::Driver.new(app, timeout: 75)
 end
 
 Capybara.javascript_driver = :poltergeist
