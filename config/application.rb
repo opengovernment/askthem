@@ -64,6 +64,9 @@ module OpenGovernment
     # Enable the asset pipeline
     config.assets.enabled = true
 
+    # heroku complains otherwise
+    config.assets.initialize_on_precompile = false if Rails.env.production?
+
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
   end
