@@ -176,6 +176,10 @@ class Person
     end
   end
 
+  def verified?
+    identities.where(status: 'verified').count > 0
+  end
+
   def votesmart_id
     read_attribute(:votesmart_id)
   end
@@ -183,15 +187,19 @@ class Person
   def votesmart_biography_url
     votesmart_url('biography')
   end
+
   def votesmart_evaluations_url
     votesmart_url('evaluations')
   end
+
   def votesmart_key_votes_url
     votesmart_url('key-votes')
   end
+
   def votesmart_public_statements_url
     votesmart_url('public-statements')
   end
+
   def votesmart_campaign_finance_url
     votesmart_url('campaign-finance')
   end
