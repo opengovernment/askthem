@@ -9,6 +9,9 @@ class Question
   # The signatures in support of the question.
   has_many :signatures
 
+  # The official answer to the question
+  has_many :answers
+
   # The jurisdiction in which the question is asked.
   field :state, type: String
   # The person to whom the question is addressed.

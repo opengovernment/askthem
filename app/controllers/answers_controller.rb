@@ -5,7 +5,11 @@ class AnswersController < ApplicationController
   def create
     question = Question.find(params[:question_id])
     if current_user.has_role?(:responder, question.person)
-      answer = Answer.create!(text: params[:answer][:text], question_id: question.id)
+      answer = Answer.new(text: params[:answer][:text], question_id: question.id)
+      if answer.save!
+        question.answered = true
+        question.save
+      end
       redirect_to question_path(question.state, question.id)
     end
   end

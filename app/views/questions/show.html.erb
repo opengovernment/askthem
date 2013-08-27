@@ -28,51 +28,54 @@
       </span>
     </span>
 
-    <div class="recipient_answer recipient"> <%# @todo JM %>
-      <div class="avatar">
-        <img src="http://lorempixel.com/130/130/" alt="" />
-      </div>
-      <div class="person-info">
-        <h2>Steven Trevathan</h2>
-        <span class="jurisdiction">Republican, 6th House District</span>
-        <span class="stats">
-          <span>3 Questions</span>
-          <span>1 Answers</span>
-        </span>
-      </div>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-
-      <span class="pubdate"><time datetime="2009-11-13" pubdate>November 11th 2013 <sup>6:45pm</sup></time></span>
-    </div>
-    <a href="#sign_on_q" class="mobile_cta cta-pill">Sign On</a> <%# @todo JM - mobile sign on button, if logged in this button should sign the question, otherwise it should send the user to the anchored form %>
-    <% if @user.has_role?(:responder, @question.person) %>
-    <div class='recipient-answer-form'>
-      <h2>Answer this Question as <strong><%= @question.person.name %></strong></h2>
-      <h2><%= person_attributes(@question.person) %></h2>
-      <%= simple_form_for(:answer, url: answers_path) do |f| %>
-        <%= hidden_field_tag :question_id, @question.id %>
-        <%= f.input :text, placeholder: "What is your answer?", as: :text, label: false %>
-        <%= f.button :submit, 'Submit Answer', class: 'cta-pill' %>
-      <% end %>
-      <p class='watermark-tip'>This watermark will appear on all answers you post to the OpenGovernment Website, indicating that you are an official representative.</p>
-    </div>
-    <% else %>
-    <div class='recipient-answer-form'>
-      <h2>Sign up &amp; Answer this Question as <strong><%= @question.person.name %></strong></h2>
-      <h2><%= person_attributes(@question.person) %></h2>
-      <%= simple_form_for(@user, as: :user, url: registration_path(:user)) do |f| %>
-        <%= hidden_field_tag :question_id, @question.id %>
-        <%= f.input :password, placeholder: "What is your answer?", as: :text, label: false %>
-        <div class='recipient-answer-form-left'>
-          <%= f.input :given_name, placeholder: "First Name", label: false %>
-          <%= f.input :family_name, placeholder: "Last Name", label: false %>
-          <%= f.input :email, placeholder: "Official Gov. E-mail", label: false %>
-          <%= f.input :password, placeholder: "Password", label: false %>
-          <%= f.button :submit, 'Submit Answer', class: 'cta-pill' %>
+    <% if @question.answered and not @question.answers.first.nil? %>
+      <div class="recipient_answer recipient">
+        <div class="avatar">
+          <%= cdn_image_tag(@question.person.image, size: '130x130', alt: '') %>
         </div>
+        <div class="person-info">
+          <h2><%= @question.person.name %></h2>
+          <span class="jurisdiction"><%= person_attributes @question.person %></span>
+          <span class="stats">
+            <span><%= pluralize @question.person.questions.length, 'Question' %></span>
+            <span><%= pluralize @question.person.questions_answered.length, 'Answer' %></span>
+          </span>
+        </div>
+        <p><%= @question.answers.first.text %></p>
+
+        <span class="pubdate"><time datetime="<%= @question.answers.first.created_at.strftime "%Y-%m-%d" %>" pubdate><%= @question.answers.first.created_at.strftime "%B #{@question.answers.first.created_at.day.ordinalize} %Y" %><sup><%= @question.answers.first.created_at.strftime "%I:%M%p" %></sup></time></span>
+      </div>
+    <% else %>
+      <!-- <a href="#sign_on_q" class="mobile_cta cta-pill">Sign On</a> <%# @todo JM - mobile sign on button, if logged in this button should sign the question, otherwise it should send the user to the anchored form %> -->
+      <% if @user.has_role?(:responder, @question.person) %>
+      <div class='recipient-answer-form'>
+        <h2>Answer this Question as <strong><%= @question.person.name %></strong></h2>
+        <h2><%= person_attributes(@question.person) %></h2>
+        <%= simple_form_for(:answer, url: answers_path) do |f| %>
+          <%= hidden_field_tag :question_id, @question.id %>
+          <%= f.input :text, placeholder: "What is your answer?", as: :text, label: false %>
+          <%= f.button :submit, 'Submit Answer', class: 'cta-pill' %>
+        <% end %>
+        <p class='watermark-tip'>This watermark will appear on all answers you post to the OpenGovernment Website, indicating that you are an official representative.</p>
+      </div>
+      <% else %>
+      <div class='recipient-answer-form'>
+        <h2>Sign up &amp; Answer this Question as <strong><%= @question.person.name %></strong></h2>
+        <h2><%= person_attributes @question.person %></h2>
+        <%= simple_form_for(@user, as: :user, url: registration_path(:user)) do |f| %>
+          <%= hidden_field_tag :question_id, @question.id %>
+          <%= f.input :password, placeholder: "What is your answer?", as: :text, label: false %>
+          <div class='recipient-answer-form-left'>
+            <%= f.input :given_name, placeholder: "First Name", label: false %>
+            <%= f.input :family_name, placeholder: "Last Name", label: false %>
+            <%= f.input :email, placeholder: "Official Gov. E-mail", label: false %>
+            <%= f.input :password, placeholder: "Password", label: false %>
+            <%= f.button :submit, 'Submit Answer', class: 'cta-pill' %>
+          </div>
+        <% end %>
+        <p class='watermark-tip'>This watermark will appear on all answers you post to the OpenGovernment Website, indicating that you are an official representative.</p>
+      </div>
       <% end %>
-      <p class='watermark-tip'>This watermark will appear on all answers you post to the OpenGovernment Website, indicating that you are an official representative.</p>
-    </div>
     <% end %>
     <div class="comments">
       <div id="disqus_thread"></div>
