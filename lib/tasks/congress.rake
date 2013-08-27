@@ -66,7 +66,7 @@ namespace :congress do
 
     class Legislators < CongressProcessor
       def fields
-        'bioguide_id,first_name,middle_name,last_name,state,votesmart_id,email,gender,name_suffix,photo_url,twitter_id,chamber,district,party,terms'
+        'bioguide_id,first_name,middle_name,last_name,state,votesmart_id,email,gender,name_suffix,photo_url,twitter_id,facebook_id,youtube_id,chamber,district,party,terms'
       end
 
       def params
