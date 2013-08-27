@@ -28,7 +28,7 @@
       </span>
     </span>
 
-    <% if @question.answered and not @question.answers.first.nil? %>
+    <% if @question.answered? %>
       <div class="recipient_answer recipient">
         <div class="avatar">
           <%= cdn_image_tag(@question.person.image, size: '130x130', alt: '') %>
