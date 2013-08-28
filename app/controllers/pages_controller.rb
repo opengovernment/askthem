@@ -1,9 +1,11 @@
 class PagesController < ApplicationController
   before_filter :set_jurisdiction, only: [:overview, :lower, :upper, :bills, :key_votes]
-  before_filter :authenticate_user!, only: :dashboard
+  before_filter :authenticate_user!, only: [:dashboard, :contact_info]
+  before_filter :check_can_view_contact_info, only: :contact_info
   caches_action :channel
-  respond_to :html, except: :identifier
+  respond_to :html, except: [:identifier, :contact_info]
   respond_to :json, only: [:locator, :identifier]
+  respond_to :csv, only: [:contact_info]
 
   def splash
     render layout: 'splash'
@@ -56,6 +58,18 @@ class PagesController < ApplicationController
     respond_with limited_json_for(@people)
   end
 
+  # must be staff member
+  # @param jurisdictions
+  # @param type
+  def contact_info
+    @people = Person.active.only_type(type)
+
+    @limit_to_jurisdictions = params[:limit_to_jurisdictions]
+    if @limit_to_jurisdictions
+      @people = @people.in(state: @limit_to_jurisdictions.split(','))
+    end
+  end
+
   def search
     # @todo elasticsearch
   end
@@ -66,6 +80,14 @@ class PagesController < ApplicationController
   end
 
   private
+  def check_can_view_contact_info
+    unless current_user.can?(:view_contact_info)
+      raise Authority::SecurityViolation.new(current_user,
+                                             :view_contact_info,
+                                             PagesController)
+    end
+  end
+
   def limited_json_for(people)
     only = [:full_name, :photo_url, :party]
     methods = [:id, :most_recent_chamber_title, :most_recent_district]
