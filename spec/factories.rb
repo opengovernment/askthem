@@ -30,7 +30,6 @@ FactoryGirl.define do
       last_name "Silver"
       full_name "Sheldon Silver"
       email "speaker@assembly.state.ny.us"
-      image "http:///photos/federal/100x125/A000055.jpg"
       metadatum { FactoryGirl.create(:metadatum, abbreviation: "ny") }
     end
   end
