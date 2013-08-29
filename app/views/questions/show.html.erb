@@ -62,7 +62,7 @@
       <div class='recipient-answer-form'>
         <h2>Sign up &amp; Answer this Question as <strong><%= @question.person.name %></strong></h2>
         <h2><%= person_attributes @question.person %></h2>
-        <%= simple_form_for(@user, as: :user, url: registration_path(:user)) do |f| %>
+        <%= simple_form_for(:user, url: registration_path(:user)) do |f| %>
           <%= hidden_field_tag :question_id, @question.id %>
           <%= f.input :password, placeholder: "What is your answer?", as: :text, label: false %>
           <div class='recipient-answer-form-left'>

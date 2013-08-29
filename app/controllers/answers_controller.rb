@@ -7,7 +7,7 @@ class AnswersController < ApplicationController
     if current_user.has_role?(:responder, question.person)
       answer = Answer.new(text: params[:answer][:text], question_id: question.id)
       if answer.save!
-        question.answered = true
+        question.answers<<answer
         question.save
       end
       redirect_to question_path(question.state, question.id)
