@@ -1,7 +1,8 @@
-<%- headers = ["Id", "Name", "Title and Details", "Email", "Phone", "Twitter", "Facebook", "Youtube", "Links"] -%>
+<%- headers = ["Jurisdiction", "Id", "Name", "Title and Details", "Email", "Phone", "Twitter", "Facebook", "Youtube", "Links"] -%>
 <%= CSV.generate_line headers %>
 <%- @people.each do |person| -%>
-<%- row = [person.id,
+<%- row = [person.metadatum.abbreviation,
+           person.id,
            person.full_name,
            person_attributes(person, " - "),
            person.email.present? ? person.email : nil,
