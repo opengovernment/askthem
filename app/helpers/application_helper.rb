@@ -107,7 +107,7 @@ module ApplicationHelper
     else
       width, height = opts[:width], opts[:height]
     end
-    if url.blank? or url.include? 'ballotpedia'
+    if url.blank? || (url.include? 'ballotpedia')
       image_tag("/assets/placeholder.png")
     else
       image_tag("http://d2xfsikitl0nz3.cloudfront.net/#{CGI.escape(url)}/#{width}/#{height}", opts)

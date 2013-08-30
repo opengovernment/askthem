@@ -45,9 +45,8 @@
 
         <span class="pubdate"><time datetime="<%= @question.answers.first.created_at.strftime "%Y-%m-%d" %>" pubdate><%= @question.answers.first.created_at.strftime "%B #{@question.answers.first.created_at.day.ordinalize} %Y" %><sup><%= @question.answers.first.created_at.strftime "%I:%M%p" %></sup></time></span>
       </div>
-    <% else %>
+    <% elsif @user.has_role?(:responder, @question.person)%>
       <!-- <a href="#sign_on_q" class="mobile_cta cta-pill">Sign On</a> <%# @todo JM - mobile sign on button, if logged in this button should sign the question, otherwise it should send the user to the anchored form %> -->
-      <% if @user.has_role?(:responder, @question.person) %>
       <div class='recipient-answer-form'>
         <h2>Answer this Question as <strong><%= @question.person.name %></strong></h2>
         <h2><%= person_attributes(@question.person) %></h2>
@@ -58,24 +57,9 @@
         <% end %>
         <p class='watermark-tip'>This watermark will appear on all answers you post to the OpenGovernment Website, indicating that you are an official representative.</p>
       </div>
-      <% else %>
-      <div class='recipient-answer-form'>
-        <h2>Sign up &amp; Answer this Question as <strong><%= @question.person.name %></strong></h2>
-        <h2><%= person_attributes @question.person %></h2>
-        <%= simple_form_for(:user, url: registration_path(:user)) do |f| %>
-          <%= hidden_field_tag :question_id, @question.id %>
-          <%= f.input :password, placeholder: "What is your answer?", as: :text, label: false %>
-          <div class='recipient-answer-form-left'>
-            <%= f.input :given_name, placeholder: "First Name", label: false %>
-            <%= f.input :family_name, placeholder: "Last Name", label: false %>
-            <%= f.input :email, placeholder: "Official Gov. E-mail", label: false %>
-            <%= f.input :password, placeholder: "Password", label: false %>
-            <%= f.button :submit, 'Submit Answer', class: 'cta-pill' %>
-          </div>
-        <% end %>
-        <p class='watermark-tip'>This watermark will appear on all answers you post to the OpenGovernment Website, indicating that you are an official representative.</p>
-      </div>
-      <% end %>
+    <% elsif not user_signed_in? %>
+      <p>Are you <%= @question.person.name %>?</p>
+      <%= link_to 'Sign up to answer', new_user_registration_path, class: 'cta-pill' %>
     <% end %>
     <div class="comments">
       <div id="disqus_thread"></div>
@@ -108,21 +92,21 @@
           <% end %>
         </li>
       </ul>
-    <%# else %>
-    <!-- <div class="row last signup"> -->
-      <%#= simple_form_for(@user, as: :user, url: registration_path(:user)) do |f| %>
-        <%#= hidden_field_tag :question_id, @question.id %>
-        <%#= f.input :given_name, placeholder: "First Name", label: false %>
-        <%#= f.input :family_name, placeholder: "Last Name", label: false %>
-        <%#= f.input :email, placeholder: "E-mail", label: false %>
-        <%#= f.input :street_address, placeholder: "Street Address", label: false %>
-        <%#= f.input :locality, placeholder: "City", label: false %>
-        <%#= f.input :region, collection: OpenGovernment::STATES, prompt: "Select your state", label: false, wrapper_html: {class: 'icon-angle-down sculpt'} %>
-        <%#= f.input :postal_code, placeholder: "Zip or Postal Code", label: false %>
-        <%#= f.input :password, placeholder: "Password", label: false %>
-        <%#= f.button :submit, 'Sign On', class: 'cta-pill' %>
-      <%# end %>
-      <!-- </div> -->
+    <% else %>
+    <div class="row last signup">
+      <%= simple_form_for(@user, as: :user, url: registration_path(:user)) do |f| %>
+        <%= hidden_field_tag :question_id, @question.id %>
+        <%= f.input :given_name, placeholder: "First Name", label: false %>
+        <%= f.input :family_name, placeholder: "Last Name", label: false %>
+        <%= f.input :email, placeholder: "E-mail", label: false %>
+        <%= f.input :street_address, placeholder: "Street Address", label: false %>
+        <%= f.input :locality, placeholder: "City", label: false %>
+        <%= f.input :region, collection: OpenGovernment::STATES, prompt: "Select your state", label: false, wrapper_html: {class: 'icon-angle-down sculpt'} %>
+        <%= f.input :postal_code, placeholder: "Zip or Postal Code", label: false %>
+        <%= f.input :password, placeholder: "Password", label: false %>
+        <%= f.button :submit, 'Sign On', class: 'cta-pill' %>
+      <% end %>
+      </div>
     <% end %>
     <% if @question.subject? %>
     <h5>Issue Area</h5>
