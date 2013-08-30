@@ -4,7 +4,7 @@ class Meeting
   belongs_to :metadatum, foreign_key: 'state'
 
   embeds_one :agenda
-  embeds_one :minutes
+  embeds_one :meeting_record
 
   field :date_and_time, type: ActiveSupport::TimeWithZone
   field :name, type: String
@@ -62,7 +62,7 @@ class Meeting
     end
 
     if (attributes['Minutes']['url'])
-      meeting.minutes = Minutes.new(url: attributes['Minutes']['url'],
+      meeting.meeting_record = MeetingRecord.new(url: attributes['Minutes']['url'],
                                     full_text: attributes['Minutes']['fulltext'])
     end
     meeting
@@ -70,7 +70,7 @@ class Meeting
 
   # @todo don't assume EST, look up zone for jurisdiction
   def self.date_and_time_from(attributes)
-    date = attributes['Meeting Date']['label'].strftime('%Y-%m-%d')
+    date = attributes['Meeting Date'].strftime('%Y-%m-%d')
     time = Time.zone.parse(attributes['Meeting Time']).strftime('%l:%M %p EST')
     date_and_time = Time.zone.parse("#{date} #{time}")
   end
