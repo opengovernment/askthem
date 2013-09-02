@@ -18,4 +18,22 @@ describe Signature do
     signature.postal_code.should    == user.postal_code
     signature.country.should        == user.country
   end
+
+  context "with callbacks" do
+    let(:signature) { FactoryGirl.create(:signature) }
+
+    context "when created" do
+      it "should add to question's signature_count" do
+        expect(signature.question.signature_count).to eq 1
+      end
+    end
+
+    context "when destroyed" do
+      it "should be dropped from question's signature_count" do
+        question = signature.question
+        signature.destroy
+        expect(question.signature_count).to eq 0
+      end
+    end
+  end
 end
