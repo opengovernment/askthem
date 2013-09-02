@@ -91,6 +91,8 @@ class User
 
   before_validation :set_password_confirmation
 
+  after_create :trigger_geocoding
+
   # Called by RegistrationsController.
   def self.new_with_session(params, session)
     super.tap do |user|
@@ -162,5 +164,9 @@ class User
   # Unlike Devise, doesn't require password confirmations.
   def set_password_confirmation
     self.password_confirmation = password
+  end
+
+  def trigger_geocoding
+    Resque.enqueue(User, id, "geocode")
   end
 end

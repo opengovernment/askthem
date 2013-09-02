@@ -67,4 +67,20 @@ describe User do
       end
     end
   end
+
+  context "with after_create callback" do
+    before do
+      Resque.inline = true
+    end
+
+    it "geocodes address to lat long", :vcr do
+      user = FactoryGirl.build(:user)
+      user.save
+      expect(user.reload.to_coordinates).to eq [40.7195898, -73.9998334]
+    end
+
+    after do
+      Resque.inline = false
+    end
+  end
 end
