@@ -99,5 +99,11 @@ describe Question do
       # should not raise Mongoid::Errors::Validations
       expect{FactoryGirl.create(:question, person: @person, subject: 'Health')}.to_not raise_error
     end
+
+    it 'should answer a question' do
+      Answer.create(text: 'This is the answer to the question', question: @question)
+      expect(@question.answered?).to be_true
+    end
+
   end
 end

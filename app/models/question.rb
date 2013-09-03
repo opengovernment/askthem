@@ -9,6 +9,9 @@ class Question
   # The signatures in support of the question.
   has_many :signatures
 
+  # The official answer to the question
+  has_many :answers
+
   # The jurisdiction in which the question is asked.
   field :state, type: String
   # The person to whom the question is addressed.
@@ -25,9 +28,6 @@ class Question
   field :issued_at, type: Time
   # The number of signatures.
   field :signature_count, type: Integer, default: 0
-  # Whether the question is answered.
-  # @note Use `update_attribute`, not `set`, to trigger the observers.
-  field :answered, type: Boolean, default: false
 
   index(state: 1)
   index(person_id: 1, answered: 1)
@@ -67,6 +67,10 @@ class Question
     else
       self.person_id = nil
     end
+  end
+
+  def answered?
+    self.answers.any?
   end
 
   # @todo delete if unnecessary with only 1 db

@@ -12,6 +12,7 @@ OpenGovernment::Application.routes.draw do
 
   resources :users, only: :show
   resources :signatures, only: :create
+  resources :answers, only: :create
 
   resources :identities, only: :update
 

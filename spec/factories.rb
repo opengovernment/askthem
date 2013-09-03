@@ -77,6 +77,7 @@ FactoryGirl.define do
         record.bill = FactoryGirl.create(:bill) unless record.bill_id?
       end
     end
+
   end
 
   factory :signature do
