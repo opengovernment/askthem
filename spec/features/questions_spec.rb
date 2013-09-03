@@ -49,8 +49,8 @@ describe 'questions' do
           valid_person
           as_user do
             visit '/vt/questions'
-            click_link 'Sign On'
-            page.should have_content 'Signed On'
+            click_link 'Sign'
+            page.should have_content 'Signed'
             page.body.should have_content '1 out of'
           end
         end
@@ -328,7 +328,7 @@ describe 'questions' do
           select_user_region_for('vt')
           fill_in 'user_postal_code', with: postal_code
           fill_in 'user_password', with: 'testtest'
-          click_button 'Sign On'
+          click_button 'Sign'
         end
 
         page.body.should have_content '1 out of'
@@ -339,8 +339,8 @@ describe 'questions' do
           valid_person
           as_user do
             visit '/vt/questions'
-            click_link 'Sign On'
-            page.should have_content 'Signed On'
+            click_link 'Sign'
+            page.should have_content 'Signed'
             page.body.should have_content '1 out of'
           end
         end
