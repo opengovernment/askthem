@@ -21,9 +21,9 @@ http_interactions:
       Content-Type:
       - application/json; charset=UTF-8
       Date:
-      - Fri, 17 May 2013 08:12:31 GMT
+      - Wed, 04 Sep 2013 04:50:34 GMT
       Expires:
-      - Sat, 18 May 2013 08:12:31 GMT
+      - Thu, 05 Sep 2013 04:50:34 GMT
       Cache-Control:
       - public, max-age=86400
       Access-Control-Allow-Origin:
@@ -34,6 +34,8 @@ http_interactions:
       - 1; mode=block
       X-Frame-Options:
       - SAMEORIGIN
+      Alternate-Protocol:
+      - 80:quic
       Transfer-Encoding:
       - chunked
     body:
@@ -60,15 +62,14 @@ http_interactions:
         : \"10013\",\n               \"short_name\" : \"10013\",\n               \"types\"
         : [ \"postal_code\" ]\n            }\n         ],\n         \"formatted_address\"
         : \"148 Lafayette Street, New York, NY 10013, USA\",\n         \"geometry\"
-        : {\n            \"location\" : {\n               \"lat\" : 40.71890990,\n
-        \              \"lng\" : -74.00027840\n            },\n            \"location_type\"
+        : {\n            \"location\" : {\n               \"lat\" : 40.7195898,\n
+        \              \"lng\" : -73.9998334\n            },\n            \"location_type\"
         : \"ROOFTOP\",\n            \"viewport\" : {\n               \"northeast\"
-        : {\n                  \"lat\" : 40.72025888029150,\n                  \"lng\"
-        : -73.99892941970849\n               },\n               \"southwest\" : {\n
-        \                 \"lat\" : 40.71756091970850,\n                  \"lng\"
-        : -74.00162738029151\n               }\n            }\n         },\n         \"postcode_localities\"
-        : [],\n         \"types\" : [ \"street_address\" ]\n      }\n   ],\n   \"status\"
-        : \"OK\"\n}\n"
+        : {\n                  \"lat\" : 40.7209387802915,\n                  \"lng\"
+        : -73.99848441970849\n               },\n               \"southwest\" : {\n
+        \                 \"lat\" : 40.71824081970851,\n                  \"lng\"
+        : -74.0011823802915\n               }\n            }\n         },\n         \"types\"
+        : [ \"street_address\" ]\n      }\n   ],\n   \"status\" : \"OK\"\n}\n"
     http_version: 
-  recorded_at: Fri, 17 May 2013 08:12:31 GMT
-recorded_with: VCR 2.3.0
+  recorded_at: Wed, 04 Sep 2013 04:50:33 GMT
+recorded_with: VCR 2.5.0

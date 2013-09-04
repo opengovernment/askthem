@@ -10,10 +10,7 @@ gem 'rmagick'
 gem 'carrierwave-mongoid'
 gem 'client_side_validations'
 gem 'client_side_validations-mongoid'
-# for security patch, delete when resque updated
-# see http://blog.steveklabnik.com/posts/2013-08-03-redis-namespace-1-3-1--security-release
-gem 'redis-namespace', '1.2.2'
-gem 'resque'
+gem 'sidekiq'
 gem 'inherited_resources', '~> 1.3.1'
 gem 'simple_form'
 gem 'kaminari'

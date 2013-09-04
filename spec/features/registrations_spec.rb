@@ -8,7 +8,7 @@ describe 'registrations' do
       visit '/users/sign_up'
     end
 
-    it 'can fill out form to sign up', js: true do
+    it 'can fill out form to sign up', js: true, vcr: true do
       user = FactoryGirl.build(:user)
 
       fill_out_sign_up_form_for user
@@ -27,7 +27,7 @@ describe 'registrations' do
         page.should have_content are_you_person
       end
 
-      it 'adds an identity and notifies appropriately', js: true do
+      it 'adds an identity and notifies appropriately', js: true, vcr: true do
         ActionMailer::Base.deliveries.clear
 
         staff_member = FactoryGirl.create(:user)

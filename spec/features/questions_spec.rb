@@ -316,7 +316,7 @@ describe 'questions' do
         page.body.should have_selector "#modal"
       end
 
-      it 'allows new user to register and sign on to a question', js: true do
+      it 'allows new user to register and sign on to a question', js: true, vcr: true do
         visit "/vt/questions/#{@question.id}"
 
         within ".signup" do

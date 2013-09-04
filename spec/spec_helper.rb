@@ -108,3 +108,8 @@ VCR.configure do |c|
     match_requests_on: [:method, VCR.request_matchers.uri_without_param(:apikey, :key)]
   }
 end
+
+# https://github.com/mperham/sidekiq/wiki/Testing
+
+# Run all Sidekiq workers synchronously, immediately upon scheduling.
+require 'sidekiq/testing/inline'

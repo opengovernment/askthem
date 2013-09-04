@@ -1,0 +1,75 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://maps.googleapis.com/maps/api/geocode/json?address=148%20Lafayette%20St,%20New%20York,%20ny,%20US,%2010013&language=en&sensor=false
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Wed, 04 Sep 2013 04:09:29 GMT
+      Expires:
+      - Thu, 05 Sep 2013 04:09:29 GMT
+      Cache-Control:
+      - public, max-age=86400
+      Access-Control-Allow-Origin:
+      - ! '*'
+      Server:
+      - mafe
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Alternate-Protocol:
+      - 80:quic
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: US-ASCII
+      string: ! "{\n   \"results\" : [\n      {\n         \"address_components\" :
+        [\n            {\n               \"long_name\" : \"148\",\n               \"short_name\"
+        : \"148\",\n               \"types\" : [ \"street_number\" ]\n            },\n
+        \           {\n               \"long_name\" : \"Lafayette Street\",\n               \"short_name\"
+        : \"Lafayette St\",\n               \"types\" : [ \"route\" ]\n            },\n
+        \           {\n               \"long_name\" : \"Lower Manhattan\",\n               \"short_name\"
+        : \"Lower Manhattan\",\n               \"types\" : [ \"neighborhood\", \"political\"
+        ]\n            },\n            {\n               \"long_name\" : \"Manhattan\",\n
+        \              \"short_name\" : \"Manhattan\",\n               \"types\" :
+        [ \"sublocality\", \"political\" ]\n            },\n            {\n               \"long_name\"
+        : \"New York\",\n               \"short_name\" : \"New York\",\n               \"types\"
+        : [ \"locality\", \"political\" ]\n            },\n            {\n               \"long_name\"
+        : \"New York\",\n               \"short_name\" : \"New York\",\n               \"types\"
+        : [ \"administrative_area_level_2\", \"political\" ]\n            },\n            {\n
+        \              \"long_name\" : \"New York\",\n               \"short_name\"
+        : \"NY\",\n               \"types\" : [ \"administrative_area_level_1\", \"political\"
+        ]\n            },\n            {\n               \"long_name\" : \"United
+        States\",\n               \"short_name\" : \"US\",\n               \"types\"
+        : [ \"country\", \"political\" ]\n            },\n            {\n               \"long_name\"
+        : \"10013\",\n               \"short_name\" : \"10013\",\n               \"types\"
+        : [ \"postal_code\" ]\n            }\n         ],\n         \"formatted_address\"
+        : \"148 Lafayette Street, New York, NY 10013, USA\",\n         \"geometry\"
+        : {\n            \"location\" : {\n               \"lat\" : 40.7195898,\n
+        \              \"lng\" : -73.9998334\n            },\n            \"location_type\"
+        : \"ROOFTOP\",\n            \"viewport\" : {\n               \"northeast\"
+        : {\n                  \"lat\" : 40.7209387802915,\n                  \"lng\"
+        : -73.99848441970849\n               },\n               \"southwest\" : {\n
+        \                 \"lat\" : 40.71824081970851,\n                  \"lng\"
+        : -74.0011823802915\n               }\n            }\n         },\n         \"types\"
+        : [ \"street_address\" ]\n      }\n   ],\n   \"status\" : \"OK\"\n}\n"
+    http_version: 
+  recorded_at: Wed, 04 Sep 2013 04:09:29 GMT
+recorded_with: VCR 2.5.0

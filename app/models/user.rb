@@ -133,16 +133,6 @@ class User
     [street_address, locality, region, country, postal_code] * ', '
   end
 
-  @queue = :user_geocode
-  def self.perform(id, meth)
-    user = find(id) # will raise an error if not found
-    case meth.to_s
-    when 'geocode'
-      user.geocode
-      user.save!
-    end
-  end
-
   # Unlike Devise, allows changing the password without a password.
   # @see https://github.com/plataformatec/devise/blob/master/lib/devise/models/database_authenticatable.rb#L89
   # @see https://github.com/plataformatec/devise/blob/master/lib/devise/models/database_authenticatable.rb#L59
@@ -167,6 +157,6 @@ class User
   end
 
   def trigger_geocoding
-    Resque.enqueue(User, id, "geocode")
+    GeocodeWorker.perform_async(id) unless coordinates.present?
   end
 end
