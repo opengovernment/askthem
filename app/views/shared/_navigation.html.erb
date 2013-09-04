@@ -32,6 +32,7 @@
       <% end %>
       <%# <li><%= tab 'Money', '#' </li> @todo %>
       <li><%= tab 'Overview', jurisdiction_path %></li>
+      <%= link_to 'Ask a Question', new_question_path(@jurisdiction.abbreviation), class: 'cta-pill top-nav-ask' %>
     </ul>
   </nav>
 </section>
