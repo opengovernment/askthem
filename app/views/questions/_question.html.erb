@@ -1,6 +1,6 @@
 <li>
   <div class="question_content">
-    <%= link_to question_path(@jurisdiction.abbreviation, question.id), class: 'title' do %>
+    <%= link_to question_path(@jurisdiction.abbreviation, question.id), class: 'title question-title' do %>
       <%= question.title %>
       <span class="icon-angle-right view"></span>
     <% end %>
