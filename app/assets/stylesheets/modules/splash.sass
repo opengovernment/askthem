@@ -2,6 +2,12 @@
 @import mixins
 
 .splash
+  background:
+    image: url(/assets/footer_illustration.jpg)
+    repeat: no-repeat
+    position: 50% 160%
+    size: 120%
+
   @media (min-width: 420px)
     min-width: 980px
 
@@ -9,12 +15,6 @@
     color: #709eac
     &:hover
       color: #82b7c8
-
-  background:
-    image: url(/assets/footer_illustration.jpg)
-    repeat: no-repeat
-    position: 50% 160%
-    size: 120%
 
   .main, .content_body
     display: block
@@ -43,22 +43,7 @@
       ul.level
         border-bottom: 1px solid rgba(174, 202, 204, .3)
         li.active i
-          background: #DCF9FD
-
-    form
-      input[type=text], input[type=email]
-        float: left
-        height: 45px
-        width: 48%
-        &:not(:last-child)
-          margin-right: 2%
-
-      input[type=submit]
-        +box-sizing(border-box)
-        float: left
-        margin-top: 1em
-        width: 22.80701754386%
-
+          background: #d8f2f6
     .leftCol
       float: left
       padding-top: 60px
@@ -201,21 +186,37 @@
           display: inline-block
         &:active
           display: inline-block
-  div.shade_pos
+
+  .shade_pos
     display: block
     clear: both
     z-index: 1
     position: relative
-    div.shade
-      display: block
-      position: fixed
-      width: 100%
-      z-index: 1
-      background: rgba($black, 0.1)
-      height: 18px
-      bottom: 0
+
+  .shade
+    display: block
+    position: fixed
+    width: 100%
+    z-index: 1
+    background: rgba($black, 0.1)
+    height: 18px
+    bottom: 0
+
+.splash-form
+  input[type=text], input[type=email]
+    float: left
+    height: 45px
+    width: 48%
+    &:not(:last-child)
+      margin-right: 2%
+
+  input[type=submit]
+    +box-sizing(border-box)
+    float: left
+    margin-top: 1em
+    width: 22.80701754386%
 
 @-moz-document url-prefix()
-  .splash .main form
+  .splash-form
     input[type=text], input[type=email]
       width: 47%
