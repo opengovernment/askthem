@@ -6,7 +6,7 @@ preload_app true
 # revisit when moving to deploying with capistrano
 # source: https://coderwall.com/p/fprnhg
 before_fork do |server, worker|
-  @sidekiq_pid ||= spawn("bundle exec sidekiq -c 2")
+  @sidekiq_pid ||= spawn("bundle exec sidekiq -q geocoding -c 2")
 end
 
 after_fork do |server, worker|
