@@ -432,35 +432,38 @@ div.filters
     position: relative
     +border-radius(3px)
     input[type=text]
-      background: none
-      border: none
-      color: #5E9187
-      padding-left: 11px
-      height: 18px
-      padding-bottom: 2px
-      padding-top: 6px
       margin-right: 35px
-      font-family: helvetica, arial, verdana, sans-serif
-      font-size: 0.688em
-      font-weight: 100
-      line-height: 1.455em
+      padding:
+        top: 6px
+        bottom: 2px
+        left: 11px
+      border: none
+      background: none
+      height: 18px
       width: 101px
+      font:
+        family: helvetica, arial, verdana, sans-serif
+        size: 0.688em
+        weight: 100
+      line-height: 1.455em
+      color: #5E9187
       &:focus
         outline: none
     input[type=submit]
-      background: url(/assets/mag_glass@2x.png)
-      background-size: 14px 14px
-      background-repeat: no-repeat
-      border: none
+      margin-top: -6px
       padding: 8px
       position: absolute
-      margin-top: -6px
-      right: -1px
-      cursor: pointer
       top: 6px
-      background-position: center
-      width: 27px
+      right: -1px
       height: 26px
+      width: 27px
+      border: none
+      background:
+        image: url(/assets/mag_glass@2x.png)
+        size: 14px 14px
+        repeat: no-repeat
+        position: center
+      cursor: pointer
 
 /*
  *Pagination
@@ -470,10 +473,10 @@ nav.pagination
   span
     display: inline-block
     &.current, &.gap
+      padding: 6px
       display: inline-block
       font-size: 0.813em
       color: #999
-      padding: 6px
     &.prev
     &.next
     a
@@ -509,53 +512,6 @@ span.bill_ref
   color: #2B464E
   font-size: 0.813em
   line-height: 1.385em
-
-/*
- *Footer
-
-footer
-  padding-top: 36px
-  padding-bottom: 42px
-  +responsive-blocker
-  +responsive-max
-  width: 100%
-  div.col
-    display: inline-block
-    width: 25%
-    float: left
-    ul>li
-      font-size: 0.813em
-      line-height: 1.385em
-      padding: 6px 10px 6px 0
-      &.ppf
-        display: inline-block
-        width: 20%
-      &.opennorth
-        display: inline-block
-        width: 20%
-      &.openstates
-        display: inline-block
-        width: 65%
-      &.knight
-        display: inline-block
-        width: 20%
-      a
-        color: #5D8A97
-        &:hover
-          color: #3B626D
-          img
-            +opacity(1)
-        img
-          +transition(opacity 0.3s ease-in)
-          +opacity(0.5)
-          width: 100%
-          display: inline-block
-          min-width: 100%
-  p
-    display: inline-block
-    font-size: 0.813em
-    line-height: 1.385em
-    width: 25%
 
 /*
  *MISC

@@ -3,23 +3,23 @@
 $darkblue: #32515a
 $middleblue: #3c636e
 $lightblue: #7b969e
-$facebook-blue: #3B5998
-$twitter-blue: #00aced
-$green: #afd82d
 
-$darkgrey: #919191
+$green: #afd82d
+$salmon: #fa7564
+$black: #000000
 $middlegrey: #7a7a7a
 $lightgrey: #919191
+$white: #FFFFFF
+
+$facebook-blue: #3B5998
+$twitter-blue: #00aced
+
 
 $context: #c8c8c8
 $border-delimiter: #dce2e4
 
 $linkcolor: #82b7c8
 $linkhover: #709eac
-
-$salmon: #fa7564
-$black: #000000
-$white: #FFFFFF
 
 @mixin gray-container($width)
   +border-radius(6px)
@@ -58,8 +58,43 @@ $white: #FFFFFF
 =Helvetica
   font-family: helvetica, arial, verdana, sans-serif
 
+$fontpath: "/assets/" !default
+
+@font-face
+  font-family: 'RobotoRegular'
+  src: url("#{$fontpath}Roboto-Regular-webfont.eot")
+  src: url("#{$fontpath}Roboto-Regular-webfont.eot?#iefix") format("embedded-opentype"), url("#{$fontpath}Roboto-Regular-webfont.woff") format("woff"), url("#{$fontpath}Roboto-Regular-webfont.ttf") format("truetype"), url("#{$fontpath}Roboto-Regular-webfont.svg#RobotoRegular") format("svg")
+  font:
+    weight: normal
+    style: normal
+
+@font-face
+  font-family: 'RobotoThin'
+  src: url("#{$fontpath}Roboto-Thin-webfont.eot")
+  src: url("#{$fontpath}Roboto-Thin-webfont.eot?#iefix") format("embedded-opentype"), url("#{$fontpath}Roboto-Thin-webfont.woff") format("woff"), url("#{$fontpath}Roboto-Thin-webfont.ttf") format("truetype"), url("#{$fontpath}Roboto-Thin-webfont.svg#RobotoThin") format("svg")
+  font:
+    weight: normal
+    style: normal
+
+@font-face
+  font-family: 'RobotoLight'
+  src: url("#{$fontpath}Roboto-Light-webfont.eot")
+  src: url("#{$fontpath}Roboto-Light-webfont.eot?#iefix") format("embedded-opentype"), url("#{$fontpath}Roboto-Light-webfont.woff") format("woff"), url("#{$fontpath}Roboto-Light-webfont.ttf") format("truetype"), url("#{$fontpath}Roboto-Light-webfont.svg#RobotoLight") format("svg")
+  font:
+    weight: normal
+    style: normal
+
+@font-face
+  font-family: 'RobotoBlack'
+  src: url("#{$fontpath}Roboto-Black-webfont.eot")
+  src: url("#{$fontpath}Roboto-Black-webfont.eot?#iefix") format("embedded-opentype"), url("#{$fontpath}Roboto-Black-webfont.woff") format("woff"), url("#{$fontpath}Roboto-Black-webfont.ttf") format("truetype"), url("#{$fontpath}Roboto-Black-webfont.svg#RobotoBlack") format("svg")
+  font:
+    weight: normal
+    style: normal
+
 /*
  *Block fluidity, for now
+
 =responsive-max($max-width: 910px)
   max-width: $max-width
 
