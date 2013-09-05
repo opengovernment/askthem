@@ -20,12 +20,8 @@
     </label>
     <%= f.text_area :body, placeholder: raw('Go on&hellip;'), cols: '30', rows: '10', validate: true %>
 
-    <label for="issue_area">Select an issue area
-      <span class="opt">(optional)</span>
-    </label>
-
     <div class="input select icon-angle-down sculpt">
-      <% subject_options = raw('<option value="">Select an Issue</option>') + options_for_select(Subject.all) -%>
+      <% subject_options = raw('<option value="">Select an Issue (optional)</option>') + options_for_select(Subject.all) -%>
       <%= f.select :subject, subject_options %>
     </div>
   </fieldset>
