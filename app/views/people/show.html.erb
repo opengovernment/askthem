@@ -16,7 +16,9 @@
           <%= @person.name %> <% unless @person['active'] %>(Not in Office)<% end %>
         </h1>
         <h2><%= person_attributes(@person) %></h2>
-        <i class='icon-ok-sign is-verified'><span> AskThem Verified</span></i>
+        <% if @person.verified? -%>
+          <i class='icon-ok-sign is-verified'><span> AskThem Verified</span></i>
+        <% end -%>
         <div class="attr">
           <span class="count"><%= pluralize @person.questions.count, 'question' %></span>
           <span class="count"><%= pluralize @person.questions_answered.count, 'answer' %></span>

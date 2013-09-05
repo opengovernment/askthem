@@ -49,8 +49,8 @@ describe 'questions' do
           valid_person
           as_user do
             visit '/vt/questions'
-            click_link 'Sign On'
-            page.should have_content 'Signed On'
+            click_link 'Sign'
+            page.should have_content 'Signed'
             page.body.should have_content '1 out of'
           end
         end
@@ -317,7 +317,7 @@ describe 'questions' do
         page.body.should have_selector "#modal"
       end
 
-      it 'allows new user to register and sign on to a question', js: true do
+      it 'allows new user to register and sign on to a question', js: true, vcr: true do
         visit "/vt/questions/#{@question.id}"
 
         within ".signup" do
@@ -329,7 +329,7 @@ describe 'questions' do
           select_user_region_for('vt')
           fill_in 'user_postal_code', with: postal_code
           fill_in 'user_password', with: 'testtest'
-          click_button 'Sign On'
+          click_button 'Sign'
         end
 
         page.body.should have_content '1 out of'
@@ -340,8 +340,8 @@ describe 'questions' do
           valid_person
           as_user do
             visit '/vt/questions'
-            click_link 'Sign On'
-            page.should have_content 'Signed On'
+            click_link 'Sign'
+            page.should have_content 'Signed'
             page.body.should have_content '1 out of'
           end
         end
@@ -352,6 +352,8 @@ describe 'questions' do
 
   def choose_person(need_to_fill_out_address = true)
     fill_out_address if need_to_fill_out_address
+    click_link "Vermont State"
+    sleep 2
     page.execute_script "jQuery('#question_person_id_#{@person.id}').parents('li').trigger('click')"
   end
 

@@ -30,14 +30,14 @@
       <% end %>
     </ol>
   </div>
-  
+
   <ul class="activity">
-    <li><%= pluralize bill.questions.count, 'question' %></li>
+    <!-- <li><%# pluralize bill.questions.count, 'question' %></li> -->
     <% bill.people_and_committee_sponsors(limit: 5, only: :people).each do |sponsor| %><%# @note N+1 query %>
       <li class="depiction">
         <% if Person === sponsor %>
           <% if sponsor.image? %>
-            <%= cdn_image_tag(sponsor.image, size: '50x50', alt: '') %>
+            <%= link_to(cdn_image_tag(sponsor.image, size: '50x50', alt: sponsor.name), person_path(@jurisdiction.abbreviation, sponsor)) %>
           <% else %>
             <%= image_tag('placeholder.png', size: '50x50', alt: '') %>
           <% end %>

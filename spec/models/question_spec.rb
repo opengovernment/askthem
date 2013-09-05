@@ -106,4 +106,12 @@ describe Question do
     end
 
   end
+
+  context "with after_create callback" do
+    it "copies coordinates from asking user" do
+      user = FactoryGirl.create(:user)
+      question = FactoryGirl.create(:question, user: user)
+      expect(question.reload.coordinates).to eq [-73.9998334, 40.7195898]
+    end
+  end
 end

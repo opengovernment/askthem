@@ -1,5 +1,4 @@
-@import compass
-@import mixins
+@import load
 
 .cta-pill
   padding: 13px 24px 12px
@@ -12,9 +11,10 @@
   color: $white
   cursor: pointer
   line-height: 1.286em
-  text-shadow: 0 1px 0 #e66c5c
+  +text-shadow(0 1px 0 #e66c5c)
   vertical-align: top
   +box-shadow(0 1px 0 #e66c5c)
+  background-color: #fa7564
   +background(linear-gradient(top center, #fa7564, #f07160))
   +rounded_corners
   +drop_shadow

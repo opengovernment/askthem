@@ -1,0 +1,80 @@
+@import load
+
+a.logo
+  background-image: url(/assets/logo.svg)
+  width: 120px
+  height: 36px
+  display: inline-block
+  background-size: 100%
+  text-indent: -9999px
+  vertical-align: top
+
+header p.slogan
+  +RobotoRegular
+  font-size: 0.813em
+  line-height: 1.385em
+  display: inline-block
+  font-weight: 100
+  vertical-align: middle
+  padding-bottom: 1px
+  margin-top: 8px
+  color: #49656D
+  margin-left: 30px
+  position: relative
+  input[type=text]
+    background: #e3f3f5
+    border: 1px solid #c5d7da
+    +box-shadow(0 3px 1px 0px rgba(41, 110, 100, 0.03) inset, 0 1px 0 #e1f6f9)
+    +border-radius(3px)
+    +input-placeholder(#a5c2c7)
+    +RobotoRegular
+    font-size: 1em
+    line-height: 1.385em
+    font-weight: 100
+    padding: 0 20px 0 0
+    margin-left: 6px
+    height: 30px
+    text-indent: 10px
+    width: 160px
+    &:focus
+      background-color: #eff9f9
+      outline: 0
+      border-color: #b4c4c7
+  input[type=submit]
+    background: url(/assets/pick.svg) no-repeat center center
+    border: none
+    background-size: 9px
+    cursor: pointer
+    display: inline-block
+    outline: 0
+    top: 5px
+    position: absolute
+    right: 6px
+
+section.mobile_admin_nav
+  display: block
+  a.logo
+    display: none
+
+ul.admin_nav
+  position: absolute
+  right: 0
+  top: 0
+  &.wide
+    display: none
+  li
+    display: inline-block
+    float: left
+    a
+      color: #5D8A97
+      border-right: 1px solid #CCE3DB
+      padding: 12px 20px 0px
+      display: block
+      font-size: 0.75em
+      float: left
+      line-height: 1.5em
+      &:hover
+        color: #3b626d
+    &:last-child a
+      border-right: 0
+

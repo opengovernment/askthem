@@ -13,8 +13,10 @@ class BillsController < ApplicationController
   end
 
   def show
-    @questions = resource.questions.page(params[:page])
-    tab 'questions'
+    sponsors
+    # questions aren't in use yet, default to sponsors for time being
+    # @questions = resource.questions.page(params[:page])
+    # tab 'questions'
   end
 
   def sponsors
@@ -33,10 +35,11 @@ private
   end
 
   def end_of_association_chain
-    Bill.in(parent.abbreviation)
+    Bill.connected_to(parent.abbreviation)
   end
 
   def collection
-    @bills ||= end_of_association_chain.in_session(parent.current_session).includes(:questions).page(params[:page])
+    # @bills ||= end_of_association_chain.in_session(parent.current_session).includes(:questions).page(params[:page])
+    @bills ||= end_of_association_chain.in_session(parent.current_session).page(params[:page])
   end
 end

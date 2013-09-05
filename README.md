@@ -31,6 +31,10 @@ Start the server:
 
     rails server
 
+In another shell, start [Sidekiq](https://github.com/mperham/sidekiq/) to handle background jobs:
+
+    bundle exec sidekiq -q geocoding
+
 ### Setting Up API Keys
 
 You will need a [Sunlight Foundation API key](http://services.sunlightlabs.com/accounts/register/) and a [Project Vote Smart API key](http://votesmart.org/share/api). In development, you should copy and edit `_heroku.rb`:

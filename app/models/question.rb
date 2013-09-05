@@ -28,10 +28,14 @@ class Question
   field :issued_at, type: Time
   # The number of signatures.
   field :signature_count, type: Integer, default: 0
+  # based on asking user at time of question creation
+  # since we aren't geocoding directly, don't need geocoder stuff
+  field :coordinates, type: Array
 
   index(state: 1)
   index(person_id: 1, answered: 1)
   index(bill_id: 1, answered: 1)
+  index({ coordinates: "2d" }, { background: true })
 
   validates_presence_of :state, :person_id, :user_id, :title, :body
   validates_length_of :title, within: 3..60, allow_blank: true
@@ -42,6 +46,8 @@ class Question
   validate :person_and_bill_must_belong_to_the_same_jurisdiction
 
   attr_accessor :person_state, :bill_state
+
+  after_create :copy_coordinates_from_user
 
   # @return [Metadatum] the jurisdiction in which the question is asked
   def metadatum
@@ -117,5 +123,9 @@ class Question
     unless bill_state.blank? || bill_state == person_state
       errors.add(:base, 'The person and the bill must belong to the same state')
     end
+  end
+
+  def copy_coordinates_from_user
+    QuestionCoordinatesWorker.perform_async(id)
   end
 end

@@ -43,11 +43,30 @@ describe User do
       end
     end
 
-    describe '#perform' do
-      it "should geocode the user's address", :vcr do
-        User.perform(user.id, 'geocode')
-        user.reload.to_coordinates.should == [40.7189099, -74.0002784]
+    describe "#verified" do
+      context "when user has at least one verified identity" do
+        let(:identity) { FactoryGirl.create(:identity, status: "verified") }
+        let(:user) { identity.user }
+
+        it "is true" do
+          expect(user.verified?).to be_true
+        end
       end
+
+      context "when user has at least one verified identity" do
+        it "is false" do
+          expect(user.verified?).to be_false
+        end
+      end
+    end
+  end
+
+  context "with after_create callback" do
+    it "geocodes address to lat long", :vcr do
+      user = FactoryGirl.build(:user)
+      user.coordinates = nil
+      user.save
+      expect(user.reload.to_coordinates).to eq [40.7195898, -73.9998334]
     end
   end
 end

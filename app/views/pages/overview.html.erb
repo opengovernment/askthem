@@ -1,11 +1,6 @@
 <%= render 'shared/navigation' %>
 
 <section class="overview">
-  <header>
-    <h1><%= legislature_name %></h1>
-    <%= link_to 'Ask a Question', new_question_path(@jurisdiction.abbreviation), class: 'cta-pill' %>
-    <div class="clear"></div>
-  </header>
   <nav>
     <ul class="radio_nav">
       <% if @jurisdiction.upper_chamber? %>

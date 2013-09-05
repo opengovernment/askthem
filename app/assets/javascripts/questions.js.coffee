@@ -85,7 +85,7 @@ jQuery ($) ->
         if $('ul.people-type').is(':hidden')
           $('ul.people-type').fadeTo(300, 1)
 
-        getPeople()
+        getPeople('FederalLegislator')
       else
         # show recipient header and loading
         if $('label.select-person').is(':hidden')

@@ -1,15 +1,19 @@
-@import compass/css3
-@import mixins
+@import load
 
 .splash
-  @media (min-width: 420px)
-    min-width: 980px
   background:
-    color: #DCF9FD
-    image: url(/assets/footer_illustration_temp@2x.png)
+    image: url(/assets/footer_illustration.jpg)
     repeat: no-repeat
     position: 50% 160%
     size: 120%
+
+  @media (min-width: 420px)
+    min-width: 980px
+
+  a
+    color: #709eac
+    &:hover
+      color: #82b7c8
 
   .main, .content_body
     display: block
@@ -38,22 +42,7 @@
       ul.level
         border-bottom: 1px solid rgba(174, 202, 204, .3)
         li.active i
-          background: #DCF9FD
-
-    form
-      input[type=text], input[type=email]
-        float: left
-        height: 45px
-        width: 48%
-        &:not(:last-child)
-          margin-right: 2%
-
-      input[type=submit]
-        +box-sizing(border-box)
-        float: left
-        margin-top: 1em
-        width: 22.80701754386%
-
+          background: #d8f2f6
     .leftCol
       float: left
       padding-top: 60px
@@ -99,6 +88,11 @@
       margin-top: 42px
       padding-top: 0
       width: 53.370786516854%
+      li
+        padding-left: 16px
+        text-indent: -16px
+        list-style-type: disc
+        list-style-position: inside
     div.rightCol
       margin-top: 42px
       padding-left: 4.494382022472%
@@ -115,9 +109,10 @@
       margin-top: 12px
     li
       margin-bottom: 12px
+      line-height: 24px
     div.avatar
-      max-width: 60px
-      width: 27.272727272727%
+      height: 60px
+      width: 60px
     div.person-info
       display: inline-block
       vertical-align: top
@@ -178,7 +173,7 @@
             display: inline-block
             content: ""
             border:
-              bottom: 12px solid #FFF
+              bottom: 12px solid $white
               left: 12px solid rgba($black, 0)
               right: 12px solid rgba($black, 0)
             position: absolute
@@ -190,16 +185,49 @@
           display: inline-block
         &:active
           display: inline-block
-  div.shade_pos
+
+  .shade_pos
     display: block
     clear: both
     z-index: 1
     position: relative
-    div.shade
-      display: block
-      position: fixed
-      width: 100%
-      z-index: 1
-      background: rgba($black, 0.1)
-      height: 18px
-      bottom: 0
+
+  .shade
+    display: block
+    position: fixed
+    width: 100%
+    z-index: 1
+    background: rgba($black, 0.1)
+    height: 18px
+    bottom: 0
+
+.splash-form
+  input[type=text], input[type=email]
+    float: left
+    height: 45px
+    width: 48%
+    &:not(:last-child)
+      margin-right: 2%
+
+  input[type=submit]
+    +box-sizing(border-box)
+    float: left
+    margin-top: 1em
+    width: 22.80701754386%
+
+@-moz-document url-prefix()
+  .splash-form
+    input[type=text], input[type=email]
+      width: 47%
+
+.splash-shares
+  margin-top: 3em
+
+a.splash-share
+  margin-top: 1em
+  display: block
+  max-width: 200px
+  text-align: center
+  color: $white
+  &:hover
+    color: $white

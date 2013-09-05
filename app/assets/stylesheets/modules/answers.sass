@@ -1,0 +1,78 @@
+@import load
+
+/*
+ *Answers
+section.question div.recipient_answer
+  @include gray-container(90%)
+  background:
+    image: url(/assets/seal@2x.png)
+    repeat: no-repeat
+    position: 98% 4%
+    size: 36px
+  display: inline-block
+  float: right
+  margin:
+    top: 24px
+    bottom: 42px
+  vertical-align: top
+  div.avatar
+    margin-right: 6px
+  div.person-info
+    display: inline-block
+    margin-bottom: 18px
+    h2
+      font-size: 1.125em
+      line-height: 1.333em
+    span.jurisdiction
+      +RobotoRegular
+      color: #518795
+      font-size: 0.813em
+      line-height: 1.385em
+    span.stats
+      +RobotoRegular
+      color: #7b969e
+      font-size: 0.688em
+      line-height: 1.636em
+      display: block
+  p
+    display: inline-block
+  span.pubdate
+    font-size: 0.813em
+    line-height: 1.385em
+    color: #7b969e
+    sup
+      &:before
+        content: "\2022"
+        padding: 0 8px 0 6px
+
+.recipient-answer-form
+  +gray-container(90%)
+  overflow: auto
+  textarea
+    resize: vertical
+  input, textarea
+    margin-top: 1em
+  input[type=submit]
+    margin-bottom: 2em
+
+.recipient-answer-form-left
+  @media (min-width: 420px)
+    float: left
+    width: 50%
+
+.watermark-tip
+  margin-top: 1.5em
+  padding-left: 5em
+  +box-sizing(border-box)
+  background:
+    image: url(/assets/seal@2x.png)
+    repeat: no-repeat
+    position: 0 4%
+    size: 36px
+  font-size: 10px !important
+  color: #c8c8c8
+  @media (min-width: 420px)
+    float: right
+    width: 45%
+
+

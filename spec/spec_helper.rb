@@ -5,11 +5,11 @@ Coveralls.wear!('rails')
 require 'capybara/rspec'
 require 'capybara/poltergeist'
 # @todo delete longer timeout if possible in future
-Capybara.register_driver :poltergeist do |app|
-  Capybara::Poltergeist::Driver.new(app, timeout: 45)
+Capybara.register_driver :poltergeist_with_longer_timeout do |app|
+  Capybara::Poltergeist::Driver.new(app, timeout: 75)
 end
 
-Capybara.javascript_driver = :poltergeist
+Capybara.javascript_driver = :poltergeist_with_longer_timeout
 # WARN: adds dependency on phantomjs 1.8.1 or higher
 
 # handy for spec/requests when you want to see state of html
@@ -108,3 +108,8 @@ VCR.configure do |c|
     match_requests_on: [:method, VCR.request_matchers.uri_without_param(:apikey, :key)]
   }
 end
+
+# https://github.com/mperham/sidekiq/wiki/Testing
+
+# Run all Sidekiq workers synchronously, immediately upon scheduling.
+require 'sidekiq/testing/inline'

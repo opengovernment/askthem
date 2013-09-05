@@ -13,4 +13,7 @@ class ApplicationAuthorizer < Authority::Authorizer
     false
   end
 
+  def self.authorizes_to_view_contact_info?(user)
+    user.has_role? :staff_member
+  end
 end
