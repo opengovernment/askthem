@@ -59,11 +59,11 @@
 
       <% unless local? -%>
         <ul class="people-type" style="display:none;">
-          <li id="federal-people">
+          <li class="active" id="federal-people">
             <a href="#federal_address_lookup"><%= @jurisdiction['name'] %> Federal</a>
             <i class="icon-angle-down"></i>
           </li>
-          <li class="active" id="state-people">
+          <li id="state-people">
             <a href="#state_address_lookup"><%= @jurisdiction['name'] %> State</a>
             <i class="icon-angle-down"></i>
           </li>
