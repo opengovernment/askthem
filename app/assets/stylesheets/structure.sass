@@ -1,117 +1,10 @@
-@import compass/reset
-@import compass/css3
-@import mixins
+@import load
 
 .clear
   clear: both
   display: block
   height: 0
   float: none
-
-body
-  background: #d8f2f6
-  color: $darkblue
-  font-family: helvetica, arial, verdana, sans-serif
-
-a
-  color: $linkcolor
-  text-decoration: none
-  outline: none
-  &:hover
-    color: $linkhover
-
-html
-  -webkit-font-smoothing: antialiased
-
-/*
- *Header & Admin controls
-a.logo
-  background-image: url(/assets/logo.svg)
-  width: 120px
-  height: 36px
-  display: inline-block
-  background-size: 100%
-  text-indent: -9999px
-  vertical-align: top
-
-header p.slogan
-  +RobotoRegular
-  font-size: 0.813em
-  line-height: 1.385em
-  display: inline-block
-  font-weight: 100
-  vertical-align: middle
-  padding-bottom: 1px
-  margin-top: 8px
-  color: #49656D
-  margin-left: 30px
-  position: relative
-  input[type=text]
-    background: #e3f3f5
-    border: 1px solid #c5d7da
-    +box-shadow(0 3px 1px 0px rgba(41, 110, 100, 0.03) inset, 0 1px 0 #e1f6f9)
-    +border-radius(3px)
-    +input-placeholder(#a5c2c7)
-    +RobotoRegular
-    font-size: 1em
-    line-height: 1.385em
-    font-weight: 100
-    padding: 0 20px 0 0
-    margin-left: 6px
-    height: 30px
-    text-indent: 10px
-    width: 160px
-    &:focus
-      background-color: #eff9f9
-      outline: 0
-      border-color: #b4c4c7
-  input[type=submit]
-    background: url(/assets/pick.svg) no-repeat center center
-    border: none
-    background-size: 9px
-    cursor: pointer
-    display: inline-block
-    outline: 0
-    top: 5px
-    position: absolute
-    right: 6px
-
-section.mobile_admin_nav
-  display: block
-  a.logo
-    display: none
-
-ul.admin_nav
-  position: absolute
-  right: 0
-  top: 0
-  &.wide
-    display: none
-  li
-    display: inline-block
-    float: left
-    a
-      color: #5D8A97
-      border-right: 1px solid #CCE3DB
-      padding: 12px 20px 0px
-      display: block
-      font-size: 0.75em
-      float: left
-      line-height: 1.5em
-      &:hover
-        color: #3b626d
-    &:last-child a
-      border-right: 0
-
-div.attr
-  span.attr
-    color: $lightblue
-    display: inline-block
-    margin-right: 20px
-    font-size: 0.813em
-    line-height: 1.385em
-    &:last-child
-      margin-right: 0
 
 /*
  *Main structural elements
@@ -144,9 +37,10 @@ div.related_wrap
 div.related_data
   background: url(/assets/related_bg@2x.png) repeat
   background-size: 30px 30px
-  border-top: 1px solid #e7e7e7
-  border-right: 1px solid #E7E7E7
-  box-shadow: 0px -1px 3px rgba(0, 0, 0, 0.05), 0 1px 0 0px white inset
+  border:
+    top: 1px solid #e7e7e7
+    right: 1px solid #e7e7e7
+  box-shadow: 0px -1px 3px rgba($black, 0.05), 0 1px 0 0px $white inset
   margin-top: 30px
   padding-bottom: 60px
   ul.related_nav
@@ -172,8 +66,8 @@ div.related_data
           padding: 21px 18px 16px
   div.related_content
     section.related_focus
-      background: #ffffff
-      box-shadow: 3px 0 7px rgba(0, 0, 0, 0.03), -1px 0 0 rgba(150, 197, 206, 0.37) inset
+      background: $white
+      box-shadow: 3px 0 7px rgba($black, 0.03), -1px 0 0 rgba(150, 197, 206, 0.37) inset
       display: inline-block
       padding-top: 18px
       min-height: 600px
@@ -183,19 +77,20 @@ div.related_data
       width: 20.5641025%
       vertical-align: top
       section
-        border-bottom: 1px dashed rgba(0, 0, 0, 0.15)
-        margin-left: 11.62790697%
-        margin-right: 11.62790697%
-        margin-bottom: 24px
+        margin:
+          right: 11.62790697%
+          bottom: 24px
+          left: 11.62790697%
         padding-bottom: 24px
+        border-bottom: 1px dashed rgba($black, 0.15)
         p
           word-wrap: break-word
         &:last-child,
         &.last
           border: 0
         ul>li
-          color: $lightblue
           font-size: 0.813em
+          color: $lightblue
           line-height: 1.385em
           p
             font-size: 1em
@@ -214,7 +109,7 @@ section.overview
 
 .sim_act
   background: #96c5ce
-  color: #ffffff
+  color: $white
   font-size: 0.75em
   font-weight: 600
   line-height: 2em
