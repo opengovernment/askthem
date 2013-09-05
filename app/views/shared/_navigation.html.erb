@@ -34,7 +34,9 @@
       <% end %>
       <%# <li><%= tab 'Money', '#' </li> @todo %>
       <li><%= tab 'Government', jurisdiction_path %></li>
-      <%= link_to 'Ask a Question', @type ? new_question_path(@jurisdiction.abbreviation, type: @type) : new_question_path(@jurisdiction.abbreviation), class: 'cta-pill top-nav-ask' %>
-    </ul>
+      <% unless params[:controller] == 'people' && params[:action] == 'show' %>
+        <%= link_to 'Ask a Question', @type ? new_question_path(@jurisdiction.abbreviation, type: @type) : new_question_path(@jurisdiction.abbreviation), class: 'cta-pill top-nav-ask' %>
+      <% end %>
+      </ul>
   </nav>
 </section>
