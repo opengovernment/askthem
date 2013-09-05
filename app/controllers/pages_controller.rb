@@ -121,7 +121,8 @@ class PagesController < ApplicationController
 
     @bills = Bill.connected_to(@jurisdiction.abbreviation)
       .in_session(@jurisdiction.current_session).page(params[:page])
-    @bills = @bills.includes(:questions) if tab == 'bills'
+    # bills not tied to questions at moment
+    # @bills = @bills.includes(:questions) if tab == 'bills'
 
     @key_votes = KeyVote.connected_to(@jurisdiction.abbreviation)
       .page(params[:page])
