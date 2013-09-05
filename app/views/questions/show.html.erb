@@ -57,9 +57,11 @@
         <% end %>
         <p class='watermark-tip'>This watermark will appear on all answers you post to the OpenGovernment Website, indicating that you are an official representative.</p>
       </div>
-    <% elsif not user_signed_in? %>
-      <p>Are you <%= @question.person.name %>?</p>
-      <%= link_to 'Sign up to answer', new_user_registration_path, class: 'cta-pill' %>
+    <% elsif !user_signed_in? %>
+      <p>
+        Are you <%= @question.person.name %>?
+        <%= link_to 'Sign up to answer', new_user_registration_path %>.
+      </p>
     <% end %>
     <div class="comments">
       <div id="disqus_thread"></div>
