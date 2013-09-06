@@ -50,6 +50,7 @@ class Meeting
   #   },
   # }
   def self.build_from_provided(attributes)
+
     meeting = Meeting.new(date_and_time: date_and_time_from(attributes),
                           name: attributes['Name'],
                           location: attributes['Meeting Location'],
@@ -62,6 +63,7 @@ class Meeting
     end
 
     if (attributes['Minutes']['url'])
+      puts attributes['Minutes']['url']
       meeting.meeting_record = MeetingRecord.new(url: attributes['Minutes']['url'],
                                     full_text: attributes['Minutes']['fulltext'])
     end
