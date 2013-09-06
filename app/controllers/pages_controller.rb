@@ -131,7 +131,9 @@ class PagesController < ApplicationController
     @key_votes = KeyVote.connected_to(@jurisdiction.abbreviation)
       .page(params[:page])
 
-    @meetings = Meeting.connected_to(@jurisdiction.abbreviation).page(params[:page])
+    @meetings = Meeting.connected_to(@jurisdiction.abbreviation)
+      .page(params[:page])
+      .order_by(:date_and_time.desc)
 
     @tab = tab
     respond_to do |format|
