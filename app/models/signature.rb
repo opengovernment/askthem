@@ -19,6 +19,10 @@ class Signature
 
   before_create :copy_user_fields
 
+  after_create :increment_question_signature_count
+
+  after_destroy :decrement_question_signature_count
+
   private
   def copy_user_fields
     self.given_name     = user.given_name
@@ -28,5 +32,13 @@ class Signature
     self.region         = user.region
     self.postal_code    = user.postal_code
     self.country        = user.country
+  end
+
+  def increment_question_signature_count
+    question.inc(:signature_count, 1)
+  end
+
+  def decrement_question_signature_count
+    question.inc(:signature_count, -1)
   end
 end

@@ -77,6 +77,7 @@ module ApplicationHelper
       @jurisdiction
     else
       @jurisdictions ||= {}
+      return Metadatum::Us.find_or_create! if %w(as gu mp vi).include?(object['state'])
       @jurisdictions[object['state']] ||= Metadatum.find_by_abbreviation(object['state'])
     end
   end
@@ -107,7 +108,7 @@ module ApplicationHelper
     else
       width, height = opts[:width], opts[:height]
     end
-    if url.include? 'ballotpedia'
+    if url.blank? || (url.include? 'ballotpedia')
       image_tag("/assets/placeholder.png")
     else
       image_tag("http://d2xfsikitl0nz3.cloudfront.net/#{CGI.escape(url)}/#{width}/#{height}", opts)
@@ -145,7 +146,7 @@ module ApplicationHelper
   #
   # @param [Person] person a person
   # @return [String] the person's attributes
-  def person_attributes(person)
+  def person_attributes(person, delimiter = ", " )
     parts = []
     parts << jurisdiction(person).chamber_title(person.most_recent(:chamber))
 
@@ -153,7 +154,7 @@ module ApplicationHelper
     parts << district_name if district_name
 
     parts << person['party'] if person['party']
-    parts.join(', ')
+    parts.join(delimiter)
   end
 
   # Formats a district name, if necessary.

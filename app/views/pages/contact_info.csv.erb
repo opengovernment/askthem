@@ -1,0 +1,16 @@
+<%- headers = ["Jurisdiction", "Id", "Name", "Title and Details", "Email", "Phone", "Office Details", "Twitter", "Facebook", "Youtube", "Links"] -%>
+<%= CSV.generate_line headers %>
+<%- @people.each do |person| -%>
+<%- row = [person.metadatum.abbreviation,
+           person.id,
+           person.full_name,
+           person_attributes(person, " - "),
+           person.email.present? ? person.email : nil,
+           person.read_attribute(:phone),
+           csv_safe_office_details_for(person),
+           person.read_attribute(:twitter_id),
+           person.read_attribute(:facebook_id),
+           person.read_attribute(:youtube_id),
+           csv_safe_links_for(person)] -%>
+<%= CSV.generate_line row %>
+<%- end -%>

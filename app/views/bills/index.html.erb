@@ -1,10 +1,6 @@
 <%= render 'shared/navigation' %>
 
 <section class="bills listings">
-  <header>
-    <h1>Bills</h1>
-    <%= link_to 'Ask a Question', new_question_path(@jurisdiction.abbreviation), class: 'cta-pill' %>
-  </header>
   <div class="filters">
     <span class="info">Filter by:</span><%# @todo DM are these really the filters we're using? %>
     <a href="#" class="radio_button filter inactive"><span class="use"></span>Date</a>

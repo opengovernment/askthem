@@ -1,0 +1,430 @@
+@import load
+
+@media (min-width: 1128px)
+  ul.admin_nav
+    &.thin
+      display: none
+    &.wide
+      display: inline-block
+      position: relative
+      vertical-align: top
+      right: auto
+      top: auto
+    li
+      clear: both
+      a
+        border-right: 0
+        padding-bottom: 12px
+        border-bottom: 1px solid #BDDCE0
+
+@media (min-width: 420px)
+  html
+    min-width: 800px
+
+@media (max-width: 420px)
+  /*
+   *Kill blockers
+  header.main, div.content_body, footer
+    +responsive-blocker(0)
+    width: 100%
+  div.content_body
+    margin-top: 72px
+  header div.wrapper, div.content_body div.wrapper, footer div.wrapper
+    padding-left: 6.6923077%
+  header.main
+    padding-bottom: 0px
+    background: #d8f2f6
+    top: 0
+    position: fixed
+    margin-top: 0
+    margin-bottom: 0
+    z-index: 9999
+  a.logo
+    display: none
+    margin: auto
+  header p.slogan
+    width: 100%
+    margin: 6px auto 0 auto
+    display: none
+    font-size: 13px
+    line-height: 18px
+  /*
+   *Nav
+  nav
+    ul.top_nav
+      li
+        display: none
+        width: 100%
+        text-align: center
+        a
+          padding: 12px 20px
+          display: block
+  section.mobile_admin_nav
+    display: block
+    margin-bottom: 24px
+    margin-top: 18px
+    a.logo
+      display: inline-block
+      margin-left: 6.6923077%
+  a.expose_nav
+    display: inline-block
+    position: absolute
+    right: 6.6923077%
+    font-size: 2em
+  ul.admin_nav
+    background: #d8f2f6
+    +box-shadow(0 3px 0 rgba(0, 0, 0, 0.1))
+    display: none
+    position: absolute
+    top: 66px
+    right: auto
+    width: 100%
+    li
+      width: 100%
+      a
+        text-indent: 6.6923077%
+        font-size: 1.125em
+        line-height: 1.333em
+        border: none
+        padding: 12px 0
+        width: 100%
+  /*
+   *Filters
+  div.filters
+    margin-top: 6px
+    padding-top: 6px
+    width: 100%
+    span.info
+      display: none
+    a.radio_button.filter
+      display: none
+      margin: 0 0 6px 6px
+      width: 46%
+      box-sizing: border-box
+      font-size: 9px
+    ul.menu
+      display: none
+    div.search
+      margin-top: 0
+      float: none
+      display: block
+    div.search input[type=text]
+      margin-right: 0
+      width: 100%
+  /*
+   *Buttons
+  .cta-pill
+    width: 100%
+    box-sizing: border-box
+    text-align: center
+  .mobile_cta
+    display: inline-block
+  section.questions.listings a.cta-pill, section.bills.listings a.cta-pill, section.people.listings a.cta-pill
+    clear: left
+    margin-top: 12px
+    float: none
+    width: 100%
+    text-align: center
+  section.people header .cta-pill
+    text-align: center
+  span.info
+    margin-top: 12px
+  /*
+   *Type
+  h1
+    display: block
+  /*
+   *Footer
+  footer
+    div.col
+      width: 50%
+      &.logos
+        width: 100%
+    p
+      width: 100%
+  /*
+   *Questions
+  section.question
+    article
+      width: 100%
+    div.flow_info
+      display: none
+    div.count .summary_count
+      top: 42px
+  section.questions ol > li,
+  section.questions.related_focus ol > li
+    div.question_content
+      margin-left: 0
+      width: 100%
+    span.target
+      padding: 0
+      a.recipient
+        margin-top: 6px
+    ul.activity
+      width: 40%
+      float: left
+      text-align: left
+      margin-top: 24px
+  section.question div.actions
+    width: 85.714286%
+    float: none
+    padding: 6.6923077%
+  /*
+   *Asking Questions
+  section.question span.toggle
+    a
+      width: 100%
+      box-sizing: border-box
+      display: none
+      &.mobile
+        display: inline-block
+      &.anchor
+        display: inline
+  section.question div.progress
+    position: relative
+    margin-top: -84px
+    width: auto
+    h4,div.row
+      display: none
+    a.cta-pill
+      width: 100%
+  /*
+   *People
+  section.people
+    div.person_info
+      width: 100%
+      .person_photo
+        @media (min-width: 420px)
+          width: 20%
+        img
+          width: 100%
+          height: 100%
+      .person_details
+        width: 70%
+        margin-left: 5%
+  .people-list > li
+    width: 100%
+    div.avatar, div.person-info
+      float: left
+  section.profile
+    header
+      div.avatar
+        display: block
+        margin: 0 auto 24px auto
+      span.loc
+        margin: auto
+        display: block
+        text-align: center
+      ul.links
+        margin: auto
+        text-align: center
+  /*
+   *Bills
+  section.bills
+    div.bill_info
+      margin-bottom: 24px
+      width: 100%
+      h2
+        text-align: center
+        width: 100%
+        a
+          display: block
+      div.attr
+        text-align: center
+    a.bill_detail.cta-pill
+      float: none
+      width: 100%
+    a.sim_act
+      float: none
+      display: block
+      width: auto
+  /*
+   *Overview
+  nav
+    ul.radio_nav
+      width: 100%
+      li
+        width: 100%
+        a
+          display: block
+    div.nav_extras
+      width: 100%
+      padding: 12px 0
+      a
+        display: none
+      div.rep_search
+        margin-bottom: 6px
+        width: 96%
+        float: none
+        display: block
+        margin: auto
+        input[type=text]
+          width: 96%
+        input[type=submit]
+          top: auto
+          bottom: 0
+  /*
+   *Related Data
+  div.related_wrap
+    width: 100%
+  div.related_data
+    border-right: 0
+    ul.related_nav
+      padding-left: 0
+      width: 100%
+      li
+        display: block
+        width: 50%
+        float: left
+        a
+          box-sizing: border-box
+          text-align: center
+          width: 100%
+          &.active
+            background: rgba(0, 0, 0, 0.05)
+            padding: 18px 18px 21px 18px
+            border-bottom: 0
+            border-top: 3px solid #F77463
+    div.related_content
+      section.related_focus
+        box-shadow: none
+        width: 100%
+      aside
+        display: inline-block
+        width: 100%
+        vertical-align: top
+        margin-top: 54px
+        section:last-child
+          margin-bottom: 0
+          padding-bottom: 0
+  /*
+   *Homepage
+  body.index
+    padding-bottom: 200px
+    header.main
+      background: #d8f2f6
+      position: relative
+      padding-top: 0
+      height: auto
+      section.mobile_admin_nav
+        margin-bottom: 24px
+        margin-top: 18px
+        top: 0
+        ul.admin_nav.thin
+          display: none
+          z-index: 999
+      h1
+        font-size: 1.5em
+        line-height: 1.25em
+      div.find_questions
+        margin-bottom: 0
+      input[type=text]
+        width: 100%
+        max-width: 100%
+        margin-bottom: 6px
+        padding-right: 0
+        margin-left: 0
+        margin-right: 0
+      input[type=submit]
+        margin-top: -4.75em
+        float: right
+      p
+        font-size: 1.125em
+        line-height: 1.333em
+        p
+          a
+            margin-left: 0
+            margin-top: 12px
+    div.content_body
+      margin-top: 18px
+      div.wrapper
+        margin-top: 30px
+      header
+        h2
+          display: block
+          font-size: 0.813em
+          font-weight: 600
+          line-height: 1.385em
+          text-align: center
+        ul>li
+          font-size: 0.688em
+          line-height: 1.636em
+          width: 40%
+          vertical-align: top
+          margin-top: 12px
+          font-weight: 600
+          padding: 1%
+          text-align: center
+      div.leftCol, div.rightCol
+        padding: 0
+        width: 100%
+        a.question
+          font-size: 1.125em
+          line-height: 1.333em
+          width: 100%
+        a.sign_on
+          width: 100%
+        div.person_wrap
+          width: 100%
+          div.row
+            width: auto
+            display: block
+      ul.popular_questions>li, ol.how_it_works>li
+        width: 100%
+        padding-right: 0
+        padding-left: 0
+        div.question_stats
+          width: 100%
+      ol.how_it_works, header.how_it_works
+        display: none
+  /*
+   *Forms & Notifs
+  div.notif
+    &.preview
+      border: none
+      box-shadow: none
+      margin: 0
+      padding: 0
+      a.edit
+        box-sizing: border-box
+        width: 100%
+        margin-bottom: 18px
+      div.notif_wrap
+        margin: 0
+        width: 100%
+  /*
+   *Splash page
+  body.splash
+    background-position: 0 bottom
+    header.main
+      margin: auto
+      a.logo
+        margin-left: 0
+        position: relative
+      form
+        input[type=email], input[type=text], input[type=submit]
+          margin: 0 0 6px
+          width: 100%
+      h1
+        font-size: 2.25em
+        line-height: 1em
+      div.leftCol
+        padding-top: 0
+      div.leftCol, div.rightCol
+        margin-left: 0
+        width: 100%
+      div.rightCol
+        margin-top: 0px
+        padding-top: 36px
+    div.content_body
+      margin: auto
+      width: 79.46429%
+      div.leftCol, div.rightCol
+        margin-left: 0
+        width: 90%
+        margin: 5%
+      div.rightCol
+        padding-top: 36px
+        padding-left: 0
+        margin: 5%
+        border-left: none

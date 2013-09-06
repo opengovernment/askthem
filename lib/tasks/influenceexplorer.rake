@@ -13,7 +13,6 @@ namespace :influenceexplorer do
 
       # Collect entity IDs that 404.
       not_found_urls = []
-
       criteria = Person.where(transparencydata_id: {'$nin' => ['', nil]}).asc(:transparencydata_id) # no index
       progressbar = ProgressBar.create(format: '%a |%B| %p%% %e', length: 80, smoothing: 0.5, total: criteria.count)
 

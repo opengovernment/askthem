@@ -1,6 +1,6 @@
 <li>
   <div class="question_content">
-    <%= link_to question_path(@jurisdiction.abbreviation, question.id), class: 'title' do %>
+    <%= link_to question_path(@jurisdiction.abbreviation, question.id), class: 'title question-title' do %>
       <%= question.title %>
       <span class="icon-angle-right view"></span>
     <% end %>
@@ -45,12 +45,12 @@
   </ul>
   <% if user_signed_in? %>
     <% if current_user.question_signed? question.id %>
-      <a class='sign_on'>Signed On</a>
+      <a class='sign_on'>Signed</a>
     <% else %>
-      <%= link_to 'Sign On', '#', class: 'sign_on sign-on-user', :'data-question-id' => question.id %><%# @todo link to remote %>
+      <%= link_to 'Sign', '#', class: 'sign_on sign-on-user', :'data-question-id' => question.id %><%# @todo link to remote %>
     <% end %>
   <% else %>
-      <%= link_to 'Read More', question_path(@jurisdiction.abbreviation, question.id), class: 'sign_on' %>
+      <%= link_to 'Sign', question_path(@jurisdiction.abbreviation, question.id), class: 'sign_on' %>
   <% end %>
   <div class="clear"></div>
 </li>

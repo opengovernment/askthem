@@ -100,7 +100,7 @@ class Bill
     unless ids.empty?
       criteria = Person.where(_id: {'$in' => ids})
       if opts[:eager]
-        criteria = criteria.includes(:questions)
+        criteria = criteria.includes(:questions).includes(:identities)
       end
       criteria.each do |document|
         documents_by_id[document.id] = document

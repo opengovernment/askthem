@@ -1,5 +1,5 @@
 jQuery ($) ->
-  $("#user_email").keyup (e) ->
+  $("form#new_registration input#user_email").keyup (e) ->
     emailAddress = $(e.delegateTarget).val()
 
     # only fire once the email is valid address

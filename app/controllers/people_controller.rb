@@ -51,7 +51,7 @@ class PeopleController < ApplicationController
   def collection
     # downcase covers api legacy set 'person' for _type
     # @todo evaluate if in for type is too slow
-    @people ||= end_of_association_chain.active.includes(:questions)
+    @people ||= end_of_association_chain.active.includes(:questions, :identities)
       .only_type(type)
   end
 end

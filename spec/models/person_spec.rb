@@ -90,4 +90,15 @@ describe Person do
       expect(@person.most_recent_district).to eq district
     end
   end
+
+  describe "#verified?" do
+    it "returns false if there is corresponding verified user identity" do
+      expect(@person.verified?).to be_false
+    end
+
+    it "returns true if there is corresponding verified user identity" do
+      identity = FactoryGirl.create(:identity, status: "verified")
+      expect(identity.person.verified?).to be_true
+    end
+  end
 end

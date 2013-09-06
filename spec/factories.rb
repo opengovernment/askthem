@@ -77,6 +77,7 @@ FactoryGirl.define do
         record.bill = FactoryGirl.create(:bill) unless record.bill_id?
       end
     end
+
   end
 
   factory :signature do
@@ -94,6 +95,7 @@ FactoryGirl.define do
     country 'US'
     postal_code '10013'
     password 'password'
+    coordinates [-73.9998334, 40.7195898]
 
     # skip confirmation by default
     after(:build) do |record|

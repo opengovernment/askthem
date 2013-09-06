@@ -1,0 +1,119 @@
+@import compass/css3
+
+$darkblue: #32515a
+$middleblue: #3c636e
+$lightblue: #7b969e
+
+$green: #afd82d
+$salmon: #fa7564
+$black: #000000
+$middlegrey: #7a7a7a
+$lightgrey: #919191
+$white: #FFFFFF
+
+$facebook-blue: #3B5998
+$twitter-blue: #00aced
+
+
+$context: #c8c8c8
+$border-delimiter: #dce2e4
+
+$linkcolor: #82b7c8
+$linkhover: #709eac
+
+@mixin gray-container($width)
+  +border-radius(6px)
+  +box-shadow(0 2px 0 #f9f9f9)
+  background: rgba($black, 0.015)
+  border: 1px solid #f3f3f3
+  padding: 4.974359%
+
+=rounded_corners($border-radius: 3px)
+  +border-radius($border-radius)
+
+=drop_shadow($x: 0, $y: 2px, $choke: 0, $blur: 0, $color: rgba($black, 0.1))
+  +box-shadow($x $y $choke $blur $color)
+
+=inset_double_drop_shadow($x: 0, $y: 2px, $choke: 0, $blur: 0, $color: rgba($black, 0.1), $inset: inset, $x2: 0, $y2: 1px, $choke2: 0, $blur2: 0, $color2: rgba($white, .4))
+  +box-shadow($x $y $choke $blur $color, $inset $x2 $y2 $choke2 $blur2 $color2)
+
+=cta_background
+  +background(linear-gradient(top center, #ff7866, #f47362))
+
+/*
+ *Typography
+
+=RobotoLight
+  font-family: 'RobotoLight', helvetica, arial, verdana, sans-serif
+
+=RobotoThin
+  font-family: 'RobotoThin', helvetica, arial, verdana, sans-serif
+
+=RobotoRegular
+  font-family: 'RobotoRegular', helvetica, arial, verdana, sans-serif
+
+=RobotoBlack
+  font-family: 'RobotoBlack', helvetica, arial, verdana, sans-serif
+
+=Helvetica
+  font-family: helvetica, arial, verdana, sans-serif
+
+$fontpath: "/assets/" !default
+
+@font-face
+  font-family: 'RobotoRegular'
+  src: url("#{$fontpath}Roboto-Regular-webfont.eot")
+  src: url("#{$fontpath}Roboto-Regular-webfont.eot?#iefix") format("embedded-opentype"), url("#{$fontpath}Roboto-Regular-webfont.woff") format("woff"), url("#{$fontpath}Roboto-Regular-webfont.ttf") format("truetype"), url("#{$fontpath}Roboto-Regular-webfont.svg#RobotoRegular") format("svg")
+  font:
+    weight: normal
+    style: normal
+
+@font-face
+  font-family: 'RobotoThin'
+  src: url("#{$fontpath}Roboto-Thin-webfont.eot")
+  src: url("#{$fontpath}Roboto-Thin-webfont.eot?#iefix") format("embedded-opentype"), url("#{$fontpath}Roboto-Thin-webfont.woff") format("woff"), url("#{$fontpath}Roboto-Thin-webfont.ttf") format("truetype"), url("#{$fontpath}Roboto-Thin-webfont.svg#RobotoThin") format("svg")
+  font:
+    weight: normal
+    style: normal
+
+@font-face
+  font-family: 'RobotoLight'
+  src: url("#{$fontpath}Roboto-Light-webfont.eot")
+  src: url("#{$fontpath}Roboto-Light-webfont.eot?#iefix") format("embedded-opentype"), url("#{$fontpath}Roboto-Light-webfont.woff") format("woff"), url("#{$fontpath}Roboto-Light-webfont.ttf") format("truetype"), url("#{$fontpath}Roboto-Light-webfont.svg#RobotoLight") format("svg")
+  font:
+    weight: normal
+    style: normal
+
+@font-face
+  font-family: 'RobotoBlack'
+  src: url("#{$fontpath}Roboto-Black-webfont.eot")
+  src: url("#{$fontpath}Roboto-Black-webfont.eot?#iefix") format("embedded-opentype"), url("#{$fontpath}Roboto-Black-webfont.woff") format("woff"), url("#{$fontpath}Roboto-Black-webfont.ttf") format("truetype"), url("#{$fontpath}Roboto-Black-webfont.svg#RobotoBlack") format("svg")
+  font:
+    weight: normal
+    style: normal
+
+/*
+ *Block fluidity, for now
+
+=responsive-max($max-width: 910px)
+  max-width: $max-width
+
+=responsive-blocker($min-width: 910px)
+  min-width: $min-width
+
+/*
+ *Form elements
+
+=input-placeholder($color, $fontweight: normal)
+  &.placeholder
+    color: $color
+    font-weight: $fontweight
+  &:-moz-placeholder
+    color: $color
+    font-weight: $fontweight
+  &:-ms-input-placeholder
+    color: $color
+    font-weight: $fontweight
+  &::-webkit-input-placeholder
+    color: $color
+    font-weight: $fontweight

@@ -91,6 +91,8 @@ class User
 
   before_validation :set_password_confirmation
 
+  after_create :trigger_geocoding
+
   # Called by RegistrationsController.
   def self.new_with_session(params, session)
     super.tap do |user|
@@ -131,16 +133,6 @@ class User
     [street_address, locality, region, country, postal_code] * ', '
   end
 
-  @queue = :user_geocode
-  def self.perform(id, meth)
-    user = find(id) # will raise an error if not found
-    case meth.to_s
-    when 'geocode'
-      user.geocode
-      user.save!
-    end
-  end
-
   # Unlike Devise, allows changing the password without a password.
   # @see https://github.com/plataformatec/devise/blob/master/lib/devise/models/database_authenticatable.rb#L89
   # @see https://github.com/plataformatec/devise/blob/master/lib/devise/models/database_authenticatable.rb#L59
@@ -154,10 +146,17 @@ class User
   # Unlike Devise, allows updating a user without a password.
   alias_method :update_with_password, :update_without_password
 
-private
+  def verified?
+    identities.where(status: "verified").count > 0
+  end
 
+  private
   # Unlike Devise, doesn't require password confirmations.
   def set_password_confirmation
     self.password_confirmation = password
+  end
+
+  def trigger_geocoding
+    GeocodeWorker.perform_async(id) unless coordinates.present?
   end
 end

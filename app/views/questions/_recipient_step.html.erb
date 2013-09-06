@@ -8,15 +8,15 @@
 
   <span class="toggle">
     <span>Locate by:</span>
-    <a href="#address_lookup" class="select active icon-ok address_lookup mobile">Your Address</a>
+    <a href="#address_lookup" class="select active address_lookup mobile">Your Address</a>
     <a class="select active address_lookup">
       <i class="icon-home"></i> Your Address
     </a>
     <a name="address_lookup" class="anchor"></a>
     <span>or</span>
-    <a href="#twitter_find" class="select twitter twitter_lookup mobile">Twitter Name</a>
+    <a href="#twitter_find" class="select twitter twitter_lookup mobile">Their Twitter Name</a>
     <a class="select twitter">
-      <i class="icon-twitter"></i> Twitter Name
+      <i class="icon-twitter"></i> Their Twitter Name
     </a>
     <a name="twitter_find" class="anchor"></a>
   </span>
@@ -52,18 +52,18 @@
       </fieldset>
 
       <label for="question_person_id" class="select-person" style="display:none;">Recipient
-        <span class="details">Select who you'd like to receive the question:</span>
+        <span class="details">We'll find your elected officials, then you can select who you'd like to receive the question:</span>
       </label>
 
       <div class="loading" style="display:none;">Loading...</div>
 
       <% unless local? -%>
         <ul class="people-type" style="display:none;">
-          <li id="federal-people">
+          <li class="active" id="federal-people">
             <a href="#federal_address_lookup"><%= @jurisdiction['name'] %> Federal</a>
             <i class="icon-angle-down"></i>
           </li>
-          <li class="active" id="state-people">
+          <li id="state-people">
             <a href="#state_address_lookup"><%= @jurisdiction['name'] %> State</a>
             <i class="icon-angle-down"></i>
           </li>

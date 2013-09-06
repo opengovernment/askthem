@@ -1,0 +1,54 @@
+@import load
+
+footer
+  padding:
+    top: 36px
+    bottom: 42px
+  +responsive-blocker
+  +responsive-max
+  width: 100%
+  @media (max-width: 420px)
+    min-width: 0
+  div.col
+    display: inline-block
+    width: 25%
+    float: left
+    @media (max-width: 420px)
+      width: 50%
+      &.logos
+        width: 100%
+    ul>li
+      padding: 6px 10px 6px 0
+      font-size: 0.813em
+      line-height: 1.385em
+      &.ppf
+        display: inline-block
+        width: 20%
+      &.opennorth
+        display: inline-block
+        width: 20%
+      &.openstates
+        display: inline-block
+        width: 65%
+      &.knight
+        display: inline-block
+        width: 20%
+      a
+        color: #5D8A97
+        &:hover
+          color: #3B626D
+          img
+            +opacity(1)
+        img
+          +transition(opacity 0.3s ease-in)
+          +opacity(0.5)
+          width: 100%
+          min-width: 100%
+          display: inline-block
+  p
+    display: inline-block
+    width: 25%
+    font-size: 0.813em
+    line-height: 1.385em
+    @media (max-width: 420px)
+      width: 100%
