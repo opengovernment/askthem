@@ -32,6 +32,9 @@ en:
     bills:
       title: "%{jurisdiction} Bills Overview - OpenGovernment"
       description: "Browse %{jurisdiction} bills"
+    meetings:
+      title: "%{jurisdiction} Meetings Overview - OpenGovernment"
+      description: "Browse %{jurisdiction} meetings"
     key_votes:
       title: "%{jurisdiction} Key Votes Overview - OpenGovernment"
       description: "Browse %{jurisdiction} key votes"

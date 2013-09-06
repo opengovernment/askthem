@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  before_filter :set_jurisdiction, only: [:overview, :lower, :upper, :bills, :key_votes]
+  before_filter :set_jurisdiction, only: [:overview, :lower, :upper, :bills, :key_votes, :meetings]
   before_filter :authenticate_user!, only: [:dashboard, :contact_info]
   before_filter :check_can_view_contact_info, only: :contact_info
   caches_action :channel
@@ -38,6 +38,10 @@ class PagesController < ApplicationController
 
   def key_votes
     tab 'key_votes'
+  end
+
+  def meetings
+    tab 'meetings'
   end
 
   def dashboard
@@ -126,6 +130,8 @@ class PagesController < ApplicationController
 
     @key_votes = KeyVote.connected_to(@jurisdiction.abbreviation)
       .page(params[:page])
+
+    @meetings = Meeting.connected_to(@jurisdiction.abbreviation).page(params[:page])
 
     @tab = tab
     respond_to do |format|

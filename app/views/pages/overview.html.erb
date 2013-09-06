@@ -27,6 +27,13 @@
           <% end %>
         </li>
       <% end %>
+      <% if local? %>
+        <li>
+        <%= link_to meetings_overview_path(@jurisdiction.abbreviation), tab_options('meetings') do %>
+          <%= number_with_delimiter @meetings.count -%> Meetings
+        <% end %>
+        </li>
+      <% end %>
       <li>
         <%= link_to bills_overview_path(@jurisdiction.abbreviation), tab_options('bills') do %>
           <%= number_with_delimiter @bills.count -%> Bills

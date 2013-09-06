@@ -43,6 +43,7 @@ OpenGovernment::Application.routes.draw do
     match 'overview/lower' => 'pages#lower', as: :lower_overview, via: :get
     match 'overview/upper' => 'pages#upper', as: :upper_overview, via: :get
     match 'overview/bills' => 'pages#bills', as: :bills_overview, via: :get
+    match 'overview/meetings' => 'pages#meetings', as: :meetings_overview, via: :get
     match 'overview/votes' => 'pages#key_votes', as: :key_votes_overview, via: :get
   end
 

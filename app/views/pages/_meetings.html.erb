@@ -1,0 +1,7 @@
+<div id="page">
+  <ol class="meetings">
+    <%= render @meetings %>
+  </ol>
+
+  <%= paginate @meetings, outer_window: 1, params: {format: nil}, replace: '#page', scroll: '.nav_extras' %>
+</div>
