@@ -13,3 +13,4 @@ latest-mongo-dump.tar.gz
 .rbenv-version
 /.sass-cache
 dump.rdb
+rspec.failures

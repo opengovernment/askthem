@@ -48,6 +48,7 @@ end
 group :test, :development do
   gem 'pry-rails'
   gem 'rspec-rails'
+  gem 'rspec-rerun'
 end
 
 group :test do

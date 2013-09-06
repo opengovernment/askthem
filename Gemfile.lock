@@ -252,6 +252,8 @@ GEM
       rspec-core (~> 2.14.0)
       rspec-expectations (~> 2.14.0)
       rspec-mocks (~> 2.14.0)
+    rspec-rerun (0.1.2)
+      rspec (>= 2.11.0)
     ruby-growl (3.0)
     ruby-hmac (0.4.0)
     ruby-progressbar (1.2.0)
@@ -342,6 +344,7 @@ DEPENDENCIES
   rmagick
   rolify!
   rspec-rails
+  rspec-rerun
   ruby-growl (= 3.0)
   ruby-progressbar
   sass-rails (~> 3.2.3)
