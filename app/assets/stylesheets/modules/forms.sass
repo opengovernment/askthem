@@ -16,14 +16,15 @@ $placeholder-color: #c8c8c8
 
 form
   input[type=text],input[type=email],input[type=password],input[type=number], textarea
-    font-family: helvetica, arial, verdana, sans-serif
-    font-weight: 200
+    font:
+      family: helvetica, arial, verdana, sans-serif
+      weight: 200
+      size: 1em
     border: 1px solid #dde3e1
-    font-size: 1em
     line-height: 1.5em
     height: 42px
     text-indent: 10px
-    box-sizing: border-box
+    +box-sizing(border-box)
     +border-radius(3px)
     +box-shadow(0 1px 2px #f3f3f3 inset)
     width: 100%
@@ -36,40 +37,43 @@ form
       outline: none
       text-indent: 12px
   textarea
-    padding-top: 8px
+    padding:
+      top: 8px
+      right: 12px
+      left: 10px
     text-indent: 0
-    padding-left: 10px
-    padding-right: 12px
     &:focus
-      text-indent: 0
       padding-left: 12px
+      text-indent: 0
   label
-    color: $darkblue
-    display: block
-    font-weight: 600
-    font-size: 1.125em
     margin-bottom: 12px
+    display: block
+    font:
+      size: 1.125em
+      weight: 600
     line-height: 1em
+    color: $darkblue
     span.details
-      color: $middleblue
-      display: block
-      font-size: 0.889em
-      font-weight: normal
-      line-height: 1.5em
       margin-top: 6px
+      display: block
+      font:
+        size: 0.889em
+        weight: normal
+      line-height: 1.5em
+      color: $middleblue
     span.option
-      color: #c8c8c8
       font-size: 1.125em
       line-height: 1em
+      color: #c8c8c8
   div.inline_label.flatline
     display: inline-block
     position: relative
     width: 100%
     label
       display: inline-block
-      left: 0
       position: absolute
       top: 7px
+      left: 0
     input[type=text], input[type=email], input[type=number]
       display: inline-block
     // input text-indents need to be defined case-by-case
@@ -78,39 +82,42 @@ form
         display: inline-block
         text-indent: 35px
   fieldset
-    border-top: 1px solid #EFEFEF
+    margin:
+      top: 18px
+      bottom: 42px
     padding-top: 18px
-    margin-bottom: 42px
-    margin-top: 18px
+    border-top: 1px solid #EFEFEF
     &.last
       margin-bottom: 0
     input[type=text],input[type=email],input[type=password],input[type=number], textarea
       margin-bottom: 12px
       max-width: 360px
     label
-      font-size: 0.813em
-      font-weight: 600
+      margin:
+        top: 12px
+        bottom: 6px
+      font:
+        size: 0.813em
+        weight: 600
       line-height: 1.385em
-      margin-bottom: 6px
-      margin-top: 12px
 
 form div.pill_wrap
-  background: #FFF
-  border: 1px solid #BCCED1
-  +box-shadow(0 2px 0 rgba(0, 0, 0, 0.03))
-  clear: both
-  float: left
   margin-bottom: 18px
   position: relative
+  float: left
   width: 100%
+  +box-shadow(0 2px 0 rgba(0, 0, 0, 0.03))
+  border: 1px solid #BCCED1
+  background-color: $white
+  clear: both
   input[type=text],input[type=email],input[type=password],input[type=number],input[type=file]
-    border: none
-    border-left: 1px solid #f2f2f2
-    +border-radius(0)
+    margin-bottom: 0
     display: block
     float: left
     height: 54px
-    margin-bottom: 0
+    border: none
+    border-left: 1px solid #f2f2f2
+    +border-radius(0)
     text-indent: 20px
     +input-placeholder(#cccccc, 600)
     &:focus
@@ -120,21 +127,23 @@ form div.pill_wrap
     @media (min-width: 420px)
       width: 76.136363636364%
   input[type=file]
-    height: 36px
     padding-top: 18px
+    height: 36px
     @media (max-width: 420px)
       width: 65%
     @media (min-width: 420px)
       width: 75%
   label
+    margin:
+      top: 19px
+      bottom: 17px
+    padding-left: 4%
     display: block
     float: left
     line-height: 18px
-    text-align: left
-    padding-left: 4%
-    text-transform: uppercase
-    margin-top: 19px
-    margin-bottom: 17px
+    text:
+      align: left
+      transform: uppercase
     @media (max-width: 420px)
       width: 30%
     @media (min-width: 420px)
@@ -142,15 +151,15 @@ form div.pill_wrap
     abbr
       display: none
   div.input.select.sculpt
-    box-sizing: border-box
+    margin-bottom: 0
+    display: block
+    float: left
+    +box-sizing(border-box)
     border: none
     border-left: 1px solid #f2f2f2
     +border-radius(0)
     +box-shadow(none)
-    display: block
-    float: left
     height: 54px
-    margin-bottom: 0
     @media (max-width: 420px)
       width: 65%
     @media (min-width: 420px)
@@ -159,46 +168,47 @@ form div.pill_wrap
       padding: 17px 0
       text-indent: 20px
     &:before
-      right: 20px
       top: 18px
+      right: 20px
 
 span.tip
-  background: #FFF
-  font-size: 0.875em
-  line-height: 1.286em
   position: absolute
+  background-color: $white
+  font-size: 0.875em
   text-align: left
+  line-height: 1.286em
   &.private
     @media (max-width: 420px)
       display: none
     @media (min-width: 420px)
+      padding: 10px
+      width: 120px
+      top: 7px
+      right: -200px
       +box-shadow(0 3px rgba(0, 0, 0, 0.05))
       +border-radius(6px)
-      padding: 10px
-      right: -200px
-      top: 7px
-      width: 120px
       &:before
-        content: ' '
+        position: absolute
+        top: 26%
+        left: -8px
         height: 0
         width: 0
-        border-right: 8px solid #FFF
-        border-top: 12px solid rgba(0, 0, 0, 0)
-        border-bottom: 12px solid rgba(0, 0, 0, 0)
-        left: -8px
-        top: 26%
-        position: absolute
+        border:
+          top: 12px solid rgba($black, 0)
+          right: 8px solid $white
+          bottom: 12px solid rgba($black, 0)
+        content: ' '
 
 // Signup to sign a question - @todo ST: classname too close to "action", rename
 .actions form
   label
   input[type=text],input[type=email],input[type=password],input[type=number]
-    box-sizing: border-box
-    font-size: 0.813em
-    height: 36px
-    line-height: 1.385em
     margin-bottom: 6px
+    height: 36px
     width: 100%
+    +box-sizing(border-box)
+    font-size: 0.813em
+    line-height: 1.385em
   .cta-pill
     width: 100%
 
@@ -220,8 +230,8 @@ div.input.select.sculpt
     border: 1px solid #BBC4C1
   &:before
     position: absolute
-    right: 13px
     top: 13px
+    right: 13px
   label
     abbr
       display: none
@@ -362,6 +372,7 @@ span.toggle
     border-radius: 3px
     border: 1px solid #E4E4E4
     margin-bottom: 1%
+    position: relative
     &:hover, &.selected, &.deselected:hover
       +opacity(1)
       +box-shadow(0 2px 0 rgba(0, 0, 0, 0.05))
@@ -385,14 +396,18 @@ span.toggle
     div.avatar
       width: 20%
     h2
-      display: inline-block
       margin-left: 2.5%
-      width: 55%
+      display: inline-block
     div.person-info
       margin-left: 0
       width: 100%
     span.selected
+      position: absolute
+      top: .75em
+      right: 2em
       display: none
+      font-size: 24px
+      color: $green
   &.twitter
     li
       cursor: inherit
@@ -404,26 +419,27 @@ span.toggle
 /*
  *Success, Info, Error treatments & messages
 div.notif
-  +box-shadow(0 3px 0 rgba(0, 0, 0, 0.05))
+  +box-shadow(0 3px 0 rgba($black, 0.05))
   +border-radius(3px)
   padding: 40px 20px
   margin: 12px 0 24px 0
   h3
-    +RobotoThin
-    color: #477380
-    font-size: 1em
-    line-height: 1.125em
-    font-weight: 600
     padding-bottom: 12px
-  p
+    font:
+      size: 1em
+      weight: 600
+    +RobotoThin
+    line-height: 1.125em
     color: #477380
+  p
+    padding-bottom: 12px !important
     font-size: 0.813em !important
     line-height: 1.385em !important
-    padding-bottom: 12px !important
+    color: #477380
   &.preview
-    padding-bottom: 36px
     margin-bottom: 36px
-    background: #FDFDFD
+    padding-bottom: 36px
+    background-color: #FDFDFD
     border: 1px solid #EFEFEF
     a.edit
       vertical-align: top
@@ -432,23 +448,23 @@ div.notif
       margin-left: 5%
       width: 60%
   &.success
-    background: #f1fee9
     border: 1px solid #9fc41e
+    background: #f1fee9
     h3
       color: #8db10e
     p
       color: #6b754e
   &.info
-    background: #fbfbfb
     border: 1px solid #ECECEC
+    background: #fbfbfb
     text-align: center
     h3
       color: $darkblue
     p
       color: #919192
   &.error
-    background: #FFF4F4
     border: 1px solid #F86369
+    background: #FFF4F4
     text-align: center
     h3
       color: #AC4747
@@ -457,9 +473,9 @@ div.notif
       color: #AC4747
 
 span.secure
-  font-weight: 600
-  display: block
   margin-bottom: 18px
+  display: block
+  font-weight: 600
   i
     font-size: 1.125em
     line-height: 1.333em
@@ -472,7 +488,7 @@ div.field_with_errors, form div.pill_wrap div.field_with_errors
       color: #F86369
       margin-top: 0
   input[type=text],input[type=email],input[type=password],input[type=number]
-    background: #FFF4F4
+    background-color: #FFF4F4
     border: 1px solid #F86369
     +input-placeholder(#f86369)
 

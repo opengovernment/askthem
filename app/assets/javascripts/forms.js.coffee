@@ -73,7 +73,7 @@ $ ->
       #load in header and slide to it first
       $('section.question label.select-person').fadeTo 100, 1
 
-      selectRecipient = $("section.question label.select-person").offset().top      
+      selectRecipient = $("section.question label.select-person").offset().top
 
       $('body').animate
         scrollTop: selectRecipient
