@@ -33,6 +33,9 @@ gem 'rolify', github: 'EppO/rolify'
 gem 'ruby-progressbar'
 gem 'rest-client'
 
+# needed in all envs as it is required in Rakefile
+gem 'rspec-rerun'
+
 group :production do
   gem 'airbrake'
   gem 'unicorn'
@@ -48,7 +51,6 @@ end
 group :test, :development do
   gem 'pry-rails'
   gem 'rspec-rails'
-  gem 'rspec-rerun'
 end
 
 group :test do
