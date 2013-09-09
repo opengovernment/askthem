@@ -13,6 +13,10 @@ class PagesController < ApplicationController
 
   def index
     @jurisdictions = Metadatum.all.to_a
+    @national_answers_count = Answer.count
+    @national_signatures_count = Signature.count
+    @national_questions = Question.includes(:signatures)
+      .order_by(signature_count: "desc").limit(3)
     render layout: 'homepage'
   end
 

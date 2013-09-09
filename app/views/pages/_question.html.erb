@@ -1,0 +1,28 @@
+<% person = question.person %>
+<li>
+  <%= link_to question_path(question.state, question.id), class: 'question' do %>
+    <%= question.title %>
+  <% end %>
+  <div class="person_wrap">
+    <div class="row">
+      <span class="emph">to</span>
+    </div>
+    <div class="row">
+      <div class="person-info">
+        <h4><%= link_to question.person.name, person_path(question.state, person) -%></h4>
+        <span class="jurisdiction"><%# jurisdiction(person).chamber_title(person.most_recent(:chamber)) -%> of <%= question.state.upcase -%></span>
+      </div>
+    </div>
+    <div class="question_stats">
+      <span class="support_count"><%= pluralize question.signatures.count, "Supporter" -%></span>
+      <div class="question_progress">
+        <div class="progress_filler" style="width: <%= question_progress_percent(question) %>%;"></div>
+      </div>
+    </div>
+  </div>
+  <% if user_signed_in? && current_user.question_signed?(question.id) -%>
+    <a class="sign_on">Signed</a>
+  <% else %>
+    <%= link_to "Sign", question_path(question.state, question.id), class: "sign_on" %>
+  <% end %>
+</li>

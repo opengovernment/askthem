@@ -23,7 +23,6 @@ FactoryGirl.define do
   factory :person do
     metadatum
 
-
     factory :person_ny_sheldon_silver do
       id "NYL000194"
       given_name "Sheldon"
