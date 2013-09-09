@@ -66,7 +66,7 @@ module ApplicationHelper
 
   def state_name
     if state? || federal?
-      @jurisdiction.name
+      @jurisdiction['name']
     elsif local?
       state = Metadatum.where(abbreviation: state_abbreviation).first
       state.nil? ? '#' : state.name
