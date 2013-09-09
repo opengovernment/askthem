@@ -29,3 +29,4 @@
 //= require modal
 //= require people
 //= require registrations
+//= require hovertip

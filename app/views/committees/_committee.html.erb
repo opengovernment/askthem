@@ -8,6 +8,9 @@
       <li class="depiction">
         <% if person.image? %><%# @todo ST use layout to support up to 93 members %>
           <%= link_to(cdn_image_tag(person.image, size: '50x50', alt: person.name), person_path(@jurisdiction.abbreviation, person)) %>
+          <span class="tip private hover-tip">
+            <%= person.name %>
+          </span>
         <% else %>
           <%= image_tag('placeholder.png', size: '50x50', alt: '') %>
         <% end %>
