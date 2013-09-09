@@ -3,22 +3,24 @@
     <ul class="level">
       <li<%= raw(' class="active"') if federal? %>>
         <%= link_to federal_path do %>
-          <%= @jurisdiction['name'] %> Federal
+          <%= state_name %> Federal
         <% end %>
         <i class="icon-angle-down"></i>
       </li>
       <li<%= raw(' class="active"') if state? %>>
         <%= link_to state_path do %>
-          <%= @jurisdiction['name'] %> State
+          <%= state_name %> State
         <% end %>
         <i class="icon-angle-down"></i>
       </li>
-      <li<%= raw(' class="active"') if local? %>>
-        <%= link_to local_path do %>
-          City
+      <% local_jurisdictions.each do |city| %>
+      <li <%= @jurisdiction.abbreviation == city.abbreviation ? raw(' class="active"') : '' %> >
+        <%= link_to jurisdiction_path(jurisdiction: city.abbreviation) do %>
+          <%= city.name %>
         <% end %>
         <i class="icon-angle-down"></i>
       </li>
+      <% end %>
     </ul>
     <ul class="top_nav">
       <li><a name="top" style="display:none;"></a><%= tab 'Questions', @type ? questions_path(type: @type) : questions_path %></li>

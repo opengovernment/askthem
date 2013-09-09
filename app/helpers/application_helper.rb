@@ -34,7 +34,7 @@ module ApplicationHelper
   # @return [String] the abbreviation of the state level jurisdiction
   #   corresponding to the current jurisdiction
   def federal_path
-    jurisdiction_path(jurisdiction: @jurisdiction.abbreviation,
+    jurisdiction_path(jurisdiction: state_abbreviation,
                       type: 'FederalLegislator')
   end
 
@@ -42,7 +42,7 @@ module ApplicationHelper
   #   corresponding to the current jurisdiction
   def state_path
     if local?
-      jurisdiction_path(jurisdiction: @jurisdiction.abbreviation[/\A[a-z]{2}/])
+      jurisdiction_path(jurisdiction: state_abbreviation)
     elsif state? || federal?
       jurisdiction_path(jurisdiction: @jurisdiction.abbreviation)
     else
@@ -58,6 +58,25 @@ module ApplicationHelper
     else
       '#'
     end
+  end
+
+  def state_abbreviation
+    @jurisdiction.abbreviation[/\A[a-z]{2}/]
+  end
+
+  def state_name
+    if state? || federal?
+      @jurisdiction['name']
+    elsif local?
+      state = Metadatum.where(abbreviation: state_abbreviation).first
+      state.nil? ? '#' : state.name
+    else
+      '#'
+    end
+  end
+
+  def local_jurisdictions
+    Metadatum.where(abbreviation: /#{state_abbreviation}-/i)
   end
 
   # Return's a bill's truncated title.

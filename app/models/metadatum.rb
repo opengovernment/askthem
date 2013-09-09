@@ -55,7 +55,7 @@ class Metadatum
   #
   # @return [String] the current session's identifier
   def current_session
-    read_attribute(:terms).last['sessions'].last
+    read_attribute(:terms).nil? ? '' : read_attribute(:terms).last['sessions'].last
   end
 
   # Returns the most recent regular session's identifier.

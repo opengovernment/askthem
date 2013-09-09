@@ -111,4 +111,10 @@ FactoryGirl.define do
     association :user, email: "speaker@assembly.state.ny.us"
     association :person, factory: :person_ny_sheldon_silver
   end
+
+  factory :meeting do
+    date_and_time Time.zone.parse('2013-08-15 13:00:00 EST')
+    name 'Special Investigating Committee on Demolition Practices in the City of Philadelphia'
+    state 'pa-philadelphia'
+  end
 end

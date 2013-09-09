@@ -1,0 +1,25 @@
+<tr>
+  <td>
+    <span class="pubdate">
+      <time datetime="<%= meeting.date_and_time.strftime "%Y-%m-%d" %>" pubdate>
+        <%= meeting.date_and_time.strftime "%b #{meeting.date_and_time.day.ordinalize} %Y" %>
+        <br /><%= meeting.date_and_time.strftime "%I:%M%p" %>
+      </time>
+    </span>
+  </td>
+  <td><%= meeting.name %></td>
+  <td>
+    <% if meeting.agenda %>
+      <%= link_to 'Agenda', meeting.agenda.url %>
+    <% else %>
+      -
+    <% end %>
+  </td>
+  <td>
+    <% if meeting.minutes_document %>
+      <%= link_to 'Minutes', meeting.minutes_document.url %>
+    <% else %>
+      -
+    <% end %>
+  </td>
+</tr>
