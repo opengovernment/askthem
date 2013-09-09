@@ -10,7 +10,6 @@ div.attr
     &:last-child
       margin-right: 0
 
-
 div.avatar
   +border-radius(30px)
   display: inline-block
@@ -170,6 +169,21 @@ section.people
 
 .is-hidden
   display: none
+
+span.tip.private.hover-tip
+  display: none
+  top: -2px
+  right: -145px
+  background-color: #f8f8f8
+  z-index: 10
+  &:before
+    border:
+      top: 8px solid transparent
+      right: 8px solid #f8f8f8
+      bottom: 8px solid transparent
+
+span.tip.private.hover-tip.is-showing
+  display: block
 
 /*
  *User Profiles

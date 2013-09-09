@@ -37,7 +37,6 @@ describe 'question' do
           page.body.should have_content 'Very interesting question, let me think about it.'
         end
       end
-
     end
   end
 end

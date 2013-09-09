@@ -23,7 +23,6 @@ FactoryGirl.define do
   factory :person do
     metadatum
 
-
     factory :person_ny_sheldon_silver do
       id "NYL000194"
       given_name "Sheldon"
@@ -77,7 +76,12 @@ FactoryGirl.define do
         record.bill = FactoryGirl.create(:bill) unless record.bill_id?
       end
     end
+  end
 
+  factory :answer do
+    user
+    question
+    text 'Blah, blah, blah.'
   end
 
   factory :signature do

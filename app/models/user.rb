@@ -67,6 +67,7 @@ class User
 
   has_many :questions
   has_many :signatures
+  has_many :answers
   mount_uploader :image, ImageUploader
 
   field :coordinates, type: Array
