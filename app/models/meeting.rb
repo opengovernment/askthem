@@ -4,7 +4,7 @@ class Meeting
   belongs_to :metadatum, foreign_key: 'state'
 
   embeds_one :agenda
-  embeds_one :meeting_record
+  embeds_one :minutes_document
 
   field :date_and_time, type: ActiveSupport::TimeWithZone
   field :name, type: String
@@ -64,7 +64,7 @@ class Meeting
 
     if (attributes['Minutes']['url'])
       puts attributes['Minutes']['url']
-      meeting.meeting_record = MeetingRecord.new(url: attributes['Minutes']['url'],
+      meeting.minutes_document = MinutesDocument.new(url: attributes['Minutes']['url'],
                                     full_text: attributes['Minutes']['fulltext'])
     end
     meeting

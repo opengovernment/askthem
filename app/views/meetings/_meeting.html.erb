@@ -16,8 +16,8 @@
     <% end %>
   </td>
   <td>
-    <% if meeting.meeting_record %>
-      <%= link_to 'Minutes', meeting.meeting_record.url %>
+    <% if meeting.minutes_document %>
+      <%= link_to 'Minutes', meeting.minutes_document.url %>
     <% else %>
       -
     <% end %>

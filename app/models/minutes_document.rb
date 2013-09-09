@@ -1,4 +1,4 @@
-class MeetingRecord
+class MinutesDocument
   include Mongoid::Document
 
   embedded_in :meeting
