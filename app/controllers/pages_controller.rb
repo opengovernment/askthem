@@ -117,15 +117,17 @@ class PagesController < ApplicationController
     # of the unevaluated query.
     @lower = Person.connected_to(@jurisdiction.abbreviation).active
       .where(chamber: 'lower')
-      .only_type(type).page(params[:page])
-    @lower = @lower.includes(:questions).includes(:identities) if tab == 'lower'
+      .only_type(type)
     @lower_parties = @lower.group_by { |person| person['party'] }
+    @lower = @lower.includes(:questions).includes(:identities) if tab == 'lower'
+    @lower = @lower.page(params[:page])
 
     @upper = Person.connected_to(@jurisdiction.abbreviation).active
       .where(chamber: 'upper')
-      .only_type(type).page(params[:page])
-    @upper = @upper.includes(:questions).includes(:identities) if tab == 'upper'
+      .only_type(type)
     @upper_parties = @upper.group_by { |person| person['party'] }
+    @upper = @upper.includes(:questions).includes(:identities) if tab == 'upper'
+    @upper = @upper.page(params[:page])
 
     @bills = Bill.connected_to(@jurisdiction.abbreviation)
       .in_session(@jurisdiction.current_session).page(params[:page])
