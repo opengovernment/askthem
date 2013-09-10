@@ -34,20 +34,20 @@
       <%= link_to 'OpenGovernment', root_path, class: 'logo' %>
       <div class="news_signup" id="news_signup">
         <div class="leftCol">
-          <h1>The "We The People" for every elected official.</h1>
-          <p>Get notified and be the first to submit a question when we launch.</p>
+          <h1 id="dynamic-title">The "We The People" for every elected official.</h1>
+          <p id="dynamic-subtitle">Get notified and be the first to submit a question when we launch.</p>
           <nav>
             <ul class="level">
               <li class="active" data-type="individual">
-                <a href="#">Individual</a>
+                <a href="#" id="individual-signup">Individual</a>
                 <i class="icon-angle-down"></i>
               </li>
               <li data-type="elected_official">
-                <a href="#">Elected Official</a>
+                <a href="#" id="official-signup">Elected Official</a>
                 <i class="icon-angle-down"></i>
               </li>
               <li data-type="organization">
-                <a href="#">Organization or Media</a>
+                <a href="#" id="organization-signup">Organization or Media</a>
                 <i class="icon-angle-down"></i>
               </li>
             </ul>
@@ -57,12 +57,13 @@
             <input type="text" name="zipcode" id="zipcode" placeholder="Zipcode (optional)">
             <input type="hidden" name="notify_type" id="notify_type" value="individual">
             <input type="submit" value="Notify Me" class="cta-pill">
+            <div id="dynamic-link"></div>
           </form>
         </div>
         <div class="rightCol">
-          <p>It's not just for Presidents anymore. The White House's "We The People" petition platform engaged over 8 million people. Now we're bringing it nationwide, free and open for everyone.</p><br>
-	      <p>Ask questions to over 100,000 elected officials. Vote up the questions you care about. Also, question and petition any verified Twitter account.</p><br> 
-	</div>
+          <p id="dynamic-text">It's not just for Presidents anymore. The White House's "We The People" petition platform engaged over 8 million people. Now we're bringing it nationwide, free and open for everyone.<br><br>
+	        Ask questions to over 100,000 elected officials. Vote up the questions you care about. Also, question and petition any verified Twitter account.</p>
+      	</div>
       </div>
     </div>
     <div class="clear"></div>
@@ -274,6 +275,32 @@
       $this.addClass('active');
       $('#notify_type').val($this.data('type'));
     });
+  </script>
+
+  <script type="text/javascript">
+    $("#individual-signup").click(function(e) {
+      $("#dynamic-title").html("The &quot;We The People&quot; for every elected official.");
+      $("#dynamic-subtitle").html("Get notified and be the first to submit a question when we launch.");
+      $("#dynamic-text").html("It's not just for Presidents anymore. The White House's &quot;We The People&quot; petition platform engaged over 8 million people. Now we're bringing it nationwide, free and open for everyone.<br><br>Ask questions to over 100,000 elected officials. Vote up the questions you care about. Also, question and petition any verified Twitter account.");
+      $("#dynamic-link").html("");
+      e.preventDefault();
+    })
+
+    $("#official-signup").click(function(e) {
+      $("#dynamic-title").html("A New &amp; Powerful Way To Engage With Constituents");
+      $("#dynamic-subtitle").html("Interested in joining? Enter your contact info and we'll be in touch.");
+      $("#dynamic-text").html("AskThem is your personal question-and-answer site, offering greater access to your constituents and your potential supporters across the nation. Agree to respond publicly to any question with enough votes to meet your signature threshold. Energize constituents and build support for your positions.");
+      $("#dynamic-link").html("<a href='https://docs.google.com/forms/d/1iCRzEuDL6bGEkmMsTVrlH-DlQYnMX4KhSF32_tPgT8o/viewform' style='position: relative; top: 1.75em; left: 1em;'>Or, sign up now to become a verified responder</a>");
+      e.preventDefault();
+    })
+
+    $("#organization-signup").click(function(e) {
+      $("#dynamic-title").html("The &quot;We The People&quot; for every elected official.");
+      $("#dynamic-subtitle").html("Get notified and be the first to submit a question when we launch.");
+      $("#dynamic-text").html("It's not just for Presidents anymore. The White House's &quot;We The People&quot; petition platform engaged over 8 million people. Now we're bringing it nationwide, free and open for everyone.<br><br>Ask questions to over 100,000 elected officials. Vote up the questions you care about. Also, question and petition any verified Twitter account.");
+      $("#dynamic-link").html("");
+      e.preventDefault();
+    })
   </script>
 
 </body>
