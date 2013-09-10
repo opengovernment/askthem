@@ -81,17 +81,17 @@
         <div class="leftCol">
           <%= yield %>
           <h3 class='splash-shares'>Help us spread the word!</h3>
-          <a href='mailto:?subject=Get notified when AskThem launches' target="_blank" class='splash-share cta-pill'>
+          <a href="mailto:?subject=Get notified when AskThem launches&body=AskThem is a new question-and-answer website with public figures. It&#039;s free, open-source, and not-for-profit.%0D%0A%0D%0ASign up here to be notified when it launches this Fall and be the first to ask a question to the people who represent you in government &#058;&#058;%0D%0A%0D%0Awww.askthem.io%0D%0A%0D%0A&#133;it's like a version of the &#147;We The People&#148; petition platform for every elected official. You can target over 100,000 elected officials nationwide with questions and petitions, from local city council members all the way up to U.S. senators.%0D%0A%0D%0AAskThem is a project of the Participatory Politics Foundation, the 501(c)3 non-profit organization that created OpenCongress.org and OpenGovernment.org." target="_blank" class='splash-share cta-pill'>
             <i class='icon-envelope-alt'></i>
             Email
           </a>
-          <a href='https://www.facebook.com/sharer.php?u=<%= URI.escape(current_url) %>' target="_blank" class='splash-share cta-pill cta-pill-facebook'>
+          <a href="http://www.facebook.com/sharer/sharer.php?s=100&p[url]=http://askthem.io/&p[images][0]=&p[title]=Get%20notified%20when%20AskThem%20launches&p[summary]=AskThem%20is%20a%20new%20question-and-answer%20website%20with%20public%20figures.%20It's%20free,%20open-source,%20and%20not-for-profit.%0A%0ASign%20up%20here%20to%20be%20notified%20when%20it%20launches%20this%20Fall%20and%20be%20the%20first%20to%20ask%20a%20question%20to%20the%20people%20who%20represent%20you%20in%20government%20::%0A%0Awww.askthem.io" target="_blank" class='splash-share cta-pill cta-pill-facebook'>
             <i class='icon-facebook'></i>
             Share on Facebook
           </a>
-          <a href='https://twitter.com/share?text=Sign up here to get notified when AskThem launches:' target="_blank" class='splash-share cta-pill cta-pill-twitter'>
+          <a href='https://twitter.com/share?text=Get notified when AskThem launches, for question-and-answer and petitions with public figures&#058; askthem.io.' target="_blank" class='splash-share cta-pill cta-pill-twitter'>
             <i class='icon-twitter'></i>
-            Share on Twitter
+            Tweet your Followers
           </a>
         </div>
         <div class="rightCol">
@@ -142,53 +142,26 @@
                 <p>Entrepreneur &amp; Faculty, Harvard University - Kennedy School of Government</p>
               </div>
             </li>
-			<h4>AskThem Team</h4>
-	          <ul>
-	            <li>
-	              <div class="avatar">
-	                <%= image_tag('splash_avatars/david_moore.jpg', class: 'avatar') %>
-	              </div>
-	              <div class="person-info">
-	                <h3><a href="https://twitter.com/ppolitics" target="_blank">David Moore</a></h3>
-	                <p>Program Director; previously, Director, <a href="http://www.opencongress.org/">OpenCongress.org</a>.</p>
-	              </div>
-	            </li>
-				    <li>
-		              <div class="avatar">
-		                <%= image_tag('splash_avatars/walter_mcginnis.jpg', class: 'avatar') %>
-		              </div>
-		              <div class="person-info">
-		                <h3><a href="https://twitter.com/wtem" target="_blank">Walter McGinnis</a></h3>
-		                <p>Technical Director; previously, <a href="http://www.kete.net.nz/">Kete collaboration tools</a>.</p>
-		              </div>
-		            </li>
-					 <li>
-			              <div class="avatar">
-			                <%= image_tag('splash_avatars/steven_trevathan.jpg', class: 'avatar') %>
-			              </div>
-			              <div class="person-info">
-			                <h3><a href="http://www.stevetrevathan.com/" target="_blank">Steven Trevathan</a></h3>
-			                <p>Web Developer & User Experience; Creative Director, <a href="http://dockyard.com/">DockYard</a>.</p>
-			              </div>
-			            </li>
-							 <li>
-					              <div class="avatar">
-					                <%= image_tag('splash_avatars/josh_segall.jpg', class: 'avatar') %>
-					              </div>
-					              <div class="person-info">
-					                <h3><a href="http://en.wikipedia.org/wiki/Joshua_Segall" target="_blank">Joshua Segall</a></h3>
-					                <p>Partnerships Director; Outreach & Business Development.</p>
-					              </div>
-					            </li>
-									 <li>
-							              <div class="avatar">
-							                <%= image_tag('splash_avatars/maryam_gunja.jpg', class: 'avatar') %>
-							              </div>
-							              <div class="person-info">
-							                <h3><a href="https://twitter.com/maryamgunja" target="_blank">Maryam Gunja</a></h3>
-							                <p>Researcher & Outreach Assistant; Community Manager.</p>
-							              </div>
-							            </li>
+	    		<h4 class="splash-team">AskThem Team</h4>
+          <ul>
+            <li>
+              <div class="avatar">
+                <%= image_tag('splash_avatars/david_moore.jpg', class: 'avatar') %>
+              </div>
+              <div class="person-info">
+                <h3><a href="https://twitter.com/mlsif" target="_blank">David Moore</a></h3>
+                <p>AskThem Program Director; previously, OpenCongress.org.</p>
+              </div>
+            </li>
+            <li>
+              <div class="avatar">
+                <%= image_tag('splash_avatars/walter_mcginnis.jpg', class: 'avatar') %>
+              </div>
+              <div class="person-info">
+                <h3><a href="https://twitter.com/mlsif" target="_blank">Walter McGinnis</a></h3>
+                <p>AskThem Tech Lead; previously, .</p>
+              </div>
+            </li>
           </ul>
           <h4 class="splash-team">Previous Contributors</h4>
           <h3><a href="https://twitter.com/mlsif" target="_blank">Derek Eder</a></h3>
