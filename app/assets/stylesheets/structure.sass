@@ -20,7 +20,7 @@ header.main
   width: 70%
 
 div.content_body
-  background: white
+  background-color: $white
   +box-shadow(0 0 5px rgba($black, 0.1), 0 35px 85px rgba($white, 0.45))
   +responsive-blocker
   +border-radius(0 2px 2px 0)
@@ -36,43 +36,45 @@ div.related_wrap
   overflow: hidden
 
 div.related_data
-  background: url(/assets/related_bg@2x.png) repeat
-  background-size: 30px 30px
+  margin-top: 30px
+  padding-bottom: 60px
   border:
     top: 1px solid #e7e7e7
     right: 1px solid #e7e7e7
+  background
+    image: url(/assets/related_bg@2x.png)
+    repeat: repeat
+    size: 30px 30px
   box-shadow: 0px -1px 3px rgba($black, 0.05), 0 1px 0 0px $white inset
-  margin-top: 30px
-  padding-bottom: 60px
   ul.related_nav
+    padding-left: 1%
+    display: block
+    width: 76.5128205%
     border-bottom: 3px solid $darkblue
     box-shadow: 1px 0 0 #e7e7e7 inset
-    display: block
-    padding-left: 1%
-    width: 76.5128205%
     li
       display: inline-block
       a
-        color: #999999
+        margin-bottom: -3px
         padding: 21px 18px
+        display: inline-block
         font-size: 0.813em
         line-height: 1.385em
-        margin-bottom: -3px
-        display: inline-block
+        color: #999999
         &:hover
           color: $darkblue
         &.active
-          color: $darkblue
-          border-bottom: 5px solid #f77463
           padding: 21px 18px 16px
+          border-bottom: 5px solid #f77463
+          color: $darkblue
   div.related_content
     section.related_focus
-      background: $white
-      box-shadow: 3px 0 7px rgba($black, 0.03), -1px 0 0 rgba(150, 197, 206, 0.37) inset
-      display: inline-block
       padding-top: 18px
-      min-height: 600px
+      display: inline-block
       width: 77.5128205%
+      min-height: 600px
+      box-shadow: 3px 0 7px rgba($black, 0.03), -1px 0 0 rgba(150, 197, 206, 0.37) inset
+      background-color: $white
     aside
       display: inline-block
       width: 20.5641025%
@@ -91,8 +93,8 @@ div.related_data
           border: 0
         ul>li
           font-size: 0.813em
-          color: $lightblue
           line-height: 1.385em
+          color: $lightblue
           p
             font-size: 1em
 
@@ -102,23 +104,24 @@ section.overview
   header
     position: relative
   h1
+    display: inline-block
     float: left
     clear: both
-    display: inline-block
   a.cta-pill
     float: right
 
 .sim_act
-  background: #96c5ce
-  color: $white
-  font-size: 0.75em
-  font-weight: 600
-  line-height: 2em
   padding: 7px 12px 6px
-  min-width: 70px
-  text-align: center
   display: inline-block
+  min-width: 70px
+  background-color: #96c5ce
   +rounded_corners
+  font:
+    size: 0.75em
+    weight: 600
+  text-align: center
+  line-height: 2em
+  color: $white
   &:hover
     // todo
     color: $white
@@ -146,10 +149,10 @@ a.sign_on
     top: -1px
     color: #709EAC
   &:active
+    top: 1px
     background-color: #edf3f5
     +background(linear-gradient(top center, #edf3f5, #edf3f5))
     +box-shadow(0 1px 0 whitesmoke, 0 1px 0 0px white inset)
-    top: 1px
 
 .mobile_cta
   display: none
@@ -159,8 +162,8 @@ a.sign_on
 
 nav
   ul.level
-    border-bottom: 1px solid #EBF1F3
     display: block
+    border-bottom: 1px solid #EBF1F3
     li
       display: inline-block
       position: relative
@@ -495,25 +498,27 @@ nav.pagination
     &.next
     a
       +border-radius(3px)
-      +box-shadow(0 1px 3px rgba(0, 0, 0, 0.1))
+      +box-shadow(0 1px 3px rgba($black, 0.1))
       +background(linear-gradient(top center, #fcfcfc, #f9f9f9))
       display: inline-block
       padding: 6px
       font-size: 0.813em
       border: 1px solid white
       &:hover
-        +box-shadow(0 1px 3px rgba(0, 0, 0, 0.2))
+        +box-shadow(0 1px 3px rgba($black, 0.2))
 
 /*
  *UI helpers
 a.show_full_title, a.show_short_title
+  margin:
+    top: 12px
+    left: 6px
   display: inline-block
   clear: left
-  font-weight: normal
-  font-size: 13px
+  font:
+    size: 13px
+    weight: normal
   line-height: 14px
-  margin-left: 6px
-  margin-top: 12px
   span
     display: inline-block
     font-size: 0.678em
@@ -523,9 +528,9 @@ a.expose_nav
   display: none
 
 span.bill_ref
-  color: #2B464E
   font-size: 0.813em
   line-height: 1.385em
+  color: #2B464E
 
 /*
  *MISC
