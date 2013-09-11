@@ -8,8 +8,8 @@ class ApplicationController < ActionController::Base
                      current_user.region
                    elsif request.location &&
                        request.location.coordinates != [0,0] &&
-                       OpenGovernment::STATES.values.include?(request.location.region_code.downcase)
-                     request.location.region_code.downcase
+                       OpenGovernment::STATES.values.include?(request.location.state_code.downcase)
+                     request.location.state_code.downcase
                    else
                      "ny"
                    end
