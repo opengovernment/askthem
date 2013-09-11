@@ -218,7 +218,10 @@ class Person
   end
 
   def self.location_is_valid?(data)
-    data.country_code == 'US' && data.latitude.nonzero? && data.longitude.nonzero?
+    data &&
+      data.country_code == 'US' &&
+      data.latitude.nonzero? &&
+      data.longitude.nonzero?
   end
 
   def self.result_for_single(id)
