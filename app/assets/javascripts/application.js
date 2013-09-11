@@ -30,3 +30,4 @@
 //= require people
 //= require registrations
 //= require hovertip
+//= require overview_subnav
