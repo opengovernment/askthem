@@ -1,25 +1,25 @@
-<tr>
-  <td>
+<div class="meeting-row">
+  <div class="meeting-date">
     <span class="pubdate">
       <time datetime="<%= meeting.date_and_time.strftime "%Y-%m-%d" %>" pubdate>
         <%= meeting.date_and_time.strftime "%b #{meeting.date_and_time.day.ordinalize} %Y" %>
         <br /><%= meeting.date_and_time.strftime "%I:%M%p" %>
       </time>
     </span>
-  </td>
-  <td><%= meeting.name %></td>
-  <td>
+  </div>
+  <div class="meeting-name"><%= meeting.name %></div>
+  <div class="meeting-agenda">
     <% if meeting.agenda %>
       <%= link_to 'Agenda', meeting.agenda.url %>
     <% else %>
       -
     <% end %>
-  </td>
-  <td>
+  </div>
+  <div class="meeting-minutes">
     <% if meeting.minutes_document %>
       <%= link_to 'Minutes', meeting.minutes_document.url %>
     <% else %>
       -
     <% end %>
-  </td>
-</tr>
+  </div>
+</div>

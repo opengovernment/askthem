@@ -1,19 +1,14 @@
 <div id="page">
   <% if @meetings.length > 0 %>
-    <table class="meetings">
-      <thead>
-        <tr>
-          <th>Date</th>
-          <th>Name</th>
-          <th>Agenda</th>
-          <th>Minutes</th>
-        </tr>
-      </thead>
-      <tbody>
-        <%= render @meetings %>
-      </tbody>
-    </table>
-
+    <div class="meetings">
+      <div class="meeting-row">
+        <h2 class="meeting-date">Date</h2>
+        <h2 class="meeting-name">Name</h2>
+        <h2 class="meeting-agenda">Agenda</h2>
+        <h2 class="meeting-minutes">Minutes</h2>
+      </div>
+      <%= render @meetings %>
+    </div>
     <%= paginate @meetings, outer_window: 1, params: {format: nil}, replace: '#page', scroll: '.nav_extras' %>
   <% else %>
     <p>No meetings found</p>
