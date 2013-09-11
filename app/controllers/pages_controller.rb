@@ -8,7 +8,7 @@ class PagesController < ApplicationController
   respond_to :csv, only: [:contact_info]
 
   def splash
-    render layout: 'splash'
+    render layout: "splash"
   end
 
   def index
@@ -17,35 +17,35 @@ class PagesController < ApplicationController
     @national_signatures_count = Signature.count
     @national_questions = Question.includes(:signatures)
       .order_by(signature_count: "desc").limit(3)
-    render layout: 'homepage'
+    render layout: "homepage"
   end
 
   def overview
     if @jurisdiction.upper_chamber?
-      tab 'upper'
+      tab "upper"
     else
-      tab 'lower'
+      tab "lower"
     end
   end
 
   def lower
-    tab 'lower'
+    tab "lower"
   end
 
   def upper
-    tab 'upper'
+    tab "upper"
   end
 
   def bills
-    tab 'bills'
+    tab "bills"
   end
 
   def key_votes
-    tab 'key_votes'
+    tab "key_votes"
   end
 
   def meetings
-    tab 'meetings'
+    tab "meetings"
   end
 
   def dashboard
@@ -74,7 +74,7 @@ class PagesController < ApplicationController
 
     @limit_to_jurisdictions = params[:limit_to_jurisdictions]
     if @limit_to_jurisdictions
-      @people = @people.in(state: @limit_to_jurisdictions.split(','))
+      @people = @people.in(state: @limit_to_jurisdictions.split(","))
     end
   end
 
@@ -104,7 +104,7 @@ class PagesController < ApplicationController
   end
 
   def type
-    @type ||= params[:type] || 'Person'
+    @type ||= params[:type] || "Person"
   end
 
   def set_jurisdiction
@@ -116,23 +116,23 @@ class PagesController < ApplicationController
     # otherwise the first query to evaluate will clear the persistence options
     # of the unevaluated query.
     @lower = Person.connected_to(@jurisdiction.abbreviation).active
-      .where(chamber: 'lower')
+      .where(chamber: "lower")
       .only_type(type)
-    @lower_parties = @lower.group_by { |person| person['party'] }
-    @lower = @lower.includes(:questions).includes(:identities) if tab == 'lower'
+    @lower_parties = @lower.group_by { |person| person["party"] }
+    @lower = @lower.includes(:questions).includes(:identities) if tab == "lower"
     @lower = @lower.page(params[:page])
 
     @upper = Person.connected_to(@jurisdiction.abbreviation).active
-      .where(chamber: 'upper')
+      .where(chamber: "upper")
       .only_type(type)
-    @upper_parties = @upper.group_by { |person| person['party'] }
-    @upper = @upper.includes(:questions).includes(:identities) if tab == 'upper'
+    @upper_parties = @upper.group_by { |person| person["party"] }
+    @upper = @upper.includes(:questions).includes(:identities) if tab == "upper"
     @upper = @upper.page(params[:page])
 
     @bills = Bill.connected_to(@jurisdiction.abbreviation)
       .in_session(@jurisdiction.current_session).page(params[:page])
     # bills not tied to questions at moment
-    # @bills = @bills.includes(:questions) if tab == 'bills'
+    # @bills = @bills.includes(:questions) if tab == "bills"
 
     @key_votes = KeyVote.connected_to(@jurisdiction.abbreviation)
       .page(params[:page])
@@ -143,7 +143,7 @@ class PagesController < ApplicationController
 
     @tab = tab
     respond_to do |format|
-      format.html { render action: 'overview' }
+      format.html { render action: "overview" }
       format.js { render partial: @tab }
     end
   end

@@ -1,16 +1,4 @@
 jQuery ($) ->
-  # Finds the right HTML node to scroll.
-  scroller = null
-  $('html,body').each ->
-    $this = $(this)
-    if $this.scrollTop() > 0
-      scroller = $this
-    else
-      $this.scrollTop(1)
-      test = $this.scrollTop() > 0
-      $this.scrollTop(0)
-      scroller = $this if test
-
   # Replaces the selector's content with the HTML data over a fade transition.
   replace = (selector, data) ->
     $(selector).fadeOut 'fast', ->
@@ -57,6 +45,6 @@ jQuery ($) ->
         scroll = $nav.data('scroll') or target
 
       $('.related_nav .active').removeClass('active') if state.id
-      scroller.animate({scrollTop: $(scroll).offset().top}, 'slow');
+      $('html,body').animate({scrollTop: $(scroll).offset().top}, 'slow')
       replace(target, data)
       $('#' + state.id).addClass('active') if state.id

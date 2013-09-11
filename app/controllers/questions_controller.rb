@@ -9,7 +9,7 @@ class QuestionsController < ApplicationController
 
   def index
     index! do |format|
-      format.js {render partial: 'page'}
+      format.js { render partial: "page" }
     end
   end
 
@@ -33,7 +33,7 @@ class QuestionsController < ApplicationController
       @question.bill = @bill
     end
 
-    render layout: 'data_collection'
+    render layout: "data_collection"
 
     # new!
   end
@@ -54,14 +54,14 @@ class QuestionsController < ApplicationController
     else
       set_up_steps
       respond_to do |format|
-        format.html { render 'new' }
+        format.html { render "new" }
       end
     end
   end
 
   private
   def type
-    @type ||= params[:type] || 'Person'
+    @type ||= params[:type] || "Person"
   end
 
   def set_state_code
@@ -77,21 +77,21 @@ class QuestionsController < ApplicationController
   # person is passed in (no recipient step)
   def relevant_steps
     @relevant_steps = %w(recipient content sign_up confirm)
-    @relevant_steps.delete('recipient') if params[:person]
-    @relevant_steps.delete('sign_up') if user_signed_in?
+    @relevant_steps.delete("recipient") if params[:person]
+    @relevant_steps.delete("sign_up") if user_signed_in?
     @relevant_steps
   end
 
   # @todo: questions are currently always created in default session
   # rather than session of owning metadatum
-  # which can lead to unexpected results when using 'in' query
+  # which can lead to unexpected results when using "in" query
   # unify databases or make consistent
   def end_of_association_chain
     questions = Question.where(state: parent.abbreviation)
-    return questions unless type == 'FederalLegislator'
+    return questions unless type == "FederalLegislator"
 
     person_ids = FederalLegislator.connected_to(parent.abbreviation).collect(&:id)
-    questions.where(person_ids: { '$in' => person_ids })
+    questions.where(person_ids: { "$in" => person_ids })
   end
 
   def collection
