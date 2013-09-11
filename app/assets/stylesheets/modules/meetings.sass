@@ -18,7 +18,8 @@
   padding-right: 5%
 
 .meeting-date-header, .meeting-date
-  width: 10%
+  @media (min-width: 420px)
+    width: 10%
 
 .meeting-date
   font:
@@ -28,15 +29,15 @@
   color: #97a2a5
 
 .meeting-name
-  width: 45%
+  @media (min-width: 420px)
+    width: 45%
 
-.meeting-agenda
-  width: 15%
+.meeting-agenda, .meeting-minutes
+  @media (min-width: 420px)
+    width: 15%
 
 .meeting-agenda-download
-  padding:
-    top: 8px
-    bottom: 8px
+  padding: 8px
   display: block
   position: relative
   width: 100%
@@ -52,6 +53,7 @@
   color: #477380
   &:hover
     top: -1px
-
-.meeting-minutes
-  width: 15%
+  @media (max-width: 420px)
+    margin-top: .5em
+    &:after
+      content: " agenda"
