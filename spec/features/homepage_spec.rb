@@ -37,51 +37,60 @@ describe "pages#index" do
 
   describe "Top Questions Near", vcr: true do
     before do
-      # need to create questions by user that is near same location
-      @user = FactoryGirl.create(:user)
-      @metadatum = FactoryGirl.create(:metadatum, abbreviation: @user.region)
-      @person = FactoryGirl.create(:person_ny_sheldon_silver)
-      3.times do
-        FactoryGirl.create(:question,
-                           person: @person,
-                           user: @user,
-                           state: @metadatum.abbreviation)
-      end
-
-      # create some content that is not "near" our user
-      california = FactoryGirl.create(:metadatum, abbreviation: "ca")
-      cali_user = FactoryGirl.create(:user,
-                                     region: california.abbreviation,
-                                     coordinates: [-118.290474, 34.100535])
-      cali_person = FactoryGirl.create(:person,
-                                       state: california.abbreviation)
-      3.times do
-        FactoryGirl.create(:question,
-                           person: cali_person,
-                           user: cali_user,
-                           state: california.abbreviation)
-      end
-
       # set our ip address for something we know is in ny, nyc.gov
       page.driver.options[:headers] = { "REMOTE_ADDR" => "161.185.30.156" }
     end
 
-    it "displays number of answers near a user's location" do
-      pending "implementation"
-
+    it "displays user's city" do
       visit "/"
-      expect(find(".rightCol")).to have_content("3 Answers")
+      expect(find(".rightCol")).to have_content("Brooklyn")
     end
 
-    it "displays number of signatures near a user's location" do
-      pending "implementation"
+    context "when there are questions near the user" do
+      before do
+        @user = FactoryGirl.create(:user)
+        @metadatum = FactoryGirl.create(:metadatum, abbreviation: @user.region)
+        @person = FactoryGirl.create(:person_ny_sheldon_silver)
+        3.times do
+          FactoryGirl.create(:question,
+                             person: @person,
+                             user: @user,
+                             state: @metadatum.abbreviation)
+        end
 
-      Question.connected_to(@metadatum.abbreviation).each do |question|
-        FactoryGirl.create(:signature, question: question)
+        # create some content that is not "near" our user
+        california = FactoryGirl.create(:metadatum, abbreviation: "ca")
+        cali_user = FactoryGirl.create(:user,
+                                       region: california.abbreviation,
+                                       coordinates: [-118.290474, 34.100535])
+        cali_person = FactoryGirl.create(:person,
+                                         state: california.abbreviation)
+        @local_questions = []
+        3.times do
+          @local_questions << FactoryGirl.create(:question,
+                                                 person: cali_person,
+                                                 user: cali_user,
+                                                 state: california.abbreviation)
+        end
       end
 
-      visit "/"
-      expect(find(".rightCol")).to have_content("3 Supporters")
+      it "displays number of answers near a user's location" do
+        @local_questions.each do |question|
+          FactoryGirl.create(:answer, question: question)
+        end
+
+        visit "/"
+        expect(find(".rightCol")).to have_content("3 Answers")
+      end
+
+      it "displays number of signatures near a user's location" do
+        @local_questions.each do |question|
+          FactoryGirl.create(:signature, question: question)
+        end
+
+        visit "/"
+        expect(find(".rightCol")).to have_content("3 Supporters")
+      end
     end
   end
 end

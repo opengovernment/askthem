@@ -13,10 +13,24 @@ class PagesController < ApplicationController
 
   def index
     @jurisdictions = Metadatum.all.to_a
+
     @national_answers_count = Answer.count
     @national_signatures_count = Signature.count
-    @national_questions = Question.includes(:signatures)
-      .order_by(signature_count: "desc").limit(3)
+    @national_questions = Question.order_by(signature_count: "desc").limit(3)
+
+    @user_city = request.location ? request.location.city : "New York"
+    # coordinates have to be in GEOjson order, thus reverse
+    center = request.location ? request.location.coordinates.reverse : [40.7195898,
+                                                                        -73.9998334]
+
+    @near_questions = Question
+      .where(:coordinates => { "$within" => { "$center" => [center, 100 ] } })
+    near_ids = @near_questions.collect(&:id)
+
+    @near_signatures = Signature.in(question_id: near_ids)
+    @near_answers = Answer.in(question_id: near_ids)
+    @near_questions = @near_questions.order_by(signature_count: "desc").limit(3)
+
     render layout: "homepage"
   end
 

@@ -18,36 +18,14 @@
   </div>
   <div class="rightCol">
     <header>
-      <h2>Top Questions Near Boston</h2>
+      <h2>Top Questions Near <%= @user_city -%></h2>
       <ul>
-        <li>1,500 Answers<%# @todo number of Answers %></li>
-        <li>26,500 Supporters<%# @todo number of Supporters %></li>
+        <li><%= number_with_delimiter @near_answers.count -%> Answers</li>
+        <li><%= number_with_delimiter @near_signatures.count -%> Supporters</li>
       </ul>
     </header>
-    <ul class="popular_questions"><%# @todo Pop question data %>
-      <% 3.times do %>
-      <li>
-        <a href="#" class="question">What will you do to redevelop Cedar Park for our families? </a>
-        <div class="person_wrap">
-          <div class="row">
-            <span class="emph">to</span>
-          </div>
-          <div class="row">
-            <div class="person-info">
-              <h4>Cory Atkins</h4>
-              <span class="jurisdiction">Rep. of MA</span>
-            </div>
-          </div>
-          <div class="question_stats">
-            <span class="support_count">502 Supporters</span>
-            <div class="question_progress">
-              <div class="progress_filler" style="width: 54%;"></div>
-            </div>
-          </div>
-        </div>
-        <a href="#" class="sign_on">Sign</a>
-      </li>
-      <% end %>
+    <ul class="popular_questions">
+      <%= render partial: 'question', collection: @near_questions %>
     </ul>
   </div>
   <header>
