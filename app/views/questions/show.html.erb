@@ -9,9 +9,13 @@
           <%= cdn_image_tag(@question.person.image, size: '30x30', alt: '', class: 'official-image') %>
         <% end %>
         <strong><%= link_to @question.person.name, person_path(@jurisdiction.abbreviation, @question.person.id) %></strong>
+        <% if @question.person.verified? -%>
+          <i class='icon-ok-sign is-verified'><span> AskThem Verified</span></i>
+        <% end -%>
         <span class="official-info">(<%= person_attributes(@question.person) %>)</span>
         <% if @question.bill_id? %>
-          <span class="emph">on:</span> <strong><%= link_to short_bill_title(@question.bill), bill_path(@jurisdiction.abbreviation, @question.bill.id) %></strong>
+          <span class="emph">on:</span>
+          <strong><%= link_to short_bill_title(@question.bill), bill_path(@jurisdiction.abbreviation, @question.bill.id) %></strong>
         <% end %>
       </h4>
       <h1><%= @question.title %></h1>
