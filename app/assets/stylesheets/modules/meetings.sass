@@ -5,9 +5,10 @@
 
 .meeting-row
   padding:
-    top: .5em
-    bottom: .5em
+    top: 1em
+    bottom: 1em
   overflow: auto
+  border-bottom: 1px solid #efefef
 
 .meeting-date, .meeting-name, .meeting-agenda, .meeting-minutes
   float: left
@@ -20,10 +21,30 @@
   width: 15%
 
 .meeting-name
-  width: 50%
+  width: 45%
 
 .meeting-agenda
-  width: 10%
+  width: 15%
+
+.meeting-agenda-download
+  padding:
+    top: 8px
+    bottom: 8px
+  display: block
+  position: relative
+  width: 100%
+  +box-shadow(0 2px 0 whitesmoke, 0 1px 0 0 $white inset)
+  background-color: #f5f9fa
+  +background-image(linear-gradient(#f5f9fa, #f0f5f7))
+  border: 1px solid #dbe9ed
+  +border-radius(3px)
+  font:
+    size: .813em
+    weight: 600
+  text-align: center
+  color: #477380
+  &:hover
+    top: -1px
 
 .meeting-minutes
   width: 10%

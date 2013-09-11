@@ -2,15 +2,15 @@
   <div class="meeting-date">
     <span class="pubdate">
       <time datetime="<%= meeting.date_and_time.strftime "%Y-%m-%d" %>" pubdate>
-        <%= meeting.date_and_time.strftime "%b #{meeting.date_and_time.day.ordinalize} %Y" %>
-        <br /><%= meeting.date_and_time.strftime "%I:%M%p" %>
+        <%= meeting.date_and_time.strftime "%b %e, %Y" %>
+        <br /><%= meeting.date_and_time.strftime "%l:%M%P" %>
       </time>
     </span>
   </div>
   <div class="meeting-name"><%= meeting.name %></div>
   <div class="meeting-agenda">
     <% if meeting.agenda %>
-      <%= link_to 'Agenda', meeting.agenda.url %>
+      <%= link_to 'Download', meeting.agenda.url, class: 'meeting-agenda-download' %>
     <% else %>
       -
     <% end %>
