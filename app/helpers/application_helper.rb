@@ -1,4 +1,9 @@
 module ApplicationHelper
+  def generic_ask_question(text = "Ask a Question", html_options = {})
+    url = Rails.env.test? ? "#" : new_question_path(default_jurisdiction)
+    link_to text, url, html_options
+  end
+
   def current_url
     request.protocol + request.host_with_port + request.fullpath
   end

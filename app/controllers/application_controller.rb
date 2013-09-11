@@ -2,8 +2,23 @@ class ApplicationController < ActionController::Base
   # rescue_from Mongoid::Errors::DocumentNotFound, with: :not_found
   protect_from_forgery
 
-private
+  def default_jurisdiction
+    return @default_jurisdiction if @default_jurisdiction
+    abbreviation = if current_user
+                     current_user.region
+                   elsif request.location &&
+                       request.location.coordinates != [0,0] &&
+                       OpenGovernment::STATES.values.include?(request.location.region_code.downcase)
+                     request.location.region_code.downcase
+                   else
+                     "ny"
+                   end
+    @default_jurisdiction = Metadatum.find_by_abbreviation(abbreviation)
+  end
 
+  helper_method :default_jurisdiction
+
+  private
   def not_found
     respond_to do |format|
       format.html do
