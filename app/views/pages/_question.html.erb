@@ -14,7 +14,7 @@
       </div>
     </div>
     <div class="question_stats">
-      <span class="support_count"><%= pluralize question.signatures.count, "Supporter" -%></span>
+      <span class="support_count"><%= pluralize question.signature_count, "Supporter" -%></span>
       <div class="question_progress">
         <div class="progress_filler" style="width: <%= question_progress_percent(question) %>%;"></div>
       </div>

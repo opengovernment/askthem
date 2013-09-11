@@ -1,0 +1,59 @@
+@import load
+
+.meetings
+  overflow: auto
+
+.meeting-row
+  padding:
+    top: 1em
+    bottom: 1em
+  overflow: auto
+  border-bottom: 1px solid #efefef
+
+.meeting-date-header, .meeting-date, .meeting-name, .meeting-agenda, .meeting-minutes
+  float: left
+  line-height: 1.5
+
+.meeting-date-header, .meeting-date, .meeting-name, .meeting-agenda
+  padding-right: 5%
+
+.meeting-date-header, .meeting-date
+  @media (min-width: 420px)
+    width: 10%
+
+.meeting-date
+  font:
+    size: .688em
+    weight: 600
+  text-transform: uppercase
+  color: #97a2a5
+
+.meeting-name
+  @media (min-width: 420px)
+    width: 45%
+
+.meeting-agenda, .meeting-minutes
+  @media (min-width: 420px)
+    width: 15%
+
+.meeting-agenda-download
+  padding: 8px
+  display: block
+  position: relative
+  width: 100%
+  +box-shadow(0 2px 0 whitesmoke, 0 1px 0 0 $white inset)
+  background-color: #f5f9fa
+  +background-image(linear-gradient(#f5f9fa, #f0f5f7))
+  border: 1px solid #dbe9ed
+  +border-radius(3px)
+  font:
+    size: .813em
+    weight: 600
+  text-align: center
+  color: #477380
+  &:hover
+    top: -1px
+  @media (max-width: 420px)
+    margin-top: .5em
+    &:after
+      content: " agenda"
