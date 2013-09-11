@@ -39,8 +39,8 @@
     <div class="wrapper">
       <%= link_to 'OpenGovernment', root_path, class: 'logo' %>
       <p class="slogan">
-        <%= link_to "Ask a Question", new_question_path %>
-        &nbsp;&nbsp;&nbsp;See questions &amp; petitions near you: 
+        <%= generic_ask_question %>
+        &nbsp;&nbsp;&nbsp;See questions &amp; petitions near you:
         <input type="text" name="location" id="location" placeholder="City, state, or zip" />
         <input type="submit" value="" class="locate" />
       </p>
@@ -64,7 +64,7 @@
       <%= render partial: 'shared/user' %>
     </ul>
   </section>
-  
+
   <footer>
     <div class="wrapper">
       <div class="col">
