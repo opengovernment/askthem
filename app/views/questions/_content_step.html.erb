@@ -1,6 +1,7 @@
 <article id="content-step" <%= step_class_for(step, relevant_steps) -%>>
   <header>
     <h1 class="action">Ask a Question</h1>
+    <p>No city service questions! No legal questions!</p>
     <span class="ref"><span class="emph">To:</span>
       <img class="official-image avatar-image" src="http://lorempixel.com/30/30">
       <span id="content-person-name"><%= "#{person.name}," if person -%></span>
@@ -14,13 +15,13 @@
     <label for="question_title"></label>
     <div class="count">
       <span class="summary_count">60</span>
-      <%= f.text_field :title, placeholder: raw('Summary&hellip;'), maxlength: '60', validate: true %>
+      <%= f.text_area :title, placeholder: raw('Summary&hellip;'), maxlength: '60', cols: '30', rows: '2', validate: true %>
     </div>
 
     <label for="question_body">Full Question
       <span class="details">Why is this important? Give it your all!</span>
     </label>
-    <%= f.text_area :body, placeholder: raw('Go on&hellip;'), cols: '30', rows: '10', validate: true %>
+    <%= f.text_area :body, placeholder: raw('Go on&hellip;'), cols: '30', rows: '10', validate: true, class: 'question-textarea' %>
 
     <div class="input select icon-angle-down sculpt">
       <% subject_options = raw('<option value="">Select an Issue (optional)</option>') + options_for_select(Subject.all) -%>
