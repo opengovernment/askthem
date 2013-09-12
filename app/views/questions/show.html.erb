@@ -6,7 +6,7 @@
       <h4>
         <span class="emph">To:</span>
         <% if @question.person.image? %>
-          <%= cdn_image_tag(@question.person.image, size: '30x30', alt: '', class: 'official-image') %>
+          <%= cdn_image_tag(@question.person.image, size: '30x30', alt: '', class: 'official-image avatar-image') %>
         <% end %>
         <strong><%= link_to @question.person.name, person_path(@jurisdiction.abbreviation, @question.person.id) %></strong>
         <% if @question.person.verified? -%>
@@ -29,7 +29,7 @@
       <span class="author">
         <%= link_to user_path(@question.user) do %>
           <% if @question.user.image? %>
-            <%= image_tag(@question.user.image.url, size: '40x40', alt: '') %>
+            <%= image_tag(@question.user.image.url, size: '30x30', alt: '', class: 'avatar-image') %>
           <% end %>
           <%= @question.user.alternate_name %>
         <% end %>, of <%= @question.user.locality -%>, <%= @question.user.region.upcase -%>
@@ -155,8 +155,6 @@
   </div>
 <% end %>
 <%# @see http://disqus.com/admin/universalcode/ %>
-
-
 
 <script type="text/javascript">
   var disqus_shortname = 'dobot';
