@@ -31,4 +31,4 @@
 //= require people
 //= require registrations
 //= require hovertip
-//= require equal_height
+//= require equal_heights
