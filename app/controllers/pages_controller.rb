@@ -70,7 +70,9 @@ class PagesController < ApplicationController
   # @see https://github.com/alexreisner/geocoder#use-outside-of-rails
   # @see https://github.com/sunlightlabs/billy/wiki/Differences-between-the-API-and-MongoDB
   def locator
-    @people = type.constantize.includes(:questions).for_location(params[:q])
+    @address = params[:q]
+    @people = type.constantize.includes(:questions, :identities)
+      .for_location(@address)
     respond_with limited_json_for(@people)
   end
 

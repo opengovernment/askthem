@@ -2,6 +2,16 @@ require "spec_helper"
 require File.expand_path("../features_helper.rb", __FILE__)
 
 describe "pages#index" do
+  describe "Get Answers from Elected Officials", :vcr do
+    it "can search for federal people matching an address or zipcode" do
+      FactoryGirl.create :federal_legislator_bernard_sanders
+      visit "/"
+      fill_in "q", with: "05602"
+      click_button "Search"
+      expect(page).to have_content("Bernard Sanders")
+    end
+  end
+
   describe "Top National Questions" do
     it "displays total number of answers" do
       3.times do

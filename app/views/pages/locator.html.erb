@@ -1,4 +1,15 @@
 <section>
+  <ul class="people-type">
+    <li <%= raw('class="active"') if @type == "FederalLegislator" -%> id="federal-people">
+      <%= link_to "Federal", url_for(q: @address, type: "FederalLegislator") %>
+      <i class="icon-angle-down"></i>
+    </li>
+    <li <%= raw('class="active"') if @type == "Person" -%> id="state-people">
+      <%= link_to "State", url_for(q: @address, type: "Person") %>
+      <i class="icon-angle-down"></i>
+    </li>
+  </ul>
+
   <ol class="people-list">
     <%# spell out arguments for subclasses of Person sake -%>
     <%= render partial: 'people/person', collection: @people %>

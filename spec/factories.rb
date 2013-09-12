@@ -33,6 +33,18 @@ FactoryGirl.define do
     end
   end
 
+  factory :federal_legislator do
+    metadatum
+
+    factory :federal_legislator_bernard_sanders do
+      id "S000033"
+      given_name "Bernard"
+      last_name "Sanders"
+      full_name "Bernard Sanders"
+      metadatum { FactoryGirl.create(:metadatum, abbreviation: "vt") }
+    end
+  end
+
   factory :vote do
     metadatum
   end
