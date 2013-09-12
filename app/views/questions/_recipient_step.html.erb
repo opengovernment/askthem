@@ -22,11 +22,11 @@
   </span>
 
   <div class="data_collection_form">
+    <div class="address_lookup">
     <span class="secure">
       <i class="icon-lock"></i> Your address information is private and safe!
     </span>
     <a href="/users/sign_in" class="login-link">Already have an AskThem account? Login.</a>
-    <div class="address_lookup">
 
       <fieldset class="last">
         <%= f.fields_for :user do |user_form| %>
@@ -79,7 +79,7 @@
     </div>
 
     <div class="twitter" style="display:none;">
-      <label for="question">Twitter users
+      <label for="question">
         <span class="details">Ask a question to any verified Twitter account.</span>
       </label>
       <fieldset>
