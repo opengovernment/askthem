@@ -68,7 +68,11 @@
     <% elsif !user_signed_in? %>
       <p>
         Are you <%= @question.person.name %>?
-        <%= link_to 'Sign up to answer', new_user_registration_path %>.
+        <% if @question.person.verified? -%>
+          <%= link_to 'Login to answer', new_user_session_path %>.
+        <% else -%>
+          <%= link_to 'Sign up to answer', new_user_registration_path %>.
+        <% end -%>
       </p>
     <% end %>
     <div class="comments">
