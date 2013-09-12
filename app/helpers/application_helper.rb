@@ -181,6 +181,11 @@ module ApplicationHelper
     parts.join(delimiter)
   end
 
+  # @todo flesh this out
+  def person_attributes_short(person)
+    "(#{person_attributes(person)})"
+  end
+
   # Formats a district name, if necessary.
   #
   # @param [String] name a district name

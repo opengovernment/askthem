@@ -99,6 +99,11 @@ jQuery ($) ->
     avatarHtml = $(personLi).children('.avatar').html()
     jurisdiction = $(personLi).children('.person-info').children('.jurisdiction').text()
 
+    avatarHtmlSmall = avatarHtml.replace('60/60', '30/30')
+      .replace('height="60"', 'height="30"')
+      .replace('width="60"', 'width="30"')
+      .replace('>', 'class="official-image avatar-image" >')
+
     $('.select_box').children('input').attr 'checked', false
     $('.icon-ok-sign').hide()
 
@@ -111,7 +116,9 @@ jQuery ($) ->
 
     # TODO: make link for person
     $('#confirm-person-name').html "<strong>#{name}</strong>"
+    $('#content-person-image').html avatarHtmlSmall
     $('#content-person-name').html name
+    $('#content-person-short-description').html '(' + jurisdiction + ')'
     $('#confirm-person-attributes').html "<strong>#{jurisdiction}</strong>"
 
   getPeople = (type = 'Person') ->

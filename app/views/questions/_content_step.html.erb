@@ -3,9 +3,14 @@
     <h1 class="action">Ask a Question</h1>
     <p>No city service questions! No legal questions!</p>
     <span class="ref"><span class="emph">To:</span>
-      <img class="official-image avatar-image" src="http://lorempixel.com/30/30">
-      <span id="content-person-name"><%= "#{person.name}," if person -%></span>
-      <span>(D, NY-10)</span>
+      <span id="content-person-image">
+        <% if person -%>
+          <%= cdn_image_tag(person.image, size: "30x30",
+          alt: "image of #{person.name}", class: "official-image avatar-image") %>
+        <% end -%>
+      </span>
+      <span id="content-person-name"><%= "#{person.name}" if person -%><%= "," if bill -%></span>
+      <span id="content-person-short-description"><%= person_attributes_short(person) if person -%></span>
       <% if bill -%>
         <span class="emph">re:</span> <span class="bill-title"><%= short_bill_title(bill) -%></span>
       <% end -%>

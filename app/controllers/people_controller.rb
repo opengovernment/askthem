@@ -7,7 +7,7 @@ class PeopleController < ApplicationController
   custom_actions resource: [:bills, :committees, :votes, :ratings]
 
   def show
-    @questions = resource.questions.page(params[:page])
+    @questions = resource.questions.includes(:user).page(params[:page])
     tab 'questions'
   end
 
