@@ -17,6 +17,7 @@
 //= require jquery.timeago
 //= require jquery.scrollTo.min
 //= require jquery.html5-placeholder-shim
+//= require jquery.equalheights
 //= require authentication
 //= require tabs
 //= require filters
@@ -30,4 +31,4 @@
 //= require people
 //= require registrations
 //= require hovertip
-//= require overview_subnav
+//= require equal_height
