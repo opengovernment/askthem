@@ -123,6 +123,14 @@ To run all the scripts, do:
 
     mongo DATABASE_NAME script/sanity/helper.js script/sanity/{code-lists.js,counts.js,denormalization.js,foreign-keys.js,hierarchy.js,manual-review.js,miscellaneous.js}
 
+## Troubleshooting
+
+* If you ever receive an error that includes "can't find special index: 2d..." or similar, someone has added a new index and you need to rebuild your indexes:
+
+```
+bundle exec rake db:mongoid:create_indexes
+```
+
 ## Bugs? Questions?
 
 This project's main repository is on GitHub: [http://github.com/opengovernment/opengovernment-local](http://github.com/opengovernment/opengovernment-local), where your contributions, forks, bug reports, feature requests, and feedback are greatly welcomed.
