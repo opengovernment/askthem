@@ -14,7 +14,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
   <meta property="og:title" content="<%= title %>">
   <meta property="og:description" content="<%= description %>">
-  <meta property="og:site_name" content="OpenGovernment">
+  <meta property="og:site_name" content="AskThem">
   <meta property="og:type" content="website">
   <meta property="og:url" content="<%= current_url %>">
   <meta property="og:image" content="<%= og_image %>">
@@ -117,7 +117,7 @@ window.fbAsyncInit = function () {
 <%= javascript_include_tag 'application' %>
 <% if Rails.env.production? %>
 <script>
-var _sf_async_config={uid:8875,domain:"opengovernment.org"};
+var _sf_async_config={uid:8875,domain:"askthem.io"};
 (function(){
   function loadChartbeat() {
     window._sf_endpt=(new Date()).getTime();
@@ -136,7 +136,7 @@ var _sf_async_config={uid:8875,domain:"opengovernment.org"};
 
 var _gaq = _gaq || [];
 _gaq.push(['_setAccount', 'UA-1208819-4']);
-_gaq.push(['_setDomainName', '.opengovernment.org']);
+_gaq.push(['_setDomainName', '.askthem.io']);
 _gaq.push(['_trackPageview']);
 
 (function() {
