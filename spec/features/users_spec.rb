@@ -16,6 +16,38 @@ describe "users" do
         end
       end
 
+      context "when the user has no questions" do
+        it "returns none found" do
+          visit "/users/#{user.id}"
+          page.should have_content "User hasn't asked any questions yet"
+        end
+      end
+
+      context "when the user has questions" do
+        it "returns them" do
+          FactoryGirl.create(:question, user: user)
+          visit "/users/#{user.id}"
+          page.should have_selector ".question_content"
+        end
+      end
+
+      context "when the user has no signatures" do
+        it "returns none found" do
+          visit "/users/#{user.id}/signatures"
+          page.should have_content "User hasn't signed on to any questions yet"
+        end
+      end
+
+      context "when the user has signatures" do
+        it "returns them" do
+          @question = FactoryGirl.create(:question, user: user)
+          FactoryGirl.create(:signature, user: user, question: @question)
+
+          visit "/users/#{user.id}/signatures"
+          page.should have_selector ".question_content"
+        end
+      end
+
       context "as a staff member" do
         before :each do
           @staff_member = FactoryGirl.create(:user)
