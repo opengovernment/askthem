@@ -10,7 +10,11 @@ OpenGovernment::Application.routes.draw do
 
   match 'splash' => 'pages#splash'
 
-  resources :users, only: :show
+  resources :users, only: :show do
+    member do
+      get 'signatures'
+    end
+  end
   resources :signatures, only: :create
   resources :answers, only: :create
 

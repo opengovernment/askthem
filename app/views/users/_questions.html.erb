@@ -1,0 +1,14 @@
+<section class="questions related_focus">
+  <% if @questions.any? %>
+    <ol>
+      <% @questions.each do |question| %>
+        <% @jurisdiction = Metadatum.find_by_abbreviation question.state %>
+        <%= render question %>
+      <% end -%>
+    </ol>
+  <% else %>
+  <div class="notif info">
+    <h3>User hasn't asked any questions yet!</h3>
+  </div>
+  <% end %>
+</section>

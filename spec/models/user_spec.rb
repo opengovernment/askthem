@@ -37,6 +37,19 @@ describe User do
       end
     end
 
+    describe '#top_issues' do
+      it "should return the subjects of the questions asked" do
+
+        2.times do
+          question = FactoryGirl.create(:question, user: user)
+          question.subject = "A Great Subject"
+          question.save
+        end
+
+        user.top_issues.should == ["A Great Subject"]
+      end
+    end
+
     describe 'address_for_geocoding' do
       it "should return the user's address for geocoding" do
         user.address_for_geocoding.should == '148 Lafayette St, New York, ny, US, 10013'

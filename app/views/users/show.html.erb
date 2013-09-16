@@ -6,10 +6,11 @@
     <div class="person-info">
       <h1><%= @user.given_name -%> <%= @user.family_name -%>&nbsp;&nbsp;<% if @user.verified? -%><i class='icon-ok-sign is-verified'><span class='verified-tooltip'>AskThem Verified</span></i><% end -%></h1>
       <span class="loc"><%= @user.locality -%>, <%= @user.region.upcase -%></span>
-      <ul class="links">
+      <!-- Not collecting this information yet -->
+      <!-- <ul class="links">
         <li><a href="#">@strevat</a></li>
         <li><a href="#">steventrevathan.com</a></li>
-      </ul>
+      </ul> -->
     </div>
     <% if user_signed_in? && current_user.has_role?(:staff_member) -%>
       <div class="identity-controls">
@@ -34,47 +35,28 @@
       </div>
     <% end -%>
   </header>
-  <div class="related_data">
-    <nav>
-      <ul class="related_nav">
-        <li><a href="#" class="active">12 Questions</a></li>
-        <li><a href="#">300 Signatures</a></li>
-      </ul>
-    </nav>
-    <div class="related_content">
-      <section class="questions related_focus">
-        <ol>
-          <% 5.times do %>
-          <li>
-            <div class="question_content">
-              <%= link_to 'Why have this thing for act for what? <span class="icon-angle-right view"></span>'.html_safe, '#', class: 'title' %>
-              <p>Lorem ipsum dolor sit amet, adipisicing elit, sed do  tempor incididunt ut labore et dolore magna aliqua sed do eiusmod tempor  ut&hellip; <span class="context">&rarr; in Pennsylvania Bills</span></p>
-              <span class="target">
-                <%= link_to image_tag('http://lorempixel.com/40/40/people/', size: '20x20', alt: '') + 'Steve T', '#' %>
-                <span class="to">&rarr;</span>
-                <%= link_to image_tag('http://lorempixel.com/40/40/people/', size: '20x20', alt: '') + 'Phil Mendelson, Councilmember, Ward 7', '#', class: 'recipient' %>
-              </span>
-            </div>
-            <ul class="activity">
-              <li><%= link_to '25 Signatures', '#', class: 'support'%></li>
-            </ul>
-            <a href="#" class="sign_on">Sign</a>
-            <div class="clear"></div>
-          </li>
-          <% end %>
+  <div class="related_wrap">
+    <div class="related_data">
+      <nav>
+        <ul class="related_nav">
+          <li><%= link_to pluralize(@user.questions.length, 'Question'), user_path(@user.id), tab_options('questions', 'show') %></li>
+          <li><%= link_to pluralize(@user.signatures.length, 'Signature'), signatures_user_path(@user.id), tab_options('signatures') %></li>
+        </ul>
+      </nav>
+      <div class="related_content">
+        <%= render partial: @tab %>
 
-        </ol>
-      </section>
-      <aside>
-        <section>
-          <h4>Top Issues</h4>
-          <ul>
-            <li><a href="#">Education</a></li>
-            <li><a href="#">Human Rights</a></li>
-            <li><a href="#">Natural Resources</a></li>
-          </ul>
-        </section>
-      </aside>
+        <aside>
+          <section>
+            <h4>Top Issues</h4>
+            <ul>
+              <% @user.top_issues.each do |issue| %>
+                <li><%= issue %></li>
+              <% end %>
+            </ul>
+          </section>
+        </aside>
+      </div>
     </div>
   </div>
 </section>
