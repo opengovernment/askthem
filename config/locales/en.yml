@@ -95,8 +95,11 @@ en:
     pagination: "%{subject} – Page %{page} - %{jurisdiction} - AskThem"
   users:
     show:
-      title: "%{user} - AskThem"
-      description: "Show your support for questions by %{user}"
+      title: "%{user}'s Questions - AskThem"
+      description: "Questions asked by %{user}"
+    signatures:
+      title: "%{user} Signatures - AskThem"
+      description: "Questions sigend by %{user}"
   registrations:
     new:
       title: Sign Up - AskThem
