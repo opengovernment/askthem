@@ -129,6 +129,12 @@ class User
     questions_signed.map(&:id).include? question_id
   end
 
+  def top_issues
+    if questions.any?
+      questions.map { |q| q.subject }.uniq.sort
+    end
+  end
+
   # @return [String] the user's address for geocoding
   def address_for_geocoding
     [street_address, locality, region, country, postal_code] * ', '

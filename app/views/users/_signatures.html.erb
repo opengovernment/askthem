@@ -1,0 +1,14 @@
+<section class="questions related_focus">
+  <% if @signatures.any? %>
+    <ol>
+      <% @signatures.each do |signature| %>
+        <% @jurisdiction = Metadatum.find_by_abbreviation signature.question.state %>
+        <%= render signature.question %>
+      <% end -%>
+    </ol>
+  <% else %>
+  <div class="notif info">
+    <h3>User hasn't signed on to any questions yet!</h3>
+  </div>
+  <% end %>
+</section>
