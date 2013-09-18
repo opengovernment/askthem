@@ -88,10 +88,9 @@ class QuestionsController < ApplicationController
   # unify databases or make consistent
   def end_of_association_chain
     questions = Question.where(state: parent.abbreviation)
-    return questions unless type == "FederalLegislator"
-
-    person_ids = FederalLegislator.connected_to(parent.abbreviation).collect(&:id)
-    questions.where(person_ids: { "$in" => person_ids })
+    person_ids = Person.only_type(type)
+      .connected_to(parent.abbreviation).collect(&:id)
+    questions.where(person_id: { "$in" => person_ids })
   end
 
   def collection
