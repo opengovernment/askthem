@@ -87,10 +87,9 @@ class QuestionsController < ApplicationController
   # which can lead to unexpected results when using "in" query
   # unify databases or make consistent
   def end_of_association_chain
-    questions = Question.where(state: parent.abbreviation)
-    person_ids = Person.only_type(type)
-      .connected_to(parent.abbreviation).collect(&:id)
-    questions.where(person_id: { "$in" => person_ids })
+    abbreviation = parent.abbreviation
+    person_ids = Person.only_type(type).connected_to(abbreviation).collect(&:id)
+    Question.connected_to(abbreviation).in(person_id: person_ids)
   end
 
   def collection
