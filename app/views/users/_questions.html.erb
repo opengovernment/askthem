@@ -1,10 +1,7 @@
 <section class="questions related_focus">
   <% if @questions.any? %>
     <ol>
-      <% @questions.each do |question| %>
-        <% @jurisdiction = Metadatum.find_by_abbreviation question.state %>
-        <%= render question %>
-      <% end -%>
+      <%= render @questions %>
     </ol>
   <% else %>
   <div class="notif info">
