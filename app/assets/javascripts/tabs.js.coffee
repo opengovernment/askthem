@@ -48,3 +48,29 @@ jQuery ($) ->
       $('html,body').animate({scrollTop: $(scroll).offset().top}, 'slow')
       replace(target, data)
       $('#' + state.id).addClass('active') if state.id
+
+  $('#questions-near').click (e) ->
+    locatorGoTo 'section.questions', e.delegateTarget
+
+  $('#officials-near').click (e) ->
+    locatorGoTo 'section.officials', e.delegateTarget
+
+  locatorGoTo = (target, e) ->
+    $('section.locator').fadeOut 'fast'
+    $(target).fadeIn 'slow'
+
+    # remove "active" class from all links inside #nav
+    $('nav.questions-or-officials li').removeClass('active')
+
+    # add active class to the current link
+    $(e).parent().addClass('active')
+
+  $('#federal-people').click (e) ->
+    locatorPeopleGoTo '.federal-people-list', e.delegateTarget
+
+  $('#state-people').click (e) ->
+    locatorPeopleGoTo '.state-people-list', e.delegateTarget
+
+  locatorPeopleGoTo = (target, e) ->
+    $('.people-list').fadeOut 'fast'
+    $(target).fadeIn 'slow'

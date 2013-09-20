@@ -68,7 +68,7 @@ class Person
   # to work with other apis
   def self.for_location(location)
     ids = []
-    data = Geocoder.search(location).first
+    data = geodata_from(location)
 
     if location_is_valid? data
       api_parse(results_for_location(data, fields: api_id_field)).map do |attributes|
@@ -217,6 +217,14 @@ class Person
     "#{base_api_url}geo/"
   end
 
+  def self.geodata_from(location)
+    if location.is_a?(Geocoder::Result::Base)
+      location
+    else
+      Geocoder.search(location).first
+    end
+  end
+
   def self.location_is_valid?(data)
     data &&
       data.country_code == 'US' &&
@@ -277,6 +285,6 @@ class Person
                            :api_format_abbreviation, :api_url_for_jurisdiction,
                            :api_parse, :results_for_location,
                            :params_for_location, :result_for_single,
-                           :location_is_valid?, :api_geo_url]
+                           :location_is_valid?, :api_geo_url, :geodata_from]
   private_class_method *private_class_methods
 end

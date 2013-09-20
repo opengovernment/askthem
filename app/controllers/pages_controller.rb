@@ -20,11 +20,11 @@ class PagesController < ApplicationController
 
     @user_city = request.location ? request.location.city : "New York"
     # coordinates have to be in GEOjson order, thus reverse
-    center = request.location ? request.location.coordinates.reverse : [40.7195898,
-                                                                        -73.9998334]
+    center = request.location ? request.location.coordinates.reverse : [-73.9998334,
+                                                                        40.7195898]
 
     @near_questions = Question
-      .where(:coordinates => { "$within" => { "$center" => [center, 100 ] } })
+      .where(:coordinates => { "$within" => { "$center" => [center, 1] } })
     near_ids = @near_questions.collect(&:id)
 
     @near_signatures = Signature.in(question_id: near_ids)
@@ -71,9 +71,11 @@ class PagesController < ApplicationController
   # @see https://github.com/sunlightlabs/billy/wiki/Differences-between-the-API-and-MongoDB
   def locator
     @address = params[:q]
-    @people = type.constantize.includes(:questions, :identities)
-      .for_location(@address)
-    respond_with limited_json_for(@people)
+    if request.format != :json
+      set_variables_for(@address)
+    else
+      respond_with limited_json_for(type.constantize.for_location(@address))
+    end
   end
 
   def identifier
@@ -110,6 +112,21 @@ class PagesController < ApplicationController
                                              :view_contact_info,
                                              PagesController)
     end
+  end
+
+  def set_variables_for(address)
+    geodata = Geocoder.search(address).first
+    center = geodata.coordinates.reverse
+
+    @questions = Question.includes(:user)
+      .where(:coordinates => { "$within" => { "$center" => [center, 1] } })
+      .order_by(signature_count: "desc").limit(10)
+
+    @federal_people = FederalLegislator.includes(:questions, :identities)
+      .for_location(geodata)
+
+    @state_people = Person.includes(:questions, :identities)
+      .for_location(geodata)
   end
 
   def limited_json_for(people)

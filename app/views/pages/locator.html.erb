@@ -1,19 +1,39 @@
-<section class="locator">
-  <h1>Your Elected Officials</h1>
-  <nav>
+<nav class="questions-or-officials">
   <ul class="level">
-    <li <%= raw('class="active"') if @type == "FederalLegislator" -%> id="federal-people">
-      <%= link_to "Federal", url_for(q: @address, type: "FederalLegislator") %>
-      <i class="icon-angle-down"></i>
-    </li>
-    <li <%= raw('class="active"') if @type == "Person" -%> id="state-people">
-      <%= link_to "State", url_for(q: @address, type: "Person") %>
-      <i class="icon-angle-down"></i>
-    </li>
+  <li class="active"><a href="#" id="questions-near">Questions Near <%= @address -%></a>
+    <i class="icon-angle-down"></i>
+  </li>
+  <li><a href="#" id="officials-near">Elected Officials for <%= @address -%></a>
+    <i class="icon-angle-down"></i></li>
   </ul>
+</nav>
+
+<section class="questions locator">
+  <ol class="question-list locator-question-list">
+    <%= render @questions %>
+  </ol>
+</section>
+
+<section class="officials locator" style="display:none;">
+  <nav>
+    <ul class="level">
+      <li class="active" id="federal-people">
+        <a href="#">Federal</a>
+        <i class="icon-angle-down"></i>
+      </li>
+      <li id="state-people">
+        <a href="#">State</a>
+        <i class="icon-angle-down"></i>
+      </li>
+    </ul>
   </nav>
-  <ol class="people-list locator-people-list">
+  &nbsp;
+  <ol class="people-list federal-people-list">
     <%# spell out arguments for subclasses of Person sake -%>
-    <%= render partial: 'people/person', collection: @people %>
+    <%= render partial: 'people/person', collection: @federal_people %>
+  </ol>
+  <ol class="people-list state-people-list" style="display:none;">
+    <%# spell out arguments for subclasses of Person sake -%>
+    <%= render partial: 'people/person', collection: @state_people %>
   </ol>
 </section>

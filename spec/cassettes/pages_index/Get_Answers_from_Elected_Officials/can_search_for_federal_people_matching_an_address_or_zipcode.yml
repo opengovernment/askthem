@@ -2,6 +2,44 @@
 http_interactions:
 - request:
     method: get
+    uri: http://freegeoip.net/json/161.185.30.156
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Origin:
+      - ! '*'
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 20 Sep 2013 01:11:26 GMT
+      Via:
+      - 1.1 BC1-ACLD
+      Content-Length:
+      - '230'
+      Connection:
+      - Keep-Alive
+      Age:
+      - '0'
+    body:
+      encoding: US-ASCII
+      string: ! '{"ip":"161.185.30.156","country_code":"US","country_name":"United
+        States","region_code":"NY","region_name":"New York","city":"Brooklyn","zipcode":"11201","latitude":40.6944,"longitude":-73.9906,"metro_code":"501","areacode":"718"}'
+    http_version:
+  recorded_at: Fri, 20 Sep 2013 01:11:52 GMT
+- request:
+    method: get
     uri: http://maps.googleapis.com/maps/api/geocode/json?address=05602&language=en&sensor=false
     body:
       encoding: US-ASCII
@@ -21,9 +59,9 @@ http_interactions:
       Content-Type:
       - application/json; charset=UTF-8
       Date:
-      - Thu, 12 Sep 2013 00:21:45 GMT
+      - Fri, 20 Sep 2013 01:11:54 GMT
       Expires:
-      - Fri, 13 Sep 2013 00:21:45 GMT
+      - Sat, 21 Sep 2013 01:11:54 GMT
       Cache-Control:
       - public, max-age=86400
       Access-Control-Allow-Origin:
@@ -65,11 +103,11 @@ http_interactions:
         : 44.15941,\n                  \"lng\" : -72.731387\n               }\n            }\n
         \        },\n         \"types\" : [ \"postal_code\" ]\n      }\n   ],\n   \"status\"
         : \"OK\"\n}\n"
-    http_version: 
-  recorded_at: Thu, 12 Sep 2013 00:21:42 GMT
+    http_version:
+  recorded_at: Fri, 20 Sep 2013 01:11:53 GMT
 - request:
     method: get
-    uri: http://congress.api.sunlightfoundation.com/legislators/locate?apikey=8f13417da56c4101995e5a96b4e1acb1&fields=bioguide_id&latitude=44.28092729999999&longitude=-72.61950759999999
+    uri: http://congress.api.sunlightfoundation.com/legislators/locate?apikey=&fields=bioguide_id&latitude=44.28092729999999&longitude=-72.61950759999999
     body:
       encoding: US-ASCII
       string: ''
@@ -88,7 +126,7 @@ http_interactions:
       Server:
       - nginx/1.1.19
       Date:
-      - Thu, 12 Sep 2013 00:21:26 GMT
+      - Fri, 20 Sep 2013 01:11:34 GMT
       Content-Type:
       - application/json; charset=utf-8
       Vary:
@@ -104,6 +142,52 @@ http_interactions:
     body:
       encoding: US-ASCII
       string: ! '{"results":[{"bioguide_id":"W000800"},{"bioguide_id":"L000174"},{"bioguide_id":"S000033"}],"count":3,"page":{"count":3,"per_page":20,"page":1}}'
-    http_version: 
-  recorded_at: Thu, 12 Sep 2013 00:21:43 GMT
+    http_version:
+  recorded_at: Fri, 20 Sep 2013 01:11:54 GMT
+- request:
+    method: get
+    uri: http://openstates.org/api/v1/legislators/geo/?apikey=&fields=id&lat=44.28092729999999&long=-72.61950759999999
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - ! '*/*; q=0.5, application/xml'
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.2.6 (Ubuntu)
+      Content-Type:
+      - application/json; charset=utf-8
+      Vary:
+      - Authorization
+      Date:
+      - Fri, 20 Sep 2013 01:12:31 GMT
+      X-Varnish:
+      - '1080905493'
+      Age:
+      - '0'
+      Via:
+      - 1.1 varnish, 1.1 BC1-ACLD
+      Content-Length:
+      - '480'
+      Connection:
+      - Keep-Alive
+    body:
+      encoding: US-ASCII
+      string: ! '[{"district": "Washington", "chamber": "upper", "state": "vt", "boundary_id":
+        "sldu/vt-washington", "id": "VTL000008"}, {"district": "Washington", "chamber":
+        "upper", "state": "vt", "boundary_id": "sldu/vt-washington", "id": "VTL000009"},
+        {"district": "Washington", "chamber": "upper", "state": "vt", "boundary_id":
+        "sldu/vt-washington", "id": "VTL000184"}, {"district": "Washington-5", "chamber":
+        "lower", "state": "vt", "boundary_id": "sldl/vt-washington-5", "id": "VTL000095"}]'
+    http_version:
+  recorded_at: Fri, 20 Sep 2013 01:11:55 GMT
 recorded_with: VCR 2.5.0
