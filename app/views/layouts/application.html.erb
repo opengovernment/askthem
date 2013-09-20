@@ -60,9 +60,11 @@
         <% if params[:controller] == 'questions' && params[:action] == 'show' %>
           <%= generic_ask_question %>
         <% end %>
-        &nbsp;&nbsp;&nbsp;See questions &amp; petitions near you:
-        <input type="text" name="location" id="location" placeholder="City, state, or zip" />
-        <input type="submit" value="" class="locate" />
+        <form action="/locator" class="slogan">
+          &nbsp;&nbsp;&nbsp;See questions &amp; petitions near you:
+         <input type="text" name="q" id="q" placeholder="City, state, or zip" />
+         <input type="submit" value="" class="locate" />
+        </form>
       </p>
     </div>
   </header>
