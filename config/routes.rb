@@ -9,6 +9,7 @@ OpenGovernment::Application.routes.draw do
   root to: 'pages#index'
 
   match 'splash' => 'pages#splash'
+  get 'about', to: 'pages#about'
 
   resources :users, only: :show do
     member do
