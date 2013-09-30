@@ -113,11 +113,11 @@
         <%= f.input :given_name, placeholder: "First Name", label: false %>
         <%= f.input :family_name, placeholder: "Last Name", label: false %>
         <%= f.input :email, placeholder: "E-mail", label: false %>
-        <%= f.input :street_address, placeholder: "Street Address", label: false %>
-        <%= f.input :locality, placeholder: "City", label: false %>
-        <%= f.input :region, collection: OpenGovernment::STATES, prompt: "Select your state", label: false, wrapper_html: {class: 'icon-angle-down sculpt'} %>
+        <%#<%= f.input :street_address, placeholder: "Street Address", label: false %>
+        <%#<%= f.input :locality, placeholder: "City", label: false %>
+        <%#<%= f.input :region, collection: OpenGovernment::STATES, prompt: "Select your state", label: false, wrapper_html: {class: 'icon-angle-down sculpt'} %>
         <%= f.input :postal_code, placeholder: "Zip or Postal Code", label: false %>
-        <%= f.input :password, placeholder: "Password", label: false %>
+        <%#<%= f.input :password, placeholder: "Password", label: false %>
         <%= f.button :submit, 'Sign', class: 'cta-pill' %>
       <% end %>
       </div>
