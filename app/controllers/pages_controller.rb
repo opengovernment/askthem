@@ -105,9 +105,6 @@ class PagesController < ApplicationController
     render layout: false
   end
 
-  def about
-  end
-
   private
   def check_can_view_contact_info
     unless current_user.can?(:view_contact_info)
