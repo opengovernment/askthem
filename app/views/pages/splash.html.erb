@@ -25,7 +25,7 @@
     <input type="email" name="email" id="email" placeholder="E-mail">
     <input type="text" name="zipcode" id="zipcode" placeholder="Zipcode (optional)">
     <input type="hidden" name="notify_type" id="notify_type" value="individual">
-    <input type="submit" value="Notify Me" class="cta-pill">
+    <input type="submit" id="dynamic-button" value="<%= request.path == '/electeds' ? 'Contact Me' : 'Notify Me' %>" class="cta-pill">
     <div id="dynamic-link">
       <%- if request.path == '/electeds' %>
         <a href='https://docs.google.com/forms/d/1iCRzEuDL6bGEkmMsTVrlH-DlQYnMX4KhSF32_tPgT8o/viewform' style='position: relative; top: 1.75em; left: 1em;'>Or, <strong>sign up now</strong> to answer questions on AskThem</a>
