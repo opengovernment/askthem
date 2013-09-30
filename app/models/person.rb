@@ -1,7 +1,9 @@
+require "legislator"
+
 # Billy
 class Person
   include Mongoid::Document
-  store_in collection: 'legislators'
+  include Legislator
 
   # authorization based on roles
   # i.e. a user.can_respond_as?(person) to answer questions
@@ -114,25 +116,6 @@ class Person
       end
       nil # don't return the enumerator
     end
-  end
-
-  # TODO: add spec
-  def jurisdiction
-    Metadatum.find_by_abbreviation(state)
-  end
-
-  # TODO: add spec
-  def most_recent_chamber
-    most_recent :chamber
-  end
-
-  # TODO: add spec
-  def most_recent_chamber_title
-    jurisdiction.chamber_title most_recent_chamber
-  end
-
-  def most_recent_district
-    most_recent :district
   end
 
   # Returns fields that are not available in Billy.
