@@ -11,6 +11,7 @@ OpenGovernment::Application.routes.draw do
   match 'splash' => 'pages#splash'
   get 'about', to: 'pages#about'
   get 'support', to: 'pages#support'
+  get 'faq', to: 'pages#faq'
 
   resources :users, only: :show do
     member do
