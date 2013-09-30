@@ -8,7 +8,8 @@ OpenGovernment::Application.routes.draw do
 
   root to: 'pages#index'
 
-  match 'splash' => 'pages#splash'
+  get 'splash' => 'pages#splash'
+  get 'electeds' => 'pages#splash'
   get 'about', to: 'pages#about'
   get 'support', to: 'pages#support'
   get 'faq', to: 'pages#faq'
