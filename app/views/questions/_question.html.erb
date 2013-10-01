@@ -1,6 +1,6 @@
 <li>
   <div class="question_content">
-    <%= link_to question_path(question.state, question.id), class: 'title question-title' do %>
+    <%= link_to question_path(question.state, question.id), class: 'title question-input-summary' do %>
       <%= question.title %>
       <span class="icon-angle-right view"></span>
     <% end %>
@@ -15,7 +15,7 @@
     <span class="target">
       <%= link_to user_path(question.user) do %>
         <% if question.user.image? %>
-          <%= image_tag(question.user.image.url, size: '20x20', alt: '') %>
+          <%= image_tag(question.user.image.url, size: '40x40', alt: '') %>
         <% end %>
         <%= question.user.alternate_name %>
       <% end %>
@@ -24,7 +24,7 @@
 
       <%= link_to person_path(question.state, question.person), class: 'recipient' do %>
         <% if question.person.image? %>
-          <%= cdn_image_tag(question.person.image, size: '20x20', alt: '') %>
+          <%= cdn_image_tag(question.person.image, size: '40x40', alt: '') %>
         <% end %>
         <%= question.person.name %>
       <% end %>
