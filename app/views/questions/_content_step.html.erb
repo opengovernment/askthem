@@ -20,7 +20,7 @@
     <label for="question_title"></label>
     <div class="count">
       <span class="summary_count">60</span>
-      <%= f.text_area :title, placeholder: raw('Summary&hellip;'), maxlength: '60', cols: '30', rows: '2', validate: true %>
+      <%= f.text_area :title, placeholder: raw('Summary&hellip;'), maxlength: '60', cols: '30', rows: '2', validate: true, class: 'question-title' %>
     </div>
 
     <label for="question_body">Full Question
