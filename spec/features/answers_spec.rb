@@ -7,7 +7,7 @@ describe 'question' do
     @metadatum = Metadatum.create(name: 'New York',
                                   abbreviation: 'ny',
                                   chambers: {} )
-    @person = FactoryGirl.create(:person_ny_sheldon_silver)
+    @person = FactoryGirl.create(:state_legislator_ny_sheldon_silver)
     @question = FactoryGirl.create(:question,
                                    state: @metadatum.abbreviation,
                                    person: @person)

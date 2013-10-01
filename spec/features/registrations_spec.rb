@@ -19,7 +19,7 @@ describe 'registrations' do
     end
 
     context 'user has email of recognized person' do
-      let(:person) { FactoryGirl.create(:person_ny_sheldon_silver) }
+      let(:person) { FactoryGirl.create(:state_legislator_ny_sheldon_silver) }
 
       it 'when email entered, user is asked if they are official', js: true do
         fill_in "user_email", with: person.email

@@ -15,7 +15,7 @@ class DefaultSignatureThreshold
 
     # @todo replace with more sophisticated calculation
     case @person.class
-    when Person
+    when Person, StateLegislator
       # HACK for council members
       # @todo replace with CouncilMember class when implemented
       if @person.state.include?('-')

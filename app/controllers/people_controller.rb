@@ -33,7 +33,7 @@ class PeopleController < ApplicationController
 
   private
   def type
-    @type ||= params[:type] || 'Person'
+    @type ||= params[:type] || 'StateLegislator'
   end
 
   def tab(tab)

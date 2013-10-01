@@ -23,7 +23,7 @@ describe PagesController do
 
     context "and logged in as staff member" do
       before do
-        @person = FactoryGirl.create(:person_ny_sheldon_silver)
+        @person = FactoryGirl.create(:state_legislator_ny_sheldon_silver)
         @person.write_attribute(:active, true)
         @person.save
 
@@ -48,7 +48,7 @@ describe PagesController do
   context "when requesting json"do
     # @warn can"t use let because of mongoid teardown
     before do
-      @person = FactoryGirl.create(:person_ny_sheldon_silver)
+      @person = FactoryGirl.create(:state_legislator_ny_sheldon_silver)
     end
 
     describe "#locator" do

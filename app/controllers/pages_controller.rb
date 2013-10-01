@@ -132,7 +132,7 @@ class PagesController < ApplicationController
   end
 
   def type
-    @type ||= params[:type] || "Person"
+    @type ||= params[:type] || "StateLegislator"
   end
 
   def set_jurisdiction

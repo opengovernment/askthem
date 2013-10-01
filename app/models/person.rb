@@ -1,9 +1,6 @@
-require "legislator"
-
 # Billy
 class Person
   include Mongoid::Document
-  include Legislator
 
   # authorization based on roles
   # i.e. a user.can_respond_as?(person) to answer questions

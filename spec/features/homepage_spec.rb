@@ -103,7 +103,7 @@ describe "pages#index" do
   def set_up_ny_local_questions
     @user = FactoryGirl.create(:user)
     @metadatum = FactoryGirl.create(:metadatum, abbreviation: @user.region)
-    @person = FactoryGirl.create(:person_ny_sheldon_silver)
+    @person = FactoryGirl.create(:state_legislator_ny_sheldon_silver)
     @local_questions = []
     3.times do
       @local_questions << FactoryGirl.create(:question,

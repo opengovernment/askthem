@@ -1,4 +1,8 @@
+require "legislator"
+
 class FederalLegislator < Person
+  include Legislator
+
   PHOTOS_BASE_URL = "http://#{ENV['AWS_DIRECTORY']}#{ENV['AWS_HOST_STUB']}/photos/federal/100x125/"
 
   def self.base_api_url

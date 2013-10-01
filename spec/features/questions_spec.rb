@@ -393,7 +393,7 @@ describe 'questions' do
 
   # see models/person_spec for another instance
   def valid_person
-    @person ||= Person.new(state: @metadatum.abbreviation)
+    @person ||= StateLegislator.new(state: @metadatum.abbreviation)
     @person.id = 'VTL000008'
     @person.save!
     @person

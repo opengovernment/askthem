@@ -78,6 +78,16 @@ Get the necessary supporting data (work-in-progress, will change):
 
     bundle exec rake openstates:json:update # takes ONLY value to limit data, recommended for most developers
     bundle exec rake openstates:add_metadata
+
+At this point we also need to do a step from the Mongo shell to get our data in order:
+
+   mongo
+   > db.legislators.find().forEach( function(doc) { doc._type = "StateLegislator" ;  db.people.insert(doc) } );
+   ...
+   > db.legislators.drop()
+
+Then resume importing data:
+
     bundle exec rake congress:api:download:legislators
     bundle exec rake db:mongoid:create_indexes
 

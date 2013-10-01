@@ -61,7 +61,7 @@ class QuestionsController < ApplicationController
 
   private
   def type
-    @type ||= params[:type] || "Person"
+    @type ||= params[:type] || "StateLegislator"
   end
 
   def set_state_code

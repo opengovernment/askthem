@@ -5,7 +5,7 @@ FactoryGirl.define do
   # @note If `id` were ever different from `abbreviation`, all `belongs_to
   #   :metadatum` calls would to set `:primary_key`.
   factory :metadatum do
-    abbreviation 'anytown'
+    abbreviation "anytown"
 
     after(:build) do |record|
       record._id = record.abbreviation
@@ -22,8 +22,12 @@ FactoryGirl.define do
 
   factory :person do
     metadatum
+  end
 
-    factory :person_ny_sheldon_silver do
+  factory :state_legislator do
+    metadatum
+
+    factory :state_legislator_ny_sheldon_silver do
       id "NYL000194"
       given_name "Sheldon"
       last_name "Silver"
@@ -76,8 +80,8 @@ FactoryGirl.define do
 
   factory :question do
     user
-    title 'Question'
-    body 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vel blandit felis. Morbi nec odio arcu.'
+    title "Question"
+    body "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vel blandit felis. Morbi nec odio arcu."
 
     after(:build) do |record|
       record.person = FactoryGirl.create(:person) unless record.person_id?
@@ -93,7 +97,7 @@ FactoryGirl.define do
   factory :answer do
     user
     question
-    text 'Blah, blah, blah.'
+    text "Blah, blah, blah."
   end
 
   factory :signature do
@@ -103,14 +107,14 @@ FactoryGirl.define do
 
   factory :user do
     sequence(:email) {|n| "user#{n}@example.com" }
-    given_name 'John'
-    family_name 'Public'
-    street_address '148 Lafayette St'
-    locality 'New York'
-    region 'ny'
-    country 'US'
-    postal_code '10013'
-    password 'password'
+    given_name "John"
+    family_name "Public"
+    street_address "148 Lafayette St"
+    locality "New York"
+    region "ny"
+    country "US"
+    postal_code "10013"
+    password "password"
     coordinates [-73.9998334, 40.7195898]
 
     # skip confirmation by default
@@ -121,12 +125,12 @@ FactoryGirl.define do
 
   factory :identity do
     association :user, email: "speaker@assembly.state.ny.us"
-    association :person, factory: :person_ny_sheldon_silver
+    association :person, factory: :state_legislator_ny_sheldon_silver
   end
 
   factory :meeting do
-    date_and_time Time.zone.parse('2013-08-15 13:00:00 EST')
-    name 'Special Investigating Committee on Demolition Practices in the City of Philadelphia'
-    state 'pa-philadelphia'
+    date_and_time Time.zone.parse("2013-08-15 13:00:00 EST")
+    name "Special Investigating Committee on Demolition Practices in the City of Philadelphia"
+    state "pa-philadelphia"
   end
 end
