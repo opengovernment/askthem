@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
   before_filter :set_jurisdiction, only: [:overview, :lower, :upper, :bills, :key_votes, :meetings]
-  before_filter :authenticate_user!, only: [:dashboard, :contact_info]
+  before_filter :authenticate_user!, only: [:contact_info]
   before_filter :check_can_view_contact_info, only: :contact_info
   caches_action :channel
   respond_to :html, except: [:identifier, :contact_info]
@@ -60,11 +60,6 @@ class PagesController < ApplicationController
 
   def meetings
     tab "meetings"
-  end
-
-  def dashboard
-    @questions_asked = current_user.questions
-    @questions_signed = current_user.questions_signed
   end
 
   # @see https://github.com/alexreisner/geocoder#use-outside-of-rails
