@@ -10,7 +10,22 @@ class QuestionsController < ApplicationController
   def index
     index! do |format|
       if params[:need_signatures] == 'true'
-        @questions = Question.where(:signature_count.gt =>1 )
+        @questions = Question.where(:signature_count.lt => 1 )
+          .includes(:user)
+          .page(params[:page] || 1)
+      end
+      if params[:have_answers] == 'true'
+        @questions = Question.any_in(_id: Answer.all.distinct("question_id"))
+          .includes(:user)
+          .page(params[:page] || 1)
+      end
+      if params[:need_answers] == 'true'
+        @questions = Question.not_in(_id: Answer.all.distinct("question_id"))
+          .includes(:user)
+          .page(params[:page] || 1)
+      end
+      if params[:recent] == 'true'
+        @questions = Question.desc(:issued_at)
           .includes(:user)
           .page(params[:page] || 1)
       end
