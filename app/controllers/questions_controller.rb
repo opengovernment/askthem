@@ -9,6 +9,11 @@ class QuestionsController < ApplicationController
 
   def index
     index! do |format|
+      if params[:need_signatures] == 'true'
+        @questions = Question.where(:signature_count.gt =>1 )
+          .includes(:user)
+          .page(params[:page] || 1)
+      end
       format.js { render partial: "page" }
     end
   end
@@ -101,4 +106,5 @@ class QuestionsController < ApplicationController
   def resource
     @question ||= Question.where(state: @state_code).find(params[:id])
   end
+
 end
