@@ -4,22 +4,22 @@
   <div class="filters">
     <span class="info">Show:</span><%# @todo DM are these really the filters we're using? %>
 
-    <%= link_to questions_path(filter: 'need-signatures'), :class => 'radio_button filter inactive', remote: true do %>
+    <%= link_to questions_path(need_signatures: true), :class => 'radio_button filter inactive', remote: true do %>
       <span class="use"></span>
       Need Signatures
     <% end %>
 
-    <%= link_to questions_path(filter: 'have-answers'), :class => 'radio_button filter inactive', remote: true do %>
+    <%= link_to questions_path(have_answers: true), :class => 'radio_button filter inactive', remote: true do %>
       <span class="use"></span>
       Have Answers
     <% end %>
 
-    <%= link_to questions_path(filter: 'need-answers'), :class => 'radio_button filter inactive', remote: true do %>
+    <%= link_to questions_path(need_answers: true), :class => 'radio_button filter inactive', remote: true do %>
       <span class="use"></span>
       Need Answers
     <% end %>
 
-    <%= link_to questions_path(filter: 'recent'), :class => 'radio_button filter inactive', remote: true do %>
+    <%= link_to questions_path(recent: true), :class => 'radio_button filter inactive', remote: true do %>
       <span class="use"></span>
       Recent
     <% end %>
