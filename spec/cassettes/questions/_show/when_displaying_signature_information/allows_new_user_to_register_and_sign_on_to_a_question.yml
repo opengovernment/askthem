@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://maps.googleapis.com/maps/api/geocode/json?address=2227%20Paine%20Turnpike,%20Berlin,%20vt,%20US,%2005602&language=en&sensor=false
+    uri: http://maps.googleapis.com/maps/api/geocode/json?address=,%20,%20,%20US,%2005602&language=en&sensor=false
     body:
       encoding: US-ASCII
       string: ''
@@ -21,9 +21,9 @@ http_interactions:
       Content-Type:
       - application/json; charset=UTF-8
       Date:
-      - Wed, 04 Sep 2013 04:46:22 GMT
+      - Wed, 02 Oct 2013 02:19:51 GMT
       Expires:
-      - Thu, 05 Sep 2013 04:46:22 GMT
+      - Thu, 03 Oct 2013 02:19:51 GMT
       Cache-Control:
       - public, max-age=86400
       Access-Control-Allow-Origin:
@@ -41,35 +41,30 @@ http_interactions:
     body:
       encoding: US-ASCII
       string: ! "{\n   \"results\" : [\n      {\n         \"address_components\" :
-        [\n            {\n               \"long_name\" : \"2227\",\n               \"short_name\"
-        : \"2227\",\n               \"types\" : [ \"street_number\" ]\n            },\n
-        \           {\n               \"long_name\" : \"Paine Turnpike South\",\n
-        \              \"short_name\" : \"Paine Turnpike S\",\n               \"types\"
-        : [ \"route\" ]\n            },\n            {\n               \"long_name\"
-        : \"Berlin\",\n               \"short_name\" : \"Berlin\",\n               \"types\"
+        [\n            {\n               \"long_name\" : \"05602\",\n               \"short_name\"
+        : \"05602\",\n               \"types\" : [ \"postal_code\" ]\n            },\n
+        \           {\n               \"long_name\" : \"Middlesex Center\",\n               \"short_name\"
+        : \"Middlesex Center\",\n               \"types\" : [ \"neighborhood\", \"political\"
+        ]\n            },\n            {\n               \"long_name\" : \"Montpelier\",\n
+        \              \"short_name\" : \"Montpelier\",\n               \"types\"
         : [ \"locality\", \"political\" ]\n            },\n            {\n               \"long_name\"
-        : \"Washington\",\n               \"short_name\" : \"Washington\",\n               \"types\"
-        : [ \"administrative_area_level_2\", \"political\" ]\n            },\n            {\n
-        \              \"long_name\" : \"Vermont\",\n               \"short_name\"
-        : \"VT\",\n               \"types\" : [ \"administrative_area_level_1\", \"political\"
-        ]\n            },\n            {\n               \"long_name\" : \"United
-        States\",\n               \"short_name\" : \"US\",\n               \"types\"
-        : [ \"country\", \"political\" ]\n            },\n            {\n               \"long_name\"
-        : \"05602\",\n               \"short_name\" : \"05602\",\n               \"types\"
-        : [ \"postal_code\" ]\n            }\n         ],\n         \"formatted_address\"
-        : \"2227 Paine Turnpike South, Berlin, VT 05602, USA\",\n         \"geometry\"
-        : {\n            \"bounds\" : {\n               \"northeast\" : {\n                  \"lat\"
-        : 44.1931496,\n                  \"lng\" : -72.58242439999999\n               },\n
-        \              \"southwest\" : {\n                  \"lat\" : 44.19314780000001,\n
-        \                 \"lng\" : -72.5824427\n               }\n            },\n
-        \           \"location\" : {\n               \"lat\" : 44.1931496,\n               \"lng\"
-        : -72.5824427\n            },\n            \"location_type\" : \"RANGE_INTERPOLATED\",\n
-        \           \"viewport\" : {\n               \"northeast\" : {\n                  \"lat\"
-        : 44.1944976802915,\n                  \"lng\" : -72.58108456970849\n               },\n
-        \              \"southwest\" : {\n                  \"lat\" : 44.19179971970851,\n
-        \                 \"lng\" : -72.58378253029151\n               }\n            }\n
-        \        },\n         \"partial_match\" : true,\n         \"types\" : [ \"street_address\"
-        ]\n      }\n   ],\n   \"status\" : \"OK\"\n}\n"
+        : \"Vermont\",\n               \"short_name\" : \"VT\",\n               \"types\"
+        : [ \"administrative_area_level_1\", \"political\" ]\n            },\n            {\n
+        \              \"long_name\" : \"United States\",\n               \"short_name\"
+        : \"US\",\n               \"types\" : [ \"country\", \"political\" ]\n            }\n
+        \        ],\n         \"formatted_address\" : \"Montpelier, VT 05602, USA\",\n
+        \        \"geometry\" : {\n            \"bounds\" : {\n               \"northeast\"
+        : {\n                  \"lat\" : 44.398224,\n                  \"lng\" : -72.501317\n
+        \              },\n               \"southwest\" : {\n                  \"lat\"
+        : 44.15941,\n                  \"lng\" : -72.731387\n               }\n            },\n
+        \           \"location\" : {\n               \"lat\" : 44.28092729999999,\n
+        \              \"lng\" : -72.61950759999999\n            },\n            \"location_type\"
+        : \"APPROXIMATE\",\n            \"viewport\" : {\n               \"northeast\"
+        : {\n                  \"lat\" : 44.398224,\n                  \"lng\" : -72.501317\n
+        \              },\n               \"southwest\" : {\n                  \"lat\"
+        : 44.15941,\n                  \"lng\" : -72.731387\n               }\n            }\n
+        \        },\n         \"types\" : [ \"postal_code\" ]\n      }\n   ],\n   \"status\"
+        : \"OK\"\n}\n"
     http_version: 
-  recorded_at: Wed, 04 Sep 2013 04:46:21 GMT
+  recorded_at: Wed, 02 Oct 2013 02:19:49 GMT
 recorded_with: VCR 2.5.0

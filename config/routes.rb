@@ -8,7 +8,11 @@ OpenGovernment::Application.routes.draw do
 
   root to: 'pages#index'
 
-  match 'splash' => 'pages#splash'
+  get 'splash' => 'pages#splash'
+  get 'electeds' => 'pages#splash'
+  get 'about', to: 'pages#about'
+  get 'support', to: 'pages#support'
+  get 'faq', to: 'pages#faq'
 
   resources :users, only: :show do
     member do
@@ -54,7 +58,6 @@ OpenGovernment::Application.routes.draw do
   match 'locator' => 'pages#locator', as: :locator, via: :get
   match 'identifier' => 'pages#identifier', as: :identifier, via: :get
   match 'contact_info' => 'pages#contact_info', as: :identifier, via: :get
-  match 'dashboard' => 'pages#dashboard', as: :dashboard, via: :get
   match 'channel' => 'pages#channel', as: :channel, via: :get
   match ':jurisdiction' => 'pages#overview', as: :jurisdiction, via: :get
 end

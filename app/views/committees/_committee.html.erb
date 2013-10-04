@@ -3,7 +3,7 @@
     <%= committee.name %>
   </div>
 
-  <ul class="activity">
+  <ul class="committee-activity">
     <% committee.people.each do |person| %><%# @note N+1 query %>
       <li class="depiction">
         <% if person.image? %><%# @todo ST use layout to support up to 93 members %>

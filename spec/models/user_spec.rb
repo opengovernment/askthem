@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe User do
-  %w(given_name family_name street_address locality region postal_code country).each do |attribute|
+  %w(given_name family_name postal_code country).each do |attribute|
     it {should validate_presence_of attribute}
   end
 

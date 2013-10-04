@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
 
   def default_jurisdiction
     return @default_jurisdiction if @default_jurisdiction
-    abbreviation = if current_user
+    abbreviation = if current_user && current_user.region
                      current_user.region
                    elsif request.location &&
                        request.location.coordinates != [0,0] &&

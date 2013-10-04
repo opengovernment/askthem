@@ -52,36 +52,7 @@
     <div class="wrapper">
       <%= link_to 'AskThem', root_path, class: 'logo' %>
       <div class="news_signup" id="news_signup">
-        <div class="leftCol">
-          <h1 id="dynamic-title">The "We The People" for every elected official.</h1>
-          <p id="dynamic-subtitle">Get notified and be the first to submit a question when we launch.</p>
-          <nav>
-            <ul class="level">
-              <li class="active" data-type="individual">
-                <a href="#" id="individual-signup">Individual</a>
-                <i class="icon-angle-down"></i>
-              </li>
-              <li data-type="elected_official">
-                <a href="#" id="official-signup">Elected Official</a>
-                <i class="icon-angle-down"></i>
-              </li>
-              <li data-type="organization">
-                <a href="#" id="organization-signup">Organization or Media</a>
-                <i class="icon-angle-down"></i>
-              </li>
-            </ul>
-          </nav>
-          <form action="/ma/questions" class='splash-form'>
-            <input type="email" name="email" id="email" placeholder="E-mail">
-            <input type="text" name="zipcode" id="zipcode" placeholder="Zipcode (optional)">
-            <input type="hidden" name="notify_type" id="notify_type" value="individual">
-            <input type="submit" value="Notify Me" class="cta-pill">
-            <div id="dynamic-link"></div>
-          </form>
-        </div>
-        <div class="rightCol">
-          <p id="dynamic-text">Over 8 million people have taken action on the White House's "We The People" petition platform. Now it's not just for Presidents anymore. We're bringing it nationwide, free and open for everyone.<br><br>Ask questions to over 100,000 elected officials. Petition your local government. Also, question and petition any verified Twitter account.</p>
-      	</div>
+        <%= yield %>
       </div>
     </div>
     <div class="clear"></div>
@@ -99,7 +70,33 @@
     <div class="content_body">
       <div class="wrapper">
         <div class="leftCol">
-          <%= yield %>
+
+          <p>AskThem is a project of the Participatory Politics Foundation, a 501(c)3 non-profit organization with a mission to increase civic engagement. AskThem is supported by a charitable grant from the Knight Foundation's <a href="http://www.knightfoundation.org/funding-initiatives/tech-engagement/">Tech For Engagement</a> initiative.</p>
+
+          <p>AskThem is a free &amp; open-source website for questions-and-answers with public figures. It's a not-for-profit tool for a stronger democracy, with open data for informed and engaged communities.</p>
+
+          <p>AskThem allows you to:</p>
+            <ul>
+              <li>Find and ask questions to over 142,000 elected officials nationwide: federal, state and city levels of government.</li>
+              <li>Get signatures for your question or petition, have it delivered over email or Twitter, and push for a public response.</li>
+              <li>See questions from people near you, sign-on to questions you care about, and review answers from public figures.</li>
+            </ul>
+
+          <p>It's like a version of "<a href="https://petitions.whitehouse.gov/">We The People</a>" for every elected official, from local city council members all the way up to U.S. senators. Enter your email above to be the first to ask a question when we launch and see previews of the site this Fall.</p>
+
+          <p><strong>Elected officials</strong>: enter your email above and we'll send you more information about signing up to answer questions on AskThem. It's a free and non-partisan service to respond to your constituents in an open public forum and update them over email about your work. Or, be a leader in open-government and <a href="https://docs.google.com/forms/d/1iCRzEuDL6bGEkmMsTVrlH-DlQYnMX4KhSF32_tPgT8o/viewform">sign up now</a>.</p>
+
+          <p>Issue-based organizations and media: sign up to help promote questions to government from people in your area. We're working to launch with partnerships that build greater public accountability.</p>
+
+          <p>Previously known as the OpenGovernment.org project, AskThem is open-source and uses open government data - our code is available on <a href="https://github.com/opengovernment">GitHub</a> - contributions welcome. For more development updates & discussion, join our low-traffic <a href="https://groups.google.com/d/forum/opengovernment">Google Group</a>.</p>
+
+          <p>We're a <a href="http://www.participatorypolitics.org/">small non-profit organization</a> actively seeking charitable funding support - help us launch this powerful new tool for public dialogue! Email us for a copy of our non-profit funding prospectus. If you can make a tax-exempt gift to support our work, please <a href="http://www.opencongress.org/donate">donate to PPF</a> via OpenCongress. More background on the project is available on our <a href="https://www.newschallenge.org/open/open-government/submission/opengovernment.org-a-wethepeople-for-state-city-and-local-governments/
+          ">Knight NewsChallenge proposal</a> from March 2013.</p>
+
+          <p>Questions, feedback, ideas? Email David Moore, Executive Director of PPF - david at ppolitics.org, Twitter: <a href="http://twitter.com/ppolitics">@ppolitics</a>; like our <a href="https://www.facebook.com/pages/Askthem/538576652878135">page on Facebook</a> & follow <a href="https://twitter.com/AskThemPPF">@AskThemPPF</a> on Twitter. Stay tuned!</p>
+
+          <iframe src="//www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2Fpages%2FAskthem%2F538576652878135&amp;width=450&amp;height=80&amp;colorscheme=light&amp;layout=standard&amp;action=like&amp;show_faces=true&amp;send=true" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:80px;" allowTransparency="true"></iframe>
+
           <h3 class='splash-shares'>Help us spread the word!</h3>
           <a href="mailto:?subject=Get notified when AskThem launches&body=AskThem is a new question-and-answer website with public figures. It&#039;s free, open-source, and not-for-profit.%0D%0A%0D%0ASign up here to be notified when it launches this Fall and be the first to ask a question to the people who represent you in government &#058;&#058;%0D%0A%0D%0Aaskthem.io%0D%0A%0D%0A&#133;it's like a version of the &#147;We The People&#148; petition platform for every elected official. You can target over 100,000 elected officials nationwide with questions and petitions, from local city council members all the way up to U.S. senators.%0D%0A%0D%0AAskThem is a project of the Participatory Politics Foundation, the 501(c)3 non-profit organization that created OpenCongress.org and OpenGovernment.org." target="_blank" class='splash-share cta-pill'>
             <i class='icon-envelope-alt'></i>
@@ -150,7 +147,7 @@
               </div>
               <div class="person-info">
                 <h3><a href="http://www.fightforthefuture.org/aboutus/index.html#team" target="_blank">Tiffiniy Cheng</a></h3>
-                <p>President & Co-Founder, PPF; Co-Director, <a href="http://www.fightforthefuture.org/">Fight For the Future</a></p>
+                <p>President &amp; Co-Founder, PPF; Co-Director, <a href="http://www.fightforthefuture.org/">Fight For the Future</a></p>
               </div>
             </li>
 	       		<li>
@@ -197,7 +194,7 @@
 			              </div>
 			              <div class="person-info">
 			                <h3><a href="http://www.stevetrevathan.com/" target="_blank">Steven Trevathan</a></h3>
-			                <p>Web Developer & User Experience; Creative Director, <a href="http://dockyard.com/">DockYard</a>.</p>
+			                <p>Web Developer &amp; User Experience; Creative Director, <a href="http://dockyard.com/">DockYard</a>.</p>
 			              </div>
 			            </li>
 							 <li>
@@ -206,7 +203,7 @@
 					              </div>
 					              <div class="person-info">
 					                <h3><a href="http://en.wikipedia.org/wiki/Joshua_Segall" target="_blank">Joshua Segall</a></h3>
-					                <p>Partnerships Director; Outreach, Elected Officials & Media.</p>
+					                <p>Partnerships Director; Outreach, Elected Officials &amp; Media.</p>
 					              </div>
 					            </li>
 									 <li>
@@ -215,7 +212,7 @@
 							              </div>
 							              <div class="person-info">
 							                <h3><a href="https://twitter.com/maryamgunja" target="_blank">Maryam Gunja</a></h3>
-							                <p>Researcher & Outreach Assistant; Community Manager.</p>
+							                <p>Researcher &amp; Outreach Assistant; Community Manager.</p>
 							              </div>
 							            </li>
           </ul>
@@ -338,7 +335,8 @@
     $("#individual-signup").click(function(e) {
       $("#dynamic-title").html("The &quot;We The People&quot; for every elected official.");
       $("#dynamic-subtitle").html("Get notified and be the first to submit a question when we launch.");
-      $("#dynamic-text").html("The White House's &quot;We The People&quot; petition platform has engaged over 8 million people. Now it's not just for Presidents anymore. We're bringing it nationwide, free and open for everyone.<br><br>Ask questions to over 100,000 elected officials. Vote up the questions you care about. Also, question and petition any verified Twitter account.");
+      $("#dynamic-text").html("Over 8 million people have taken action on the White House\'s \"We The People\" petition platform. Now it's not just for Presidents anymore. We're bringing it nationwide, free and open for everyone.<br><br>Ask questions to over 100,000 elected officials. Petition your local government. Also, question and petition any verified Twitter account.");
+      $("#dynamic-button").val("Notify Me");
       $("#dynamic-link").html("");
       e.preventDefault();
     })
@@ -348,13 +346,15 @@
       $("#dynamic-subtitle").html("Interested in joining? Enter your contact info and we'll be in touch.");
       $("#dynamic-text").html("AskThem is your personal question-and-answer site, offering greater access to your constituents and your potential supporters across the nation.<br><br>Agree to respond publicly to any question with enough votes to meet your signature threshold. Energize constituents and build support for your positions.");
       $("#dynamic-link").html("<a href='https://docs.google.com/forms/d/1iCRzEuDL6bGEkmMsTVrlH-DlQYnMX4KhSF32_tPgT8o/viewform' style='position: relative; top: 1.75em; left: 1em;'>Or, <strong>sign up now</strong> to answer questions on AskThem</a>");
+      $("#dynamic-button").val("Contact Me");
       e.preventDefault();
     })
 
     $("#organization-signup").click(function(e) {
       $("#dynamic-title").html("The &quot;We The People&quot; for every elected official.");
       $("#dynamic-subtitle").html("Get notified and be the first to submit a question when we launch.");
-      $("#dynamic-text").html("The White House's &quot;We The People&quot; petition platform has engaged over 8 million people. Now it's not just for Presidents anymore. We're bringing it nationwide, free and open for everyone.<br><br>Ask questions to over 100,000 elected officials. Vote up the questions you care about. Also, question and petition any verified Twitter account.");
+      $("#dynamic-text").html("Over 8 million people have taken action on the White House\'s \"We The People\" petition platform. Now it's not just for Presidents anymore. We're bringing it nationwide, free and open for everyone.<br><br>Ask questions to over 100,000 elected officials. Petition your local government. Also, question and petition any verified Twitter account.");
+      $("#dynamic-button").val("Notify Me");
       $("#dynamic-link").html("");
       e.preventDefault();
     })

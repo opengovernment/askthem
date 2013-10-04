@@ -168,7 +168,6 @@ jQuery ($) ->
 
           personList.children('li:last').fadeTo(300, 1)
 
-        $(".select-person li").equalHeights()
         personList.children('li').on 'click', (e) ->
           updateSelectedPerson e
 

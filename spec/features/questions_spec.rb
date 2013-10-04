@@ -324,11 +324,7 @@ describe 'questions' do
           fill_in 'user_given_name', with: 'John'
           fill_in 'user_family_name', with: 'Doe'
           fill_in 'user_email', with: 'john.doe@example.com'
-          fill_in 'user_street_address', with: street_address
-          fill_in 'user_locality', with: locality
-          select_user_region_for('vt')
           fill_in 'user_postal_code', with: postal_code
-          fill_in 'user_password', with: 'testtest'
           click_button 'Sign'
         end
 

@@ -23,6 +23,10 @@ class User
   field :reset_password_token,   :type => String
   field :reset_password_sent_at, :type => Time
 
+  # in some cases we allow sign up without password
+  # and prompt user to reset password
+  field :password_is_placeholder, type: Boolean, default: false
+
   ## Rememberable
   field :remember_created_at, :type => Time
 
@@ -86,13 +90,14 @@ class User
   index('authentications.provider' => 1, 'authentications.uid' => 1)
 
   validates_presence_of :given_name, :family_name, :email
-  validates_presence_of :street_address, :locality, :region, :postal_code, :country
+  validates_presence_of :postal_code, :country
   validates_inclusion_of :region, in: OpenGovernment::STATES.values, allow_blank: true
   validates_inclusion_of :country, in: %w(US), allow_blank: true
 
   before_validation :set_password_confirmation
 
   after_create :trigger_geocoding
+  after_create :send_reset_password_if_password_is_placeholder
 
   # Called by RegistrationsController.
   def self.new_with_session(params, session)
@@ -163,5 +168,13 @@ class User
 
   def trigger_geocoding
     GeocodeWorker.perform_async(id) unless coordinates.present?
+  end
+
+  def send_reset_password_if_password_is_placeholder
+    if password_is_placeholder?
+      send_reset_password_instructions
+      self.password_is_placeholder = false
+      save!
+    end
   end
 end

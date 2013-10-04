@@ -9,6 +9,9 @@
     </div>
     <div class="row">
       <div class="person-info">
+        <% if question.person.image? %>
+          <%= cdn_image_tag(question.person.image, size: '40x40', alt: '', class: 'official-image avatar-image') %>
+        <% end %>
         <h4><%= link_to question.person.name, person_path(question.state, person) -%></h4>
         <span class="jurisdiction"><%# jurisdiction(person).chamber_title(person.most_recent(:chamber)) -%> of <%= question.state.upcase -%></span>
       </div>
