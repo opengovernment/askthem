@@ -58,11 +58,24 @@ describe 'questions' do
         end
       end
 
-      context 'when a filter is clicked' do
-        it 'applies the filter', js: true do
+      context 'when the need-signatures filter is clicked' do
+        it 'applies and removes the filter', js: true do
           visit '/vt/questions'
           click_link 'Need Signatures'
           page.should have_no_content "1 out of"
+          page.save_screenshot('need_sigs.png')
+          click_link 'Need Signatures'
+          page.should have_content "1 out of"
+          page.save_screenshot('unfiltered.png')
+        end
+      end
+
+      context 'when the have-answers filter is clicked' do
+        it 'applies the filter', js: true do
+          visit '/vt/questions'
+          click_link 'Have Answers'
+          page.save_screenshot('have_answers.png')
+          page.should have_no_content @all_questions.last.title
         end
       end
 
