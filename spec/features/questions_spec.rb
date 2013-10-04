@@ -31,6 +31,8 @@ describe 'questions' do
                              state: @metadatum.abbreviation,
                              person: valid_person)
         end
+        FactoryGirl.create(:signature, question: @all_questions.last)
+        FactoryGirl.create(:answer, question: @all_questions.first)
       end
 
       it 'returns them' do
@@ -53,6 +55,14 @@ describe 'questions' do
             page.should have_content 'Signed'
             page.body.should have_content '1 out of'
           end
+        end
+      end
+
+      context 'when a filter is clicked' do
+        it 'applies the filter', js: true do
+          visit '/vt/questions'
+          click_link 'Need Signatures'
+          page.should have_no_content "1 out of"
         end
       end
 
