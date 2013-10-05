@@ -167,7 +167,7 @@ jQuery ($) ->
           personList.append liVal
 
           personList.children('li:last').fadeTo(300, 1)
-
+        personList.show()
         personList.children('li').on 'click', (e) ->
           updateSelectedPerson e
 
