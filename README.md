@@ -83,7 +83,6 @@ At this point we also need to do a step from the Mongo shell to get our data in 
 
    mongo askthem_development # development db name, adjust to suit
    > db.legislators.find().forEach( function(doc) { doc._type = "StateLegislator" ;  db.people.insert(doc) } );
-   ...
    > db.legislators.drop()
 
 Then resume importing data:
