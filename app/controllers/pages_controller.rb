@@ -120,7 +120,7 @@ class PagesController < ApplicationController
     @federal_people = FederalLegislator.includes(:questions, :identities)
       .for_location(geodata)
 
-    @state_people = Person.includes(:questions, :identities)
+    @state_people = StateLegislator.includes(:questions, :identities)
       .for_location(geodata)
   end
 
@@ -132,7 +132,15 @@ class PagesController < ApplicationController
   end
 
   def type
-    @type ||= params[:type] || "StateLegislator"
+    @type ||= if params[:type]
+                params[:type]
+              else
+                if @jurisdiction.abbreviation.include?("-")
+                  "Councilmember"
+                else
+                  "StateLegislator"
+                end
+              end
   end
 
   def set_jurisdiction

@@ -32,8 +32,18 @@ class PeopleController < ApplicationController
   end
 
   private
+  # @todo DRY with pages controller and improve
+  # putting off, because it will likely be totally replaced
   def type
-    @type ||= params[:type] || 'StateLegislator'
+    @type ||= if params[:type]
+                params[:type]
+              else
+                if @jurisdiction.abbreviation.include?("-")
+                  "Councilmember"
+                else
+                  "StateLegislator"
+                end
+              end
   end
 
   def tab(tab)
