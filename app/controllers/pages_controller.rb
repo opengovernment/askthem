@@ -135,7 +135,7 @@ class PagesController < ApplicationController
     @type ||= if params[:type]
                 params[:type]
               else
-                if @jurisdiction.abbreviation.include?("-")
+                if @jurisdiction && @jurisdiction.abbreviation.include?("-")
                   "Councilmember"
                 else
                   "StateLegislator"
