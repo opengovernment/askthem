@@ -128,7 +128,7 @@ class PagesController < ApplicationController
     only = [:full_name, :photo_url, :party]
     methods = [:id, :most_recent_chamber_title, :most_recent_district]
 
-    people.as_json only: only, methods: methods
+    people.includes(:metadatum).as_json only: only, methods: methods
   end
 
   def type

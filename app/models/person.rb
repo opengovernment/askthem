@@ -46,54 +46,34 @@ class Person
     end
   end
 
-  # override in subclass for other apis
-  def self.api_id_field
-    'id'
-  end
-
-  # override in subclass for other apis
-  def self.api_key
-    ENV['SUNLIGHT_API_KEY']
-  end
-
-  # override in subclass for other apis
-  def self.base_api_url
-    'http://openstates.org/api/v1/legislators/'
-  end
-
   # assumes only one matching location
   # openstates as default API
-  # override base_api_key and api_geo_url in subclasses
+  # override default_api in subclass
   # to work with other apis
-  def self.for_location(location)
-    ids = []
-    data = geodata_from(location)
+  def self.for_location(location, api = nil)
+    api ||= default_api.new
+    where(:id.in => api.ids_for(location))
+  end
 
-    if location_is_valid? data
-      api_parse(results_for_location(data, fields: api_id_field)).map do |attributes|
-        ids << attributes[api_id_field]
-      end
-    end
-
-    where(:id.in => ids)
+  def self.default_api
+    OpenStatesLegislatorService
   end
 
   # for now, only run if we have a clean slate
-  def self.load_from_apis_for_jurisdiction(abbreviation)
+  def self.load_from_apis_for_jurisdiction(abbreviation, api = nil, adapter = nil)
     return if self.connected_to(abbreviation).count > 0
 
-    api_parse(results_for_jurisdiction(abbreviation)).map do |attributes|
-      create_from_apis attributes
+    api ||= default_api.new
+    api.parsed_results_for_jurisdiction(abbreviation).map do |attributes|
+      new.load_from_apis!(attributes)
     end
   end
 
-  def self.create_from_apis(attributes, options = {})
-    person = build_from_api(attributes)
-    person.save!
-
-    PersonDetailRetriever.new(person, options).retrieve!
-
-    person
+  # @todo needs spec
+  def load_from_apis!(attributes, options = {})
+    adapt(attributes, options).save!
+    PersonDetailRetriever.new(self, options).retrieve!
+    self
   end
 
   # Inactive legislators will not have top-level `chamber` or `district` fields.
@@ -193,78 +173,16 @@ class Person
     end
   end
 
-  def self.api_geo_url
-    "#{base_api_url}geo/"
-  end
-
-  def self.geodata_from(location)
-    if location.is_a?(Geocoder::Result::Base)
-      location
+  def adapt(attributes, options = {})
+    adapter = options[:adapter]
+    if adapter
+      adapter.run(attributes)
     else
-      Geocoder.search(location).first
+      self.attributes = attributes
     end
-  end
 
-  def self.location_is_valid?(data)
-    data &&
-      data.country_code == 'US' &&
-      data.latitude.nonzero? &&
-      data.longitude.nonzero?
-  end
-
-  def self.result_for_single(id)
-    params = {
-      apikey: api_key
-    }
-
-    RestClient.get "#{base_api_url}#{id}/", params: params
-  end
-
-  def self.params_for_location(data)
-    { lat: data.latitude,
-      long: data.longitude,
-      apikey: api_key }
-  end
-
-  def self.results_for_location(data, options = {})
-    params = params_for_location(data).merge(options)
-
-    RestClient.get api_geo_url, params: params
-  end
-
-  def self.api_parse(data)
-    JSON.parse data
-  end
-
-  def self.api_url_for_jurisdiction
-    base_api_url
-  end
-
-  def self.api_format_abbreviation(abbreviation)
-    abbreviation.downcase
-  end
-
-  def self.results_for_jurisdiction(abbreviation, options = {})
-    params = {
-      state: api_format_abbreviation(abbreviation),
-      apikey: api_key
-    }.merge(options)
-
-    RestClient.get api_url_for_jurisdiction, params: params
-  end
-
-  def self.build_from_api(attributes)
-    person = new(attributes)
     # id cannot be mass assigned..., have to set it explictly
-    person.id = attributes['id']
-    person
+    # id = attributes['id']
+    self
   end
-
-  # class methods have do not honor private declaration
-  private_class_methods = [:build_from_api, :results_for_jurisdiction,
-                           :api_format_abbreviation, :api_url_for_jurisdiction,
-                           :api_parse, :results_for_location,
-                           :params_for_location, :result_for_single,
-                           :location_is_valid?, :api_geo_url, :geodata_from]
-  private_class_method *private_class_methods
 end

@@ -21,9 +21,9 @@ http_interactions:
       Content-Type:
       - application/json; charset=UTF-8
       Date:
-      - Wed, 10 Jul 2013 04:04:05 GMT
+      - Fri, 04 Oct 2013 01:42:12 GMT
       Expires:
-      - Thu, 11 Jul 2013 04:04:05 GMT
+      - Sat, 05 Oct 2013 01:42:12 GMT
       Cache-Control:
       - public, max-age=86400
       Access-Control-Allow-Origin:
@@ -34,6 +34,8 @@ http_interactions:
       - 1; mode=block
       X-Frame-Options:
       - SAMEORIGIN
+      Alternate-Protocol:
+      - 80:quic
       Transfer-Encoding:
       - chunked
     body:
@@ -57,19 +59,19 @@ http_interactions:
         : [ \"postal_code\" ]\n            }\n         ],\n         \"formatted_address\"
         : \"2227 Paine Turnpike South, Berlin, VT 05602, USA\",\n         \"geometry\"
         : {\n            \"bounds\" : {\n               \"northeast\" : {\n                  \"lat\"
-        : 44.19314960,\n                  \"lng\" : -72.58242439999999\n               },\n
+        : 44.1931496,\n                  \"lng\" : -72.58242439999999\n               },\n
         \              \"southwest\" : {\n                  \"lat\" : 44.19314780000001,\n
-        \                 \"lng\" : -72.58244270\n               }\n            },\n
-        \           \"location\" : {\n               \"lat\" : 44.19314960,\n               \"lng\"
-        : -72.58244270\n            },\n            \"location_type\" : \"RANGE_INTERPOLATED\",\n
+        \                 \"lng\" : -72.5824427\n               }\n            },\n
+        \           \"location\" : {\n               \"lat\" : 44.1931496,\n               \"lng\"
+        : -72.5824427\n            },\n            \"location_type\" : \"RANGE_INTERPOLATED\",\n
         \           \"viewport\" : {\n               \"northeast\" : {\n                  \"lat\"
-        : 44.19449768029150,\n                  \"lng\" : -72.58108456970849\n               },\n
+        : 44.1944976802915,\n                  \"lng\" : -72.58108456970849\n               },\n
         \              \"southwest\" : {\n                  \"lat\" : 44.19179971970851,\n
         \                 \"lng\" : -72.58378253029151\n               }\n            }\n
         \        },\n         \"types\" : [ \"street_address\" ]\n      }\n   ],\n
         \  \"status\" : \"OK\"\n}\n"
     http_version:
-  recorded_at: Wed, 10 Jul 2013 04:04:17 GMT
+  recorded_at: Fri, 04 Oct 2013 01:42:12 GMT
 - request:
     method: get
     uri: http://congress.api.sunlightfoundation.com/legislators/locate?apikey=&fields=bioguide_id&latitude=44.1931496&longitude=-72.5824427
@@ -86,27 +88,39 @@ http_interactions:
   response:
     status:
       code: 200
-      message: OK
+      message: !binary |-
+        T0s=
     headers:
-      Server:
-      - nginx/1.1.19
-      Date:
-      - Wed, 10 Jul 2013 04:04:02 GMT
-      Content-Type:
-      - application/json; charset=utf-8
-      Vary:
-      - Accept-Encoding
-      Status:
-      - 200 OK
-      Via:
-      - 1.1 BC2-ACLD
-      Content-Length:
-      - '143'
-      Connection:
-      - Keep-Alive
+      !binary "U2VydmVy":
+      - !binary |-
+        bmdpbngvMS4xLjE5
+      !binary "RGF0ZQ==":
+      - !binary |-
+        RnJpLCAwNCBPY3QgMjAxMyAwMTo0MTo0OSBHTVQ=
+      !binary "Q29udGVudC1UeXBl":
+      - !binary |-
+        YXBwbGljYXRpb24vanNvbjsgY2hhcnNldD11dGYtOA==
+      !binary "VHJhbnNmZXItRW5jb2Rpbmc=":
+      - !binary |-
+        Y2h1bmtlZA==
+      !binary "Q29ubmVjdGlvbg==":
+      - !binary |-
+        a2VlcC1hbGl2ZQ==
+      !binary "VmFyeQ==":
+      - !binary |-
+        QWNjZXB0LUVuY29kaW5n
+      !binary "U3RhdHVz":
+      - !binary |-
+        MjAwIE9L
+      !binary "Q29udGVudC1FbmNvZGluZw==":
+      - !binary |-
+        Z3ppcA==
     body:
-      encoding: US-ASCII
-      string: ! '{"results":[{"bioguide_id":"W000800"},{"bioguide_id":"L000174"},{"bioguide_id":"S000033"}],"count":3,"page":{"count":3,"per_page":20,"page":1}}'
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAA6tWKkotLs0pKVayiq5WSsrMTy/NTEmNz0xRslIKNzAwsDAw
+        UKrVQZfxAcoYmptgkQkGyhgYGyvVxuooJeeX5pUoWRnrKBUkpqcqWVUji6QW
+        xUNEjQxg8oa1tQAABXExjwAAAA==
     http_version:
-  recorded_at: Wed, 10 Jul 2013 04:04:18 GMT
-recorded_with: VCR 2.3.0
+  recorded_at: Fri, 04 Oct 2013 01:42:13 GMT
+recorded_with: VCR 2.5.0

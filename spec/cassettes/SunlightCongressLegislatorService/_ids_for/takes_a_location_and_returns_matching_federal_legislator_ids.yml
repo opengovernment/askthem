@@ -1,0 +1,109 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://maps.googleapis.com/maps/api/geocode/json?address=05602&language=en&sensor=false
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Thu, 03 Oct 2013 03:10:43 GMT
+      Expires:
+      - Fri, 04 Oct 2013 03:10:43 GMT
+      Cache-Control:
+      - public, max-age=86400
+      Access-Control-Allow-Origin:
+      - ! '*'
+      Server:
+      - mafe
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Alternate-Protocol:
+      - 80:quic
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: US-ASCII
+      string: ! "{\n   \"results\" : [\n      {\n         \"address_components\" :
+        [\n            {\n               \"long_name\" : \"05602\",\n               \"short_name\"
+        : \"05602\",\n               \"types\" : [ \"postal_code\" ]\n            },\n
+        \           {\n               \"long_name\" : \"Middlesex Center\",\n               \"short_name\"
+        : \"Middlesex Center\",\n               \"types\" : [ \"neighborhood\", \"political\"
+        ]\n            },\n            {\n               \"long_name\" : \"Montpelier\",\n
+        \              \"short_name\" : \"Montpelier\",\n               \"types\"
+        : [ \"locality\", \"political\" ]\n            },\n            {\n               \"long_name\"
+        : \"Vermont\",\n               \"short_name\" : \"VT\",\n               \"types\"
+        : [ \"administrative_area_level_1\", \"political\" ]\n            },\n            {\n
+        \              \"long_name\" : \"United States\",\n               \"short_name\"
+        : \"US\",\n               \"types\" : [ \"country\", \"political\" ]\n            }\n
+        \        ],\n         \"formatted_address\" : \"Montpelier, VT 05602, USA\",\n
+        \        \"geometry\" : {\n            \"bounds\" : {\n               \"northeast\"
+        : {\n                  \"lat\" : 44.398224,\n                  \"lng\" : -72.501317\n
+        \              },\n               \"southwest\" : {\n                  \"lat\"
+        : 44.15941,\n                  \"lng\" : -72.731387\n               }\n            },\n
+        \           \"location\" : {\n               \"lat\" : 44.28092729999999,\n
+        \              \"lng\" : -72.61950759999999\n            },\n            \"location_type\"
+        : \"APPROXIMATE\",\n            \"viewport\" : {\n               \"northeast\"
+        : {\n                  \"lat\" : 44.398224,\n                  \"lng\" : -72.501317\n
+        \              },\n               \"southwest\" : {\n                  \"lat\"
+        : 44.15941,\n                  \"lng\" : -72.731387\n               }\n            }\n
+        \        },\n         \"types\" : [ \"postal_code\" ]\n      }\n   ],\n   \"status\"
+        : \"OK\"\n}\n"
+    http_version:
+  recorded_at: Thu, 03 Oct 2013 03:10:40 GMT
+- request:
+    method: get
+    uri: http://congress.api.sunlightfoundation.com/legislators/locate?apikey=&fields=bioguide_id&latitude=44.28092729999999&longitude=-72.61950759999999
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - ! '*/*; q=0.5, application/xml'
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.1.19
+      Date:
+      - Thu, 03 Oct 2013 03:10:19 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Vary:
+      - Accept-Encoding
+      Status:
+      - 200 OK
+      Via:
+      - 1.1 BC4-ACLD
+      Content-Length:
+      - '143'
+      Connection:
+      - Keep-Alive
+    body:
+      encoding: US-ASCII
+      string: ! '{"results":[{"bioguide_id":"W000800"},{"bioguide_id":"L000174"},{"bioguide_id":"S000033"}],"count":3,"page":{"count":3,"per_page":20,"page":1}}'
+    http_version:
+  recorded_at: Thu, 03 Oct 2013 03:10:41 GMT
+recorded_with: VCR 2.5.0

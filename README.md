@@ -81,7 +81,7 @@ Get the necessary supporting data (work-in-progress, will change):
 
 At this point we also need to do a step from the Mongo shell to get our data in order:
 
-   mongo
+   mongo askthem_development # development db name, adjust to suit
    > db.legislators.find().forEach( function(doc) { doc._type = "StateLegislator" ;  db.people.insert(doc) } );
    ...
    > db.legislators.drop()
@@ -122,16 +122,6 @@ You can import Project VoteSmart people on a yearly basis. Ratings are added reg
 1. Get Project VoteSmart special interest group scorecard ratings
 
         bundle exec rake projectvotesmart:ratings # skip unless you want to work with the full data set!
-
-## Data Quality
-
-We provide a number of scripts for checking the quality and consistency of a Billy database. You can run e.g. the `code-lists.js` validator with:
-
-    mongo DATABASE_NAME script/sanity/helper.js script/sanity/code-lists.js
-
-To run all the scripts, do:
-
-    mongo DATABASE_NAME script/sanity/helper.js script/sanity/{code-lists.js,counts.js,denormalization.js,foreign-keys.js,hierarchy.js,manual-review.js,miscellaneous.js}
 
 ## Troubleshooting
 
