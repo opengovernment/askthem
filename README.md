@@ -88,6 +88,7 @@ At this point we also need to do a step from the Mongo shell to get our data in 
 Then resume importing data:
 
     bundle exec rake congress:api:download:legislators
+    bundle exec seed_cities:load
     bundle exec rake db:mongoid:create_indexes
 
 ### Influence Explorer
