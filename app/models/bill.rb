@@ -38,6 +38,9 @@ class Bill
     'upper' => 'lower',
   }
 
+  index(state: 1)
+  index(chamber: 1)
+
   # Returns fields that are not available in Billy.
   #
   # @return [BillDetail] the bill's additional fields
