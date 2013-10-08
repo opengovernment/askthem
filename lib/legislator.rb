@@ -12,4 +12,12 @@ module Legislator
   def most_recent_district
     most_recent :district
   end
+
+  def political_position
+    most_recent_chamber
+  end
+
+  def political_position_title
+    most_recent_chamber_title
+  end
 end

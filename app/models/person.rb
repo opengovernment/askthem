@@ -31,7 +31,7 @@ class Person
   index(_type: 1)
   index(state: 1)
   index(active: 1)
-  index(chamber: 1)
+  index(chamber: 1) # only applicable to legislators
 
   scope :active, where(active: true).asc(:chamber, :family_name) # no index includes `last_name`
 
@@ -93,6 +93,32 @@ class Person
       end
       nil # don't return the enumerator
     end
+  end
+
+  # What political role does the person currently play?
+  # Can be elected or something other like "adviser" or "spokesperson", etc.
+  #
+  # Expected to be fully meaningful in combination with class and perhaps
+  # metadatum (e.g name of chamber for StateLegislator like "upper").
+  #
+  # Subclasses may populate with a dedicated field or dynamically based on
+  # another value.
+  #
+  # Meant for programmatic use, all lower case.
+  #
+  # @return [String, nil]
+  def political_position
+    read_attribute(:political_position)
+  end
+
+  # Meant as common formal presentation of political position.
+  #
+  # Yeah, I know, it's presentation concern, but may be dynamically generated
+  # in subclasses based on relation with metadatum and its own class.
+  #
+  # @return [String, nil]
+  def political_position_title
+    political_position ? political_position.humanize : nil
   end
 
   # Returns fields that are not available in Billy.

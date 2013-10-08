@@ -18,7 +18,16 @@ class FederalLegislator < Person
     "#{PHOTOS_BASE_URL}#{id}.jpg"
   end
 
-  alias :photo_url :image
+  alias_method :photo_url, :image
+
+  def political_position_title
+    case political_position
+    when "upper"
+      "Senator"
+    when "lower"
+      "Representative"
+    end
+  end
 
   private
   def adapt(attributes, options = {})

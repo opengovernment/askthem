@@ -155,14 +155,20 @@ class PagesController < ApplicationController
       .where(chamber: "lower")
       .only_type(type)
     @lower_parties = @lower.group_by { |person| person["party"] }
-    @lower = @lower.includes(:questions).includes(:identities) if tab == "lower"
+    if tab == "lower"
+      @lower = @lower.includes(:questions, :identities)
+      @lower = @lower.includes(:metadatum) unless type == "FederalLegislator"
+    end
     @lower = @lower.page(params[:page])
 
     @upper = Person.connected_to(@jurisdiction.abbreviation).active
       .where(chamber: "upper")
       .only_type(type)
     @upper_parties = @upper.group_by { |person| person["party"] }
-    @upper = @upper.includes(:questions).includes(:identities) if tab == "upper"
+    if tab == "upper"
+      @upper = @upper.includes(:questions, :identities)
+      @upper = @upper.includes(:metadatum) unless type == "FederalLegislator"
+    end
     @upper = @upper.page(params[:page])
 
     @bills = Bill.connected_to(@jurisdiction.abbreviation)

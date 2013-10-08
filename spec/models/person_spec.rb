@@ -43,6 +43,70 @@ describe Person do
     end
   end
 
+  describe "#most_recent" do
+    it "returns nothing when there is no matching value" do
+      expect(@person.most_recent(:chamber)).to be_nil
+    end
+
+    it "when attribute is present, return that" do
+      @person.write_attribute(:chamber, "upper")
+      expect(@person.most_recent(:chamber)).to eq "upper"
+    end
+
+    it "when only old_roles are present, returns most recent" do
+      @person.write_attribute(:old_roles, old_roles)
+      expect(@person.most_recent(:chamber)).to eq "lower"
+    end
+
+    def old_roles
+      { "2007-2008" =>
+        [{ "term" => "2007-2008",
+           "end_date" => nil,
+           "district" => "Chittenden-3-1",
+           "level" => "state",
+           "country" => "us",
+           "chamber" => "upper",
+           "state" => "vt",
+           "party" => "Progressive",
+           "type" => "member",
+           "start_date" => nil }],
+        "2009-2010" =>
+        [{ "term" => "2009-2010",
+           "end_date" => nil,
+           "district" => "Washington-5",
+           "level" => "state",
+           "country" => "us",
+           "chamber" => "lower",
+           "state" => "vt",
+           "party" => "Progressive",
+           "type" => "member",
+           "start_date" => nil }]
+      }
+    end
+  end
+
+  describe "#political_position" do
+    it "returns nil when there is no matching attribute" do
+      expect(@person.political_position).to be_nil
+    end
+
+    it "returns attribute when present" do
+      @person.write_attribute(:political_position, "upper")
+      expect(@person.political_position).to eq "upper"
+    end
+  end
+
+  describe "#political_position_title" do
+    it "returns nil when there is no value" do
+      expect(@person.political_position_title).to be_nil
+    end
+
+    it "returns humanized attribute when present" do
+      @person.write_attribute(:political_position, "adviser")
+      expect(@person.political_position_title).to eq "Adviser"
+    end
+  end
+
   describe "#votesmart_id" do
     it "returns nil when not set or set to nil" do
       expect(@person.votesmart_id).to be_nil

@@ -172,12 +172,12 @@ module ApplicationHelper
   # @return [String] the person's attributes
   def person_attributes(person, delimiter = ", " )
     parts = []
-    parts << jurisdiction(person).chamber_title(person.most_recent(:chamber))
+    parts << person.political_position_title
 
     district_name = district_name(person.most_recent(:district))
     parts << district_name if district_name
 
-    parts << person['party'] if person['party']
+    parts << person["party"] if person["party"]
     parts.join(delimiter)
   end
 
@@ -235,7 +235,7 @@ private
 
       if @person
         args[:person] = @person.name
-        args[:honorary_prefix] = @jurisdiction.chamber_title(@person.most_recent(:chamber))
+        args[:honorary_prefix] = @person.political_position_title
       end
 
       if @question

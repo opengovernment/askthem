@@ -26,18 +26,8 @@ describe Legislator do
 
   describe "#most_recent_chamber_title" do
     it "returns metadatum title for legislators most_recent_chamber" do
-      state = FactoryGirl.create(:metadatum)
-      state.write_attribute(:chambers, chambers)
-      state.save!
-
-      @legislator.state = state.abbreviation
-      @legislator.write_attribute(:chamber, "upper")
+      set_up_state_and_chamber
       expect(@legislator.most_recent_chamber_title).to eq "Senator"
-    end
-
-    def chambers
-      { "upper"=> { "name" => "Senate", "title" => "Senator" },
-        "lower" => { "name" => "House", "title" => "Representative" } }
     end
   end
 
@@ -81,5 +71,34 @@ describe Legislator do
          "type" => "member",
          "start_date" => nil }]
     }
+  end
+
+  describe "#political_position" do
+    it "returns most recent chamber" do
+      @legislator.write_attribute(:chamber, "upper")
+      expect(@legislator.most_recent_chamber).to eq "upper"
+      expect(@legislator.political_position).to eq "upper"
+    end
+  end
+
+  describe "#political_position_title" do
+    it "returns most recent chamber title" do
+      set_up_state_and_chamber
+      expect(@legislator.political_position_title).to eq "Senator"
+    end
+  end
+
+  def set_up_state_and_chamber
+    state = FactoryGirl.create(:metadatum)
+    state.write_attribute(:chambers, chambers)
+    state.save!
+
+    @legislator.state = state.abbreviation
+    @legislator.write_attribute(:chamber, "upper")
+  end
+
+  def chambers
+    { "upper"=> { "name" => "Senate", "title" => "Senator" },
+      "lower" => { "name" => "House", "title" => "Representative" } }
   end
 end
