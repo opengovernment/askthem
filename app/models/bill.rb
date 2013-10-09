@@ -40,6 +40,8 @@ class Bill
 
   index(state: 1)
   index(chamber: 1)
+  index("sponsors.leg_id" => 1)
+  index("action_dates.last" => 1)
 
   # Returns fields that are not available in Billy.
   #
