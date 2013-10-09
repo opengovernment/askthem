@@ -41,6 +41,8 @@ group :production do
   gem 'unicorn'
   gem 'fog'
   gem 'newrelic_rpm'
+  gem 'capistrano'
+  gem 'rvm-capistrano'  # https://rvm.io/integration/capistrano/ and https://github.com/wayneeseguin/rvm-capistrano
 end
 
 group :development do
