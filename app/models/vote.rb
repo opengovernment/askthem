@@ -5,6 +5,10 @@ class Vote
   belongs_to :metadatum, foreign_key: 'state'
   belongs_to :bill
 
+  index("yes_votes.leg_id" => 1)
+  index("no_votes.leg_id" => 1)
+  index("other_votes.leg_id" => 1)
+
   # Returns the people who voted.
   #
   # @return [Array<Person>] the people who voted

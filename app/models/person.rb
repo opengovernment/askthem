@@ -154,11 +154,11 @@ class Person
 
   # Returns the person's committees.
   def committees
-    ids = read_attribute(:roles).map{|x| x['committee_id']}.compact
+    ids = read_attribute(:roles).map { |x| x['committee_id'] }.compact
     if ids.empty?
       []
     else
-      Committee.where(_id: {'$in' => ids}).to_a
+      Committee.where(_id: { '$in' => ids }).to_a
     end
   end
 

@@ -23,6 +23,7 @@ class Rating
 
   index(ratingId: 1)
   index(sigId: 1)
+  index(candidateId: 1)
 
   # @param [Person,nil] person the person being rated, or nil
   # @param [Metadatum,nil] person the person's jurisdiction, or nil
