@@ -144,7 +144,7 @@
       &.below
         bottom: 42px
       a
-        background: #FFF
+        background: $white
         @include border-radius(3px)
         cursor: pointer
         display: inline-block
@@ -159,7 +159,7 @@
             display: inline-block
             content: ""
             border:
-              top: 12px solid #FFF
+              top: 12px solid $white
               left: 12px solid rgba($black, 0)
               right: 12px solid rgba($black, 0)
             position: absolute
@@ -185,6 +185,9 @@
           display: inline-block
         &:active
           display: inline-block
+    .show_above, .show_below
+    @media (max-height: 520px)
+      display: none
 
   .shade_pos
     display: block
