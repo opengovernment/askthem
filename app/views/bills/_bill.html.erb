@@ -5,7 +5,8 @@
       <%= short_bill_title(bill) %>, <%= bill.session_label %>
     </p>
     <ol class="actions">
-      <% bill.dates.select{|_,date| date}.each do |action,date| %>
+      <% bill.dates.select{ |_, date| date }.each do |action, date| %>
+        <% date = Time.zone.parse(date) if date && date.is_a?(String) %>
         <% if action == 'first' %>
           <li<% if date %> class="active"<% end %>>
             Introduced
