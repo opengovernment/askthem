@@ -37,7 +37,7 @@
         <% end %>
         <%# <li><%= tab 'Money', '#' </li> @todo %>
           <li><%= tab 'Government', jurisdiction_path %></li>
-        <% unless (params[:controller] == 'people' && params[:action] == 'show') || (params[:controller] == 'questions' && params[:action] == 'show') %>
+        <% if should_have_ask_question_in_header? -%>
           <%= link_to 'Ask a Question', @type ? new_question_path(@jurisdiction.abbreviation, type: @type) : new_question_path(@jurisdiction.abbreviation), class: 'cta-pill top-nav-ask' %>
         <% end %>
         </ul>

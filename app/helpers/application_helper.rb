@@ -198,8 +198,13 @@ module ApplicationHelper
     end
   end
 
-private
+  def should_have_ask_question_in_header?
+    !(params[:controller] == 'people' &&
+      %w(show bills committees votes ratings).include?(params[:action])) &&
+      !(params[:controller] == 'questions' && params[:action] == 'show')
+  end
 
+  private
   def translate_in_controller_scope(key, args = {})
     args.reverse_merge!(translate_arguments)
     args[:defaults] = [*args[:default]]
