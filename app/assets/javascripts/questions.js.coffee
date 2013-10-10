@@ -4,8 +4,12 @@ jQuery ($) ->
 
   $('textarea').css('overflow', 'hidden').autogrow()
 
-  $('#question_title').keyup ->
-    $('.summary_count').text($(this).attr('maxlength') - $('#question_title').val().length)
+  $('#question_title,#question_body').keyup (event) ->
+    $target = $ event.target
+    $target.parent().find('.summary_count').text($(this).attr('maxlength') - $target.val().length)
+
+  #$('#question_body').keyup ->
+    #$('.summary_count').text($(this).attr('maxlength') - $('#question_body').val().length)
 
   popup = (event, height) ->
     event.preventDefault()
