@@ -148,7 +148,12 @@ class ProjectVoteSmart
     return [347, 368] if options[:state] == 'dc'
 
     office_ids = []
-    if options[:chamber] == 'lower'
+    case options[:political_position]
+    when 'governor'
+      office_ids << 3
+    when 'mayor'
+      office_ids << 73
+    when 'lower'
       if options[:state] == 'us'
         # Federal House
         office_ids << 5
