@@ -43,6 +43,10 @@ OpenGovernment::Application.routes.draw do
     resources :questions, only: [:index, :show, :new, :create] do
       collection do
         get 'preview'
+        get 'need_signatures'
+        get 'have_answers'
+        get 'need_answers'
+        get 'recent'
       end
     end
 

@@ -166,6 +166,19 @@ module ApplicationHelper
     }
   end
 
+  # Returns HTML options for an "a" tag in the questions filter bar.
+  #
+  # @param [String] action the controller action
+  # @param [String] scope a translation scope
+  # @return [Hash] HTML options for the "a" tag
+  def filter_options(action, scope = nil)
+    {
+      'id' => "#{action}-tab",
+      'class' => @tab == action ? 'radio_button filter active' : 'radio_button filter inactive',
+      'data-title' => translate_in_controller_scope("#{scope || action}.title"),
+    }
+  end
+
   # Returns the person's basic attributes.
   #
   # @param [Person] person a person

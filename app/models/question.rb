@@ -79,6 +79,10 @@ class Question
     self.answers.any?
   end
 
+  def threshold_met?
+    self.signature_count >= self.person.signature_threshold
+  end
+
   # @todo delete if unnecessary with only 1 db
   # i.e. does belongs_to now work
   # @return [Bill] the bill the question is about
