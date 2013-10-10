@@ -9,19 +9,19 @@ describe ProjectVoteSmart do
     end
 
     it 'returns State Assembly and State House ids if lower chamber' do
-      expect(api.office_ids(state: 'vt', chamber: 'lower')).to eq [7, 8]
+      expect(api.office_ids(state: 'vt', political_position: 'lower')).to eq [7, 8]
     end
 
     it 'returns state senate id if not dc and lower chamber' do
-      expect(api.office_ids(state: 'vt', chamber: 'upper')).to eq [9]
+      expect(api.office_ids(state: 'vt', political_position: 'upper')).to eq [9]
     end
 
     it 'returns federal senate id if state us and upper chamber' do
-      expect(api.office_ids(state: 'us', chamber: 'upper')).to eq [6]
+      expect(api.office_ids(state: 'us', political_position: 'upper')).to eq [6]
     end
 
     it 'returns federal house id if state us and lower chamber' do
-      expect(api.office_ids(state: 'us', chamber: 'lower')).to eq [5]
+      expect(api.office_ids(state: 'us', political_position: 'lower')).to eq [5]
     end
   end
 

@@ -16,7 +16,7 @@ class ProjectVoteSmartPersonDetail
   end
 
   def officials
-    @officials ||= get_officials(person.state, person.chamber)
+    @officials ||= get_officials(person.state, person.political_position)
   end
 
   def votesmart_id
@@ -30,9 +30,9 @@ class ProjectVoteSmartPersonDetail
   end
 
   private
-  def get_officials(state, chamber)
+  def get_officials(state, political_position)
     api = ProjectVoteSmart.new
-    office_ids = api.office_ids(state: state, chamber: chamber)
+    office_ids = api.office_ids(state: state, political_position: political_position)
     api.officials_by_state_and_office(state, office_ids)
   end
 
@@ -55,9 +55,12 @@ class ProjectVoteSmartPersonDetail
   end
 
   def pvs_district_or_office_for(official)
-    return official['officeName'] if official['officeName'].include?('U.S. ')
-
-    official['officeDistrictName']
+    # @todo move 7, 8, 9 to constant on ProjectVoteSmart
+    if [7, 8, 9].include?(official['officeId'].to_i)
+      official['officeDistrictName']
+    else
+      official['officeName']
+    end
   end
 
   def district_or_office_for(person)
@@ -65,7 +68,12 @@ class ProjectVoteSmartPersonDetail
 
     # reset if federal
     if person.state == 'us'
-      district_or_office = person.chamber == 'lower' ? 'U.S. House' : 'U.S. Senate'
+      district_or_office = person.political_position == 'lower' ? 'U.S. House' : 'U.S. Senate'
+    end
+
+    # handle governors, etc.
+    unless district_or_office
+      district_or_office = person.political_position_title
     end
 
     district_or_office
@@ -75,10 +83,12 @@ class ProjectVoteSmartPersonDetail
   # family name is incorrectly set to "(SD28)". It may also fail to
   # identify suffixes, incorrectly leaving them in the family name.
   def comparable_family_name_for(person)
-    if person.family_name[/\A\([A-Z0-9]+\)\z/]
-      person.given_name[/(\S+)\z/]
+    last_name = person.family_name || person.full_name.split(' ').last
+    first_names = person.given_name || person.full_name.delete(last_name)
+    if last_name[/\A\([A-Z0-9]+\)\z/]
+      first_names[/(\S+)\z/]
     else
-      person.family_name
+      last_name
     end.sub(/,? (?:III|IV|Jr\.|M\.D\.|SR|Sr\.)\z/, '')
   end
 

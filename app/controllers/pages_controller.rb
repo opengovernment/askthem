@@ -148,6 +148,8 @@ class PagesController < ApplicationController
   end
 
   def tab(tab)
+    @governor = Governor.connected_to(@jurisdiction.abbreviation).first
+
     # Each pair of `@lower` and `@upper` lines must be run together, as below,
     # otherwise the first query to evaluate will clear the persistence options
     # of the unevaluated query.
