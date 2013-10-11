@@ -1,7 +1,7 @@
 class IdentityMailer < ActionMailer::Base
   add_template_helper(ApplicationHelper)
 
-  default from: "develop@opengovernment.org"
+  default from: "support@askthem.io"
 
   def identity_submitted(identity)
     send_user_mail_for(identity, "Your AskThem identity is being verified")
