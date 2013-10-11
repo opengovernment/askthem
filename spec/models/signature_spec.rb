@@ -21,10 +21,17 @@ describe Signature do
 
   context "with callbacks" do
     let(:signature) { FactoryGirl.create(:signature) }
-
     context "when created" do
       it "should add to question's signature_count" do
         expect(signature.question.signature_count).to eq 1
+      end
+      it "should appropriately flag the question's signature threshold as met" do
+        users = FactoryGirl.create_list(:user, 101)
+        question = FactoryGirl.create(:question)
+        users.each do |u|
+          FactoryGirl.create(:signature, user: u, question: question)
+        end
+        expect(question.threshold_met?).to eq true
       end
     end
 
