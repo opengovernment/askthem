@@ -71,8 +71,25 @@ describe 'questions' do
 
       context 'when have_answers filter is clicked' do
         it 'applies the filter' do
+          question = FactoryGirl.create(:question, title: 'This question has an answer')
+          answer = FactoryGirl.create(:answer, question: question)
           visit '/vt/questions/have_answers'
-          page.should have_content @all_questions.first.title
+          page.should have_content question.title
+        end
+      end
+
+      context 'when need_answers filter is clicked' do
+        it 'applies the filter' do
+          question = FactoryGirl.create(:question, title: 'This question has no answer')
+          visit '/vt/questions/need_answers'
+          page.should have_no_content question.title
+        end
+      end
+
+      context 'when recent filter is clicked' do
+        it 'applies the filter' do
+          visit '/vt/questions/recent'
+          page.find('.title.question-input-summary').first.should have_content @all_questions.last.title
         end
       end
 
