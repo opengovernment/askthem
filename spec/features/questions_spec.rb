@@ -65,13 +65,16 @@ describe 'questions' do
           users.each do |u|
             FactoryGirl.create(:signature, user: u, question: @all_questions.last)
           end
-          page.should have_no_content "101 out of"
+          page.should have_no_content "100 out of"
         end
       end
 
       context 'when have_answers filter is clicked' do
         it 'applies the filter' do
-          question = FactoryGirl.create(:question, title: 'This question has an answer')
+          question = FactoryGirl.create(:question, 
+                                        title: 'This question has an answer', 
+                                        state: @metadatum.abbreviation,
+                                        person: valid_person)
           answer = FactoryGirl.create(:answer, question: question)
           visit '/vt/questions/have_answers'
           page.should have_content question.title
@@ -80,7 +83,11 @@ describe 'questions' do
 
       context 'when need_answers filter is clicked' do
         it 'applies the filter' do
-          question = FactoryGirl.create(:question, title: 'This question has no answer')
+          question = FactoryGirl.create(:question, 
+                                        title: 'This question has no answer', 
+                                        state: @metadatum.abbreviation,
+                                        person: valid_person)
+          answer = FactoryGirl.create(:answer, question: question)
           visit '/vt/questions/need_answers'
           page.should have_no_content question.title
         end
@@ -89,7 +96,8 @@ describe 'questions' do
       context 'when recent filter is clicked' do
         it 'applies the filter' do
           visit '/vt/questions/recent'
-          page.find('.title.question-input-summary').first.should have_content @all_questions.last.title
+          rendered_questions = page.find('.title.question-input-summary')
+          rendered_questions.should have_content @all_questions.last.title
         end
       end
 
