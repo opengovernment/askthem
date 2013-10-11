@@ -36,7 +36,7 @@ class Signature
 
   def increment_question_signature_count
     question.inc(:signature_count, 1)
-    if question.person.signature_threshold == question.signature_count
+    if question.signature_count >= question.person.signature_threshold
       question.threshold_met = true
       question.save
     end
