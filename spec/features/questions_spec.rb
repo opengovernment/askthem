@@ -58,19 +58,21 @@ describe 'questions' do
         end
       end
 
-      context 'when the need-signatures filter is clicked' do
-        it 'applies and removes the filter', js: true do
+      context 'when needs_signatures filter is clicked' do
+        it 'applies the filter' do
           visit '/vt/questions/need_signatures'
-          page.should have_no_content "1 out of"
+          users = FactoryGirl.create_list(:user, 100)
+          users.each do |u|
+            FactoryGirl.create(:signature, user: u, question: @all_questions.last)
+          end
+          page.should have_no_content "101 out of"
         end
       end
 
-      context 'when the have-answers filter is clicked' do
-        it 'applies the filter', js: true do
-          visit '/vt/questions'
-          click_link 'Have Answers'
-          page.save_screenshot('have_answers.png')
-          page.should have_no_content @all_questions.last.title
+      context 'when have_answers filter is clicked' do
+        it 'applies the filter' do
+          visit '/vt/questions/have_answers'
+          page.should have_content @all_questions.first.title
         end
       end
 
@@ -346,7 +348,7 @@ describe 'questions' do
           click_button 'Sign'
         end
 
-        page.body.should have_content '1 out of'
+        page.body.should have_content "1 out of"
       end
 
       context 'as signed in user' do

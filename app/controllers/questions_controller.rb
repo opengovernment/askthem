@@ -15,7 +15,8 @@ class QuestionsController < ApplicationController
   end
 
   def need_signatures
-    @questions = Question.where(state: @state_code)
+    people = Person.where(state: @state_code)
+    @questions = Question.where(state: @state_code).where(threshold_met: false)
       .includes(:user)
       .page(params[:page] || 1)
     tab 'need_signatures'
