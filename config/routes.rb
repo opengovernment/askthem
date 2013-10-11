@@ -10,9 +10,11 @@ OpenGovernment::Application.routes.draw do
 
   get 'splash' => 'pages#splash'
   get 'electeds' => 'pages#splash'
+  get 'elected_signup' => 'pages#elected_signup'
   get 'about', to: 'pages#about'
   get 'support', to: 'pages#support'
   get 'faq', to: 'pages#faq'
+  get 'map', to: 'pages#map'
 
   resources :users, only: :show do
     member do

@@ -71,6 +71,27 @@ jQuery ($) ->
   $('#state-people').click (e) ->
     locatorPeopleGoTo '.state-people-list', e.delegateTarget
 
+  $('#municipal-people').click (e) ->
+    locatorPeopleGoTo '.municipal-people-list', e.delegateTarget
+
   locatorPeopleGoTo = (target, e) ->
     $('.people-list').fadeOut 'fast'
     $(target).fadeIn 'slow'
+
+  switchToPeopleType = (type = 'State') ->
+    id = '#state-people' if type == 'State'
+    id = '#federal-people' if type == 'Federal'
+    id = '#municipal-people' if type == 'Municipal'
+
+    $('ul.level').children('li').removeClass 'active'
+    $(id).addClass 'active'
+
+
+  $('#federal-people a').click (event) ->
+    switchToPeopleType('Federal')
+
+  $('#state-people a').click (event) ->
+    switchToPeopleType()
+
+  $('#municipal-people a').click (event) ->
+    switchToPeopleType('Municipal')

@@ -13,6 +13,13 @@ class Governor < Person
     states.collect { |state| load_from_apis_for_jurisdiction(state) }
   end
 
+  def self.for_location(location)
+    location = LocationFormatter.new(location).format
+    return where(id: []) unless location
+
+    where(state: location.state_code.downcase)
+  end
+
   private
   def adapt(attributes, options = {})
     adapter = options[:adapter] || DemocracyMapGovernorAdapter.new(self)

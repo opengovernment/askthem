@@ -7,7 +7,8 @@ describe OpenStatesLegislatorService do
   describe "#ids_for" do
     it "takes a location and returns matching state legislator ids", :vcr do
       legislator_ids = ["VTL000008", "VTL000009", "VTL000184", "VTL000095"]
-      expect(api.ids_for("05602")).to eq legislator_ids
+      location = Geocoder.search("05602").first
+      expect(api.ids_for(location)).to eq legislator_ids
     end
   end
 

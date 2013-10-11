@@ -74,7 +74,7 @@ describe PagesController do
                               :photo_url,
                               :party],
                        methods: [:id,
-                                 :most_recent_chamber_title,
+                                 :political_position_title,
                                  :most_recent_district] })
     end
   end

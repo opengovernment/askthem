@@ -46,13 +46,39 @@ class Person
     end
   end
 
-  # assumes only one matching location
-  # openstates as default API
-  # override default_api in subclass
-  # to work with other apis
+  # non-chainable
+  def self.criteria_for_types_for_location(location)
+    location = LocationFormatter.new(location).format
+    return where(id: nil) if location.nil?
+
+    criteria = distinct("_type").collect do |type|
+      type.constantize.for_location(location)
+    end
+  end
+
   def self.for_location(location, api = nil)
-    api ||= default_api.new
-    where(:id.in => api.ids_for(location))
+    if self.name != "Person"
+      raise "this class needs a real implementation of for_location"
+    end
+  end
+
+  # non-chainable
+  def self.results_for_location(location)
+    if self.name != "Person"
+      raise "should not be called from subclass"
+    end
+
+    count = 1
+    results = []
+    criteria_for_types_for_location(location).each do |criterium|
+      if count == 1
+        results = criterium
+      else
+        results = results + criterium
+      end
+      count += 1
+    end
+    results
   end
 
   def self.default_api

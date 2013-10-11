@@ -348,8 +348,6 @@ describe 'questions' do
 
   def choose_person(need_to_fill_out_address = true)
     fill_out_address if need_to_fill_out_address
-    click_link "Vermont State"
-    sleep 2
     page.execute_script "jQuery('#question_person_id_#{@person.id}').parents('li').trigger('click')"
   end
 

@@ -21,9 +21,9 @@ http_interactions:
       Content-Type:
       - application/json; charset=UTF-8
       Date:
-      - Thu, 19 Sep 2013 21:36:12 GMT
+      - Fri, 11 Oct 2013 01:10:59 GMT
       Expires:
-      - Fri, 20 Sep 2013 21:36:12 GMT
+      - Sat, 12 Oct 2013 01:10:59 GMT
       Cache-Control:
       - public, max-age=86400
       Access-Control-Allow-Origin:
@@ -71,7 +71,7 @@ http_interactions:
         \        },\n         \"types\" : [ \"street_address\" ]\n      }\n   ],\n
         \  \"status\" : \"OK\"\n}\n"
     http_version:
-  recorded_at: Thu, 19 Sep 2013 21:36:12 GMT
+  recorded_at: Fri, 11 Oct 2013 01:10:58 GMT
 - request:
     method: get
     uri: http://openstates.org/api/v1/legislators/geo/?apikey=&fields=id&lat=44.1931496&long=-72.5824427
@@ -97,13 +97,13 @@ http_interactions:
       Vary:
       - Authorization
       Date:
-      - Thu, 19 Sep 2013 21:36:49 GMT
+      - Fri, 11 Oct 2013 01:11:38 GMT
       X-Varnish:
-      - '1080705306'
+      - '236860378'
       Age:
       - '0'
       Via:
-      - 1.1 varnish, 1.1 BC1-ACLD
+      - 1.1 varnish, 1.1 BC2-ACLD
       Content-Length:
       - '603'
       Connection:
@@ -119,5 +119,5 @@ http_interactions:
         {"district": "Washington-1", "chamber": "lower", "state": "vt", "boundary_id":
         "sldl/vt-washington-1", "id": "VTL000064"}]'
     http_version:
-  recorded_at: Thu, 19 Sep 2013 21:36:13 GMT
+  recorded_at: Fri, 11 Oct 2013 01:10:58 GMT
 recorded_with: VCR 2.5.0
