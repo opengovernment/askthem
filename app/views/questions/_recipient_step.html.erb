@@ -42,7 +42,7 @@
         <div class="pill_wrap">
           <label for="question_user_attributes_region" class="lesser">State</label>
           <div class="input select sculpt icon-angle-down">
-            <%= user_form.select :region, options_for_select(OpenGovernment::STATES, @state_code), placeholder: 'Select your state' %>
+            <%= user_form.select :region, options_for_select(OpenGovernment::STATES, @state_code.split('-').first), placeholder: 'Select your state' %>
           </div>
         </div>
         <div class="pill_wrap">
@@ -57,19 +57,6 @@
       </label>
 
       <div class="loading" style="display:none;">Loading...</div>
-
-      <% unless local? -%>
-        <ul class="people-type" style="display:none;">
-          <li class="active" id="federal-people">
-            <a href="#federal_address_lookup"><%= @jurisdiction['name'] %> Federal</a>
-            <i class="icon-angle-down"></i>
-          </li>
-          <li id="state-people">
-            <a href="#state_address_lookup"><%= @jurisdiction['name'] %> State</a>
-            <i class="icon-angle-down"></i>
-          </li>
-        </ul>
-      <% end -%>
 
       <fieldset class="person-selector">
         <ol class="people-list select-person">

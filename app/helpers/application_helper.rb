@@ -10,7 +10,7 @@ module ApplicationHelper
 
   # Called by the page layout and paginators.
   def title(args = {})
-    translate_in_controller_scope("#{controller.action_name}.title", params.slice(:page).merge(default: 'OpenGovernment').merge(args))
+    translate_in_controller_scope("#{controller.action_name}.title", params.slice(:page).merge(default: 'AskThem').merge(args))
   end
 
   # Called by the page layout.

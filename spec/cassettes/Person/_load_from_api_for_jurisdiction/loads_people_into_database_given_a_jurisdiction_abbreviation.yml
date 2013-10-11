@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://openstates.org/api/v1/legislators/?apikey=8f13417da56c4101995e5a96b4e1acb1&state=vt
+    uri: http://openstates.org/api/v1/legislators/?apikey=&state=vt
     body:
       encoding: US-ASCII
       string: ''
@@ -3847,11 +3847,11 @@ http_interactions:
         NyBCYXJiZXIgUmQuXG5cblRvd25zaGVuZCwgVlQgMDUzNTMtIiwgInR5cGUi
         OiAiZGlzdHJpY3QiLCAiZW1haWwiOiBudWxsfV0sICJzdWZmaXhlcyI6ICIi
         fV0=
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:57:56 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/d281d03c67914c7dbbc34f20a79a988d.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/d281d03c67914c7dbbc34f20a79a988d.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -3917,7 +3917,7 @@ http_interactions:
         Fc0VioMimuMnhKwipq4R1jem9W7UL2xEMRsFeG7gQClDxlUTfmMUHG/Z/vXz
         cXvpiEkdixCdLcS85c0nphx/Qb2OHiaRBq7/RTrTzpUyf5QRSx9bGPJXrfv9
         /g+wa/FVVgcAAA==
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:57:57 GMT
 - request:
     method: get
@@ -3988,11 +3988,11 @@ http_interactions:
         Senate","officeTypeId":"L","runningMateId":"","runningMateName":""},{"candidateId":"14887","firstName":"David","nickName":"Dave","middleName":"E.","preferredName":"Dave","lastName":"Zuckerman","suffix":"","title":"Senator","ballotName":"","electionParties":"","electionStatus":"","electionStage":"","electionDistrictId":"","electionDistrictName":"","electionOffice":"","electionOfficeId":"","electionStateId":"","electionOfficeTypeId":"","electionYear":"","electionSpecial":"","electionDate":"","officeParties":"Democratic,
         Progressive","officeStatus":"active","officeDistrictId":"27137","officeDistrictName":"Chittenden","officeStateId":"VT","officeId":"9","officeName":"State
         Senate","officeTypeId":"L","runningMateId":"","runningMateName":""}]}}'
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:57:58 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/f09f91618f4347c6819565ed068b9360.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/f09f91618f4347c6819565ed068b9360.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -4061,11 +4061,11 @@ http_interactions:
         8d+XmCmMWWWSY0GUVOqDeXlyTP6aCZvhDFKQmM5LJgj2wDEpYNNrkqX+F3f7
         H8b1JENMhInqTpLbrvcoYugTDLHX3ajRYO+RF+HXnYtRwL/daYi/vuaOAX+n
         LOAW993zdWgM0G096tZLRD+SAnw6/QOxvQynEx4AAA==
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:57:59 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/b454fc5076f24f6c85ab465626275051.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/b454fc5076f24f6c85ab465626275051.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -4131,7 +4131,7 @@ http_interactions:
         kzriwxortCTy5FzQYKE4GERzfIfghUXXN4H1wLTBjfiFTVDMxgCcGziQ8+Bx
         1bS/0QYcb9n+/etxe+6IST2LCDo7sH7LmzVTjj+hQccAC5FGrv9FOtPmSpk/
         yYilTy0M+avW/X7/Bx/jmWJfBwAA
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:57:59 GMT
 - request:
     method: get
@@ -4202,11 +4202,11 @@ http_interactions:
         Senate","officeTypeId":"L","runningMateId":"","runningMateName":""},{"candidateId":"14887","firstName":"David","nickName":"Dave","middleName":"E.","preferredName":"Dave","lastName":"Zuckerman","suffix":"","title":"Senator","ballotName":"","electionParties":"","electionStatus":"","electionStage":"","electionDistrictId":"","electionDistrictName":"","electionOffice":"","electionOfficeId":"","electionStateId":"","electionOfficeTypeId":"","electionYear":"","electionSpecial":"","electionDate":"","officeParties":"Democratic,
         Progressive","officeStatus":"active","officeDistrictId":"27137","officeDistrictName":"Chittenden","officeStateId":"VT","officeId":"9","officeName":"State
         Senate","officeTypeId":"L","runningMateId":"","runningMateName":""}]}}'
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:58:00 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/d3457e27f4dd4918a3bb26bf1f598973.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/d3457e27f4dd4918a3bb26bf1f598973.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -4274,11 +4274,11 @@ http_interactions:
         WoLCOiLHg2i5cVsafIiIv7BgmK5AgEE6j0ww7KSRFPD0Eln2DG5vG2MOeadw
         pgQMfWlwDiAukSiPaVINwu+bmKuAf6oExN9/8l4D/pFsUYJpfPg0ugbodDZI
         2ePju9//B8R5XFZNFAAA
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:58:01 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/e668ba6252af4b689f1fe79eefbe08da.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/e668ba6252af4b689f1fe79eefbe08da.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -4344,11 +4344,11 @@ http_interactions:
         rwv+akj4sMISPUncO1c05SgOimSOHxCi8hjaWlg/mda7UX+wFr1sFOCxgQOF
         CBGXtfuLXnC8ZfuPh2F76ohJLYsQnQ34uOHNiinDB1Gvo4dJpAPX/yOdacdK
         mT/KiKWPLQx5UetoVF682N3uH8LTItiTCgAA
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:58:02 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/0419777703064f85a2afcf9ac7ed964d.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/0419777703064f85a2afcf9ac7ed964d.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -4415,11 +4415,11 @@ http_interactions:
         aSvv8eRsIYT9xMpjDI4uh4+fVfUv1ME89HP5hxZXwoW1jhwPogFt1+7wMXL8
         hYLhusQCNdG5Z4LRokikoKfXkWVO4Pa2PuaQdwBnt/qH21D1z8zM38hM2zT/
         kJlDTG8hd7dH/l2D/2f0PSW8TtWNoy+y7fY3D/wvsNgNAAA=
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:58:03 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/9372cede9d15448a8db8436aeef950ca.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/9372cede9d15448a8db8436aeef950ca.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -4487,11 +4487,11 @@ http_interactions:
         YIK570f5+xZagsJqIseDqLhxB7r5FBF/YcHweIeVGqTzwgTD6Q6SAp5eIsve
         we1tXcwhbx9On4B2VhKcA4ghEuUx9apB+M3B+iHg3yoB8TfHsEfA35EtSjCN
         z9/rjwCd3g1S9tXrizU0H3iDr+F0+g83VzqgjBcAAA==
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:58:03 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/e4ca900a27d043b0ba1e1d75957c5656.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/e4ca900a27d043b0ba1e1d75957c5656.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -4557,11 +4557,11 @@ http_interactions:
         WoxQQgT5QkoTojeafx0S3lxjiZ40npwrmnQUB0Uzxw8IUXkMbSWsR6Z1btQf
         rEQwGwV4buBAIULEZVX/RS84XrL95+q4vHTEpJZFiM4GfNzy4jtTjn9FnY4O
         JpF6rv9HOtPOlTJ/kBFLH1oY8qrWwbi8ebH7/T+8TzFTlgoAAA==
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:58:04 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/0129e18078374be69058154664f186d9.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/0129e18078374be69058154664f186d9.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -4628,11 +4628,11 @@ http_interactions:
         5XcgvbDgmpK9fpBbF0b8hpLpkpGBpwZK5Lz0sCqrP2AZR0uyf+dpsL9wd0E7
         buw24P6Lx6W0VMeIHvEYWwhCaRuqnhtUS+u3tHgO6EiZ0798+qH2I1R0VCDW
         F4eHm+ZHoI5k20vI1ZPd7/8CCcp79g4RAAA=
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:58:05 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/0c8d2853b1654e40888a6c6301d8e8b4.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/0c8d2853b1654e40888a6c6301d8e8b4.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -4707,11 +4707,11 @@ http_interactions:
         YYGG7s7+sFIKjoChv0t8M+yPkPSIe+zoIWuHl4D4lzamZMGNc/ViMkE17pGP
         tVlPeDVhdqYthTiSfqzRXZguJO+NFyd0xzymQW4IftsCPwn4x0WE8Lf90lPA
         f1DxiDme4L4A/p/CHof3X+FPItCNdv1tCu7u/gNkcWRgthYAAA==
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:58:05 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/449f9cf62844417b8d7bfc416a2c77ab.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/449f9cf62844417b8d7bfc416a2c77ab.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -4785,11 +4785,11 @@ http_interactions:
         yENt5gO/GqwKla8KlfeF8mGtp1A9kf4Q338HT/n7R+7t2yD8bl7xIODvv1yI
         v7vcPgT8W52AmLO6Az0E6PQuUhf7m+6cRHF3ln4IoTUL7dZ9ILi9/Q3o7K0S
         HxkAAA==
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:58:06 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/942ee89a0517426ab8175b01129a0d56.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/942ee89a0517426ab8175b01129a0d56.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -4857,11 +4857,11 @@ http_interactions:
         4qmAAjkvPayK8h9Y1qMtyX/+oG3390TrtMXGZr3em3BcCkt5DOARjqGEVChs
         TdnzBVXS+i1tPgZUUsY0sOkm2auAf54g4m+mnmvAf1QNZs7hcXwN0OPw8Goa
         Pdj9/j/0xh0YWxQAAA==
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:58:07 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/f5510fb508e04891b23c8cd25a7ffa19.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/f5510fb508e04891b23c8cd25a7ffa19.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -4929,11 +4929,11 @@ http_interactions:
         A806N+kfKAkuCknxWICBjGUWFmX1FzTp4RLl37/hsv9fonPaYSOzvd5/4TgX
         FvMYwEMcQwmqYNgGs6cC1UzbNS6ePGwpYRrY9DPsRcA/TdDhbyeeS8B/0A1i
         zu67+BKgh/7uk2n0YLfbfyMskThaFAAA
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:58:07 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/b2651c77f7c742ffa066895c61b3a036.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/b2651c77f7c742ffa066895c61b3a036.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -4999,11 +4999,11 @@ http_interactions:
         HaVy3irJHw0xb1ZYoiWFo3NBQ47iYFDM8R2CFxZdVwfWD6YNbsQfrINcNgbg
         qYEDOQ8el3XzF23A8ZLt39eH5bkjJnUsIuhswfotLz4z5fA9NOgYYCHSkev/
         kc60U6XMn2TE0qcWhryodTIpr17sfv8PpNjlsJgKAAA=
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:58:08 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/6e6794ccf93d42fba40ed0c7c4604551.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/6e6794ccf93d42fba40ed0c7c4604551.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -5071,11 +5071,11 @@ http_interactions:
         QMV0ScjA9wJy5IMMMK/qv+AYR1OSPz8dpgND2B12f3PvpmfLhk40/4fZOSKk
         PyBMzIYSgpDblvLBKWukC1uaPEa0yRz1EHHobj8D/5NwMJpDD/QZqCPZ7nV8
         8WT3+381zHYJHREAAA==
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:58:09 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/e3408f3b383340b6a7b4bef750d2f05f.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/e3408f3b383340b6a7b4bef750d2f05f.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -5142,11 +5142,11 @@ http_interactions:
         vX6yWw8j/2Ad+bIwGh4KOJAPEHBV27/ooh1fWf7jZbgeA7FTyyQiz2Et7yP3
         iog9AvsIWXY75Mb+kxyY7FTCJlN2DbiwYbTnhBs/utJt2N7+B+pEtnvYz57s
         bvcPMm8Hv9INAAA=
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:58:10 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/992c0c2a72b743f1a8486e53a0c5e621.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/992c0c2a72b743f1a8486e53a0c5e621.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -5216,11 +5216,11 @@ http_interactions:
         WdBMryAHiXQemUixC46kANGryWr+FPfhM8b5Iq8TQV9DjMlFOH+LCB3VFd+H
         vrcBZIh6PYZ/s5lnmBB71466Gey93Ub4XefiJuBfvmmIv7vm3gL+k7KAr7jn
         7K9DtwCd6tFpvUT0N1KAd7vfAOrx8BMeAAA=
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:58:10 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/59942f3e215049069df293614146a2ac.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/59942f3e215049069df293614146a2ac.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -5288,11 +5288,11 @@ http_interactions:
         ByrG6B0pB8cvqvovGG/u+1H+voWWoLCWyGEQjTBuT4OvAfHnF/TTWyjBIJ1n
         JnJU00gKML1Elr2Dm22XmH3ePpw+ASdt6p09iCESxZj61dySixV10uYzVHTR
         CbircfhxBf4M0KndqFmu3gisobs0Db6G4/Ef6U8rRFQUAAA=
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:58:11 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/b8b5ee57725046e0ba341e5adb8c1b97.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/b8b5ee57725046e0ba341e5adb8c1b97.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -5362,11 +5362,11 @@ http_interactions:
         +F40qJ27P0QOXXISL0RlC85q6X056/dBnz/hI5aQozw3dtHnVf8BiwKlEvdS
         VVCIa7PUzoTdQ9nXF+oPk32H/AS/vn19CPj/3ee078I+DNv+PcdZuTS+bX+0
         2fwDZjr49AMVAAA=
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:58:12 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/67bd993032f74c7b9e629b6e3243eeca.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/67bd993032f74c7b9e629b6e3243eeca.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -5437,11 +5437,11 @@ http_interactions:
         IVmKZ1FCJhgOsTO1y3HDyAwy0KigbTkUc0EdgFeU04f5n1YddMBttNe79ieo
         aXiTzHFp5NZrZC8nlAytdO4yXlhbTns9kGFLc6j0vOdWvVpQ9DqkrZwc/Vh6
         Pdgcd+n18fClHzT070cK6/Pa8SfsX94c5ULZls5gs/kDXK1Qa0oPAAA=
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:58:12 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/e9cd38781d5049b0b365ce55c7ae88a9.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/e9cd38781d5049b0b365ce55c7ae88a9.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -5509,11 +5509,11 @@ http_interactions:
         MvBYQI58kAGWRfkbHONoSfJvX/fLniGcDpuj3Lpp2bKhjmaf2dO7zM4RIf0e
         YWLWlxCE3NaUD05ZJV3Y0OIhoiJz1H3Efrr9O/7vZ/Zf8e+Eg9HsZ6D/gTqS
         bd7GF092t/sDpIPc+hkRAAA=
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:58:13 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/75f3e5e813af4e62b84bc78a1773633e.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/75f3e5e813af4e62b84bc78a1773633e.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -5584,11 +5584,11 @@ http_interactions:
         2d13b/figN7Qpwz+00ytQFf+9cThvAElpPDbztMITAum7dovbiMvxv/FbkJF
         fVCnM++2tLaYttsgW1VVW0ov2n7VDuqhpXQCSB+ogam6kV9LeWizgEEXoYIv
         +ZvVyo3VrobIV8O9ri9Ev5s3XgP6YqlsJdpou/0HadoGyXsSAAA=
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:58:14 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/0ae9e5af1258451087d41bb948a2224b.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/0ae9e5af1258451087d41bb948a2224b.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -5657,11 +5657,11 @@ http_interactions:
         IFph7IYG7wLizy3opldQgUE6j0zk2OhBUoDpJbI6H/fXk1icXx+OT8Cha+KU
         HYgpEsWYvGgQ/vDA/jv4zJcz8RwSsUTBv9hn3jQ/ExD/8BhzYP6M/tfBP0pb
         TME43N/Z/wfov9lWjGG4400+ht3uFzspbjKbFwAA
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:58:14 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/c5dc2209ff814960a30f2ba2f43533ba.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/c5dc2209ff814960a30f2ba2f43533ba.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -5729,11 +5729,11 @@ http_interactions:
         J5RMl4QMPBSQI+elh2lZ/QJLuG7sa620ZBhHm6+Pnb2t40+vOj7h55gP8Tim
         TG4bCpczUkvrF7R5H1ANDzn9iYluhvi7AF/P7L8KcCders3msfk/UI9EuH6G
         nD3Z1eo3Fu6hKhwRAAA=
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:58:15 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/098d7b6524d74ac28b4c861346693487.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/098d7b6524d74ac28b4c861346693487.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -5805,11 +5805,11 @@ http_interactions:
         6qJC/LnClxUi89UNzi61EHUd5r9oHEK9x45o7PHlFLak5IX8FsL6CS1eI/oE
         AqYtm9W4fxLwKQfbBBH/fDg8Bfwb1Qids5giTgF6+CpDJ/3LJhfXFn9HT4Fa
         MTJ+tQVEs9lfs1ho7MAVAAA=
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:58:16 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/f8b6c888a7f74d2a9c1a73a65bc1b2e0.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/f8b6c888a7f74d2a9c1a73a65bc1b2e0.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -5876,11 +5876,11 @@ http_interactions:
         X+TWhRF/sWS4JOzXlE7bJXEePFP4+YPs3h2QDCkG+y/L6h/a3v8wMesHUDgF
         iRuiwUxrsH5Dh8eIevNG7H73/xAcjupKx0EZ+jvxQ7ChOXuzZ93c9H3f7f4D
         +2A6bM0NAAA=
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:58:16 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/94bfced67b25449682c5dabcdb4b366a.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/94bfced67b25449682c5dabcdb4b366a.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -5948,11 +5948,11 @@ http_interactions:
         JP8LlcPoFcmHs19W9T/QXjzWI/9jCS1BZi0lx4FomLYbGjwHlD+/oJ9eQQka
         03nIRI7tHUwKuPRSsswZ3E42xOz9juGME9A3S7yyBzHFRDlMo2gQfnexvgj4
         p0xA/N017BLwD2iLFIzD/Xn9EqDTt0HMPvp8MYbugDf5GHa7/wuw0seSFwAA
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:58:17 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/21b5c75eab5b49b4aa4297e4345aa97d.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/21b5c75eab5b49b4aa4297e4345aa97d.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -6021,11 +6021,11 @@ http_interactions:
         Pr4Gjr9uwW56iwVqovPMBKe2I5GCnl5Hlnkv7r5v/HaRKRLhvLpCct9ovAkf
         xgFG2Nvq/2awj4KX4LeF4k3Av/zTCH9bVNwC/kFaoF88Ck+Xz1uA7vNRny+P
         x//Hcolc1RoAAA==
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:58:18 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/bce982d4d4654fe29a5b4127a9b5004a.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/bce982d4d4654fe29a5b4127a9b5004a.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -6092,11 +6092,11 @@ http_interactions:
         b1zRPkB+UBizf48QlEPfVqL1k9V6M+ovVkKXhQJ8K2BHPkDAeVX/Qyc4PrL8
         x3c+7obu3mjPTdT2uHfxOOWW4xjQYx5DCUPYbcvRS4IacGHFh88Rl1Q4DXSI
         fvfq+RD0jwPcbeEfgf9BNaRztqPx2VPfbP4DQFpxGBURAAA=
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:58:19 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/c0219f06e833420681efaec07b3eeb38.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/c0219f06e833420681efaec07b3eeb38.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -6167,11 +6167,11 @@ http_interactions:
         ODK4/9X4e2ngE3EC8T0+xOOIIaewFckNGSmF9QtajCNq3ANO2DS8sjmdz7wv
         B+026FaT5pax0zat2tRSfNjiTUsFQUfxMRXrq/pNpILq+99khcJuhvO3oCa0
         eSj0S26OcmZ8U/lotXoGOP1DukQPAAA=
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:58:19 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/89d88afe936c441f81e94ee3b541e37a.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/89d88afe936c441f81e94ee3b541e37a.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -6239,11 +6239,11 @@ http_interactions:
         +w2Vw+gNKYbzX1f1H9C+e2hH8Yc9NAW5tUSOA9FwbffU+BwQf35CP7yFEjTS
         eWKCYXkHSQFHL5Fl/hV3X567nGSMRFBWN0juCzp3kcNQYIi9u2bdDfaBeBF+
         dya/C/jXXxri7w5w94D/bFvwn3i/BR2PfwEp0HoQjhcAAA==
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:58:20 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/d28731a89c3b45b1bb75316f80de2712.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/d28731a89c3b45b1bb75316f80de2712.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -6315,11 +6315,11 @@ http_interactions:
         CuvIQ21mHVp1fGGSRlVqWy2n9Za3T9VHsXP7T7SOsThgS7RaoXgX5LaiZPp8
         l9y4JS0eAvoSjiDqvwDeQ/wNOsimnhTfQ+i+zX0p/mazQGqbgeM9UCvn2tXf
         VLBe/wHfCgR+gxIAAA==
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:58:21 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/6abd4219bdd9415a84aff4292c2415dd.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/6abd4219bdd9415a84aff4292c2415dd.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -6387,11 +6387,11 @@ http_interactions:
         lH9ooSUorCFyPIiaG7enwUtE/IUFw/QWBBik88wEw2YaSQFPL5Flr+D2tj7m
         kHcIZ0hA15kG5wBijER5TINqEH7bxdwE/EslIP72znsL+HuyRQmm8eludAvQ
         6d0gZfdf3+PxP+WpS4tRFAAA
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:58:22 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/bc2f067d1bf8445480cc69f5fcf77e40.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/bc2f067d1bf8445480cc69f5fcf77e40.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -6457,7 +6457,7 @@ http_interactions:
         KyjBo8ijc4F7BeMAi6b4AWQUHkJbM+sH0Xo34jfUrJiMDDw1UKAQZYRV7f6A
         Zxxdyf7963A9d0SklkSwzkb6uKPLhijDX1Cvo4dxpJHr/5FOtFOlxJ9kRNKn
         FoL8U+vhcPgLeNMAp14HAAA=
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:58:22 GMT
 - request:
     method: get
@@ -6528,11 +6528,11 @@ http_interactions:
         Senate","officeTypeId":"L","runningMateId":"","runningMateName":""},{"candidateId":"14887","firstName":"David","nickName":"Dave","middleName":"E.","preferredName":"Dave","lastName":"Zuckerman","suffix":"","title":"Senator","ballotName":"","electionParties":"","electionStatus":"","electionStage":"","electionDistrictId":"","electionDistrictName":"","electionOffice":"","electionOfficeId":"","electionStateId":"","electionOfficeTypeId":"","electionYear":"","electionSpecial":"","electionDate":"","officeParties":"Democratic,
         Progressive","officeStatus":"active","officeDistrictId":"27137","officeDistrictName":"Chittenden","officeStateId":"VT","officeId":"9","officeName":"State
         Senate","officeTypeId":"L","runningMateId":"","runningMateName":""}]}}'
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:58:23 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/d37c122964bd4ef89275edeccaf9703f.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/d37c122964bd4ef89275edeccaf9703f.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -6598,7 +6598,7 @@ http_interactions:
         9iTy7FzQYKE4mERz/IAQhcfQ1on1xLTOjfiNdVLMxgQcGzhQiBBxXbs/6BOO
         t2z/8XjaXjpiUssiks4GfNzxZsOU00+o09HBUqSe63+RzrSxUuYPMmLpQwtD
         3tR6OBz+ArAhjgVbBwAA
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:58:24 GMT
 - request:
     method: get
@@ -6669,11 +6669,11 @@ http_interactions:
         Senate","officeTypeId":"L","runningMateId":"","runningMateName":""},{"candidateId":"14887","firstName":"David","nickName":"Dave","middleName":"E.","preferredName":"Dave","lastName":"Zuckerman","suffix":"","title":"Senator","ballotName":"","electionParties":"","electionStatus":"","electionStage":"","electionDistrictId":"","electionDistrictName":"","electionOffice":"","electionOfficeId":"","electionStateId":"","electionOfficeTypeId":"","electionYear":"","electionSpecial":"","electionDate":"","officeParties":"Democratic,
         Progressive","officeStatus":"active","officeDistrictId":"27137","officeDistrictName":"Chittenden","officeStateId":"VT","officeId":"9","officeName":"State
         Senate","officeTypeId":"L","runningMateId":"","runningMateName":""}]}}'
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:58:25 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/41000154fe964caa80674ff87828bc49.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/41000154fe964caa80674ff87828bc49.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -6741,11 +6741,11 @@ http_interactions:
         Cy1hWJ0Yws6wP8yDm4FtgI40p8w+v8rsHBHSnxAmZlMJQchtR/kIKWuF9Wua
         fIhok0PUU8S+s/07/q9n9l/xH4WD0ewboP+BOpLtn8YXT3a7/QM/tFKMFBEA
         AA==
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:58:26 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/0ae9e5af1258451087d41bb948a2224b.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/0ae9e5af1258451087d41bb948a2224b.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -6814,11 +6814,11 @@ http_interactions:
         IFph7IYG7wLizy3opldQgUE6j0zk2OhBUoDpJbI6H/fXk1icXx+OT8Cha+KU
         HYgpEsWYvGgQ/vDA/jv4zJcz8RwSsUTBv9hn3jQ/ExD/8BhzYP6M/tfBP0pb
         TME43N/Z/wfov9lWjGG4400+ht3uFzspbjKbFwAA
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:58:26 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/881160dba1124374b1fb41d287517c7d.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/881160dba1124374b1fb41d287517c7d.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -6884,11 +6884,11 @@ http_interactions:
         ir8cMj7cokJPEk/kkiYdxcEkmeMHhCg9hrZOXo/s1tPIP1gnvWxMwHMDBwoR
         Im5q9xd9wvGW7T9/DNtLInZqWUTSOXwG9ZH7g8Q9Ivsfsex2ro39Jzmw2KmF
         IVN1Dfi4Z7b7jC9+tKXdMC1fvfTj8R+s9lfckwoAAA==
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:58:27 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/50d1957bf2864ef69e3d3172557843d6.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/50d1957bf2864ef69e3d3172557843d6.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -6960,11 +6960,11 @@ http_interactions:
         EI5XCDltWxNdn5FKGLegwX1Ait3DhGrhtSlofeZcNe50QIXrNIfaTDs06jRa
         4tchX2lpRbxp7D8M8f8lC0vZNIYfgdFWZb0KVx3ER4Du30mvyvecb0kUN39E
         PwK1aqbd+p0KXl7+AXma5Vm5FQAA
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:58:28 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/1ac2c211b6724d059c09c092b75ded7a.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/1ac2c211b6724d059c09c092b75ded7a.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -7030,7 +7030,7 @@ http_interactions:
         R+eC5grFwSSa4weEKDyGrkmsH0wb3Ijf2CTFbEzAUwMHChEiLhv3B33C8Zbt
         3x8P23NHTOpYRNLZgo9b3nxiyuETNOgYYCnSyPX/SGfaqVLmTzJi6VMLQ/6p
         db/f/wUWgiBbXQcAAA==
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:58:29 GMT
 - request:
     method: get
@@ -7101,11 +7101,11 @@ http_interactions:
         Senate","officeTypeId":"L","runningMateId":"","runningMateName":""},{"candidateId":"14887","firstName":"David","nickName":"Dave","middleName":"E.","preferredName":"Dave","lastName":"Zuckerman","suffix":"","title":"Senator","ballotName":"","electionParties":"","electionStatus":"","electionStage":"","electionDistrictId":"","electionDistrictName":"","electionOffice":"","electionOfficeId":"","electionStateId":"","electionOfficeTypeId":"","electionYear":"","electionSpecial":"","electionDate":"","officeParties":"Democratic,
         Progressive","officeStatus":"active","officeDistrictId":"27137","officeDistrictName":"Chittenden","officeStateId":"VT","officeId":"9","officeName":"State
         Senate","officeTypeId":"L","runningMateId":"","runningMateName":""}]}}'
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:58:30 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/e7559f0168a6490bbcfeae1cb221f167.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/e7559f0168a6490bbcfeae1cb221f167.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -7171,7 +7171,7 @@ http_interactions:
         RVOF4qCI5vgRIamAsWuE9Z1pvRv1CxtRzEYBnhs4UEyQcN343xgEx1u2f7sf
         tpeOmNSxCNHZQkhb3rxlyvAD6nX0MIl04vpfpDPtXCnzRxmx9LGFIX/Vut/v
         /wBOD1wOUwcAAA==
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:58:30 GMT
 - request:
     method: get
@@ -7242,11 +7242,11 @@ http_interactions:
         Senate","officeTypeId":"L","runningMateId":"","runningMateName":""},{"candidateId":"14887","firstName":"David","nickName":"Dave","middleName":"E.","preferredName":"Dave","lastName":"Zuckerman","suffix":"","title":"Senator","ballotName":"","electionParties":"","electionStatus":"","electionStage":"","electionDistrictId":"","electionDistrictName":"","electionOffice":"","electionOfficeId":"","electionStateId":"","electionOfficeTypeId":"","electionYear":"","electionSpecial":"","electionDate":"","officeParties":"Democratic,
         Progressive","officeStatus":"active","officeDistrictId":"27137","officeDistrictName":"Chittenden","officeStateId":"VT","officeId":"9","officeName":"State
         Senate","officeTypeId":"L","runningMateId":"","runningMateName":""}]}}'
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:58:32 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/9e6fd566d7744d86aebe2fba0b5a4869.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/9e6fd566d7744d86aebe2fba0b5a4869.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -7313,7 +7313,7 @@ http_interactions:
         NgbgqYEDOQ8eV0X5B23A8Zbt3++67bkjJtUsIuiswPotbz4wpfsuanW0sBDp
         yPVQ+lfmtpSziExrlNZVdVDK/EFGLH1oYcg/tQ4GZhv5aWL/X+debF/WZ4vd
         7/8C+hyZMJgKAAA=
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:58:33 GMT
 - request:
     method: get
@@ -7384,11 +7384,11 @@ http_interactions:
         Senate","officeTypeId":"L","runningMateId":"","runningMateName":""},{"candidateId":"14887","firstName":"David","nickName":"Dave","middleName":"E.","preferredName":"Dave","lastName":"Zuckerman","suffix":"","title":"Senator","ballotName":"","electionParties":"","electionStatus":"","electionStage":"","electionDistrictId":"","electionDistrictName":"","electionOffice":"","electionOfficeId":"","electionStateId":"","electionOfficeTypeId":"","electionYear":"","electionSpecial":"","electionDate":"","officeParties":"Democratic,
         Progressive","officeStatus":"active","officeDistrictId":"27137","officeDistrictName":"Chittenden","officeStateId":"VT","officeId":"9","officeName":"State
         Senate","officeTypeId":"L","runningMateId":"","runningMateName":""}]}}'
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:58:34 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/e0ed6f77c1af46958ed43fc9771e715c.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/e0ed6f77c1af46958ed43fc9771e715c.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -7458,11 +7458,11 @@ http_interactions:
         4KIdiaR/fSER+8BrV5JiEoIddrugOxvkHePGXZK66y7xxw5fd4m8N2/vPrOY
         tM3yLhbHQB+QIxYHdDmlral2sbxWuDAnYZTQLYiY3uGDLrEbMcS/DLidmLCp
         ZrJc/gWYxGFCxQgAAA==
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:58:34 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/43d896f10c324cde8b1cab7a9ac41d08.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/43d896f10c324cde8b1cab7a9ac41d08.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -7528,11 +7528,11 @@ http_interactions:
         aiB9gwEUBIg/h9I+OC351ZDw4RoVOmJ4NC5oypEfjIzZv0cIwqFvyqj1k9U6
         M+I3lpEuCyPwVMCOfICAi7L6gy7ieMvyH6vDdmDo8Ct3bjq20VBP81+YXSLC
         +gPCzGwoYQi7bTgfMWU1uLDlzeeELzlGPUQc3mv/A/9+OPu/07IcfJ0KAAA=
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:58:35 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/44b35c8a5b0f4391afb15b23431b6132.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/44b35c8a5b0f4391afb15b23431b6132.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -7598,7 +7598,7 @@ http_interactions:
         UByMojm+RwjCoe+aiPrBsIFG/MYmKmZjdJwbOJAPEHDT2D/ooh9f2f70fbze
         EjGoYxFRZwsuHPnymSHjH9CgY3CLka6o/0U6w+ZKGT/JiKVPLezyptbz+fwX
         w6ZB+VYHAAA=
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:58:36 GMT
 - request:
     method: get
@@ -7669,11 +7669,11 @@ http_interactions:
         Senate","officeTypeId":"L","runningMateId":"","runningMateName":""},{"candidateId":"14887","firstName":"David","nickName":"Dave","middleName":"E.","preferredName":"Dave","lastName":"Zuckerman","suffix":"","title":"Senator","ballotName":"","electionParties":"","electionStatus":"","electionStage":"","electionDistrictId":"","electionDistrictName":"","electionOffice":"","electionOfficeId":"","electionStateId":"","electionOfficeTypeId":"","electionYear":"","electionSpecial":"","electionDate":"","officeParties":"Democratic,
         Progressive","officeStatus":"active","officeDistrictId":"27137","officeDistrictName":"Chittenden","officeStateId":"VT","officeId":"9","officeName":"State
         Senate","officeTypeId":"L","runningMateId":"","runningMateName":""}]}}'
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:58:37 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/62177d07e470484ebab1b7befb0ee0a4.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/62177d07e470484ebab1b7befb0ee0a4.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -7739,7 +7739,7 @@ http_interactions:
         VSgOimiOHxGSDhi7RlCPDBto9C9sRDEbxXFu4EAxQcJ1439jED++sv3h+/F6
         TsSgjkWIzhZC2vHlI0OOf0CDjsFNIo2o/0U6w+ZKGT/JiKVPLezyV62Hw+EP
         9oKEtlYHAAA=
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:58:37 GMT
 - request:
     method: get
@@ -7810,11 +7810,11 @@ http_interactions:
         Senate","officeTypeId":"L","runningMateId":"","runningMateName":""},{"candidateId":"14887","firstName":"David","nickName":"Dave","middleName":"E.","preferredName":"Dave","lastName":"Zuckerman","suffix":"","title":"Senator","ballotName":"","electionParties":"","electionStatus":"","electionStage":"","electionDistrictId":"","electionDistrictName":"","electionOffice":"","electionOfficeId":"","electionStateId":"","electionOfficeTypeId":"","electionYear":"","electionSpecial":"","electionDate":"","officeParties":"Democratic,
         Progressive","officeStatus":"active","officeDistrictId":"27137","officeDistrictName":"Chittenden","officeStateId":"VT","officeId":"9","officeName":"State
         Senate","officeTypeId":"L","runningMateId":"","runningMateName":""}]}}'
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:58:38 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/2058b227c66048a6ac9eb5e368b3ef40.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/2058b227c66048a6ac9eb5e368b3ef40.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -7880,11 +7880,11 @@ http_interactions:
         8OYKS/QkcU+uaMZRHEySOX5AiMpjaKvk9Yvdehr1B6ukl40JeGzgQCFCxGVV
         /0WfcLxk+8/vw/KUiJ1aFpF0Dj9AfeR+I3EfkP2PWHY71sb+oxxY7NjCkLG6
         BnzcMNu94IMflrec3zAoL1v6rdjtdv8A+JEizpAKAAA=
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:58:39 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/a89a78b08f79412595e9b23b07fcdbc0.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/a89a78b08f79412595e9b23b07fcdbc0.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -7950,11 +7950,11 @@ http_interactions:
         c4MVepJ4JJc05igOJskcPyBE6TG0dUL9ZFhPI/9gnfSyMTmeGjhQiBBxXbu/
         6JMfL9n+4/uwPCdiUMsiks7hH6iP3G8k7hHZ/4hl2Kk2xk9yYLFTC7tM1TXg
         447ZHjM++NGSVsOsvHrph8M/NvOep5EKAAA=
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:58:40 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/90dbeeceb1d94d2da5d123774df1ecac.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/90dbeeceb1d94d2da5d123774df1ecac.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -8021,11 +8021,11 @@ http_interactions:
         /MEy8mVhNDwWcCAfIOCyrP6ii3Z8ZPn3b/3xFIidGiYRefZreRe5U0TsAdhr
         yLLbMTf2H+XAZMcSNhmzq8GFDaM9Jdz4wZFO/f72P1Ansu3LfvFkd7t/ZVtR
         m9INAAA=
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:58:40 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/aa550732c08a406bad16ba4dc5f75eff.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/aa550732c08a406bad16ba4dc5f75eff.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -8100,11 +8100,11 @@ http_interactions:
         ZckXnatlYBlCOxuPyYy2yEfWLcbSG8uFKPqz22Y52a6QvTrBHultH4vHvCOk
         HYb/xVGWHVM6oS4c/w2dSGEl2a4S+Rztdbm3fVP8CNCjZiKV//LFY2q9Of0R
         qLVLG7YCTZ6e/gGUV86JpRAAAA==
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:58:41 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/b4339b59502244288f55787796622def.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/b4339b59502244288f55787796622def.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -8172,11 +8172,11 @@ http_interactions:
         B9KZx34m/9hipjBhjSHHgqip1AfT+eYZ/tyEbriAHCTS2TNB8GkHSQFLryFL
         3cBtbUPMLu8ITvdY50bdrFNk5gITYm/v0HeDfUS9XaCxErCi9g52DxUNZIsS
         DP3zYf0eoBvqjdCtoPrPF2toj3eTr+F0+g8KXeolkRcAAA==
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:58:42 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/fd3859b3c23c44aba40a0d3bfd5238f5.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/fd3859b3c23c44aba40a0d3bfd5238f5.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -8243,11 +8243,11 @@ http_interactions:
         HL8wDgTJFN8B94UF19XB6zu5DTTFb6iDXjIG4LGBAjnPPazq5g/YgKMl2b/l
         ++UpETl1JCLo3M/mQ+RhI3CPyP5FLLkdayP/SQ4kdmohyFRdy63fENvniA5+
         tMTVfoT7H6Sj2P5pv3ixu91fjfmtatwNAAA=
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:58:42 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/ad0450ef0c184321b973505e24d1ab36.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/ad0450ef0c184321b973505e24d1ab36.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -8313,7 +8313,7 @@ http_interactions:
         iRydC5oqFAeTaI4fEKLwGNo6sb4zrXcjfmGdFLMxAc8NHChEiLiu3W/0Ccdb
         tn/bDNtLR0xqWUTS2YCPe97cMWX4APU6eliKdOL6X6Qz7Vwp8ycZsfSphSF/
         1Xo8Hv8AyD4M1FwHAAA=
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:58:43 GMT
 - request:
     method: get
@@ -8384,11 +8384,11 @@ http_interactions:
         Senate","officeTypeId":"L","runningMateId":"","runningMateName":""},{"candidateId":"14887","firstName":"David","nickName":"Dave","middleName":"E.","preferredName":"Dave","lastName":"Zuckerman","suffix":"","title":"Senator","ballotName":"","electionParties":"","electionStatus":"","electionStage":"","electionDistrictId":"","electionDistrictName":"","electionOffice":"","electionOfficeId":"","electionStateId":"","electionOfficeTypeId":"","electionYear":"","electionSpecial":"","electionDate":"","officeParties":"Democratic,
         Progressive","officeStatus":"active","officeDistrictId":"27137","officeDistrictName":"Chittenden","officeStateId":"VT","officeId":"9","officeName":"State
         Senate","officeTypeId":"L","runningMateId":"","runningMateName":""}]}}'
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:58:44 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/0683b7b6ebe44ba2ba0750030e84be60.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/0683b7b6ebe44ba2ba0750030e84be60.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -8454,7 +8454,7 @@ http_interactions:
         gyKa40eEpALGthbWN6Z1btQvrEUxGwU4NHCgmCDhuva/MQiOt2x/eT5vbx0x
         qWURorOBkPa8eWLK+RfU6ehgEunK9b9IZ9pQKfN7GbH0voUhf9V6PB7/APvY
         JmhUBwAA
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:58:45 GMT
 - request:
     method: get
@@ -8525,7 +8525,7 @@ http_interactions:
         Senate","officeTypeId":"L","runningMateId":"","runningMateName":""},{"candidateId":"14887","firstName":"David","nickName":"Dave","middleName":"E.","preferredName":"Dave","lastName":"Zuckerman","suffix":"","title":"Senator","ballotName":"","electionParties":"","electionStatus":"","electionStage":"","electionDistrictId":"","electionDistrictName":"","electionOffice":"","electionOfficeId":"","electionStateId":"","electionOfficeTypeId":"","electionYear":"","electionSpecial":"","electionDate":"","officeParties":"Democratic,
         Progressive","officeStatus":"active","officeDistrictId":"27137","officeDistrictName":"Chittenden","officeStateId":"VT","officeId":"9","officeName":"State
         Senate","officeTypeId":"L","runningMateId":"","runningMateName":""}]}}'
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:58:45 GMT
 - request:
     method: get
@@ -8596,11 +8596,11 @@ http_interactions:
         Senate","officeTypeId":"L","runningMateId":"","runningMateName":""},{"candidateId":"14887","firstName":"David","nickName":"Dave","middleName":"E.","preferredName":"Dave","lastName":"Zuckerman","suffix":"","title":"Senator","ballotName":"","electionParties":"","electionStatus":"","electionStage":"","electionDistrictId":"","electionDistrictName":"","electionOffice":"","electionOfficeId":"","electionStateId":"","electionOfficeTypeId":"","electionYear":"","electionSpecial":"","electionDate":"","officeParties":"Democratic,
         Progressive","officeStatus":"active","officeDistrictId":"27137","officeDistrictName":"Chittenden","officeStateId":"VT","officeId":"9","officeName":"State
         Senate","officeTypeId":"L","runningMateId":"","runningMateName":""}]}}'
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:58:46 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/fe7a7066915644aeaae2d728eeae8d6b.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/fe7a7066915644aeaae2d728eeae8d6b.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -8666,7 +8666,7 @@ http_interactions:
         KA6KaI4fEZIKGIdOWN+YNrlRv7ATxWwU4LmBA8UECVed/41BcLxl+9cvh+2l
         IyYNLEJ09hDSljfvmXL4BU06JphEOnH9L9KZdq6U+bOMWPrcwpC/ah3H8Q+p
         +8CVVQcAAA==
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:58:47 GMT
 - request:
     method: get
@@ -8737,7 +8737,7 @@ http_interactions:
         Senate","officeTypeId":"L","runningMateId":"","runningMateName":""},{"candidateId":"14887","firstName":"David","nickName":"Dave","middleName":"E.","preferredName":"Dave","lastName":"Zuckerman","suffix":"","title":"Senator","ballotName":"","electionParties":"","electionStatus":"","electionStage":"","electionDistrictId":"","electionDistrictName":"","electionOffice":"","electionOfficeId":"","electionStateId":"","electionOfficeTypeId":"","electionYear":"","electionSpecial":"","electionDate":"","officeParties":"Democratic,
         Progressive","officeStatus":"active","officeDistrictId":"27137","officeDistrictName":"Chittenden","officeStateId":"VT","officeId":"9","officeName":"State
         Senate","officeTypeId":"L","runningMateId":"","runningMateName":""}]}}'
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:58:48 GMT
 - request:
     method: get
@@ -8808,11 +8808,11 @@ http_interactions:
         Senate","officeTypeId":"L","runningMateId":"","runningMateName":""},{"candidateId":"14887","firstName":"David","nickName":"Dave","middleName":"E.","preferredName":"Dave","lastName":"Zuckerman","suffix":"","title":"Senator","ballotName":"","electionParties":"","electionStatus":"","electionStage":"","electionDistrictId":"","electionDistrictName":"","electionOffice":"","electionOfficeId":"","electionStateId":"","electionOfficeTypeId":"","electionYear":"","electionSpecial":"","electionDate":"","officeParties":"Democratic,
         Progressive","officeStatus":"active","officeDistrictId":"27137","officeDistrictName":"Chittenden","officeStateId":"VT","officeId":"9","officeName":"State
         Senate","officeTypeId":"L","runningMateId":"","runningMateName":""}]}}'
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:58:49 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/4297b4f1af2849c48a06b0c797c5cc01.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/4297b4f1af2849c48a06b0c797c5cc01.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -8878,7 +8878,7 @@ http_interactions:
         QmoMUEIA/kBK5YNTkn4cEnq5wBJd1Lh3LuKgi3GQNVN8jxCEQ99UzHoiWudG
         /MKKBZORgccGCuQDBJxV9jc6xtGW7D8ed9tTR0RqSATrrMGFFW3uibL7J+p0
         dDCOdOD6X6QT7Vgp8XsZkfS+hSB/1dqblhcvdrP5A/HWFAibCgAA
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:58:50 GMT
 - request:
     method: get
@@ -8949,11 +8949,11 @@ http_interactions:
         Senate","officeTypeId":"L","runningMateId":"","runningMateName":""},{"candidateId":"14887","firstName":"David","nickName":"Dave","middleName":"E.","preferredName":"Dave","lastName":"Zuckerman","suffix":"","title":"Senator","ballotName":"","electionParties":"","electionStatus":"","electionStage":"","electionDistrictId":"","electionDistrictName":"","electionOffice":"","electionOfficeId":"","electionStateId":"","electionOfficeTypeId":"","electionYear":"","electionSpecial":"","electionDate":"","officeParties":"Democratic,
         Progressive","officeStatus":"active","officeDistrictId":"27137","officeDistrictName":"Chittenden","officeStateId":"VT","officeId":"9","officeName":"State
         Senate","officeTypeId":"L","runningMateId":"","runningMateName":""}]}}'
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:58:51 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/cb23095d85bd4b399cc529edf5c49f10.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/cb23095d85bd4b399cc529edf5c49f10.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -9022,11 +9022,11 @@ http_interactions:
         HDkEomXabtzHQ+T48wH98Aoq0EjnkYkCezxIChC9jiwT4v55EYv3G8IJCTh0
         TLyyB/ExURTQm4T+EZnz8T+IIp9BNITf3609lkHDP68ExN9fxD4D/pOyxRJM
         4/2B/TNAd//LharEHPoD3uBz2O3+AWMP6miYFwAA
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:58:51 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/b71b27ab9a7547d48adb2093f03e8ba9.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/b71b27ab9a7547d48adb2093f03e8ba9.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -9092,7 +9092,7 @@ http_interactions:
         UBwU0Rw/IiQVMDaVoH4wrKNRz1iJYjaK49jAgWKChOvK/8Ygfnxl+/en4/Wc
         iEENixCdNYS048s3hhz/fjodnZtE6lH/i3SGjZUyfpARSx9a2OWvWg+Hwx+Y
         x5oNVAcAAA==
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:58:52 GMT
 - request:
     method: get
@@ -9163,11 +9163,11 @@ http_interactions:
         Senate","officeTypeId":"L","runningMateId":"","runningMateName":""},{"candidateId":"14887","firstName":"David","nickName":"Dave","middleName":"E.","preferredName":"Dave","lastName":"Zuckerman","suffix":"","title":"Senator","ballotName":"","electionParties":"","electionStatus":"","electionStage":"","electionDistrictId":"","electionDistrictName":"","electionOffice":"","electionOfficeId":"","electionStateId":"","electionOfficeTypeId":"","electionYear":"","electionSpecial":"","electionDate":"","officeParties":"Democratic,
         Progressive","officeStatus":"active","officeDistrictId":"27137","officeDistrictName":"Chittenden","officeStateId":"VT","officeId":"9","officeName":"State
         Senate","officeTypeId":"L","runningMateId":"","runningMateName":""}]}}'
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:58:53 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/4be25748b7d44e04b479b18904607555.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/4be25748b7d44e04b479b18904607555.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -9233,11 +9233,11 @@ http_interactions:
         LZboSePFuaa1QnFQNHP8gBC1x9BWwnpm2vkvYOgvRIii9uU74+5xO4r+jZUk
         2wFZk/AXbdOg78x9HPvvW1ge01pWLEk14OOeP1aKG/HXgDd+7ikYJPSv8Y9/
         AL1WbQdeBwAA
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:58:54 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/7e3bea651f264230abf9f01cdb4d22f7.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/7e3bea651f264230abf9f01cdb4d22f7.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -9306,11 +9306,11 @@ http_interactions:
         VYdy7UEEjhxjQ09Y9vPYDV9Ck0qTghNweEAmHsXBrLErcITbv5JDMglHBj/S
         w/qqwGfiJPseH+JxwpBT2EhyU0Za4cKaNvOM+nXACXuFR9fQ/TKEdjYegxnt
         0zyybjGm3XjXSZzaKKXmlZExcCpDIvIvDd0ubdgzy7bbvyO8tyqvCAAA
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:58:54 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/155575bbbc2b4dbca21aa76599d4a748.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/155575bbbc2b4dbca21aa76599d4a748.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -9379,11 +9379,11 @@ http_interactions:
         81iJguY7VBR05eVimRD3j4tYvN8QTliAw7TEK3sQ/y6UC+hNQv+EjH38j0I5
         n0E0gj901h7LqOGfM4HwD33YW8B/QluiYBrv/66/Beh8Xy6wknIY/uCNPofd
         7i/V+XLAjxcAAA==
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:58:55 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/56581e7e4d504918ab40bbcb93fb4db7.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/56581e7e4d504918ab40bbcb93fb4db7.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -9454,11 +9454,11 @@ http_interactions:
         XD1sNEDFG+SxNuMGSY3QJ77qEzlutu8hqZBvm+CfCJzCe8SLCBwx5ZTWU9lC
         ZWth3IyEu4g+gYDpTz6bn9z/gdEOQeQXpibw/ZtPsZ5ot+l6tFj8BpV1e+IF
         DAAA
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:58:56 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/ae3be139795044e8926380deac154aff.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/ae3be139795044e8926380deac154aff.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -9524,11 +9524,11 @@ http_interactions:
         U5I+HBI6rLFCFzUenYs46GIcZM0U3yME4dB3DbN+EG1wI35jw4LJyMBzAwXy
         AQKuGvsHHeNoS/bvT4ftpSMidSSCdbbgwpY2n4ly+CYadAwwjnTi+n+kE+1c
         KfFHGZH0sYUg/9Q6GpY3L3a//wsz24ujlQoAAA==
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:58:57 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/a02b93a1e12642c9992206b65176d4de.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/a02b93a1e12642c9992206b65176d4de.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -9594,11 +9594,11 @@ http_interactions:
         h9I+OC35qyFh5QYVOqJ4BBe05SgORsoc3yME4dC3VfR6YrceRvzCKvJlYTQ8
         FXAgHyDguqp/o4t2fGX5t8fheg7ETi2TiDyHT6A+cq+I2COwvyHLbqfc2H+S
         A5OdSthkyq4BF3aMdpdw40dXug2r8uqpHw5/ADeQXLKSCgAA
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:58:57 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/015328b011e84b26a8658dc5be893e03.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/015328b011e84b26a8658dc5be893e03.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -9679,11 +9679,11 @@ http_interactions:
         DybKscKXz2t7P+r4ET8R+A4ebk4PEKbstuVwY0Ya6cKSX34ZcF+/hwk9NQV3
         eb8KoTnZ3yczWqd5hFOwz2/73EvTFUtWMXejr2cT806eULJuTvIs4DMPd4sK
         /N2l+jng32JgPC2r29dzgB57Rzw9P/K10lQ2rI/T4O7uf3yUKEHaGAAA
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:58:58 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/df421b80aba843879db1ddae14ea9218.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/df421b80aba843879db1ddae14ea9218.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -9750,11 +9750,11 @@ http_interactions:
         LsIuEOIgI6b4DsELi66t2IpXuN6NeMGK4ZIvVjwUUCDnweO8qv+gZT06kvzH
         dzoOO2DvtMfGZju9/8JxKizlMYJHOMYSUqGwLWXPBWrA+hUdHiJqKWMa2Qzv
         nXcB/58JcjO22897yCasat1cfPZgN5u/s0lvERIRAAA=
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:58:59 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/2d7089f1b0e54fce88490fc0a7aa08ab.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/2d7089f1b0e54fce88490fc0a7aa08ab.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -9820,11 +9820,11 @@ http_interactions:
         bUh4s8ISHSk8kQu65ygORsUc3yME4dC3dfR6YreeRvzGOsplYwSeGziQDxBw
         Xds/6CKOl2z/8X1YToiGj7kP06uNRCPPf1F2TQj7TwSzsqmFIRy25XrEkjXg
         wp4XnxNucsx6ihh+2P4H/eN0jn8BWC03QZIKAAA=
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:00 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/95fd5fc67b4c48e886fa755a1398eb28.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/95fd5fc67b4c48e886fa755a1398eb28.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -9891,11 +9891,11 @@ http_interactions:
         qm7+gYvmIY7iDy2Ugtw6EodJtNKFLW0eE9IvJozHFZTgUM6TEgJHMooCLC+J
         5a/wZlufc4w7pHMmwAXf4wMT3SOtW5SOa35V3BehqID+ve33/wHoWSfJlAoA
         AA==
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:01 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/20fead84146b4b8794448878d13fc5bc.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/20fead84146b4b8794448878d13fc5bc.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -9975,11 +9975,11 @@ http_interactions:
         m2OUEPmpV6HvetzD7LduJ9QaksaUHFHhXD09PSU+rSMPtZmf8uqUm0XiCcaJ
         EFDtHLRrZf+Q0TcP1yP2P7vfax0Kvx2ZvYvwX7d3Pj+E+NP6S7LP8G99izxz
         Vvfw9wC9P33+O/pf/h9QL2ivc+8htbrQbn3yg+fnvwG+i8GjkhsAAA==
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:01 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/6679d3af89a64d2eb35f083ca74abbd8.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/6679d3af89a64d2eb35f083ca74abbd8.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -10046,7 +10046,7 @@ http_interactions:
         EsIsFMVzATsKESLOq/o3etHjLcu/fTlsLw0xqGUSwrMBHze8+cSQw09Rx6NT
         E08npvvU7xnbQS48MuycKeN7ETH1voRVnuXam5ad538j+/c8/xeyu90fnsvs
         xpYKAAA=
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:02 GMT
 - request:
     method: get
@@ -10117,11 +10117,11 @@ http_interactions:
         Senate","officeTypeId":"L","runningMateId":"","runningMateName":""},{"candidateId":"14887","firstName":"David","nickName":"Dave","middleName":"E.","preferredName":"Dave","lastName":"Zuckerman","suffix":"","title":"Senator","ballotName":"","electionParties":"","electionStatus":"","electionStage":"","electionDistrictId":"","electionDistrictName":"","electionOffice":"","electionOfficeId":"","electionStateId":"","electionOfficeTypeId":"","electionYear":"","electionSpecial":"","electionDate":"","officeParties":"Democratic,
         Progressive","officeStatus":"active","officeDistrictId":"27137","officeDistrictName":"Chittenden","officeStateId":"VT","officeId":"9","officeName":"State
         Senate","officeTypeId":"L","runningMateId":"","runningMateName":""}]}}'
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:03 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/c554dfa9c02a45c7a788dbbbd3da1d3a.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/c554dfa9c02a45c7a788dbbbd3da1d3a.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -10187,7 +10187,7 @@ http_interactions:
         sJo3dcaPSzQYSOTBuaLFQnFQRHP8iJBUwFgXwrpnWuNG/cFCFLNRgMcGDhQT
         JJwX5V8MguMr2+9u99dTR0yqWYTorCCkNV8WTNn/CTU6GphEarl+jnSmHStl
         ficjlt61MOS/Wrfb7T/ruAgFYAcAAA==
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:04 GMT
 - request:
     method: get
@@ -10258,11 +10258,11 @@ http_interactions:
         Senate","officeTypeId":"L","runningMateId":"","runningMateName":""},{"candidateId":"14887","firstName":"David","nickName":"Dave","middleName":"E.","preferredName":"Dave","lastName":"Zuckerman","suffix":"","title":"Senator","ballotName":"","electionParties":"","electionStatus":"","electionStage":"","electionDistrictId":"","electionDistrictName":"","electionOffice":"","electionOfficeId":"","electionStateId":"","electionOfficeTypeId":"","electionYear":"","electionSpecial":"","electionDate":"","officeParties":"Democratic,
         Progressive","officeStatus":"active","officeDistrictId":"27137","officeDistrictName":"Chittenden","officeStateId":"VT","officeId":"9","officeName":"State
         Senate","officeTypeId":"L","runningMateId":"","runningMateName":""}]}}'
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:05 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/0efa0878ff154baeb495355bef2a12de.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/0efa0878ff154baeb495355bef2a12de.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -10336,11 +10336,11 @@ http_interactions:
         UU+OIv/0lxyZ2XnnGhGsQ2jnwyGZQY98YN1qKKdh5H3+wvvez1nAXKJ1gj4m
         2KILGzm8EZN+MT+tQ4S4x/RdOYvZaYpnpZCcvwNrfIekERH7v3kt+vXuv5Ba
         u7ah73ry/PwPqlJNTlgNAAA=
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:05 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/8a2086f8d6ae4b8ab88699190757a05e.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/8a2086f8d6ae4b8ab88699190757a05e.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -10406,11 +10406,11 @@ http_interactions:
         fLjFGh1pPJFLmnMUB6Nmju8RgnTouyaifjBsoJG/sYmC2RgdLw0cyAcIuG7s
         H3TRj7ds/74Zt9dEDOpYRNTZggt73jwxZPwiGnQMbjHSGfX/SGfYpVLGTzJi
         6VMLu/xT62RY3r3Y4/EvQit0c5AKAAA=
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:06 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/116b88a9a54b474c9e82c789ba2c89a5.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/116b88a9a54b474c9e82c789ba2c89a5.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -10476,11 +10476,11 @@ http_interactions:
         H5yS/N+Q8OYGK3Sk8ehc0KCjOBg1c3yPEIRD39aR9YNpvRvxG+somI0ReGrg
         QD5AwHVt/6CLOF6y/flpWJ47YlLLIqLOBlzY8eKRKcMvUa+jh8VII9f/I51p
         p0qZP8mIpU8tDPmn1sm0vHqxh8NfS59bx5IKAAA=
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:07 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/1a0dfdb096914041a6afaa9eadda549c.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/1a0dfdb096914041a6afaa9eadda549c.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -10546,11 +10546,11 @@ http_interactions:
         DwhReAxtnVjfmDa4Eb+wToLZmICnBg4UIkTc1u43+oTjLdu/Po7bc0dMallE
         0tmAj3vePDBl/PcMOgZYijRx/S/SmXaqlPmzjFj63MKQv2rtuu4PTUGK5FIH
         AAA=
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:07 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/9955b0151bc349cc82fe4eda1c87b6cb.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/9955b0151bc349cc82fe4eda1c87b6cb.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -10617,11 +10617,11 @@ http_interactions:
         34MIuQPfVGz1jcw6N/kvqBiYhKx4KKBAPogAi8r+Acd6tCT518/98tgRGTUE
         wZz9bN5F7jbY956zMey7F2HJrGVb2d94VrbFIxejNIh3LCGVMWAtXFiTw7cR
         HX6/fCSCfor7N/qXSz3QD5X9P/RHRkfY9n4/e9jt9i+tmWF51g0AAA==
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:08 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/7f006e3ae5ed41d9a34325ab0aec88a2.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/7f006e3ae5ed41d9a34325ab0aec88a2.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -10687,11 +10687,11 @@ http_interactions:
         aKhQHBTRHD8hZBUxdY2wnpjWu1G/sBHFbBTgpYEDpQwZF034jVFwvGX799Vx
         e+2ISR2LEJ0txLzlzWemHH8/vY4eJpHOXP+LdKZdKmX+ICOWPrQw5K9a9/v9
         HyEZRWhWBwAA
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:09 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/0bb3ca90aae04866aa804bb9d122e004.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/0bb3ca90aae04866aa804bb9d122e004.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -10756,11 +10756,11 @@ http_interactions:
         398DrOWqKDblfLFAKVeMtJighAT5fZQmpmA0L2nBl3ssMZDGC7mipUJxMGvm
         +BEhqYCxqbLXjt06GvULqyyYjRk4NnCgmCDhtvK/MTCu//foWDoxGccf37/1
         fH8b+EacqR7WMZXMYRtON1ekhpCO/PFZcBfHmv6V4vwH+HRPvFMHAAA=
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:09 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/feb1b111b9a74f57a6db92480beece23.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/feb1b111b9a74f57a6db92480beece23.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -10828,11 +10828,11 @@ http_interactions:
         cF9AjqwTDmZZ/g8M42hJ8l+vzbJjCP+X6meu3dRs2VBL8xRmx4iQfocwMetK
         CEJuS8oHp6wQxq1o8ejRJnPUXUQz3J7G/8enmf0q/q1wMJpmBjqN+udF8VXU
         kWx1Nz57spvNf1pI9CsgEQAA
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:10 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/b16ff62357cf4d839bf43c5cbe9dabc3.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/b16ff62357cf4d839bf43c5cbe9dabc3.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -10901,11 +10901,11 @@ http_interactions:
         7/e4KZxa7cghEBXTdud+7jzHXzthO5xDBhrpPDGRYNkRSQGi15H137i7uvHz
         SYZIhPPqCsldofFd+NAPMMS+QJf2F4s8SP4vghfhNw/F11H/9U32EW2KF3ca
         7prQPz4xXufN22QF8uY8BSH6d5LTDod/xkCrANcaAAA=
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:11 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/9c3c6c32dd1541c2aaf3c5bf713456ba.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/9c3c6c32dd1541c2aaf3c5bf713456ba.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -10971,11 +10971,11 @@ http_interactions:
         s3NJa4XiYNLM8QNClB5DUybWM9NOfwFDfyFCTGp/vDBujNtR5B8sU7IdkDUl
         /qqpa/SduY9j/30Ly2Naw4pTUjX4uOePjeBGfBjwys+YgkFC/xr/+BdAM3Sj
         WwcAAA==
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:11 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/2cc7727d7e1f40e3ad57d57b353337c7.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/2cc7727d7e1f40e3ad57d57b353337c7.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -11042,7 +11042,7 @@ http_interactions:
         IzseGyhQiDLCom7+gGc/WpL9+7dxeUpEoI5EsM5xKB8iDxvMfUA2FfvlXbEE
         O9ZG+EkOJHZqIZepulb6uCG2p4ROflwuKfw4vV229CVLR7H9h/3fxL7fFP+/
         zih2t/sLl1k0ds0NAAA=
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:12 GMT
 - request:
     method: get
@@ -11113,11 +11113,11 @@ http_interactions:
         Senate","officeTypeId":"L","runningMateId":"","runningMateName":""},{"candidateId":"14887","firstName":"David","nickName":"Dave","middleName":"E.","preferredName":"Dave","lastName":"Zuckerman","suffix":"","title":"Senator","ballotName":"","electionParties":"","electionStatus":"","electionStage":"","electionDistrictId":"","electionDistrictName":"","electionOffice":"","electionOfficeId":"","electionStateId":"","electionOfficeTypeId":"","electionYear":"","electionSpecial":"","electionDate":"","officeParties":"Democratic,
         Progressive","officeStatus":"active","officeDistrictId":"27137","officeDistrictName":"Chittenden","officeStateId":"VT","officeId":"9","officeName":"State
         Senate","officeTypeId":"L","runningMateId":"","runningMateName":""}]}}'
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:13 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/8050e6646a12435fa9fd18f13ed16970.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/8050e6646a12435fa9fd18f13ed16970.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -11183,7 +11183,7 @@ http_interactions:
         j84VjRWKgyKa40eEpALGthbWT6Z1btQz1qKYjQI8NXCgmCDhsvZ/MAiOt2z/
         8XTYnjtiUssiRGcDIW1485kph19Qp6ODSaSe63+RzrRTpcwfZMTShxaGvKt1
         t9v9BVLVHTJXBwAA
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:14 GMT
 - request:
     method: get
@@ -11254,11 +11254,11 @@ http_interactions:
         Senate","officeTypeId":"L","runningMateId":"","runningMateName":""},{"candidateId":"14887","firstName":"David","nickName":"Dave","middleName":"E.","preferredName":"Dave","lastName":"Zuckerman","suffix":"","title":"Senator","ballotName":"","electionParties":"","electionStatus":"","electionStage":"","electionDistrictId":"","electionDistrictName":"","electionOffice":"","electionOfficeId":"","electionStateId":"","electionOfficeTypeId":"","electionYear":"","electionSpecial":"","electionDate":"","officeParties":"Democratic,
         Progressive","officeStatus":"active","officeDistrictId":"27137","officeDistrictName":"Chittenden","officeStateId":"VT","officeId":"9","officeName":"State
         Senate","officeTypeId":"L","runningMateId":"","runningMateName":""}]}}'
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:15 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/70993e1234f84840b2cc347c7f96347c.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/70993e1234f84840b2cc347c7f96347c.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -11327,11 +11327,11 @@ http_interactions:
         a8jBIJ0HJhiWeJAU8PQSWbaL+8tFLCFuB05btAujYdbrMFOUP67IzCmmM3Ix
         m+Zy/WfZeL6CS4ceIpYYadb5ytmcKwHxNxexAOb3VuPv4D+SLUowjV/O6/8C
         9F8sK+bQHPB6n8N+/xOBxz09khcAAA==
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:15 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/2ab17b0409e241cf9d4c62a89ca6b5c7.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/2ab17b0409e241cf9d4c62a89ca6b5c7.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -11397,11 +11397,11 @@ http_interactions:
         0ZDQYYkFusjwbFzEKRf9IDMm/x4hCIe+qVjrkdQ6M+I3VkyXhAy8FJAjHyDg
         trJ/0DGOtiT/8b3fjgz1v3LnpmPLhgaa/8LsFhHSHxEmZmMJQchtQ/nglNXg
         woE2nxMqMkc9RvTPtf+B/zCc01/hCz80kAoAAA==
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:16 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/744c15dc49c34fb9b2eeb2595532b3b2.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/744c15dc49c34fb9b2eeb2595532b3b2.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -11473,11 +11473,11 @@ http_interactions:
         lpsprhOyVZUxpKCQT+sYYwSIrADHL8sW/daFwyLEpcosoqkxxajbBdFpkHek
         mnTtqutKFN92YlciG0wzb6qJ85eo3hyyy9p/cm3XBuFXs4mDgL97mBB/dZE9
         BPwbJ98xZ3XjOQTo7gS6rjX4h24c+qs/zocQWjGVpjn93nL5B4ierRT8GAAA
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:17 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/48bb4f35224e421284a031f74ecd936e.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/48bb4f35224e421284a031f74ecd936e.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -11543,11 +11543,11 @@ http_interactions:
         Yk8uaadQHEySOX5AiNJjaOvk9YPdOhr5G+ukl40JeG7gQCFCxGXt/qBPOL6y
         /fvz6XpJxE4ti0g6T384XeTuIXEPyP5FLLuda2P/UQ4sdmxhyFhdAz7umO1R
         cOOH18NfhydkCFgHAAA=
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:17 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/d499524b44f249c1b7e293f77d4b34b3.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/d499524b44f249c1b7e293f77d4b34b3.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -11618,11 +11618,11 @@ http_interactions:
         k2HmfTlst0G3GuYtY6dtWrU3NeJ1gfhZ/HVL+yweULDma+VQaOCw3fS/RJ3S
         cKSVRB2p57RtRakM2S6F9QtajCN6JAKnPZ/m3H4T9CkHfxWI+kInBb3/8mg2
         Y/1b0F7OjG/aNlqt/gDUSe0ZUA8AAA==
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:18 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/485caabcc8154894a5776f09380f2a2d.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/485caabcc8154894a5776f09380f2a2d.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -11689,11 +11689,11 @@ http_interactions:
         7tC3lWh9Y7XeTP4LK6HLQgGeC9iRDxBwWdW/0QmOtyz/uh62I0PDx9y76dmK
         oRPNv2F2jQjrjwgzs7GEIey25XxIyhpwYcebTxEXWaIeI4b/Ef8C/5NwKJph
         2rx56ofDH06R3XbUDQAA
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:19 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/628840715ae54ada88f2c4371a833a77.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/628840715ae54ada88f2c4371a833a77.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -11762,11 +11762,11 @@ http_interactions:
         +y0ozgUtFxSGizTn2m5p8sGj2lyxXfdI3hbD49WktP0UeX7LGE7yStNWGjCa
         8nn9b6K5fUVYu2aIv3yMvQ3/dYq2q3Fb/DXBlkSG0D/c2rsNfVl/DCfECcoL
         XufR7/d/AB6HNlCRFwAA
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:19 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/346eba47701d49bd93801bf570315f35.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/346eba47701d49bd93801bf570315f35.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -11834,11 +11834,11 @@ http_interactions:
         lf0DjvVoS/K3JW37PyU6px02Nhv0/gnHubCUxwge4RhLSIXCNpQ9F6iWLmxo
         8xJRSxnTyKYfYK8C/mmCiL8dd64B/0E3mDn7a/E1QJ/ESXtjuniwu91fBzEs
         TE0UAAA=
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:20 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/47707420938241c3ad445ed33dac12c2.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/47707420938241c3ad445ed33dac12c2.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -11907,11 +11907,11 @@ http_interactions:
         BzkYpLNjgmHTEUmBQK8ny97BHWyXmGPeHpy2ixzfxlGHyMwVJsTeNHceBvs1
         9U0j4CHg38oW6W9OjY+A/2KN4Xqh6flw8QjQ/UL2q/Jqr8Eamp/RwddwOv0H
         xAj3I84aAAA=
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:21 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/6e084e5cf7054f64ab8467ebd5212203.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/6e084e5cf7054f64ab8467ebd5212203.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -11978,11 +11978,11 @@ http_interactions:
         LJnie1BBOvBtxV4/yK2nkb+hYr1kZOC5gQL5oAKsq/oPOMbRkuzfvx2Xl0Tk
         1JII1nkczvvI/QZzD8heI5bczrWR/ygHEju2EGSsrlEu7IjtfUQHP1ji6jjC
         /QvSUWz3tN+82MPhLzMYJIDUDQAA
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:22 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/7c14d866bea848478c70a1b8c2f34c3c.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/7c14d866bea848478c70a1b8c2f34c3c.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -12049,11 +12049,11 @@ http_interactions:
         zAPMmPI7ED6z4JqSvX6QWxcm+w0l0yUjA48NlMh54WFZVn/AMo6WZH/43i9H
         gXAKb9/lLk3HlgMNPMfMvrzI7BwR8h8RJmZjC0EobUP14JLVwvotLe4DOmRW
         PUb0/yL+jf/LlX0t/gM5qKYfNi+e+n7/F5MyyVvVDQAA
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:23 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/5084a47ab793424ea1262377a345fcad.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/5084a47ab793424ea1262377a345fcad.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -12119,11 +12119,11 @@ http_interactions:
         F1Ay0mCAEgLI71FqH5wu+OEQ8eEaS3TE8Ghc0aAjPyiM2b9HCMqhbyvR+spq
         nRn1Eyuhy0IBngrYkQ8QcFXVv9AJjrcs//LQb0eG+p+5c9OxFUMDzT9hdokI
         648IM7OxhCHstuV8SMoacGHLm7cRF1miHiP6J9vfwH8Yzv430LzWUZYKAAA=
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:23 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/0e57743da9904f02bc2d75639e059e17.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/0e57743da9904f02bc2d75639e059e17.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -12190,11 +12190,11 @@ http_interactions:
         FaQD35Ts9YPcOhj5G0rmS0I2PBdQIB9UgHVZ/QHHdnQl+fOmv14CkVNDJJhn
         v5h3kTsFYw/A3kOW3M65kf8oByI7lpDJmF2tXNgT2peIHn5wxVu/v/0L1JFs
         +2W/ebLH4190WgmA0g0AAA==
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:24 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/a5e88af1a4134ddbac68cd9a2b7d2e6e.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/a5e88af1a4134ddbac68cd9a2b7d2e6e.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -12261,11 +12261,11 @@ http_interactions:
         y6iXjdHx1MCBfICAy7L6iy768ZLt31f98pyIQQ2LiDr7ubyL3G1E7gHZW8Qy
         7FQb40c5sNixhV3G6mpwYctsnxIu/GBJq36A+x+kk9j2ab96sfv9PyJ25hPR
         DQAA
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:25 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/a0295f759dbe4b15971ec913c49e872e.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/a0295f759dbe4b15971ec913c49e872e.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -12333,11 +12333,11 @@ http_interactions:
         u2ZXO9oGsY47SuH7N6/33w69ovdB9uui/AOms+8HpvEBFArhxbVPgzKtuHF7
         //EU+Ln5wHfXHrmJHIZ1RezNTfpmsP9rzjCj5iZ2Cxn1CIb8isPTL/stQKfl
         0l9RiL75vRs9+uPxLxsXhfGLFwAA
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:25 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/34209c889f0042bba4145352b1f00992.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/34209c889f0042bba4145352b1f00992.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -12403,11 +12403,11 @@ http_interactions:
         ZHy4wwo9STyTS5pzFAeTZI4fEKL0GNo6oX4yrKeRf7BOetmYHC8NHChEiLit
         3V/0yY+3bP/xNGyviRjUsoikc/gI6iP3B4l7RPY/Yhl2qY3xkxxY7NTCLlN1
         Dfh4YLYvGV/8aEu7YVa+eemn0z+yT5gikQoAAA==
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:26 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/6723a43e2d074c5bae731a6fd21bceb2.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/6723a43e2d074c5bae731a6fd21bceb2.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -12479,11 +12479,11 @@ http_interactions:
         K6oqVLtqxMQxutr5Dpk6ELuo/8XqFIkjssSqAcWFoLAl5dKlu+DaLmkx8eiL
         OKFR/w3wHvDv0UE29bz4HqC7Lnel+JdNA6lVY8d7oFbMla0/KW+9/guLNptE
         hhIAAA==
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:27 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/6675db28bb4d4d58bcb18a1b0dcf09f4.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/6675db28bb4d4d58bcb18a1b0dcf09f4.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -12550,11 +12550,11 @@ http_interactions:
         myuQYIPEPTkLs1eIAyQZ4zvgnllwdUFez+jW0rBfUJBeNBLw0ICBnOceFkX5
         GyzhcIn2H0/d8pgInWoUQTq7wbyN3G4Qd4/sb8Si26E29B/kgGKHFoQM1VXc
         +g2y3Ud48L1lWHUD3L8gPYhtnvazF7vb/QEdXcqZ3A0AAA==
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:28 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/30d9c5db6ec841788758d09a385a3241.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/30d9c5db6ec841788758d09a385a3241.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -12628,11 +12628,11 @@ http_interactions:
         8i+huN6FqZaca4eVHQ8Nchi4b3Bau1v0maRsxf7lSrbc3hU3qhiWMbbTfh9t
         b8O85/yiL7u+NH/VNf8G5ykDuS0J+5zg5l/PYeaZ1JbFf8pSwg6TEpX2kpcs
         9y3iss+uVT6uBO1tIdNnZ8u7XIh8+m9GRrt0cSNk8fDwDx5fgGMWCgAA
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:28 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/299b80964a1844c6bce0e7240388ce99.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/299b80964a1844c6bce0e7240388ce99.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -12704,11 +12704,11 @@ http_interactions:
         EIVaBzCnKI8DTKgWWuvCIV5YW036fZC9luae0vO+W/WdlmijJV+XI2EiCc0A
         +CFIOP6KEH8zLXwE/HufPAraC9x3gEH67842iLf/hH6IRBfKtgKNNpu/bgDp
         jLEVAAA=
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:29 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/2758e54ae2c14d9e8f9ee626a6c1cbcf.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/2758e54ae2c14d9e8f9ee626a6c1cbcf.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -12776,11 +12776,11 @@ http_interactions:
         Dzw2UCLruIN5Wf0F43G0Jfuvn7Tt/5LognbcvNse9188zqWlOgb0iMfQQhBK
         21D1vkE1N25Nmx8BHannNPDp59eLoH9aIPJvp51L4H9wGl45u9fiS6Aeh1H7
         xjR6stvtP9GqYGtXFAAA
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:30 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/fa92ae909e6847bfa23cdc5d5c20e40b.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/fa92ae909e6847bfa23cdc5d5c20e40b.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -12847,11 +12847,11 @@ http_interactions:
         phStN1brzGR/sBS6LBTgVwE78gECrsrqLzrB8Zblry/9dmCI5tz2Ze7cdGzF
         0JHmd5idI8L6A8LMbChhCLttOB+Sshpc2PLmMeIiS9RDRP8T8T/wPwqHoumn
         zYunvt//A+oiGsXSDQAA
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:31 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/a2e281f947e24723897c639f3ad565d7.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/a2e281f947e24723897c639f3ad565d7.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -12920,11 +12920,11 @@ http_interactions:
         +ccWmoLCWiLHgmiYMgd6eHGJv37CfngHJSik88JEjk1HJAUsvUSWvoPb2oaY
         +7wjOOc2cj/azzpFZq4wIfauu/Mw2K+p7xoBDwH/VrZIf3drfAT8gz2G+yX0
         3y8XjwCdNjLtyquzBmvovkYnX8Pp9B8qLBs70hoAAA==
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:31 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/aa2d913bafb649bdab5b25c1e971a759.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/aa2d913bafb649bdab5b25c1e971a759.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -12997,11 +12997,11 @@ http_interactions:
         9pKQXMJCpRbz3Jh83G6jaNU0t6Sate2qXYopvG2FVkyWeaq7HEUcRd17XBH8
         8qv1KODvP/aEv/zCOQb8Wz2KlOOeQNey/qUVB531e/NRFDqXpn6gvLe3PxuE
         jjf9GAAA
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:32 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/4c26177ab52e43e5972fe2f18e3ca768.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/4c26177ab52e43e5972fe2f18e3ca768.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -13069,11 +13069,11 @@ http_interactions:
         AnLkvPQwK8rfYBlHS5J/e6QlDoLNFac12nJjtQ53xOPzqzw6t3VV7dxSHD16
         xKMvIQi5rSl6TlAlrV/T4kNAJWVOPR2k35w8f0f/9TR29Lus/RP6pwHu5/D/
         gf9BNbhzdgPbxVPfbv8Ag7Dp5hkRAAA=
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:32 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/8773ef54ffde41e4a6321c648ffbc0dd.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/8773ef54ffde41e4a6321c648ffbc0dd.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -13139,11 +13139,11 @@ http_interactions:
         VKE4KJo5fkLIKmLqGmH9YFrvRj1jI4LZKMBTAwdKGTIum/Abo+B4y/bvT/vt
         uSMmdSxCdLYQ85o3H5iy/wP1OnqYRDpy/S/SmXaqlPmDjFj60MKQv2rdbrd/
         APeGucBUBwAA
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:33 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/3e32406681a84c15b21958f03748b4d2.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/3e32406681a84c15b21958f03748b4d2.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -13209,11 +13209,11 @@ http_interactions:
         VNJ5K0v+aIjYuMUKLTE8gQtacpQHA2PO7xC8sOjaOkT94LAeRvzBOtBlZXA8
         V3Ai58FjXpu/aIMfi6z/vhnESyAOaplE4Dl8AfWZe0PAHoH9D1kOO+fG8ZMa
         mOxUwy5Tdg1Yv2e0zxHf+0gkadiUN0/9ePwHVAtpLJEKAAA=
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:34 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/025d4cd94c6448ca8bd1f1eb5d720a95.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/025d4cd94c6448ca8bd1f1eb5d720a95.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -13281,7 +13281,7 @@ http_interactions:
         dWH+gW3Efb3gvy8JIYJZFcCJSZTM+n0YfEoCfk3AZnoLAizCeUaCYmsHQYEI
         bwDLvTbvtjN3GWSIQISqboDcNnPuooYLgr2GD1hg/RK7hwI75EUiZunpL/s9
         pB53TXdXY/Z3ckwcj/8BXtPmtYwXAAA=
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:34 GMT
 - request:
     method: get
@@ -13352,11 +13352,11 @@ http_interactions:
         Senate","officeTypeId":"L","runningMateId":"","runningMateName":""},{"candidateId":"14887","firstName":"David","nickName":"Dave","middleName":"E.","preferredName":"Dave","lastName":"Zuckerman","suffix":"","title":"Senator","ballotName":"","electionParties":"","electionStatus":"","electionStage":"","electionDistrictId":"","electionDistrictName":"","electionOffice":"","electionOfficeId":"","electionStateId":"","electionOfficeTypeId":"","electionYear":"","electionSpecial":"","electionDate":"","officeParties":"Democratic,
         Progressive","officeStatus":"active","officeDistrictId":"27137","officeDistrictName":"Chittenden","officeStateId":"VT","officeId":"9","officeName":"State
         Senate","officeTypeId":"L","runningMateId":"","runningMateName":""}]}}'
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:35 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/f905a5d52080490dbcf401d632243a56.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/f905a5d52080490dbcf401d632243a56.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -13422,11 +13422,11 @@ http_interactions:
         IVwPqZy3quC/hogXNyjRksQjuaAuR3EwSOb4DsELi64pg9cvdutoxBOWQS8b
         A/DUwIGcB4+LsvqLNuB4yvafj/30nIidGhYRdPa/QF3kbiFwD8j+Ryy7nWpj
         /1EOLHZsYchYXQ3W75htHfHBD6Y061vl1Us/HP4BPCFvGZkKAAA=
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:36 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/5c225b29dd724a36b88d4f3d3056170e.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/5c225b29dd724a36b88d4f3d3056170e.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -13493,11 +13493,11 @@ http_interactions:
         DzBj8h9ARuEhtBVr/SC13oz4DRXTJSEDTwXkKEQZYVHVf8Azjo4k//6NjvsV
         sDfac2O1A+6/eFxyS3EM6BGPoYQg5Lal6DlBjfRxTYenhErKnAY6SL8bPO+C
         /j8D5GLslp/3EA1uat27+OrJbrd/AYXo3oQNEQAA
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:37 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/fa17fa7ed3bd477187387464ba246492.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/fa17fa7ed3bd477187387464ba246492.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -13569,11 +13569,11 @@ http_interactions:
         D2TYIg+VXvRo1WvKlF6H6bZMrbNO1PYDeMjVw9jF/S9ex2i8oku8OlB8CArr
         KJs+4TXXdkWL24AOxhGN9s+A94B/jw6yaYfG9wDd97kvxb98O5BaM328B2r1
         Utn2UAWbzV9KLlbWixIAAA==
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:37 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/868a5c84f2b646128a8dd491a0876dd0.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/868a5c84f2b646128a8dd491a0876dd0.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -13641,11 +13641,11 @@ http_interactions:
         ngrIkbHMwrwof4N2ONqS/OuXbjswhKNh8zK3blq2zlBPc8js8UVml4iQ/oAw
         MRtKCEJua8qHS1nFtN3S5pNHl+yiHiK60fbv+L+c2X/FvxcORtNNQP8DdSTb
         tMZXT3a//wObtBeUIBEAAA==
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:38 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/1efaa4f5d70646f9a00d97d55e855c54.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/1efaa4f5d70646f9a00d97d55e855c54.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -13713,11 +13713,11 @@ http_interactions:
         0IJLYFiD5BCImhu3w8E6Qv7CgmG6AAHG03ligvlW2pMCRC+SZS/gJlsfc8g7
         hDMkoGtMg3MAMS6iXokowjSoxsNvm5irgH+uBI+/vfJeA/5Otq8o/Wl8vBtd
         A3R8N1DZ/df3cPgPB7tAt04UAAA=
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:39 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/c6a2ab39bec549a0870d946360fd3df9.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/c6a2ab39bec549a0870d946360fd3df9.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -13783,7 +13783,7 @@ http_interactions:
         FYqDIprjJ4SsIqauEdQPhg006jc2opiN4nhu4EApQ8ZlE/5gFD++sv376nC9
         JGJQxyJEZwsxb/nykSGHP6BBx+AmkU6o/0U6w86VMn6UEUsfW9jlRa37/f4v
         oLXaplUHAAA=
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:40 GMT
 - request:
     method: get
@@ -13854,11 +13854,11 @@ http_interactions:
         Senate","officeTypeId":"L","runningMateId":"","runningMateName":""},{"candidateId":"14887","firstName":"David","nickName":"Dave","middleName":"E.","preferredName":"Dave","lastName":"Zuckerman","suffix":"","title":"Senator","ballotName":"","electionParties":"","electionStatus":"","electionStage":"","electionDistrictId":"","electionDistrictName":"","electionOffice":"","electionOfficeId":"","electionStateId":"","electionOfficeTypeId":"","electionYear":"","electionSpecial":"","electionDate":"","officeParties":"Democratic,
         Progressive","officeStatus":"active","officeDistrictId":"27137","officeDistrictName":"Chittenden","officeStateId":"VT","officeId":"9","officeName":"State
         Senate","officeTypeId":"L","runningMateId":"","runningMateName":""}]}}'
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:41 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/98487389eaf54f958fc84c761464ed37.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/98487389eaf54f958fc84c761464ed37.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -13926,11 +13926,11 @@ http_interactions:
         bf6BJT3covznD9wOf0r0TntsZHbUexWOa2ExjxE8xDGWoAqGbTF7KlDDrd/i
         5lOELSVMI5thgH0T8C8TDPi7aect4D/pBjHn8Cx+C9DT+PBimjzY/f4/uwJn
         cUwUAAA=
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:42 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/d84d5fa891954456b4d2171a683c9f3c.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/d84d5fa891954456b4d2171a683c9f3c.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -14007,11 +14007,11 @@ http_interactions:
         nrTbpOMD8tjYRVtW7dBNmdSfaHFTbI/sjxkFZ0fr/wv9c2CfkBL0T2hm4raR
         mIWwSp42svg1kqdUwHSmc3iZvgr4EoNzgox/+1npNeA/yUaonN33h9cAPTRj
         qKT/8h6ql8Yfmil6ePgXegqbdyEUAAA=
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:42 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/e1098303be0d4e37963375b8ef454d1d.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/e1098303be0d4e37963375b8ef454d1d.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -14080,11 +14080,11 @@ http_interactions:
         QN99AAYK6bwxQbDYiKSAo9eSpR/gdrI2Zu+3A6epHvteP+oQmelhQux1Vedp
         sPepr0sATwH/Pm2R/vrB+Az4W2sM18s8vL4sngG6Xch2Vfb2GoyhvosOPobL
         5T9zmEBKyhoAAA==
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:43 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/3eeb5122023e4285bd845cfe2d03dd03.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/3eeb5122023e4285bd845cfe2d03dd03.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -14149,11 +14149,11 @@ http_interactions:
         G7NaLPUGa1PODf3Y02EGAxnkgRibcrSap3TBhxs0GEnkiVzRVKE4KKI5fkLI
         KmLqW0F9Z9hIo35jK4rZKI6XBg6UMmRct+EPRvHjLdu/PR2310QM6lmE6Owg
         5h1vPjPk+AEadYxuEumM+i3SGXaplPGTjFj61MIu/9R6OBz+Alo/3ulQBwAA
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:44 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/d7a9ad545503483880436a342c3462cd.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/d7a9ad545503483880436a342c3462cd.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -14218,7 +14218,7 @@ http_interactions:
         83I1X62Kcr6EeTlT83I5U5qRFhNoSJC/Dm1iCkbxihb8uEGNgRT25JJWCsXB
         rJjjR4QkA8a2zl7f2a2jkb+wznLZmIFjAweKCRKua/8bA+NO/x0dSycm4/jy
         7euJ728DX4lzqYd1XErmsC2nmyvSQEg7vnwR3MOxpn+lOPwBWrTBAlIHAAA=
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:44 GMT
 - request:
     method: get
@@ -14289,7 +14289,7 @@ http_interactions:
         Senate","officeTypeId":"L","runningMateId":"","runningMateName":""},{"candidateId":"14887","firstName":"David","nickName":"Dave","middleName":"E.","preferredName":"Dave","lastName":"Zuckerman","suffix":"","title":"Senator","ballotName":"","electionParties":"","electionStatus":"","electionStage":"","electionDistrictId":"","electionDistrictName":"","electionOffice":"","electionOfficeId":"","electionStateId":"","electionOfficeTypeId":"","electionYear":"","electionSpecial":"","electionDate":"","officeParties":"Democratic,
         Progressive","officeStatus":"active","officeDistrictId":"27137","officeDistrictName":"Chittenden","officeStateId":"VT","officeId":"9","officeName":"State
         Senate","officeTypeId":"L","runningMateId":"","runningMateName":""}]}}'
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:45 GMT
 - request:
     method: get
@@ -14360,11 +14360,11 @@ http_interactions:
         Senate","officeTypeId":"L","runningMateId":"","runningMateName":""},{"candidateId":"14887","firstName":"David","nickName":"Dave","middleName":"E.","preferredName":"Dave","lastName":"Zuckerman","suffix":"","title":"Senator","ballotName":"","electionParties":"","electionStatus":"","electionStage":"","electionDistrictId":"","electionDistrictName":"","electionOffice":"","electionOfficeId":"","electionStateId":"","electionOfficeTypeId":"","electionYear":"","electionSpecial":"","electionDate":"","officeParties":"Democratic,
         Progressive","officeStatus":"active","officeDistrictId":"27137","officeDistrictName":"Chittenden","officeStateId":"VT","officeId":"9","officeName":"State
         Senate","officeTypeId":"L","runningMateId":"","runningMateName":""}]}}'
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:46 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/f46049bee5c44467b48936572ffa37e1.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/f46049bee5c44467b48936572ffa37e1.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -14430,7 +14430,7 @@ http_interactions:
         HYk8Oxc0VygORtEc3yME4dC3dWT9YFrnRvzCOipmYwSODRzIBwi4ru1vdBHH
         W7Z//3baXjpiUssios4GXNjx5j1TTp+gTkcHi5F6rv9FOtPGSpk/yIilDy0M
         +avWw+HwB1ZyaH9aBwAA
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:47 GMT
 - request:
     method: get
@@ -14501,11 +14501,11 @@ http_interactions:
         Senate","officeTypeId":"L","runningMateId":"","runningMateName":""},{"candidateId":"14887","firstName":"David","nickName":"Dave","middleName":"E.","preferredName":"Dave","lastName":"Zuckerman","suffix":"","title":"Senator","ballotName":"","electionParties":"","electionStatus":"","electionStage":"","electionDistrictId":"","electionDistrictName":"","electionOffice":"","electionOfficeId":"","electionStateId":"","electionOfficeTypeId":"","electionYear":"","electionSpecial":"","electionDate":"","officeParties":"Democratic,
         Progressive","officeStatus":"active","officeDistrictId":"27137","officeDistrictName":"Chittenden","officeStateId":"VT","officeId":"9","officeName":"State
         Senate","officeTypeId":"L","runningMateId":"","runningMateName":""}]}}'
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:47 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/b8b10a581b1441cdb1590ca2d5ed047c.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/b8b10a581b1441cdb1590ca2d5ed047c.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -14571,7 +14571,7 @@ http_interactions:
         jVtpH5yWdH3ICOUDBE7zg28fHiEIh75vGPFMkOQiXrBhjuwXgRSD/ZdN+xtd
         Mo9xFH9soRTk1pM4TKIDFzb08ZSRfilhWl6hQhflPCkh4pkcRUGWl8S6xptt
         Q84p7ojO8ZKVVlPWW1TmnNNfinsQiioc9m23+wNKRfUAkAoAAA==
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:48 GMT
 - request:
     method: get
@@ -14642,11 +14642,11 @@ http_interactions:
         Senate","officeTypeId":"L","runningMateId":"","runningMateName":""},{"candidateId":"14887","firstName":"David","nickName":"Dave","middleName":"E.","preferredName":"Dave","lastName":"Zuckerman","suffix":"","title":"Senator","ballotName":"","electionParties":"","electionStatus":"","electionStage":"","electionDistrictId":"","electionDistrictName":"","electionOffice":"","electionOfficeId":"","electionStateId":"","electionOfficeTypeId":"","electionYear":"","electionSpecial":"","electionDate":"","officeParties":"Democratic,
         Progressive","officeStatus":"active","officeDistrictId":"27137","officeDistrictName":"Chittenden","officeStateId":"VT","officeId":"9","officeName":"State
         Senate","officeTypeId":"L","runningMateId":"","runningMateName":""}]}}'
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:49 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/e609cdbf7d79489caab67b9cd4a30c69.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/e609cdbf7d79489caab67b9cd4a30c69.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -14713,11 +14713,11 @@ http_interactions:
         ELyw6JoyZP3gtA5G/MYy8GVjCDw1cCHnweOqrP6gDXF8ZPv3p8PxHIiTGiYR
         eB6UeVe5cwTsHti/kOW0U26cP+iByQ4tHDJkV4P1W0Z7G/HF9450Ogi4/4E6
         kW2/7VdPdr//C9pzWfvVDQAA
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:50 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/7ce5a7cc9c204356a36977cb9ae4ea3e.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/7ce5a7cc9c204356a36977cb9ae4ea3e.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -14784,11 +14784,11 @@ http_interactions:
         FmiI4cF4RsMA+UHPmP1bBJcZtE3ptX6yWmcm+4Olp8tCDzwWsCPrwOG6rP6i
         8TjesvzH9347MkRTYfsxd246tt7QQPN/mJ0jwvojwsxsLGEIu204Hz5lNRi3
         5c37gIvsox4j+qn2LfAfhEPR9OPPW6BOZNuX8cWT3e//ASbIlPwSEQAA
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:50 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/72c4f88e0cd14e6aa5066a50801d8fd3.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/72c4f88e0cd14e6aa5066a50801d8fd3.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -14855,11 +14855,11 @@ http_interactions:
         31AyxwSkGOw/L6s/4JO5i6P4XQulILeGxGEStfRxQ5unjPRLCdPxCjR4lPNN
         CYFDIooCLC+JFbq8f1zkkuJ26BzG/nSasl6jMieckHv7Gv8bd1YnuXTEIBmp
         /v9xqxzzLNv7nbC/1VM6u91fbilUXs8NAAA=
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:51 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/f9a97d6b60a84f138d4c9e557771df69.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/f9a97d6b60a84f138d4c9e557771df69.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -14927,11 +14927,11 @@ http_interactions:
         HC5+U9X/QHnz2M/mH1vsFDasteQ4EA1VZmdfvgWWPz+hHy6BgUI6T0wQbO4g
         KeDotWTpK7idbYjZ5x3DGRPQt0q8swcxRaIcplE1CL+7V98E/EslIP7uEnYL
         +AeyRQnG4fGwfgvQ7d6wyj7bvlhDd7ybfA2Hw39k6WCokBcAAA==
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:52 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/338826cc8c7e42708a268caeefc1a854.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/338826cc8c7e42708a268caeefc1a854.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -14999,11 +14999,11 @@ http_interactions:
         rP6BCea+H+XvW2gJCmuIHA+i5sbt6eY1Iv7CguHxFgowSOeZCYbTHSQFPL1E
         lr2D29suMYe8fTh9ArpZSXAOIIZIlMfUqwbht431Q8C/VQLib7uwR8B/IVuU
         YBqfTuuPAJ3eDVL21euLNbTnu8HXcDz+BwcnOVKMFwAA
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:52 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/f5be9d0bd353401db508dfa8b17aaa2e.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/f5be9d0bd353401db508dfa8b17aaa2e.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -15069,11 +15069,11 @@ http_interactions:
         lqjRE8OTcUVDjvygMGb/ASEqj6GtROsHq/Vm1G+shC4LBXguYEchQsRNVf9B
         Lzjesvzp+7CdGBp+5d5Nz1YMjTT/hdk1Iqw/IczMphKGsNuW8yEpa8DHPW+2
         CRdZop4ihtfa/8B/HM7xLymShcyOCgAA
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:53 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/43d393899cdf466b8f878db51bf2baf3.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/43d393899cdf466b8f878db51bf2baf3.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -15139,11 +15139,11 @@ http_interactions:
         eXEuaLBQHEyiOX5AiMJjaOvEemJa50b8wjopZmMCjg0cKESIuKndb/QJx1u2
         f/923l47YlLLIpLOBnzc8+YDU84/oU5HB0uReq7/RTrTxkqZP8iIpQ8tDPmr
         1uPx+Ae5jWyfWQcAAA==
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:54 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/d25c9bf562204e3fad20daf27e413576.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/d25c9bf562204e3fad20daf27e413576.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -15210,11 +15210,11 @@ http_interactions:
         KqCXOQgwyLAPznAdwDzgGVN+C9wxA7YuvNcvcmvDsL9QeLpk9MBDAyWyjjtY
         FOU/MB5HR7L/fKRjtwa2QVtu3q3HvYrHqbRUx4Ae8RhaCEJpa6reN6jixq3p
         8DGgkXpOA5/uy/Mm6L9YoB/Gbv95C9XgstbcjM+e7Hb7H+mjfO0bEQAA
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:55 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/75e659dbc59c411c8dcba5248f6c17bc.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/75e659dbc59c411c8dcba5248f6c17bc.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -15280,11 +15280,11 @@ http_interactions:
         OkSvJX84ZHy4RIWeNO7IBU06ioNJM8cPCFF4DE2VUD8Z1tGIZ6ySYDYmx0MD
         BwoRIi4q9wd98uMt23889dtjIgY1LCLprMHHNW8+M6T/Jup0dG4p0h71/0hn
         2KFSxg8yYulDC7v8U+tgXJ692O32L3DU7CuYCgAA
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:55 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/dadf6031b003440d9139303e37e8cb7a.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/dadf6031b003440d9139303e37e8cb7a.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -15356,11 +15356,11 @@ http_interactions:
         NWi1QMdL5LGxoxatWvM88euYNykiY7zsmqZwm1jYc7XJf5F4DfMONyKxw5bT
         tjWFLkS3EtZPaXEX0TEImDZslnf1u4BPMdgkiPibfy7eA/61bITKmU+47wF6
         OJOhkv7loqvGxi/PVPTy8hfuBJWekRIAAA==
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:56 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/44e085d087e545ee92409fdb09c8a353.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/44e085d087e545ee92409fdb09c8a353.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -15426,11 +15426,11 @@ http_interactions:
         Vq5b82iFfpHuoYnjIoqP/OIHv8yFmJdlORPF/ifTw7ZLUpe4FwsUy1KL5TOW
         ixJxNVuIVa0rsVJLmJfzqNdgAA0B0j+E4iCCpy9DsWdSzSMqjNa9HEYLPs6j
         gusjEeqaGoKAWrZuA5Z+QxpmMMdrdI0nKhS2/FX815H9/g+n25U1KxMAAA==
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:57 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/662ea3a76ec64b9787b753e43d6b9f95.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/662ea3a76ec64b9787b753e43d6b9f95.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -15499,11 +15499,11 @@ http_interactions:
         ywsowSCfeyYyHKqRFGB+iSzbx/2dsPg0veq7ryJ+1Re5RiKoK8LXkVzVvzuS
         d1P0f9HDkcAu1APuYzTcvgtf1u7bGniDVtZQT+MXYiXtniRB9H/zz/sH6Deb
         PyEWDJhbFAAA
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:57 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/55c003838a48401bbcf340a6926925e5.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/55c003838a48401bbcf340a6926925e5.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -15569,11 +15569,11 @@ http_interactions:
         cq5oqlAcFM0cPyIkFTC2tbB+MK1zo16wFsFsFOC5gQPFBAkXtf+NQXC8Zfvz
         6ri9dMSklkWIzgZC2vLmM1OOf6BORweTSD3X/yKdaedKmT/IiKUPLQz5q9b9
         fv8HKkbU51gHAAA=
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:58 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/22ffc978da634564b351b05bed2f1113.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/22ffc978da634564b351b05bed2f1113.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -15640,11 +15640,11 @@ http_interactions:
         C66pAuqZYB0N+wVVEEzG4HhooEDOcw/LyvwGG/xoS/bvT/32mIhADYkIOvup
         vIvcHQTuAdlYbBjuO8hRDIIdaiP8KAcSO7aQy1hdza3fENt9RDc/2OKuH986
         Hf8m/e91/l/SUWz7YT97sbvdH6cVfanWDQAA
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:59 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/f6f1edf3505a46b3af7b0321a2c8d1d8.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/f6f1edf3505a46b3af7b0321a2c8d1d8.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -15710,11 +15710,11 @@ http_interactions:
         g6KZ4yeErCKmvhXWd6YNbtQvbEUwGwV4buBAKUPGVRt+YxQcX9n+7evheumI
         ST2LEJ0dxLzhyz1TDv8/g44BJpFOXP+LdKadK2X+KCOWPrYw5K9ad7vdH4oK
         ge5TBwAA
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 07:59:59 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/22ffc978da634564b351b05bed2f1113.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/22ffc978da634564b351b05bed2f1113.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -15781,11 +15781,11 @@ http_interactions:
         C66pAuqZYB0N+wVVEEzG4HhooEDOcw/LyvwGG/xoS/bvT/32mIhADYkIOvup
         vIvcHQTuAdlYbBjuO8hRDIIdaiP8KAcSO7aQy1hdza3fENt9RDc/2OKuH986
         Hf8m/e91/l/SUWz7YT97sbvdH6cVfanWDQAA
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 08:00:00 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/cc1bfcae6226428d8a13e53122336b65.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/cc1bfcae6226428d8a13e53122336b65.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -15851,11 +15851,11 @@ http_interactions:
         6YSRFiNUEEE+kcqE6I3mv4eEN5dYoSeNB+eKhh3FQdHM8QNCVB5DVwvrB9N6
         N+o31iKYjQI8NXCgECHiom7+oBccL9n+/X6/PHfEpI5FiM4WfFzz4j1T9j9G
         vY4eJpGOXP+PdKadKmX+ICOWPrQw5J9aBwPz6sVut38BOV3235oKAAA=
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 08:00:01 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/4f75cbcba29246bbb56c6039026292ac.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/4f75cbcba29246bbb56c6039026292ac.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -15930,11 +15930,11 @@ http_interactions:
         t+sE4D08jOMZwoyXbZhuyEhN9d/y4O+I9/0JJtpzWYMl3994X89GIzDDLs1D
         i+sRj0btjszmw+yGd+SOdtuN/je0u/T+Ju2rA+1eqqhq7UP5fwGfpfiTul5x
         MYLIQ5l/5dhN413Xdvbcn57+BZYWNkqvEwAA
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 08:00:01 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/fd638c2fb8b54d0bbc8b13ec32343930.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/fd638c2fb8b54d0bbc8b13ec32343930.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -16012,11 +16012,11 @@ http_interactions:
         +r4dJi25ioc9JhfD/Q1xgayBj9umYRftZCn7365liQOdoqFlowyhOT48ZNNd
         I+9aNz2U1SGOeyo6rEM8yZVKolaAR27rC/E+6YhnA+A/ERS3fT5PeAvBf0KH
         jggLiXbWkS/t1hKr9a3p/wA9Nkyk8m8+5qC2nL1fPLWHh78BjlUbX3URAAA=
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 08:00:02 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/309b5ed2091947619fd3dff2a10dcfa4.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/309b5ed2091947619fd3dff2a10dcfa4.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -16083,11 +16083,11 @@ http_interactions:
         HQz/iWWgS8L+TehOOyfWgQshfPlMen8MSIqEEew3ZfULTW8/dhzOJ1SCCxI3
         FEaItAbjdrR5jKg2U+ymro/YJ1Rp+xJy/5fhf4h7lAafhX60/DfUh7RSD/2N
         kg0gh8Nvd7NxQc4NAAA=
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 08:00:03 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/d914f2d58d764d72b1adca151dcec36f.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/d914f2d58d764d72b1adca151dcec36f.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -16157,11 +16157,11 @@ http_interactions:
         ZR3Y+LULttNb4KAxnKdIZNihwaCAC68NVnUDt++mXdrrs8+dUPnmyz14YLfg
         BiP8Zf3HfHj+FOZdMAOxNxdoH8P+OV+Nw96hj79ruQv412kB8TeF+T3gP8th
         mI+i8L2AuwfoLnmeJ3dE35z1e4/+ePwPI0MhN1whAAA=
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 08:00:04 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/c2bb6fc3ab2c498d8e83192fca1c7a38.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/c2bb6fc3ab2c498d8e83192fca1c7a38.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -16230,11 +16230,11 @@ http_interactions:
         +mnk7uk2Ksk/yK2rjaDBZPVXVVmCbIb7csZ+f8TAM2qVQWydKonUB/OxcU0a
         7i7Yduma2UZ5iB6YMN6JTtvVeQgfrphxk0j0pu4HPIQ3t6xD/PXV8RHwd34R
         /EMC73zFeATodk/p7h2Ivi5HB4/+dPoPI87hs+IaAAA=
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 08:00:05 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/8587832ebb964ecbb7042211a85d2e72.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/8587832ebb964ecbb7042211a85d2e72.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -16301,11 +16301,11 @@ http_interactions:
         uIYCHDI8GZc4EaAfYMbk34MK0oFvStZ6IbXOjPwLJdMlIQMvBeTIBxVg0dQ1
         OMbRluS/VrQ9ToKd0Y4bq51w/8XjlluKo0ePePQlBCG3DUXPCaqVC1vafI2o
         pMypp3O8eD4E/XcD5GIcZqCPEA0ObO3bePBk9/t/+z67cBgRAAA=
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 08:00:05 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/021a9be8a45e4974a8fa5c92575ab3fd.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/021a9be8a45e4974a8fa5c92575ab3fd.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -16384,11 +16384,11 @@ http_interactions:
         u4X9P4V7Uo+s6GUlHzcGqsm4NgUT5s5V814PVbBDHmiz7vGq11RsfBvEnGJs
         DGV3M4Rsq6u1yivkxRm1Ho/pyD1cpgTyadcGzxr+aW/l5vLd4D+4CHzmbB/B
         30Pm+IL0l9h/uZwH/e1T6uxNe37+B1wqAXMAGwAA
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 08:00:06 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/e5fe5797a21f4d4a8e7e68f020623b23.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/e5fe5797a21f4d4a8e7e68f020623b23.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -16456,11 +16456,11 @@ http_interactions:
         S0YH3DdQImOZhXlVlqAdjpZk//LQLnuBcDysX+YmTcPWBdrxPIVZR6RQv7ZE
         yL9HmJj1LQShtBX1w7WsZNquaPHWo012VfcR7Xj7L/DfKQeraceg06h/eFEU
         XeuX6ie+EaqWwd/oPvKtD8in8X1ZxB3fTrN/THaz+Q0bTsJ0IhEAAA==
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 08:00:07 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/b5725bd1a29040538f0451f609ad45e8.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/b5725bd1a29040538f0451f609ad45e8.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -16541,11 +16541,11 @@ http_interactions:
         FhRvwss1V8nXddWW9x2eu9u+66pqfK9E0OeQA4Ft3rOfA1h6qkR09rgduXPV
         7OQEVXd1HLrazE/46sQzNlrNZ99wPhJb/aXMGx3mOWS+g4yEv/lqfzb4N8+b
         H0B+xP3Mu0U/WH4N/je5ro7uvxwL534sVLl2K552Hh7+BlDq8J/RGwAA
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 08:00:07 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/345411e65fe64a57b1f37c799d1bbc14.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/345411e65fe64a57b1f37c799d1bbc14.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -16615,11 +16615,11 @@ http_interactions:
         gAuvDZZ+grttpd3bG7PPg1C1nZcpeGCP4Akj2qv6SfgwfBsQe319NhnsA/og
         /PquZRLwH9MC4q/r8ing7+UwzEeBf6vfpgDdJc9+ckf0E/laXK//ASCYPOBX
         IQAA
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 08:00:08 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/307f6275f85e409aa06f3c46f86111b4.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/307f6275f85e409aa06f3c46f86111b4.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -16691,11 +16691,11 @@ http_interactions:
         eEU5fZg/KdVBBdxCVe3KoljXrikFrAItdeaAM2uLUbsNsrVh3lJ62najdlUj
         Om7RbY1cSJuOqtZPHdsxSs5zOkjSnkw3/1r8DxHtfFNYDC8e/4n9ztbRCdcX
         vX8T6FZxTsKNXeUvdotipuxGqcFq9QtznicIhxIAAA==
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 08:00:09 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/61bcda020e0049539c0e0ac3dab12b5d.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/61bcda020e0049539c0e0ac3dab12b5d.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -16763,11 +16763,11 @@ http_interactions:
         Enb/L7SrbRAfRIgp/PpJev/tkBTJR7Sf1lUFrrPfDxzXe1BiCBLXlEbMtBIu
         rGgyT2hvPvDdNaRnkUO/roi96VzOBntvzxB+88o9C/h0KD4kGPIrY9sX0tlk
         052ozeYfvQ2O7lgUAAA=
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 08:00:10 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/ee0d77c853d94d36a4a791f2c0301a12.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/ee0d77c853d94d36a4a791f2c0301a12.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -16842,11 +16842,11 @@ http_interactions:
         m0Sy5abVt3v2/QTK767j/DvE/h+EPQpCDE4bVVrMa2PqxXCIYrAv80Cq1dCO
         hpbf6btB6vlta0+Zt9Kd/9/1OvOjahH8VuR5FvCPexHhbwWB54D/oHE65uxu
         jc8BumsYrun/yseMmmB7+eh9avf3/wFDegRRzRwAAA==
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 08:00:10 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/eb6f3ff90bdb42a29f8b6793752ac51d.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/eb6f3ff90bdb42a29f8b6793752ac51d.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -16916,11 +16916,11 @@ http_interactions:
         29s5ZCAxnH0kYuzQYFDAhtcESz3A3XXTbu1N2edRqLrmyxw8MFvwgBHdcf0s
         fBg/DYi9OUKbDfYRfRB+c9gyC/j3aQHxN4X5HPAPchjmI899r9/mAN0mz2Fy
         R/QzeVtcr/8BrgXj/mAhAAA=
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 08:00:11 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/759eb5fc9fad4e3eaa2c05dd6e7855ad.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/759eb5fc9fad4e3eaa2c05dd6e7855ad.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -16988,11 +16988,11 @@ http_interactions:
         WFzVVYXa42hJ9h9PtOw+TrRBW27erced8Fi/yaNPW5R/jmmpjhE94jG2EITS
         1lS9b1AF2u5o8TmgI/WcRj7dHPtv9N9uY0+/79p/oX9eoOPfzDzvgf/gNLxy
         ju/G74F6HEbNS9PkyR4OfwG6ZjMAVhQAAA==
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 08:00:12 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/9ac797c23ef14613860024bc0e5df156.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/9ac797c23ef14613860024bc0e5df156.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -17068,11 +17068,11 @@ http_interactions:
         zX+7pSGqPm11RRMra5v5cAjS3yL3lV4OaTT87KckynSjH3Ld3qA9peUy7lL8
         FoXnEB8xIwpHXFNK21LhXG0bru2aBjcevXAcpgOf7V3Li4BPNTgkiPi7tvwl
         4N/bDaecTfP2EqC7E+mU9H9+UvA6omsBXgK1ZqXs9vh7j4+/AK/CL1U6FwAA
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 08:00:12 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/54b18677de244212afd16de2060380b7.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/54b18677de244212afd16de2060380b7.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -17149,11 +17149,11 @@ http_interactions:
         4LBiByXX/6zQpbur75fFijslwZJpSlfx//zQ4E9vqVfVT5rJcJMdbIgB33wi
         YFsi8kTAtgzViYBtqYvTALu7054CWHdiuRPoZ87aKNhdjU7BtbpQViWNLvsG
         90ZHwy7fiRTW1ovxGKTffzb4Sudjeht3B3Ky8hN3XnnPz/8D1riHIckdAAA=
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 08:00:13 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/d3397276cdee4efab6e234aa0e552291.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/d3397276cdee4efab6e234aa0e552291.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -17223,11 +17223,11 @@ http_interactions:
         voKbZKeYnd8enK6b7GbdqkNk5gwTYm+7PP8Ge1NV77irhP2c+rYfcBPwL9MW
         6W9rx1vAf3LG8Lww/1Bi3AJ0e5DtqaQMWnZZiTG0f0gHH8N+/xdSayNk3BoA
         AA==
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 08:00:14 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/bc976b49a2b2474cb3c1424b7c7eeac7.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/bc976b49a2b2474cb3c1424b7c7eeac7.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -17297,11 +17297,11 @@ http_interactions:
         pd6Ku/+QcT7IEIkwWR1JbpvGkdxXvm8iB19giN1VpG4GuydehO+qF+8Dv59i
         q2dvvf3DOrJB/JWG+N1N9xbwn2wLuMTj8PVCdAvQL+YP0b/nBvwfhXM4/AUX
         G6uYFB4AAA==
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 08:00:15 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/3197ab5976834d08a4f328402cfcaca8.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/3197ab5976834d08a4f328402cfcaca8.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -17371,11 +17371,11 @@ http_interactions:
         EiSm85qJHFs0mBSw6TXJUg9w9+20W39TjnmUqr77MocIzBI8YER/Wz+LGMb/
         hv4GbTbYR/RB+N1lyyzg35cFxN8dzOeAf1DDsB4F/uX8NgfotngOizui7770
         J4/+fP4PBkZ5k1khAAA=
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 08:00:15 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/ac6a38a0ad48446e8ccb4f8d05379cca.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/ac6a38a0ad48446e8ccb4f8d05379cca.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -17454,11 +17454,11 @@ http_interactions:
         hnTwVHE2zI+Yp06ir0BcT/iAfmhqU5pGlckZ0cK58rjXQxW0yANt5j2e9XwS
         R6dB1OQD+0NnX7cnm+ryHcd+OGofuP9ZkJ7rMIkJ8X1bHPca/vOKy6n3avBv
         vR48cx7vxq+BOT4J/avtv7yyB/2wvmK9BtfKhXZtAeg8PPwDdFCXSi8bAAA=
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 08:00:16 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/dc276960774043f4885bc8676cdcdafd.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/dc276960774043f4885bc8676cdcdafd.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -17524,11 +17524,11 @@ http_interactions:
         fHBK0IdDQocVSHAo8UTOcNBhHIiSKb4HHpgD39bR647cehr2B+qol4wReG6g
         QD7wAOva/gUXcbQl+4/vw/aSiJxaEhF1Dl9BfeT+IHKPyKZifz4rltzOtZH/
         JAcSO7UQZKqu4S7siW2T0MWPtrgbhuXLpD9f5/8i/Xj8B+zwReiUCgAA
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 08:00:17 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/e215455ec7d14b01a1bf0d46bb4dece5.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/e215455ec7d14b01a1bf0d46bb4dece5.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -17597,7 +17597,7 @@ http_interactions:
         f72EGgzSeWCiwJYaSQGml8iyIe7FWSw+bwgnJGDfoHpnD+ISiWJMQTUIf+hl
         /gv4p0pA/MO998/w83r7kIAQEgYt4d/Q6ZFsdxI8M1Ma725NHt7vCeofVLTd
         /gK3X2MhYBQAAA==
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 08:00:26 GMT
 - request:
     method: get
@@ -17668,11 +17668,11 @@ http_interactions:
         Senate","officeTypeId":"L","runningMateId":"","runningMateName":""},{"candidateId":"14887","firstName":"David","nickName":"Dave","middleName":"E.","preferredName":"Dave","lastName":"Zuckerman","suffix":"","title":"Senator","ballotName":"","electionParties":"","electionStatus":"","electionStage":"","electionDistrictId":"","electionDistrictName":"","electionOffice":"","electionOfficeId":"","electionStateId":"","electionOfficeTypeId":"","electionYear":"","electionSpecial":"","electionDate":"","officeParties":"Democratic,
         Progressive","officeStatus":"active","officeDistrictId":"27137","officeDistrictName":"Chittenden","officeStateId":"VT","officeId":"9","officeName":"State
         Senate","officeTypeId":"L","runningMateId":"","runningMateName":""}]}}'
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 08:00:27 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/7ad945a58a544f6c80bf36228eb3644a.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/7ad945a58a544f6c80bf36228eb3644a.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -17738,11 +17738,11 @@ http_interactions:
         BPmLVCZEbzR/PSR8uMYKPWk8Olc07CgOimaOHxCi8hi6Wlg/mTa4UX+wFsFs
         FOC5gQOFCBGXXduiFxxv2f7j+2F76YhJHYsQnS34uOXNN6YcPowGHQNMIp24
         /h/pTDtXyvxRRix9bGHIP7WOBubNi93v/wLCXPvzlwoAAA==
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 08:00:27 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/6e90595abe154494a52ce1e8c99e99fd.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/6e90595abe154494a52ce1e8c99e99fd.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -17808,11 +17808,11 @@ http_interactions:
         LUaoIYL8R2oTojeaXxAJby6wRk8a984VDTyKg6KZ4weEqDyGvhHWL6YNbtRf
         bEQwGwV4bOBAIULEWd916AXHS7b/fNotTx0xqWcRorMDH1e8+MqU3eNo0DHA
         JNKB6/+RzrRjpcwfZcTSxxaGvKl1NDMvXuxm8w8//w5InQoAAA==
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 08:00:28 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/10ecff03af544b0da18d59503add955e.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/10ecff03af544b0da18d59503add955e.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -17878,11 +17878,11 @@ http_interactions:
         iN6U/PWQ8GGFGj1pPDlXNOwoDopmjh8QovIYulpY35g2uFG/sRbBbBTguYED
         hQgRN13bohccb9n+9ctxe+mISR2LEJ0t+LjjzQemHD+MBh0DTCKNXL9EOtPO
         lTJ/khFLn1oY8letk4F582IPhz+WSU9BlQoAAA==
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 08:00:29 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/5bf7d4e32031441aa6b67043102e2414.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/5bf7d4e32031441aa6b67043102e2414.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -17951,11 +17951,11 @@ http_interactions:
         5CA0nWcmEt3f0aQA0mvIkldwo62L2ebtwWkbdnbUzvp3Zr68CTMXmDT25kf6
         37C/zaoi9kvqm7+udwF/KFtNf3NGfw/4O3vstF+M0HFRNnVVNds38E5nvP9T
         UTvPYGsOxYEuxnz9NXE8/gFSnTqgkhcAAA==
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 08:00:30 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/bb3db1774b154de787eaa7a3c5b69528.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/bb3db1774b154de787eaa7a3c5b69528.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -18029,11 +18029,11 @@ http_interactions:
         ajPr0KizZCAfh3zJwGXsbcPqKGLfyxeWrm1tHAV84ulucRF/ew0+BvxbTPS7
         Znlf+j/Q17tzj/B+9/7lrvFHht9Ff3KG4+nW/nQfQ2j1XLv1CRA8Pf0C/Rd0
         u0EZAAA=
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 08:00:30 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/55ee67d3a1334d938588fd82e140888c.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/55ee67d3a1334d938588fd82e140888c.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -18112,11 +18112,11 @@ http_interactions:
         wQtra6vl8TGqSY98os3qmN+Od50l3qnZezoIGXO8hvE7iv1NfJ+7gzXg2ON5
         yQG6LQcxeFtLa7U7Ag7PgQJM9WDzHsCKuw47vPC4wfev5+yyv691UDpa30b/
         7SwN6Iek/Dfo5w66Kx1H5d/8gxC1duj/P1Cr1tr2deo9PPwDfzWCuAkSAAA=
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 08:00:31 GMT
 - request:
     method: get
-    uri: http://transparencydata.com/api/1.0/entities/8bb9c2e97d3647859541d42f40927f8f.json?apikey=8f13417da56c4101995e5a96b4e1acb1
+    uri: http://transparencydata.com/api/1.0/entities/8bb9c2e97d3647859541d42f40927f8f.json?apikey=
     body:
       encoding: US-ASCII
       string: ''
@@ -18182,6 +18182,6 @@ http_interactions:
         yNNAkEoGyf8QpX1wuqSnQ0SbFShwqPFALnDSYRxgzRTfgwzCge9qRvELZaAR
         v6FmwcTFjqcGCuSDDLDq2hYc+9GS7N/X4/KciEAdiWCdrXRhS4uPBBlfRYOO
         wY0jHVH/jXSCnSol/CQjkj61kMurWifT8urF7vd/ABQs0TiaCgAA
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2013 08:00:31 GMT
 recorded_with: VCR 2.5.0

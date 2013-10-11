@@ -21,9 +21,9 @@ http_interactions:
       Content-Type:
       - application/json; charset=UTF-8
       Date:
-      - Thu, 05 Sep 2013 02:24:36 GMT
+      - Fri, 11 Oct 2013 04:40:31 GMT
       Expires:
-      - Fri, 06 Sep 2013 02:24:36 GMT
+      - Sat, 12 Oct 2013 04:40:31 GMT
       Cache-Control:
       - public, max-age=86400
       Access-Control-Allow-Origin:
@@ -71,118 +71,7 @@ http_interactions:
         \        },\n         \"partial_match\" : true,\n         \"types\" : [ \"street_address\"
         ]\n      }\n   ],\n   \"status\" : \"OK\"\n}\n"
     http_version:
-  recorded_at: Thu, 05 Sep 2013 02:24:35 GMT
-- request:
-    method: get
-    uri: http://congress.api.sunlightfoundation.com/legislators/locate?apikey=&fields=bioguide_id&latitude=44.1931496&longitude=-72.5824427
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - ! '*/*; q=0.5, application/xml'
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Server:
-      - nginx/1.1.19
-      Date:
-      - Thu, 05 Sep 2013 02:24:19 GMT
-      Content-Type:
-      - application/json; charset=utf-8
-      Vary:
-      - Accept-Encoding
-      Status:
-      - 200 OK
-      Via:
-      - 1.1 BC5-ACLD
-      Content-Length:
-      - '143'
-      Connection:
-      - Keep-Alive
-    body:
-      encoding: US-ASCII
-      string: ! '{"results":[{"bioguide_id":"W000800"},{"bioguide_id":"L000174"},{"bioguide_id":"S000033"}],"count":3,"page":{"count":3,"per_page":20,"page":1}}'
-    http_version:
-  recorded_at: Thu, 05 Sep 2013 02:24:35 GMT
-- request:
-    method: get
-    uri: http://maps.googleapis.com/maps/api/geocode/json?address=2227%20Paine%20Turnpike%20Berlin%20vt%2005602&language=en&sensor=false
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - ! '*/*'
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Content-Type:
-      - application/json; charset=UTF-8
-      Date:
-      - Thu, 05 Sep 2013 02:24:38 GMT
-      Expires:
-      - Fri, 06 Sep 2013 02:24:38 GMT
-      Cache-Control:
-      - public, max-age=86400
-      Access-Control-Allow-Origin:
-      - ! '*'
-      Server:
-      - mafe
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Frame-Options:
-      - SAMEORIGIN
-      Alternate-Protocol:
-      - 80:quic
-      Transfer-Encoding:
-      - chunked
-    body:
-      encoding: US-ASCII
-      string: ! "{\n   \"results\" : [\n      {\n         \"address_components\" :
-        [\n            {\n               \"long_name\" : \"2227\",\n               \"short_name\"
-        : \"2227\",\n               \"types\" : [ \"street_number\" ]\n            },\n
-        \           {\n               \"long_name\" : \"Paine Turnpike South\",\n
-        \              \"short_name\" : \"Paine Turnpike S\",\n               \"types\"
-        : [ \"route\" ]\n            },\n            {\n               \"long_name\"
-        : \"Berlin\",\n               \"short_name\" : \"Berlin\",\n               \"types\"
-        : [ \"locality\", \"political\" ]\n            },\n            {\n               \"long_name\"
-        : \"Washington\",\n               \"short_name\" : \"Washington\",\n               \"types\"
-        : [ \"administrative_area_level_2\", \"political\" ]\n            },\n            {\n
-        \              \"long_name\" : \"Vermont\",\n               \"short_name\"
-        : \"VT\",\n               \"types\" : [ \"administrative_area_level_1\", \"political\"
-        ]\n            },\n            {\n               \"long_name\" : \"United
-        States\",\n               \"short_name\" : \"US\",\n               \"types\"
-        : [ \"country\", \"political\" ]\n            },\n            {\n               \"long_name\"
-        : \"05602\",\n               \"short_name\" : \"05602\",\n               \"types\"
-        : [ \"postal_code\" ]\n            }\n         ],\n         \"formatted_address\"
-        : \"2227 Paine Turnpike South, Berlin, VT 05602, USA\",\n         \"geometry\"
-        : {\n            \"bounds\" : {\n               \"northeast\" : {\n                  \"lat\"
-        : 44.1931496,\n                  \"lng\" : -72.58242439999999\n               },\n
-        \              \"southwest\" : {\n                  \"lat\" : 44.19314780000001,\n
-        \                 \"lng\" : -72.5824427\n               }\n            },\n
-        \           \"location\" : {\n               \"lat\" : 44.1931496,\n               \"lng\"
-        : -72.5824427\n            },\n            \"location_type\" : \"RANGE_INTERPOLATED\",\n
-        \           \"viewport\" : {\n               \"northeast\" : {\n                  \"lat\"
-        : 44.1944976802915,\n                  \"lng\" : -72.58108456970849\n               },\n
-        \              \"southwest\" : {\n                  \"lat\" : 44.19179971970851,\n
-        \                 \"lng\" : -72.58378253029151\n               }\n            }\n
-        \        },\n         \"partial_match\" : true,\n         \"types\" : [ \"street_address\"
-        ]\n      }\n   ],\n   \"status\" : \"OK\"\n}\n"
-    http_version:
-  recorded_at: Thu, 05 Sep 2013 02:24:37 GMT
+  recorded_at: Fri, 11 Oct 2013 04:40:30 GMT
 - request:
     method: get
     uri: http://openstates.org/api/v1/legislators/geo/?apikey=&fields=id&lat=44.1931496&long=-72.5824427
@@ -208,13 +97,13 @@ http_interactions:
       Vary:
       - Authorization
       Date:
-      - Thu, 05 Sep 2013 02:25:11 GMT
+      - Fri, 11 Oct 2013 04:41:11 GMT
       X-Varnish:
-      - 597026676 597025223
+      - 237078193 237077519
       Age:
-      - '54'
+      - '72'
       Via:
-      - 1.1 varnish, 1.1 BC4-ACLD
+      - 1.1 varnish, 1.1 BC2-ACLD
       Content-Length:
       - '603'
       Connection:
@@ -230,5 +119,125 @@ http_interactions:
         {"district": "Washington-1", "chamber": "lower", "state": "vt", "boundary_id":
         "sldl/vt-washington-1", "id": "VTL000064"}]'
     http_version:
-  recorded_at: Thu, 05 Sep 2013 02:24:37 GMT
+  recorded_at: Fri, 11 Oct 2013 04:40:31 GMT
+- request:
+    method: get
+    uri: http://maps.googleapis.com/maps/api/geocode/json?address=2227%20Paine%20Turnpike%20Berlin%20vt%2005602&language=en&sensor=false
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Fri, 11 Oct 2013 04:40:34 GMT
+      Expires:
+      - Sat, 12 Oct 2013 04:40:34 GMT
+      Cache-Control:
+      - public, max-age=86400
+      Access-Control-Allow-Origin:
+      - ! '*'
+      Server:
+      - mafe
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Alternate-Protocol:
+      - 80:quic
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: US-ASCII
+      string: ! "{\n   \"results\" : [\n      {\n         \"address_components\" :
+        [\n            {\n               \"long_name\" : \"2227\",\n               \"short_name\"
+        : \"2227\",\n               \"types\" : [ \"street_number\" ]\n            },\n
+        \           {\n               \"long_name\" : \"Paine Turnpike South\",\n
+        \              \"short_name\" : \"Paine Turnpike S\",\n               \"types\"
+        : [ \"route\" ]\n            },\n            {\n               \"long_name\"
+        : \"Berlin\",\n               \"short_name\" : \"Berlin\",\n               \"types\"
+        : [ \"locality\", \"political\" ]\n            },\n            {\n               \"long_name\"
+        : \"Washington\",\n               \"short_name\" : \"Washington\",\n               \"types\"
+        : [ \"administrative_area_level_2\", \"political\" ]\n            },\n            {\n
+        \              \"long_name\" : \"Vermont\",\n               \"short_name\"
+        : \"VT\",\n               \"types\" : [ \"administrative_area_level_1\", \"political\"
+        ]\n            },\n            {\n               \"long_name\" : \"United
+        States\",\n               \"short_name\" : \"US\",\n               \"types\"
+        : [ \"country\", \"political\" ]\n            },\n            {\n               \"long_name\"
+        : \"05602\",\n               \"short_name\" : \"05602\",\n               \"types\"
+        : [ \"postal_code\" ]\n            }\n         ],\n         \"formatted_address\"
+        : \"2227 Paine Turnpike South, Berlin, VT 05602, USA\",\n         \"geometry\"
+        : {\n            \"bounds\" : {\n               \"northeast\" : {\n                  \"lat\"
+        : 44.1931496,\n                  \"lng\" : -72.58242439999999\n               },\n
+        \              \"southwest\" : {\n                  \"lat\" : 44.19314780000001,\n
+        \                 \"lng\" : -72.5824427\n               }\n            },\n
+        \           \"location\" : {\n               \"lat\" : 44.1931496,\n               \"lng\"
+        : -72.5824427\n            },\n            \"location_type\" : \"RANGE_INTERPOLATED\",\n
+        \           \"viewport\" : {\n               \"northeast\" : {\n                  \"lat\"
+        : 44.1944976802915,\n                  \"lng\" : -72.58108456970849\n               },\n
+        \              \"southwest\" : {\n                  \"lat\" : 44.19179971970851,\n
+        \                 \"lng\" : -72.58378253029151\n               }\n            }\n
+        \        },\n         \"partial_match\" : true,\n         \"types\" : [ \"street_address\"
+        ]\n      }\n   ],\n   \"status\" : \"OK\"\n}\n"
+    http_version:
+  recorded_at: Fri, 11 Oct 2013 04:40:32 GMT
+- request:
+    method: get
+    uri: http://openstates.org/api/v1/legislators/geo/?apikey=&fields=id&lat=44.1931496&long=-72.5824427
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - ! '*/*; q=0.5, application/xml'
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.2.6 (Ubuntu)
+      Content-Type:
+      - application/json; charset=utf-8
+      Vary:
+      - Authorization
+      Date:
+      - Fri, 11 Oct 2013 04:41:13 GMT
+      X-Varnish:
+      - 237078223 237077519
+      Age:
+      - '74'
+      Via:
+      - 1.1 varnish, 1.1 BC2-ACLD
+      Content-Length:
+      - '603'
+      Connection:
+      - Keep-Alive
+    body:
+      encoding: US-ASCII
+      string: ! '[{"district": "Washington", "chamber": "upper", "state": "vt", "boundary_id":
+        "sldu/vt-washington", "id": "VTL000008"}, {"district": "Washington", "chamber":
+        "upper", "state": "vt", "boundary_id": "sldu/vt-washington", "id": "VTL000009"},
+        {"district": "Washington", "chamber": "upper", "state": "vt", "boundary_id":
+        "sldu/vt-washington", "id": "VTL000184"}, {"district": "Washington-1", "chamber":
+        "lower", "state": "vt", "boundary_id": "sldl/vt-washington-1", "id": "VTL000199"},
+        {"district": "Washington-1", "chamber": "lower", "state": "vt", "boundary_id":
+        "sldl/vt-washington-1", "id": "VTL000064"}]'
+    http_version:
+  recorded_at: Fri, 11 Oct 2013 04:40:33 GMT
 recorded_with: VCR 2.5.0

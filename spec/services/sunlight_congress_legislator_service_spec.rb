@@ -7,7 +7,8 @@ describe SunlightCongressLegislatorService do
   describe "#ids_for" do
     it "takes a location and returns matching federal legislator ids", :vcr do
       legislator_ids = ["W000800", "L000174", "S000033"]
-      expect(api.ids_for("05602")).to eq legislator_ids
+      location = Geocoder.search("05602").first
+      expect(api.ids_for(location)).to eq legislator_ids
     end
   end
 

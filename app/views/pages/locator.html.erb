@@ -26,6 +26,12 @@
         <a href="#">State</a>
         <i class="icon-angle-down"></i>
       </li>
+      <% if @municipal_people.count > 0 -%>
+        <li id="municipal-people">
+          <a href="#"><%= @municipality -%></a>
+          <i class="icon-angle-down"></i>
+        </li>
+        <% end -%>
     </ul>
   </nav>
   &nbsp;
@@ -35,6 +41,12 @@
   </ol>
   <ol class="people-list state-people-list" style="display:none;">
     <%# spell out arguments for subclasses of Person sake -%>
+    <%= render partial: 'people/person', object: @governor if @governor %>
     <%= render partial: 'people/person', collection: @state_people %>
+  </ol>
+  <ol class="people-list municipal-people-list" style="display:none;">
+    <%# spell out arguments for subclasses of Person sake -%>
+    <%# render partial: 'people/person', object: @mayor if @mayor %>
+    <%= render partial: 'people/person', collection: @municipal_people %>
   </ol>
 </section>

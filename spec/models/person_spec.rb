@@ -9,20 +9,6 @@ describe Person do
     @person.save!
   end
 
-  describe ".for_location" do
-    it "returns matching people given a location", :vcr do
-      address = "2227 Paine Turnpike South, Berlin, VT"
-      expect(Person.for_location(address).first).to eq @person
-    end
-
-    context "when location is already geocoded", :vcr do
-      it "returns matching people" do
-        geodata = Geocoder.search("2227 Paine Turnpike South, Berlin, VT").first
-        expect(Person.for_location(geodata).first).to eq @person
-      end
-    end
-  end
-
   describe ".load_from_api_for_jurisdiction" do
     it "does not overwrite existing people" do
       Person.load_from_apis_for_jurisdiction("vt")

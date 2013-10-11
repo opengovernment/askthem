@@ -69,13 +69,13 @@ class PagesController < ApplicationController
     if request.format != :json
       set_variables_for(@address)
     else
-      respond_with limited_json_for(type.constantize.for_location(@address))
+      respond_with limited_json_for(Person.results_for_location(@address))
     end
   end
 
   def identifier
     # annoying that you can't do case insensitive queries without a regex
-    @people = type.constantize.where(email: /^#{params[:email]}$/i)
+    @people = Person.where(email: /^#{params[:email]}$/i)
     respond_with limited_json_for(@people)
   end
 
@@ -113,6 +113,8 @@ class PagesController < ApplicationController
     geodata = Geocoder.search(address).first
     center = geodata.coordinates.reverse
 
+    @municipality = geodata.city
+
     @questions = Question.includes(:user)
       .where(:coordinates => { "$within" => { "$center" => [center, 1] } })
       .order_by(signature_count: "desc").limit(10)
@@ -120,15 +122,21 @@ class PagesController < ApplicationController
     @federal_people = FederalLegislator.includes(:questions, :identities)
       .for_location(geodata)
 
-    @state_people = StateLegislator.includes(:questions, :identities)
+    @state_people = StateLegislator.includes(:questions, :identities, :metadatum)
       .for_location(geodata)
+
+    @municipal_people = Councilmember.includes(:questions, :identities, :metadatum)
+      .for_location(geodata)
+
+    @governor = Governor.includes(:questions, :identities, :metadatum)
+      .for_location(geodata).first
   end
 
   def limited_json_for(people)
     only = [:full_name, :photo_url, :party]
-    methods = [:id, :most_recent_chamber_title, :most_recent_district]
+    methods = [:id, :political_position_title, :most_recent_district]
 
-    people.includes(:metadatum).as_json only: only, methods: methods
+    people.as_json only: only, methods: methods
   end
 
   def type

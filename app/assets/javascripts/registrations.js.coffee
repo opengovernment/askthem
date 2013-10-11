@@ -34,7 +34,7 @@ jQuery ($) ->
             divVal += '<div class="person-info">'
             divVal += '<span class="jurisdiction">'
             personAttributes = []
-            personAttributes.push @most_recent_chamber_title if @most_recent_chamber_title?
+            personAttributes.push @political_position_title if @political_position_title?
             personAttributes.push @most_recent_district if @most_recent_district?
             personAttributes.push @party if @party?
             divVal += personAttributes.join(', ')

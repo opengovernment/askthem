@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://congress.api.sunlightfoundation.com/legislators/?apikey=8f13417da56c4101995e5a96b4e1acb1&state=VT
+    uri: http://congress.api.sunlightfoundation.com/legislators/?apikey=&state=VT
     body:
       encoding: US-ASCII
       string: ''
@@ -67,6 +67,6 @@ http_interactions:
         X0ox+qzNFuS8Lo/f4Dlc/1EY84g2HPyx147y4P9DHv+0r8oDjHlDHm/dEozT
         lfyOPJBrzynYDcUhEs5x8b4qjpc8hPtAHr4JjTkGfwZLiqbF1Uf7Yp+vcWs9
         nSO4tjpU4MzujT8//wded5BDSwkAAA==
-    http_version: 
+    http_version:
   recorded_at: Fri, 04 Oct 2013 01:42:10 GMT
 recorded_with: VCR 2.5.0

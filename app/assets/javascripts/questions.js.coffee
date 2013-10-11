@@ -89,7 +89,7 @@ jQuery ($) ->
         if $('ul.people-type').is(':hidden')
           $('ul.people-type').fadeTo(300, 1)
 
-        getPeople('FederalLegislator')
+        getPeople()
       else
         # show recipient header and loading
         if $('label.select-person').is(':hidden')
@@ -125,14 +125,13 @@ jQuery ($) ->
     $('#content-person-short-description').html '(' + jurisdiction + ')'
     $('#confirm-person-attributes').html "<strong>#{jurisdiction}</strong>"
 
-  getPeople = (type = 'Person') ->
+  getPeople = () ->
     address = $('#question_user_attributes_street_address').val()
     address += ' ' + $('#question_user_attributes_locality').val()
     address += ' ' + $('#question_user_attributes_region').val()
     address += ' ' + $('#question_user_attributes_postal_code').val()
 
     url = "/locator.json?q=#{encodeURIComponent(address)}"
-    url += "&type=FederalLegislator" if type == 'FederalLegislator'
 
     $.ajax
       url: url
@@ -159,7 +158,7 @@ jQuery ($) ->
           liVal += '<div class="person-info">'
           liVal += '<span class="jurisdiction">'
           personAttributes = []
-          personAttributes.push @most_recent_chamber_title if @most_recent_chamber_title?
+          personAttributes.push @political_position_title if @political_position_title?
           personAttributes.push @most_recent_district if @most_recent_district?
           personAttributes.push @party if @party?
           liVal += personAttributes.join(', ')
@@ -174,25 +173,6 @@ jQuery ($) ->
         personList.show()
         personList.children('li').on 'click', (e) ->
           updateSelectedPerson e
-
-
-  switchToPeopleType = (type = 'Person') ->
-    id = '#state-people'
-    oldId = '#federal-people'
-    if type == 'FederalLegislator'
-      id = '#federal-people'
-      oldId = '#state-people'
-
-    $(id).addClass 'active'
-    $(oldId).removeClass 'active'
-
-    getPeople(type)
-
-  $('#federal-people a').click (event) ->
-    switchToPeopleType('FederalLegislator')
-
-  $('#state-people a').click (event) ->
-    switchToPeopleType()
 
   hideLaterSteps = (->
     $('article.not-first-step').each ->
