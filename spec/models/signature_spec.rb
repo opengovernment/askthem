@@ -10,13 +10,9 @@ describe Signature do
   it "should copy the user's fields" do
     user = FactoryGirl.create(:user)
     signature = FactoryGirl.create(:signature, user: user)
-    signature.given_name.should     == user.given_name
-    signature.family_name.should    == user.family_name
-    signature.street_address.should == user.street_address
-    signature.locality.should       == user.locality
-    signature.region.should         == user.region
-    signature.postal_code.should    == user.postal_code
-    signature.country.should        == user.country
+    expect(signature.given_name).to eq user.given_name
+    expect(signature.family_name).to eq user.family_name
+    expect(signature.street_address).to eq user.street_address
   end
 
   context "with callbacks" do
@@ -25,13 +21,13 @@ describe Signature do
       it "should add to question's signature_count" do
         expect(signature.question.signature_count).to eq 1
       end
-      it "should appropriately flag the question's signature threshold as met" do
+      it "should appropriately flag the question's signature threshold met" do
         users = FactoryGirl.create_list(:user, 101)
         question = FactoryGirl.create(:question)
-        users.each do |u|
-          FactoryGirl.create(:signature, user: u, question: question)
+        users.each do |user|
+          FactoryGirl.create(:signature, user: user, question: question)
         end
-        expect(question.threshold_met?).to eq true
+        expect(question.threshold_met?).to be_true
       end
     end
 

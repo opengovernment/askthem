@@ -15,32 +15,31 @@ class QuestionsController < ApplicationController
   end
 
   def need_signatures
-    people = Person.where(state: @state_code)
-    @questions = Question.where(state: @state_code).where(threshold_met: false)
+    @questions = end_of_association_chain.where(threshold_met: false)
       .includes(:user)
-      .page(params[:page] || 1)
-    tab 'need_signatures'
+      .page(page)
+    tab "need_signatures"
   end
 
   def have_answers
-    @questions = Question.where(state: @state_code).any_in(_id: Answer.all.distinct("question_id"))
+    @questions = end_of_association_chain.any_in(_id: Answer.all.distinct("question_id"))
       .includes(:user)
-      .page(params[:page] || 1)
-    tab 'have_answers'
+      .page(page)
+    tab "have_answers"
   end
 
   def need_answers
-    @questions = Question.where(state: @state_code).not_in(_id: Answer.all.distinct("question_id"))
+    @questions = end_of_association_chain.not_in(_id: Answer.all.distinct("question_id"))
       .includes(:user)
-      .page(params[:page] || 1)
-    tab 'need_answers'
+      .page(page)
+    tab "need_answers"
   end
 
   def recent
     @questions = Question.where(state: @state_code).desc(:issued_at)
       .includes(:user)
-      .page(params[:page] || 1)
-    tab 'recent'
+      .page(page)
+    tab "recent"
   end
 
   def show
@@ -90,6 +89,10 @@ class QuestionsController < ApplicationController
   end
 
   private
+  def page
+    params[:page] || 1
+  end
+
   def type
     @type ||= params[:type] || "StateLegislator"
   end
@@ -136,8 +139,8 @@ class QuestionsController < ApplicationController
   def tab(tab)
     @tab = tab
     index! do |format|
-      format.html { render action: 'index' }
-      format.js { render partial: 'page' }
+      format.html { render action: "index" }
+      format.js { render partial: "page" }
     end
   end
 end
