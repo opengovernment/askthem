@@ -1,7 +1,7 @@
 class QuestionMailer < ActionMailer::Base
   add_template_helper(ApplicationHelper)
 
-  default from: "develop@opengovernment.org"
+  default from: "support@askthem.io"
   def question_posted(user, question)
     @user = user
     @question = question

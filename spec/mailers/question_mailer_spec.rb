@@ -9,7 +9,7 @@ describe QuestionMailer do
     last_email = ActionMailer::Base.deliveries.last
 
     last_email.to.should == [user.email]
-    last_email.from.should eq(["develop@opengovernment.org"])
+    last_email.from.should eq(["support@askthem.io"])
     last_email.subject.should eq("Your Question on AskThem Has Been Posted")
     last_email.body.encoded.should match( question_url(question.state, question.id) )
   end
@@ -20,9 +20,8 @@ describe QuestionMailer do
     QuestionMailer.signed_on(user, question).deliver
     last_email = ActionMailer::Base.deliveries.last
     last_email.to.should == [user.email]
-    last_email.from.should == ["develop@opengovernment.org"]
+    last_email.from.should == ["support@askthem.io"]
     last_email.subject.should == "You're Signed On to '#{question.title}'"
     last_email.body.encoded.should match(question_url(question.state, question.id))
-
   end
 end
