@@ -76,6 +76,18 @@ en:
     index:
       title: "%{jurisdiction} Questions - AskThem"
       description: "Ask and support questions to your %{jurisdiction} officials"
+    need_signatures:
+      title: "%{jurisdiction} Questions - AskThem"
+      description: "Ask and support questions to your %{jurisdiction} officials"
+    have_answers:
+      title: "%{jurisdiction} Questions - AskThem"
+      description: "Ask and support questions to your %{jurisdiction} officials"
+    need_answers:
+      title: "%{jurisdiction} Questions - AskThem"
+      description: "Ask and support questions to your %{jurisdiction} officials"
+    recent:
+      title: "%{jurisdiction} Questions - AskThem"
+      description: "Ask and support questions to your %{jurisdiction} officials"
     show:
       title: '“%{question}” - %{jurisdiction} - AskThem'
       description: Show your support for this question by adding your signature

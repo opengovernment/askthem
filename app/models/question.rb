@@ -32,6 +32,8 @@ class Question
   # since we aren't geocoding directly, don't need geocoder stuff
   field :coordinates, type: Array
 
+  field :threshold_met, type: Boolean, default: false
+
   index(state: 1)
   index(person_id: 1, answered: 1)
   index(bill_id: 1, answered: 1)

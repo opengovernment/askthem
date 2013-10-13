@@ -4,13 +4,42 @@ class QuestionsController < ApplicationController
   respond_to :html
   respond_to :js, only: :index
   actions :index, :show, :new, :create
+  custom_actions resource: [:need_signatures, :have_answers, :need_answers, :recent]
 
-  before_filter :set_state_code, only: [:show, :new, :create]
+  before_filter :set_state_code, only: [:show, :new, :create, :need_signatures, :have_answers, :need_answers, :recent]
 
   def index
     index! do |format|
       format.js { render partial: "page" }
     end
+  end
+
+  def need_signatures
+    @questions = end_of_association_chain.where(threshold_met: false)
+      .includes(:user)
+      .page(page)
+    tab "need_signatures"
+  end
+
+  def have_answers
+    @questions = end_of_association_chain.any_in(_id: Answer.all.distinct("question_id"))
+      .includes(:user)
+      .page(page)
+    tab "have_answers"
+  end
+
+  def need_answers
+    @questions = end_of_association_chain.not_in(_id: Answer.all.distinct("question_id"))
+      .includes(:user)
+      .page(page)
+    tab "need_answers"
+  end
+
+  def recent
+    @questions = Question.where(state: @state_code).desc(:issued_at)
+      .includes(:user)
+      .page(page)
+    tab "recent"
   end
 
   def show
@@ -60,6 +89,10 @@ class QuestionsController < ApplicationController
   end
 
   private
+  def page
+    params[:page] || 1
+  end
+
   def type
     @type ||= params[:type] || "StateLegislator"
   end
@@ -100,5 +133,14 @@ class QuestionsController < ApplicationController
 
   def resource
     @question ||= Question.where(state: @state_code).find(params[:id])
+  end
+
+  private
+  def tab(tab)
+    @tab = tab
+    index! do |format|
+      format.html { render action: "index" }
+      format.js { render partial: "page" }
+    end
   end
 end

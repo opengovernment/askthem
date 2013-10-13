@@ -31,6 +31,8 @@ describe 'questions' do
                              state: @metadatum.abbreviation,
                              person: valid_person)
         end
+        FactoryGirl.create(:signature, question: @all_questions.last)
+        FactoryGirl.create(:answer, question: @all_questions.first)
       end
 
       it 'returns them' do
@@ -53,6 +55,49 @@ describe 'questions' do
             page.should have_content 'Signed'
             page.body.should have_content '1 out of'
           end
+        end
+      end
+
+      context 'when needs_signatures filter is clicked' do
+        it 'applies the filter' do
+          visit '/vt/questions/need_signatures'
+          users = FactoryGirl.create_list(:user, 100)
+          users.each do |u|
+            FactoryGirl.create(:signature, user: u, question: @all_questions.last)
+          end
+          page.should have_no_content "100 out of"
+        end
+      end
+
+      context 'when have_answers filter is clicked' do
+        it 'applies the filter' do
+          question = FactoryGirl.create(:question, 
+                                        title: 'This question has an answer', 
+                                        state: @metadatum.abbreviation,
+                                        person: valid_person)
+          answer = FactoryGirl.create(:answer, question: question)
+          visit '/vt/questions/have_answers'
+          page.should have_content question.title
+        end
+      end
+
+      context 'when need_answers filter is clicked' do
+        it 'applies the filter' do
+          question = FactoryGirl.create(:question, 
+                                        title: 'This question has no answer', 
+                                        state: @metadatum.abbreviation,
+                                        person: valid_person)
+          answer = FactoryGirl.create(:answer, question: question)
+          visit '/vt/questions/need_answers'
+          page.should have_no_content question.title
+        end
+      end
+
+      context 'when recent filter is clicked' do
+        it 'applies the filter' do
+          visit '/vt/questions/recent'
+          rendered_questions = page.find('.title.question-input-summary')
+          rendered_questions.should have_content @all_questions.last.title
         end
       end
 
@@ -328,7 +373,7 @@ describe 'questions' do
           click_button 'Sign'
         end
 
-        page.body.should have_content '1 out of'
+        page.body.should have_content "1 out of"
       end
 
       context 'as signed in user' do
