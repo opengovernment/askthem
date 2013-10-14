@@ -2,29 +2,6 @@ require 'spec_helper'
 require File.expand_path("../features_helper.rb", __FILE__)
 
 describe "people" do
-  describe '#index' do
-    context "when at least one person has a staff inspected user account" do
-      let(:identity) { FactoryGirl.create(:identity, status: 'verified') }
-      let(:person) { identity.person }
-
-      it "is listed as verified" do
-        set_up_person_and_metadatum(person)
-        visit "/ny/people/"
-        page.should have_selector ".is-verified"
-      end
-    end
-
-    context "when no people have staff inspected user accounts" do
-      let(:person) { FactoryGirl.create(:person) }
-
-      it "doesn't list as verified" do
-        set_up_person_and_metadatum(person)
-        visit "/#{person.metadatum.abbreviation}/people/"
-        page.should_not have_selector ".is-verified"
-      end
-    end
-  end
-
   describe '#show' do
     context "when has a staff inspected user account" do
       let(:identity) { FactoryGirl.create(:identity, status: 'verified') }

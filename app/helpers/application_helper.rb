@@ -20,27 +20,26 @@ module ApplicationHelper
 
   # @return [Boolean] whether the current jurisdiction is at the federal level
   def federal?
-    (@jurisdiction && params[:type] && params[:type] == 'FederalLegislator') ||
-      (@person && @person.is_a?(FederalLegislator))
+    @jurisdiction && !state? && !local?
   end
 
   # @return [Boolean] whether the current jurisdiction is at the state level
   def state?
-    !!(@jurisdiction &&
-       @jurisdiction.abbreviation[/\A[a-z]{2}\z/] &&
-       !federal?)
+    (@jurisdiction &&
+     @jurisdiction.abbreviation[/\A[a-z]{2}\z/] &&
+     params[:gov] && params[:gov] == 'state') ||
+      (@person && @person.is_a?(StateLegislator))
   end
 
   # @return [Boolean] whether the current jurisdiction is at the local
   def local?
-    !!(@jurisdiction && @jurisdiction.abbreviation[/\A[a-z]{2}-/])
+    @jurisdiction && @jurisdiction.abbreviation[/\A[a-z]{2}-/]
   end
 
   # @return [String] the abbreviation of the state level jurisdiction
   #   corresponding to the current jurisdiction
   def federal_path
-    jurisdiction_path(jurisdiction: state_abbreviation,
-                      type: 'FederalLegislator')
+    jurisdiction_path jurisdiction: state_abbreviation
   end
 
   # @return [String] the abbreviation of the state level jurisdiction
@@ -49,7 +48,7 @@ module ApplicationHelper
     if local?
       jurisdiction_path(jurisdiction: state_abbreviation)
     elsif state? || federal?
-      jurisdiction_path(jurisdiction: @jurisdiction.abbreviation)
+      jurisdiction_path(jurisdiction: @jurisdiction.abbreviation, gov: 'state')
     else
       '#'
     end
@@ -173,9 +172,9 @@ module ApplicationHelper
   # @return [Hash] HTML options for the "a" tag
   def filter_options(action, scope = nil)
     {
-      'id' => "#{action}-tab",
-      'class' => @tab == action ? 'radio_button filter active' : 'radio_button filter inactive',
-      'data-title' => translate_in_controller_scope("#{scope || action}.title"),
+      id: "#{action}-tab",
+      class:  @tab == action ? "radio_button filter active" : "radio_button filter inactive",
+      "data-title" => translate_in_controller_scope("#{scope || action}.title"),
     }
   end
 

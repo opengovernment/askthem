@@ -37,13 +37,8 @@ class Person
 
   delegate :signature_threshold, :biography, :links, to: :person_detail
 
-  def self.only_type(type)
-    if type == 'Person'
-      # handle legacy where api sets _type to 'person'
-      where('_type' => { '$in' => [type, type.downcase, nil] })
-    else
-      where('_type' => type)
-    end
+  def self.only_types(types)
+    where("_type" => { "$in" => types })
   end
 
   # non-chainable

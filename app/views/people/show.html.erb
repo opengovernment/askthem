@@ -37,7 +37,7 @@
       <nav>
         <ul class="related_nav">
           <li><%= link_to 'Questions', person_path(@jurisdiction.abbreviation, @person.id), tab_options('questions', 'show') %></li>
-          <%- if @person._type == "StateLegislator"%>
+          <%- if @person.is_a? StateLegislator %>
             <li><%= link_to 'Sponsored Bills', bills_person_path(@jurisdiction.abbreviation, @person.id), tab_options('bills') %></li>
             <li><%= link_to 'Votes', votes_person_path(@jurisdiction.abbreviation, @person.id), tab_options('votes') %></li>
             <li><%= link_to 'Committees', committees_person_path(@jurisdiction.abbreviation, @person.id), tab_options('committees') %></li>
