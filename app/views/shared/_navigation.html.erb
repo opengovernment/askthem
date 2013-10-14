@@ -24,13 +24,13 @@
     </ul>
     <% unless (params[:controller] == 'questions' && params[:action] == 'show') %>
       <ul class="top_nav">
-        <li><a name="top" style="display:none;"></a><%= tab 'Questions', @type ? questions_path(type: @type) : questions_path %></li>
+        <li><a name="top" style="display:none;"></a><%= tab 'Questions', @gov ? questions_path(gov: @gov) : questions_path %></li>
         <% unless 1 # federal? -%>
           <li><%= tab 'Bills', bills_path %></li>
         <% end %>
         <%# @todo extract to helper -%>
         <% unless 1 %>
-          <li><%= tab 'People', @type ? people_path(type: @type) : people_path %></li>
+          <li><%= tab 'People', @gov ? people_path(gov: @gov) : people_path %></li>
           <% if @jurisdiction.subjects? %>
           <li><%= tab 'Issues', subjects_path %></li>
           <% end %>
@@ -38,7 +38,7 @@
         <%# <li><%= tab 'Money', '#' </li> @todo %>
           <li><%= tab 'Government', jurisdiction_path %></li>
         <% if should_have_ask_question_in_header? -%>
-          <%= link_to 'Ask a Question', @type ? new_question_path(@jurisdiction.abbreviation, type: @type) : new_question_path(@jurisdiction.abbreviation), class: 'cta-pill top-nav-ask' %>
+          <%= link_to 'Ask a Question', new_question_path(@jurisdiction.abbreviation), class: 'cta-pill top-nav-ask' %>
         <% end %>
         </ul>
     <% end %>

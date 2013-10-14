@@ -36,16 +36,22 @@ class PeopleController < ApplicationController
   private
   # @todo DRY with pages controller and improve
   # putting off, because it will likely be totally replaced
-  def type
-    @type ||= if params[:type]
-                params[:type]
-              else
-                if @jurisdiction.abbreviation.include?("-")
-                  "Councilmember"
-                else
-                  "StateLegislator"
-                end
-              end
+  def types
+    @types ||= if params[:gov]
+                @gov = params[:gov]
+                 case @gov
+                 when "state"
+                   ["StateLegislator"]
+                 when "federal"
+                   ["FederalLegislator"]
+                 end
+               else
+                 if @jurisdiction && @jurisdiction.abbreviation.include?("-")
+                   ["Councilmember"]
+                 else
+                   ["FederalLegislator"]
+                 end
+               end
   end
 
   def tab(tab)
@@ -64,6 +70,6 @@ class PeopleController < ApplicationController
     # downcase covers api legacy set 'person' for _type
     # @todo evaluate if in for type is too slow
     @people ||= end_of_association_chain.active.includes(:questions, :identities)
-      .only_type(type)
+      .only_types(types)
   end
 end

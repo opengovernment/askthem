@@ -36,12 +36,12 @@ describe 'questions' do
       end
 
       it 'returns them' do
-        visit '/vt/questions'
+        visit '/vt/questions?gov=state'
         page.body.should have_selector '.question_content .title'
       end
 
       it 'shows the correct threshold for the person' do
-        visit '/vt/questions'
+        visit '/vt/questions?gov=state'
         page.body.should have_content "out of #{@all_questions[0].person.signature_threshold}"
 
       end
@@ -50,7 +50,7 @@ describe 'questions' do
         it 'allows user to sign on to a question', js: true do
           valid_person
           as_user do
-            visit '/vt/questions'
+            visit '/vt/questions?gov=state'
             click_link 'Sign'
             page.should have_content 'Signed'
             page.body.should have_content '1 out of'
@@ -60,7 +60,7 @@ describe 'questions' do
 
       context 'when needs_signatures filter is clicked' do
         it 'applies the filter' do
-          visit '/vt/questions/need_signatures'
+          visit '/vt/questions/need_signatures?gov=state'
           users = FactoryGirl.create_list(:user, 100)
           users.each do |u|
             FactoryGirl.create(:signature, user: u, question: @all_questions.last)
@@ -71,31 +71,31 @@ describe 'questions' do
 
       context 'when have_answers filter is clicked' do
         it 'applies the filter' do
-          question = FactoryGirl.create(:question, 
-                                        title: 'This question has an answer', 
+          question = FactoryGirl.create(:question,
+                                        title: 'This question has an answer',
                                         state: @metadatum.abbreviation,
                                         person: valid_person)
           answer = FactoryGirl.create(:answer, question: question)
-          visit '/vt/questions/have_answers'
+          visit '/vt/questions/have_answers?gov=state'
           page.should have_content question.title
         end
       end
 
       context 'when need_answers filter is clicked' do
         it 'applies the filter' do
-          question = FactoryGirl.create(:question, 
-                                        title: 'This question has no answer', 
+          question = FactoryGirl.create(:question,
+                                        title: 'This question has no answer',
                                         state: @metadatum.abbreviation,
                                         person: valid_person)
           answer = FactoryGirl.create(:answer, question: question)
-          visit '/vt/questions/need_answers'
+          visit '/vt/questions/need_answers?gov=state'
           page.should have_no_content question.title
         end
       end
 
       context 'when recent filter is clicked' do
         it 'applies the filter' do
-          visit '/vt/questions/recent'
+          visit '/vt/questions/recent?gov=state'
           rendered_questions = page.find('.title.question-input-summary')
           rendered_questions.should have_content @all_questions.last.title
         end
@@ -380,7 +380,7 @@ describe 'questions' do
         it 'allows user to sign on to a question', js: true do
           valid_person
           as_user do
-            visit '/vt/questions'
+            visit '/vt/questions?gov=state'
             click_link 'Sign'
             page.should have_content 'Signed'
             page.body.should have_content '1 out of'

@@ -83,7 +83,7 @@ class PagesController < ApplicationController
   # @param jurisdictions
   # @param type
   def contact_info
-    @people = Person.active.only_type(type)
+    @people = Person.active.only_types(types)
 
     @limit_to_jurisdictions = params[:limit_to_jurisdictions]
     if @limit_to_jurisdictions
@@ -139,14 +139,20 @@ class PagesController < ApplicationController
     people.as_json only: only, methods: methods
   end
 
-  def type
-    @type ||= if params[:type]
-                params[:type]
+  def types
+    @types ||= if params[:gov]
+                @gov = params[:gov]
+                case @gov
+                when "state"
+                  ["StateLegislator"]
+                when "federal"
+                  ["FederalLegislator"]
+                end
               else
                 if @jurisdiction && @jurisdiction.abbreviation.include?("-")
-                  "Councilmember"
+                  ["Councilmember"]
                 else
-                  "StateLegislator"
+                  ["FederalLegislator"]
                 end
               end
   end
@@ -163,21 +169,25 @@ class PagesController < ApplicationController
     # of the unevaluated query.
     @lower = Person.connected_to(@jurisdiction.abbreviation).active
       .where(chamber: "lower")
-      .only_type(type)
+      .only_types(types)
     @lower_parties = @lower.group_by { |person| person["party"] }
     if tab == "lower"
       @lower = @lower.includes(:questions, :identities)
-      @lower = @lower.includes(:metadatum) unless type == "FederalLegislator"
+      unless types.include?("FederalLegislator")
+        @lower = @lower.includes(:metadatum)
+      end
     end
     @lower = @lower.page(params[:page])
 
     @upper = Person.connected_to(@jurisdiction.abbreviation).active
       .where(chamber: "upper")
-      .only_type(type)
+      .only_types(types)
     @upper_parties = @upper.group_by { |person| person["party"] }
     if tab == "upper"
       @upper = @upper.includes(:questions, :identities)
-      @upper = @upper.includes(:metadatum) unless type == "FederalLegislator"
+      unless types.include?("FederalLegislator")
+        @upper = @upper.includes(:metadatum)
+      end
     end
     @upper = @upper.page(params[:page])
 

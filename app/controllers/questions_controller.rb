@@ -36,7 +36,7 @@ class QuestionsController < ApplicationController
   end
 
   def recent
-    @questions = Question.where(state: @state_code).desc(:issued_at)
+    @questions = end_of_association_chain.desc(:issued_at)
       .includes(:user)
       .page(page)
     tab "recent"
@@ -93,8 +93,23 @@ class QuestionsController < ApplicationController
     params[:page] || 1
   end
 
-  def type
-    @type ||= params[:type] || "StateLegislator"
+  def types
+    @gov = params[:gov]
+    @types ||= if @gov
+                 case @gov
+                 when "state"
+                   ["StateLegislator", "Governor"]
+                 when "federal"
+                   ["FederalLegislator"]
+                 end
+               else
+                 if @jurisdiction && @jurisdiction.abbreviation.include?("-")
+                   ["Councilmember"]
+                 else
+                   @gov = "federal"
+                   ["FederalLegislator"]
+                 end
+               end
   end
 
   def set_state_code
@@ -121,7 +136,7 @@ class QuestionsController < ApplicationController
   # unify databases or make consistent
   def end_of_association_chain
     abbreviation = parent.abbreviation
-    person_ids = Person.only_type(type).connected_to(abbreviation).collect(&:id)
+    person_ids = Person.only_types(types).connected_to(abbreviation).collect(&:id)
     Question.connected_to(abbreviation).in(person_id: person_ids)
   end
 

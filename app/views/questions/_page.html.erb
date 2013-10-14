@@ -3,7 +3,7 @@
     <ol class="questions">
       <%= render @questions %>
     </ol>
-    <%= paginate @questions, outer_window: 1, params: {format: nil}, replace: '#page', scroll: 'section' %>
+    <%= paginate @questions, outer_window: 1, params: { format: nil }, replace: '#page', scroll: 'section' %>
     <% else %>
     <div class="notif info">
       <h3>Nobody has asked any questions yet!</h3>
