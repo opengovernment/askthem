@@ -1,3 +1,7 @@
+require 'bundler/capistrano'   # http://gembundler.com/v1.3/deploying.html
+require 'rvm/capistrano'       # https://rubygems.org/gems/rvm-capistrano
+set :rvm_type, :system
+
 set :application, "AskThem"
 
 default_run_options[:pty] = true
