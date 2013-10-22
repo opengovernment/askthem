@@ -1,18 +1,107 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
-  <head>
-    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
-  </head>
-  <body>
-    <h1>Thank you for requesting your account for verification by AskThem, <%= @user.given_name %></h1>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=320, target-densitydpi=device-dpi" />
 
-    <p>An AskThem staff member has verified your identity. You can now view your answer questions from the following URL:</p>
+<!--[if gte mso 9]>
+<style _tmplitem="283" >
+.article-content ol, .article-content ul {
+   margin: 0 0 0 24px;
+   padding: 0;
+   list-style-position: inside;
+}
+</style>
+<![endif]-->
+</head>
 
-     <p><%= link_to(person_url(@person.state, @person.id), person_url(@person.state, @person.id)) %></p>
+<body style="width: 100% !important; background-color: #d8f2f6 !important; margin: 0; padding: 0;" bgcolor="#d8f2f6">
+  <table width="100%" cellpadding="0" cellspacing="0" border="0" id="background-table" style="background-color: #d8f2f6; font-family: Roboto, Helvetica, sans-serif; color: #32515a;" bgcolor="#d8f2f6">
+    <tbody>
+      <tr id="header" style="border-collapse: collapse; display: block; margin: 45px;">
+        <td align="center" style="border-collapse: collapse;">
+          <table width="640" cellpadding="0" cellspacing="0" border="0">
+            <tbody>
+              <tr style="border-collapse: collapse;">
+                <div align="left">
+                  <a href="http://askthem.io/" class="logo" style="margin-right: 25px; float: left; color: #82B7C8; text-decoration: none;">
+                    <img label="AskThem" editable="true" width="135" src="http://askthem.io/assets/logo.svg" class="w640" border="0" align="top" style="display: block !important; outline: none !important; text-decoration: none !important;" />
+                  </a>
+                  <p class="tagline" style="color: #82B7C8; position: relative; top: 12px;">
+                    Questions and petitions with public figures
+                  </p>
+                </div>
+              </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="main" style="display: block; width: 550px; background-color: #ffffff; -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.1), 0 35px 85px rgba(255, 255, 255, 0.45); -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.1), 0 35px 85px rgba(255, 255, 255, 0.45); box-shadow: 0 0 5px rgba(0, 0, 0, 0.1), 0 35px 85px rgba(255, 255, 255, 0.45); -webkit-border-radius: 0 2px 2px 0; -moz-border-radius: 0 2px 2px 0; -ms-border-radius: 0 2px 2px 0; -o-border-radius: 0 2px 2px 0; padding: 45px 45px 90px;" bgcolor="#ffffff">
+        <td width="500">
+          <table width="500" cellpadding="0" cellspacing="0" border="0">
+            <tbody>
+              <tr style="border-collapse: collapse;">
+                <td width="500" style="border-collapse: collapse;">
+                  <h2>Thank you for requesting your account for verification by AskThem, <%= @user.given_name %></h2>
 
-    <p>
-        Thank you,
-        The AskThem Team
-    </p>
-  </body>
+                  <p>An AskThem staff member has verified your identity. You can now view your answer questions from the following URL:</p>
+
+                   <p><%= link_to(person_url(@person.state, @person.id), person_url(@person.state, @person.id)) %></p>
+
+                  <p>
+                      Thank you,
+                      The AskThem Team
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="footer" style="margin-top: 45px; margin-left: 45px; margin-bottom: 90px; display: block; font-size: 14px;">
+        <td width="640">
+          <p align="left">
+            This email was sent by
+            <a href="http://askthem.io/" style="color: #82B7C8; text-decoration: none;">askthem.io</a><span>.</span>
+          </p>
+          <p align="left">
+            Didn't support this question? Click
+            <a href="#" style="color: #82B7C8; text-decoration: none;">here</a><span>.</span>
+          </p>
+          <p align="left">
+            If you would like to stop receiving emails from
+            <a href="http://askthem.io" style="color: #82B7C8; text-decoration: none;">askthem.io</a>
+            , simply click
+            <a href="#" style="color: #82B7C8; text-decoration: none;">unsubscribe</a><span>.</span>
+          </p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+
+
+<style type="text/css">
+body { width: 100% !important; }
+.ReadMsgBody { width: 100% !important; }
+.ExternalClass { width: 100% !important; display: block !important; }
+body { background-color: #d8f2f6 !important; margin: 0 !important; padding: 0 !important; }
+img { outline: none !important; text-decoration: none !important; display: block !important; }
+h1 a:active { color: red !important; }
+h2 a:active { color: red !important; }
+h3 a:active { color: red !important; }
+h4 a:active { color: red !important; }
+h5 a:active { color: red !important; }
+h6 a:active { color: red !important; }
+h1 a:visited { color: purple !important; }
+h2 a:visited { color: purple !important; }
+h3 a:visited { color: purple !important; }
+h4 a:visited { color: purple !important; }
+h5 a:visited { color: purple !important; }
+h6 a:visited { color: purple !important; }
+.yshortcuts a:visited { color: black !important; text-decoration: none !important; border-bottom: none !important; background: none !important; }
+.yshortcuts a:hover { color: black !important; text-decoration: none !important; border-bottom: none !important; background: none !important; }
+</style>
+</body>
+
 </html>
