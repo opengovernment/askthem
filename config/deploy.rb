@@ -2,7 +2,10 @@ require 'bundler/capistrano'   # http://gembundler.com/v1.3/deploying.html
 require 'rvm/capistrano'       # https://rubygems.org/gems/rvm-capistrano
 set :rvm_type, :system
 
-set :application, "AskThem"
+set :application,   "askthem"
+set :user,          "cappy"
+set :repository,    "https://github.com/rchekaluk/opengovernment-app.git"
+set :keep_releases, 4
 
 default_run_options[:pty] = true
 set :scm,         :git
