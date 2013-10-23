@@ -1,9 +1,12 @@
 <nav class="questions-or-officials">
   <ul class="level">
-  <li class="active"><a href="#" id="questions-near">Questions Near You</a>
+    <li class="active">
+    <a href="#" id="questions-near">See Questions Near You</a>
     <i class="icon-angle-down"></i>
   </li>
-  <li><a href="#" id="officials-near">Your Elected Officials</a>
+  <li>
+    <a href="#" id="officials-near">See Your Elected Officials</a>
+    <%= cdn_image_tag(@federal_people.first.image, size: '30x30', alt: '', class: 'preview-avatar') %>
     <i class="icon-angle-down"></i></li>
   <%= generic_ask_question 'Ask a Question', { class: 'cta-pill'} %>
   </ul>
