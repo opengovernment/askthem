@@ -1,1 +1,5 @@
-The Map!
+<div class='state-links'>
+  <%- OpenGovernment::STATES.each do |state, abbr| %>
+    <%= link_to "#{state}", "/#{abbr}", class: 'state-link' %>
+  <%- end %>
+</div>
