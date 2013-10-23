@@ -12,28 +12,6 @@
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script src="http://d3js.org/topojson.v1.min.js"></script>
 
-<style>
-
-.background {
-  fill: none;
-  pointer-events: all;
-}
-
-#states {
-  fill: #cfecf0;
-}
-
-#state-borders {
-  fill: none;
-  stroke: #fff;
-  stroke-width: 1px;
-  stroke-linejoin: round;
-  stroke-linecap: round;
-  pointer-events: none;
-}
-
-</style>
-
 <script>
 
 var width = 960,
@@ -41,7 +19,7 @@ var width = 960,
     centered;
 
 var projection = d3.geo.albersUsa()
-    .scale(1070)
+    .scale(1000)
     .translate([width / 2, height / 2]);
 
 var path = d3.geo.path()
@@ -52,7 +30,7 @@ var svg = d3.select("#map").append("svg")
     .attr("height", height);
 
 svg.append("rect")
-    .attr("class", "background")
+    .attr("class", "map-background")
     .attr("width", width)
     .attr("height", height)
     ;
