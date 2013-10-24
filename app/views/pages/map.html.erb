@@ -14,6 +14,16 @@
 
 <script>
 
+function showTooltip(el, data) {
+  var center = path.centroid(data);
+
+  tooltip.style("display", "block")
+         .style('left', center[0] + 'px')
+         .style('top', center[1] + el.parentNode.offsetTop - 80 + 'px');
+
+  tooltip.select(".map-tooltip-state-name").text(data.properties.name);
+}
+
 var width = 960,
     height = 500,
     centered;
@@ -35,19 +45,36 @@ svg.append("rect")
     .attr("height", height)
     ;
 
+var tooltip = d3.select("#map").append("div")
+                 .attr("class", "map-tooltip");
+
+tooltip.append("div")
+      .attr("class", "map-tooltip-state-name")
+      ;
+
+tooltip.on("mouseout", function(el) {
+  tooltip.style("display", "none");
+});
+
 var g = svg.append("g");
 
 d3.json("/us.json", function(error, us) {
   g.append("g")
       .attr("id", "states")
     .selectAll("path")
-      .data(topojson.feature(us, us.objects.states).features)
+      .data(topojson.feature(us, us.objects.usa).features)
     .enter().append("path")
       .attr("d", path)
+      .on("mouseover", function(data) {
+        showTooltip(this, data);
+      })
+      .on("click", function(data) {
+        location.href = data.id.toLowerCase();
+      })
       ;
 
   g.append("path")
-      .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))
+      .datum(topojson.mesh(us, us.objects.usa, function(a, b) { return a !== b; }))
       .attr("id", "state-borders")
       .attr("d", path);
 });
