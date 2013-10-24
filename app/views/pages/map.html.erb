@@ -1,5 +1,82 @@
+<h1 class='map-title'>Questions &amp; Petitions in All 50 U.S. States</h1>
+<p>Click on a state to see popular questions and petitions awaiting a public response.</p>
+
+<div id='map'></div>
+
 <div class='state-links'>
   <%- OpenGovernment::STATES.each do |state, abbr| %>
     <%= link_to "#{state}", "/#{abbr}", class: 'state-link' %>
   <%- end %>
 </div>
+
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="http://d3js.org/topojson.v1.min.js"></script>
+
+<script>
+
+function showTooltip(el, data) {
+  var center = path.centroid(data);
+
+  tooltip.style("display", "block")
+         .style('left', center[0] + el.parentNode.offsetLeft - 40 + 'px')
+         .style('top', center[1] + el.parentNode.offsetTop - 60 + 'px');
+
+  tooltip.select(".map-tooltip-state-name").text(data.properties.name);
+}
+
+var width = 960,
+    height = 500,
+    centered;
+
+var projection = d3.geo.albersUsa()
+    .scale(1000)
+    .translate([width / 2, height / 2]);
+
+var path = d3.geo.path()
+    .projection(projection);
+
+var svg = d3.select("#map").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+svg.append("rect")
+    .attr("class", "map-background")
+    .attr("width", width)
+    .attr("height", height)
+    ;
+
+var tooltip = d3.select("#map").append("div")
+                 .attr("class", "map-tooltip");
+
+tooltip.append("div")
+      .attr("class", "map-tooltip-state-name")
+      ;
+
+tooltip.on("mouseout", function(el) {
+  tooltip.style("display", "none");
+});
+
+var g = svg.append("g");
+
+d3.json("/us.json", function(error, us) {
+  g.append("g")
+      .attr("id", "states")
+    .selectAll("path")
+      .data(topojson.feature(us, us.objects.usa).features)
+    .enter().append("path")
+      .attr("d", path)
+      .on("mouseover", function(data) {
+        showTooltip(this, data);
+      })
+      .on("click", function(data) {
+        location.href = data.id.toLowerCase();
+      })
+      ;
+
+  g.append("path")
+      .datum(topojson.mesh(us, us.objects.usa, function(a, b) { return a !== b; }))
+      .attr("id", "state-borders")
+      .attr("d", path);
+});
+
+</script>

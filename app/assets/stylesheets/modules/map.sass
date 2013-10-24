@@ -1,7 +1,19 @@
 @import load
 
+#map
+  margin:
+    top: 3em
+    left: -5.5em
+  position: relative
+  cursor: pointer
+
+.map-title
+  margin:
+    top: 42px
+    bottom: 16px
+
 .state-links
-  margin-top: 6em
+  margin-top: 3em
   @media (min-width: 420px)
     @include column-count(5)
     overflow: hidden
@@ -10,3 +22,42 @@
   display: block
   font-size: 14px
   line-height: 1.5
+
+.map-background
+  fill: none
+  pointer-events: all
+
+.map-tooltip
+  padding: 10px
+  display: none
+  position: absolute
+  +border-radius(6px)
+  background-color: darken($white, 5%)
+  font-size: 0.875em
+  text-align: center
+  line-height: 1.286em
+  &:after
+    margin-left: -8px
+    position: absolute
+    top: 100%
+    left: 50%
+    height: 0
+    width: 0
+    border:
+      width: 8px
+      style: solid
+      color: transparent
+      top-color: darken($white, 5%)
+    content: ''
+
+#states
+  fill: #cfecf0
+
+#state-borders
+  fill: none
+  stroke: $white
+  stroke:
+    width: 1px
+    linejoin: round
+    linecap: round
+  pointer-events: none
