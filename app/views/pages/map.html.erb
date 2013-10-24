@@ -18,8 +18,8 @@ function showTooltip(el, data) {
   var center = path.centroid(data);
 
   tooltip.style("display", "block")
-         .style('left', center[0] + 'px')
-         .style('top', center[1] + el.parentNode.offsetTop - 80 + 'px');
+         .style('left', center[0] + el.parentNode.offsetLeft - 40 + 'px')
+         .style('top', center[1] + el.parentNode.offsetTop - 60 + 'px');
 
   tooltip.select(".map-tooltip-state-name").text(data.properties.name);
 }

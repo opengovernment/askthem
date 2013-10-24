@@ -1,11 +1,11 @@
 @import load
 
 #map
-  position: relative
-
   margin:
     top: 3em
     left: -5.5em
+  position: relative
+  cursor: pointer
 
 .map-title
   margin:
@@ -28,11 +28,27 @@
   pointer-events: all
 
 .map-tooltip
-  background-color: red
-  width: 200px
-  height: 100px
-  position: absolute
+  padding: 10px
   display: none
+  position: absolute
+  +border-radius(6px)
+  background-color: darken($white, 5%)
+  font-size: 0.875em
+  text-align: center
+  line-height: 1.286em
+  &:after
+    margin-left: -8px
+    position: absolute
+    top: 100%
+    left: 50%
+    height: 0
+    width: 0
+    border:
+      width: 8px
+      style: solid
+      color: transparent
+      top-color: darken($white, 5%)
+    content: ''
 
 #states
   fill: #cfecf0
