@@ -358,7 +358,7 @@ describe 'questions' do
       end
 
       it 'renders modal when created parameter is present', js: true do
-        visit "/vt/questions/#{@question.id}?created=true"
+        visit "/vt/questions/#{@question.id}?share=true"
         page.body.should have_selector "#modal"
       end
 

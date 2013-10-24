@@ -47,7 +47,7 @@ class RegistrationsController < Devise::RegistrationsController
     if question_id
       question = Question.find(question_id)
       user.signatures.new(question_id: question.id).save
-      respond_with user, :location => question_path(question.state, question.id)
+      respond_with user, :location => question_path(question.state, question.id, :share => true)
     end
   end
 end

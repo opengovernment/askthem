@@ -79,7 +79,7 @@ class QuestionsController < ApplicationController
     if @question.valid? && (user_signed_in? || @user.valid?)
       @question.save
       QuestionMailer.question_posted(@user, @question).deliver
-      redirect_to question_path(@state_code, @question, :created => true)
+      redirect_to question_path(@state_code, @question, :share => true)
     else
       set_up_steps
       respond_to do |format|
