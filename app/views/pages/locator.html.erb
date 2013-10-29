@@ -6,7 +6,9 @@
   </li>
   <li>
     <a href="#" id="officials-near">See Your Elected Officials</a>
-    <%= cdn_image_tag(@federal_people.first.image, size: '30x30', alt: '', class: 'preview-avatar') %>
+    <% if @federal_people.count > 0 -%>
+      <%= cdn_image_tag(@federal_people.first.image, size: '30x30', alt: '', class: 'preview-avatar') %>
+    <% end -%>
     <i class="icon-angle-down"></i></li>
   <%= generic_ask_question 'Ask a Question', { class: 'cta-pill'} %>
   </ul>
