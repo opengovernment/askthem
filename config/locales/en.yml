@@ -2,7 +2,9 @@ en:
   offices:
     types:
       capitol: Capitol Office
+      "city hall": City Hall Office
       district: District Office
+      ward: Ward Office
   time:
     formats:
       bill: '%B %e, %Y'
