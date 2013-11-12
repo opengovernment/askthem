@@ -6,6 +6,7 @@ describe Metadatum::SeedCities do
     context "when seed city jurisdictions already exist" do
       before :each do
         @metadata = [Metadatum.create(abbreviation: "ca-san-jose"),
+                     Metadatum.create(abbreviation: "il-chicago"),
                      Metadatum.create(abbreviation: "pa-philadelphia")]
       end
 
@@ -15,7 +16,7 @@ describe Metadatum::SeedCities do
     end
 
     context "when no seed city jurisdictions exist" do
-      it "creates a Metadatum with US jurisdiction attributes" do
+      it "creates a Metadatum with seed cities' attributes" do
         metadata = Metadatum::SeedCities.find_or_create!
         expect(metadata.last.attributes).to eq attributes
       end
