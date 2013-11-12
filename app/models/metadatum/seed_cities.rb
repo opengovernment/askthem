@@ -4,6 +4,15 @@
 class Metadatum::SeedCities
   ABBREVIATIONS = ["ca-san-jose", "pa-philadelphia", "il-chicago"]
 
+  # return seed city jurisdiction
+  def self.find_or_create_city!(abbreviation)
+    if Metadatum.in(abbreviation: abbreviation).count > 0
+      Metadatum.find(abbreviation)
+    else
+      Metadatum.create! attribute_sets[abbreviation]
+    end
+  end
+
   # return seed city jurisdictions
   def self.find_or_create!
     if Metadatum.in(abbreviation: ABBREVIATIONS).count > 0

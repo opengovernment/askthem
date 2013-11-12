@@ -26,4 +26,28 @@ describe Metadatum::SeedCities do
       end
     end
   end
+
+  describe ".find_or_create_city!" do
+    context "when seed city jurisdiction already exists" do
+      before :each do
+        @chicago = Metadatum.create(abbreviation: "il-chicago")
+      end
+
+      it "returns existing seed city jurisdiction" do
+        expect(Metadatum::SeedCities.find_or_create_city!("il-chicago"))
+          .to eq @chicago
+      end
+    end
+
+    context "when no seed city jurisdiction exists" do
+      it "creates a Metadatum with seed city's attributes" do
+        metadatum = Metadatum::SeedCities.find_or_create_city!("il-chicago")
+        expect(metadatum.attributes).to eq attributes
+      end
+
+      def attributes
+        {"abbreviation"=>"il-chicago", "capitol_timezone"=>"America/Chicago", "chambers"=>{"upper"=>{"name"=>"Council", "title"=>"Councilmember"}}, "feature_flags"=>[], "latest_update"=>Time.zone.parse("2013-11-11 03:00:04 UTC"), "legislature_name"=>"Chicago City Council", "name"=>"City of Chicago", "session_details"=>{"2013"=>{"_scraped_name"=>"2013", "display_name"=>"2013 Legislative Session", "type"=>"primary"}, "2012"=>{"_scraped_name"=>"2012", "display_name"=>"2012 Legislative Session", "type"=>"primary"}}, "terms"=>[{"end_year"=>2016, "start_year"=>2012, "name"=>"2012-2016", "sessions"=>["2013", "2012"]}], "_id"=>"il-chicago"}
+      end
+    end
+  end
 end

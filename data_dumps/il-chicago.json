@@ -1,0 +1,1513 @@
+[
+  {
+    "sources": [
+      {
+        "url": "https:\/\/chicago.legistar.com\/People.aspx"
+      }
+    ],
+    "offices": [
+      {
+        "address": "(312) 744-6839, 121 North LaSalle Street, Room 200, Chicago IL",
+        "phone": "(312) 744-6839",
+        "type": "city hall",
+        "name": "City Hall Office"
+      },
+      {
+        "address": "1158 South Keeler Street, Chicago, IL 60624",
+        "fax": "(773) 533-2400",
+        "phone": "(773) 533-2400",
+        "type": "ward",
+        "name": "Ward Office"
+      }
+    ],
+    "url": "http:\/\/www.aldermanchandler.com\/",
+    "email": "ward24@cityofchicago.org",
+    "district": "Ward 24",
+    "chamber": "upper",
+    "last_name": "Chandler",
+    "first_name": "Michael",
+    "full_name": "Michael D. Chandler",
+    "_id": "004ab00d-e99e-4480-a562-3e5cb32df6da"
+  },
+  {
+    "sources": [
+      {
+        "url": "https:\/\/chicago.legistar.com\/People.aspx"
+      }
+    ],
+    "offices": [
+      {
+        "address": "(312) 744-3304, 121 North LaSalle Street, Room 200, Chicago IL",
+        "phone": "(312) 744-3304",
+        "type": "city hall",
+        "name": "City Hall Office"
+      },
+      {
+        "address": "3559 North Milwaukee Avenue, Chicago, IL 60641",
+        "fax": "(773) 794-3095",
+        "phone": "(773) 794-3095",
+        "type": "ward",
+        "name": "Ward Office"
+      }
+    ],
+    "email": "ward30@cityofchicago.org",
+    "district": "Ward 30",
+    "chamber": "upper",
+    "last_name": "Reboyras",
+    "first_name": "Ariel",
+    "full_name": "Ariel Reboyras",
+    "_id": "01dd404e-023a-4ae3-8c9a-04ae1ee6d99e"
+  },
+  {
+    "sources": [
+      {
+        "url": "https:\/\/chicago.legistar.com\/People.aspx"
+      }
+    ],
+    "offices": [
+      {
+        "address": "(312) 744-6828, 121 North LaSalle Street, Room 200, Chicago IL",
+        "phone": "(312) 744-6828",
+        "type": "city hall",
+        "name": "City Hall Office"
+      },
+      {
+        "address": "6247 South Archer Avenue, Chicago, IL 60638",
+        "fax": "(773) 582-4444",
+        "phone": "(773) 582-4444",
+        "type": "ward",
+        "name": "Ward Office"
+      }
+    ],
+    "url": "http:\/\/www.chicago23ward.com\/",
+    "email": "mzalewski@cityofchicago.org",
+    "district": "Ward 23",
+    "chamber": "upper",
+    "last_name": "Zalewski",
+    "first_name": "Michael",
+    "full_name": "Michael R. Zalewski",
+    "_id": "06c1ba33-fece-457b-9fc8-f288acbe7740"
+  },
+  {
+    "sources": [
+      {
+        "url": "https:\/\/chicago.legistar.com\/People.aspx"
+      }
+    ],
+    "offices": [
+      {
+        "address": "(312) 744-3040, 121 North LaSalle Street, Room 300, Chicago IL",
+        "phone": "(312) 744-3040",
+        "type": "city hall",
+        "name": "City Hall Office"
+      },
+      {
+        "address": "3476 South Archer Avenue, Chicago, IL 60608",
+        "fax": "(773) 523-8250",
+        "phone": "(773) 523-8250",
+        "type": "ward",
+        "name": "Ward Office"
+      }
+    ],
+    "email": "ward12@cityofchicago.org",
+    "district": "Ward 12",
+    "chamber": "upper",
+    "last_name": "Cardenas",
+    "first_name": "George",
+    "full_name": "George A. Cardenas",
+    "_id": "07ec64d3-53cd-41c5-bf63-62fd04231200"
+  },
+  {
+    "sources": [
+      {
+        "url": "https:\/\/chicago.legistar.com\/People.aspx"
+      }
+    ],
+    "offices": [
+      {
+        "address": "(312) 744-6663, 121 North LaSalle Street, Room 300, Chicago IL",
+        "phone": "(312) 744-6663",
+        "type": "city hall",
+        "name": "City Hall Office"
+      },
+      {
+        "address": "3659 South Halsted Street, Chicago, IL 60609",
+        "fax": "(773) 254-6677",
+        "phone": "(773) 254-6677",
+        "type": "ward",
+        "name": "Ward Office"
+      }
+    ],
+    "url": "http:\/\/www.11thward.com\/",
+    "email": "jbalcer@cityofchicago.org",
+    "district": "Ward 11",
+    "chamber": "upper",
+    "last_name": "Balcer",
+    "first_name": "James",
+    "full_name": "James Balcer",
+    "_id": "105c9109-ac09-47cb-bcb8-263ac2ae419b"
+  },
+  {
+    "sources": [
+      {
+        "url": "https:\/\/chicago.legistar.com\/People.aspx"
+      }
+    ],
+    "offices": [
+      {
+        "address": "(312) 744-6811, 121 North LaSalle Street, Room 200, Chicago IL",
+        "phone": "(312) 744-6811",
+        "type": "city hall",
+        "name": "City Hall Office"
+      },
+      {
+        "address": "5817 West Irving Park Road, Chicago, IL 60634",
+        "fax": "(773) 545-3838",
+        "phone": "(773) 545-3838",
+        "type": "ward",
+        "name": "Ward Office"
+      }
+    ],
+    "url": "http:\/\/www.ward38.com\/",
+    "email": "Timothy.Cullerton@cityofchicago.org",
+    "district": "Ward 38",
+    "chamber": "upper",
+    "last_name": "Cullerton",
+    "first_name": "Timothy",
+    "full_name": "Timothy M. Cullerton",
+    "_id": "10e6bd9d-14f0-454e-a771-06c90709bdf6"
+  },
+  {
+    "sources": [
+      {
+        "url": "https:\/\/chicago.legistar.com\/People.aspx"
+      }
+    ],
+    "offices": [
+      {
+        "address": "(312) 744-6832, 121 North LaSalle Street, Room 300, Chicago IL",
+        "phone": "(312) 744-6832",
+        "type": "city hall",
+        "name": "City Hall Office"
+      },
+      {
+        "address": "2325 East 71st Street, Chicago, IL 60649",
+        "fax": "(773) 324-5555",
+        "phone": "(773) 324-5555",
+        "type": "ward",
+        "name": "Ward Office"
+      }
+    ],
+    "email": "lhairston@cityofchicago.org",
+    "district": "Ward 05",
+    "chamber": "upper",
+    "last_name": "Hairston",
+    "first_name": "Leslie",
+    "full_name": "Leslie A. Hairston",
+    "_id": "12b839d6-0892-4944-ba1a-7567d2880c70"
+  },
+  {
+    "sources": [
+      {
+        "url": "https:\/\/chicago.legistar.com\/People.aspx"
+      }
+    ],
+    "offices": [
+      {
+        "address": "(312) 744-3075, 121 Noth LaSalle Street, Room 200, Chicago IL",
+        "phone": "(312) 744-3075",
+        "type": "city hall",
+        "name": "City Hall Office"
+      },
+      {
+        "address": "8539 South Cottage Grove Avenue, Chicago, IL 60619",
+        "fax": "(773) 874-3300",
+        "phone": "(773) 874-3300",
+        "type": "ward",
+        "name": "Ward Office"
+      }
+    ],
+    "email": "mharris@cityofchicago.org",
+    "district": "Ward 08",
+    "chamber": "upper",
+    "last_name": "Harris",
+    "first_name": "Michelle",
+    "full_name": "Michelle A. Harris",
+    "_id": "193cb1f4-4bc0-404c-a405-439ab02516a0"
+  },
+  {
+    "sources": [
+      {
+        "url": "https:\/\/chicago.legistar.com\/People.aspx"
+      }
+    ],
+    "offices": [
+      {
+        "address": "(312) 744-3058, 121 North LaSalle Street, Room 300, Chicago IL",
+        "phone": "(312) 744-3058",
+        "type": "city hall",
+        "name": "City Hall Office"
+      },
+      {
+        "address": "6500 South Pulaski Road, Chicago, IL 60629",
+        "fax": "(773) 581-8000",
+        "phone": "(773) 581-8000",
+        "type": "ward",
+        "name": "Ward Office"
+      }
+    ],
+    "district": "Ward 13",
+    "chamber": "upper",
+    "last_name": "Quinn",
+    "first_name": "Marty",
+    "full_name": "Marty Quinn",
+    "_id": "1c36fe72-99d3-440a-b641-025420616781"
+  },
+  {
+    "sources": [
+      {
+        "url": "https:\/\/chicago.legistar.com\/People.aspx"
+      }
+    ],
+    "offices": [
+      {
+        "address": "(312) 744-6853, 121 North LaSalle Street, Room 200, Chicago IL",
+        "phone": "(312) 744-6853",
+        "type": "city hall",
+        "name": "City Hall Office"
+      },
+      {
+        "address": "2511 West Division Street, Chicago, IL 60622",
+        "fax": "(773) 395-0143",
+        "phone": "(773) 395-0143",
+        "type": "ward",
+        "name": "Ward Office"
+      }
+    ],
+    "url": "http:\/\/robertomaldonado.com\/",
+    "district": "Ward 26",
+    "chamber": "upper",
+    "last_name": "Maldonado",
+    "first_name": "Roberto",
+    "full_name": "Roberto Maldonado",
+    "_id": "2333088b-96f1-440d-880e-3ddd913734b3"
+  },
+  {
+    "sources": [
+      {
+        "url": "https:\/\/chicago.legistar.com\/People.aspx"
+      }
+    ],
+    "offices": [
+      {
+        "address": "(312) 744-8590, 121 North LaSalle Street, Room 107, Chicago IL",
+        "phone": "(312) 744-8590",
+        "type": "city hall",
+        "name": "City Hall Office"
+      },
+      {
+        "address": "N\/A, \u00a0, \u00a0 \u00a0",
+        "fax": "N\/A",
+        "phone": "N\/A",
+        "type": "ward",
+        "name": "Ward Office"
+      }
+    ],
+    "url": "http:\/\/www.chicityclerk.com",
+    "district": "Clerk",
+    "chamber": "upper",
+    "last_name": "Mendoza",
+    "first_name": "Susana",
+    "full_name": "Susana A. Mendoza",
+    "_id": "271f488e-f8aa-4618-b2d7-2473030ba3d6"
+  },
+  {
+    "sources": [
+      {
+        "url": "https:\/\/chicago.legistar.com\/People.aspx"
+      }
+    ],
+    "offices": [
+      {
+        "address": "(312) 744-7947, 121 North LaSalle Street, Room 300, Chicago IL",
+        "phone": "(312) 744-7947",
+        "type": "city hall",
+        "name": "City Hall Office"
+      },
+      {
+        "address": "6934 West Diversey Avenue, Chicago, IL 60707",
+        "fax": "(773) 836-0036",
+        "phone": "(773) 836-0036",
+        "type": "ward",
+        "name": "Ward Office"
+      }
+    ],
+    "url": "http:\/\/aldermansposato.com\/",
+    "email": "info@aldermansposato.com",
+    "district": "Ward 36",
+    "chamber": "upper",
+    "last_name": "Sposato",
+    "first_name": "Nicholas",
+    "full_name": "Nicholas Sposato",
+    "_id": "30c23b41-a2fe-4296-a1c8-1dbf6cd169e6"
+  },
+  {
+    "sources": [
+      {
+        "url": "https:\/\/chicago.legistar.com\/People.aspx"
+      }
+    ],
+    "offices": [
+      {
+        "address": "(312) 744-6834, 121 North LaSalle Street, Room 300, Chicago IL",
+        "phone": "(312) 744-6834",
+        "type": "city hall",
+        "name": "City Hall Office"
+      },
+      {
+        "address": "5533 North Broadway Avenue, Chicago, IL 60640",
+        "fax": "(773) 784-5277",
+        "phone": "(773) 784-5277",
+        "type": "ward",
+        "name": "Ward Office"
+      }
+    ],
+    "url": "http:\/\/www.48thward.org",
+    "email": "harry@48thward.org",
+    "district": "Ward 48",
+    "chamber": "upper",
+    "last_name": "Osterman",
+    "first_name": "Harry",
+    "full_name": "Harry Osterman",
+    "_id": "31b720a9-8c5e-4f57-ac35-044f9da3e3c3"
+  },
+  {
+    "sources": [
+      {
+        "url": "https:\/\/chicago.legistar.com\/People.aspx"
+      }
+    ],
+    "offices": [
+      {
+        "address": "(312) 744-6835, 121 North LaSalle Street, Room 200, Chicago IL",
+        "phone": "(312) 744-6835",
+        "type": "city hall",
+        "name": "City Hall Office"
+      },
+      {
+        "address": "2710 North Sawyer Avenue, Chicago, IL 60647",
+        "fax": "(773) 365-3535",
+        "phone": "(773) 365-3535",
+        "type": "ward",
+        "name": "Ward Office"
+      }
+    ],
+    "url": "http:\/\/www.reycolon.org\/",
+    "email": "ward35@cityofchicago.org",
+    "district": "Ward 35",
+    "chamber": "upper",
+    "last_name": "Col\u00f3n",
+    "first_name": "Rey",
+    "full_name": "Rey Col\u00f3n",
+    "_id": "3971bf8d-54be-4fc5-8206-02cafc10a95f"
+  },
+  {
+    "sources": [
+      {
+        "url": "https:\/\/chicago.legistar.com\/People.aspx"
+      }
+    ],
+    "offices": [
+      {
+        "address": "(312) 744-6587, 121 North LaSalle Street, Room 300, Chicago IL",
+        "phone": "(312) 744-6587",
+        "type": "city hall",
+        "name": "City Hall Office"
+      },
+      {
+        "address": "2657 North Clybourn Avenue, Chicago, IL 60614",
+        "fax": "(773) 248-1330",
+        "phone": "(773) 248-1330",
+        "type": "ward",
+        "name": "Ward Office"
+      }
+    ],
+    "url": "http:\/\/www.ward32.org",
+    "email": "info@ward32.org",
+    "district": "Ward 32",
+    "chamber": "upper",
+    "last_name": "Waguespack",
+    "first_name": "Scott",
+    "full_name": "Scott Waguespack",
+    "_id": "3b9869b5-731b-45ca-8574-739181f35ba5"
+  },
+  {
+    "sources": [
+      {
+        "url": "https:\/\/chicago.legistar.com\/People.aspx"
+      }
+    ],
+    "offices": [
+      {
+        "address": "(312) 744-6825, 121 North LaSalle Street , Room 200, Chicago IL",
+        "phone": "(312) 744-6825",
+        "type": "city hall",
+        "name": "City Hall Office"
+      },
+      {
+        "address": "3649 North Kedzie Avenue, Chicago, IL 60618",
+        "fax": "(773) 478-8040",
+        "phone": "(773) 478-8040",
+        "type": "ward",
+        "name": "Ward Office"
+      }
+    ],
+    "url": "http:\/\/www.33rdward.org",
+    "email": "deb@33rdward.org",
+    "district": "Ward 33",
+    "chamber": "upper",
+    "last_name": "Mell",
+    "first_name": "Deborah",
+    "full_name": "Deborah Mell",
+    "_id": "3cb19d8b-a58d-45f8-8b8e-dd8369bba5c3"
+  },
+  {
+    "sources": [
+      {
+        "url": "https:\/\/chicago.legistar.com\/People.aspx"
+      }
+    ],
+    "offices": [
+      {
+        "address": "(312) 744-3066, 121 North LaSalle Street, Room 200, Chicago IL",
+        "phone": "(312) 744-3066",
+        "type": "city hall",
+        "name": "City Hall Office"
+      },
+      {
+        "address": "2602 West 16th Street, Chicago, IL 60608",
+        "fax": "(773) 533-0900",
+        "phone": "(773) 533-0900",
+        "type": "ward",
+        "name": "Ward Office"
+      }
+    ],
+    "url": "http:\/\/www.AldermanErvin.com\/",
+    "email": "jason.ervin@cityofchicago.org",
+    "district": "Ward 28",
+    "chamber": "upper",
+    "last_name": "Ervin",
+    "first_name": "Jason",
+    "full_name": "Jason C. Ervin",
+    "_id": "41774b4d-879e-4d4f-80b2-058ddd1a838f"
+  },
+  {
+    "sources": [
+      {
+        "url": "https:\/\/chicago.legistar.com\/People.aspx"
+      }
+    ],
+    "offices": [
+      {
+        "address": "(312)744-6820, 121 North LaSalle Street, Room 200, Chicago IL",
+        "phone": "(312)744-6820",
+        "type": "city hall",
+        "name": "City Hall Office"
+      },
+      {
+        "address": "507 West 111th Street, Chicago, IL 60628",
+        "fax": "(773) 928-6961",
+        "phone": "(773) 928-6961",
+        "type": "ward",
+        "name": "Ward Office"
+      }
+    ],
+    "url": "http:\/\/committe....org\/index.html",
+    "email": "caustin@cityofchicago.org",
+    "district": "Ward 34",
+    "chamber": "upper",
+    "last_name": "Austin",
+    "first_name": "Carrie",
+    "full_name": "Carrie M. Austin",
+    "_id": "482e520f-2b5d-4e7d-9e77-19a26c9d21d1"
+  },
+  {
+    "sources": [
+      {
+        "url": "https:\/\/chicago.legistar.com\/People.aspx"
+      }
+    ],
+    "offices": [
+      {
+        "address": "(312) 744-6833, 121 North LaSalle Street, Room 200, Chicago IL",
+        "phone": "(312) 744-6833",
+        "type": "city hall",
+        "name": "City Hall Office"
+      },
+      {
+        "address": "2459 East 75th Street, Chicago, IL 60649",
+        "fax": "(773) 731-7777",
+        "phone": "(773) 731-7777",
+        "type": "ward",
+        "name": "Ward Office"
+      }
+    ],
+    "url": "http:\/\/www.IAM7chicago.com",
+    "email": "Ward07@cityofchicago.org",
+    "district": "Ward 07",
+    "chamber": "upper",
+    "last_name": "Holmes",
+    "first_name": "Natashia",
+    "full_name": "Natashia Holmes",
+    "_id": "4de812d6-fcb4-475b-a6de-3f9d89f4b21c"
+  },
+  {
+    "sources": [
+      {
+        "url": "https:\/\/chicago.legistar.com\/People.aspx"
+      }
+    ],
+    "offices": [
+      {
+        "address": "(312) 744-6102, 121 North LaSalle Street, Room 200, Chicago IL",
+        "phone": "(312) 744-6102",
+        "type": "city hall",
+        "name": "City Hall Office"
+      },
+      {
+        "address": "4502 West Fullerton Avenue, Chicago, IL 60639",
+        "fax": "(773) 486-6488",
+        "phone": "(773) 486-6488",
+        "type": "ward",
+        "name": "Ward Office"
+      }
+    ],
+    "url": "http:\/\/www.ward31.com\/",
+    "email": "rsuarez@cityofchicago.org",
+    "district": "Ward 31",
+    "chamber": "upper",
+    "last_name": "Suarez",
+    "first_name": "Regner",
+    "full_name": "Regner Ray Suarez",
+    "_id": "5008d99f-2d66-49c4-958b-0e4b81c134b9"
+  },
+  {
+    "sources": [
+      {
+        "url": "https:\/\/chicago.legistar.com\/People.aspx"
+      }
+    ],
+    "offices": [
+      {
+        "address": "(312) 744-2690, 121 North LaSalle Street, Room 200, Chicago IL",
+        "phone": "(312) 744-2690",
+        "type": "city hall",
+        "name": "City Hall Office"
+      },
+      {
+        "address": "435 East 35th Street, 1st Floor, Chicago, IL 60616",
+        "fax": "(773) 536-8103",
+        "phone": "(773) 536-8103",
+        "type": "ward",
+        "name": "Ward Office"
+      }
+    ],
+    "url": "http:\/\/www.aldwillburns.com",
+    "email": "ward04@cityofchicago.org",
+    "district": "Ward 04",
+    "chamber": "upper",
+    "last_name": "Burns",
+    "first_name": "William",
+    "full_name": "William D. Burns",
+    "_id": "50d9c7d1-e97f-408f-9c9d-3ae4bf6aa173"
+  },
+  {
+    "sources": [
+      {
+        "url": "https:\/\/chicago.legistar.com\/People.aspx"
+      }
+    ],
+    "offices": [
+      {
+        "address": "(312) 744-3063, 121 North LaSalle Street, Room 300, Chicago IL",
+        "phone": "(312) 744-3063",
+        "type": "city hall",
+        "name": "City Hall Office"
+      },
+      {
+        "address": "2058 North Western Avenue, Chicago, IL 60647",
+        "fax": "(773) 278-0101",
+        "phone": "(773) 278-0101",
+        "type": "ward",
+        "name": "Ward Office"
+      }
+    ],
+    "url": "http:\/\/www.ward1.org",
+    "email": "ward01@cityofchicago.org",
+    "district": "Ward 01",
+    "chamber": "upper",
+    "last_name": "Moreno",
+    "first_name": "Proco",
+    "full_name": "Proco Joe Moreno",
+    "_id": "5d1717f6-d137-4a80-9803-de2241390865"
+  },
+  {
+    "sources": [
+      {
+        "url": "https:\/\/chicago.legistar.com\/People.aspx"
+      }
+    ],
+    "offices": [
+      {
+        "address": "(312) 744-0446, 121 North LaSalle Street, Room 200, Chicago IL",
+        "phone": "(312) 744-0446",
+        "type": "city hall",
+        "name": "City Hall Office"
+      },
+      {
+        "address": "4243 North Lincoln Avenue, Chicago, IL 60618",
+        "fax": "(773) 868-4747",
+        "phone": "(773) 868-4747",
+        "type": "ward",
+        "name": "Ward Office"
+      }
+    ],
+    "url": "http:\/\/www.chicago47.org\/",
+    "email": "info@chicago47.org",
+    "district": "Ward 47",
+    "chamber": "upper",
+    "last_name": "Pawar",
+    "first_name": "Ameya",
+    "full_name": "Ameya Pawar",
+    "_id": "5e965390-3a8c-46b4-88ab-c6061e585c2d"
+  },
+  {
+    "sources": [
+      {
+        "url": "https:\/\/chicago.legistar.com\/People.aspx"
+      }
+    ],
+    "offices": [
+      {
+        "address": "(312) 744-9491, 121 North LaSalle Street, Room 300, Chicago IL",
+        "phone": "(312) 744-9491",
+        "type": "city hall",
+        "name": "City Hall Office"
+      },
+      {
+        "address": "2500 South St. Louis, Chicago, IL 60623",
+        "fax": "(773) 762-1771",
+        "phone": "(773) 762-1771",
+        "type": "ward",
+        "name": "Ward Office"
+      }
+    ],
+    "email": "Ward22@cityofchicago.org",
+    "district": "Ward 22",
+    "chamber": "upper",
+    "last_name": "Munoz",
+    "first_name": "Ricardo",
+    "full_name": "Ricardo Munoz",
+    "_id": "6061ec9b-1c6d-4afe-bb90-b011114cfd8f"
+  },
+  {
+    "sources": [
+      {
+        "url": "https:\/\/chicago.legistar.com\/People.aspx"
+      }
+    ],
+    "offices": [
+      {
+        "address": "(312) 744-7242, 121 North LaSalle Street, Room 200, Chicago IL",
+        "phone": "(312) 744-7242",
+        "type": "city hall",
+        "name": "City Hall Office"
+      },
+      {
+        "address": "4404 West Lawrence Avenue, Chicago, IL 60630",
+        "fax": "(773) 736-5594",
+        "phone": "(773) 736-5594",
+        "type": "ward",
+        "name": "Ward Office"
+      }
+    ],
+    "url": "http:\/\/www.aldermanlaurino.com\/",
+    "email": "mlaurino@cityofchicago.org",
+    "district": "Ward 39",
+    "chamber": "upper",
+    "last_name": "Laurino",
+    "first_name": "Margaret",
+    "full_name": "Margaret Laurino",
+    "_id": "60725152-401f-474c-8db3-aa29a5e1d4b9"
+  },
+  {
+    "sources": [
+      {
+        "url": "https:\/\/chicago.legistar.com\/People.aspx"
+      }
+    ],
+    "offices": [
+      {
+        "address": "(312) 744-6850, 121 North LaSalle Street, Room 300, Chicago IL",
+        "phone": "(312) 744-6850",
+        "type": "city hall",
+        "name": "City Hall Office"
+      },
+      {
+        "address": "3045 West 63rd Street, Chicago, IL 60629",
+        "fax": "(773) 863-0220",
+        "phone": "(773) 863-0220",
+        "type": "ward",
+        "name": "Ward Office"
+      }
+    ],
+    "email": "Toni.Foulkes@cityofchicago.org",
+    "district": "Ward 15",
+    "chamber": "upper",
+    "last_name": "Foulkes",
+    "first_name": "Toni",
+    "full_name": "Toni Foulkes",
+    "_id": "6d1d9dd3-faab-4edc-955a-8480dbcb1c07"
+  },
+  {
+    "sources": [
+      {
+        "url": "https:\/\/chicago.legistar.com\/People.aspx"
+      }
+    ],
+    "offices": [
+      {
+        "address": "(312) 744-6831, 121 North LaSalle Street, Room 200, Chicago IL",
+        "phone": "(312) 744-6831",
+        "type": "city hall",
+        "name": "City Hall Office"
+      },
+      {
+        "address": "4544 North Broadway Avenue, Chicago, IL 60640",
+        "fax": "(773) 878-4646",
+        "phone": "(773) 878-4646",
+        "type": "ward",
+        "name": "Ward Office"
+      }
+    ],
+    "url": "http:\/\/www.James46.org\/",
+    "email": "info@james46.org",
+    "district": "Ward 46",
+    "chamber": "upper",
+    "last_name": "Cappleman",
+    "first_name": "James",
+    "full_name": "James Cappleman",
+    "_id": "828b53c7-be73-4f99-a397-24ee6d949b7b"
+  },
+  {
+    "sources": [
+      {
+        "url": "https:\/\/chicago.legistar.com\/People.aspx"
+      }
+    ],
+    "offices": [
+      {
+        "address": "(312) 744-6836, 121 North LaSalle Street, Room 200, Chicago IL",
+        "phone": "(312) 744-6836",
+        "type": "city hall",
+        "name": "City Hall Office"
+      },
+      {
+        "address": "1319 South State Street, Suite A, Chicago, IL 60605",
+        "fax": "(312) 263-9273",
+        "phone": "(312) 263-9273",
+        "type": "ward",
+        "name": "Ward Office"
+      }
+    ],
+    "url": "http:\/\/bobfioretti.com",
+    "email": "Robert.Fioretti@cityofchicago.org",
+    "district": "Ward 02",
+    "chamber": "upper",
+    "last_name": "Fioretti",
+    "first_name": "Bob",
+    "full_name": "Bob Fioretti",
+    "_id": "834b483f-50f8-4a57-819e-a623f7bec25f"
+  },
+  {
+    "sources": [
+      {
+        "url": "https:\/\/chicago.legistar.com\/People.aspx"
+      }
+    ],
+    "offices": [
+      {
+        "address": "(312) 744-3073, 121 North LaSalle Street, Room 300, Chicago IL",
+        "phone": "(312) 744-3073",
+        "type": "city hall",
+        "name": "City Hall Office"
+      },
+      {
+        "address": "3223 North Sheffield Avenue, Chicago, IL 60657",
+        "fax": "(773) 525-6034",
+        "phone": "(773) 525-6034",
+        "type": "ward",
+        "name": "Ward Office"
+      }
+    ],
+    "url": "http:\/\/44thward.org\/",
+    "email": "ttunney@cityofchicago.org",
+    "district": "Ward 44",
+    "chamber": "upper",
+    "last_name": "Tunney",
+    "first_name": "Thomas",
+    "full_name": "Thomas Tunney",
+    "_id": "84a308bd-f995-4c1a-88f0-1a599936460a"
+  },
+  {
+    "sources": [
+      {
+        "url": "https:\/\/chicago.legistar.com\/People.aspx"
+      }
+    ],
+    "offices": [
+      {
+        "address": "(312) 744-3062, 121 North LaSalle Street, Room 200, Chicago IL",
+        "phone": "(312) 744-3062",
+        "type": "city hall",
+        "name": "City Hall Office"
+      },
+      {
+        "address": "325 West Huron Street, Suite 510, Chicago, IL 60654",
+        "fax": "(312) 642-4242",
+        "phone": "(312) 642-4242",
+        "type": "ward",
+        "name": "Ward Office"
+      }
+    ],
+    "url": "http:\/\/www.ward42chicago.com\/",
+    "email": "Brendan.Reilly@cityofchicago.org",
+    "district": "Ward 42",
+    "chamber": "upper",
+    "last_name": "Reilly",
+    "first_name": "Brendan",
+    "full_name": "Brendan Reilly",
+    "_id": "84f2b6d3-5030-4c13-b56a-3c1dca20304b"
+  },
+  {
+    "sources": [
+      {
+        "url": "https:\/\/chicago.legistar.com\/People.aspx"
+      }
+    ],
+    "offices": [
+      {
+        "address": "\u00a0, 121 North LaSalle Street, 5th Floor, Chicago IL",
+        "phone": "\u00a0",
+        "type": "city hall",
+        "name": "City Hall Office"
+      },
+      {
+        "address": "N\/A, \u00a0, \u00a0 \u00a0",
+        "fax": "N\/A",
+        "phone": "N\/A",
+        "type": "ward",
+        "name": "Ward Office"
+      }
+    ],
+    "url": "http:\/\/www.city...epts\/mayor.html",
+    "district": "Mayor",
+    "chamber": "upper",
+    "last_name": "Emanuel",
+    "first_name": "Rahm",
+    "full_name": "Rahm Emanuel",
+    "_id": "937dec5a-651b-44d3-89a3-8df2931cf724"
+  },
+  {
+    "sources": [
+      {
+        "url": "https:\/\/chicago.legistar.com\/People.aspx"
+      }
+    ],
+    "offices": [
+      {
+        "address": "(312) 744-3067, 121 North LaSalle Street, Room 300, Chicago IL",
+        "phone": "(312) 744-3067",
+        "type": "city hall",
+        "name": "City Hall Office"
+      },
+      {
+        "address": "7356 North Greenview Avenue, Chicago, IL 60626",
+        "fax": "(773) 338-5796",
+        "phone": "(773) 338-5796",
+        "type": "ward",
+        "name": "Ward Office"
+      }
+    ],
+    "email": "ward49@cityofchicago.org",
+    "district": "Ward 49",
+    "chamber": "upper",
+    "last_name": "Moore",
+    "first_name": "Joseph",
+    "full_name": "Joseph Moore",
+    "_id": "975e817c-69da-411b-84cb-e45848bed368"
+  },
+  {
+    "sources": [
+      {
+        "url": "https:\/\/chicago.legistar.com\/People.aspx"
+      }
+    ],
+    "offices": [
+      {
+        "address": "(312) 744-8734, 121 North LaSalle Street, Room 200, Chicago IL",
+        "phone": "(312) 744-8734",
+        "type": "city hall",
+        "name": "City Hall Office"
+      },
+      {
+        "address": "5046 South State Street, Chicago, IL 60609",
+        "fax": "(773) 373-9273",
+        "phone": "(773) 373-9273",
+        "type": "ward",
+        "name": "Ward Office"
+      }
+    ],
+    "url": "http:\/\/www.dowellfor3rdward.com\/",
+    "email": "Pat.Dowell@cityofchicago.org",
+    "district": "Ward 03",
+    "chamber": "upper",
+    "last_name": "Dowell",
+    "first_name": "Pat",
+    "full_name": "Pat Dowell",
+    "_id": "97f27520-04cd-4b98-a582-bb6efd1aef77"
+  },
+  {
+    "sources": [
+      {
+        "url": "https:\/\/chicago.legistar.com\/People.aspx"
+      }
+    ],
+    "offices": [
+      {
+        "address": "(312) 744-6838, 121 North LaSalle Street, Room 300, Chicago IL",
+        "phone": "(312) 744-6838",
+        "type": "city hall",
+        "name": "City Hall Office"
+      },
+      {
+        "address": "34 East 112th Place, Chicago, IL 60628",
+        "fax": "(773) 785-1100",
+        "phone": "(773) 785-1100",
+        "type": "ward",
+        "name": "Ward Office"
+      }
+    ],
+    "url": "http:\/\/www.ward...yofchicago.org\/",
+    "email": "ward09@cityofchicago.org",
+    "district": "Ward 09",
+    "chamber": "upper",
+    "last_name": "Beale",
+    "first_name": "Anthony",
+    "full_name": "Anthony Beale",
+    "_id": "9f2ad540-970d-44c2-b929-fd3ed607fbf4"
+  },
+  {
+    "sources": [
+      {
+        "url": "https:\/\/chicago.legistar.com\/People.aspx"
+      }
+    ],
+    "offices": [
+      {
+        "address": "(312) 744-3078, 121 North LaSalle Street, Room 300   Chicago, IL 60602, Chicago IL",
+        "phone": "(312) 744-3078",
+        "type": "city hall",
+        "name": "City Hall Office"
+      },
+      {
+        "address": "3522 East 106th Street, Chicago, IL 60617",
+        "fax": "(773) 721-1999",
+        "phone": "(773) 721-1999",
+        "type": "ward",
+        "name": "Ward Office"
+      }
+    ],
+    "url": "http:\/\/www.10thwardchicago.com\/",
+    "email": "jpope@cityofchicago.org",
+    "district": "Ward 10",
+    "chamber": "upper",
+    "last_name": "Pope",
+    "first_name": "John",
+    "full_name": "John Pope",
+    "_id": "a040ab18-d428-4dae-a889-a0ca87924102"
+  },
+  {
+    "sources": [
+      {
+        "url": "https:\/\/chicago.legistar.com\/People.aspx"
+      }
+    ],
+    "offices": [
+      {
+        "address": "(312) 744-6856, 121 North LaSalle Street, Room 300, Chicago IL",
+        "phone": "(312) 744-6856",
+        "type": "city hall",
+        "name": "City Hall Office"
+      },
+      {
+        "address": "8108 South Western Avenue, Chicago, IL 60620",
+        "fax": "(773) 471-1991",
+        "phone": "(773) 471-1991",
+        "type": "ward",
+        "name": "Ward Office"
+      }
+    ],
+    "email": "ward18@cityofchicago.org",
+    "district": "Ward 18",
+    "chamber": "upper",
+    "last_name": "Lane",
+    "first_name": "Lona",
+    "full_name": "Lona Lane",
+    "_id": "a1d64d8d-afa4-4ab5-89d1-a06769092af8"
+  },
+  {
+    "sources": [
+      {
+        "url": "https:\/\/chicago.legistar.com\/People.aspx"
+      }
+    ],
+    "offices": [
+      {
+        "address": "(312) 744-6858, 121 North LaSalle Street, Room 305, Chicago IL",
+        "phone": "(312) 744-6858",
+        "type": "city hall",
+        "name": "City Hall Office"
+      },
+      {
+        "address": "5850 North Lincoln Avenue, Chicago, IL 60659",
+        "fax": "(773) 769-1140",
+        "phone": "(773) 769-1140",
+        "type": "ward",
+        "name": "Ward Office"
+      }
+    ],
+    "url": "http:\/\/www.aldermanoconnor.com\/",
+    "email": "pjoconnor@cityofchicago.org",
+    "district": "Ward 40",
+    "chamber": "upper",
+    "last_name": "O'Connor",
+    "first_name": "Patrick",
+    "full_name": "Patrick O'Connor",
+    "_id": "a63a677d-e5e0-4dad-b260-9c9e780cf170"
+  },
+  {
+    "sources": [
+      {
+        "url": "https:\/\/chicago.legistar.com\/People.aspx"
+      }
+    ],
+    "offices": [
+      {
+        "address": "(312) 744-6855, 121 North LaSalle Street, Room 300, Chicago IL",
+        "phone": "(312) 744-6855",
+        "type": "city hall",
+        "name": "City Hall Office"
+      },
+      {
+        "address": "2949 West Devon Avenue, Suite A, Chicago, IL 60659",
+        "fax": "(773) 262-1050",
+        "phone": "(773) 262-1050",
+        "type": "ward",
+        "name": "Ward Office"
+      }
+    ],
+    "url": "http:\/\/50thwardchicago.com",
+    "email": "info@50thwardchicago.com",
+    "district": "Ward 50",
+    "chamber": "upper",
+    "last_name": "Silverstein",
+    "first_name": "Debra",
+    "full_name": "Debra L. Silverstein",
+    "_id": "b530d195-102f-47a5-a41b-fa5caf8b5758"
+  },
+  {
+    "sources": [
+      {
+        "url": "https:\/\/chicago.legistar.com\/People.aspx"
+      }
+    ],
+    "offices": [
+      {
+        "address": "(312) 744-3380, 121 North LaSalle Street, Room 302, Chicago IL",
+        "phone": "(312) 744-3380",
+        "type": "city hall",
+        "name": "City Hall Office"
+      },
+      {
+        "address": "2650 West 51st Street, Chicago, IL 60632",
+        "fax": "(773) 471-1414",
+        "phone": "(773) 471-1414",
+        "type": "ward",
+        "name": "Ward Office"
+      }
+    ],
+    "url": "http:\/\/www.comm...eonfinance.org\/",
+    "email": "eburke@cityofchicago.org",
+    "district": "Ward 14",
+    "chamber": "upper",
+    "last_name": "Burke",
+    "first_name": "Edward",
+    "full_name": "Edward M. Burke",
+    "_id": "b5ffc29c-52ae-480a-9320-08b3babf3ea7"
+  },
+  {
+    "sources": [
+      {
+        "url": "https:\/\/chicago.legistar.com\/People.aspx"
+      }
+    ],
+    "offices": [
+      {
+        "address": "(312) 744-6840, 121 North LaSalle Street, Room 300, Chicago IL",
+        "phone": "(312) 744-6840",
+        "type": "city hall",
+        "name": "City Hall Office"
+      },
+      {
+        "address": "6357 South Cottage Grove Avenue, Chicago, IL 60637",
+        "fax": "(773) 955-5610",
+        "phone": "(773) 955-5610",
+        "type": "ward",
+        "name": "Ward Office"
+      }
+    ],
+    "url": "http:\/\/the20thward.com",
+    "email": "Willie.Cochran@cityofchicago.org",
+    "district": "Ward 20",
+    "chamber": "upper",
+    "last_name": "Cochran",
+    "first_name": "Willie",
+    "full_name": "Willie Cochran",
+    "_id": "ba6e0988-4b89-467b-ba83-2f100ee2049e"
+  },
+  {
+    "sources": [
+      {
+        "url": "https:\/\/chicago.legistar.com\/People.aspx"
+      }
+    ],
+    "offices": [
+      {
+        "address": "(312) 744-7738, 121 North LaSalle Street, Room 300, Chicago IL",
+        "phone": "(312) 744-7738",
+        "type": "city hall",
+        "name": "City Hall Office"
+      },
+      {
+        "address": "7811 South Racine Avenue, Chicago, IL 60620",
+        "fax": "(773) 723-0908",
+        "phone": "(773) 723-0908",
+        "type": "ward",
+        "name": "Ward Office"
+      }
+    ],
+    "email": "lrthomas@cityofchicago.org",
+    "district": "Ward 17",
+    "chamber": "upper",
+    "last_name": "Thomas",
+    "first_name": "Latasha",
+    "full_name": "Latasha R. Thomas",
+    "_id": "bb547692-1b5f-44b9-8f11-bb918f685251"
+  },
+  {
+    "sources": [
+      {
+        "url": "https:\/\/chicago.legistar.com\/People.aspx"
+      }
+    ],
+    "offices": [
+      {
+        "address": "(312) 744-0670, 121 North LaSalle Street, Room 200, Chicago IL",
+        "phone": "(312) 744-0670",
+        "type": "city hall",
+        "name": "City Hall Office"
+      },
+      {
+        "address": "463 & 1\/2 East 83rd Street, Chicago, IL 60619",
+        "fax": "(773) 635-0006",
+        "phone": "(773) 635-0006",
+        "type": "ward",
+        "name": "Ward Office"
+      }
+    ],
+    "url": "http:\/\/www.6thwardchicago.com",
+    "email": "service@6thwardchicago.com",
+    "district": "Ward 06",
+    "chamber": "upper",
+    "last_name": "Sawyer",
+    "first_name": "Roderick",
+    "full_name": "Roderick T. Sawyer",
+    "_id": "cf60b66e-14f6-40eb-a5d1-635f5b46d08c"
+  },
+  {
+    "sources": [
+      {
+        "url": "https:\/\/chicago.legistar.com\/People.aspx"
+      }
+    ],
+    "offices": [
+      {
+        "address": "(312) 744-6845, 121 North LaSalle Street, Room 304, Chicago IL",
+        "phone": "(312) 744-6845",
+        "type": "city hall",
+        "name": "City Hall Office"
+      },
+      {
+        "address": "2439 South Oakley Street, Chicago, IL 60608",
+        "fax": "(773) 523-4100",
+        "phone": "(773) 523-4100",
+        "type": "ward",
+        "name": "Ward Office"
+      }
+    ],
+    "url": "http:\/\/www.dannysolis.org\/",
+    "email": "info@dannysolis.org",
+    "district": "Ward 25",
+    "chamber": "upper",
+    "last_name": "Solis",
+    "first_name": "Daniel",
+    "full_name": "Daniel Solis",
+    "_id": "d6f5eab2-f6d4-40a2-add7-96fd794ee6df"
+  },
+  {
+    "sources": [
+      {
+        "url": "https:\/\/chicago.legistar.com\/People.aspx"
+      }
+    ],
+    "offices": [
+      {
+        "address": "(312) 744-3069, 121 North LaSalle Street, Room 300, Chicago IL",
+        "phone": "(312) 744-3069",
+        "type": "city hall",
+        "name": "City Hall Office"
+      },
+      {
+        "address": "5335 South Western Boulevard, Chicago, IL 60609",
+        "fax": "(773) 434-3399",
+        "phone": "(773) 434-3399",
+        "type": "ward",
+        "name": "Ward Office"
+      }
+    ],
+    "email": "JoAnn.Thompson@cityofchicago.org",
+    "district": "Ward 16",
+    "chamber": "upper",
+    "last_name": "Thompson",
+    "first_name": "Joann",
+    "full_name": "Joann Thompson",
+    "_id": "dbd80f92-139b-465c-b52c-10c00c3f357b"
+  },
+  {
+    "sources": [
+      {
+        "url": "https:\/\/chicago.legistar.com\/People.aspx"
+      }
+    ],
+    "offices": [
+      {
+        "address": "(312) 744-8019, 121 North LaSalle Street, Room 300, Chicago IL",
+        "phone": "(312) 744-8019",
+        "type": "city hall",
+        "name": "City Hall Office"
+      },
+      {
+        "address": "5344 West North Avenue, Chicago, IL 60639",
+        "fax": "(773) 745-2894",
+        "phone": "(773) 745-2894",
+        "type": "ward",
+        "name": "Ward Office"
+      }
+    ],
+    "url": "http:\/\/www.37thwardchicago.org\/",
+    "email": "emitts@cityofchicago.org",
+    "district": "Ward 37",
+    "chamber": "upper",
+    "last_name": "Mitts",
+    "first_name": "Emma",
+    "full_name": "Emma Mitts",
+    "_id": "ddbdc3ac-628d-4c43-bb47-fa47c236cf01"
+  },
+  {
+    "sources": [
+      {
+        "url": "https:\/\/chicago.legistar.com\/People.aspx"
+      }
+    ],
+    "offices": [
+      {
+        "address": "(312) 744-8805, 121 North LaSalle Street, Room 203, Chicago IL",
+        "phone": "(312) 744-8805",
+        "type": "city hall",
+        "name": "City Hall Office"
+      },
+      {
+        "address": "5755 West Division Street, Chicago, IL 60651",
+        "fax": "(773) 261-4646",
+        "phone": "(773) 261-4646",
+        "type": "ward",
+        "name": "Ward Office"
+      }
+    ],
+    "district": "Ward 29",
+    "chamber": "upper",
+    "last_name": "Graham",
+    "first_name": "Deborah",
+    "full_name": "Deborah L. Graham",
+    "_id": "e050def3-d4ba-4c03-85a9-34d189b53edd"
+  },
+  {
+    "sources": [
+      {
+        "url": "https:\/\/chicago.legistar.com\/People.aspx"
+      }
+    ],
+    "offices": [
+      {
+        "address": "(312) 744-5685, 121 North LaSalle Street, Room 300, Chicago IL",
+        "phone": "(312) 744-5685",
+        "type": "city hall",
+        "name": "City Hall Office"
+      },
+      {
+        "address": "2523 North Halsted Street, Chicago, IL 60614",
+        "fax": "(773) 348-9500",
+        "phone": "(773) 348-9500",
+        "type": "ward",
+        "name": "Ward Office"
+      }
+    ],
+    "url": "http:\/\/www.ward43.org\/",
+    "email": "yourvoice@ward43.org",
+    "district": "Ward 43",
+    "chamber": "upper",
+    "last_name": "Smith",
+    "first_name": "Michele",
+    "full_name": "Michele Smith",
+    "_id": "e448a572-2bc4-470e-8d29-abebe5c13da2"
+  },
+  {
+    "sources": [
+      {
+        "url": "https:\/\/chicago.legistar.com\/People.aspx"
+      }
+    ],
+    "offices": [
+      {
+        "address": "(312) 744-4810, 121 North LaSalle Street, Room 300, Chicago IL",
+        "phone": "(312) 744-4810",
+        "type": "city hall",
+        "name": "City Hall Office"
+      },
+      {
+        "address": "9011 South Ashland Avenue, Unit B, Chicago, IL 60620",
+        "fax": "(773) 881-9300",
+        "phone": "(773) 881-9300",
+        "type": "ward",
+        "name": "Ward Office"
+      }
+    ],
+    "email": "ward21@cityofchicago.org",
+    "district": "Ward 21",
+    "chamber": "upper",
+    "last_name": "Brookins",
+    "first_name": "Howard",
+    "full_name": "Howard Brookins, Jr.",
+    "_id": "e6042d16-ee31-4d28-97bf-2398b30f05eb"
+  },
+  {
+    "sources": [
+      {
+        "url": "https:\/\/chicago.legistar.com\/People.aspx"
+      }
+    ],
+    "offices": [
+      {
+        "address": "(312) 744-6124, 121 North LaSalle Street, Room 300, Chicago IL",
+        "phone": "(312) 744-6124",
+        "type": "city hall",
+        "name": "City Hall Office"
+      },
+      {
+        "address": "1463 West Chicago Avenue, Chicago, IL 60622",
+        "fax": "(312) 432-1995",
+        "phone": "(312) 432-1995",
+        "type": "ward",
+        "name": "Ward Office"
+      }
+    ],
+    "url": "http:\/\/aldermanburnett.com\/",
+    "email": "wburnett@cityofchicago.org",
+    "district": "Ward 27",
+    "chamber": "upper",
+    "last_name": "Burnett",
+    "first_name": "Walter",
+    "full_name": "Walter Burnett, Jr.",
+    "_id": "f4370b6f-02d2-4bb0-a0da-a285fb27e46d"
+  },
+  {
+    "sources": [
+      {
+        "url": "https:\/\/chicago.legistar.com\/People.aspx"
+      }
+    ],
+    "offices": [
+      {
+        "address": "(312) 744-3072, 121 North LaSalle Street, Room 200, Chicago IL",
+        "phone": "(312) 744-3072",
+        "type": "city hall",
+        "name": "City Hall Office"
+      },
+      {
+        "address": "10400 South Western Avenue, Chicago, IL 60643",
+        "fax": "(773) 238-8766",
+        "phone": "(773) 238-8766",
+        "type": "ward",
+        "name": "Ward Office"
+      }
+    ],
+    "url": "http:\/\/the19thward.com\/",
+    "district": "Ward 19",
+    "chamber": "upper",
+    "last_name": "O'Shea",
+    "first_name": "Matthew",
+    "full_name": "Matthew J. O'Shea",
+    "_id": "fa3f7612-c356-4dce-97c6-68d3d4a11e68"
+  },
+  {
+    "sources": [
+      {
+        "url": "https:\/\/chicago.legistar.com\/People.aspx"
+      }
+    ],
+    "offices": [
+      {
+        "address": "(312) 744-3208, 121 North LaSalle Street, Room 200, Chicago IL",
+        "phone": "(312) 744-3208",
+        "type": "city hall",
+        "name": "City Hall Office"
+      },
+      {
+        "address": "6107 North Northwest Highway, Chicago, IL 60631",
+        "fax": "(773) 594-8341",
+        "phone": "(773) 594-8341",
+        "type": "ward",
+        "name": "Ward Office"
+      }
+    ],
+    "url": "http:\/\/www.ward41.com\/",
+    "email": "ward41@cityofchicago.org",
+    "district": "Ward 41",
+    "chamber": "upper",
+    "last_name": "O'Connor",
+    "first_name": "Mary",
+    "full_name": "Mary O'Connor",
+    "_id": "fe21582c-69bc-4662-b56b-9703e6563097"
+  }
+]
