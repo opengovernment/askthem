@@ -46,7 +46,7 @@ module ApplicationHelper
   #   corresponding to the current jurisdiction
   def state_path
     if local?
-      jurisdiction_path(jurisdiction: state_abbreviation)
+      jurisdiction_path(jurisdiction: state_abbreviation, gov: 'state')
     elsif state? || federal?
       jurisdiction_path(jurisdiction: @jurisdiction.abbreviation, gov: 'state')
     else
