@@ -42,6 +42,13 @@
               <%= @governor.full_name -%>
             </span>
           <% end %>
+        <% elsif local? && @mayor -%>
+          <%= link_to person_path(@jurisdiction.abbreviation, @mayor) do %>
+            Mayor
+            <span class="info">
+              <%= @mayor.full_name -%>
+            </span>
+          <% end %>
         <% else %>
           <a href="#">Governor</a>
         <% end %>
