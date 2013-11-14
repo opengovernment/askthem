@@ -125,8 +125,10 @@ class PagesController < ApplicationController
     @state_people = StateLegislator.includes(:questions, :identities, :metadatum)
       .for_location(geodata)
 
+    # since we return all councilmembers for a city, regardless of "nearness"
+    # order alphabetically by last name
     @municipal_people = Councilmember.includes(:questions, :identities, :metadatum)
-      .for_location(geodata)
+      .for_location(geodata).order_by([["last_name", "ASC"]])
 
     @governor = Governor.includes(:questions, :identities, :metadatum)
       .for_location(geodata).first
