@@ -56,6 +56,7 @@
     "last_name": "Reboyras",
     "first_name": "Ariel",
     "full_name": "Ariel Reboyras",
+	  "photo_url" : "http://www.cityofchicago.org/content/dam/city/about/wards/30/aldward30.jpg",
     "_id": "01dd404e-023a-4ae3-8c9a-04ae1ee6d99e"
   },
   {
@@ -86,6 +87,7 @@
     "last_name": "Zalewski",
     "first_name": "Michael",
     "full_name": "Michael R. Zalewski",
+	  "photo_url" : "http://www.cityofchicago.org/content/dam/city/about/wards/23/aldward23.jpg",
     "_id": "06c1ba33-fece-457b-9fc8-f288acbe7740"
   },
   {
@@ -115,6 +117,7 @@
     "last_name": "Cardenas",
     "first_name": "George",
     "full_name": "George A. Cardenas",
+	  "photo_url" : "http://www.cityofchicago.org/content/dam/city/about/wards/12/aldward12.jpg",
     "_id": "07ec64d3-53cd-41c5-bf63-62fd04231200"
   },
   {
@@ -145,6 +148,7 @@
     "last_name": "Balcer",
     "first_name": "James",
     "full_name": "James Balcer",
+	  "photo_url" : "http://www.cityofchicago.org/content/dam/city/about/wards/11/aldward11.jpg",
     "_id": "105c9109-ac09-47cb-bcb8-263ac2ae419b"
   },
   {
@@ -175,6 +179,7 @@
     "last_name": "Cullerton",
     "first_name": "Timothy",
     "full_name": "Timothy M. Cullerton",
+	  "photo_url" : "http://www.cityofchicago.org/content/dam/city/about/wards/38/aldward38.jpg",
     "_id": "10e6bd9d-14f0-454e-a771-06c90709bdf6"
   },
   {
@@ -204,6 +209,7 @@
     "last_name": "Hairston",
     "first_name": "Leslie",
     "full_name": "Leslie A. Hairston",
+	  "photo_url" : "http://www.cityofchicago.org/content/dam/city/about/wards/05/aldward5photo.jpg",
     "_id": "12b839d6-0892-4944-ba1a-7567d2880c70"
   },
   {
@@ -233,6 +239,7 @@
     "last_name": "Harris",
     "first_name": "Michelle",
     "full_name": "Michelle A. Harris",
+	  "photo_url" : "http://www.cityofchicago.org/content/dam/city/about/wards/08/aldward8.jpg",
     "_id": "193cb1f4-4bc0-404c-a405-439ab02516a0"
   },
   {
@@ -290,6 +297,7 @@
     "last_name": "Maldonado",
     "first_name": "Roberto",
     "full_name": "Roberto Maldonado",
+	  "photo_url" : "http://www.cityofchicago.org/content/dam/city/about/wards/26/aldward26.jpg",
     "_id": "2333088b-96f1-440d-880e-3ddd913734b3"
   },
   {
@@ -319,6 +327,7 @@
     "last_name": "Mendoza",
     "first_name": "Susana",
     "full_name": "Susana A. Mendoza",
+	  "photo_url" : "http://chicityclerk.com/wp-content/uploads/2012/10/susana-a-mendoza.jpg",
     "_id": "271f488e-f8aa-4618-b2d7-2473030ba3d6"
   },
   {
@@ -409,6 +418,7 @@
     "last_name": "Col\u00f3n",
     "first_name": "Rey",
     "full_name": "Rey Col\u00f3n",
+	  "photo_url" : "http://www.cityofchicago.org/content/dam/city/about/wards/35/aldward35.jpg",
     "_id": "3971bf8d-54be-4fc5-8206-02cafc10a95f"
   },
   {
@@ -439,6 +449,7 @@
     "last_name": "Waguespack",
     "first_name": "Scott",
     "full_name": "Scott Waguespack",
+	  "photo_url" : "http://www.cityofchicago.org/content/dam/city/about/wards/32/aldward32.jpg",
     "_id": "3b9869b5-731b-45ca-8574-739181f35ba5"
   },
   {
@@ -469,6 +480,7 @@
     "last_name": "Mell",
     "first_name": "Deborah",
     "full_name": "Deborah Mell",
+	  "photo_url" : "http://www.cityofchicago.org/content/dam/city/about/wards/33/aldward33.jpg",
     "_id": "3cb19d8b-a58d-45f8-8b8e-dd8369bba5c3"
   },
   {
@@ -499,6 +511,7 @@
     "last_name": "Ervin",
     "first_name": "Jason",
     "full_name": "Jason C. Ervin",
+	  "photo_url" : "http://www.cityofchicago.org/content/dam/city/about/wards/28/aldward28.jpg",
     "_id": "41774b4d-879e-4d4f-80b2-058ddd1a838f"
   },
   {
@@ -529,6 +542,7 @@
     "last_name": "Austin",
     "first_name": "Carrie",
     "full_name": "Carrie M. Austin",
+	  "photo_url" : "http://www.cityofchicago.org/content/dam/city/about/wards/34/alderman34lgbio.jpg",
     "_id": "482e520f-2b5d-4e7d-9e77-19a26c9d21d1"
   },
   {
@@ -559,6 +573,7 @@
     "last_name": "Holmes",
     "first_name": "Natashia",
     "full_name": "Natashia Holmes",
+	  "photo_url" : "http://www.cityofchicago.org/content/dam/city/about/wards/07/aldward7.png",
     "_id": "4de812d6-fcb4-475b-a6de-3f9d89f4b21c"
   },
   {
@@ -589,6 +604,7 @@
     "last_name": "Suarez",
     "first_name": "Regner",
     "full_name": "Regner Ray Suarez",
+	  "photo_url" : "http://www.cityofchicago.org/content/dam/city/about/wards/31/aldward31.gif",
     "_id": "5008d99f-2d66-49c4-958b-0e4b81c134b9"
   },
   {
@@ -619,6 +635,7 @@
     "last_name": "Burns",
     "first_name": "William",
     "full_name": "William D. Burns",
+	  "photo_url" : "http://www.cityofchicago.org/content/dam/city/about/wards/04/aldermanburns.jpg",
     "_id": "50d9c7d1-e97f-408f-9c9d-3ae4bf6aa173"
   },
   {
@@ -649,6 +666,7 @@
     "last_name": "Moreno",
     "first_name": "Proco",
     "full_name": "Proco Joe Moreno",
+	  "photo_url" : "http://www.cityofchicago.org/content/dam/city/about/wards/01/aldward01.jpg",
     "_id": "5d1717f6-d137-4a80-9803-de2241390865"
   },
   {
@@ -679,6 +697,7 @@
     "last_name": "Pawar",
     "first_name": "Ameya",
     "full_name": "Ameya Pawar",
+	  "photo_url" : "http://www.cityofchicago.org/content/dam/city/about/wards/47/aldward47.jpg",
     "_id": "5e965390-3a8c-46b4-88ab-c6061e585c2d"
   },
   {
@@ -708,6 +727,7 @@
     "last_name": "Munoz",
     "first_name": "Ricardo",
     "full_name": "Ricardo Munoz",
+	  "photo_url" : "http://www.cityofchicago.org/content/dam/city/about/wards/22/aldward22.jpg",
     "_id": "6061ec9b-1c6d-4afe-bb90-b011114cfd8f"
   },
   {
@@ -738,6 +758,7 @@
     "last_name": "Laurino",
     "first_name": "Margaret",
     "full_name": "Margaret Laurino",
+	  "photo_url" : "http://www.cityofchicago.org/content/dam/city/about/wards/39/aldward39.jpg",
     "_id": "60725152-401f-474c-8db3-aa29a5e1d4b9"
   },
   {
@@ -767,6 +788,7 @@
     "last_name": "Foulkes",
     "first_name": "Toni",
     "full_name": "Toni Foulkes",
+	  "photo_url" : "http://www.cityofchicago.org/content/dam/city/about/wards/15/aldward15.jpg",
     "_id": "6d1d9dd3-faab-4edc-955a-8480dbcb1c07"
   },
   {
@@ -827,6 +849,7 @@
     "last_name": "Fioretti",
     "first_name": "Bob",
     "full_name": "Bob Fioretti",
+	  "photo_url" : "http://www.cityofchicago.org/content/dam/city/about/wards/02/aldfioretti.jpg",
     "_id": "834b483f-50f8-4a57-819e-a623f7bec25f"
   },
   {
@@ -857,6 +880,7 @@
     "last_name": "Tunney",
     "first_name": "Thomas",
     "full_name": "Thomas Tunney",
+	  "photo_url" : "http://www.cityofchicago.org/content/dam/city/about/wards/44/aldward44.jpg",
     "_id": "84a308bd-f995-4c1a-88f0-1a599936460a"
   },
   {
@@ -887,6 +911,7 @@
     "last_name": "Reilly",
     "first_name": "Brendan",
     "full_name": "Brendan Reilly",
+	  "photo_url" : "http://www.cityofchicago.org/content/dam/city/about/wards/42/aldward42.jpg",
     "_id": "84f2b6d3-5030-4c13-b56a-3c1dca20304b"
   },
   {
@@ -916,6 +941,7 @@
     "last_name": "Emanuel",
     "first_name": "Rahm",
     "full_name": "Rahm Emanuel",
+	  "photo_url" : "http://www.cityofchicago.org/content/dam/city/depts/mayor/general/Rahm_200x200.jpg",
     "_id": "937dec5a-651b-44d3-89a3-8df2931cf724"
   },
   {
@@ -945,6 +971,7 @@
     "last_name": "Moore",
     "first_name": "Joseph",
     "full_name": "Joseph Moore",
+	  "photo_url" : "http://www.cityofchicago.org/content/dam/city/about/wards/49/aldward49.jpg",
     "_id": "975e817c-69da-411b-84cb-e45848bed368"
   },
   {
@@ -975,6 +1002,7 @@
     "last_name": "Dowell",
     "first_name": "Pat",
     "full_name": "Pat Dowell",
+	  "photo_url" : "http://www.cityofchicago.org/content/dam/city/about/wards/03/pdowellsm.jpg",
     "_id": "97f27520-04cd-4b98-a582-bb6efd1aef77"
   },
   {
@@ -1005,6 +1033,7 @@
     "last_name": "Beale",
     "first_name": "Anthony",
     "full_name": "Anthony Beale",
+	  "photo_url" : "http://www.cityofchicago.org/content/dam/city/about/wards/09/aldward9.jpg",
     "_id": "9f2ad540-970d-44c2-b929-fd3ed607fbf4"
   },
   {
@@ -1035,6 +1064,7 @@
     "last_name": "Pope",
     "first_name": "John",
     "full_name": "John Pope",
+	  "photo_url" : "http://www.cityofchicago.org/content/dam/city/about/wards/10/aldward10.jpg",
     "_id": "a040ab18-d428-4dae-a889-a0ca87924102"
   },
   {
@@ -1064,6 +1094,7 @@
     "last_name": "Lane",
     "first_name": "Lona",
     "full_name": "Lona Lane",
+	  "photo_url" : "http://www.cityofchicago.org/content/dam/city/about/wards/18/aldward18.jpg",
     "_id": "a1d64d8d-afa4-4ab5-89d1-a06769092af8"
   },
   {
@@ -1094,6 +1125,7 @@
     "last_name": "O'Connor",
     "first_name": "Patrick",
     "full_name": "Patrick O'Connor",
+	  "photo_url" : "http://www.cityofchicago.org/content/dam/city/about/wards/40/aldward40.gif",
     "_id": "a63a677d-e5e0-4dad-b260-9c9e780cf170"
   },
   {
@@ -1154,6 +1186,7 @@
     "last_name": "Burke",
     "first_name": "Edward",
     "full_name": "Edward M. Burke",
+	  "photo_url" : "http://www.cityofchicago.org/content/dam/city/about/wards/14/aldward14.jpg",
     "_id": "b5ffc29c-52ae-480a-9320-08b3babf3ea7"
   },
   {
@@ -1184,6 +1217,7 @@
     "last_name": "Cochran",
     "first_name": "Willie",
     "full_name": "Willie Cochran",
+	  "photo_url" : "http://www.cityofchicago.org/content/dam/city/about/wards/20/aldward20.jpg",
     "_id": "ba6e0988-4b89-467b-ba83-2f100ee2049e"
   },
   {
@@ -1213,6 +1247,7 @@
     "last_name": "Thomas",
     "first_name": "Latasha",
     "full_name": "Latasha R. Thomas",
+	  "photo_url" : "http://www.cityofchicago.org/content/dam/city/about/wards/17/aldward17.jpg",
     "_id": "bb547692-1b5f-44b9-8f11-bb918f685251"
   },
   {
@@ -1273,6 +1308,7 @@
     "last_name": "Solis",
     "first_name": "Daniel",
     "full_name": "Daniel Solis",
+	  "photo_url" : "http://www.cityofchicago.org/content/dam/city/about/wards/25/aldward25.jpg",
     "_id": "d6f5eab2-f6d4-40a2-add7-96fd794ee6df"
   },
   {
@@ -1302,6 +1338,7 @@
     "last_name": "Thompson",
     "first_name": "Joann",
     "full_name": "Joann Thompson",
+	  "photo_url" : "http://www.cityofchicago.org/content/dam/city/about/wards/16/aldward16.jpg",
     "_id": "dbd80f92-139b-465c-b52c-10c00c3f357b"
   },
   {
@@ -1332,6 +1369,7 @@
     "last_name": "Mitts",
     "first_name": "Emma",
     "full_name": "Emma Mitts",
+	  "photo_url" : "http://www.cityofchicago.org/content/dam/city/about/wards/37/aldward37.jpg",
     "_id": "ddbdc3ac-628d-4c43-bb47-fa47c236cf01"
   },
   {
@@ -1360,6 +1398,7 @@
     "last_name": "Graham",
     "first_name": "Deborah",
     "full_name": "Deborah L. Graham",
+	  "photo_url" : "http://www.cityofchicago.org/content/dam/city/about/wards/29/aldward29.png",
     "_id": "e050def3-d4ba-4c03-85a9-34d189b53edd"
   },
   {
@@ -1390,6 +1429,7 @@
     "last_name": "Smith",
     "first_name": "Michele",
     "full_name": "Michele Smith",
+	  "photo_url" : "http://www.cityofchicago.org/content/dam/city/about/wards/47/aldward47.jpg",
     "_id": "e448a572-2bc4-470e-8d29-abebe5c13da2"
   },
   {
@@ -1419,6 +1459,7 @@
     "last_name": "Brookins",
     "first_name": "Howard",
     "full_name": "Howard Brookins, Jr.",
+	  "photo_url" : "http://www.cityofchicago.org/content/dam/city/about/wards/21/aldward21.jpg",
     "_id": "e6042d16-ee31-4d28-97bf-2398b30f05eb"
   },
   {
@@ -1449,6 +1490,7 @@
     "last_name": "Burnett",
     "first_name": "Walter",
     "full_name": "Walter Burnett, Jr.",
+	  "photo_url" : "http://www.cityofchicago.org/content/dam/city/about/wards/27/aldward27.jpg",
     "_id": "f4370b6f-02d2-4bb0-a0da-a285fb27e46d"
   },
   {
