@@ -1,7 +1,7 @@
 class Meeting
   include Mongoid::Document
 
-  belongs_to :metadatum, foreign_key: 'state'
+  belongs_to :metadatum, foreign_key: "state"
 
   embeds_one :agenda
   embeds_one :minutes_document
@@ -24,7 +24,7 @@ class Meeting
   # @todo decide whether to keep 'all' handling
   def self.results_for_jurisdiction(jurisdiction = nil)
     if jurisdiction
-      scraped_local_gov[:council_agendas].find('Municipality' => jurisdiction)
+      scraped_local_gov[:council_agendas].find("Municipality" => jurisdiction)
     else
       scraped_local_gov[:council_agendas].find
     end
@@ -52,28 +52,28 @@ class Meeting
   def self.build_from_provided(attributes)
 
     meeting = Meeting.new(date_and_time: date_and_time_from(attributes),
-                          name: attributes['Name'],
-                          location: attributes['Meeting Location'],
+                          name: attributes["Name"],
+                          location: attributes["Meeting Location"],
                           # state == metadatum == jurisdiction
-                          state: attributes['Municipality'])
+                          state: attributes["Municipality"])
 
-    if (attributes['Agenda']['url'])
-      meeting.agenda = Agenda.new(url: attributes['Agenda']['url'],
-                                  full_text: attributes['Agenda']['fulltext'])
+    if attributes["Agenda"] && attributes["Agenda"]["url"]
+      meeting.agenda = Agenda.new(url: attributes["Agenda"]["url"],
+                                  full_text: attributes["Agenda"]["fulltext"])
     end
 
-    if (attributes['Minutes']['url'])
-      puts attributes['Minutes']['url']
-      meeting.minutes_document = MinutesDocument.new(url: attributes['Minutes']['url'],
-                                    full_text: attributes['Minutes']['fulltext'])
+    if attributes["Minutes"] && attributes["Minutes"]["url"]
+      puts attributes["Minutes"]["url"]
+      meeting.minutes_document = MinutesDocument.new(url: attributes["Minutes"]["url"],
+                                    full_text: attributes["Minutes"]["fulltext"])
     end
     meeting
   end
 
   # @todo don't assume EST, look up zone for jurisdiction
   def self.date_and_time_from(attributes)
-    date = attributes['Meeting Date'].strftime('%Y-%m-%d')
-    time = Time.zone.parse(attributes['Meeting Time']).strftime('%l:%M %p EST')
+    date = attributes["Meeting Date"].strftime("%Y-%m-%d")
+    time = Time.zone.parse(attributes["Meeting Time"]).strftime("%l:%M %p EST")
     date_and_time = Time.zone.parse("#{date} #{time}")
   end
 
