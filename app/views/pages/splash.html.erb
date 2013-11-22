@@ -25,6 +25,7 @@
     <input type="email" name="email" id="email" placeholder="E-mail">
     <input type="text" name="zipcode" id="zipcode" placeholder="Zipcode (optional)">
     <input type="hidden" name="notify_type" id="notify_type" value="individual">
+    <input type="hidden" name="notify_source" id="notify_source" value="splash">
     <input type="submit" id="dynamic-button" value="<%= request.path == '/electeds' ? 'Contact Me' : 'Notify Me' %>" class="cta-pill">
     <div id="dynamic-link">
       <%- if request.path == '/electeds' %>
