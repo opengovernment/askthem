@@ -34,6 +34,9 @@ gem 'rolify', '3.3.0.rc4'
 gem 'ruby-progressbar'
 gem 'rest-client'
 
+# Google Civic Information API, used for representatives for address
+gem 'google_civic_info', github: 'walter/google_civic_info'
+
 # needed in all envs as it is required in Rakefile
 gem 'rspec-rerun'
 
