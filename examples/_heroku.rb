@@ -6,3 +6,4 @@
 # ENV['PROJECT_VOTE_SMART_API_KEY'] ||= ''
 # ENV['AWS_DIRECTORY'] ||= ''
 # ENV['AWS_HOST_STUB'] ||= '.s3.amazonaws.com'
+# ENV['GOOGLE_API_KEY'] ||= ''
