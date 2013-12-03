@@ -32,6 +32,12 @@ require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 # require 'rspec/autorun'
 
+# required for valid google_civic_info gem client object
+# even when calls to api are vcr cassettes
+# when recording new cassettes, be sure to set valid key
+# in your environment
+ENV["GOOGLE_API_KEY"] ||= "placeholder"
+
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
