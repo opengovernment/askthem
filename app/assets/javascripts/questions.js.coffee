@@ -150,7 +150,8 @@ jQuery ($) ->
           if @photo_url?
             liVal += "<img src=\"http://d2xfsikitl0nz3.cloudfront.net/#{encodeURIComponent(@photo_url)}/60/60\" width=\"60\" height=\"60\" alt=\"\" />"
           else
-            liVal += "<img src=\"http://lorempixel.com/60/60/\" width=\"60\" height=\"60\" alt=\"\" />"
+            placeholderUrl = "http://" + $(location).attr('host') + "/assets/placeholder.png"
+            liVal += "<img src=\"http://d2xfsikitl0nz3.cloudfront.net/#{encodeURIComponent(placeholderUrl)}/60/60\" width=\"60\" height=\"60\" alt=\"\" />"
           liVal += '</div>'
 
           liVal += "<h2>#{@full_name}</h2>"

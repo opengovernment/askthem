@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: post
-    uri: https://www.googleapis.com/civicinfo/us_v1/representatives/lookup?key=AIzaSyArEaOIgL8dcxFWOQBmKIpvZfqBPJhZ0a8
+    uri: https://www.googleapis.com/civicinfo/us_v1/representatives/lookup?key=
     body:
       encoding: US-ASCII
       string: ! '{"address":"148 Lafayette St, New York, NY 10013"}'
@@ -122,7 +122,7 @@ http_interactions:
         xfq9AxBSfGNyebHBtfXx+cTmUSSTN0R4+5yxO+sP/9Csv6eTZT0YdNs4eRrw
         xLszeKxnh0Sy8HewCP5JnX+YvWO4WUiDi8zeUHMO8HPCws95VF19Aj8/Tv4H
         q7eQ7I0vAAA=
-    http_version: 
+    http_version:
   recorded_at: Tue, 26 Nov 2013 02:06:23 GMT
 - request:
     method: post
@@ -230,6 +230,6 @@ http_interactions:
         xfq9AxBSfGNyebHBtfXx+cTmUSSTN0R4+5yxO+sP/9Csv6eTZT0YdNs4eRrw
         xLszeKxnh0Sy8HewCP5JnX+YvWO4WUiDi8zeUHMO8HPCws95VF19Aj8/Tv4H
         q7eQ7I0vAAA=
-    http_version: 
+    http_version:
   recorded_at: Tue, 26 Nov 2013 02:06:26 GMT
 recorded_with: VCR 2.5.0

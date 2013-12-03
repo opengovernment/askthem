@@ -121,11 +121,12 @@ describe 'questions' do
       end
 
       it 'can fill out and submit complete form', js: true, vcr: true do
-        valid_person
+
+        add_governor
         as_user(@user) do
           visit '/vt/questions/new'
 
-          choose_person false
+          choose_governor false
           click_next_button
           fields_should_be_valid
 
@@ -141,10 +142,10 @@ describe 'questions' do
 
     context 'as a non-registered user' do
       it 'can fill out and submit complete form', js: true, vcr: true do
-        valid_person
+        add_governor
         visit '/vt/questions/new'
 
-        choose_person
+        choose_governor
         click_next_button
         fields_should_be_valid
 
@@ -178,15 +179,15 @@ describe 'questions' do
         end
 
         it 'can choose a person from address locator', js: true, vcr: true do
-          valid_person
-          choose_person
-          selector = "#question_person_id_#{@person.id}"
-          expect(find(selector).value).to eq @person.id
+          add_governor
+          choose_governor
+          selector = "#question_person_id_#{@cached_official.id}"
+          expect(find(selector).value).to eq @cached_official.id.to_s
           expect(find(selector).checked?).to be_true
         end
 
         it 'can get feedback based on person chosen address locator', js: true, vcr: true do
-          valid_person
+          add_governor
           fill_out_address
           click_next_button
 
@@ -387,7 +388,6 @@ describe 'questions' do
           end
         end
       end
-
     end
   end
 
@@ -440,6 +440,26 @@ describe 'questions' do
     @person.id = 'VTL000008'
     @person.save!
     @person
+  end
+
+  def add_governor
+    @person ||= Governor.new(state: @metadatum.abbreviation)
+    @person.save!
+    @cached_official = CachedOfficial.create!(name: "Peter Shumlin",
+                                              state: "vt",
+                                              office_name: "Governor",
+                                              office_level: "state",
+                                              division_name: "Vermont",
+                                              division_scope: "statewide",
+                                              person: @person,
+                                              ocd_division_id: "ocd-division/country:us/state:vt")
+    @person
+  end
+
+  def choose_governor(need_to_fill_out_address = true)
+    fill_out_address if need_to_fill_out_address
+    sleep 2
+    page.execute_script "jQuery('#question_person_id_#{@cached_official.id}').parents('li').trigger('click')"
   end
 
   def click_next_button(number_of_clicks = 1, sleepy_time = 1)

@@ -13,13 +13,16 @@
         <% end %>
         <i class="icon-angle-down"></i>
       </li>
+      <%# @todo needs drop down or something that handles multiple cities %>
       <% local_jurisdictions.each do |city| %>
-      <li <%= @jurisdiction.abbreviation == city.abbreviation ? raw(' class="active"') : '' %> >
-        <%= link_to jurisdiction_path(jurisdiction: city.abbreviation) do %>
-          <%= city.name %>
+        <% if %w(pa-philadelphia ca-san-jose il-chicago ny-new-york).include?(city.abbreviation) -%>
+          <li <%= @jurisdiction.abbreviation == city.abbreviation ? raw(' class="active"') : '' %> >
+            <%= link_to jurisdiction_path(jurisdiction: city.abbreviation) do %>
+              <%= city.name %>
+            <% end %>
+            <i class="icon-angle-down"></i>
+          </li>
         <% end %>
-        <i class="icon-angle-down"></i>
-      </li>
       <% end %>
     </ul>
     <% unless (params[:controller] == 'questions' && params[:action] == 'show') %>

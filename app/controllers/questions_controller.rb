@@ -7,6 +7,7 @@ class QuestionsController < ApplicationController
   custom_actions resource: [:need_signatures, :have_answers, :need_answers, :recent]
 
   before_filter :set_state_code, only: [:show, :new, :create, :need_signatures, :have_answers, :need_answers, :recent]
+  before_filter :set_question_person_id, only: :create
 
   def index
     index! do |format|
@@ -63,8 +64,6 @@ class QuestionsController < ApplicationController
     end
 
     render layout: "data_collection"
-
-    # new!
   end
 
   def create
@@ -157,5 +156,16 @@ class QuestionsController < ApplicationController
       format.html { render action: "index" }
       format.js { render partial: "page" }
     end
+  end
+
+  def set_question_person_id
+    person_id = params[:question][:person_id]
+
+    unless Person.connected_to(@state_code).where(id: person_id).count > 0
+      person_id = CachedOfficial.connected_to(@state_code)
+        .where(id: person_id).first.person.id
+    end
+
+    params[:question][:person_id] = person_id
   end
 end

@@ -1,123 +1,98 @@
 ---
 http_interactions:
 - request:
-    method: get
-    uri: http://maps.googleapis.com/maps/api/geocode/json?address=2227%20Paine%20Turnpike%20Berlin%20vt%2005602&language=en&sensor=false
+    method: post
+    uri: https://www.googleapis.com/civicinfo/us_v1/representatives/lookup?key=
     body:
       encoding: US-ASCII
-      string: ''
+      string: ! '{"address":"2227 Paine Turnpike Berlin vt 05602"}'
     headers:
       Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      - gzip
+      User-Agent:
+      - GoogleCivicInfo.rb (gzip)
       Accept:
       - ! '*/*'
-      User-Agent:
-      - Ruby
+      Content-Type:
+      - application/json
   response:
     status:
       code: 200
       message: OK
     headers:
+      Cache-Control:
+      - no-cache, no-store, max-age=0, must-revalidate
+      Pragma:
+      - no-cache
+      Expires:
+      - Fri, 01 Jan 1990 00:00:00 GMT
+      Date:
+      - Tue, 03 Dec 2013 04:47:09 GMT
+      Etag:
+      - ! '"rRbhVmkDXZdGUpgfQuG_GrfOWWM/C3bT3lPKlywkdCSS9RnEmwGnRYs"'
       Content-Type:
       - application/json; charset=UTF-8
-      Date:
-      - Fri, 11 Oct 2013 04:40:41 GMT
-      Expires:
-      - Sat, 12 Oct 2013 04:40:41 GMT
-      Cache-Control:
-      - public, max-age=86400
-      Access-Control-Allow-Origin:
-      - ! '*'
-      Server:
-      - mafe
-      X-Xss-Protection:
-      - 1; mode=block
+      Content-Encoding:
+      - gzip
+      X-Content-Type-Options:
+      - nosniff
       X-Frame-Options:
       - SAMEORIGIN
-      Alternate-Protocol:
-      - 80:quic
-      Transfer-Encoding:
-      - chunked
-    body:
-      encoding: US-ASCII
-      string: ! "{\n   \"results\" : [\n      {\n         \"address_components\" :
-        [\n            {\n               \"long_name\" : \"2227\",\n               \"short_name\"
-        : \"2227\",\n               \"types\" : [ \"street_number\" ]\n            },\n
-        \           {\n               \"long_name\" : \"Paine Turnpike South\",\n
-        \              \"short_name\" : \"Paine Turnpike S\",\n               \"types\"
-        : [ \"route\" ]\n            },\n            {\n               \"long_name\"
-        : \"Berlin\",\n               \"short_name\" : \"Berlin\",\n               \"types\"
-        : [ \"locality\", \"political\" ]\n            },\n            {\n               \"long_name\"
-        : \"Washington\",\n               \"short_name\" : \"Washington\",\n               \"types\"
-        : [ \"administrative_area_level_2\", \"political\" ]\n            },\n            {\n
-        \              \"long_name\" : \"Vermont\",\n               \"short_name\"
-        : \"VT\",\n               \"types\" : [ \"administrative_area_level_1\", \"political\"
-        ]\n            },\n            {\n               \"long_name\" : \"United
-        States\",\n               \"short_name\" : \"US\",\n               \"types\"
-        : [ \"country\", \"political\" ]\n            },\n            {\n               \"long_name\"
-        : \"05602\",\n               \"short_name\" : \"05602\",\n               \"types\"
-        : [ \"postal_code\" ]\n            }\n         ],\n         \"formatted_address\"
-        : \"2227 Paine Turnpike South, Berlin, VT 05602, USA\",\n         \"geometry\"
-        : {\n            \"bounds\" : {\n               \"northeast\" : {\n                  \"lat\"
-        : 44.1931496,\n                  \"lng\" : -72.58242439999999\n               },\n
-        \              \"southwest\" : {\n                  \"lat\" : 44.19314780000001,\n
-        \                 \"lng\" : -72.5824427\n               }\n            },\n
-        \           \"location\" : {\n               \"lat\" : 44.1931496,\n               \"lng\"
-        : -72.5824427\n            },\n            \"location_type\" : \"RANGE_INTERPOLATED\",\n
-        \           \"viewport\" : {\n               \"northeast\" : {\n                  \"lat\"
-        : 44.1944976802915,\n                  \"lng\" : -72.58108456970849\n               },\n
-        \              \"southwest\" : {\n                  \"lat\" : 44.19179971970851,\n
-        \                 \"lng\" : -72.58378253029151\n               }\n            }\n
-        \        },\n         \"partial_match\" : true,\n         \"types\" : [ \"street_address\"
-        ]\n      }\n   ],\n   \"status\" : \"OK\"\n}\n"
-    http_version:
-  recorded_at: Fri, 11 Oct 2013 04:40:39 GMT
-- request:
-    method: get
-    uri: http://openstates.org/api/v1/legislators/geo/?apikey=&fields=id&lat=44.1931496&long=-72.5824427
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - ! '*/*; q=0.5, application/xml'
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Server:
-      - nginx/1.2.6 (Ubuntu)
-      Content-Type:
-      - application/json; charset=utf-8
-      Vary:
-      - Authorization
-      Date:
-      - Fri, 11 Oct 2013 04:41:20 GMT
-      X-Varnish:
-      - 237078330 237077519
-      Age:
-      - '81'
-      Via:
-      - 1.1 varnish, 1.1 BC2-ACLD
+      X-Xss-Protection:
+      - 1; mode=block
       Content-Length:
-      - '603'
-      Connection:
-      - Keep-Alive
+      - '1957'
+      Server:
+      - GSE
+      Alternate-Protocol:
+      - 443:quic
     body:
-      encoding: US-ASCII
-      string: ! '[{"district": "Washington", "chamber": "upper", "state": "vt", "boundary_id":
-        "sldu/vt-washington", "id": "VTL000008"}, {"district": "Washington", "chamber":
-        "upper", "state": "vt", "boundary_id": "sldu/vt-washington", "id": "VTL000009"},
-        {"district": "Washington", "chamber": "upper", "state": "vt", "boundary_id":
-        "sldu/vt-washington", "id": "VTL000184"}, {"district": "Washington-1", "chamber":
-        "lower", "state": "vt", "boundary_id": "sldl/vt-washington-1", "id": "VTL000199"},
-        {"district": "Washington-1", "chamber": "lower", "state": "vt", "boundary_id":
-        "sldl/vt-washington-1", "id": "VTL000064"}]'
+      encoding: ASCII-8BIT
+      string: !binary |-
+        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
+        k4VVu49VyJ3hv29n/wL5tsI+ySQAAA==
     http_version:
-  recorded_at: Fri, 11 Oct 2013 04:40:40 GMT
+  recorded_at: Tue, 03 Dec 2013 04:47:09 GMT
 recorded_with: VCR 2.5.0

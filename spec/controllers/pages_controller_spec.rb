@@ -46,20 +46,17 @@ describe PagesController do
   end
 
   context "when requesting json"do
-    # @warn can"t use let because of mongoid teardown
-    before do
-      @person = FactoryGirl.create(:state_legislator_ny_sheldon_silver)
-    end
-
     describe "#locator" do
       it "takes a geographic address and returns matching people", :vcr do
         get :locator, format: :json, q: "148 Lafayette, NY, NY"
-        expect(JSON.parse(response.body)).to eq expected_from_json
+        expect(JSON.parse(response.body).size).to eq 7
       end
     end
 
     describe "#identifier" do
       it "takes an email address and returns matching person" do
+        @person = FactoryGirl.create(:state_legislator_ny_sheldon_silver)
+
         get :identifier, format: :json, email: @person.email
         expect(JSON.parse(response.body)).to eq expected_from_json
       end

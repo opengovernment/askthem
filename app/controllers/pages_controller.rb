@@ -69,7 +69,13 @@ class PagesController < ApplicationController
     if request.format != :json
       set_variables_for(@address)
     else
-      respond_with limited_json_for(Person.results_for_location(@address))
+      json = nil
+      if params[:google] && params[:google] == "false"
+        json = limited_json_for(Person.results_for_location(@address))
+      else
+        json = limited_json_for(CachedOfficialsFromGoogle.new(@address))
+      end
+      respond_with json
     end
   end
 
@@ -127,7 +133,9 @@ class PagesController < ApplicationController
 
     # since we return all councilmembers for a city, regardless of "nearness"
     # order alphabetically by last name
-    @municipal_people = Councilmember.includes(:questions, :identities, :metadatum)
+    @municipal_people = Mayor.includes(:questions, :identities)
+      .for_location(geodata) +
+      Councilmember.includes(:questions, :identities, :metadatum)
       .for_location(geodata).order_by([["last_name", "ASC"]])
 
     @governor = Governor.includes(:questions, :identities, :metadatum)
@@ -135,8 +143,9 @@ class PagesController < ApplicationController
   end
 
   def limited_json_for(people)
-    only = [:full_name, :photo_url, :party]
-    methods = [:id, :political_position_title, :most_recent_district]
+    only = [:party]
+    methods = [:id, :full_name, :photo_url,
+               :political_position_title, :most_recent_district]
 
     people.as_json only: only, methods: methods
   end
@@ -165,8 +174,9 @@ class PagesController < ApplicationController
 
   def tab(tab)
     @governor = Governor.connected_to(@jurisdiction.abbreviation).first
-    @mayor = Councilmember.connected_to(@jurisdiction.abbreviation)
-             .where(district: "Mayor").first
+    @mayor = Mayor.connected_to(@jurisdiction.abbreviation).first ||
+      Councilmember.connected_to(@jurisdiction.abbreviation)
+      .where(district: "Mayor").first
 
     # Each pair of `@lower` and `@upper` lines must be run together, as below,
     # otherwise the first query to evaluate will clear the persistence options
