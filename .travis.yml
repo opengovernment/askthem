@@ -1,5 +1,4 @@
 # use rspec-rerun for flickering tests due to poltergeist time outs
-script: bundle exec rake ci
 language: ruby
 rvm:
   - 1.9.3
