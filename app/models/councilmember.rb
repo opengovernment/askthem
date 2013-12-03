@@ -8,7 +8,8 @@ class Councilmember < Person
     location = LocationFormatter.new(location).format
     return where(id: []) unless location
 
-    abbreviation = "#{location.state_code.downcase}-#{location.city.downcase}"
+    city_code = location.city.gsub(" ", "-").downcase
+    abbreviation = "#{location.state_code.downcase}-#{city_code}"
     where(state: abbreviation)
   end
 end
