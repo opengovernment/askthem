@@ -5,6 +5,10 @@
     <%= f.hidden_field :bill_id %>
     <%= f.validate :person_id %>
 
+    <% @question.errors.full_messages.each do |message| -%>
+      <p class="alert"><%= message -%></p>
+    <% end -%>
+
     <% locals = { question: @question, person: @person, bill: @bill, relevant_steps: @relevant_steps, first_step: @first_step, f: f } -%>
 
     <% @relevant_steps.each do |step| %>

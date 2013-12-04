@@ -78,11 +78,12 @@ class QuestionsController < ApplicationController
     if @question.valid? && (user_signed_in? || @user.valid?)
       @question.save
       QuestionMailer.question_posted(@user, @question).deliver
-      redirect_to question_path(@state_code, @question, :share => true)
+      redirect_to question_path(@state_code, @question, share: true)
     else
       set_up_steps
+      flash.now[:alert] = "Whoops! Not quite right. Please try again."
       respond_to do |format|
-        format.html { render "new" }
+        format.html { render "new", layout: "data_collection" }
       end
     end
   end
@@ -161,9 +162,8 @@ class QuestionsController < ApplicationController
   def set_question_person_id
     person_id = params[:question][:person_id]
 
-    unless Person.connected_to(@state_code).where(id: person_id).count > 0
-      person_id = CachedOfficial.connected_to(@state_code)
-        .where(id: person_id).first.person.id
+    unless Person.where(id: person_id).count > 0
+      person_id = CachedOfficial.where(id: person_id).first.person.id
     end
 
     params[:question][:person_id] = person_id

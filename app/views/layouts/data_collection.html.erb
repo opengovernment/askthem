@@ -54,6 +54,12 @@
   </header>
   <section id="content_body">
     <div class="content_body">
+      <% if notice %>
+        <p class="notice"><%= notice %></p>
+      <% end %>
+      <% if alert %>
+        <p class="alert"><%= alert %></p>
+      <% end %>
       <div class="wrapper">
         <%= yield %>
       <div class="clear"></div>
