@@ -39,11 +39,11 @@ gem 'google_civic_info', github: 'walter/google_civic_info'
 
 group :production do
   gem 'airbrake'
-  gem 'unicorn'
+  #gem 'unicorn'
   gem 'fog'
   gem 'newrelic_rpm'
-  gem 'capistrano'
-  gem 'rvm-capistrano'  # https://rvm.io/integration/capistrano/ and https://github.com/wayneeseguin/rvm-capistrano
+  #gem 'capistrano'
+  #gem 'rvm-capistrano'  # https://rvm.io/integration/capistrano/ and https://github.com/wayneeseguin/rvm-capistrano
   gem 'nokogiri', '1.5.10'
 end
 
