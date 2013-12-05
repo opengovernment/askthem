@@ -75,4 +75,7 @@ group :assets do
   # gem 'therubyracer', :platforms => :ruby
 
   gem 'uglifier', '>= 1.0.3'
+
+  # only precompile assets when changed
+  gem 'turbo-sprockets-rails3'
 end
