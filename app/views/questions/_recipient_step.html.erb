@@ -38,25 +38,26 @@
 
       <fieldset class="last">
         <%= f.fields_for :user do |user_form| %>
+          <%= user_form.hidden_field :for_new_question %>
 
-        <div class="pill_wrap">
-          <label for="question_user_attributes_street_address" class="lesser">Address</label>
-          <%= user_form.text_field :street_address, placeholder: 'Street Address' %>
-        </div>
-        <div class="pill_wrap">
-          <label for="question_user_attributes_locality" class="lesser">City</label>
-          <%= user_form.text_field :locality, placeholder: 'City' %>
-        </div>
-        <div class="pill_wrap">
-          <label for="question_user_attributes_region" class="lesser">State</label>
-          <div class="input select sculpt icon-angle-down">
-            <%= user_form.select :region, options_for_select(OpenGovernment::STATES, @state_code.split('-').first), placeholder: 'Select your state' %>
+          <div class="pill_wrap">
+            <label for="question_user_attributes_street_address" class="lesser">Address</label>
+            <%= user_form.text_field :street_address, placeholder: 'Street Address', validate: true %>
           </div>
-        </div>
-        <div class="pill_wrap">
-          <label for="question_user_attributes_postal_code" class="lesser">Zipcode</label>
-          <%= user_form.text_field :postal_code, placeholder: 'ex. 02141' %>
-        </div>
+          <div class="pill_wrap">
+            <label for="question_user_attributes_locality" class="lesser">City</label>
+            <%= user_form.text_field :locality, placeholder: 'City', validate: true %>
+          </div>
+          <div class="pill_wrap">
+            <label for="question_user_attributes_region" class="lesser">State</label>
+            <div class="input select sculpt icon-angle-down">
+              <%= user_form.select :region, options_for_select(OpenGovernment::STATES, @state_code.split('-').first), placeholder: 'Select your state' %>
+            </div>
+          </div>
+          <div class="pill_wrap">
+            <label for="question_user_attributes_postal_code" class="lesser">Zipcode</label>
+            <%= user_form.text_field :postal_code, placeholder: 'ex. 02141' %>
+          </div>
         <% end %>
       </fieldset>
 

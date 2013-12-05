@@ -52,7 +52,9 @@ class QuestionsController < ApplicationController
     set_up_steps
     @question = Question.new(state: @state_code)
     @question.user = user_signed_in? ? current_user : User.new
+    @question.user.for_new_question = true
 
+    logger.debug "question user for_new_question: #{@question.user.for_new_question}"
     if params[:person]
       @person = Person.connected_to(@state_code).find(params[:person])
       @question.person = @person

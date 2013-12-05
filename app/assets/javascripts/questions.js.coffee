@@ -274,6 +274,30 @@ jQuery ($) ->
     else
       $('#confirm-issue').hide()
 
+  $('#question_user_attributes_street_address').blur (event) ->
+    manualValidate($('#question_user_attributes_street_address'), 'question[user_attributes][street_address]', 'question_user_attributes_street_address')
+
+  $('#question_user_attributes_locality').blur (event) ->
+    manualValidate($('#question_user_attributes_locality'), 'question[user_attributes][locality]', 'question_user_attributes_locality')
+
+  manualValidate = (field, fieldName, forId) ->
+    value = field.val()
+    formSettings = window.ClientSideValidations.forms['new_question']
+    inputTag = $(formSettings.input_tag)
+    originalParent = field.parent().parent()
+
+    if value? and value isnt ''
+      fieldErrorClassName = $(inputTag).attr('class')
+      fieldErrorClass = ".#{fieldErrorClassName}"
+      fieldErrorWrapper = field.closest(fieldErrorClass)
+      fieldErrorLabelWrapper = originalParent.children("div.#{fieldErrorClassName}")
+      if fieldErrorWrapper[0]
+        fieldErrorWrapper.replaceWith field
+      if fieldErrorLabelWrapper[0]
+        plainLabel = fieldErrorLabelWrapper.children('label').not('.message')
+        if plainLabel[0]
+          fieldErrorLabelWrapper.replaceWith plainLabel
+
   # since we have a multi-step form
   # each time we change the visibility of inputs
   # we have to re-enable client side validations
@@ -295,7 +319,7 @@ jQuery ($) ->
 
       selectPersonList.before inputTag
       inputTag.find('span#input_tag').replaceWith selectPersonList
-      inputTag.find('label.message').text message
+      inputTag.find('label.message').html message
       inputTag.find('label.message').attr('for', 'question_person_id')
     else
       fieldErrorClass = '.' + $(inputTag).attr('class')

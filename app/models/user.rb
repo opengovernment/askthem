@@ -94,6 +94,9 @@ class User
   validates_inclusion_of :region, in: OpenGovernment::STATES.values, allow_blank: true
   validates_inclusion_of :country, in: %w(US), allow_blank: true
 
+  attr_accessor :for_new_question
+  validates_presence_of :street_address, :locality, if: :for_new_question?
+
   before_validation :set_password_confirmation
 
   after_create :trigger_geocoding
@@ -159,6 +162,15 @@ class User
   def verified?
     identities.where(status: "verified").count > 0
   end
+
+  # conditional validation for when we need all fields filled out
+  # i.e. questions/new action relies on api lookup that needs full address
+  # but registering when signature adding does not
+  def for_new_question
+    @for_new_question ||= false
+  end
+
+  alias_method :for_new_question?, :for_new_question
 
   private
   # Unlike Devise, doesn't require password confirmations.
