@@ -70,10 +70,10 @@ class PagesController < ApplicationController
       set_variables_for(@address)
     else
       json = nil
-      if params[:google] && params[:google] == "false"
-        json = limited_json_for(Person.results_for_location(@address))
-      else
+      begin
         json = limited_json_for(CachedOfficialsFromGoogle.new(@address))
+      rescue GoogleCivicInfo::AddressUnparseableException
+        json = limited_json_for(Person.results_for_location(@address))
       end
       respond_with json
     end
