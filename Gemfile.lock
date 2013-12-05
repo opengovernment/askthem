@@ -160,7 +160,6 @@ GEM
       treetop (~> 1.4.8)
     method_source (0.8.1)
     mime-types (1.25.1)
-    mini_portile (0.5.1)
     mongoid (3.1.4)
       activemodel (~> 3.2)
       moped (~> 1.4)
@@ -184,8 +183,7 @@ GEM
     net-ssh-gateway (1.2.0)
       net-ssh (>= 2.6.5)
     newrelic_rpm (3.6.6.147)
-    nokogiri (1.6.0)
-      mini_portile (~> 0.5.0)
+    nokogiri (1.5.0)
     oauth2 (0.8.1)
       faraday (~> 0.8)
       httpauth (~> 0.1)
@@ -349,6 +347,7 @@ DEPENDENCIES
   mongoid (~> 3.1.2)
   mongoid-rspec
   newrelic_rpm
+  nokogiri (= 1.5.0)
   omniauth
   omniauth-facebook
   omniauth-gplus

@@ -44,6 +44,7 @@ group :production do
   gem 'newrelic_rpm'
   gem 'capistrano'
   gem 'rvm-capistrano'  # https://rvm.io/integration/capistrano/ and https://github.com/wayneeseguin/rvm-capistrano
+  gem 'nokogiri', '1.5.0'
 end
 
 group :development do
