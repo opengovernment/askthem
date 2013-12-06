@@ -39,17 +39,20 @@ gem 'google_civic_info', github: 'walter/google_civic_info'
 
 group :production do
   gem 'airbrake'
-  gem 'unicorn'
   gem 'fog'
   gem 'newrelic_rpm'
-  gem 'capistrano'
-  gem 'rvm-capistrano'  # https://rvm.io/integration/capistrano/ and https://github.com/wayneeseguin/rvm-capistrano
   gem 'nokogiri', '1.5.10'
+end
+
+group :heroku do
+  gem 'unicorn'
 end
 
 group :development do
   gem 'ruby-growl', '3.0'
   gem 'bullet'
+  gem 'capistrano'
+  gem 'rvm-capistrano'  # https://rvm.io/integration/capistrano/ and https://github.com/wayneeseguin/rvm-capistrano
 end
 
 group :test, :development do
