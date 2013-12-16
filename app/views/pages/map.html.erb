@@ -4,8 +4,12 @@
 <div id='map'></div>
 
 <div class='state-links'>
-  <%- OpenGovernment::STATES.each do |state, abbr| %>
-    <%= link_to "#{state}", "/#{abbr}", class: 'state-link' %>
+  <%- @states.each do |name, details| %>
+    <% state_classes = "state-link" %>
+    <% if @current_state && @current_state == details[:abbr] %>
+      <% state_classes += " current-state" %>
+    <% end %>
+    <%= link_to "#{name} (#{details[:count]})", "/#{details[:abbr]}", class: state_classes, data: { count: details[:count] } %>
   <%- end %>
 </div>
 
@@ -21,7 +25,9 @@ function showTooltip(el, data) {
          .style('left', center[0] + el.parentNode.offsetLeft - 40 + 'px')
          .style('top', center[1] + el.parentNode.offsetTop - 60 + 'px');
 
-  tooltip.select(".map-tooltip-state-name").text(data.properties.name);
+  stateId = data.id.toLowerCase();
+  stateCount = jQuery("a.state-link[href='/" + stateId +"']").attr("data-count");
+  tooltip.select(".map-tooltip-state-name").text(data.properties.name + " (" + stateCount + ")");
 }
 
 var width = 960,

@@ -59,6 +59,8 @@ OpenGovernment::Application.routes.draw do
     match 'overview/bills' => 'pages#bills', as: :bills_overview, via: :get
     match 'overview/meetings' => 'pages#meetings', as: :meetings_overview, via: :get
     match 'overview/votes' => 'pages#key_votes', as: :key_votes_overview, via: :get
+
+    get 'map', to: 'pages#map'
   end
 
   match 'locator' => 'pages#locator', as: :locator, via: :get
