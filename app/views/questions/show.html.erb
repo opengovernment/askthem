@@ -152,17 +152,21 @@
     <div class='modal-content'>
       <a href='#' class='modal-close'><i class='icon-remove'></i></a>
       <p class='modal-copy'>Share your question - get more signatures and ask for a public response!</p>
-      <a href='mailto:?subject=Help get an answer to my question on AskThem' target="_blank" class='modal-email cta-pill'>
+      <a href='mailto:?subject=Help get an answer to my question on AskThem' target="_blank" class='modal-share cta-pill'>
         <i class='icon-envelope-alt'></i>
         Email
       </a>
-      <a href='https://www.facebook.com/sharer.php?u=<%= URI.escape(current_url) %>' target="_blank" class='modal-facebook cta-pill cta-pill-facebook'>
+      <a href='https://www.facebook.com/sharer.php?u=<%= URI.escape(current_url) %>' target="_blank" class='modal-share cta-pill cta-pill-facebook'>
         <i class='icon-facebook'></i>
         Facebook
       </a>
-      <a href='https://twitter.com/share?text=Help get my question answered on @AskThemPPF: <%= URI.escape(@question.title) %>' target="_blank" class='modal-twitter cta-pill cta-pill-twitter'>
+      <a href='https://twitter.com/share?text=Help get my question answered on @AskThemPPF: <%= URI.escape(@question.title) %>' target="_blank" class='modal-share cta-pill cta-pill-twitter'>
         <i class='icon-twitter'></i>
         Twitter
+      </a>
+      <a href='https://twitter.com/share?text=Help get my question answered on @AskThemPPF: <%= URI.escape(@question.title) %>' target="_blank" class='modal-share cta-pill cta-pill-google'>
+        <i class='icon-google-plus'></i>
+        Google Plus
       </a>
       <%= image_tag('mark.svg', class: 'modal-logo') %>
     </div>
