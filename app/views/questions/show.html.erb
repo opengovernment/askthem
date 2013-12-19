@@ -156,24 +156,31 @@
   <div id='modal'>
     <div class='modal-content'>
       <a href='#' class='modal-close'><i class='icon-remove'></i></a>
-      <p class='modal-copy'>Share your question - get more signatures and ask for a public response!</p>
-      <a href='https://www.facebook.com/sharer.php?u=<%= URI.escape(current_url) %>' target="_blank" class='modal-share cta-pill cta-pill-facebook'>
-        <i class='icon-facebook'></i>
-        Facebook
-      </a>
-      <a href='https://twitter.com/share?text=Help get my question answered on @AskThemPPF: <%= URI.escape(@question.title) %>' target="_blank" class='modal-share cta-pill cta-pill-twitter'>
-        <i class='icon-twitter'></i>
-        Twitter
-      </a>
-      <a href='https://twitter.com/share?text=Help get my question answered on @AskThemPPF: <%= URI.escape(@question.title) %>' target="_blank" class='modal-share cta-pill cta-pill-google'>
-        <i class='icon-google-plus'></i>
-        Google Plus
-      </a>
-      <a href='mailto:?subject=Help get an answer to my question on AskThem' target="_blank" class='modal-share cta-pill'>
-        <i class='icon-envelope-alt'></i>
-        Email
-      </a>
-      <%= image_tag('mark.svg', class: 'modal-logo') %>
+      <h2 class='modal-header'>Share your question - get more signatures and ask for a public response!</h2>
+      <div class='modal-copy-wrap'>
+        <p class='modal-copy'>Get more signatures and ask for a response! If this question reaches its signature threshold, we'll deliver it to the person's official contact information and promote it on social media.</p>
+        <p class='modal-copy'>AskThem is free, open-source, and non-profit. Help us encourage open public dialogue by sharing this question now.</p>
+        <%= image_tag('mark.svg', class: 'modal-logo') %>
+      </div>
+
+      <div class='modal-shares'>
+        <a href='https://www.facebook.com/sharer.php?u=<%= URI.escape(current_url) %>' target="_blank" class='modal-share cta-pill cta-pill-facebook'>
+          <i class='icon-facebook'></i>
+          Facebook
+        </a>
+        <a href='https://twitter.com/share?text=Help get my question answered on @AskThemPPF: <%= URI.escape(@question.title) %>' target="_blank" class='modal-share cta-pill cta-pill-twitter'>
+          <i class='icon-twitter'></i>
+          Twitter
+        </a>
+        <a href='https://twitter.com/share?text=Help get my question answered on @AskThemPPF: <%= URI.escape(@question.title) %>' target="_blank" class='modal-share cta-pill cta-pill-google'>
+          <i class='icon-google-plus'></i>
+          Google Plus
+        </a>
+        <a href='mailto:?subject=Help get an answer to my question on AskThem' target="_blank" class='modal-share cta-pill'>
+          <i class='icon-envelope-alt'></i>
+          Email
+        </a>
+      </div>
     </div>
   </div>
 <% end %>
