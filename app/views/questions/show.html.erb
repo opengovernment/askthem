@@ -35,7 +35,6 @@
         <% end %>, of <%= @question.user.locality -%>, <%= @question.user.region.upcase -%>
       </span>
     </span>
-
     <% if @question.answered? %>
       <div class="recipient_answer recipient">
         <div class="avatar">
@@ -50,7 +49,6 @@
           </span>
         </div>
         <p><%= @question.answers.first.text %></p>
-
         <span class="pubdate"><time datetime="<%= @question.answers.first.created_at.strftime "%Y-%m-%d" %>" pubdate><%= @question.answers.first.created_at.strftime "%B #{@question.answers.first.created_at.day.ordinalize} %Y" %><sup><%= @question.answers.first.created_at.strftime "%I:%M%p" %></sup></time></span>
       </div>
     <% elsif @user.has_role?(:responder, @question.person)%>
@@ -66,19 +64,22 @@
         <p class='watermark-tip'>This watermark will appear on all answers you post to the OpenGovernment Website, indicating that you are an official representative.</p>
       </div>
     <% elsif !user_signed_in? %>
-      <p>
-        Are you <%= @question.person.name %>?
+      <div class='recipient-answer-form'>
+        <p>Are you <%= @question.person.name %>?
         <% if @question.person.verified? -%>
           <%= link_to 'Login to answer', new_user_session_path %>.
+          </p>
         <% else -%>
-          <%= link_to 'Sign up to answer', new_user_registration_path %>.
+          <%= link_to 'Sign up to answer this question.', new_user_registration_path %>
+          AskThem is free, open-source, and non-profit.
+          </p>
+          <p>If this question reaches its signature threshold, we'll deliver it to <%= @question.person.name %>'s official contact information for a public response.</p>
         <% end -%>
-      </p>
+      </div>
     <% end %>
     <div class="comments">
       <div id="disqus_thread"></div>
     </div>
-
   </article>
   <a name="sign_on_q"></a>
   <div class="actions">
