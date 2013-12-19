@@ -4,19 +4,19 @@
   <article>
     <header>
       <h4>
-        <span class="emph">To:</span>
+        <span class="emph">Question for:</span>
         <% if @question.person.image? %>
-          <%= cdn_image_tag(@question.person.image, size: '30x30', alt: '', class: 'official-image avatar-image') %>
+          <%= cdn_image_tag(@question.person.image, size: '50x50', alt: '', class: 'official-image avatar-image') %>
         <% end %>
-        <strong><%= link_to @question.person.name, person_path(@jurisdiction.abbreviation, @question.person.id) %></strong>
-        <% if @question.person.verified? -%>
-          <i class='icon-ok-sign is-verified'><span> AskThem Verified</span></i>
-        <% end -%>
+        <strong><%= link_to @question.person.name, person_path(@jurisdiction.abbreviation, @question.person.id), class:'official-name' %></strong>
         <span class="official-info">(<%= person_attributes(@question.person) %>)</span>
         <% if @question.bill_id? %>
           <span class="emph">on:</span>
           <strong><%= link_to short_bill_title(@question.bill), bill_path(@jurisdiction.abbreviation, @question.bill.id) %></strong>
         <% end %>
+        <% if @question.person.verified? -%>
+          <i class='icon-ok-sign is-verified'><span> AskThem Verified</span></i>
+        <% end -%>
       </h4>
       <h1><%= @question.title %></h1>
     </header>
