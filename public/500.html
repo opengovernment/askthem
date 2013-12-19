@@ -2,24 +2,42 @@
 <html>
 <head>
   <title>We're sorry, but something went wrong (500)</title>
-  <style type="text/css">
-    body { background-color: #fff; color: #666; text-align: center; font-family: arial, sans-serif; }
-    div.dialog {
-      width: 25em;
-      padding: 0 4em;
-      margin: 4em auto 0 auto;
-      border: 1px solid #ccc;
-      border-right-color: #999;
-      border-bottom-color: #999;
+  <style>
+    body {
+      margin: 0;
+      padding: 1em 0 0 0;
+      font-family: helvetica, arial, verdana, sans-serif;
+      text-align: center;
+      background-color: #d8f2f6;
+      color: #32515a;
     }
-    h1 { font-size: 100%; color: #f00; line-height: 1.5em; }
+
+    h1, p {
+      padding-right: 1em;
+      padding-left: 1em;
+    }
+
+    p {
+      margin-bottom: 1.5em;
+    }
+
+    .dialog {
+      margin-right: auto;
+      margin-left: auto;
+      max-width: 600px;
+    }
+
+    .mark {
+      height: 30px;
+      width: 30px;
+    }
   </style>
 </head>
 
 <body>
-  <!-- This file lives in public/500.html -->
   <div class="dialog">
     <h1>We're sorry, but something went wrong.</h1>
+    <img src='mark.png' class='mark'>
   </div>
 </body>
 </html>
