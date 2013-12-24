@@ -117,7 +117,7 @@
         <%#<%= f.input :street_address, placeholder: "Street Address", label: false %>
         <%#<%= f.input :locality, placeholder: "City", label: false %>
         <%#<%= f.input :region, collection: OpenGovernment::STATES, prompt: "Select your state", label: false, wrapper_html: {class: 'icon-angle-down sculpt'} %>
-        <%= f.input :postal_code, placeholder: "Zip or Postal Code", label: false %>
+        <%= f.input :postal_code, placeholder: "Zip Code", label: false %>
         <%#<%= f.input :password, placeholder: "Password", label: false %>
         <%= f.hidden_field :password, value: Devise.friendly_token.first(6) %>
         <%= f.hidden_field :password_is_placeholder, value: true %>
