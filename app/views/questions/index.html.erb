@@ -9,10 +9,12 @@
     <%= link_to raw('<span class="use"></span>Need Answers'), need_answers_questions_path(gov: @gov), filter_options("need_answers") %>
     <%= link_to raw('<span class="use"></span>Recent'), recent_questions_path(gov: @gov), filter_options("recent") %>
 
+    <!--
     <div class="search"><%# @todo DM full-text search within state? %>
       <input type="text" name="" id="" placeholder="Search state">
       <input type="submit" value="">
     </div>
+    -->
   </div>
 
   <%= render partial: "page" %>
