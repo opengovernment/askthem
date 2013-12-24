@@ -1,15 +1,21 @@
 <li>
   <div class="avatar">
     <% if person.image? %>
-      <%= cdn_image_tag(person.image, size: '60x60', alt: '') %>
+      <%= cdn_image_tag(person.image, size: "60x60", alt: "") %>
     <% else %>
-      <%= image_tag('placeholder.png', size: '60x60', alt: '') %>
+      <%= image_tag("placeholder.png", size: "60x60", alt: "") %>
     <% end %>
   </div>
   <div class="person-info">
-    <h2><%= link_to person.name, person_path(person['state'], person) %>&nbsp;&nbsp;<% if person.verified? -%><i class='icon-ok-sign is-verified'><span class='verified-tooltip'>AskThem Verified</span></i><% end -%></h2>
+    <h2><%= link_to person.name, person_path(person["state"], person) %>&nbsp;&nbsp;<% if person.verified? -%><i class="icon-ok-sign is-verified"><span class="verified-tooltip">AskThem Verified</span></i><% end -%></h2>
     <span class="jurisdiction"><%= person_attributes(person) %></span>
-    <span class="stats"><span><%= pluralize person.questions.count, 'Question' %></span>
-    <span><%= pluralize person.questions_answered.count, 'Answer' %></span></span>
+    <span class="stats">
+      <%- if person.questions.count > 0 %>
+        <span><%= pluralize person.questions.count, "Question" %></span>
+        <span><%= pluralize person.questions_answered.count, "Answer" %></span>
+      <%- else %>
+        <%= link_to "Ask the first question >>", new_question_path(person.state, person: @person) -%>
+      <%- end %>
+    </span>
   </div>
 </li>
