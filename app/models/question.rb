@@ -48,6 +48,8 @@ class Question
 
   attr_accessor :person_state, :bill_state
 
+  after_create :add_signature_of_creating_user
+
   after_create :copy_coordinates_from_user
 
   # @return [Metadatum] the jurisdiction in which the question is asked
@@ -102,6 +104,10 @@ class Question
   end
 
   private
+  def add_signature_of_creating_user
+    signatures.create!(user: user)
+  end
+
   def state_must_be_included_in_the_list_of_states
     unless state.blank? || Metadatum.find_by_abbreviation(state)
       errors.add(:state, 'is not included in the list of states')

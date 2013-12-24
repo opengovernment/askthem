@@ -374,7 +374,9 @@ describe 'questions' do
           click_button 'Sign'
         end
 
-        page.body.should have_content "1 out of"
+        # supporters = creator of question + signers
+        sleep 1
+        page.body.should have_content "2 out of"
       end
 
       context 'as signed in user' do
@@ -384,7 +386,9 @@ describe 'questions' do
             visit '/vt/questions?gov=state'
             click_link 'Sign'
             page.should have_content 'Signed'
-            page.body.should have_content '1 out of'
+
+            # supporters = creator of question + signers
+            page.body.should have_content '2 out of'
           end
         end
       end

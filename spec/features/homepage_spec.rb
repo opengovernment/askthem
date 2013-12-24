@@ -36,7 +36,8 @@ describe "pages#index" do
         FactoryGirl.create(:signature)
       end
       visit "/"
-      expect(find(".leftCol")).to have_content("3 Supporters")
+      # supporters = creators of questions + signers
+      expect(find(".leftCol")).to have_content("6 Supporters")
     end
 
     it "displays top questions by number of signatures" do
@@ -50,8 +51,10 @@ describe "pages#index" do
 
       visit "/"
       questions_on_page = all(".leftCol .popular_questions li")
-      expect(questions_on_page.first).to have_content("2 Supporters")
-      expect(questions_on_page.last).to have_content("1 Supporter")
+
+      # supporters = creators of questions + signers
+      expect(questions_on_page.first).to have_content("3 Supporters")
+      expect(questions_on_page.last).to have_content("2 Supporter")
     end
   end
 
@@ -95,7 +98,9 @@ describe "pages#index" do
         end
 
         visit "/"
-        expect(find(".rightCol")).to have_content("3 Supporters")
+
+        # supporters = creators of questions + signers
+        expect(find(".rightCol")).to have_content("6 Supporters")
       end
     end
   end
