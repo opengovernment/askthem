@@ -64,11 +64,6 @@ describe "pages#index" do
       page.driver.options[:headers] = { "REMOTE_ADDR" => "161.185.30.156" }
     end
 
-    it "displays user's city" do
-      visit "/"
-      expect(find(".rightCol")).to have_content("Brooklyn")
-    end
-
     context "when there are questions near the user" do
       before do
         set_up_ny_local_questions
