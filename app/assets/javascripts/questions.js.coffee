@@ -117,6 +117,7 @@ jQuery ($) ->
 
     # TODO: make link for person
     $('#confirm-person-name').html "<strong>#{name}</strong>"
+    $('#confirm-person-image').html avatarHtmlSmall
     $('#content-person-image').html avatarHtmlSmall
     $('#content-person-name').html name
     $('#content-person-short-description').html '(' + jurisdiction + ')'
