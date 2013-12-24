@@ -1,12 +1,11 @@
 require 'spec_helper'
 
 describe Question do
-  %w(state person_id user_id title body).each do |attribute|
+  %w(state person_id user_id title).each do |attribute|
     it {should validate_presence_of attribute}
   end
 
   it {should validate_length_of(:title).within(3..70)}
-  it {should validate_length_of(:body).with_minimum(60)}
 
   it 'should validate if the state is in the list of states' do
     metadatum = FactoryGirl.create(:metadatum)

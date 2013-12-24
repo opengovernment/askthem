@@ -29,10 +29,7 @@
       <span class="question_details">Why is this important? Give it your all!</span>
     </label>
 
-    <div class="count">
-      <span class="summary_count">500</span>
-      <%= f.text_area :body, placeholder: raw('Go on&hellip;'), maxlength: '500', cols: '30', rows: '10', validate: true, class: 'question-textarea' %>
-    </div>
+    <%= f.text_area :body, placeholder: raw('Go on&hellip;'), cols: '30', rows: '10', validate: true, class: 'question-textarea' %>
 
     <div class="input select icon-angle-down sculpt">
       <% subject_options = raw('<option value="">Select an Issue (optional)</option>') + options_for_select(Subject.all) -%>

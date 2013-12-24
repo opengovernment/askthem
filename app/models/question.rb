@@ -39,9 +39,8 @@ class Question
   index(bill_id: 1, answered: 1)
   index({ coordinates: "2d" }, { background: true })
 
-  validates_presence_of :state, :person_id, :user_id, :title, :body
+  validates_presence_of :state, :person_id, :user_id, :title
   validates_length_of :title, within: 3..70, allow_blank: true
-  validates_length_of :body, minimum: 60, allow_blank: true
   validate :state_must_be_included_in_the_list_of_states
   validate :subject_must_be_included_in_the_list_of_subjects
   validate :question_and_person_must_belong_to_the_same_jurisdiction
