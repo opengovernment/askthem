@@ -16,11 +16,11 @@
     </a>
     <a name="address_lookup" class="anchor"></a>
 
-    <a href="#" class="select mobile">Their Name</a>
-    <a class="select">
+    <a href="#name-lookup" class="select mobile name-lookup">Their Name</a>
+    <a class="select name-lookup">
       <i class="icon-user"></i> Their Name
     </a>
-    <a name="twitter_find" class="anchor"></a>
+    <a name="name-lookup" class="anchor"></a>
 
     <a href="#twitter_find" class="select twitter twitter_lookup mobile">Their Twitter Name</a>
     <a class="select twitter">
@@ -96,6 +96,23 @@
             </div>
             <span class="selected icon-ok-sign"></span>
           </li>
+        </ol>
+      </fieldset>
+    </div>
+
+    <div class="name-lookup" style="display:none;">
+      <label for="question">
+        <span class="details">Ask a question to someone in our system</span>
+      </label>
+      <fieldset>
+        <div class="inline_label to">
+          <input type="text" name="name-lookup" id="name-lookup" placeholder="Enter a name" />
+        </div>
+
+        <div class="loading" style="display:none;">Loading...</div>
+
+        <ol class="people-list select-person name-lookup">
+          <!-- will be populated by address_lookup -->
         </ol>
       </fieldset>
     </div>

@@ -1,4 +1,7 @@
 jQuery ($) ->
+  isHeadless = ->
+    navigator.userAgent.indexOf('PhantomJS') > -1
+
   if $('#recipient-step').is(':visible')
     $('#recipient-step input[type=text]:eq(0)').focus()
 
@@ -42,36 +45,123 @@ jQuery ($) ->
         $('#question_person_id').val ''
 
 
-  $("#twitter").keyup(->
-    if $(this).val()[0] is "@"
-      getTwitter($(this))
-    else
-      $(this).addClass 'invalid'
+  $("#twitter").on 'keyup change',  (->
+    if $(this).is(':focus') or isHeadless
+      if $(this).val()[0] is "@"
+        getTwitter($(this))
+      else
+        $(this).addClass 'invalid'
   )
 
   $('span.toggle a.select').click (event) ->
     personError 'remove'
+    $('.loading').hide()
 
     if $(this).hasClass('twitter') and !$(this).hasClass('active')
       $('div.address_lookup').hide()
+      $('div.name-lookup').hide()
       $('div.twitter').show()
       $('div.twitter input[type=text]:eq(0)').focus()
     else
       if $(this).hasClass('address_lookup') and !$(this).hasClass('active')
         $('div.twitter').hide()
+        $('div.name-lookup').hide()
         $('div.address_lookup').show()
         $('div.address_lookup input[type=text]:eq(0)').focus()
         reloadValidationForForm()
         # this will only show people if zip is complete
         showPeopleForAddress($("#question_user_attributes_postal_code"))
+      else
+        if $(this).hasClass('name-lookup') and !$(this).hasClass('active')
+          $('div.twitter').hide()
+          $('div.address_lookup').hide()
+          $('div.name-lookup').show()
+          $('div.name-lookup input[type=text]:eq(0)').focus()
 
     if !$(this).hasClass('active')
       $('span.toggle a.active').removeClass('active')
       $(this).addClass('active')
 
-  $("#question_user_attributes_postal_code").keyup (e) ->
+  $('#name-lookup').on 'keyup change', (e) ->
+    theInput = $('#name-lookup')
+
+    if $(theInput).is(':focus') or isHeadless
+      jurisdiction = $(location).attr('pathname').split('/')[1]
+      showPeopleForName theInput, jurisdiction
+
+  showPeopleForName = (theInput, jurisdiction) ->
+    value = $.trim(theInput.val())
+    unless value.length == 0
+      getPeopleFromText(value, jurisdiction)
+
+  getPeopleFromText = (text, jurisdiction) ->
+    loading = $('.loading')
+    loading.show()
+
+    url = "/identifier.json?name_fragment=#{encodeURIComponent(text)}&jurisdiction=#{jurisdiction}"
+
+    $.ajax
+      url: url
+      type: 'GET'
+      dataType: 'json'
+      success: (data) ->
+        personList = $('div.name-lookup ol.people-list').first()
+        personList.html('')
+        $('#question_person_id').remove() # our radio buttons replace this below
+        $(data).each ->
+          liVal = '<li style="display:none;">'
+          liVal += '<div class="select_box">'
+          liVal += "<input type=\"radio\" name=\"question[person_id]\" id=\"question_person_id_#{@id}\" value=\"#{@id}\" /></div>"
+
+          liVal += '<div class="avatar">'
+          if @photo_url?
+            liVal += "<img src=\"http://d2xfsikitl0nz3.cloudfront.net/#{encodeURIComponent(@photo_url)}/60/60\" width=\"60\" height=\"60\" alt=\"\" />"
+          else
+            placeholderUrl = "http://" + $(location).attr('host') + "/assets/placeholder.png"
+            liVal += "<img src=\"http://d2xfsikitl0nz3.cloudfront.net/#{encodeURIComponent(placeholderUrl)}/60/60\" width=\"60\" height=\"60\" alt=\"\" />"
+          liVal += '</div>'
+
+          liVal += "<h2>#{@full_name}</h2>"
+
+          liVal += '<div class="person-info">'
+          liVal += '<span class="jurisdiction">'
+          personAttributes = []
+          personAttributes.push @political_position_title if @political_position_title?
+          personAttributes.push @most_recent_district if @most_recent_district?
+          personAttributes.push @party if @party?
+          liVal += personAttributes.join(', ')
+          liVal += '</span></div>'
+          liVal += '<span class="selected icon-ok-sign"></span>'
+
+          liVal += "</li>"
+
+          personList.append liVal
+
+          personList.children('li:last').fadeTo(300, 1)
+        loading.hide()
+        personList.show()
+        personList.children('li').on 'click', (e) ->
+          reloadAsNewQuestionForPerson e
+
+  reloadAsNewQuestionForPerson = (e) ->
+    personLi = e.delegateTarget
+
+    selectedPersonInput = $(personLi).children('.select_box').children('input')
+    value = selectedPersonInput.val()
+    url = $(location).attr('href')
+
+    if url.indexOf('?') > -1
+      url += "&"
+    else
+      url += "?"
+    url = "#{url}person=#{value}"
+
+    window.location.href = url
+
+  $("#question_user_attributes_postal_code").on 'keyup change', (e) ->
     theInput = e.delegateTarget
-    showPeopleForAddress theInput
+    if $(theInput).is(':focus') or isHeadless
+      showPeopleForAddress theInput
 
   showPeopleForAddress = (theInput) ->
     unless $('div.address_lookup').length == 0
@@ -82,9 +172,6 @@ jQuery ($) ->
         # redundant, but covers case where zip is pasted in
         if $('label.select-person').is(':hidden')
           $('label.select-person').fadeTo(300, 1)
-
-        if $('ul.people-type').is(':hidden')
-          $('ul.people-type').fadeTo(300, 1)
 
         getPeople()
       else
@@ -110,7 +197,6 @@ jQuery ($) ->
 
     selectedPersonInput = $(personLi).children('.select_box').children('input')
     selectedPersonInput.attr 'checked', true
-    # $('#question_person_id').val selectedPersonInput.val()
     personError 'remove'
 
     $(personLi).children('.icon-ok-sign').show()

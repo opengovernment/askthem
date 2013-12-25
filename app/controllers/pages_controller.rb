@@ -91,8 +91,17 @@ class PagesController < ApplicationController
   end
 
   def identifier
-    # annoying that you can't do case insensitive queries without a regex
-    @people = Person.where(email: /^#{params[:email]}$/i)
+    email = params[:email]
+
+    if email
+      # annoying that you can't do case insensitive queries without a regex
+      @people = Person.where(email: /^#{email}$/i)
+    else
+      name_fragment = params[:name_fragment]
+      @people = Person.active.connected_to(params[:jurisdiction])
+        .some_name_matches(name_fragment)
+    end
+
     respond_with limited_json_for(@people)
   end
 

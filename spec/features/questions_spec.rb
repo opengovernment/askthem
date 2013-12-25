@@ -193,6 +193,39 @@ describe 'questions' do
 
           fields_should_be_invalid
         end
+
+        it 'can find a person based on name', js: true do
+          valid_person
+          @person.full_name = 'Ann E Cummings'
+          @person.first_name = 'Ann'
+          @person.write_attribute(:active, true)
+          @person.save
+
+          # click_link won't work with this type or link
+          find('a[href="#name-lookup"]').trigger('click')
+
+          # only need the first letter, no need for extra lookup triggering
+          fill_in 'name-lookup', with: @person.first_name.first
+
+          sleep 1
+          # person matching name is listed and clickable
+          # clicking person redirects to questions/new with person_id matching person
+
+          # skipping actual click and page content check
+          # as it capybara mangles the click and causes problems
+          # click_person_box_with(@person.id)
+          expect(find('div.name-lookup ol.people-list li'))
+            .to have_content @person.full_name
+          # person_link = find('div.name-lookup ol.people-list li')
+          # person_link.click
+
+
+          # we should now be on a page that goes direct to question step
+          # with person as recipient
+          # expect(find('div.content-person-info').visible?).to be_true
+          # expect(find('div.content-person-info'))
+            # .to have_content(@person.full_name)
+        end
       end
 
       context 'when a recipient is already specified' do
@@ -397,7 +430,7 @@ describe 'questions' do
 
   def choose_person(need_to_fill_out_address = true)
     fill_out_address if need_to_fill_out_address
-    page.execute_script "jQuery('#question_person_id_#{@person.id}').parents('li').trigger('click')"
+    click_person_box_with(@person.id)
   end
 
   def fill_out_address(with_lookup = true)
@@ -463,7 +496,11 @@ describe 'questions' do
   def choose_governor(need_to_fill_out_address = true)
     fill_out_address if need_to_fill_out_address
     sleep 2
-    page.execute_script "jQuery('#question_person_id_#{@cached_official.id}').parents('li').trigger('click')"
+    click_person_box_with(@cached_official.id)
+  end
+
+  def click_person_box_with(id)
+    page.execute_script "jQuery('#question_person_id_#{id}').parents('li').trigger('click')"
   end
 
   def click_next_button(number_of_clicks = 1, sleepy_time = 1)

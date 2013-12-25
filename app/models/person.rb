@@ -37,6 +37,16 @@ class Person
 
   delegate :signature_threshold, :biography, :links, to: :person_detail
 
+  # expensive, do this only when constrained by connected_to or the like
+  def self.some_name_matches(name_fragment)
+    any_of({ full_name: name_fragment },
+           { first_name: name_fragment },
+           { last_name: name_fragment },
+           { full_name: /#{name_fragment}/i },
+           { first_name: /#{name_fragment}/i },
+           { last_name: /#{name_fragment}/i })
+  end
+
   def self.only_types(types)
     where("_type" => { "$in" => types })
   end
