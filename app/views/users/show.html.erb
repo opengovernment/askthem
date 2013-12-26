@@ -5,7 +5,9 @@
     </div>
     <div class="person-info">
       <h1><%= @user.given_name -%> <%= @user.family_name -%>&nbsp;&nbsp;<% if @user.verified? -%><i class='icon-ok-sign is-verified'><span class='verified-tooltip'>AskThem Verified</span></i><% end -%></h1>
-      <span class="loc"><%= @user.locality -%>, <%= @user.region.upcase -%></span>
+      <%- if @user.locality? && @user.region? %>
+        <span class="loc"><%= @user.locality -%>, <%= @user.region.upcase -%></span>
+      <%- end %>
       <!-- Not collecting this information yet -->
       <!-- <ul class="links">
         <li><a href="#">@strevat</a></li>

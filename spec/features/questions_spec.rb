@@ -391,6 +391,17 @@ describe 'questions' do
         expect(threshold_on_page).to eq @person.signature_threshold
       end
 
+      it 'displays recent signatures', js: true do
+        signer = FactoryGirl.create(:user,
+                                    given_name: "El",
+                                    family_name: "Signator")
+
+        FactoryGirl.create(:signature, question: @question, user: signer)
+
+        visit "/vt/questions/#{@question.id}"
+        page.body.should have_content "El Signator (New York, NY)"
+      end
+
       it 'renders modal when created parameter is present', js: true do
         visit "/vt/questions/#{@question.id}?share=true"
         page.body.should have_selector "#modal"

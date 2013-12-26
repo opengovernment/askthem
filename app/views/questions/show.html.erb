@@ -139,17 +139,12 @@
     <% end %>
     <%= link_to 'Flag this question', '#', class: 'flag' %><%# @todo JM %>
   </div>
-  <div class="recent-signatures">
-    <h3>Recent signatures</h3>
-    <p class="recent-signature">
-      <a href="#">Amanda Cheung (Boston, MA)</a>
-      signed 1m ago
-    </p>
-    <p class="recent-signature">
-      <a href="#">Donald Duck (Disney, MA)</a>
-      signed 2m ago
-    </p>
-  </div>
+  <%- if @recent_signatures.any? %>
+    <div class="recent-signatures">
+      <h3>Recent signatures</h3>
+      <%= render partial: 'signatures/as_signer', collection: @recent_signatures %>
+    </div>
+  <%- end %>
 </section>
 <% if params[:share] == 'true' %>
   <div id='overlay'></div>
