@@ -1,7 +1,11 @@
 <section class="profile">
   <header>
     <div class="avatar">
-      <img src="http://lorempixel.com/130/130/" alt="" />
+      <%- if @user.image? %>
+        <%= cdn_image_tag(@user.image.url, size: '130x130', alt: '') %>
+      <%- else %>
+        <img src="http://lorempixel.com/130/130/" alt="" />
+      <%- end %>
     </div>
     <div class="person-info">
       <h1><%= @user.given_name -%> <%= @user.family_name -%>&nbsp;&nbsp;<% if @user.verified? -%><i class='icon-ok-sign is-verified'><span class='verified-tooltip'>AskThem Verified</span></i><% end -%></h1>
