@@ -2,14 +2,16 @@ module SignaturesHelper
   def signers_description(signer)
     description = sanitize("#{signer.given_name} #{signer.family_name}")
 
-    if signer.image?
-      avatar_tag = cdn_image_tag(signer.image.url,
+    avatar_tag = if signer.image?
+                   cdn_image_tag(signer.image.url,
                                  size: "40x40",
                                  alt: "",
                                  class: "avatar-image")
+                 else
+                   image_tag("//lorempixel.com/40/40/", class: "avatar-image")
+                 end
 
-      description = "#{avatar_tag} #{description}"
-    end
+    description = "#{avatar_tag} #{description}"
 
     if signer.locality.present? && signer.region.present?
       signer_from = sanitize("(#{signer.locality}, #{signer.region.upcase})")

@@ -8,7 +8,9 @@ describe SignaturesHelper do
         with_where = "#{signer.given_name} #{signer.family_name}"
         with_where += " (#{signer.locality}, #{signer.region.upcase})"
 
-        expect(helper.signers_description(signer)).to eq with_where
+        expect{
+          helper.signers_description(signer) =~ /#{with_where}$/
+        }.to be_true
       end
     end
 
@@ -17,7 +19,9 @@ describe SignaturesHelper do
         signer = FactoryGirl.create(:user, locality: "", region: "")
         without_where = "#{signer.given_name} #{signer.family_name}"
 
-        expect(helper.signers_description(signer)).to eq without_where
+        expect{
+          helper.signers_description(signer) =~ /#{without_where}$/
+        }.to be_true
       end
     end
 
