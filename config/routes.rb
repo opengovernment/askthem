@@ -1,3 +1,5 @@
+require 'sidekiq/web'
+
 OpenGovernment::Application.routes.draw do
   devise_for :users, controllers: {
     registrations: 'registrations',
@@ -61,6 +63,11 @@ OpenGovernment::Application.routes.draw do
     match 'overview/votes' => 'pages#key_votes', as: :key_votes_overview, via: :get
 
     get 'map', to: 'pages#map'
+  end
+
+  # Sidekiq monitoring
+  authenticate :user, lambda { |u| u.has_role?(:staff_member) } do
+    mount Sidekiq::Web => '/sidekiq'
   end
 
   match 'locator' => 'pages#locator', as: :locator, via: :get
