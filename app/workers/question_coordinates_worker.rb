@@ -1,6 +1,5 @@
 class QuestionCoordinatesWorker
   include Sidekiq::Worker
-  sidekiq_options queue: :geocoding
 
   # user may not have coordinates yet, try until they do
   def perform(id)
