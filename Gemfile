@@ -37,10 +37,6 @@ gem 'rest-client'
 # Google Civic Information API, used for representatives for address
 gem 'google_civic_info', github: 'walter/google_civic_info'
 
-# Sidekiq monitoring
-gem 'sinatra', '>= 1.3.0', :require => nil
-gem 'slim'
-
 group :production do
   gem 'airbrake'
   gem 'fog'
