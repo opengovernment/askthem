@@ -60,6 +60,19 @@ describe PagesController do
         get :identifier, format: :json, email: @person.email
         expect(JSON.parse(response.body)).to eq expected_from_json
       end
+
+      it "takes jurisdiction and a name_fragment and returns matching people" do
+        @person = FactoryGirl.create(:state_legislator_ny_sheldon_silver)
+        @person.write_attribute(:active, true)
+        @person.save
+
+        get(:identifier,
+            format: :json,
+            jurisdiction: @person.state,
+            name_fragment: "Sheldon")
+
+        expect(JSON.parse(response.body)).to eq expected_from_json
+      end
     end
 
     def expected_from_json

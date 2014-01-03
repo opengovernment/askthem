@@ -15,7 +15,7 @@
     <span class="target">
       <%= link_to user_path(question.user) do %>
         <% if question.user.image? %>
-          <%= image_tag(question.user.image.url, size: '40x40', alt: '') %>
+          <%= cdn_image_tag(question.user.image.url, size: '40x40', alt: '') %>
         <% end %>
         <%= question.user.alternate_name %>
       <% end %>
@@ -39,7 +39,7 @@
         <strong><span class="question-signatures" data-signature-question-id="<%= question.id %>"><%= question.signature_count -%></span></strong>
         out of
         <strong><span class="question-signature-threshold"><%= question.person.signature_threshold -%></span></strong>
-        Signatures
+        Signatures needed
       </span>
     </li>
   </ul>

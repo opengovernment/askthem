@@ -1,0 +1,6 @@
+<%- signature, signer = as_signer, as_signer.user %>
+
+<p class="recent-signature">
+  <%= link_to signers_description(signer), signer %>
+  <%= distance_of_time_in_words_to_now(signature.created_at) %> ago
+</p>

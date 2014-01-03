@@ -45,7 +45,12 @@ class QuestionsController < ApplicationController
 
   def show
     @user = user_signed_in? ? current_user : User.new
-    show!
+    show! do
+      @recent_signatures = @question.signatures
+        .includes(:user)
+        .where(:user_id.nin => [@question.user_id])
+        .order_by(created_at: "DESC").limit(5)
+    end
   end
 
   def new
@@ -54,7 +59,6 @@ class QuestionsController < ApplicationController
     @question.user = user_signed_in? ? current_user : User.new
     @question.user.for_new_question = true
 
-    logger.debug "question user for_new_question: #{@question.user.for_new_question}"
     if params[:person]
       @person = Person.connected_to(@state_code).find(params[:person])
       @question.person = @person

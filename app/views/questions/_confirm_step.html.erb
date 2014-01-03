@@ -9,11 +9,17 @@
     </div>
 
     <h4>
+      <span class="emph">Question for:</span>
       <% if person.present? %>
-        <span class="emph">To:</span> <span id="confirm-person-name"><strong><%= link_to question.person.name, person_path(@jurisdiction.abbreviation, question.person.id) %></strong></span>
+        <span id="confirm-person-image" class="confirm-person-image">
+          <%= cdn_image_tag(person.image, size: "30x30",
+          alt: "image of #{person.name}", class: "official-image avatar-image") %>
+        </span>
+        <span id="confirm-person-name"><strong><%= link_to question.person.name, person_path(@jurisdiction.abbreviation, question.person.id) %></strong></span>
         <span id="confirm-person-attributes">(<%= person_attributes(question.person) %>)</span>
       <% else %>
-        <span class="emph">To:</span> <span id="confirm-person-name"></span>
+        <span id="confirm-person-image" class="confirm-person-image"></span>
+        <span id="confirm-person-name"></span>
         <span id="confirm-person-attributes"></span>
       <% end %>
 

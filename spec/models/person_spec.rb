@@ -9,6 +9,14 @@ describe Person do
     @person.save!
   end
 
+  describe ".some_name_matches" do
+    it "returns people that at least partially match name_fragment" do
+      @person.full_name = "Ann E Cummings"
+      @person.save
+      expect(Person.some_name_matches("Ann").count).to eq 1
+    end
+  end
+
   describe ".load_from_api_for_jurisdiction" do
     it "does not overwrite existing people" do
       Person.load_from_apis_for_jurisdiction("vt")

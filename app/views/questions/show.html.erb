@@ -4,19 +4,19 @@
   <article>
     <header>
       <h4>
-        <span class="emph">To:</span>
+        <span class="emph">Question for:</span>
         <% if @question.person.image? %>
-          <%= cdn_image_tag(@question.person.image, size: '30x30', alt: '', class: 'official-image avatar-image') %>
+          <%= cdn_image_tag(@question.person.image, size: '50x50', alt: '', class: 'official-image avatar-image') %>
         <% end %>
-        <strong><%= link_to @question.person.name, person_path(@jurisdiction.abbreviation, @question.person.id) %></strong>
-        <% if @question.person.verified? -%>
-          <i class='icon-ok-sign is-verified'><span> AskThem Verified</span></i>
-        <% end -%>
-        <span class="official-info">(<%= person_attributes(@question.person) %>)</span>
+        <strong><%= link_to @question.person.name, person_path(@jurisdiction.abbreviation, @question.person.id), class:'official-name' %></strong>
+        <span class="official-info"><%= person_attributes(@question.person) -%></span>
         <% if @question.bill_id? %>
           <span class="emph">on:</span>
           <strong><%= link_to short_bill_title(@question.bill), bill_path(@jurisdiction.abbreviation, @question.bill.id) %></strong>
         <% end %>
+        <% if @question.person.verified? -%>
+          <i class='icon-ok-sign is-verified'><span> AskThem Verified</span></i>
+        <% end -%>
       </h4>
       <h1><%= @question.title %></h1>
     </header>
@@ -35,7 +35,6 @@
         <% end %>, of <%= @question.user.locality -%>, <%= @question.user.region.upcase -%>
       </span>
     </span>
-
     <% if @question.answered? %>
       <div class="recipient_answer recipient">
         <div class="avatar">
@@ -50,7 +49,6 @@
           </span>
         </div>
         <p><%= @question.answers.first.text %></p>
-
         <span class="pubdate"><time datetime="<%= @question.answers.first.created_at.strftime "%Y-%m-%d" %>" pubdate><%= @question.answers.first.created_at.strftime "%B #{@question.answers.first.created_at.day.ordinalize} %Y" %><sup><%= @question.answers.first.created_at.strftime "%I:%M%p" %></sup></time></span>
       </div>
     <% elsif @user.has_role?(:responder, @question.person)%>
@@ -66,19 +64,22 @@
         <p class='watermark-tip'>This watermark will appear on all answers you post to the OpenGovernment Website, indicating that you are an official representative.</p>
       </div>
     <% elsif !user_signed_in? %>
-      <p>
-        Are you <%= @question.person.name %>?
+      <div class='recipient-answer-form'>
+        <p>Are you <%= @question.person.name %>?
         <% if @question.person.verified? -%>
           <%= link_to 'Login to answer', new_user_session_path %>.
+          </p>
         <% else -%>
-          <%= link_to 'Sign up to answer', new_user_registration_path %>.
+          <%= link_to 'Sign up to answer this question.', new_user_registration_path %>
+          AskThem is free, open-source, and non-profit.
+          </p>
+          <p>If this question reaches its signature threshold, we'll deliver it to <%= @question.person.name %>'s official contact information for a public response.</p>
         <% end -%>
-      </p>
+      </div>
     <% end %>
     <div class="comments">
       <div id="disqus_thread"></div>
     </div>
-
   </article>
   <a name="sign_on_q"></a>
   <div class="actions">
@@ -92,7 +93,7 @@
         <strong><span class="question-signatures" data-signature-question-id="<%= @question.id %>"><%= @question.signature_count -%></span></strong>
         out of
         <strong><span class="question-signature-threshold"><%= @question.person.signature_threshold -%></span></strong>
-        Signatures
+        Signatures needed
       </span>
     </div>
 
@@ -116,7 +117,7 @@
         <%#<%= f.input :street_address, placeholder: "Street Address", label: false %>
         <%#<%= f.input :locality, placeholder: "City", label: false %>
         <%#<%= f.input :region, collection: OpenGovernment::STATES, prompt: "Select your state", label: false, wrapper_html: {class: 'icon-angle-down sculpt'} %>
-        <%= f.input :postal_code, placeholder: "Zip or Postal Code", label: false %>
+        <%= f.input :postal_code, placeholder: "Zip Code", label: false %>
         <%#<%= f.input :password, placeholder: "Password", label: false %>
         <%= f.hidden_field :password, value: Devise.friendly_token.first(6) %>
         <%= f.hidden_field :password_is_placeholder, value: true %>
@@ -138,41 +139,55 @@
     <% end %>
     <%= link_to 'Flag this question', '#', class: 'flag' %><%# @todo JM %>
   </div>
-  <div class="recent-signatures">
-    <h3>Recent signatures</h3>
-    <p class="recent-signature">
-      <a href="#">Amanda Cheung (Boston, MA)</a>
-      signed 1m ago
-    </p>
-    <p class="recent-signature">
-      <a href="#">Donald Duck (Disney, MA)</a>
-      signed 2m ago
-    </p>
-  </div>
+  <%- if @recent_signatures.any? %>
+    <div class="recent-signatures">
+      <h3>Recent signatures</h3>
+      <%= render partial: 'signatures/as_signer', collection: @recent_signatures %>
+    </div>
+  <%- end %>
 </section>
 <% if params[:share] == 'true' %>
   <div id='overlay'></div>
   <div id='modal'>
     <div class='modal-content'>
       <a href='#' class='modal-close'><i class='icon-remove'></i></a>
-      <p class='modal-copy'>Share your question! Get signatures and ask for a response.</p>
-      <a href='https://www.facebook.com/sharer.php?u=<%= URI.escape(current_url) %>' target="_blank" class='modal-share cta-pill cta-pill-facebook'>
-        <i class='icon-facebook'></i>
-        Facebook
-      </a>
-      <a href='https://twitter.com/share?text=Help get my question answered on @AskThemPPF: <%= URI.escape(@question.title) %>' target="_blank" class='modal-share cta-pill cta-pill-twitter'>
-        <i class='icon-twitter'></i>
-        Twitter
-      </a>
-      <a href='https://twitter.com/share?text=Help get my question answered on @AskThemPPF: <%= URI.escape(@question.title) %>' target="_blank" class='modal-share cta-pill cta-pill-google'>
-        <i class='icon-google-plus'></i>
-        Google Plus
-      </a>
-      <a href='mailto:?subject=Help get an answer to my question on AskThem' target="_blank" class='modal-share cta-pill'>
-        <i class='icon-envelope-alt'></i>
-        Email
-      </a>
-      <%= image_tag('mark.svg', class: 'modal-logo') %>
+      <h2 class='modal-header'>Share this question - get more signatures and ask for a public response!</h2>
+      <div class='modal-copy-wrap'>
+
+        <div class='modal-progress'>
+          <div class="question_progress">
+            <div class="progress_filler" style="width: <%= question_progress_percent(@question) %>%;"></div>
+          </div>
+          <span class="question_progress_count">
+            <strong><span class="question-signatures" data-signature-question-id="<%= @question.id %>"><%= @question.signature_count -%></span></strong>
+            out of
+            <strong><span class="question-signature-threshold"><%= @question.person.signature_threshold -%></span></strong>
+            Signatures needed
+          </span>
+        </div>
+        <p class='modal-copy'>Get more signatures and ask for a response! If this question reaches its signature threshold, we'll deliver it to the person's official contact information and promote it on social media.</p>
+        <p class='modal-copy'>AskThem is free, open-source, and non-profit. Help us encourage open public dialogue by sharing this question now.</p>
+        <%= image_tag('mark.svg', class: 'modal-logo') %>
+      </div>
+
+      <div class='modal-shares'>
+        <a href='https://www.facebook.com/sharer.php?u=<%= URI.escape(current_url) %>' target="_blank" class='modal-share cta-pill cta-pill-facebook'>
+          <i class='icon-facebook'></i>
+          Facebook
+        </a>
+        <a href='https://twitter.com/share?text=Help get my question answered on @AskThemPPF: <%= URI.escape(@question.title) %>' target="_blank" class='modal-share cta-pill cta-pill-twitter'>
+          <i class='icon-twitter'></i>
+          Twitter
+        </a>
+        <a href='https://twitter.com/share?text=Help get my question answered on @AskThemPPF: <%= URI.escape(@question.title) %>' target="_blank" class='modal-share cta-pill cta-pill-google'>
+          <i class='icon-google-plus'></i>
+          Google Plus
+        </a>
+        <a href='mailto:?subject=Help get an answer to my question on AskThem' target="_blank" class='modal-share cta-pill'>
+          <i class='icon-envelope-alt'></i>
+          Email
+        </a>
+      </div>
     </div>
   </div>
 <% end %>

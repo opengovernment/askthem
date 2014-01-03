@@ -14,7 +14,6 @@
   position: fixed
   +border-radius(3px)
   background-color: #F9F9F9
-  text-align: center
   z-index: 10000
   @media (max-width: 420px)
     top: 2em
@@ -23,7 +22,7 @@
   @media (min-width: 420px)
     top: 15%
     left: 250px
-    width: 350px
+    width: 500px
 
 .modal-close
   font-size: 1.5em
@@ -31,22 +30,42 @@
   top: 5px
   right: 7px
 
+.modal-header
+  margin-bottom: 1em
+  font-size: 1.5em
+  text-align: center
+
+.modal-progress
+  margin:
+    top: .75em
+    bottom: 1em
+  width: 220px
+
+.modal-copy-wrap
+  @media (min-width: 420px)
+    float: left
+    width: 62%
+
 .modal-copy
   margin-bottom: 1em
-  font:
-    size: 1.5em
-    weight: 100
+  font-size: 13px
+  line-height: 1.5
 
 .modal-logo
-  padding-top: 1.5em
-
-.modal-share
   margin:
-    top: 1em
     right: auto
     left: auto
   display: block
-  max-width: 250px
+
+.modal-shares
+  text-align: center
+  @media (min-width: 420px)
+    float: right
+    width: 35%
+
+.modal-share
+  margin-top: 1em
+  display: block
 
 .icon-envelope-alt, .icon-facebook, .icon-twitter, .icon-google-plus
   margin-right: .5em !important

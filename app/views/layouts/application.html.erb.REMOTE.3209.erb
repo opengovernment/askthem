@@ -43,7 +43,7 @@
   <%= stylesheet_link_tag 'application', media: 'all' %>
   <%= csrf_meta_tags %>
 </head>
-<body class="index">
+<body>
   <div id="fb-root"></div>
 
   <header class="main">
@@ -56,28 +56,41 @@
     </section>
     <div class="wrapper">
       <%= link_to 'AskThem', root_path, class: 'logo' %>
-      <div class="find_questions">
-        <h1>Get answers<br/> from elected officials</h1>
-        <p>&amp; support questions by your fellow citizens!</p>
-        <form action="/locator">
-          <input type="text" name="q" id="q" placeholder="Enter City and State, or ZIP code" />
-          <input type="submit" value="Search" class="cta-pill" />
-          <div class="ask_question">
-            <span>–or–</span>
-            <%= generic_ask_question 'Ask your own Question', { class: 'cta-pill'} %>
-          </div>
-        </form>
-      </div>
+      <p class="slogan">
+        <% if params[:controller] == 'questions' && params[:action] == 'show' %>
+          <%= generic_ask_question %>
+        <% end %>
+      </p>
+      <form action="/locator" class="slogan">
+        See questions &amp; petitions near you:
+        <input type="text" name="q" id="q" placeholder="City and State, or ZIP" />
+        <input type="submit" value="" class="locate" />
+      </form>
+      <p class="slogan">
+        <a href="/map">
+          <span class='header-map-link'>See all states</span>
+          <span class='header-map-icon'></span>
+        </a>
+      </p>
     </div>
-    <div class="clear"></div>
   </header>
   <section>
     <div class="content_body">
+      <% if notice %>
+        <p class="notice"><%= notice %></p>
+      <% end %>
+      <% if alert %>
+        <p class="alert"><%= alert %></p>
+      <% end %>
       <div class="wrapper">
-        <%= yield %>
+<%= yield %>
+
       <div class="clear"></div>
       </div>
     </div>
+    <ul class="admin_nav wide">
+      <%= render partial: 'shared/user' %>
+    </ul>
   </section>
 
   <footer>
@@ -93,11 +106,11 @@
       </div>
       <div class="col">
         <ul>
-          <li><%= link_to 'View All States', '/map' %></li>
-          <li><%= link_to 'Code & Data', 'https://github.com/opengovernment' %><%# @todo DM %></li>
+          <li><%= link_to 'See All States', '/map' %></li>
+          <li><%= link_to 'Code & Data', '#' %><%# @todo DM %></li>
           <li><%= link_to 'Volunteer', '#' %><%# @todo DM %></li>
           <li><%= link_to 'Donate', 'http://www.opencongress.org/donate' %></li>
-          <li><%= link_to 'Bring AskThem to Your City', '#' %><%# @todo DM %></li>
+          <li><%= link_to 'Bring OG to Your City', '#' %><%# @todo DM %></li>
         </ul>
       </div>
       <div class="col logos">
@@ -108,7 +121,7 @@
           <li class="openstates"><%= link_to image_tag('credit_openstates.png', alt: 'Open States'), 'http://openstates.org/' %></li>
         </ul>
       </div>
-      <p>AskThem is a project of the Participatory Politics Foundation, a 501(c)3 non-profit organization, with open data from Sunlight Labs and the Democracy Map API. AskThem's development was supported by a charitable grant from the Knight Foundation's Tech For Engagement initiative.</p>
+      <p>OpenGovernment is a project of the nonprofit Participatory Politics Foundation, with Open North as technical lead and generous support from the Knight Foundation. State legislative data from Open States.</p>
     </div>
     <div class="clear"></div>
   </footer>

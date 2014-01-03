@@ -2,8 +2,8 @@
   <header>
     <h1 class="action">Ask a Question</h1>
     <p>Click here for tips on what kind of questions work best - or ask about an issue you care about.</p>
-    <span class="ref"><span class="emph">To:</span>
-      <span id="content-person-image">
+    <p class="ref"><span class="emph">Question for:</p>
+      <span id="content-person-image" class="content-person-image">
         <% if person -%>
           <%= cdn_image_tag(person.image, size: "30x30",
           alt: "image of #{person.name}", class: "official-image avatar-image") %>
@@ -29,10 +29,7 @@
       <span class="question_details">Why is this important? Give it your all!</span>
     </label>
 
-    <div class="count">
-      <span class="summary_count">500</span>
-      <%= f.text_area :body, placeholder: raw('Go on&hellip;'), maxlength: '500', cols: '30', rows: '10', validate: true, class: 'question-textarea' %>
-    </div>
+    <%= f.text_area :body, placeholder: raw('Go on&hellip;'), cols: '30', rows: '10', validate: true, class: 'question-textarea' %>
 
     <div class="input select icon-angle-down sculpt">
       <% subject_options = raw('<option value="">Select an Issue (optional)</option>') + options_for_select(Subject.all) -%>

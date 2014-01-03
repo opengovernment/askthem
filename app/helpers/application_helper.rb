@@ -131,6 +131,9 @@ module ApplicationHelper
     else
       width, height = opts[:width], opts[:height]
     end
+
+    url = "http:#{url}" if url.present? && url[0..1] == "//"
+
     if url.blank? || (url.include? 'ballotpedia')
       image_tag("/assets/placeholder.png")
     else

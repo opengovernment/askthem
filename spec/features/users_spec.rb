@@ -40,7 +40,7 @@ describe "users" do
 
       context "when the user has signatures" do
         it "returns them" do
-          @question = FactoryGirl.create(:question, user: user)
+          @question = FactoryGirl.create(:question)
           FactoryGirl.create(:signature, user: user, question: @question)
 
           visit "/users/#{user.id}/signatures"
