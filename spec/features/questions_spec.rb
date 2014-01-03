@@ -138,6 +138,46 @@ describe 'questions' do
           page.body.should have_content 'Support this question'
         end
       end
+
+      context 'when adding adding media via a url' do
+        before do
+          valid_person
+        end
+
+        it 'can enter image or video url for question', js:true, vcr: true do
+          as_user(@user) do
+            visit "/vt/questions/new?person=#{@person.id}"
+            add_valid_content
+            cat_lol_url = 'http://media2.giphy.com/media/cQtJZDOZN7ZfO/giphy.gif'
+            fill_in 'question_media_file_url', with: cat_lol_url
+            click_next_button
+
+            click_button 'Publish'
+            # cgi.escape is because we are using cdn_image_tag
+            expect(page.body.include?(CGI.escape(cat_lol_url))).to be_true
+          end
+        end
+      end
+
+      context 'when adding adding media via upload' do
+        before do
+          valid_person
+        end
+
+        it 'can upload image or video file for question', js:true, focus:true do
+          as_user(@user) do
+            visit "/vt/questions/new?person=#{@person.id}"
+            add_valid_content
+            movie_file_name = 'teststrip.mpg'
+            attach_file 'question_media', Rails.root.join('spec/support/files',
+                                                           movie_file_name)
+            click_next_button
+
+            click_button 'Publish'
+            expect(page.body.include?(movie_file_name)).to be_true
+          end
+        end
+      end
     end
 
     context 'as a non-registered user' do

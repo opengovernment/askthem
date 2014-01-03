@@ -9,6 +9,8 @@ gem 'mongoid', '~> 3.1.2'
 gem 'geocoder' # must be after mongoid
 gem 'rmagick'
 gem 'carrierwave-mongoid'
+gem 'carrierwave-video-thumbnailer'
+gem 'vidibus-validate_uri'
 gem 'client_side_validations'
 gem 'client_side_validations-mongoid'
 gem 'sidekiq'

@@ -1,0 +1,228 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: http://media2.giphy.com/media/cQtJZDOZN7ZfO/giphy.gif
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - image/gif
+      Date:
+      - Fri, 03 Jan 2014 02:26:33 GMT
+      Last-Modified:
+      - Wed, 23 Oct 2013 07:19:12 GMT
+      Etag:
+      - ! '"fb6fd4de6d7114257ae33fcaf1c4ff0b"'
+      Accept-Ranges:
+      - bytes
+      Server:
+      - AmazonS3
+      Age:
+      - '10225'
+      X-Cache:
+      - Hit from cloudfront
+      X-Amz-Cf-Id:
+      - CuksiWRJiPjeb0SEfdJbfHUIH_ycigIRPjEHCyXHK18or_YhC4khZQ==
+      Via:
+      - 1.1 b3a0e63107950d3a9fbd4fddf3ed5e38.cloudfront.net (CloudFront), 1.1 BC4-ACLD
+      Content-Length:
+      - '990586'
+      Connection:
+      - Keep-Alive
+    body:
+      encoding: US-ASCII
+      string: ''
+    http_version: 
+  recorded_at: Fri, 03 Jan 2014 05:16:57 GMT
+- request:
+    method: head
+    uri: http://media2.giphy.com/media/cQtJZDOZN7ZfO/giphy.gif
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - image/gif
+      Date:
+      - Fri, 03 Jan 2014 02:26:33 GMT
+      Last-Modified:
+      - Wed, 23 Oct 2013 07:19:12 GMT
+      Etag:
+      - ! '"fb6fd4de6d7114257ae33fcaf1c4ff0b"'
+      Accept-Ranges:
+      - bytes
+      Server:
+      - AmazonS3
+      Age:
+      - '10225'
+      X-Cache:
+      - Hit from cloudfront
+      X-Amz-Cf-Id:
+      - TGNV_fZ9dXW03K7IRK71riC46b-pa1jwEeEtrw4v2Q9jbCvCgTi9MA==
+      Via:
+      - 1.1 8094b2a1faa8405ea4a61d1f3b90514f.cloudfront.net (CloudFront), 1.1 BC4-ACLD
+      Content-Length:
+      - '990586'
+      Connection:
+      - Keep-Alive
+    body:
+      encoding: US-ASCII
+      string: ''
+    http_version: 
+  recorded_at: Fri, 03 Jan 2014 05:16:57 GMT
+- request:
+    method: head
+    uri: http://media2.giphy.com/media/cQtJZDOZN7ZfO/giphy.gif
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - image/gif
+      Date:
+      - Fri, 03 Jan 2014 02:26:33 GMT
+      Last-Modified:
+      - Wed, 23 Oct 2013 07:19:12 GMT
+      Etag:
+      - ! '"fb6fd4de6d7114257ae33fcaf1c4ff0b"'
+      Accept-Ranges:
+      - bytes
+      Server:
+      - AmazonS3
+      Age:
+      - '10225'
+      X-Cache:
+      - Hit from cloudfront
+      X-Amz-Cf-Id:
+      - a-CjeebCUourSctsp_Yp3uUg0fJb_wMabahdj1wOKEozzYM_Waa6Jg==
+      Via:
+      - 1.1 b3a0e63107950d3a9fbd4fddf3ed5e38.cloudfront.net (CloudFront), 1.1 BC4-ACLD
+      Content-Length:
+      - '990586'
+      Connection:
+      - Keep-Alive
+    body:
+      encoding: US-ASCII
+      string: ''
+    http_version: 
+  recorded_at: Fri, 03 Jan 2014 05:16:57 GMT
+- request:
+    method: head
+    uri: http://media2.giphy.com/media/cQtJZDOZN7ZfO/giphy.gif
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - image/gif
+      Date:
+      - Fri, 03 Jan 2014 02:26:33 GMT
+      Last-Modified:
+      - Wed, 23 Oct 2013 07:19:12 GMT
+      Etag:
+      - ! '"fb6fd4de6d7114257ae33fcaf1c4ff0b"'
+      Accept-Ranges:
+      - bytes
+      Server:
+      - AmazonS3
+      Age:
+      - '10225'
+      X-Cache:
+      - Hit from cloudfront
+      X-Amz-Cf-Id:
+      - 2FiNyY2WEa5SFQ2LcBJJ5OYb5dR5eaXxSYEKTzkoDZKJE0pCn_UADg==
+      Via:
+      - 1.1 b3a0e63107950d3a9fbd4fddf3ed5e38.cloudfront.net (CloudFront), 1.1 BC4-ACLD
+      Content-Length:
+      - '990586'
+      Connection:
+      - Keep-Alive
+    body:
+      encoding: US-ASCII
+      string: ''
+    http_version: 
+  recorded_at: Fri, 03 Jan 2014 05:16:57 GMT
+- request:
+    method: head
+    uri: http://media2.giphy.com/media/cQtJZDOZN7ZfO/giphy.gif
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - image/gif
+      Date:
+      - Fri, 03 Jan 2014 02:26:33 GMT
+      Last-Modified:
+      - Wed, 23 Oct 2013 07:19:12 GMT
+      Etag:
+      - ! '"fb6fd4de6d7114257ae33fcaf1c4ff0b"'
+      Accept-Ranges:
+      - bytes
+      Server:
+      - AmazonS3
+      Age:
+      - '10225'
+      X-Cache:
+      - Hit from cloudfront
+      X-Amz-Cf-Id:
+      - nu25bnmgAvGBhkf0A5YlUuSEXLnlSQjoXVsNq9gq2iq3ZE2isjPYtA==
+      Via:
+      - 1.1 311a9d7ff8766e5464dee932e18a9727.cloudfront.net (CloudFront), 1.1 BC4-ACLD
+      Content-Length:
+      - '990586'
+      Connection:
+      - Keep-Alive
+    body:
+      encoding: US-ASCII
+      string: ''
+    http_version: 
+  recorded_at: Fri, 03 Jan 2014 05:16:57 GMT
+recorded_with: VCR 2.5.0

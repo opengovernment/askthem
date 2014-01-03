@@ -1,0 +1,15 @@
+<%- if question.media_file_url.present? %>
+  <%- if is_image?(question.media_file_url) %>
+    <%= cdn_image_tag(question.media_file_url, class: "question-image") %>
+  <%- else %>
+    <!-- not an image, assume video, also assume cdn not necessary, as likely youtube, etc. -->
+    <%= video_tag(question.media_file_url, class: "question-video", controls: true) %>
+  <%- end %>
+  <%- elsif question.media.url.present? %>
+  <%- if is_image?(question.media.url) %>
+    <%= cdn_image_tag(question.media.url, class: "question-image") %>
+  <%- else %>
+    <!-- not an image, assume video, we're hosting, use cdn -->
+    <%= cdn_video_tag(question.media.url, class: "question-video", controls: true) %>
+  <%- end %>
+<%- end %>

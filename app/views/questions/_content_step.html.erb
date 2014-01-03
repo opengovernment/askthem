@@ -39,8 +39,8 @@
     <%# #@todo functionality needs to be tied in, gave method :subject for now, but probably should be :media -%>
     <label for="question_media">Add a photo or video</label>
     <div>
-      <%= f.file_field :subject, class: 'question_media' %>
-      <%= f.text_field :subject, placeholder: raw('Or paste a link to a photo or video') %>
+      <%= f.file_field :media, class: 'question_media' %>
+      <%= f.text_field :media_file_url, placeholder: raw('Or paste a link to a photo or video') %>
     </div>
   </fieldset>
 </article>

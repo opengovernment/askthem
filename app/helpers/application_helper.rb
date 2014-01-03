@@ -141,6 +141,25 @@ module ApplicationHelper
     end
   end
 
+  # Returns "video" tag for the remote video
+  #
+  # @param [String] url an video URL
+  # @param [Hash] opts optional arguments
+  # @option opts [Integer] :width the maximum width
+  # @option opts [Integer] :height the maximum height
+  # @return [String] the HTML for an "video" tag
+  def cdn_video_tag(url, opts = {})
+    if opts[:size]
+      width, height = opts[:size].split('x')
+    else
+      width, height = opts[:width], opts[:height]
+    end
+
+    url = "http:#{url}" if url.present? && url[0..1] == "//"
+
+    video_tag("http://d2xfsikitl0nz3.cloudfront.net/#{CGI.escape(url)}", opts)
+  end
+
   # Returns an "a" tag for the navigation tab.
   #
   # @param [String] body the link text
