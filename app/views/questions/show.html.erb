@@ -72,9 +72,8 @@
           </p>
         <% else -%>
           <%= link_to 'Sign up to answer this question.', new_user_registration_path %>
-          AskThem is free, open-source, and non-profit.
           </p>
-          <p>If this question reaches its signature threshold, we'll deliver it to <%= @question.person.name %>'s official contact information for a public response.</p>
+          <p>If this question reaches its signature threshold, we'll deliver it to <%= @question.person.name %>.</p>
         <% end -%>
       </div>
     <% end %>
