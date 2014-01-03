@@ -219,6 +219,12 @@ module ApplicationHelper
       !(params[:controller] == 'questions' && params[:action] == 'show')
   end
 
+  def is_image?(file_or_url)
+    return false unless file_or_url.present?
+
+    ImageSrcUrl.new(file_or_url).is_image?
+  end
+
   private
   def translate_in_controller_scope(key, args = {})
     args.reverse_merge!(translate_arguments)
