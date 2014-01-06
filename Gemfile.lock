@@ -265,7 +265,7 @@ GEM
       rspec-mocks (~> 2.14.0)
     ruby-growl (3.0)
     ruby-hmac (0.4.0)
-    ruby-progressbar (1.2.0)
+    ruby-progressbar (1.4.0)
     rvm-capistrano (1.5.1)
       capistrano (~> 2.15.4)
     safe_yaml (0.9.7)
