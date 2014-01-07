@@ -164,7 +164,7 @@ describe 'questions' do
           valid_person
         end
 
-        it 'can upload image or video file for question', js:true, focus:true do
+        it 'can upload image or video file for question', js:true do
           as_user(@user) do
             visit "/vt/questions/new?person=#{@person.id}"
             add_valid_content
