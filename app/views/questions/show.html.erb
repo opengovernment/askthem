@@ -85,12 +85,15 @@
     <h4>Support this question</h4>
 
     <div class="row">
+      <span class="question_progress_count">
+        <strong><span class="question-signature-threshold"><%= @question.signature_count -%> signatures</span></strong>
+      </span>
       <div class="question_progress">
         <div class="progress_filler" data-width='<%= question_progress_percent(@question) %>'></div>
       </div>
-      <span class="question_progress_count count_needed">
+      <span class="question_progress_count">
         <strong><span class="question-signature-threshold"><%= @question.person.signature_threshold - @question.signature_count -%></span></strong>
-        more signatures needed to deliver this question to <%= @question.person.name %>
+        needed to deliver this question
       </span>
     </div>
 
@@ -157,15 +160,14 @@
 
         <div class='modal-progress'>
           <span class="question_progress_count">
-            <strong><span class="question-signatures" data-signature-question-id="<%= @question.id %>"><%= @question.signature_count -%></span></strong>
-            signatures
+            <strong><span class="question-signature-threshold"><%= @question.signature_count -%> signatures</span></strong>
           </span>
           <div class="question_progress">
-            <div class="progress_filler" data-width="<%= question_progress_percent(@question) %>"></div>
+            <div class="progress_filler" data-width='<%= question_progress_percent(@question) %>'></div>
           </div>
-          <span class="question_progress_count count_needed">
+          <span class="question_progress_count">
             <strong><span class="question-signature-threshold"><%= @question.person.signature_threshold - @question.signature_count -%></span></strong>
-            more needed to deliver this question
+            needed to deliver this question
           </span>
         </div>
         <a href='https://www.facebook.com/sharer.php?u=<%= URI.escape(current_url) %>' target="_blank" class='modal-share cta-pill cta-pill-facebook'>
