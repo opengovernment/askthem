@@ -6,7 +6,7 @@
       <h4>
         <span class="emph">Question for:</span>
         <% if @question.person.image? %>
-          <%= cdn_image_tag(@question.person.image, size: '50x50', alt: '', class: 'official-image avatar-image') %>
+          <%= cdn_image_tag(@question.person.image, size: '50x50', alt: '', class: 'official-image avatar-image official-image-big') %>
         <% end %>
         <strong><%= link_to @question.person.name, person_path(@jurisdiction.abbreviation, @question.person.id), class:'official-name' %></strong>
         <span class="official-info"><%= person_attributes(@question.person) -%></span>
@@ -73,7 +73,6 @@
         <% else -%>
           <%= link_to 'Sign up to answer this question.', new_user_registration_path %>
           </p>
-          <p>If this question reaches its signature threshold, we'll deliver it to <%= @question.person.name %>.</p>
         <% end -%>
       </div>
     <% end %>
@@ -89,11 +88,9 @@
       <div class="question_progress">
         <div class="progress_filler" style="width: <%= question_progress_percent(@question) %>%;"></div>
       </div>
-      <span class="question_progress_count">
-        <strong><span class="question-signatures" data-signature-question-id="<%= @question.id %>"><%= @question.signature_count -%></span></strong>
-        out of
-        <strong><span class="question-signature-threshold"><%= @question.person.signature_threshold -%></span></strong>
-        Signatures needed
+      <span class="question_progress_count count_needed">
+        <strong><span class="question-signature-threshold"><%= @question.person.signature_threshold - @question.signature_count -%></span></strong>
+        more signatures needed to deliver this question to <%= @question.person.name %>
       </span>
     </div>
 
@@ -166,9 +163,9 @@
           <div class="question_progress">
             <div class="progress_filler" style="width: <%= question_progress_percent(@question) %>%;"></div>
           </div>
-          <span class="question_progress_count modal_count_needed">
-            <strong><span class="question-signature-threshold"><%= @question.person.signature_threshold -%></span></strong>
-            signatures needed
+          <span class="question_progress_count count_needed">
+            <strong><span class="question-signature-threshold"><%= @question.person.signature_threshold - @question.signature_count -%></span></strong>
+            more needed to deliver this question
           </span>
         </div>
         <a href='https://www.facebook.com/sharer.php?u=<%= URI.escape(current_url) %>' target="_blank" class='modal-share cta-pill cta-pill-facebook'>
