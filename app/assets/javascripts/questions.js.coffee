@@ -208,6 +208,7 @@ jQuery ($) ->
     $('#content-person-name').html name
     $('#content-person-short-description').html '(' + jurisdiction + ')'
     $('#confirm-person-attributes').html "<strong>#{jurisdiction}</strong>"
+    $.scrollTo('#next-button', 500)
 
   getPeople = () ->
     address = $('#question_user_attributes_street_address').val()
