@@ -91,9 +91,9 @@
       <div class="question_progress">
         <div class="progress_filler" data-width='<%= question_progress_percent(@question) %>'></div>
       </div>
-      <span class="question_progress_count">
+      <span class="question_progress_count count_needed">
         <strong><span class="question-signature-threshold"><%= @question.person.signature_threshold - @question.signature_count -%></span></strong>
-        needed to deliver this question
+        needed to deliver
       </span>
     </div>
 
@@ -165,9 +165,9 @@
           <div class="question_progress">
             <div class="progress_filler" data-width='<%= question_progress_percent(@question) %>'></div>
           </div>
-          <span class="question_progress_count">
+          <span class="question_progress_count count_needed">
             <strong><span class="question-signature-threshold"><%= @question.person.signature_threshold - @question.signature_count -%></span></strong>
-            needed to deliver this question
+            needed to deliver
           </span>
         </div>
         <a href='https://www.facebook.com/sharer.php?u=<%= URI.escape(current_url) %>' target="_blank" class='modal-share cta-pill cta-pill-facebook'>
