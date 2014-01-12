@@ -86,7 +86,7 @@
 
     <div class="row">
       <span class="question_progress_count">
-        <strong><span class="question-signature-threshold"><%= @question.signature_count -%> signatures</span></strong>
+        <strong><span class="question-signature-count"><%= @question.signature_count -%> signatures</span></strong>
       </span>
       <div class="question_progress">
         <div class="progress_filler" data-width='<%= question_progress_percent(@question) %>'></div>
@@ -159,7 +159,7 @@
 
         <div class='modal-progress'>
           <span class="question_progress_count">
-            <strong><span class="question-signature-threshold"><%= @question.signature_count -%> signatures</span></strong>
+            <strong><span class="question-signature-count"><%= @question.signature_count -%> signatures</span></strong>
           </span>
           <div class="question_progress">
             <div class="progress_filler" data-width='<%= question_progress_percent(@question) %>'></div>

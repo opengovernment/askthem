@@ -421,14 +421,15 @@ describe 'questions' do
       it 'displays number of signatures for question', js: true do
         FactoryGirl.create(:signature, question: @question)
         visit "/vt/questions/#{@question.id}"
-        signatures_on_page = find('span.question-signatures').text.to_i
-        expect(signatures_on_page).to eq @question.signatures.count
+        count_on_page = find('span.question-signature-count').text.to_i
+        expect(count_on_page).to eq @question.signatures.count
       end
 
       it 'displays signature threshold number for recipient', js: true do
         visit "/vt/questions/#{@question.id}"
+        signatures_needed = @person.signature_threshold - @question.signature_count
         threshold_on_page = find('span.question-signature-threshold').text.to_i
-        expect(threshold_on_page).to eq @person.signature_threshold
+        expect(threshold_on_page).to eq signatures_needed
       end
 
       it 'displays recent signatures', js: true do
@@ -460,7 +461,7 @@ describe 'questions' do
 
         # supporters = creator of question + signers
         sleep 1
-        page.body.should have_content "2 out of"
+        page.body.should have_content "98 needed"
       end
 
       context 'as signed in user' do
