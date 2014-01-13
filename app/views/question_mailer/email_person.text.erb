@@ -1,4 +1,4 @@
-<% if @mail_admin %>
+<% if @mail_staff %>
   This email could not be sent because we don't have an email address for <%= person_attributes(@question.person) %>
 <% end %>
 A question asked of you by people on AskThem has reached <%= @question.signature_count %> signatures.

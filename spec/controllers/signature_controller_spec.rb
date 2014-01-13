@@ -1,10 +1,10 @@
-include Devise::TestHelpers
+require "spec_helper"
 
 describe SignaturesController do
   # @warn can't use let because of mongoid teardown
   before :each do
     @user = FactoryGirl.create(:user)
-    @person = FactoryGirl.create(:person_ny_sheldon_silver)
+    @person = FactoryGirl.create(:state_legislator_ny_sheldon_silver)
     @question = FactoryGirl.create(:question, person: @person)
     @question.signature_count = @question.person.signature_threshold - 1
     @question.save
@@ -12,17 +12,26 @@ describe SignaturesController do
   end
 
   describe "#create" do
-    it "ensures that an email is sent to admins when Person email is blank" do
-      @person.email = ''
-      @person.save
+    it "ensures an email is sent to person when signature threshold is met" do
       post :create, format: :json, question_id: @question.id
       last_email = ActionMailer::Base.deliveries.last
-      last_email.body.encoded.should match("This email could not be sent because we don't have an email address for")
+      msg = "A question asked of you by people on AskThem has reached"
+      expect(last_email.body.encoded).to match(msg)
     end
-    it "ensures that an email is sent to person when signature threshold is met" do
-      post :create, format: :json, question_id: @question.id
-      last_email = ActionMailer::Base.deliveries.last
-      last_email.body.encoded.should match("A question asked of you by people on AskThem has reached")
+
+    describe "when person does not have an email" do
+      it "ensures an email is sent to staff when Person email is blank" do
+        @person.email = ""
+        @person.save
+
+        staff_member = FactoryGirl.create(:user)
+        staff_member.add_role :staff_member
+
+        post :create, format: :json, question_id: @question.id
+        last_email = ActionMailer::Base.deliveries.last
+        msg = "This email could not be sent because we don't have an email"
+        expect(last_email.body.encoded).to match(msg)
+      end
     end
   end
 end
