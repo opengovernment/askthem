@@ -27,6 +27,8 @@ describe QuestionMailer do
   end
 
   it "sends email to person that signature threshold is met" do
+    pending "feature being reenabled, see question_mailer#email_person"
+
     person = FactoryGirl.create(:state_legislator_ny_sheldon_silver)
     question = FactoryGirl.create(:question, person: person)
     question.signature_count = question.person.signature_threshold

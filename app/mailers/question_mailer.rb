@@ -15,7 +15,10 @@ class QuestionMailer < ActionMailer::Base
   end
 
   def email_person(question)
-    return unless question.person.email.present?
+    # @warn TEMP: disable automatic delivery of question for time being
+    # rely on staff members manually doing it for now
+    return # replace with line below to reenable
+    # return unless question.person.email.present?
 
     @question = question
     mail to: question.person.email, subject: "People on AskThem want to know"

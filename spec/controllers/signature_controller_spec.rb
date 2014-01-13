@@ -13,6 +13,8 @@ describe SignaturesController do
 
   describe "#create" do
     it "ensures an email is sent to person when signature threshold is met" do
+      pending "feature being reenabled, see question_mailer#email_person"
+
       post :create, format: :json, question_id: @question.id
       last_email = ActionMailer::Base.deliveries.last
       msg = "A question asked of you by people on AskThem has reached"
