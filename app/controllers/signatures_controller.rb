@@ -10,11 +10,8 @@ class SignaturesController < ApplicationController
       QuestionMailer.signed_on(current_user, question).deliver
 
       if question.signature_count == question.person.signature_threshold
-        if question.person.email.blank?
-          QuestionMailer.email_person(question, true).deliver
-        else
-          QuestionMailer.email_person(question).deliver
-        end
+        QuestionMailer.email_person(question).deliver
+        QuestionMailer.notify_staff_question_at_threshold(question).deliver
       end
 
       render json: @signature, status: :created

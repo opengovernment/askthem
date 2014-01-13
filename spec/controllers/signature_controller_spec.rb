@@ -19,19 +19,14 @@ describe SignaturesController do
       expect(last_email.body.encoded).to match(msg)
     end
 
-    describe "when person does not have an email" do
-      it "ensures an email is sent to staff when Person email is blank" do
-        @person.email = ""
-        @person.save
+    it "ensures an email is sent to staff when signature threshold is met" do
+      staff_member = FactoryGirl.create(:user)
+      staff_member.add_role :staff_member
 
-        staff_member = FactoryGirl.create(:user)
-        staff_member.add_role :staff_member
-
-        post :create, format: :json, question_id: @question.id
-        last_email = ActionMailer::Base.deliveries.last
-        msg = "This email could not be sent because we don't have an email"
-        expect(last_email.body.encoded).to match(msg)
-      end
+      post :create, format: :json, question_id: @question.id
+      last_email = ActionMailer::Base.deliveries.last
+      msg = "A question has reached its delivery goal"
+      expect(last_email.body.encoded).to match(msg)
     end
   end
 end
