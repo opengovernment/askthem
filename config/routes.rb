@@ -65,7 +65,11 @@ OpenGovernment::Application.routes.draw do
 
   match 'locator' => 'pages#locator', as: :locator, via: :get
   match 'identifier' => 'pages#identifier', as: :identifier, via: :get
-  match 'contact_info' => 'pages#contact_info', as: :identifier, via: :get
+  match 'contact_info' => 'pages#contact_info', as: :contact_info, via: :get
   match 'channel' => 'pages#channel', as: :channel, via: :get
+  match 'people' => 'people#index', as: :unaffiliated_people, via: :get, jurisdiction: Metadatum::Unaffiliated::ABBREVIATION
+  match 'people/:id' => 'people#show', as: :unaffiliated_person, via: :get, jurisdiction: Metadatum::Unaffiliated::ABBREVIATION
+  match 'questions' => 'questions#index', as: :unaffiliated_questions, via: :get, jurisdiction: Metadatum::Unaffiliated::ABBREVIATION
+  match 'questions/:id' => 'questions#show', as: :unaffiliated_question, via: :get, jurisdiction: Metadatum::Unaffiliated::ABBREVIATION
   match ':jurisdiction' => 'pages#overview', as: :jurisdiction, via: :get
 end

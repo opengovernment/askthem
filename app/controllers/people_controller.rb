@@ -6,12 +6,18 @@ class PeopleController < ApplicationController
   actions :index, :show
   custom_actions resource: [:bills, :committees, :votes, :ratings]
 
+  before_filter :redirect_to_unaffiliated_route_if_necessary, only: :index
+
   def show
     @questions = resource.questions.includes(:user).page(params[:page])
     tab 'questions'
 
-  rescue Mongoid::Errors::DocumentNotFound
-    redirect_to person_path('unaffiliated', params[:id])
+  rescue Mongoid::Errors::DocumentNotFound => error
+    if params[:jurisdiction] == Metadatum::Unaffiliated::ABBREVIATION
+      raise error
+    else
+      redirect_to unaffiliated_person_path(params[:id])
+    end
   end
 
   def bills
@@ -74,5 +80,11 @@ class PeopleController < ApplicationController
     # @todo evaluate if in for type is too slow
     @people ||= end_of_association_chain.active.includes(:questions, :identities)
       .only_types(types)
+  end
+
+  def redirect_to_unaffiliated_route_if_necessary
+    if request.fullpath.include?(Metadatum::Unaffiliated::ABBREVIATION)
+      redirect_to unaffiliated_people_path
+    end
   end
 end

@@ -8,6 +8,7 @@ class QuestionsController < ApplicationController
 
   before_filter :set_state_code, only: [:show, :new, :create, :need_signatures, :have_answers, :need_answers, :recent]
   before_filter :set_question_person_id, only: :create
+  before_filter :redirect_to_unaffiliated_route_if_necessary, only: :index
 
   def index
     index! do |format|
@@ -52,8 +53,12 @@ class QuestionsController < ApplicationController
         .order_by(created_at: "DESC").limit(5)
     end
 
-  rescue Mongoid::Errors::DocumentNotFound
-    redirect_to person_path('unaffiliated', params[:id])
+  rescue Mongoid::Errors::DocumentNotFound => error
+    if params[:jurisdiction] == Metadatum::Unaffiliated::ABBREVIATION
+      raise error
+    else
+      redirect_to unaffiliated_question_path(params[:id])
+    end
   end
 
   def new
@@ -77,8 +82,12 @@ class QuestionsController < ApplicationController
 
   def create
     @question = Question.new(params[:question])
-    @question.state = @state_code
-    @person = @question.person if @question.person_id.present?
+    if @question.person_id.present?
+      @person = @question.person
+      @question.state = @person.state
+    else
+      @question.state = @state_code
+    end
     @user = @question.user
 
     # mongoid nested user
@@ -176,5 +185,11 @@ class QuestionsController < ApplicationController
     end
 
     params[:question][:person_id] = person_id
+  end
+
+  def redirect_to_unaffiliated_route_if_necessary
+    if request.fullpath.include?(Metadatum::Unaffiliated::ABBREVIATION)
+      redirect_to unaffiliated_questions_path
+    end
   end
 end
