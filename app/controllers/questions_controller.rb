@@ -51,6 +51,9 @@ class QuestionsController < ApplicationController
         .where(:user_id.nin => [@question.user_id])
         .order_by(created_at: "DESC").limit(5)
     end
+
+  rescue Mongoid::Errors::DocumentNotFound
+    redirect_to person_path('unaffiliated', params[:id])
   end
 
   def new
@@ -60,7 +63,7 @@ class QuestionsController < ApplicationController
     @question.user.for_new_question = true
 
     if params[:person]
-      @person = Person.connected_to(@state_code).find(params[:person])
+      @person = Person.find(params[:person])
       @question.person = @person
     end
 

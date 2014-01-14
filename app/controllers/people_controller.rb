@@ -9,6 +9,9 @@ class PeopleController < ApplicationController
   def show
     @questions = resource.questions.includes(:user).page(params[:page])
     tab 'questions'
+
+  rescue Mongoid::Errors::DocumentNotFound
+    redirect_to person_path('unaffiliated', params[:id])
   end
 
   def bills
