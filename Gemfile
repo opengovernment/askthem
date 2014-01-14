@@ -39,6 +39,9 @@ gem 'rest-client'
 # Google Civic Information API, used for representatives for address
 gem 'google_civic_info', github: 'walter/google_civic_info'
 
+# Twitter API, used for looking up possible recipients
+gem 'twitter'
+
 group :production do
   gem 'airbrake'
   gem 'fog'
