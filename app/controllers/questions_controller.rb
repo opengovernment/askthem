@@ -97,6 +97,11 @@ class QuestionsController < ApplicationController
     if @question.valid? && (user_signed_in? || @user.valid?)
       @question.save
       QuestionMailer.question_posted(@user, @question).deliver
+
+      if @question.state == Metadatum::Unaffiliated::ABBREVIATION
+        PersonMailer.notify_staff_new_from_twitter(person).deliver
+      end
+
       redirect_to question_path(@state_code, @question, share: true)
     else
       set_up_steps

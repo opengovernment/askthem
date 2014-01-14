@@ -40,8 +40,6 @@ class TwitterPersonService
     adapter = TwitterPersonAdapter.new(person)
     person = person.load_from_apis!(twitter_user, adapter: adapter)
 
-    PersonMailer.notify_staff_new_from_twitter(person).deliver
-
     UnaffiliatedPersonTidyWorker.perform_in(24.hours, person.id)
     person
   end
