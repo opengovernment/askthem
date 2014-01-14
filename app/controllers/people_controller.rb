@@ -6,14 +6,15 @@ class PeopleController < ApplicationController
   actions :index, :show
   custom_actions resource: [:bills, :committees, :votes, :ratings]
 
-  before_filter :redirect_to_unaffiliated_route_if_necessary, only: :index
+  before_filter :set_is_unaffiliated, only: [:index, :show]
+  before_filter :redirect_to_unaffiliated_route_if_necessary, only: [:index, :show]
 
   def show
     @questions = resource.questions.includes(:user).page(params[:page])
     tab 'questions'
 
   rescue Mongoid::Errors::DocumentNotFound => error
-    if params[:jurisdiction] == Metadatum::Unaffiliated::ABBREVIATION
+    if @is_unaffiliated
       raise error
     else
       redirect_to unaffiliated_person_path(params[:id])
@@ -54,6 +55,8 @@ class PeopleController < ApplicationController
                  when "federal"
                    ["FederalLegislator"]
                  end
+               elsif @is_unaffiliated
+                 ["Person"]
                else
                  if @jurisdiction && @jurisdiction.abbreviation.include?("-")
                    ["Councilmember"]
@@ -78,13 +81,28 @@ class PeopleController < ApplicationController
   def collection
     # downcase covers api legacy set 'person' for _type
     # @todo evaluate if in for type is too slow
-    @people ||= end_of_association_chain.active.includes(:questions, :identities)
-      .only_types(types)
+    @people ||= begin
+                  people = end_of_association_chain.includes(:questions, :identities)
+                  unless @is_unaffiliated
+                    people = people.active
+                  end
+                  people.only_types(types)
+                end
+  end
+
+  def set_is_unaffiliated
+    @is_unaffiliated = params[:jurisdiction] ==
+      Metadatum::Unaffiliated::ABBREVIATION
   end
 
   def redirect_to_unaffiliated_route_if_necessary
     if request.fullpath.include?(Metadatum::Unaffiliated::ABBREVIATION)
-      redirect_to unaffiliated_people_path
+      path = if params[:action] == "index"
+               unaffiliated_people_path
+             else
+               unaffiliated_person_path(params[:id])
+             end
+      redirect_to path
     end
   end
 end

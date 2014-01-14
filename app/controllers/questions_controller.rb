@@ -8,7 +8,8 @@ class QuestionsController < ApplicationController
 
   before_filter :set_state_code, only: [:show, :new, :create, :need_signatures, :have_answers, :need_answers, :recent]
   before_filter :set_question_person_id, only: :create
-  before_filter :redirect_to_unaffiliated_route_if_necessary, only: :index
+  before_filter :set_is_unaffiliated, only: [:index, :show]
+  before_filter :redirect_to_unaffiliated_route_if_necessary, only: [:index, :show]
 
   def index
     index! do |format|
@@ -54,7 +55,7 @@ class QuestionsController < ApplicationController
     end
 
   rescue Mongoid::Errors::DocumentNotFound => error
-    if params[:jurisdiction] == Metadatum::Unaffiliated::ABBREVIATION
+    if @is_unaffiliated
       raise error
     else
       redirect_to unaffiliated_question_path(params[:id])
@@ -120,6 +121,8 @@ class QuestionsController < ApplicationController
                  when "federal"
                    ["FederalLegislator"]
                  end
+               elsif @is_unaffiliated
+                 ["Person"]
                else
                  if @jurisdiction && @jurisdiction.abbreviation.include?("-")
                    ["Councilmember"]
@@ -187,9 +190,19 @@ class QuestionsController < ApplicationController
     params[:question][:person_id] = person_id
   end
 
+  def set_is_unaffiliated
+    @is_unaffiliated = params[:jurisdiction] ==
+      Metadatum::Unaffiliated::ABBREVIATION
+  end
+
   def redirect_to_unaffiliated_route_if_necessary
     if request.fullpath.include?(Metadatum::Unaffiliated::ABBREVIATION)
-      redirect_to unaffiliated_questions_path
+      path = if params[:action] == "index"
+               unaffiliated_questions_path
+             else
+               unaffiliated_question_path(params[:id])
+             end
+      redirect_to path
     end
   end
 end
