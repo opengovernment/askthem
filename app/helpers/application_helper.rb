@@ -217,7 +217,8 @@ module ApplicationHelper
 
   # @todo flesh this out
   def person_attributes_short(person)
-    "(#{person_attributes(person)})"
+    attributes = person_attributes(person)
+    "(#{attributes})" if attributes.present?
   end
 
   # Formats a district name, if necessary.
