@@ -96,7 +96,7 @@ class Person
 
     api ||= default_api.new
     api.parsed_results_for_jurisdiction(abbreviation).map do |attributes|
-      new.load_from_apis!(attributes)
+      new.load_from_apis!(attributes, adapter: adapter)
     end
   end
 
