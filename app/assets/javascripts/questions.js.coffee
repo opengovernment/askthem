@@ -27,30 +27,24 @@ jQuery ($) ->
 
   $('time[data-time-ago]').timeago()
 
-  # <%# @todo JM to connect this to accounts that may be officials on OG %>
-
   getTwitter = (elem) ->
+    loading = $('.loading')
+    loading.show()
+
+    screenName = $(elem).val().replace('@', '')
+    url = "/identifier.json?twitter_id=#{encodeURIComponent(screenName)}"
+
     $.ajax
-      url: "http://api.twitter.com/1/users/lookup.json?screen_name=" + $(elem).val().slice(1) + "&callback=?"
+      url: url
       type: "GET"
       dataType: "json"
       success: (data) ->
-        # TODO: this should add radio button for matching person
-        # as question[person_id] input, see getPeople
-        $("div.twitter .select-person li h2").html data[0].name
-        $("div.twitter div.avatar img").attr 'src', data[0].profile_image_url
-        $("div.twitter .select-person div.person-info p").html data[0].description
-        $("div.twitter .select-person li").fadeTo(300, 1)
-        # TODO: change below to reset person_id to val of twitter selected person
-        $('#question_person_id').val ''
-
+        refreshPersonList(data, 'reload', 'div.twitter')
 
   $("#twitter").on 'keyup change',  (->
-    if $(this).is(':focus') or isHeadless
-      if $(this).val()[0] is "@"
-        getTwitter($(this))
-      else
-        $(this).addClass 'invalid'
+    nameLength = $(this).val().length
+    if $(this).is(':focus') or isHeadless and nameLength > 1
+      getTwitter($(this))
   )
 
   $('span.toggle a.select').click (event) ->
@@ -105,43 +99,7 @@ jQuery ($) ->
       type: 'GET'
       dataType: 'json'
       success: (data) ->
-        personList = $('div.name-lookup ol.people-list').first()
-        personList.html('')
-        $('#question_person_id').remove() # our radio buttons replace this below
-        $(data).each ->
-          liVal = '<li style="display:none;">'
-          liVal += '<div class="select_box">'
-          liVal += "<input type=\"radio\" name=\"question[person_id]\" id=\"question_person_id_#{@id}\" value=\"#{@id}\" /></div>"
-
-          liVal += '<div class="avatar">'
-          if @photo_url?
-            liVal += "<img src=\"http://d2xfsikitl0nz3.cloudfront.net/#{encodeURIComponent(@photo_url)}/60/60\" width=\"60\" height=\"60\" alt=\"\" />"
-          else
-            placeholderUrl = "http://" + $(location).attr('host') + "/assets/placeholder.png"
-            liVal += "<img src=\"http://d2xfsikitl0nz3.cloudfront.net/#{encodeURIComponent(placeholderUrl)}/60/60\" width=\"60\" height=\"60\" alt=\"\" />"
-          liVal += '</div>'
-
-          liVal += "<h2>#{@full_name}</h2>"
-
-          liVal += '<div class="person-info">'
-          liVal += '<span class="jurisdiction">'
-          personAttributes = []
-          personAttributes.push @political_position_title if @political_position_title?
-          personAttributes.push @most_recent_district if @most_recent_district?
-          personAttributes.push @party if @party?
-          liVal += personAttributes.join(', ')
-          liVal += '</span></div>'
-          liVal += '<span class="selected icon-ok-sign"></span>'
-
-          liVal += "</li>"
-
-          personList.append liVal
-
-          personList.children('li:last').fadeTo(300, 1)
-        loading.hide()
-        personList.show()
-        personList.children('li').on 'click', (e) ->
-          reloadAsNewQuestionForPerson e
+        refreshPersonList(data, 'reload', 'div.name-lookup')
 
   reloadAsNewQuestionForPerson = (e) ->
     personLi = e.delegateTarget
@@ -167,18 +125,16 @@ jQuery ($) ->
     unless $('div.address_lookup').length == 0
       zipLength = $(theInput).val().length
       if zipLength is 5 or zipLength > 5
-        $('.loading').hide()
-
         # redundant, but covers case where zip is pasted in
         if $('label.select-person').is(':hidden')
           $('label.select-person').fadeTo(300, 1)
+          $('div.address_lookup .loading').fadeTo(300, 1)
 
         getPeople()
       else
-        # show recipient header and loading
-        if $('label.select-person').is(':hidden')
+        if zipLength > 0 and $('label.select-person').is(':hidden')
           $('label.select-person').fadeTo(300, 1)
-          $('.loading').fadeTo(300, 1)
+          $('div.address_lookup .loading').fadeTo(300, 1)
 
   updateSelectedPerson = (e) ->
     personLi = e.delegateTarget
@@ -206,7 +162,8 @@ jQuery ($) ->
     $('#confirm-person-image').html avatarHtmlSmall
     $('#content-person-image').html avatarHtmlSmall
     $('#content-person-name').html name
-    $('#content-person-short-description').html '(' + jurisdiction + ')'
+    if jurisdiction? and jurisdiction isnt ''
+      $('#content-person-short-description').html '(' + jurisdiction + ')'
     $('#confirm-person-attributes').html "<strong>#{jurisdiction}</strong>"
     $.scrollTo('#next-button', 500)
 
@@ -223,42 +180,52 @@ jQuery ($) ->
       type: 'GET'
       dataType: 'json'
       success: (data) ->
-        personList = $('div.address_lookup ol.people-list').first()
-        personList.html('')
-        $('#question_person_id').remove() # our radio buttons replace this below
-        $(data).each ->
-          liVal = '<li style="display:none;">'
-          liVal += '<div class="select_box">'
-          liVal += "<input type=\"radio\" name=\"question[person_id]\" id=\"question_person_id_#{@id}\" value=\"#{@id}\" /></div>"
+        refreshPersonList(data, "update")
 
-          liVal += '<div class="avatar">'
-          if @photo_url?
-            liVal += "<img src=\"http://d2xfsikitl0nz3.cloudfront.net/#{encodeURIComponent(@photo_url)}/60/60\" width=\"60\" height=\"60\" alt=\"\" />"
-          else
-            placeholderUrl = "http://" + $(location).attr('host') + "/assets/placeholder.png"
-            liVal += "<img src=\"http://d2xfsikitl0nz3.cloudfront.net/#{encodeURIComponent(placeholderUrl)}/60/60\" width=\"60\" height=\"60\" alt=\"\" />"
-          liVal += '</div>'
+  refreshPersonList = (data, updateOrReload, lookupDiv = 'div.address_lookup') ->
+    loading = $('.loading')
+    loading.show()
 
-          liVal += "<h2>#{@full_name}</h2>"
+    personList = $("#{lookupDiv} ol.people-list").first()
+    personList.html('')
+    $('#question_person_id').remove() # our radio buttons replace this below
+    $(data).each ->
+      liVal = '<li style="display:none;">'
+      liVal += '<div class="select_box">'
+      liVal += "<input type=\"radio\" name=\"question[person_id]\" id=\"question_person_id_#{@id}\" value=\"#{@id}\" /></div>"
 
-          liVal += '<div class="person-info">'
-          liVal += '<span class="jurisdiction">'
-          personAttributes = []
-          personAttributes.push @political_position_title if @political_position_title?
-          personAttributes.push @most_recent_district if @most_recent_district?
-          personAttributes.push @party if @party?
-          liVal += personAttributes.join(', ')
-          liVal += '</span></div>'
-          liVal += '<span class="selected icon-ok-sign"></span>'
+      liVal += '<div class="avatar">'
+      if @photo_url?
+        liVal += "<img src=\"http://d2xfsikitl0nz3.cloudfront.net/#{encodeURIComponent(@photo_url)}/60/60\" width=\"60\" height=\"60\" alt=\"\" />"
+      else
+        placeholderUrl = "http://" + $(location).attr('host') + "/assets/placeholder.png"
+        liVal += "<img src=\"http://d2xfsikitl0nz3.cloudfront.net/#{encodeURIComponent(placeholderUrl)}/60/60\" width=\"60\" height=\"60\" alt=\"\" />"
+      liVal += '</div>'
 
-          liVal += "</li>"
+      liVal += "<h2>#{@full_name}</h2>"
 
-          personList.append liVal
+      liVal += '<div class="person-info">'
+      liVal += '<span class="jurisdiction">'
+      personAttributes = []
+      personAttributes.push @political_position_title if @political_position_title?
+      personAttributes.push @most_recent_district if @most_recent_district?
+      personAttributes.push @party if @party?
+      liVal += personAttributes.join(', ')
+      liVal += '</span></div>'
+      liVal += '<span class="selected icon-ok-sign"></span>'
 
-          personList.children('li:last').fadeTo(300, 1)
-        personList.show()
-        personList.children('li').on 'click', (e) ->
-          updateSelectedPerson e
+      liVal += "</li>"
+
+      personList.append liVal
+
+      personList.children('li:last').fadeTo(300, 1)
+    loading.hide()
+    personList.show()
+    personList.children('li').on 'click', (e) ->
+      if updateOrReload == 'update'
+        updateSelectedPerson e
+      else
+        reloadAsNewQuestionForPerson e
 
   hideLaterSteps = (->
     $('article.not-first-step').each ->

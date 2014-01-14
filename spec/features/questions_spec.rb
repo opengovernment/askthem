@@ -256,15 +256,25 @@ describe 'questions' do
           # click_person_box_with(@person.id)
           expect(find('div.name-lookup ol.people-list li'))
             .to have_content @person.full_name
-          # person_link = find('div.name-lookup ol.people-list li')
-          # person_link.click
+        end
 
+        it 'can find a person based on twitter screen_name', js: true, vcr: true do
+          pending "figuring out cause of vcr causing flickering against twitter api"
 
-          # we should now be on a page that goes direct to question step
-          # with person as recipient
-          # expect(find('div.content-person-info').visible?).to be_true
-          # expect(find('div.content-person-info'))
-            # .to have_content(@person.full_name)
+          screen_name = 'jack'
+
+          # click_link won't work with this type or link
+          find('a[href="#twitter_find"]').trigger('click')
+
+          # only need the first letter, no need for extra lookup triggering
+          fill_in 'twitter', with: screen_name
+
+          sleep 5
+          # person matching name is listed and clickable
+          # clicking person redirects to questions/new with person_id matching person
+
+          expect(find('div.twitter ol.people-list li'))
+            .to have_content screen_name.capitalize
         end
       end
 
