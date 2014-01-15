@@ -197,7 +197,7 @@
 <%# @see http://disqus.com/admin/universalcode/ %>
 
 <script type="text/javascript">
-  var disqus_shortname = 'dobot';
+  var disqus_shortname = '<%= ENV["DISQUS_SHORTNAME"] -%>';
   (function() {
     var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
     dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
