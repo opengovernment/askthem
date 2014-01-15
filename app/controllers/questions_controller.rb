@@ -8,6 +8,8 @@ class QuestionsController < ApplicationController
 
   before_filter :set_state_code, only: [:show, :new, :create, :need_signatures, :have_answers, :need_answers, :recent]
   before_filter :set_question_person_id, only: :create
+  before_filter :set_is_unaffiliated, only: [:index, :show]
+  before_filter :redirect_to_unaffiliated_route_if_necessary, only: [:index, :show]
 
   def index
     index! do |format|
@@ -45,7 +47,19 @@ class QuestionsController < ApplicationController
 
   def show
     @user = user_signed_in? ? current_user : User.new
-    show!
+    show! do
+      @recent_signatures = @question.signatures
+        .includes(:user)
+        .where(:user_id.nin => [@question.user_id])
+        .order_by(created_at: "DESC").limit(5)
+    end
+
+  rescue Mongoid::Errors::DocumentNotFound => error
+    if @is_unaffiliated
+      raise error
+    else
+      redirect_to unaffiliated_question_path(params[:id])
+    end
   end
 
   def new
@@ -54,9 +68,8 @@ class QuestionsController < ApplicationController
     @question.user = user_signed_in? ? current_user : User.new
     @question.user.for_new_question = true
 
-    logger.debug "question user for_new_question: #{@question.user.for_new_question}"
     if params[:person]
-      @person = Person.connected_to(@state_code).find(params[:person])
+      @person = Person.find(params[:person])
       @question.person = @person
     end
 
@@ -70,8 +83,12 @@ class QuestionsController < ApplicationController
 
   def create
     @question = Question.new(params[:question])
-    @question.state = @state_code
-    @person = @question.person if @question.person_id.present?
+    if @question.person_id.present?
+      @person = @question.person
+      @question.state = @person.state
+    else
+      @question.state = @state_code
+    end
     @user = @question.user
 
     # mongoid nested user
@@ -80,6 +97,11 @@ class QuestionsController < ApplicationController
     if @question.valid? && (user_signed_in? || @user.valid?)
       @question.save
       QuestionMailer.question_posted(@user, @question).deliver
+
+      if @question.state == Metadatum::Unaffiliated::ABBREVIATION
+        PersonMailer.notify_staff_new_from_twitter(person).deliver
+      end
+
       redirect_to question_path(@state_code, @question, share: true)
     else
       set_up_steps
@@ -104,6 +126,8 @@ class QuestionsController < ApplicationController
                  when "federal"
                    ["FederalLegislator"]
                  end
+               elsif @is_unaffiliated
+                 ["Person"]
                else
                  if @jurisdiction && @jurisdiction.abbreviation.include?("-")
                    ["Councilmember"]
@@ -169,5 +193,21 @@ class QuestionsController < ApplicationController
     end
 
     params[:question][:person_id] = person_id
+  end
+
+  def set_is_unaffiliated
+    @is_unaffiliated = params[:jurisdiction] ==
+      Metadatum::Unaffiliated::ABBREVIATION
+  end
+
+  def redirect_to_unaffiliated_route_if_necessary
+    if request.fullpath.include?(Metadatum::Unaffiliated::ABBREVIATION)
+      path = if params[:action] == "index"
+               unaffiliated_questions_path
+             else
+               unaffiliated_question_path(params[:id])
+             end
+      redirect_to path
+    end
   end
 end

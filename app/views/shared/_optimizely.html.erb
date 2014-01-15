@@ -1,0 +1,3 @@
+<%- if Rails.env.production? -%>
+  <script src="//cdn.optimizely.com/js/<%= ENV["OPTIMIZELY_FILENAME"] -%>.js"></script>
+<%- end  %>

@@ -14,16 +14,15 @@
   position: fixed
   +border-radius(3px)
   background-color: #F9F9F9
-  text-align: center
   z-index: 10000
   @media (max-width: 420px)
     top: 2em
     width: 86%
     +box-sizing(border-box)
   @media (min-width: 420px)
-    top: 30%
+    top: 15%
     left: 250px
-    width: 350px
+    width: 500px
 
 .modal-close
   font-size: 1.5em
@@ -31,22 +30,59 @@
   top: 5px
   right: 7px
 
+.modal-header
+  font-size: 1.5em
+  text-align: center
+  @media (min-width: 420px)
+    margin:
+      right: auto
+      left: auto
+    width: 80%
+
+.modal-progress
+  margin: .75em auto 1em
+  @media (max-width: 420px)
+    width: 220px
+  @media (min-width: 420px)
+    width: 270px
+
 .modal-copy
   margin-bottom: 1em
-  font:
-    size: 1.5em
-    weight: 100
+  font-size: 13px
+  line-height: 1.5
+  text-align: center
 
 .modal-logo
-  padding-top: 1.5em
-
-.modal-email, .modal-facebook, .modal-twitter
   margin:
     top: 1em
     right: auto
     left: auto
   display: block
-  max-width: 250px
 
-.icon-envelope-alt, .icon-facebook, .icon-twitter
+.modal-shares
+  @media (min-width: 420px)
+    margin-top: 1em
+    overflow: auto
+
+.modal-share
+  +box-sizing(border-box)
+  text-align: center
+  @media (max-width: 420px)
+    margin-bottom: 1em
+    display: inline-block
+  @media (min-width: 420px)
+    margin:
+      right: auto
+      bottom: 1em
+      left: auto
+    width: 270px
+    display: block
+
+    .modal-shares &
+      width: 160px
+      float: left
+      &:not(:last-child)
+        margin-right: 10px
+
+.icon-envelope-alt, .icon-facebook, .icon-twitter, .icon-google-plus
   margin-right: .5em !important

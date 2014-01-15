@@ -131,11 +131,33 @@ module ApplicationHelper
     else
       width, height = opts[:width], opts[:height]
     end
+
+    url = "http:#{url}" if url.present? && url[0..1] == "//"
+
     if url.blank? || (url.include? 'ballotpedia')
       image_tag("/assets/placeholder.png")
     else
       image_tag("http://d2xfsikitl0nz3.cloudfront.net/#{CGI.escape(url)}/#{width}/#{height}", opts)
     end
+  end
+
+  # Returns "video" tag for the remote video
+  #
+  # @param [String] url an video URL
+  # @param [Hash] opts optional arguments
+  # @option opts [Integer] :width the maximum width
+  # @option opts [Integer] :height the maximum height
+  # @return [String] the HTML for an "video" tag
+  def cdn_video_tag(url, opts = {})
+    if opts[:size]
+      width, height = opts[:size].split('x')
+    else
+      width, height = opts[:width], opts[:height]
+    end
+
+    url = "http:#{url}" if url.present? && url[0..1] == "//"
+
+    video_tag("http://d2xfsikitl0nz3.cloudfront.net/#{CGI.escape(url)}", opts)
   end
 
   # Returns an "a" tag for the navigation tab.
@@ -195,7 +217,8 @@ module ApplicationHelper
 
   # @todo flesh this out
   def person_attributes_short(person)
-    "(#{person_attributes(person)})"
+    attributes = person_attributes(person)
+    "(#{attributes})" if attributes.present?
   end
 
   # Formats a district name, if necessary.
@@ -214,6 +237,12 @@ module ApplicationHelper
     !(params[:controller] == 'people' &&
       %w(show bills committees votes ratings).include?(params[:action])) &&
       !(params[:controller] == 'questions' && params[:action] == 'show')
+  end
+
+  def is_image?(file_or_url)
+    return false unless file_or_url.present?
+
+    ImageSrcUrl.new(file_or_url).is_image?
   end
 
   private

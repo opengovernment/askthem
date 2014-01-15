@@ -1,0 +1,65 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.twitter.com/1.1/users/lookup.json
+    body:
+      encoding: US-ASCII
+      string: screen_name=NYTMinusContext
+    headers:
+      Accept:
+      - application/json
+      User-Agent:
+      - Twitter Ruby Gem 5.5.1
+      Authorization:
+      - Bearer
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - no-cache, no-store, must-revalidate, pre-check=0, post-check=0
+      Content-Length:
+      - '2791'
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Mon, 13 Jan 2014 21:24:26 GMT
+      Expires:
+      - Tue, 31 Mar 1981 05:00:00 GMT
+      Last-Modified:
+      - Mon, 13 Jan 2014 21:24:26 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - tfe
+      Set-Cookie:
+      - guest_id=v1%3A138964826641915214; Domain=.twitter.com; Path=/; Expires=Wed,
+        13-Jan-2016 21:24:26 UTC
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=631138519
+      X-Access-Level:
+      - read
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Transaction:
+      - cfe235bbb9b4e25d
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: US-ASCII
+      string: ! '[{"id":2189503302,"id_str":"2189503302","name":"NYT Minus Context","screen_name":"NYTMinusContext","location":"","description":"All
+        Tweets Verbatim From New York Times Content. Not Affiliated with New York
+        Times. Follow @NYTPlusContext for context. NYTMinusContext@gmail.com","url":null,"entities":{"description":{"urls":[]}},"protected":false,"followers_count":10293,"friends_count":926,"listed_count":125,"created_at":"Tue
+        Nov 12 03:15:23 +0000 2013","favourites_count":3408,"utc_offset":-21600,"time_zone":"Central
+        Time (US & Canada)","geo_enabled":false,"verified":false,"statuses_count":1198,"lang":"en","status":{"created_at":"Mon
+        Jan 13 19:49:03 +0000 2014","id":422817590076264449,"id_str":"422817590076264449","text":"http:\/\/t.co\/oaXAIfWV1q","source":"\u003ca
+        href=\"http:\/\/bufferapp.com\" rel=\"nofollow\"\u003eBuffer\u003c\/a\u003e","truncated":false,"in_reply_to_status_id":null,"in_reply_to_status_id_str":null,"in_reply_to_user_id":null,"in_reply_to_user_id_str":null,"in_reply_to_screen_name":null,"geo":null,"coordinates":null,"place":null,"contributors":null,"retweet_count":4,"favorite_count":11,"entities":{"hashtags":[],"symbols":[],"urls":[],"user_mentions":[],"media":[{"id":422817589942034432,"id_str":"422817589942034432","indices":[0,22],"media_url":"http:\/\/pbs.twimg.com\/media\/Bd4mW51IIAA6iXW.jpg","media_url_https":"https:\/\/pbs.twimg.com\/media\/Bd4mW51IIAA6iXW.jpg","url":"http:\/\/t.co\/oaXAIfWV1q","display_url":"pic.twitter.com\/oaXAIfWV1q","expanded_url":"http:\/\/twitter.com\/NYTMinusContext\/status\/422817590076264449\/photo\/1","type":"photo","sizes":{"thumb":{"w":150,"h":150,"resize":"crop"},"medium":{"w":190,"h":243,"resize":"fit"},"small":{"w":190,"h":243,"resize":"fit"},"large":{"w":190,"h":243,"resize":"fit"}}}]},"favorited":false,"retweeted":false,"possibly_sensitive":false,"lang":"und"},"contributors_enabled":false,"is_translator":false,"profile_background_color":"C0DEED","profile_background_image_url":"http:\/\/abs.twimg.com\/images\/themes\/theme1\/bg.png","profile_background_image_url_https":"https:\/\/abs.twimg.com\/images\/themes\/theme1\/bg.png","profile_background_tile":false,"profile_image_url":"http:\/\/pbs.twimg.com\/profile_images\/378800000737186790\/cf2fdc5e3dc3d9bd0e6233d271d4ca3b_normal.jpeg","profile_image_url_https":"https:\/\/pbs.twimg.com\/profile_images\/378800000737186790\/cf2fdc5e3dc3d9bd0e6233d271d4ca3b_normal.jpeg","profile_banner_url":"https:\/\/pbs.twimg.com\/profile_banners\/2189503302\/1384900032","profile_link_color":"0084B4","profile_sidebar_border_color":"C0DEED","profile_sidebar_fill_color":"DDEEF6","profile_text_color":"333333","profile_use_background_image":true,"default_profile":true,"default_profile_image":false,"following":null,"follow_request_sent":null,"notifications":null}]'
+    http_version:
+  recorded_at: Mon, 13 Jan 2014 21:24:28 GMT
+recorded_with: VCR 2.5.0

@@ -1,7 +1,47 @@
 <section class="static">
-  <h1>Support AskThem</h1>
+  <h1>Help & User Support for AskThem - Contact Us Below</h1>
   <div class="related_data">
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi vel dictum leo, vel varius dui. Morbi vel nulla erat. In ac turpis at nisi euismod sagittis. Phasellus congue ligula euismod enim malesuada, eu cursus libero venenatis. Sed sit amet orci et lectus luctus rutrum. Phasellus dignissim enim at hendrerit elementum. Nunc eu dictum sem. Vivamus euismod purus vitae malesuada posuere. Donec eget ipsum lobortis, tincidunt tellus molestie, pellentesque metus. Sed nec odio lorem. Nulla vitae luctus dolor. Cras eget turpis ac leo dignissim venenatis id vel turpis. In vel molestie metus, in hendrerit augue.</p>
-    <p>Maecenas viverra pulvinar sollicitudin. Vivamus in pellentesque mi. Integer eu dapibus est, a dignissim nibh. Praesent tempus, velit vel porta condimentum, turpis odio tempus metus, ut cursus lectus lectus sit amet augue. Aliquam viverra diam lacus, vitae luctus augue molestie non. Mauris a velit ut sem commodo pulvinar sit amet pulvinar orci. Donec at est vehicula, feugiat orci in, faucibus metus. Donec aliquam, eros at posuere commodo, ipsum arcu tincidunt risus, in placerat urna ligula eget turpis. Donec non scelerisque nunc, nec volutpat nisl. Morbi vehicula felis nec magna bibendum, non scelerisque lectus placerat. Sed tristique mauris gravida, dictum ligula sit amet, tincidunt enim. Aenean fermentum nibh ut tortor ultrices, a commodo erat eleifend.</p>
+    <%- if Rails.env.production? %>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
+    <link href="https://d218iqt4mo6adh.cloudfront.net/assets/widget_embed_191.css" media="screen" rel="stylesheet" type="text/css" />
+    <!--If you already have fancybox on the page this script tag should be omitted-->
+    <script src="https://d218iqt4mo6adh.cloudfront.net/assets/widget_embed_libraries_191.js" type="text/javascript"></script>
+
+		<script>
+		 new DESK.Widget({
+		   version: 1,
+		   site: '<%= ENV["DESK_COM_SITE"] -%>',
+		   port: '80',
+		   type: 'email',
+		   displayMode: 1,  //0 for popup, 1 for lightbox
+		   features: {
+		   },
+		   fields: {
+		     ticket: {
+		       // desc: &#x27;&#x27;,
+		       // labels_new: &#x27;&#x27;,
+		       // priority: &#x27;&#x27;,
+		       // subject: &#x27;&#x27;
+		     },
+		     interaction: {
+		       // email: &#x27;&#x27;,
+		       // name: &#x27;&#x27;
+		     },
+		     email: {
+		       //subject: '',
+		       //body: ''
+		     },
+		     customer: {
+		       // company: &#x27;&#x27;,
+		       // desc: &#x27;&#x27;,
+		       // first_name: &#x27;&#x27;,
+		       // last_name: &#x27;&#x27;,
+		       // locale_code: &#x27;&#x27;,
+		       // title: &#x27;&#x27;
+		     }
+		   }
+		 }).render();
+		</script>
+    <%- end  %>
   </div>
 </section>

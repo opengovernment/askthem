@@ -1,4 +1,8 @@
-<%= render 'shared/navigation' %>
+<%- if @is_unaffiliated %>
+  <p>&nbsp;</p>
+<%- else %>
+  <%= render 'shared/navigation' %>
+<%- end %>
 
 <section class="people">
   <header>

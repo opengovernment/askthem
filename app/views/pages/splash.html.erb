@@ -15,7 +15,7 @@
         <a href="#" id="official-signup">Elected Official</a>
         <i class="icon-angle-down"></i>
       </li>
-      <li data-type="organization">
+      <li class="<%= request.path == '/organization' ? 'active' : '' %>"data-type="organization">
         <a href="#" id="organization-signup">Organization or Media</a>
         <i class="icon-angle-down"></i>
       </li>
@@ -38,6 +38,13 @@
   <p id="dynamic-text">
     <%- if request.path == '/electeds' %>
       AskThem is your personal question-and-answer site, offering greater access to your constituents and your potential supporters across the nation.<br><br>Agree to respond publicly to any question with enough votes to meet your signature threshold. Energize constituents and build support for your positions.
+    <%- else %>
+      Over 8 million people have taken action on the White House's "We The People" petition platform. Now it's not just for Presidents anymore. We're bringing it nationwide, free and open for everyone.<br><br>Ask questions to over 100,000 elected officials. Petition your local government. Also, question and petition any verified Twitter account.
+    <%- end %>
+  </p>
+  <p id="dynamic-text">
+    <%- if request.path == '/organization' %>
+     The AskThem platform enables organizations to push elected officials across the country on their signature issues.<br><br>It’s a great place for membership groups and media partners to ask and deliver key questions to local & national elected officials.
     <%- else %>
       Over 8 million people have taken action on the White House's "We The People" petition platform. Now it's not just for Presidents anymore. We're bringing it nationwide, free and open for everyone.<br><br>Ask questions to over 100,000 elected officials. Petition your local government. Also, question and petition any verified Twitter account.
     <%- end %>

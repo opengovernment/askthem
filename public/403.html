@@ -2,9 +2,43 @@
 <html>
   <head>
     <title>Forbidden</title>
+
+    <style>
+      body {
+        margin: 0;
+        padding: 1em 0 0 0;
+        font-family: helvetica, arial, verdana, sans-serif;
+        text-align: center;
+        background-color: #d8f2f6;
+        color: #32515a;
+      }
+
+      h1, p {
+        padding-right: 1em;
+        padding-left: 1em;
+      }
+
+      p {
+        margin-bottom: 1.5em;
+      }
+
+      .dialog {
+        margin-right: auto;
+        margin-left: auto;
+        max-width: 600px;
+      }
+
+      .mark {
+        height: 30px;
+        width: 30px;
+      }
+    </style>
   </head>
   <body>
-    <h1>Access Denied</h1>
-    <p>You do not have permission to access this resource.</p>
+    <div class="dialog">
+      <h1>Access Denied</h1>
+      <p>You do not have permission to access this resource.</p>
+      <img src="mark.png" class="mark">
+    </div>
   </body>
 </html>

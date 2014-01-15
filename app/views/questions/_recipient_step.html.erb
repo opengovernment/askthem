@@ -16,11 +16,11 @@
     </a>
     <a name="address_lookup" class="anchor"></a>
 
-    <a href="#" class="select mobile">Their Name</a>
-    <a class="select">
+    <a href="#name-lookup" class="select mobile name-lookup">Their Name</a>
+    <a class="select name-lookup">
       <i class="icon-user"></i> Their Name
     </a>
-    <a name="twitter_find" class="anchor"></a>
+    <a name="name-lookup" class="anchor"></a>
 
     <a href="#twitter_find" class="select twitter twitter_lookup mobile">Their Twitter Name</a>
     <a class="select twitter">
@@ -31,10 +31,10 @@
 
   <div class="data_collection_form">
     <div class="address_lookup">
-    <span class="secure">
-      <i class="icon-lock"></i> Your address information is private and safe!
-    </span>
-    <a href="/users/sign_in" class="login-link">Already have an AskThem account? Login.</a>
+      <span class="secure">
+        <i class="icon-lock"></i> Your address information is private and safe!
+      </span>
+      <a href="/users/sign_in" class="login-link">Already have an AskThem account? Login.</a>
 
       <fieldset class="last">
         <%= f.fields_for :user do |user_form| %>
@@ -65,7 +65,7 @@
         <span class="details">We'll find your elected officials, then you can select who you'd like to receive the question:</span>
       </label>
 
-      <div class="loading" style="display:none;">Loading...</div>
+      <div class="loading" style="display:none;">Loading<span class="loading-1">.</span><span class="loading-2">.</span><span class="loading-3">.</span></div>
 
       <fieldset class="person-selector">
         <ol class="people-list select-person">
@@ -76,26 +76,34 @@
 
     <div class="twitter" style="display:none;">
       <label for="question">
-        <span class="details">Ask a question to any verified Twitter account.</span>
+        <span class="details">Ask a question to any Twitter account.</span>
+      </label>
+
+      <fieldset>
+        <div class="inline_label to">
+          <input type="text" name="twitter" id="twitter" placeholder="Enter a twitter account" />
+        </div>
+
+        <div class="loading">Loading<span class="loading-1">.</span><span class="loading-2">.</span><span class="loading-3">.</span></div>
+
+        <ol class="people-list select-person twitter">
+        </ol>
+      </fieldset>
+    </div>
+
+    <div class="name-lookup" style="display:none;">
+      <label for="question">
+        <span class="details">Search by name in <%= jurisdiction.name -%></span>
       </label>
       <fieldset>
         <div class="inline_label to">
-          <input type="text" name="twitter" id="twitter" placeholder="Enter a name or verified twitter account" />
+          <input type="text" name="name-lookup" id="name-lookup" placeholder="An elected official's name" />
         </div>
-        <ol class="people-list select-person twitter">
-          <li style="display:none;" class="selected">
-            <div class="select_box">
-              <input type="radio" name="person-select" id="" />
-            </div>
-            <div class="avatar">
-              <img src="" alt="" />
-            </div>
-            <h2></h2>
-            <div class="person-info">
-              <p></p>
-            </div>
-            <span class="selected icon-ok-sign"></span>
-          </li>
+
+        <div class="loading">Loading<span class="loading-1">.</span><span class="loading-2">.</span><span class="loading-3">.</span></div>
+
+        <ol class="people-list select-person name-lookup">
+          <!-- will be populated by address_lookup -->
         </ol>
       </fieldset>
     </div>

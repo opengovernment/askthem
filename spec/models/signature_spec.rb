@@ -19,7 +19,8 @@ describe Signature do
     let(:signature) { FactoryGirl.create(:signature) }
     context "when created" do
       it "should add to question's signature_count" do
-        expect(signature.question.signature_count).to eq 1
+        # supporters = creator of question + signers
+        expect(signature.question.signature_count).to eq 2
       end
       it "should appropriately flag the question's signature threshold met" do
         users = FactoryGirl.create_list(:user, 101)
@@ -35,7 +36,7 @@ describe Signature do
       it "should be dropped from question's signature_count" do
         question = signature.question
         signature.destroy
-        expect(question.signature_count).to eq 0
+        expect(question.signature_count).to eq 1
       end
     end
   end

@@ -138,6 +138,46 @@ describe 'questions' do
           page.body.should have_content 'Support this question'
         end
       end
+
+      context 'when adding adding media via a url' do
+        before do
+          valid_person
+        end
+
+        it 'can enter image or video url for question', js:true, vcr: true do
+          as_user(@user) do
+            visit "/vt/questions/new?person=#{@person.id}"
+            add_valid_content
+            cat_lol_url = 'http://media2.giphy.com/media/cQtJZDOZN7ZfO/giphy.gif'
+            fill_in 'question_media_file_url', with: cat_lol_url
+            click_next_button
+
+            click_button 'Publish'
+            # cgi.escape is because we are using cdn_image_tag
+            expect(page.body.include?(CGI.escape(cat_lol_url))).to be_true
+          end
+        end
+      end
+
+      context 'when adding adding media via upload' do
+        before do
+          valid_person
+        end
+
+        it 'can upload image or video file for question', js:true do
+          as_user(@user) do
+            visit "/vt/questions/new?person=#{@person.id}"
+            add_valid_content
+            movie_file_name = 'teststrip.mpg'
+            attach_file 'question_media', Rails.root.join('spec/support/files',
+                                                           movie_file_name)
+            click_next_button
+
+            click_button 'Publish'
+            expect(page.body.include?(movie_file_name)).to be_true
+          end
+        end
+      end
     end
 
     context 'as a non-registered user' do
@@ -192,6 +232,49 @@ describe 'questions' do
           click_next_button
 
           fields_should_be_invalid
+        end
+
+        it 'can find a person based on name', js: true do
+          valid_person
+          @person.full_name = 'Ann E Cummings'
+          @person.first_name = 'Ann'
+          @person.write_attribute(:active, true)
+          @person.save
+
+          # click_link won't work with this type or link
+          find('a[href="#name-lookup"]').trigger('click')
+
+          # only need the first letter, no need for extra lookup triggering
+          fill_in 'name-lookup', with: @person.first_name.first
+
+          sleep 1
+          # person matching name is listed and clickable
+          # clicking person redirects to questions/new with person_id matching person
+
+          # skipping actual click and page content check
+          # as it capybara mangles the click and causes problems
+          # click_person_box_with(@person.id)
+          expect(find('div.name-lookup ol.people-list li'))
+            .to have_content @person.full_name
+        end
+
+        it 'can find a person based on twitter screen_name', js: true, vcr: true do
+          pending "figuring out cause of vcr causing flickering against twitter api"
+
+          screen_name = 'jack'
+
+          # click_link won't work with this type or link
+          find('a[href="#twitter_find"]').trigger('click')
+
+          # only need the first letter, no need for extra lookup triggering
+          fill_in 'twitter', with: screen_name
+
+          sleep 5
+          # person matching name is listed and clickable
+          # clicking person redirects to questions/new with person_id matching person
+
+          expect(find('div.twitter ol.people-list li'))
+            .to have_content screen_name.capitalize
         end
       end
 
@@ -348,14 +431,26 @@ describe 'questions' do
       it 'displays number of signatures for question', js: true do
         FactoryGirl.create(:signature, question: @question)
         visit "/vt/questions/#{@question.id}"
-        signatures_on_page = find('span.question-signatures').text.to_i
-        expect(signatures_on_page).to eq @question.signatures.count
+        count_on_page = find('span.question-signature-count').text.to_i
+        expect(count_on_page).to eq @question.signatures.count
       end
 
       it 'displays signature threshold number for recipient', js: true do
         visit "/vt/questions/#{@question.id}"
+        signatures_needed = @person.signature_threshold - @question.signature_count
         threshold_on_page = find('span.question-signature-threshold').text.to_i
-        expect(threshold_on_page).to eq @person.signature_threshold
+        expect(threshold_on_page).to eq signatures_needed
+      end
+
+      it 'displays recent signatures', js: true do
+        signer = FactoryGirl.create(:user,
+                                    given_name: "El",
+                                    family_name: "Signator")
+
+        FactoryGirl.create(:signature, question: @question, user: signer)
+
+        visit "/vt/questions/#{@question.id}"
+        page.body.should have_content "El Signator (New York, NY)"
       end
 
       it 'renders modal when created parameter is present', js: true do
@@ -374,7 +469,9 @@ describe 'questions' do
           click_button 'Sign'
         end
 
-        page.body.should have_content "1 out of"
+        # supporters = creator of question + signers
+        sleep 1
+        page.body.should have_content "98 needed"
       end
 
       context 'as signed in user' do
@@ -384,7 +481,9 @@ describe 'questions' do
             visit '/vt/questions?gov=state'
             click_link 'Sign'
             page.should have_content 'Signed'
-            page.body.should have_content '1 out of'
+
+            # supporters = creator of question + signers
+            page.body.should have_content '2 out of'
           end
         end
       end
@@ -393,7 +492,7 @@ describe 'questions' do
 
   def choose_person(need_to_fill_out_address = true)
     fill_out_address if need_to_fill_out_address
-    page.execute_script "jQuery('#question_person_id_#{@person.id}').parents('li').trigger('click')"
+    click_person_box_with(@person.id)
   end
 
   def fill_out_address(with_lookup = true)
@@ -459,7 +558,11 @@ describe 'questions' do
   def choose_governor(need_to_fill_out_address = true)
     fill_out_address if need_to_fill_out_address
     sleep 2
-    page.execute_script "jQuery('#question_person_id_#{@cached_official.id}').parents('li').trigger('click')"
+    click_person_box_with(@cached_official.id)
+  end
+
+  def click_person_box_with(id)
+    page.execute_script "jQuery('#question_person_id_#{id}').parents('li').trigger('click')"
   end
 
   def click_next_button(number_of_clicks = 1, sleepy_time = 1)

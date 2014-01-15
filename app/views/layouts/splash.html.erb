@@ -36,7 +36,7 @@
   <meta property="og:site_name" content="AskThem">
   <meta property="og:type" content="website">
   <meta property="og:url" content="<%= current_url %>">
-  <meta property="og:image" content="http://askthem.io/assets/mark.png">
+  <meta property="og:image" content="http://askthem.io/assets/logo.svg">
   <meta property="og:locale" content="en_US">
   <meta property="fb:admins" content="100002666906486">
   <meta property="fb:app_id" content="124751554385930">
@@ -83,7 +83,7 @@
               <li>See questions from people near you, sign-on to questions you care about, and review answers from public figures.</li>
             </ul>
 
-          <p>It's like a version of "<a href="https://petitions.whitehouse.gov/">We The People</a>" for every elected official, from local city council members all the way up to U.S. senators. Enter your email above to be the first to ask a question when we launch and see previews of the site this Fall.</p>
+          <p>It's like a version of "<a href="https://petitions.whitehouse.gov/">We The People</a>" for every elected official, from local city council members all the way up to U.S. senators. Enter your email above to be the first to ask a question when we launch and see previews of the site.</p>
 
           <p><strong>Elected officials</strong>: enter your email above and we'll send you more information about signing up to answer questions on AskThem. It's a free and non-partisan service to respond to your constituents in an open public forum and update them over email about your work. Or, be a leader in open-government and <a href="https://docs.google.com/forms/d/1iCRzEuDL6bGEkmMsTVrlH-DlQYnMX4KhSF32_tPgT8o/viewform">sign up now</a>.</p>
 
@@ -91,7 +91,7 @@
 
           <p>Previously known as the OpenGovernment.org project, AskThem is open-source and uses open government data - our code is available on <a href="https://github.com/opengovernment">GitHub</a> - contributions welcome. For more development updates &amp; discussion, join our low-traffic <a href="https://groups.google.com/d/forum/opengovernment">Google Group</a>.</p>
 
-          <p>We're a <a href="http://www.participatorypolitics.org/">small non-profit organization</a> actively seeking charitable funding support - help us launch this powerful new tool for public dialogue! Email us for a copy of our non-profit funding prospectus. If you can make a tax-exempt gift to support our work, please <a href="http://www.opencongress.org/donate">donate to PPF</a> via OpenCongress. More background on the project is available on our <a href="https://www.newschallenge.org/open/open-government/submission/opengovernment.org-a-wethepeople-for-state-city-and-local-governments/
+          <p>We're a <a href="http://www.participatorypolitics.org/">small non-profit organization</a> actively seeking charitable funding support - help us launch this powerful new tool for public dialogue! Email us for a copy of our non-profit funding prospectus. If you can make a tax-exempt gift to support our work, please <a href="http://www.participatorypolitics.org/donate/">donate to PPF</a>. More background on the project is available on our <a href="https://www.newschallenge.org/open/open-government/submission/opengovernment.org-a-wethepeople-for-state-city-and-local-governments/
           ">Knight NewsChallenge proposal</a> from March 2013.</p>
 
           <p>Questions, feedback, ideas? Email David Moore, Executive Director of PPF - david at ppolitics.org, Twitter: <a href="http://twitter.com/ppolitics">@ppolitics</a>; like our <a href="https://www.facebook.com/pages/Askthem/538576652878135">page on Facebook</a> &amp; follow <a href="https://twitter.com/AskThemPPF">@AskThemPPF</a> on Twitter. Stay tuned!</p>
@@ -360,17 +360,5 @@
       e.preventDefault();
     })
   </script>
-<% if Rails.env.production? %>
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-1208819-7', 'askthem.io');
-  ga('send', 'pageview');
-
-</script>
-<% end %>
-
+  <%= render "shared/google_analytics" %>
 </body>

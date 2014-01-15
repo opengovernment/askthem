@@ -31,3 +31,4 @@
 //= require registrations
 //= require hovertip
 //= require equal_heights
+//= require progress_bar

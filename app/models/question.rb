@@ -12,6 +12,9 @@ class Question
   # The official answer to the question
   has_many :answers
 
+  # for uploaded photo or video
+  mount_uploader :media, MediaUploader
+
   # The jurisdiction in which the question is asked.
   field :state, type: String
   # The person to whom the question is addressed.
@@ -26,12 +29,19 @@ class Question
   field :subject, type: String
   # The questions's time of publication.
   field :issued_at, type: Time
-  # The number of signatures.
-  field :signature_count, type: Integer, default: 0
+
   # based on asking user at time of question creation
   # since we aren't geocoding directly, don't need geocoder stuff
   field :coordinates, type: Array
 
+  # alternative to uploaded photo or video
+  # remotely hosted media (think youtube, vimeo)
+  # note that "_file_" is added to avoid name conflict
+  # with carrierwave generated methods for media uploader
+  field :media_file_url, type: String
+
+  # local cache of the number of signatures
+  field :signature_count, type: Integer, default: 0
   field :threshold_met, type: Boolean, default: false
 
   index(state: 1)
@@ -39,16 +49,19 @@ class Question
   index(bill_id: 1, answered: 1)
   index({ coordinates: "2d" }, { background: true })
 
-  validates_presence_of :state, :person_id, :user_id, :title, :body
+  validates_presence_of :state, :person_id, :user_id, :title
   validates_length_of :title, within: 3..70, allow_blank: true
-  validates_length_of :body, minimum: 60, allow_blank: true
   validate :state_must_be_included_in_the_list_of_states
   validate :subject_must_be_included_in_the_list_of_subjects
   validate :question_and_person_must_belong_to_the_same_jurisdiction
   validate :person_and_bill_must_belong_to_the_same_jurisdiction
+  validates :media_file_url, :uri => { accessible: true, allow_blank: true }
 
   attr_accessor :person_state, :bill_state
 
+  before_validation :modify_media_file_url_if_from_video_site
+
+  after_create :add_signature_of_creating_user
   after_create :copy_coordinates_from_user
 
   # @return [Metadatum] the jurisdiction in which the question is asked
@@ -103,6 +116,10 @@ class Question
   end
 
   private
+  def add_signature_of_creating_user
+    signatures.create!(user: user)
+  end
+
   def state_must_be_included_in_the_list_of_states
     unless state.blank? || Metadatum.find_by_abbreviation(state)
       errors.add(:state, 'is not included in the list of states')
@@ -129,5 +146,13 @@ class Question
 
   def copy_coordinates_from_user
     QuestionCoordinatesWorker.perform_async(id)
+  end
+
+  # extract correct url for video from youtube/vimeo urls, etc.
+  def modify_media_file_url_if_from_video_site
+    if media_file_url.present? && !ImageSrcUrl.new(media_file_url).is_image?
+      video_src_url = VideoSrcUrl.new(media_file_url)
+      self.media_file_url = video_src_url.value if video_src_url.is_video?
+    end
   end
 end

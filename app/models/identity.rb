@@ -39,12 +39,8 @@ class Identity
   def submit
     IdentityMailer.identity_submitted(self).deliver
 
-    # should only be one staff_member user_role
-    staff_member_role = UserRole.where(name: 'staff_member').first
-    if staff_member_role
-      staff_member_role.users.each do |staff_member|
-        IdentityMailer.identity_needs_inspection(self, staff_member).deliver
-      end
+    UserRole.staff_members.each do |staff_member|
+      IdentityMailer.identity_needs_inspection(self, staff_member).deliver
     end
   end
 

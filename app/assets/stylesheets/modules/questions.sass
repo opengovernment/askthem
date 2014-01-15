@@ -12,22 +12,28 @@ section.questions ol > li div.question_content a.title.question-title
 // Question progress
 div.question_progress
   display: block
-  height: 6px
+  height: 8px
   width: 100%
-  border: 1px solid #DDE3E1
-  +border-radius(3px)
+  border: 1px solid #c1ccc8
+  +border-radius(4px)
   background: $white
   overflow: hidden
   div.progress_filler
     background: #F47362
-    height: 4px
+    height: 8px
+    width: 0
     padding: 1px
+    +transition-duration(.5s)
+    +transition-property(width)
+    +transition-delay(2s)
 
 input[type=submit].cta-pill
   width: 100%
 
 span.question_progress_count
-  padding-top: 6px
+  padding:
+    top: 3px
+    bottom: 3px
   display: inline-block
   width: 100%
   font:
@@ -35,6 +41,9 @@ span.question_progress_count
     weight: 600
   color: #7B969E
   line-height: 1.385em
+
+.count_needed
+  text-align: right
 
 section.questions
   header
@@ -271,6 +280,7 @@ section.question
       margin-top: 3em
       padding-top: 36px
       border-top: 1px solid #e5e5e5
+      clear: both
   // Ask a question flow
   &.ask
     article
@@ -495,13 +505,20 @@ ul.people-type
         color: #F77665
 
 .official-image
-  margin-left: .5em
+  margin-left: .75em
   position: relative
   top: .75em
 
+.official-image-big
+  margin-right: .25em
+  top: 2em
+
 .official-info
-  margin-left: 5.5em
+  margin-left: 160px
   display: block
+
+.official-name
+  font-size: 1.25em
 
 section.question article span.author_wrap a img.avatar-image, .avatar-image
   +border-radius(50%)
@@ -517,11 +534,20 @@ section.question article span.author_wrap a img.avatar-image, .avatar-image
 
 #content-step
   .ref
-    margin-bottom: 2em
-    display: block
+    display: inline-block
 
 .data_collection
   .question-textarea
     min-height: 100px
   .question-title
     min-height: 84px
+
+.share-question
+  margin-bottom: 2em
+  display: block
+
+.question-video, .question-image
+  width: 100%
+
+.question-video
+  height: 300px

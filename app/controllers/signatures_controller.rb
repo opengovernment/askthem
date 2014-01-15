@@ -8,6 +8,12 @@ class SignaturesController < ApplicationController
     if @signature.save
       question = Question.find(params[:question_id])
       QuestionMailer.signed_on(current_user, question).deliver
+
+      if question.signature_count == question.person.signature_threshold
+        QuestionMailer.email_person(question).deliver
+        QuestionMailer.notify_staff_question_at_threshold(question).deliver
+      end
+
       render json: @signature, status: :created
     else
       render json: @signature.errors, status: :unprocessable_entity

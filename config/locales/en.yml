@@ -92,7 +92,7 @@ en:
       description: "Ask and support questions to your %{jurisdiction} officials"
     show:
       title: '“%{question}” - %{jurisdiction} - AskThem'
-      description: Show your support for this question by adding your signature
+      description: Support this question on AskThem and help get an answer. AskThem is a free, non-profit platform for questions-and-answers with public figures nationwide.
     new:
       title: Ask a Question - AskThem
       description: Ask a question to your city and state elected officials

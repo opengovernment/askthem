@@ -9,6 +9,8 @@ gem 'mongoid', '~> 3.1.2'
 gem 'geocoder' # must be after mongoid
 gem 'rmagick'
 gem 'carrierwave-mongoid'
+gem 'carrierwave-video-thumbnailer'
+gem 'vidibus-validate_uri'
 gem 'client_side_validations'
 gem 'client_side_validations-mongoid'
 gem 'sidekiq'
@@ -37,19 +39,25 @@ gem 'rest-client'
 # Google Civic Information API, used for representatives for address
 gem 'google_civic_info', github: 'walter/google_civic_info'
 
+# Twitter API, used for looking up possible recipients
+gem 'twitter'
+
 group :production do
   gem 'airbrake'
-  #gem 'unicorn'
   gem 'fog'
   gem 'newrelic_rpm'
-  #gem 'capistrano'
-  #gem 'rvm-capistrano'  # https://rvm.io/integration/capistrano/ and https://github.com/wayneeseguin/rvm-capistrano
   gem 'nokogiri', '1.5.10'
+end
+
+group :heroku do
+  gem 'unicorn'
 end
 
 group :development do
   gem 'ruby-growl', '3.0'
   gem 'bullet'
+  gem 'capistrano'
+  gem 'rvm-capistrano'  # https://rvm.io/integration/capistrano/ and https://github.com/wayneeseguin/rvm-capistrano
 end
 
 group :test, :development do

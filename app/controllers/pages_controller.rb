@@ -1,11 +1,22 @@
 class PagesController < ApplicationController
-  before_filter :set_jurisdiction, only: [:overview, :lower, :upper, :bills, :key_votes, :meetings]
+  before_filter :set_jurisdiction, only: [:overview, :lower, :upper, :bills,
+                                          :key_votes, :meetings]
   before_filter :authenticate_user!, only: [:contact_info]
   before_filter :check_can_view_contact_info, only: :contact_info
   caches_action :channel
   respond_to :html, except: [:identifier, :contact_info]
   respond_to :json, only: [:locator, :identifier]
   respond_to :csv, only: [:contact_info]
+
+  def map
+    if params[:jurisdiction]
+      @jurisdiction = Metadatum.find_by_abbreviation(params[:jurisdiction])
+    end
+    if @jurisdiction
+      @current_state = @jurisdiction.abbreviation.split("-").first
+    end
+    @states = states_info
+  end
 
   def splash
     render layout: "splash"
@@ -80,9 +91,7 @@ class PagesController < ApplicationController
   end
 
   def identifier
-    # annoying that you can't do case insensitive queries without a regex
-    @people = Person.where(email: /^#{params[:email]}$/i)
-    respond_with limited_json_for(@people)
+    respond_with limited_json_for(PeopleIdentifier.new(params).people)
   end
 
   # must be staff member
@@ -221,6 +230,25 @@ class PagesController < ApplicationController
     respond_to do |format|
       format.html { render action: "overview" }
       format.js { render partial: @tab }
+    end
+  end
+
+  # @todo cache or otherwise optimize
+  def question_count_for(state_code)
+    count = Metadatum.find(state_code).questions.count
+
+    # cities and counties are under their own metadatum
+    Metadatum.where(abbreviation: /^#{state_code}-/).each do |subjurisdiction|
+      count += subjurisdiction.questions.count
+    end
+    count
+  end
+
+  def states_info
+    OpenGovernment::STATES.inject({}) do |states, state_array|
+      name, abbr = state_array
+      states[name] = { abbr: abbr, count: question_count_for(abbr) }
+      states
     end
   end
 end
