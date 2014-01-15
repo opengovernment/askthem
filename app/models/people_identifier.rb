@@ -18,7 +18,8 @@ class PeopleIdentifier
 
   private
   def people_from_twitter
-    people = Person.where(twitter_id: /^#{params[:twitter_id]}/i)
+    # exact match only to return local results over twitter
+    people = Person.where(twitter_id: /^#{params[:twitter_id]}$/i)
     return people if people.count > 0
 
     TwitterPersonService.new(params[:twitter_id]).people
