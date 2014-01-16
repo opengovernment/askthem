@@ -58,7 +58,7 @@ class QuestionsController < ApplicationController
     if @is_unaffiliated
       raise error
     else
-      redirect_to unaffiliated_question_path(params[:id])
+      redirect_to unaffiliated_question_path(params[:id], share: params[:share])
     end
   end
 
@@ -102,7 +102,7 @@ class QuestionsController < ApplicationController
         PersonMailer.notify_staff_new_from_twitter(person).deliver
       end
 
-      redirect_to question_path(@state_code, @question, share: true)
+      redirect_to question_path(@question.state, @question, share: true)
     else
       set_up_steps
       flash.now[:alert] = "Whoops! Not quite right. Please try again."
@@ -202,10 +202,11 @@ class QuestionsController < ApplicationController
 
   def redirect_to_unaffiliated_route_if_necessary
     if request.fullpath.include?(Metadatum::Unaffiliated::ABBREVIATION)
+      logger.debug("in redirect and matching fullpath")
       path = if params[:action] == "index"
                unaffiliated_questions_path
              else
-               unaffiliated_question_path(params[:id])
+               unaffiliated_question_path(params[:id], share: params[:share])
              end
       redirect_to path
     end
