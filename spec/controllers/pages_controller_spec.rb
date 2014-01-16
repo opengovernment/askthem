@@ -94,13 +94,9 @@ describe PagesController do
           end
 
           it "returns matching person from twitter if there is one", vcr: true do
-            @person = FactoryGirl.create(:person,
-                                         full_name: "NYT Minus Context")
-            @person.write_attribute(:twitter_id, "NYTMinusContext")
-            @person.save!
-
-            get :identifier, format: :json, twitter_id: "NYTMinusContext"
-            expect(JSON.parse(response.body).first["id"]).to eq @person.id.to_s
+            get :identifier, format: :json, twitter_id: "SenSanders"
+            expect(JSON.parse(response.body).first["full_name"])
+              .to eq "Bernie Sanders"
           end
         end
       end

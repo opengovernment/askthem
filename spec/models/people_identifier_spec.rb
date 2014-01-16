@@ -35,7 +35,7 @@ describe PeopleIdentifier do
 
     context "when an twitter_id is submitted" do
       it "returns person that matches if one exists" do
-        screen_name = "xyz"
+        screen_name = "SenSanders"
         person = FactoryGirl.create(:person)
         person.write_attribute(:twitter_id, screen_name)
         person.save!

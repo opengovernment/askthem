@@ -14,8 +14,9 @@ class TwitterPersonService
 
   # twitter matches are only exact,
   # but we keep the api as if many results for consistency with other services
+  # must be verified
   def matching_users
-    @matching_users ||= client.users(screen_name)
+    @matching_users ||= client.users(screen_name).select(&:verified)
   rescue Twitter::Error::NotFound
     @matching_users = []
   end
