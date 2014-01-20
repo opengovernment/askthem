@@ -1,49 +1,49 @@
 <div class="leftCol">
   <h1 id="dynamic-title">
-    <%= request.path == '/electeds' ? 'A New & Powerful Way To Engage With Constituents' : 'The "We The People" for every elected official.' %>
+    <%= request.path == "/electeds" ? "A New & Powerful Way To Engage With Constituents" : 'The "We The People" for every elected official.' %>
   </h1>
   <p id="dynamic-subtitle">
-    <%= request.path == '/electeds' ? 'Interested in joining? Enter your contact info and we\'ll be in touch.' : 'Get notified and be the first to submit a question when we launch.' %>
+    <%= request.path == "/electeds" ? "Interested in joining? Enter your contact info and we'll be in touch." : "Get notified and be the first to submit a question when we launch." %>
   </p>
   <nav>
     <ul class="level">
-      <li class="<%= request.path == '/splash' ? 'active' : '' %>" data-type="individual">
+      <li class="<%= (request.path == "/splash" || request.path == "/") ? "active" : "" %>" data-type="individual">
         <a href="#" id="individual-signup">Individual</a>
         <i class="icon-angle-down"></i>
       </li>
-      <li class="<%= request.path == '/electeds' ? 'active' : '' %>" data-type="elected_official">
+      <li class="<%= request.path == "/electeds" ? "active" : "" %>" data-type="elected_official">
         <a href="#" id="official-signup">Elected Official</a>
         <i class="icon-angle-down"></i>
       </li>
-      <li class="<%= request.path == '/organization' ? 'active' : '' %>"data-type="organization">
+      <li class="<%= request.path == "/organization" ? "active" : "" %>"data-type="organization">
         <a href="#" id="organization-signup">Organization or Media</a>
         <i class="icon-angle-down"></i>
       </li>
     </ul>
   </nav>
-  <form action="/ma/questions" class='splash-form'>
+  <form action="<%= ENV["CRM_SUBSCRIBE_ACTION_URL"] -%>" class="splash-form">
     <input type="email" name="email" id="email" placeholder="E-mail">
     <input type="text" name="zipcode" id="zipcode" placeholder="Zipcode (optional)">
     <input type="hidden" name="notify_type" id="notify_type" value="individual">
     <input type="hidden" name="notify_source" id="notify_source" value="splash">
-    <input type="submit" id="dynamic-button" value="<%= request.path == '/electeds' ? 'Contact Me' : 'Notify Me' %>" class="cta-pill">
+    <input type="submit" id="dynamic-button" value="<%= request.path == "/electeds" ? "Contact Me" : "Notify Me" %>" class="cta-pill">
     <div id="dynamic-link">
-      <%- if request.path == '/electeds' %>
-        <a href='https://docs.google.com/forms/d/1iCRzEuDL6bGEkmMsTVrlH-DlQYnMX4KhSF32_tPgT8o/viewform' style='position: relative; top: 1.75em; left: 1em;'>Or, <strong>sign up now</strong> to answer questions on AskThem</a>
+      <%- if request.path == "/electeds" %>
+        <a href="https://docs.google.com/forms/d/1iCRzEuDL6bGEkmMsTVrlH-DlQYnMX4KhSF32_tPgT8o/viewform" style="position: relative; top: 1.75em; left: 1em;">Or, <strong>sign up now</strong> to answer questions on AskThem</a>
       <%- end %>
     </div>
   </form>
 </div>
 <div class="rightCol">
   <p id="dynamic-text">
-    <%- if request.path == '/electeds' %>
+    <%- if request.path == "/electeds" %>
       AskThem is your personal question-and-answer site, offering greater access to your constituents and your potential supporters across the nation.<br><br>Agree to respond publicly to any question with enough votes to meet your signature threshold. Energize constituents and build support for your positions.
     <%- else %>
       Over 8 million people have taken action on the White House's "We The People" petition platform. Now it's not just for Presidents anymore. We're bringing it nationwide, free and open for everyone.<br><br>Ask questions to over 100,000 elected officials. Petition your local government. Also, question and petition any verified Twitter account.
     <%- end %>
   </p>
   <p id="dynamic-text">
-    <%- if request.path == '/organization' %>
+    <%- if request.path == "/organization" %>
      The AskThem platform enables organizations to push elected officials across the country on their signature issues.<br><br>It’s a great place for membership groups and media partners to ask and deliver key questions to local & national elected officials.
     <%- else %>
       Over 8 million people have taken action on the White House's "We The People" petition platform. Now it's not just for Presidents anymore. We're bringing it nationwide, free and open for everyone.<br><br>Ask questions to over 100,000 elected officials. Petition your local government. Also, question and petition any verified Twitter account.

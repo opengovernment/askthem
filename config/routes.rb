@@ -6,7 +6,12 @@ OpenGovernment::Application.routes.draw do
     sessions: 'sessions'
   }
 
-  root to: 'pages#index'
+  if ENV["SPLASH_AS_HOMEPAGE"]
+    root to: 'pages#splash'
+    get 'home' => 'pages#index'
+  else
+    root to: 'pages#index'
+  end
 
   get 'splash' => 'pages#splash'
   get 'electeds' => 'pages#splash'
