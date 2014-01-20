@@ -5,7 +5,7 @@ describe Question do
     it {should validate_presence_of attribute}
   end
 
-  it {should validate_length_of(:title).within(3..70)}
+  it {should validate_length_of(:title).within(3..100)}
 
   it 'should validate if the state is in the list of states' do
     metadatum = FactoryGirl.create(:metadatum)
