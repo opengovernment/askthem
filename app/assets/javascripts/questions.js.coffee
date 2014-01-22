@@ -157,11 +157,11 @@ jQuery ($) ->
       .replace('width="60"', 'width="30"')
       .replace('>', 'class="official-image avatar-image" >')
 
-    $('.select_box').children('input').attr 'checked', false
+    $('.select_box').children('input').prop 'checked', false
     $('.icon-ok-sign').hide()
 
     selectedPersonInput = $(personLi).children('.select_box').children('input')
-    selectedPersonInput.attr 'checked', true
+    selectedPersonInput.prop 'checked', true
     personError 'remove'
 
     $(personLi).children('.icon-ok-sign').show()
