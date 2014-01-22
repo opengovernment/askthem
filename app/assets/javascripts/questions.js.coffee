@@ -7,7 +7,7 @@ jQuery ($) ->
 
   $('textarea').css('overflow', 'hidden').autogrow()
 
-  $('#question_title').keyup (event) ->
+  $('#question_title').on 'input', (event) ->
     $target = $ event.target
     $target.parent().find('.summary_count').text($(this).attr('maxlength') - $target.val().length)
 
@@ -41,10 +41,13 @@ jQuery ($) ->
       success: (data) ->
         refreshPersonList(data, 'reload', 'div.twitter')
 
-  $("#twitter").on 'keyup change',  (->
+  $("#twitter").on 'input',  (->
     nameLength = $(this).val().length
-    if $(this).is(':focus') or isHeadless and nameLength > 1
+    if nameLength > 1
       getTwitter($(this))
+    else
+      if nameLength == 0
+        clearPersonList 'div.twitter'
   )
 
   $('span.toggle a.select').click (event) ->
@@ -76,12 +79,14 @@ jQuery ($) ->
       $('span.toggle a.active').removeClass('active')
       $(this).addClass('active')
 
-  $('#name-lookup').on 'keyup change', (e) ->
+  $('#name-lookup').on 'input', (e) ->
     theInput = $('#name-lookup')
 
-    if $(theInput).is(':focus') or isHeadless
+    if $(theInput).val().length > 0
       jurisdiction = $(location).attr('pathname').split('/')[1]
       showPeopleForName theInput, jurisdiction
+    else
+      clearPersonList 'div.name-lookup'
 
   showPeopleForName = (theInput, jurisdiction) ->
     value = $.trim(theInput.val())
@@ -116,15 +121,17 @@ jQuery ($) ->
 
     window.location.href = url
 
-  $("#question_user_attributes_postal_code").on 'keyup change', (e) ->
+  $("#question_user_attributes_postal_code").on 'input', (e) ->
     theInput = e.delegateTarget
-    if $(theInput).is(':focus') or isHeadless
+    if $(theInput).val().length > 0
       showPeopleForAddress theInput
+    else
+      clearPersonList
 
   showPeopleForAddress = (theInput) ->
     unless $('div.address_lookup').length == 0
       zipLength = $(theInput).val().length
-      if zipLength is 5 or zipLength > 5
+      if zipLength is 5
         # redundant, but covers case where zip is pasted in
         if $('label.select-person').is(':hidden')
           $('label.select-person').fadeTo(300, 1)
@@ -181,6 +188,10 @@ jQuery ($) ->
       dataType: 'json'
       success: (data) ->
         refreshPersonList(data, "update")
+
+  clearPersonList = (lookupDiv = 'div.address_lookup') ->
+    personList = $("#{lookupDiv} ol.people-list").first()
+    personList.html('')
 
   refreshPersonList = (data, updateOrReload, lookupDiv = 'div.address_lookup') ->
     loading = $('.loading')
@@ -303,18 +314,18 @@ jQuery ($) ->
   $('#edit-button').click (event) ->
     beginAgain event
 
-  $('#question_title').keyup (event) ->
+  $('#question_title').on 'input', (event) ->
     value = $('#question_title').val()
     $('#confirm-question-title').text value
 
-  $('#question_body').keyup (event) ->
+  $('#question_body').on 'input', (event) ->
     value = $('#question_body').val()
     $('#confirm-question-body').text value
 
-  $('#question_user_attributes_given_name').keyup (event) ->
+  $('#question_user_attributes_given_name').on 'input', (event) ->
     $('.author .firstname').text $('#question_user_attributes_given_name').val()
 
-  $('#question_user_attributes_family_name').keyup (event) ->
+  $('#question_user_attributes_family_name').on 'input', (event) ->
     $('.author .lastname').text $('#question_user_attributes_family_name').val()
 
   $('#question_subject').change (event) ->
