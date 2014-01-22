@@ -28,6 +28,7 @@ jQuery ($) ->
   $('time[data-time-ago]').timeago()
 
   getTwitter = (elem) ->
+    $('.nothing-matching').hide()
     loading = $('.loading')
     loading.show()
 
@@ -94,6 +95,7 @@ jQuery ($) ->
       getPeopleFromText(value, jurisdiction)
 
   getPeopleFromText = (text, jurisdiction) ->
+    $('.nothing-matching').hide()
     loading = $('.loading')
     loading.show()
 
@@ -200,43 +202,47 @@ jQuery ($) ->
     personList = $("#{lookupDiv} ol.people-list").first()
     personList.html('')
     $('#question_person_id').remove() # our radio buttons replace this below
-    $(data).each ->
-      liVal = '<li style="display:none;">'
-      liVal += '<div class="select_box">'
-      liVal += "<input type=\"radio\" name=\"question[person_id]\" id=\"question_person_id_#{@id}\" value=\"#{@id}\" /></div>"
+    if $(data).length > 0
+      $(data).each ->
+        liVal = '<li style="display:none;">'
+        liVal += '<div class="select_box">'
+        liVal += "<input type=\"radio\" name=\"question[person_id]\" id=\"question_person_id_#{@id}\" value=\"#{@id}\" /></div>"
 
-      liVal += '<div class="avatar">'
-      if @photo_url?
-        liVal += "<img src=\"http://d2xfsikitl0nz3.cloudfront.net/#{encodeURIComponent(@photo_url)}/60/60\" width=\"60\" height=\"60\" alt=\"\" />"
-      else
-        placeholderUrl = "http://" + $(location).attr('host') + "/assets/placeholder.png"
-        liVal += "<img src=\"http://d2xfsikitl0nz3.cloudfront.net/#{encodeURIComponent(placeholderUrl)}/60/60\" width=\"60\" height=\"60\" alt=\"\" />"
-      liVal += '</div>'
+        liVal += '<div class="avatar">'
+        if @photo_url?
+          liVal += "<img src=\"http://d2xfsikitl0nz3.cloudfront.net/#{encodeURIComponent(@photo_url)}/60/60\" width=\"60\" height=\"60\" alt=\"\" />"
+        else
+          placeholderUrl = "http://" + $(location).attr('host') + "/assets/placeholder.png"
+          liVal += "<img src=\"http://d2xfsikitl0nz3.cloudfront.net/#{encodeURIComponent(placeholderUrl)}/60/60\" width=\"60\" height=\"60\" alt=\"\" />"
+        liVal += '</div>'
 
-      liVal += "<h2>#{@full_name}</h2>"
+        liVal += "<h2>#{@full_name}</h2>"
 
-      liVal += '<div class="person-info">'
-      liVal += '<span class="jurisdiction">'
-      personAttributes = []
-      personAttributes.push @political_position_title if @political_position_title?
-      personAttributes.push @most_recent_district if @most_recent_district?
-      personAttributes.push @party if @party?
-      liVal += personAttributes.join(', ')
-      liVal += '</span></div>'
-      liVal += '<span class="selected icon-ok-sign"></span>'
+        liVal += '<div class="person-info">'
+        liVal += '<span class="jurisdiction">'
+        personAttributes = []
+        personAttributes.push @political_position_title if @political_position_title?
+        personAttributes.push @most_recent_district if @most_recent_district?
+        personAttributes.push @party if @party?
+        liVal += personAttributes.join(', ')
+        liVal += '</span></div>'
+        liVal += '<span class="selected icon-ok-sign"></span>'
 
-      liVal += "</li>"
+        liVal += "</li>"
 
-      personList.append liVal
+        personList.append liVal
 
-      personList.children('li:last').fadeTo(300, 1)
-    loading.hide()
-    personList.show()
-    personList.children('li').on 'click', (e) ->
-      if updateOrReload == 'update'
-        updateSelectedPerson e
-      else
-        reloadAsNewQuestionForPerson e
+        personList.children('li:last').fadeTo(300, 1)
+      loading.hide()
+      personList.show()
+      personList.children('li').on 'click', (e) ->
+        if updateOrReload == 'update'
+          updateSelectedPerson e
+        else
+          reloadAsNewQuestionForPerson e
+    else
+      loading.hide()
+      $('.nothing-matching').show()
 
   hideLaterSteps = (->
     $('article.not-first-step').each ->
