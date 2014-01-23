@@ -32,7 +32,7 @@
   <div class="data_collection_form">
     <div class="address_lookup">
       <span class="secure">
-        <i class="icon-lock"></i> Your address information is private and safe!
+        <i class="icon-lock"></i>Enter your address, and we'll show your elected officials. 
       </span>
       <a href="/users/sign_in" class="login-link">Already have an AskThem account? Login.</a>
 
@@ -62,7 +62,7 @@
       </fieldset>
 
       <label for="question_person_id" class="select-person" style="display:none;">Recipient
-        <span class="details">We'll find your elected officials, then you can select who you'd like to receive the question:</span>
+        <span class="details">(Address info is private & safe with AskThem.) Then, select who you'd like to receive the question:</span>
       </label>
 
       <div class="loading" style="display:none;">Loading<span class="loading-1">.</span><span class="loading-2">.</span><span class="loading-3">.</span></div>
@@ -95,7 +95,7 @@
 
     <div class="name-lookup" style="display:none;">
       <label for="question">
-        <span class="details">Search by name in <%= jurisdiction.name -%></span>
+        <span class="details">Search by elected official's name in <%= jurisdiction.name -%></span>
       </label>
       <fieldset>
         <div class="inline_label to">
