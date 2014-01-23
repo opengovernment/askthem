@@ -80,13 +80,7 @@ class PagesController < ApplicationController
     if request.format != :json
       set_variables_for(@address)
     else
-      json = nil
-      begin
-        json = limited_json_for(CachedOfficialsFromGoogle.new(@address))
-      rescue GoogleCivicInfo::AddressUnparseableException
-        json = limited_json_for(Person.results_for_location(@address))
-      end
-      respond_with json
+      respond_with locator_json_for(@address)
     end
   end
 
@@ -250,5 +244,12 @@ class PagesController < ApplicationController
       states[name] = { abbr: abbr, count: question_count_for(abbr) }
       states
     end
+  end
+
+  def locator_json_for(address)
+    limited_json_for(CachedOfficialsFromGoogle.new(@address))
+  rescue
+    # @todo report error and non-coverage of address
+    limited_json_for(Person.results_for_location(@address))
   end
 end
