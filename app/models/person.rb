@@ -57,6 +57,7 @@ class Person
     return where(id: nil) if location.nil?
 
     criteria = distinct("_type").collect do |type|
+      type = "Person" if type.blank?
       type.constantize.for_location(location)
     end
   end
@@ -65,6 +66,9 @@ class Person
     if self.name != "Person"
       raise "this class needs a real implementation of for_location"
     end
+
+    # plain Person cannot be relied on to have location data
+    where('false')
   end
 
   # non-chainable
