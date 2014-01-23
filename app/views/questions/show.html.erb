@@ -171,7 +171,7 @@
         </div>
         <% current_url_without_share = current_url.sub("share=true", "share=false") %>
         <% current_url_without_share_encoded = URI.escape(current_url_without_share) %>
-        <a href='https://www.facebook.com/sharer.php?u=<%= current_url_without_share_encoded %>' target="_blank" class='modal-share cta-pill cta-pill-facebook'>
+        <a href='https://www.facebook.com/sharer.php?u=<%= current_url_without_share_encoded -%>' target="_blank" class='modal-share cta-pill cta-pill-facebook'>
           <i class='icon-facebook'></i>
           Share on Facebook
         </a>
@@ -179,11 +179,11 @@
       </div>
 
       <div class='modal-shares'>
-        <a href='https://twitter.com/share?url=<%= current_url_without_share_encoded %>&text=Get an answer! Support my question on @AskThemPPF: <%= URI.escape(@question.title) %>' target="_blank" class='modal-share cta-pill cta-pill-twitter'>
+        <a href='https://twitter.com/share?url=<%= current_url_without_share_encoded -%>&text=Get an answer! Support my question on @AskThemPPF: <%= URI.escape(@question.title) %>' target="_blank" class='modal-share cta-pill cta-pill-twitter'>
           <i class='icon-twitter'></i>
           Twitter
         </a>
-        <a href='https://plus.google.com/share?url=<%= current_url_without_share_encoded %>' target="_blank" class='modal-share cta-pill cta-pill-google'>
+        <a href='https://plus.google.com/share?url=<%= current_url_without_share_encoded -%>' target="_blank" class='modal-share cta-pill cta-pill-google'>
           <i class='icon-google-plus'></i>
           Google Plus
         </a>
