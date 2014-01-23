@@ -77,17 +77,9 @@ class Person
       raise "should not be called from subclass"
     end
 
-    count = 1
-    results = []
-    criteria_for_types_for_location(location).each do |criterium|
-      if count == 1
-        results = criterium
-      else
-        results = results + criterium
-      end
-      count += 1
+    criteria_for_types_for_location(location).inject([]) do |results, criterium|
+      results += criterium
     end
-    results
   end
 
   def self.default_api
