@@ -99,7 +99,7 @@ class QuestionsController < ApplicationController
       QuestionMailer.question_posted(@user, @question).deliver
 
       if @question.state == Metadatum::Unaffiliated::ABBREVIATION
-        PersonMailer.notify_staff_new_from_twitter(person).deliver
+        PersonMailer.notify_staff_new_from_twitter(@person).deliver
       end
 
       redirect_to question_path(@question.state, @question, share: true)
