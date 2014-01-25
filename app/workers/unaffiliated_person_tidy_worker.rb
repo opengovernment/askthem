@@ -10,5 +10,8 @@ class UnaffiliatedPersonTidyWorker
 
     person.person_detail.destroy
     person.destroy
+
+  rescue Mongoid::Errors::DocumentNotFound
+    logger.info "Person: #{id} appears to have been deleted"
   end
 end
