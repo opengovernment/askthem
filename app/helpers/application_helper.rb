@@ -132,13 +132,14 @@ module ApplicationHelper
       width, height = opts[:width], opts[:height]
     end
 
-    return image_tag(url, opts) if Rails.env.development?
-
     url = "http:#{url}" if url.present? && url[0..1] == "//"
 
     if url.blank? || (url.include? 'ballotpedia')
       image_tag("/assets/placeholder.png")
     else
+      return image_tag(url, opts) if (width.blank? || height.blank?) ||
+        Rails.env.development?
+
       image_tag("http://d2xfsikitl0nz3.cloudfront.net/#{CGI.escape(url)}/#{width}/#{height}", opts)
     end
   end
@@ -157,10 +158,11 @@ module ApplicationHelper
       width, height = opts[:width], opts[:height]
     end
 
-    return video_tag(url, opts) if Rails.env.development?
+    return video_tag(url, opts) # if Rails.env.development?
 
-    url = "http:#{url}" if url.present? && url[0..1] == "//"
-    video_tag("http://d2xfsikitl0nz3.cloudfront.net/#{CGI.escape(url)}", opts)
+    # url = "http:#{url}" if url.present? && url[0..1] == "//"
+    # cloudfront backed vide
+    # video_tag("http://d2xfsikitl0nz3.cloudfront.net/#{CGI.escape(url)}", opts)
   end
 
   # Returns an "a" tag for the navigation tab.
