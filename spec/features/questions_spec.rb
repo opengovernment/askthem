@@ -153,8 +153,11 @@ describe 'questions' do
             click_next_button
 
             click_button 'Publish'
-            # cgi.escape is because we are using cdn_image_tag
-            expect(page.body.include?(CGI.escape(cat_lol_url))).to be_true
+            # cgi.escape is because we are using cdn_image_tag in some cases
+            image_included = page.body.include?(cat_lol_url) ||
+              page.body.include?(CGI.escape(cat_lol_url))
+
+            expect(image_included).to be_true
           end
         end
       end
