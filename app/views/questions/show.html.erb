@@ -62,7 +62,7 @@
           <%= f.input :text, placeholder: "What is your answer?", as: :text, label: false %>
           <%= f.button :submit, 'Submit Answer', class: 'cta-pill' %>
         <% end %>
-        <p class='watermark-tip'>This watermark will appear on all answers you post to the OpenGovernment Website, indicating that you are an official representative.</p>
+        <p class='watermark-tip'>This watermark will appear on all responses you post on AskThem, indicating that you are a verified elected official.</p>
       </div>
     <% elsif !user_signed_in? %>
       <div class='recipient-answer-form'>
