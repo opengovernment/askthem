@@ -8,6 +8,6 @@ class ImageSrcUrl
   end
 
   def is_image?
-    IMAGE_TYPES.include?(File.extname(url).sub(".", ""))
+    IMAGE_TYPES.include?(File.extname(url.downcase).sub(".", ""))
   end
 end
