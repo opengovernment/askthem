@@ -3,9 +3,9 @@
     <%= cdn_image_tag(question.media_file_url, class: "question-image") %>
   <%- else %>
     <!-- not an image, assume video, also assume cdn not necessary, as likely youtube, etc. -->
-    <%= video_tag(question.media_file_url, class: "question-video", controls: true) %>
+    <%= cdn_video_tag(question.media_file_url, class: "question-video", controls: true) %>
   <%- end %>
-  <%- elsif question.media.url.present? %>
+<%- elsif question.media.url.present? %>
   <%- if is_image?(question.media.url) %>
     <%= cdn_image_tag(question.media.url, class: "question-image") %>
   <%- else %>
