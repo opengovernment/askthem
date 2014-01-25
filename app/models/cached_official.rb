@@ -300,7 +300,9 @@ class CachedOfficial
       person.write_attribute(:ocd_division_id, ocd_division_id)
     end
 
-    person.photo_url = photo_url if person.image? && photo_url.present?
+    if photo_url.present? && should_update_photo_url_for?(person)
+      person.photo_url = photo_url
+    end
 
     if emails.any?
       emails_to_add = emails.collect(&:downcase)
@@ -354,5 +356,9 @@ class CachedOfficial
     end
     person.person_detail.save if person.person_detail.changed?
     person.save if person.changed?
+  end
+
+  def should_update_photo_url_for?(person)
+    !person.image? || person.image.include?("ballotpedia")
   end
 end
