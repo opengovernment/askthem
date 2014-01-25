@@ -6,6 +6,10 @@ describe VideoSrcUrl do
       expect(VideoSrcUrl.new("/file.mov").is_video?).to be_true
     end
 
+    it "it recognizes video extension that has different capitalization" do
+      expect(VideoSrcUrl.new("/file.MOV").is_video?).to be_true
+    end
+
     context "when no video hosting site matches" do
       it "is false if file or url is does't have video extension" do
         expect(VideoSrcUrl.new("/file.png").is_video?).to be_false

@@ -16,7 +16,7 @@ class VideoSrcUrl
   end
 
   def is_video?
-    is_video_service_src? || VIDEO_TYPES.include?(extension_for(value))
+    is_video_service_src? || VIDEO_TYPES.include?(extension_for(value.downcase))
   end
 
   def value
