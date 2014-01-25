@@ -132,6 +132,8 @@ module ApplicationHelper
       width, height = opts[:width], opts[:height]
     end
 
+    return image_tag(url, opts) if Rails.env.development?
+
     url = "http:#{url}" if url.present? && url[0..1] == "//"
 
     if url.blank? || (url.include? 'ballotpedia')
@@ -155,8 +157,9 @@ module ApplicationHelper
       width, height = opts[:width], opts[:height]
     end
 
-    url = "http:#{url}" if url.present? && url[0..1] == "//"
+    return video_tag(url, opts) if Rails.env.development?
 
+    url = "http:#{url}" if url.present? && url[0..1] == "//"
     video_tag("http://d2xfsikitl0nz3.cloudfront.net/#{CGI.escape(url)}", opts)
   end
 
