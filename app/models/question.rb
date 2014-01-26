@@ -7,10 +7,10 @@ class Question
   accepts_nested_attributes_for :user
 
   # The signatures in support of the question.
-  has_many :signatures
+  has_many :signatures, dependent: :destroy
 
   # The official answer to the question
-  has_many :answers
+  has_many :answers, dependent: :destroy
 
   # for uploaded photo or video
   mount_uploader :media, MediaUploader

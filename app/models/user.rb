@@ -64,14 +64,14 @@ class User
   # mappings to a person in our db
   # potential more than one as we may have the same person
   # listed more than once in our db if they have held more than one office
-  has_many :identities, inverse_of: :user
+  has_many :identities, inverse_of: :user, dependent: :destroy
 
   # users that are staff members can verify or reject an identity
   has_many :inspections, class_name: "Identity", inverse_of: :inspector
 
-  has_many :questions
-  has_many :signatures
-  has_many :answers
+  has_many :questions, dependent: :destroy
+  has_many :signatures, dependent: :destroy
+  has_many :answers, dependent: :destroy
   mount_uploader :image, ImageUploader
 
   field :coordinates, type: Array
