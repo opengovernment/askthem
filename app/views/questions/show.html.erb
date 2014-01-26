@@ -52,7 +52,7 @@
         <p><%= @question.answers.first.text %></p>
         <span class="pubdate"><time datetime="<%= @question.answers.first.created_at.strftime "%Y-%m-%d" %>" pubdate><%= @question.answers.first.created_at.strftime "%B #{@question.answers.first.created_at.day.ordinalize} %Y" %><sup><%= @question.answers.first.created_at.strftime "%I:%M%p" %></sup></time></span>
       </div>
-    <% elsif @user.has_role?(:responder, @question.person)%>
+      <% elsif @user.has_role?(:responder, @question.person)%>
       <!-- <a href="#sign_on_q" class="mobile_cta cta-pill">Sign On</a> <%# @todo JM - mobile sign on button, if logged in this button should sign the question, otherwise it should send the user to the anchored form %> -->
       <div class='recipient-answer-form'>
         <h2>Answer this Question as <strong><%= @question.person.name %></strong></h2>
@@ -64,16 +64,16 @@
         <% end %>
         <p class='watermark-tip'>This watermark will appear on all responses you post on AskThem, indicating that you are a verified elected official.</p>
       </div>
-    <% elsif !user_signed_in? %>
+      <% elsif !user_signed_in? %>
       <div class='recipient-answer-form'>
         <p>Are you <%= @question.person.name %>?
-        <% if @question.person.verified? -%>
-          <%= link_to 'Login to answer', new_user_session_path %>.
-          </p>
-        <% else -%>
-          <%= link_to 'Sign up to answer this question.', new_user_registration_path %>
-          </p>
-        <% end -%>
+          <% if @question.person.verified? -%>
+            <%= link_to 'Login to answer', new_user_session_path %>.
+        </p>
+          <% else -%>
+        <%= link_to 'Sign up to answer this question.', new_user_registration_path %>
+        </p>
+          <% end -%>
       </div>
     <% end %>
     <div class="comments">
@@ -82,6 +82,21 @@
   </article>
   <a name="sign_on_q"></a>
   <div class="actions">
+
+    <% if user_signed_in? && current_user.has_role?(:staff_member) -%>
+      <div class="question-controls">
+        <div class="controls">
+          <h4>Staff Actions:</h4>
+          <ul>
+            <li>
+              <%= link_to "Delete", question_path(@jurisdiction, @question),
+              method: :delete, data: { confirm: "Are you sure?" } %>
+            </li>
+          </ul>
+        </div>
+      </div>
+    <% end -%>
+
     <h4>Support this question</h4>
 
     <div class="row">
@@ -103,39 +118,39 @@
           <% if current_user.question_signed? @question.id %>
             <a class='sign_on'>Signed</a>
           <% else %>
-          <%= link_to 'Sign', "#", class: 'cta-pill sign-on-user', :'data-question-id' => @question.id %>
+            <%= link_to 'Sign', "#", class: 'cta-pill sign-on-user', :'data-question-id' => @question.id %>
           <% end %>
         </li>
       </ul>
     <% else %>
-    <div class="row last signup">
-      <%= simple_form_for(@user, as: :user, url: registration_path(:user)) do |f| %>
-        <%= hidden_field_tag :question_id, @question.id %>
-        <%= f.input :given_name, placeholder: "First Name", label: false %>
-        <%= f.input :family_name, placeholder: "Last Name", label: false %>
-        <%= f.input :email, placeholder: "E-mail", label: false %>
-        <%#<%= f.input :street_address, placeholder: "Street Address", label: false %>
-        <%#<%= f.input :locality, placeholder: "City", label: false %>
-        <%#<%= f.input :region, collection: OpenGovernment::STATES, prompt: "Select your state", label: false, wrapper_html: {class: 'icon-angle-down sculpt'} %>
-        <%= f.input :postal_code, placeholder: "Zip Code", label: false %>
-        <%#<%= f.input :password, placeholder: "Password", label: false %>
-        <%= f.hidden_field :password, value: Devise.friendly_token.first(6) %>
-        <%= f.hidden_field :password_is_placeholder, value: true %>
-        <%= f.button :submit, 'Sign', class: 'cta-pill' %>
-      <% end %>
-    </div>
+      <div class="row last signup">
+        <%= simple_form_for(@user, as: :user, url: registration_path(:user)) do |f| %>
+          <%= hidden_field_tag :question_id, @question.id %>
+          <%= f.input :given_name, placeholder: "First Name", label: false %>
+          <%= f.input :family_name, placeholder: "Last Name", label: false %>
+          <%= f.input :email, placeholder: "E-mail", label: false %>
+          <%#<%= f.input :street_address, placeholder: "Street Address", label: false %>
+          <%#<%= f.input :locality, placeholder: "City", label: false %>
+          <%#<%= f.input :region, collection: OpenGovernment::STATES, prompt: "Select your state", label: false, wrapper_html: {class: 'icon-angle-down sculpt'} %>
+          <%= f.input :postal_code, placeholder: "Zip Code", label: false %>
+          <%#<%= f.input :password, placeholder: "Password", label: false %>
+          <%= f.hidden_field :password, value: Devise.friendly_token.first(6) %>
+          <%= f.hidden_field :password_is_placeholder, value: true %>
+          <%= f.button :submit, 'Sign', class: 'cta-pill' %>
+        <% end %>
+      </div>
     <% end %>
     <a class='share-question' href='?share=true'>
       <i class='icon-share'></i>
       Share this
     </a>
     <% if @question.subject? %>
-    <h5>Issue Area</h5>
-    <ul class="tags">
-      <li>
-        <%= link_to @question.subject, questions_path(@jurisdiction.id, subject: @question.subject) %>
-      </li>
-    </ul>
+      <h5>Issue Area</h5>
+      <ul class="tags">
+        <li>
+          <%= link_to @question.subject, questions_path(@jurisdiction.id, subject: @question.subject) %>
+        </li>
+      </ul>
     <% end %>
     <%= link_to "Flag this question", "/support", class: "flag" %><%# @todo JM %>
   </div>
@@ -212,10 +227,10 @@ AskThem is free, open-source, and non-profit, working to change the civic cultur
 <%# @see http://disqus.com/admin/universalcode/ %>
 
 <script type="text/javascript">
-  var disqus_shortname = '<%= ENV["DISQUS_SHORTNAME"] -%>';
-  (function() {
-    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-  })();
+ var disqus_shortname = '<%= ENV["DISQUS_SHORTNAME"] -%>';
+ (function() {
+   var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+   dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+   (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+ })();
 </script>

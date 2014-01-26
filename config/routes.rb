@@ -47,7 +47,7 @@ OpenGovernment::Application.routes.draw do
       end
     end
 
-    resources :questions, only: [:index, :show, :new, :create] do
+    resources :questions, only: [:index, :show, :new, :create, :destroy] do
       collection do
         get 'preview'
         get 'need_signatures'
