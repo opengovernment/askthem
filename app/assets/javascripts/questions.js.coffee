@@ -203,6 +203,7 @@ jQuery ($) ->
     personList.html('')
 
   refreshPersonList = (data, updateOrReload, lookupDiv = 'div.address_lookup') ->
+    $('.nothing-matching').hide()
     loading = $('.loading')
     loading.show()
 
