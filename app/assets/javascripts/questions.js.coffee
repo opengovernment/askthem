@@ -217,7 +217,7 @@ jQuery ($) ->
         liVal += "<input type=\"radio\" name=\"question[person_id]\" id=\"question_person_id_#{@id}\" value=\"#{@id}\" /></div>"
 
         liVal += '<div class="avatar">'
-        if @photo_url?
+        if @photo_url? and $.trim(@photo_url) != ''
           liVal += "<img src=\"http://d2xfsikitl0nz3.cloudfront.net/#{encodeURIComponent(@photo_url)}/60/60\" width=\"60\" height=\"60\" alt=\"\" />"
         else
           placeholderUrl = "http://" + $(location).attr('host') + "/assets/placeholder.png"
