@@ -111,7 +111,14 @@ jQuery ($) ->
   reloadAsNewQuestionForPerson = (e) ->
     personLi = e.delegateTarget
 
+    # clear any previously checked people
+    $('.select_box').children('input').prop 'checked', false
+    $('.icon-ok-sign').hide()
+
+    $(personLi).children('.icon-ok-sign').show()
+
     selectedPersonInput = $(personLi).children('.select_box').children('input')
+    selectedPersonInput.prop 'checked', true
     value = selectedPersonInput.val()
     url = $(location).attr('href')
 
