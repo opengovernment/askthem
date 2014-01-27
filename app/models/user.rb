@@ -179,7 +179,7 @@ class User
   end
 
   def trigger_geocoding
-    GeocodeWorker.perform_async(id) unless coordinates.present?
+    GeocodeWorker.perform_async(id.to_s) unless coordinates.present?
   end
 
   def send_reset_password_if_password_is_placeholder

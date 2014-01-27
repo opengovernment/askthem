@@ -41,7 +41,7 @@ class TwitterPersonService
     adapter = TwitterPersonAdapter.new(person)
     person = person.load_from_apis!(twitter_user, adapter: adapter)
 
-    UnaffiliatedPersonTidyWorker.perform_in(24.hours, person.id)
+    UnaffiliatedPersonTidyWorker.perform_in(24.hours, person.id.to_s)
     person
   end
 end

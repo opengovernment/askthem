@@ -145,7 +145,7 @@ class Question
   end
 
   def copy_coordinates_from_user
-    QuestionCoordinatesWorker.perform_async(id)
+    QuestionCoordinatesWorker.perform_async(id.to_s)
   end
 
   # extract correct url for video from youtube/vimeo urls, etc.
