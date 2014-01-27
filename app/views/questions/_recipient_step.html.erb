@@ -32,7 +32,7 @@
   <div class="data_collection_form">
     <div class="address_lookup">
       <span class="secure">
-        <i class="icon-lock"></i> Enter your address to see your elected officials. 
+        <i class="icon-lock"></i> Enter your address to see your elected officials.
       </span>
       <a href="/users/sign_in" class="login-link">Already have an AskThem account? Login.</a>
 
@@ -56,7 +56,7 @@
           </div>
           <div class="pill_wrap">
             <label for="question_user_attributes_postal_code" class="lesser">Zipcode</label>
-            <%= user_form.text_field :postal_code, placeholder: 'ex. 02141' %>
+            <%= user_form.text_field :postal_code, placeholder: 'ex. 02141', autocomplete: 'off' %>
           </div>
         <% end %>
       </fieldset>
@@ -82,7 +82,7 @@
 
       <fieldset>
         <div class="inline_label to">
-          <input type="text" name="twitter" id="twitter" placeholder="Enter a twitter account" />
+          <input type="text" name="twitter" id="twitter" placeholder="Enter a twitter account" autocomplete="off" />
         </div>
 
         <div class="loading">Loading<span class="loading-1">.</span><span class="loading-2">.</span><span class="loading-3">.</span></div>
@@ -99,7 +99,7 @@
       </label>
       <fieldset>
         <div class="inline_label to">
-          <input type="text" name="name-lookup" id="name-lookup" placeholder="An elected official's name" />
+          <input type="text" name="name-lookup" id="name-lookup" placeholder="An elected official's name" autocomplete="off" />
         </div>
 
         <div class="loading">Loading<span class="loading-1">.</span><span class="loading-2">.</span><span class="loading-3">.</span></div>
