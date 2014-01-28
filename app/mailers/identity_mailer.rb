@@ -1,7 +1,7 @@
 class IdentityMailer < ActionMailer::Base
   add_template_helper(ApplicationHelper)
 
-  default from: "support@askthem.io"
+  default from: ENV["NOTIFICATION_SENDER_EMAIL"]
 
   def identity_submitted(identity)
     send_user_mail_for(identity, "Your AskThem identity is being verified")

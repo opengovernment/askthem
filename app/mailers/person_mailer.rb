@@ -1,7 +1,7 @@
 class PersonMailer < ActionMailer::Base
   add_template_helper(ApplicationHelper)
 
-  default from: "support@askthem.io"
+  default from: ENV["NOTIFICATION_SENDER_EMAIL"]
 
   def notify_staff_new_from_twitter(person)
     @person = person

@@ -8,7 +8,6 @@ describe QuestionMailer do
 
     last_email = ActionMailer::Base.deliveries.last
     last_email.to.should == [user.email]
-    last_email.from.should eq(["support@askthem.io"])
     last_email.subject.should eq("Your Question on AskThem Has Been Posted")
     last_email.body.encoded.should match( question_url(question.state, question.id) )
   end
@@ -20,7 +19,6 @@ describe QuestionMailer do
 
     last_email = ActionMailer::Base.deliveries.last
     last_email.to.should == [user.email]
-    last_email.from.should == ["support@askthem.io"]
     last_email.subject.should == "You're Signed On to '#{question.title}'"
     last_email.body.encoded.should match(question_url(question.state,
                                                       question.id))
@@ -36,7 +34,6 @@ describe QuestionMailer do
 
     last_email = ActionMailer::Base.deliveries.last
     last_email.to.should == [question.person.email]
-    last_email.from.should eq(["support@askthem.io"])
     last_email.subject.should == "People on AskThem want to know"
     last_email.body.encoded.should match(question_url(question.state,
                                                       question.id))
@@ -54,7 +51,6 @@ describe QuestionMailer do
 
     last_email = ActionMailer::Base.deliveries.last
     expect(last_email.to).to eq [staff_member.email]
-    expect(last_email.from).to eq ["support@askthem.io"]
     subject = "A question for '#{person.name}' has reached its goal"
     expect(last_email.subject).to eq subject
     expect(last_email.body.encoded).to match(question_url(question.state,

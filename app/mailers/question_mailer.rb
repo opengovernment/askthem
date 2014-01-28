@@ -1,7 +1,8 @@
 class QuestionMailer < ActionMailer::Base
   add_template_helper(ApplicationHelper)
 
-  default from: "support@askthem.io"
+  default from: ENV["NOTIFICATION_SENDER_EMAIL"]
+
   def question_posted(user, question)
     @user = user
     @question = question
