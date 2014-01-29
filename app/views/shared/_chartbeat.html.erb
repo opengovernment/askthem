@@ -1,4 +1,4 @@
-<% if Rails.env.production? -%>
+<% if Rails.env.production? && ENV["CHARTBEAT_HOSTNAME"].present? -%>
 <script type="text/javascript">
   var _sf_async_config = { uid: <%= ENV["CHARTBEAT_UID"] -%>, domain: '<%= ENV["CHARTBEAT_HOSTNAME"] -%>', useCanonical: true };
   (function() {

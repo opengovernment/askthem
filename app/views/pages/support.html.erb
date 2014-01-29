@@ -1,7 +1,7 @@
 <section class="static">
   <h1>Help & User Support for AskThem - Contact Us Below</h1>
   <div class="related_data">
-    <%- if Rails.env.production? %>
+    <%- if Rails.env.production? && ENV["DESK_COM_SITE"].present? %>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
     <link href="https://d218iqt4mo6adh.cloudfront.net/assets/widget_embed_191.css" media="screen" rel="stylesheet" type="text/css" />
     <!--If you already have fancybox on the page this script tag should be omitted-->
