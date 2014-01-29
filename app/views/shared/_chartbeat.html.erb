@@ -1,6 +1,6 @@
 <% if Rails.env.production? -%>
 <script type="text/javascript">
-  var _sf_async_config = { uid: <%= ENV["CHARTBEAT_UID"] -%>, domain: <%= ENV["CHARTBEAT_HOSTNAME"] -%>, useCanonical: true };
+  var _sf_async_config = { uid: <%= ENV["CHARTBEAT_UID"] -%>, domain: '<%= ENV["CHARTBEAT_HOSTNAME"] -%>', useCanonical: true };
   (function() {
     function loadChartbeat() {
       window._sf_endpt = (new Date()).getTime();
