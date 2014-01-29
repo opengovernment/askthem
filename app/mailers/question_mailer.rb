@@ -28,9 +28,6 @@ class QuestionMailer < ActionMailer::Base
   def notify_staff_question_at_threshold(question)
     @question = question
     subject = "A question for '#{question.person.name}' has reached its goal"
-
-    UserRole.staff_members.each do |staff_member|
-      mail to: staff_member.email, subject: subject
-    end
+    mail to: UserRole.staff_members.pluck(:email), subject: subject
   end
 end
