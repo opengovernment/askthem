@@ -1,4 +1,6 @@
 class AnswersController < ApplicationController
+  before_filter :force_http
+
   respond_to :html
   before_filter :authenticate_user!
 

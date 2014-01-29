@@ -1,4 +1,6 @@
 class PagesController < ApplicationController
+  before_filter :force_http
+
   before_filter :set_jurisdiction, only: [:overview, :lower, :upper, :bills,
                                           :key_votes, :meetings]
   before_filter :authenticate_user!, only: [:contact_info]

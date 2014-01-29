@@ -1,4 +1,6 @@
 class SignaturesController < ApplicationController
+  before_filter :force_http
+
   respond_to :json
   before_filter :authenticate_user!
 

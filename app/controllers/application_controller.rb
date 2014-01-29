@@ -18,6 +18,15 @@ class ApplicationController < ActionController::Base
 
   helper_method :default_jurisdiction
 
+  # @see http://robert-reiz.com/2012/07/09/ssl-in-ruby-on-rails/
+  # third party resources make https everywhere problematic
+  # before_filter set on individual controllers
+  def force_http
+    if request.protocol == "https://"
+      redirect_to protocol: "http://", status: :moved_permanently
+    end
+  end
+
   private
   def not_found
     respond_to do |format|

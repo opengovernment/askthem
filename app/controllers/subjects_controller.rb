@@ -1,4 +1,6 @@
 class SubjectsController < ApplicationController
+  before_filter :force_http
+
   inherit_resources
   belongs_to :jurisdiction, parent_class: Metadatum, finder: :find_by_abbreviation, param: :jurisdiction
   respond_to :html

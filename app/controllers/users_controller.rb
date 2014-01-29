@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_filter :force_http
+
   inherit_resources
   respond_to :html
   actions :show

@@ -1,4 +1,6 @@
 class OmniauthCallbacksController < Devise::OmniauthCallbacksController
+  force_ssl if Rails.env.production?
+
   # If a user is already signed in, do not allow Facebook sign in.
   prepend_before_filter :require_no_authentication, only: :facebook
 
