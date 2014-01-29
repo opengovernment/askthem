@@ -1,4 +1,6 @@
 class RegistrationsController < Devise::RegistrationsController
+  force_ssl if Rails.env.production?
+
   layout 'data_collection'
 
   # based on https://github.com/plataformatec/devise/blob/master/app/controllers/devise/registrations_controller.rb#L12

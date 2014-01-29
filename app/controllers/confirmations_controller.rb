@@ -4,6 +4,8 @@
 #
 # @see https://github.com/plataformatec/devise/blob/master/app/controllers/devise/confirmations_controller.rb
 class ConfirmationsController < Devise::ConfirmationsController
+  force_ssl if Rails.env.production?
+
   def new
     not_found
   end
