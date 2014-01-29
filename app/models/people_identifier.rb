@@ -7,8 +7,8 @@ class PeopleIdentifier
 
   def people
     @people ||= if params[:email]
-                  # annoying that you can't do case insensitive queries without a regex
-                  Person.where(email: /\A#{params[:email]}\z/i)
+                  # annoying that you can't do case insensitive without a regex
+                  Person.where(email: /\A#{Regexp.escape(params[:email])}\z/i)
                 elsif params[:twitter_id]
                   people_from_twitter
                 else
@@ -19,7 +19,8 @@ class PeopleIdentifier
   private
   def people_from_twitter
     # exact match only to return local results over twitter
-    people = Person.where(twitter_id: /\A#{params[:twitter_id]}\z/i)
+    regexp = /\A#{Regexp.escape(params[:twitter_id])}\z/i
+    people = Person.where(twitter_id: regexp)
     return people if people.count > 0
 
     TwitterPersonService.new(params[:twitter_id]).people
