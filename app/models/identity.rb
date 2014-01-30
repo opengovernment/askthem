@@ -1,4 +1,6 @@
 class Identity
+  class InvalidWorkflowEvent < StandardError; end
+
   include Mongoid::Document
   include Workflow
 
@@ -32,6 +34,14 @@ class Identity
 
     state :verified
     state :rejected
+  end
+
+  def inspection_event(event, inspector)
+    unless current_state.events.keys.include?(event.sub("!", "").to_sym)
+      raise InvalidWorkflowEvent, "#{event} is not accepted"
+    end
+
+    send event, inspector
   end
 
   private

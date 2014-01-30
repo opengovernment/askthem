@@ -6,7 +6,7 @@ class IdentitiesController < ApplicationController
     authorize_action_for @identity
 
     @event = params[:event]
-    @identity.send(@event, current_user)
+    @identity.inspection_event(@event, current_user)
 
     redirect_to user_path(@identity.user)
   end

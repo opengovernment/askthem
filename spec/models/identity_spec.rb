@@ -34,6 +34,22 @@ describe Identity do
     expect(identity.valid?).to be_false
   end
 
+  describe "#inspection_event" do
+    before do
+      identity.status = "being_inspected"
+    end
+
+    it "runs passed in inspection workflow event" do
+      identity.inspection_event("reject!", identity.user)
+      expect(identity.rejected?).to be_true
+    end
+
+    it "raises error if not a valid inspection workflow event" do
+      expect { identity.inspection_event("xyz", identity.user) }
+        .to raise_error Identity::InvalidWorkflowEvent
+    end
+  end
+
   context "when triggering events on identity" do
     before { ActionMailer::Base.deliveries.clear }
 

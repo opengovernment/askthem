@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe IdentitiesController do
   # @warn can't use let because of mongoid teardown
@@ -8,7 +8,7 @@ describe IdentitiesController do
     context "when not signed in" do
       it "cannot make changes" do
         post :update, id: @identity.id
-        expect(response.body).to redirect_to('/users/sign_in')
+        expect(response.body).to redirect_to("/users/sign_in")
       end
     end
 
@@ -29,7 +29,7 @@ describe IdentitiesController do
           @staff_member.add_role :staff_member
           sign_in @staff_member
 
-          @identity.status = 'being_inspected'
+          @identity.status = "being_inspected"
           @identity.save
         end
 
