@@ -24,6 +24,9 @@
   <meta property="og:locale" content="en_US">
   <meta property="fb:admins" content="<%= ENV["FACEBOOK_ADMINS_ID"] -%>">
   <meta property="fb:app_id" content="<%= ENV["FACEBOOK_APP_ID"] -%>">
+  <%- if ENV["BLITZ_AUTHORIZATION_META"].present? %>
+    <%= raw(ENV["BLITZ_AUTHORIZATION_META"]) %>
+  <%- end %>
   <%= javascript_include_tag 'modernizr-2.5.3.min.js' %>
   <%= stylesheet_link_tag 'application', media: 'all' %>
   <%= csrf_meta_tags %>
