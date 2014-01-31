@@ -15,19 +15,6 @@
       <%= render partial: "#{step}_step", locals: locals.merge({step: step}) %>
     <% end %>
 
-    <%#
-    <div class="flow_info">
-      <h3>Your question &amp; petition</h3>
-      <ul>
-        <li><strong>OpenGovernment works best for</strong> questions and petitions on issues like city planning, economic development, health care, education, immigration, civil rights, and more.</li>
-        <li><strong>For federal &amp; state elected officials</strong>, questions on national policy positions are popular.</li>
-        <li><strong>For city elected officials</strong>, questions on city planning priorities are most effective.</li>
-        <li><strong>For city service requests</strong>, like reporting potholes, please use official city 311 channels.</li>
-        <li><strong>For judicial issues</strong>, like trial or criminal information, please contact the judicial branch in your city.</li>
-      </ul>
-    </div>
-    %>
-
     <div class="controls">
       <a class="cta-pill" id="next-button"
          data-relevant-steps="<%= @relevant_steps.join(', ') -%>"
@@ -36,6 +23,9 @@
         <span class="count"><span class="step-number">1</span> of <%= @relevant_steps.size %></span>
     </div>
 
-    <%# render partial: 'progress', locals: locals %>
+    <div class="click-recipient-for-next-step" style="display:none;">
+      <h3>Click on recipient for the next step</h3>
+    </div>
+
   <% end %>
 </section>

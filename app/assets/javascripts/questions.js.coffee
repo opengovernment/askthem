@@ -40,7 +40,9 @@ jQuery ($) ->
       type: "GET"
       dataType: "json"
       success: (data) ->
-        refreshPersonList(data, 'reload', 'div.twitter')
+        refreshPersonList data, 'reload', 'div.twitter'
+        $('.controls').hide()
+        $('.click-recipient-for-next-step').show()
 
   $("#twitter").on 'input',  (->
     nameLength = $(this).val().length
@@ -58,6 +60,8 @@ jQuery ($) ->
     if $(this).hasClass('twitter') and !$(this).hasClass('active')
       $('div.address_lookup').hide()
       $('div.name-lookup').hide()
+      $('.click-recipient-for-next-step').hide()
+      $('.controls').hide()
       $('div.twitter').show()
       $('div.twitter input[type=text]:eq(0)').focus()
     else
@@ -65,6 +69,8 @@ jQuery ($) ->
         $('div.twitter').hide()
         $('div.name-lookup').hide()
         $('div.address_lookup').show()
+        $('.click-recipient-for-next-step').hide()
+        $('.controls').show()
         $('div.address_lookup input[type=text]:eq(0)').focus()
         reloadValidationForForm()
         # this will only show people if zip is complete
@@ -73,6 +79,8 @@ jQuery ($) ->
         if $(this).hasClass('name-lookup') and !$(this).hasClass('active')
           $('div.twitter').hide()
           $('div.address_lookup').hide()
+          $('.click-recipient-for-next-step').hide()
+          $('.controls').hide()
           $('div.name-lookup').show()
           $('div.name-lookup input[type=text]:eq(0)').focus()
 
@@ -106,7 +114,7 @@ jQuery ($) ->
       type: 'GET'
       dataType: 'json'
       success: (data) ->
-        refreshPersonList(data, 'reload', 'div.name-lookup')
+        refreshPersonList data, 'reload', 'div.name-lookup'
 
   reloadAsNewQuestionForPerson = (e) ->
     personLi = e.delegateTarget
@@ -196,13 +204,14 @@ jQuery ($) ->
       type: 'GET'
       dataType: 'json'
       success: (data) ->
-        refreshPersonList(data, "update")
+        refreshPersonList data, "update"
 
   clearPersonList = (lookupDiv = 'div.address_lookup') ->
     personList = $("#{lookupDiv} ol.people-list").first()
     personList.html('')
 
   refreshPersonList = (data, updateOrReload, lookupDiv = 'div.address_lookup') ->
+    $('.click-recipient-for-next-step').hide() if lookupDiv != 'div.address_lookup'
     $('.nothing-matching').hide()
     loading = $('.loading')
     loading.show()
@@ -241,6 +250,8 @@ jQuery ($) ->
         personList.append liVal
 
         personList.children('li:last').fadeTo(300, 1)
+        $('.click-recipient-for-next-step').show() if lookupDiv != 'div.address_lookup'
+
       loading.hide()
       personList.show()
       personList.children('li').on 'click', (e) ->
