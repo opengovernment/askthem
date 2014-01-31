@@ -50,6 +50,7 @@
           </span>
         </div>
       </fieldset>
+      <%= render partial: "shared/accept_terms", locals: { verb: "signing up" } %>
     </div>
     <div class="controls">
       <%= f.button :submit, 'Sign up', :class => 'cta-pill' %>

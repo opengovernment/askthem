@@ -136,6 +136,7 @@
           <%#<%= f.input :password, placeholder: "Password", label: false %>
           <%= f.hidden_field :password, value: Devise.friendly_token.first(6) %>
           <%= f.hidden_field :password_is_placeholder, value: true %>
+          <%= render partial: "shared/accept_terms", locals: { verb: "signing" } %>
           <%= f.button :submit, 'Sign', class: 'cta-pill' %>
         <% end %>
       </div>

@@ -12,7 +12,7 @@
     <% locals = { jurisdiction: @jurisdiction, question: @question, person: @person, bill: @bill, relevant_steps: @relevant_steps, first_step: @first_step, f: f } -%>
 
     <% @relevant_steps.each do |step| %>
-      <%= render partial: "#{step}_step", locals: locals.merge({step: step}) %>
+      <%= render partial: "#{step}_step", locals: locals.merge({ step: step }) %>
     <% end %>
 
     <div class="controls">
