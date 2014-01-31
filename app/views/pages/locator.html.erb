@@ -6,7 +6,7 @@
   </li>
   <li>
     <a href="#" id="officials-near">See Your Elected Officials</a>
-    <% if @federal_people.count > 0 -%>
+    <% if @federal_people && @federal_people.count > 0 -%>
       <%= cdn_image_tag(@federal_people.first.image, size: '30x30', alt: '', class: 'preview-avatar') %>
     <% end -%>
     <i class="icon-angle-down"></i></li>
@@ -16,7 +16,7 @@
 
 <section class="questions locator">
   <ol class="question-list locator-question-list">
-    <%= render @questions %>
+    <%= render @questions if @questions %>
   </ol>
 </section>
 
@@ -31,7 +31,7 @@
         <a href="#">State</a>
         <i class="icon-angle-down"></i>
       </li>
-      <% if @municipal_people.count > 0 -%>
+      <% if @municipal_people && @municipal_people.count > 0 -%>
         <li id="municipal-people">
           <a href="#"><%= @municipality -%></a>
           <i class="icon-angle-down"></i>

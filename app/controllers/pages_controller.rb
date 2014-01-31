@@ -122,29 +122,34 @@ class PagesController < ApplicationController
 
   def set_variables_for(address)
     geodata = Geocoder.search(address).first
-    center = geodata.coordinates.reverse
 
-    @municipality = geodata.city
+    if geodata
+      center = geodata.coordinates.reverse
 
-    @questions = Question.includes(:user)
-      .where(:coordinates => { "$within" => { "$center" => [center, 1] } })
-      .order_by(signature_count: "desc").limit(10)
+      @municipality = geodata.city
 
-    @federal_people = FederalLegislator.includes(:questions, :identities)
-      .for_location(geodata)
+      @questions = Question.includes(:user)
+        .where(:coordinates => { "$within" => { "$center" => [center, 1] } })
+        .order_by(signature_count: "desc").limit(10)
 
-    @state_people = StateLegislator.includes(:questions, :identities, :metadatum)
-      .for_location(geodata)
+      @federal_people = FederalLegislator.includes(:questions, :identities)
+        .for_location(geodata)
 
-    # since we return all councilmembers for a city, regardless of "nearness"
-    # order alphabetically by last name
-    @municipal_people = Mayor.includes(:questions, :identities)
-      .for_location(geodata) +
-      Councilmember.includes(:questions, :identities, :metadatum)
-      .for_location(geodata).order_by([["last_name", "ASC"]])
+      @state_people = StateLegislator.includes(:questions, :identities, :metadatum)
+        .for_location(geodata)
 
-    @governor = Governor.includes(:questions, :identities, :metadatum)
-      .for_location(geodata).first
+      # since we return all councilmembers for a city, regardless of "nearness"
+      # order alphabetically by last name
+      @municipal_people = Mayor.includes(:questions, :identities)
+        .for_location(geodata) +
+        Councilmember.includes(:questions, :identities, :metadatum)
+        .for_location(geodata).order_by([["last_name", "ASC"]])
+
+      @governor = Governor.includes(:questions, :identities, :metadatum)
+        .for_location(geodata).first
+    else
+      flash.now[:alert] = "Whoops! We couldn't find a location for #{address}."
+    end
   end
 
   def limited_json_for(people)
@@ -157,20 +162,20 @@ class PagesController < ApplicationController
 
   def types
     @types ||= if params[:gov]
-                @gov = params[:gov]
-                case @gov
-                when "state"
-                  ["StateLegislator"]
-                when "federal"
-                  ["FederalLegislator"]
-                end
-              else
-                if @jurisdiction && @jurisdiction.abbreviation.include?("-")
-                  ["Councilmember"]
-                else
-                  ["FederalLegislator"]
-                end
-              end
+                 @gov = params[:gov]
+                 case @gov
+                 when "state"
+                   ["StateLegislator"]
+                 when "federal"
+                   ["FederalLegislator"]
+                 end
+               else
+                 if @jurisdiction && @jurisdiction.abbreviation.include?("-")
+                   ["Councilmember"]
+                 else
+                   ["FederalLegislator"]
+                 end
+               end
   end
 
   def set_jurisdiction
