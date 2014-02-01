@@ -184,9 +184,7 @@ class User
 
   def send_reset_password_if_password_is_placeholder
     if password_is_placeholder?
-      send_reset_password_instructions
-      self.password_is_placeholder = false
-      save!
+      UserSetPasswordNoticeWorker.perform_in(20.minutes, id.to_s)
     end
   end
 end

@@ -28,8 +28,8 @@ describe 'questions' do
         @all_questions = []
         3.times do
           @all_questions << FactoryGirl.create(:question,
-                             state: @metadatum.abbreviation,
-                             person: valid_person)
+                                               state: @metadatum.abbreviation,
+                                               person: valid_person)
         end
         FactoryGirl.create(:signature, question: @all_questions.last)
         FactoryGirl.create(:answer, question: @all_questions.first)
@@ -173,7 +173,7 @@ describe 'questions' do
             add_valid_content
             movie_file_name = 'teststrip.mpg'
             attach_file 'question_media', Rails.root.join('spec/support/files',
-                                                           movie_file_name)
+                                                          movie_file_name)
             click_next_button
 
             click_button 'Publish'
@@ -462,19 +462,22 @@ describe 'questions' do
       end
 
       it 'allows new user to register and sign on to a question', js: true, vcr: true do
-        visit "/vt/questions/#{@question.id}"
+        # skip sign delayed sign up emails
+        Sidekiq::Testing.disable! do
+          visit "/vt/questions/#{@question.id}"
 
-        within ".signup" do
-          fill_in 'user_given_name', with: 'John'
-          fill_in 'user_family_name', with: 'Doe'
-          fill_in 'user_email', with: 'john.doe@example.com'
-          fill_in 'user_postal_code', with: postal_code
-          click_button 'Sign'
+          within ".signup" do
+            fill_in 'user_given_name', with: 'John'
+            fill_in 'user_family_name', with: 'Doe'
+            fill_in 'user_email', with: 'john.doe@example.com'
+            fill_in 'user_postal_code', with: postal_code
+            click_button 'Sign'
+          end
+
+          # supporters = creator of question + signers
+          sleep 1
+          page.body.should have_content "98 needed"
         end
-
-        # supporters = creator of question + signers
-        sleep 1
-        page.body.should have_content "98 needed"
       end
 
       context 'as signed in user' do
