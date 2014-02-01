@@ -9,17 +9,24 @@ class Subject
       'Business and Consumers',
       'Civil Liberties and Civil Rights',     # Women
       'Crime',
+      'Domestic Surveillance Reform',
       'Drugs',
+      'Economy',
       'Education',
       'Energy',
       'Executive Branch',                     # Foreign Affairs
+      'Foreign Policy',
       'Gambling and Gaming',
       'Guns',
+      'Health Insurance',
       'Housing and Property',
       'Immigration',
+      'Mental Health',
+      'Prisons',
       'Technology and Communication',
       'Trade',
       'Transportation',
+      'Voting Reform',
 
       # Differences:                          # Corresponding VoteSmart subjects:
       'Animal Rights and Wildlife Issues',    # Animals and Wildlife
