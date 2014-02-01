@@ -56,6 +56,6 @@ en:
       confirmation_instructions:
         subject: Confirm your AskThem.io email address
       reset_password_instructions:
-        subject: Reset your AskThem.io password
+        subject: Set your AskThem.io password
       #unlock_instructions:
       #  subject: 'Unlock Instructions'

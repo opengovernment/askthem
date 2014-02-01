@@ -16,7 +16,7 @@ describe UserSetPasswordNoticeWorker do
         last_email = ActionMailer::Base.deliveries.last
 
         expect(last_email.to).to eq [user.email]
-        expect(last_email.subject).to eq "Reset your AskThem.io password"
+        expect(last_email.subject).to eq "Set your AskThem.io password"
       end
     end
   end
