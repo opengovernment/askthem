@@ -2,6 +2,11 @@
 
 $placeholder-color: #c8c8c8
 
+// $label-width: 19.863636363636%
+$label-width: 20.5%
+// $input-width: 76.136363636364%
+$input-width: 75.5%
+
 \::-webkit-input-placeholder
   color: $placeholder-color
 
@@ -125,7 +130,7 @@ form div.pill_wrap
     @media (max-width: 420px)
       width: 66%
     @media (min-width: 420px)
-      width: 76.136363636364%
+      width: $input-width
   input[type=file]
     padding-top: 18px
     height: 36px
@@ -134,7 +139,8 @@ form div.pill_wrap
     margin:
       top: 19px
       bottom: 17px
-    padding-left: 4%
+    // padding-left: 4%
+    padding-left: 2.5%
     display: block
     float: left
     line-height: 18px
@@ -144,9 +150,10 @@ form div.pill_wrap
     @media (max-width: 420px)
       width: 30%
     @media (min-width: 420px)
-      width: 19.863636363636%
+      width: $label-width
     abbr
-      display: none
+      color: #e32
+
   div.input.select.sculpt
     margin-bottom: 0
     display: block
@@ -160,7 +167,7 @@ form div.pill_wrap
     @media (max-width: 420px)
       width: 65%
     @media (min-width: 420px)
-      width: 76.136363636364%
+      width: $input-width
     select
       padding: 17px 0
       text-indent: 20px

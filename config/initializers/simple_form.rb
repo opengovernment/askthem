@@ -92,7 +92,10 @@ SimpleForm.setup do |config|
   # config.item_wrapper_class = nil
 
   # How the label text should be generated altogether with the required text.
-  # config.label_text = lambda { |label, required| "#{required} #{label}" }
+  # default, prepend required
+  # config.label_text = lambda { |label, required| "#{required} #{label} " }
+  # we use append abbr
+  config.label_text = lambda { |label, required| "#{label} #{required}" }
 
   # You can define the class to use on all labels. Default is nil.
   config.label_class = 'control-label'
