@@ -33,6 +33,13 @@
 <body class="index">
   <div id="fb-root"></div>
 
+  <% if notice %>
+    <p class="notice"><%= notice %></p>
+  <% end %>
+  <% if alert %>
+    <p class="alert"><%= alert %></p>
+  <% end %>
+
   <header class="main">
     <section class="mobile_admin_nav">
       <%= link_to 'AskThem', root_path, class: 'logo' %>
