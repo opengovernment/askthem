@@ -239,3 +239,16 @@ Warden::Manager.after_set_user({}, :unshift) do |record, warden, options|
     record.send_confirmation_instructions
   end
 end
+
+# we use recoverable mechanism as a way of asking user to set new password
+# after only a placeholder has been set for them at time of signing question
+# this means that they are likely still signed in (after confirming email request)
+# sign them out as passwords#edit requires_no_authentication
+Devise::PasswordsController.class_eval do
+  prepend_before_filter :sign_out_if_needed, only: :edit
+
+  private
+  def sign_out_if_needed
+    sign_out(resource) if current_user
+  end
+end
