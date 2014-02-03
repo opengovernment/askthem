@@ -8,8 +8,6 @@ class PersonMailer < ActionMailer::Base
     @screen_name = person.read_attribute(:twitter_id)
     subject = "New person added from Twitter: #{@screen_name}"
 
-    UserRole.staff_members.each do |staff_member|
-      mail to: staff_member.email, subject: subject
-    end
+    mail to: UserRole.staff_members.pluck(:email), subject: subject
   end
 end
