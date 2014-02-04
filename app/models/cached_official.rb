@@ -159,6 +159,8 @@ class CachedOfficial
         when "citywide"
           if office_name == "Mayor"
             "Mayor"
+          elsif office_name =~ /council/i
+            "Councilmember"
           else
             "MunicipalOfficial"
           end
