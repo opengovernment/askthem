@@ -7,8 +7,10 @@ $(".sign-on-user").click ->
       self.after "<a class='sign_on'>Signed On</a>"
       self.hide()
       question_id = self.data("question-id")
-      current_count = $("[data-signature-question-id='" + question_id + "']")
-      current_count.html parseInt(current_count.html()) + 1
+      currentCount = $("[data-signature-question-id='" + question_id + "']")
+      currentCount.html parseInt(currentCount.html()) + 1
+      currentNeeded = $(".question-signatures-needed")
+      currentNeeded.html parseInt(currentNeeded.html()) - 1
 
     error: (resp) ->
       console.log "coundnt save!"
