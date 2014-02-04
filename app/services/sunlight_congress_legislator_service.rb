@@ -10,7 +10,7 @@ class SunlightCongressLegislatorService
 
   def initialize
     @key = ENV['SUNLIGHT_API_KEY']
-    @base_url = "http://congress.api.sunlightfoundation.com/"
+    @base_url = "https://congress.api.sunlightfoundation.com/"
     @legislators_url = "#{base_url}legislators/"
     @id_field = "bioguide_id"
   end
