@@ -2,44 +2,6 @@
 http_interactions:
 - request:
     method: get
-    uri: http://freegeoip.net/json/161.185.30.156
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - ! '*/*'
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Access-Control-Allow-Origin:
-      - ! '*'
-      Content-Type:
-      - application/json
-      Date:
-      - Fri, 20 Sep 2013 01:19:53 GMT
-      Via:
-      - 1.1 BC1-ACLD
-      Content-Length:
-      - '230'
-      Connection:
-      - Keep-Alive
-      Age:
-      - '0'
-    body:
-      encoding: US-ASCII
-      string: ! '{"ip":"161.185.30.156","country_code":"US","country_name":"United
-        States","region_code":"NY","region_name":"New York","city":"Brooklyn","zipcode":"11201","latitude":40.6944,"longitude":-73.9906,"metro_code":"501","areacode":"718"}'
-    http_version:
-  recorded_at: Fri, 20 Sep 2013 01:20:19 GMT
-- request:
-    method: get
     uri: http://maps.googleapis.com/maps/api/geocode/json?address=10013&language=en&sensor=false
     body:
       encoding: US-ASCII
@@ -59,9 +21,9 @@ http_interactions:
       Content-Type:
       - application/json; charset=UTF-8
       Date:
-      - Fri, 20 Sep 2013 01:20:21 GMT
+      - Tue, 04 Feb 2014 13:03:27 GMT
       Expires:
-      - Sat, 21 Sep 2013 01:20:21 GMT
+      - Wed, 05 Feb 2014 13:03:27 GMT
       Cache-Control:
       - public, max-age=86400
       Access-Control-Allow-Origin:
@@ -98,20 +60,20 @@ http_interactions:
         : \"New York, NY 10013, USA\",\n         \"geometry\" : {\n            \"bounds\"
         : {\n               \"northeast\" : {\n                  \"lat\" : 40.728263,\n
         \                 \"lng\" : -73.994378\n               },\n               \"southwest\"
-        : {\n                  \"lat\" : 40.7118841,\n                  \"lng\" :
-        -74.0215158\n               }\n            },\n            \"location\" :
-        {\n               \"lat\" : 40.7217861,\n               \"lng\" : -74.0094471\n
-        \           },\n            \"location_type\" : \"APPROXIMATE\",\n            \"viewport\"
-        : {\n               \"northeast\" : {\n                  \"lat\" : 40.728263,\n
-        \                 \"lng\" : -73.994378\n               },\n               \"southwest\"
-        : {\n                  \"lat\" : 40.7118841,\n                  \"lng\" :
-        -74.0215158\n               }\n            }\n         },\n         \"types\"
-        : [ \"postal_code\" ]\n      }\n   ],\n   \"status\" : \"OK\"\n}\n"
+        : {\n                  \"lat\" : 40.711884,\n                  \"lng\" : -74.0215159\n
+        \              }\n            },\n            \"location\" : {\n               \"lat\"
+        : 40.7217861,\n               \"lng\" : -74.0094471\n            },\n            \"location_type\"
+        : \"APPROXIMATE\",\n            \"viewport\" : {\n               \"northeast\"
+        : {\n                  \"lat\" : 40.728263,\n                  \"lng\" : -73.994378\n
+        \              },\n               \"southwest\" : {\n                  \"lat\"
+        : 40.711884,\n                  \"lng\" : -74.0215159\n               }\n
+        \           }\n         },\n         \"types\" : [ \"postal_code\" ]\n      }\n
+        \  ],\n   \"status\" : \"OK\"\n}\n"
     http_version:
-  recorded_at: Fri, 20 Sep 2013 01:20:19 GMT
+  recorded_at: Tue, 04 Feb 2014 13:03:26 GMT
 - request:
     method: get
-    uri: http://congress.api.sunlightfoundation.com/legislators/locate?apikey=&fields=bioguide_id&latitude=40.7217861&longitude=-74.0094471
+    uri: https://congress.api.sunlightfoundation.com/legislators/locate?apikey=&fields=bioguide_id&latitude=40.7217861&longitude=-74.0094471
     body:
       encoding: US-ASCII
       string: ''
@@ -125,32 +87,44 @@ http_interactions:
   response:
     status:
       code: 200
-      message: OK
+      message: !binary |-
+        T0s=
     headers:
-      Server:
-      - nginx/1.1.19
-      Date:
-      - Fri, 20 Sep 2013 01:20:00 GMT
-      Content-Type:
-      - application/json; charset=utf-8
-      Vary:
-      - Accept-Encoding
-      Status:
-      - 200 OK
-      Via:
-      - 1.1 BC4-ACLD
-      Content-Length:
-      - '143'
-      Connection:
-      - Keep-Alive
+      !binary "U2VydmVy":
+      - !binary |-
+        bmdpbngvMS4xLjE5
+      !binary "RGF0ZQ==":
+      - !binary |-
+        VHVlLCAwNCBGZWIgMjAxNCAxMzowMTozOSBHTVQ=
+      !binary "Q29udGVudC1UeXBl":
+      - !binary |-
+        YXBwbGljYXRpb24vanNvbjsgY2hhcnNldD11dGYtOA==
+      !binary "VHJhbnNmZXItRW5jb2Rpbmc=":
+      - !binary |-
+        Y2h1bmtlZA==
+      !binary "Q29ubmVjdGlvbg==":
+      - !binary |-
+        a2VlcC1hbGl2ZQ==
+      !binary "VmFyeQ==":
+      - !binary |-
+        QWNjZXB0LUVuY29kaW5n
+      !binary "U3RhdHVz":
+      - !binary |-
+        MjAwIE9L
+      !binary "Q29udGVudC1FbmNvZGluZw==":
+      - !binary |-
+        Z3ppcA==
     body:
-      encoding: US-ASCII
-      string: ! '{"results":[{"bioguide_id":"S000148"},{"bioguide_id":"N000002"},{"bioguide_id":"G000555"}],"count":3,"page":{"count":3,"per_page":20,"page":1}}'
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAA6tWKkotLs0pKVayiq5WSsrMTy/NTEmNz0xRslIKNjAwMDSx
+        UKrVQZfxA8oYGBhhkXEHipuamirVxuooJeeX5pUoWRnrKBUkpqcqWVUji6QW
+        xUNEjQxg8oa1tQDLsVsLjwAAAA==
     http_version:
-  recorded_at: Fri, 20 Sep 2013 01:20:20 GMT
+  recorded_at: Tue, 04 Feb 2014 13:03:28 GMT
 - request:
     method: get
-    uri: http://openstates.org/api/v1/legislators/geo/?apikey=&fields=id&lat=40.7217861&long=-74.0094471
+    uri: http://openstates.org/api/v1/legislators/geo/?apikey=8f13417da56c4101995e5a96b4e1acb1&fields=id&lat=40.7217861&long=-74.0094471
     body:
       encoding: US-ASCII
       string: ''
@@ -172,23 +146,23 @@ http_interactions:
       - application/json; charset=utf-8
       Vary:
       - Authorization
+      Content-Length:
+      - '206'
       Date:
-      - Fri, 20 Sep 2013 01:20:58 GMT
+      - Tue, 04 Feb 2014 13:04:30 GMT
       X-Varnish:
-      - '1080910009'
+      - '236869768'
       Age:
       - '0'
       Via:
-      - 1.1 varnish, 1.1 BC1-ACLD
-      Content-Length:
-      - '206'
+      - 1.1 varnish
       Connection:
-      - Keep-Alive
+      - keep-alive
     body:
       encoding: US-ASCII
       string: ! '[{"district": "66", "chamber": "lower", "state": "ny", "boundary_id":
         "sldl/ny-66", "id": "NYL000112"}, {"district": "26", "chamber": "upper", "state":
         "ny", "boundary_id": "sldu/ny-26", "id": "NYL000057"}]'
     http_version:
-  recorded_at: Fri, 20 Sep 2013 01:20:21 GMT
+  recorded_at: Tue, 04 Feb 2014 13:03:28 GMT
 recorded_with: VCR 2.5.0

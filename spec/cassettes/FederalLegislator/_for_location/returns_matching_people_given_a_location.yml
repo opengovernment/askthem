@@ -21,9 +21,9 @@ http_interactions:
       Content-Type:
       - application/json; charset=UTF-8
       Date:
-      - Fri, 04 Oct 2013 01:42:12 GMT
+      - Tue, 04 Feb 2014 13:01:25 GMT
       Expires:
-      - Sat, 05 Oct 2013 01:42:12 GMT
+      - Wed, 05 Feb 2014 13:01:25 GMT
       Cache-Control:
       - public, max-age=86400
       Access-Control-Allow-Origin:
@@ -71,10 +71,10 @@ http_interactions:
         \        },\n         \"types\" : [ \"street_address\" ]\n      }\n   ],\n
         \  \"status\" : \"OK\"\n}\n"
     http_version:
-  recorded_at: Fri, 04 Oct 2013 01:42:12 GMT
+  recorded_at: Tue, 04 Feb 2014 13:01:25 GMT
 - request:
     method: get
-    uri: http://congress.api.sunlightfoundation.com/legislators/locate?apikey=&fields=bioguide_id&latitude=44.1931496&longitude=-72.5824427
+    uri: https://congress.api.sunlightfoundation.com/legislators/locate?apikey=&fields=bioguide_id&latitude=44.1931496&longitude=-72.5824427
     body:
       encoding: US-ASCII
       string: ''
@@ -96,7 +96,7 @@ http_interactions:
         bmdpbngvMS4xLjE5
       !binary "RGF0ZQ==":
       - !binary |-
-        RnJpLCAwNCBPY3QgMjAxMyAwMTo0MTo0OSBHTVQ=
+        VHVlLCAwNCBGZWIgMjAxNCAxMjo1OTozNyBHTVQ=
       !binary "Q29udGVudC1UeXBl":
       - !binary |-
         YXBwbGljYXRpb24vanNvbjsgY2hhcnNldD11dGYtOA==
@@ -122,5 +122,5 @@ http_interactions:
         UKrVQZfxAcoYmptgkQkGyhgYGyvVxuooJeeX5pUoWRnrKBUkpqcqWVUji6QW
         xUNEjQxg8oa1tQAABXExjwAAAA==
     http_version:
-  recorded_at: Fri, 04 Oct 2013 01:42:13 GMT
+  recorded_at: Tue, 04 Feb 2014 13:01:25 GMT
 recorded_with: VCR 2.5.0

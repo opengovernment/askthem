@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://congress.api.sunlightfoundation.com/legislators/?apikey=&state=VT
+    uri: https://congress.api.sunlightfoundation.com/legislators/?apikey=&state=VT
     body:
       encoding: US-ASCII
       string: ''
@@ -24,7 +24,7 @@ http_interactions:
         bmdpbngvMS4xLjE5
       !binary "RGF0ZQ==":
       - !binary |-
-        RnJpLCAwNCBPY3QgMjAxMyAwMTo0MTo0NiBHTVQ=
+        VHVlLCAwNCBGZWIgMjAxNCAxMjo1OTozNyBHTVQ=
       !binary "Q29udGVudC1UeXBl":
       - !binary |-
         YXBwbGljYXRpb24vanNvbjsgY2hhcnNldD11dGYtOA==
@@ -46,27 +46,28 @@ http_interactions:
     body:
       encoding: ASCII-8BIT
       string: !binary |-
-        H4sIAAAAAAAAA51V246jRhD9FYtnY/cFDMzjah8m0SZZjVezD6vIwtC2O8Zg
-        dTfjjEbz7znV4LXxXLwTiQc4VFXX5Zzqp8Ao21bOBjc/noKlbtatLtVCl8FN
-        8J0xljIWjIEbtynzR4A8i5KQxSETwItNvlsqA3jTtFYR0tQuL9xi1Zgdwc7t
-        b6bTw+Ew8RaTdfMwpX8HVRWbqba2VQvbLm1h9FJNNm5HMcy+S+BPJMBYzGOA
-        pbbO6MIFN2wcrPJCLZtm25klYpayRLA0lTBc5f/iYMFEKEQczpKMClipArZU
-        ZHA7u//GGJ8RfJvSO5NR8DdstLFuUec7Bf+vyqGucbBWdekL/IM+mgdn8qI/
-        NuJCyAywLvbW+FQES2Kkp+tFs1rpAoGcadU4qPJT5O9UObx2uiwr1Z9Xt1U1
-        DuhsdAOuKKGHdLHtUuq+j3EDIZkc3eWPy9bUo1vq/ugvf+boU6urUtdrnLHP
-        jaOhfab3TVNTZcfORNz31brcEXz/DTb+49iCe2V2mCZgtGK3QCO8N8fsecio
-        1R6Hj8FUEJfL059Ns8ttNx7G04Ta5LSr6KQ7taevg3bw70x8t4+NeWicsjsE
-        9f9iLhIxDg5qabVP9IxSnkQnYiHqY9O6dtnz16j9nsbozYLn8SW/v2D0PIng
-        NuQ3Q3Wh5MBP/Laqpj69R/BK5ZvHSWfoed5rYUpeA0pnGU8BnijdzXbIap6k
-        8SzjseApF7ME9ufMjkIZ+a6eMXseeTbz5CWbc9LOFjHe4bNEO2YktROfeSRZ
-        coXPX6hseFW6n/ecxZTtgN/B7xNAH+F3JJPRXWutqqrR3Df/Q/yOwkhEtKK6
-        eSwKSBDylz3HrxC+04HJ6y0MEUE3tAs83X/KAFvwDRkAxkOddAMZSL+fjjJA
-        UWRxLgNfZ2OOHb0QgpQx0n9VCJfUQ+CBEvrAXzsadPFf6mEOAjBJwh7qAcVk
-        ISPGfkgPNqfVaX9JESwW1xWRcRHRLmGXYkhDliQz5HcmBr/aOfY84F4YKO1y
-        zX9Sps5NCZt3hBGhK57SJ2GIjEfXhDHv6kfskzQkp/YOpPELqz+gNDVtn5/r
-        X0ox+qzNFuS8Lo/f4Dlc/1EY84g2HPyx147y4P9DHv+0r8oDjHlDHm/dEozT
-        lfyOPJBrzynYDcUhEs5x8b4qjpc8hPtAHr4JjTkGfwZLiqbF1Uf7Yp+vcWs9
-        nSO4tjpU4MzujT8//wded5BDSwkAAA==
+        H4sIAAAAAAAAA7WWTY/aSBCG/wryGUN/2NhwjHKYrLK70RBNDqsVMnYDHYyN
+        utuwaDT/fd9qmwUzX0mklTjY5erqqur3qeYxMMo2pbPB7K/HYKnrdaMLtdBF
+        MAu+McZSxoIh7MZtiuwEI59GScjikAnY8022WyoD86ZurCJLXbksd4tVbXZk
+        dm4/G4+Px+PIe4zW9WFM346qzDdjbW2jFrZZ2tzopRpt3I5imH2bwB9IgLGY
+        xzAW2jqjcxfM2DBYZbla1vW2dUvEJGWJYGkq4bjK/sHGgolQiDicJFMqYKVy
+        +FKRwd3k4StjfELmu5SemYyCv+GjjXWLKtsprP+iHOoaBmtVFb7A3+mlPjiT
+        5d22ERdCTmHW+d4an4pgSYz0dLWoVyudI5AzjRoGZXaJ/I0qx6qdLopSdftV
+        TVkOA9ob3cBSlNCZdL5tU2rf67xoi8ZDWOiDtrquxnndVM6cZo0dW5c5NTs4
+        7HDOIRCSycF9dlo2phrc0UkN/vT5DT40uix0tYb3PjOODvgjPW/qirpw7mLE
+        /Rn42DA/fIWPfzm360GZHU4eZrRtt0DT/GoOnfCQ0bF4O9YYnCDicnn5sql3
+        mW2rYjxNqKVOu5ISuFd7ejtqh/Wtiz+ZcxMPtVN2h6D+W8xFIobBUS2tdrT8
+        Sn5ecBcRIuqpblyz7LRu1H5PR+7dgqfhLQufIROeRFjWZ4GhulBy2C8sWFXh
+        DMj0KgylyjanUevomehcx7SqJ//plKcwXuTf6qBPAE/SeDLlseApF5ME/tcU
+        RKGMfFevKJhHXvk8ea78jDjbIsYb2pdox4SwvGifR5Il72j/M5WNVaXuznvO
+        Ysq2x0Lw2wim/4uFSCaD+8ZaVZaDuT+on2IhCiMR0ehrz26RA22MFdnxAM29
+        BUfLjMmqLRwRQdc0Yzwa/yGD6foKMjDjR113PWSkn3tnZFAUeVwj4+uszbn7
+        N9BIGSP9F6G5lSkC96jpAn9pJdPGf87OHGJhkoZAnx0UMw0Zqfun2LEZjWT7
+        Q/SwWLxPz5SLiOYOuwUnDVmSTJDfFTj+yuC4P2DuIEJpt9fHB2WqzBTweQOi
+        CF3x8r9AJKY8eg+ieVs/Yl8wkpza28PoB66UgNLUNKl+6VqRUgw+arOFkN9H
+        6RN26V8rURjziCYn1mNenlHiv4DS9+ZFlKCuV1B67fZhnP4WvI3Spf99kETC
+        OS7/F0F6rlls00PJN6E2nWPwBEX5W93Pln22xnX2eG3BddhaBfZsn/jT0781
+        wxK/zwkAAA==
     http_version:
-  recorded_at: Fri, 04 Oct 2013 01:42:10 GMT
+  recorded_at: Tue, 04 Feb 2014 13:01:26 GMT
 recorded_with: VCR 2.5.0

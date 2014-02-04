@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://congress.api.sunlightfoundation.com/legislators/?apikey=&state=VT
+    uri: https://congress.api.sunlightfoundation.com/legislators/?apikey=&state=VT
     body:
       encoding: US-ASCII
       string: ''
@@ -16,30 +16,58 @@ http_interactions:
   response:
     status:
       code: 200
-      message: OK
+      message: !binary |-
+        T0s=
     headers:
-      Server:
-      - nginx/1.1.19
-      Date:
-      - Thu, 03 Oct 2013 05:32:14 GMT
-      Content-Type:
-      - application/json; charset=utf-8
-      Vary:
-      - Accept-Encoding
-      Status:
-      - 200 OK
-      Via:
-      - 1.1 BC4-ACLD
-      Content-Length:
-      - '2379'
-      Connection:
-      - Keep-Alive
+      !binary "U2VydmVy":
+      - !binary |-
+        bmdpbngvMS4xLjE5
+      !binary "RGF0ZQ==":
+      - !binary |-
+        VHVlLCAwNCBGZWIgMjAxNCAxMjo1NjozNyBHTVQ=
+      !binary "Q29udGVudC1UeXBl":
+      - !binary |-
+        YXBwbGljYXRpb24vanNvbjsgY2hhcnNldD11dGYtOA==
+      !binary "VHJhbnNmZXItRW5jb2Rpbmc=":
+      - !binary |-
+        Y2h1bmtlZA==
+      !binary "Q29ubmVjdGlvbg==":
+      - !binary |-
+        a2VlcC1hbGl2ZQ==
+      !binary "VmFyeQ==":
+      - !binary |-
+        QWNjZXB0LUVuY29kaW5n
+      !binary "U3RhdHVz":
+      - !binary |-
+        MjAwIE9L
+      !binary "Q29udGVudC1FbmNvZGluZw==":
+      - !binary |-
+        Z3ppcA==
     body:
-      encoding: US-ASCII
-      string: ! '{"results":[{"bioguide_id":"W000800","birthday":"1947-05-02","chamber":"house","contact_form":"http://www.house.gov/formwelch/issue_subscribe.htm","crp_id":"N00000515","district":0,"facebook_id":"72680720883","fax":"202-225-6790","fec_ids":["H6VT00160","H8VT00034"],"first_name":"Peter","gender":"M","govtrack_id":"412239","icpsr_id":20750,"in_office":true,"last_name":"Welch","middle_name":null,"name_suffix":null,"nickname":null,"office":"2303
-        Rayburn House Office Building","party":"D","phone":"202-225-4115","state":"VT","state_name":"Vermont","term_end":"2015-01-03","term_start":"2013-01-03","thomas_id":"01879","title":"Rep","twitter_id":"PeterWelch","votesmart_id":51272,"website":"http://www.welch.house.gov","youtube_id":"reppeterwelch"},{"bioguide_id":"L000174","birthday":"1940-03-31","chamber":"senate","contact_form":"http://www.leahy.senate.gov/contact/","crp_id":"N00009918","district":null,"facebook_id":"178569152181267","fax":"202-224-3479","fec_ids":["S4VT00017"],"first_name":"Patrick","gender":"M","govtrack_id":"300065","icpsr_id":14307,"in_office":true,"last_name":"Leahy","lis_id":"S057","middle_name":"J.","name_suffix":null,"nickname":null,"office":"437
-        Russell Senate Office Building","party":"D","phone":"202-224-4242","senate_class":3,"state":"VT","state_name":"Vermont","state_rank":"senior","term_end":"2017-01-03","term_start":"2011-01-05","thomas_id":"01383","title":"Sen","twitter_id":"SenatorLeahy","votesmart_id":53353,"website":"http://www.leahy.senate.gov","youtube_id":"SenatorPatrickLeahy"},{"bioguide_id":"S000033","birthday":"1941-09-08","chamber":"senate","contact_form":"http://www.sanders.senate.gov/contact/","crp_id":"N00000528","district":null,"facebook_id":"9124187907","fax":"202-228-0776","fec_ids":["H8VT01016","S4VT00033"],"first_name":"Bernard","gender":"M","govtrack_id":"400357","icpsr_id":29147,"in_office":true,"last_name":"Sanders","lis_id":"S313","middle_name":null,"name_suffix":null,"nickname":"Bernie","office":"332
-        Dirksen Senate Office Building","party":"I","phone":"202-224-5141","senate_class":1,"state":"VT","state_name":"Vermont","state_rank":"junior","term_end":"2019-01-03","term_start":"2013-01-03","thomas_id":"01010","title":"Sen","twitter_id":"sensanders","votesmart_id":27110,"website":"http://www.sanders.senate.gov","youtube_id":"senatorsanders"}],"count":3,"page":{"count":3,"per_page":20,"page":1}}'
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAA7WWTY/aSBCG/wryGUN/2NhwjHKYrLK70RBNDqsVMnYDHYyN
+        utuwaDT/fd9qmwUzX0mklTjY5erqqur3qeYxMMo2pbPB7K/HYKnrdaMLtdBF
+        MAu+McZSxoIh7MZtiuwEI59GScjikAnY8022WyoD86ZurCJLXbksd4tVbXZk
+        dm4/G4+Px+PIe4zW9WFM346qzDdjbW2jFrZZ2tzopRpt3I5imH2bwB9IgLGY
+        xzAW2jqjcxfM2DBYZbla1vW2dUvEJGWJYGkq4bjK/sHGgolQiDicJFMqYKVy
+        +FKRwd3k4StjfELmu5SemYyCv+GjjXWLKtsprP+iHOoaBmtVFb7A3+mlPjiT
+        5d22ERdCTmHW+d4an4pgSYz0dLWoVyudI5AzjRoGZXaJ/I0qx6qdLopSdftV
+        TVkOA9ob3cBSlNCZdL5tU2rf67xoi8ZDWOiDtrquxnndVM6cZo0dW5c5NTs4
+        7HDOIRCSycF9dlo2phrc0UkN/vT5DT40uix0tYb3PjOODvgjPW/qirpw7mLE
+        /Rn42DA/fIWPfzm360GZHU4eZrRtt0DT/GoOnfCQ0bF4O9YYnCDicnn5sql3
+        mW2rYjxNqKVOu5ISuFd7ejtqh/Wtiz+ZcxMPtVN2h6D+W8xFIobBUS2tdrT8
+        Sn5ecBcRIuqpblyz7LRu1H5PR+7dgqfhLQufIROeRFjWZ4GhulBy2C8sWFXh
+        DMj0KgylyjanUevomehcx7SqJ//plKcwXuTf6qBPAE/SeDLlseApF5ME/tcU
+        RKGMfFevKJhHXvk8ea78jDjbIsYb2pdox4SwvGifR5Il72j/M5WNVaXuznvO
+        Ysq2x0Lw2wim/4uFSCaD+8ZaVZaDuT+on2IhCiMR0ehrz26RA22MFdnxAM29
+        BUfLjMmqLRwRQdc0Yzwa/yGD6foKMjDjR113PWSkn3tnZFAUeVwj4+uszbn7
+        N9BIGSP9F6G5lSkC96jpAn9pJdPGf87OHGJhkoZAnx0UMw0Zqfun2LEZjWT7
+        Q/SwWLxPz5SLiOYOuwUnDVmSTJDfFTj+yuC4P2DuIEJpt9fHB2WqzBTweQOi
+        CF3x8r9AJKY8eg+ieVs/Yl8wkpza28PoB66UgNLUNKl+6VqRUgw+arOFkN9H
+        6RN26V8rURjziCYn1mNenlHiv4DS9+ZFlKCuV1B67fZhnP4WvI3Spf99kETC
+        OS7/F0F6rlls00PJN6E2nWPwBEX5W93Pln22xnX2eG3BddhaBfZsn/jT0781
+        wxK/zwkAAA==
     http_version:
-  recorded_at: Thu, 03 Oct 2013 05:32:37 GMT
+  recorded_at: Tue, 04 Feb 2014 12:58:25 GMT
 recorded_with: VCR 2.5.0
