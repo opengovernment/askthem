@@ -53,7 +53,6 @@
         <span class="pubdate"><time datetime="<%= @question.answers.first.created_at.strftime "%Y-%m-%d" %>" pubdate><%= @question.answers.first.created_at.strftime "%B #{@question.answers.first.created_at.day.ordinalize} %Y" %><sup><%= @question.answers.first.created_at.strftime "%I:%M%p" %></sup></time></span>
       </div>
       <% elsif @user.has_role?(:responder, @question.person)%>
-      <!-- <a href="#sign_on_q" class="mobile_cta cta-pill">Sign On</a> <%# @todo JM - mobile sign on button, if logged in this button should sign the question, otherwise it should send the user to the anchored form %> -->
       <div class='recipient-answer-form'>
         <h2>Answer this Question as <strong><%= @question.person.name %></strong></h2>
         <h2><%= person_attributes(@question.person) %></h2>
@@ -115,11 +114,30 @@
     <% if user_signed_in? %>
       <ul>
         <li>
-          <% if current_user.question_signed? @question.id %>
-            <a class='sign_on'>Signed</a>
-          <% else %>
+          <% has_signed = current_user.question_signed?(@question.id) %>
+          <% unless has_signed %>
             <%= link_to 'Sign', "#", class: 'cta-pill sign-on-user', :'data-question-id' => @question.id %>
           <% end %>
+        </li>
+
+        <li class="share-button first-share"<%= raw(" style=\"display:none\"") unless has_signed -%>>
+          <%= facebook_question_share(target: "_blank",
+          class: "cta-pill cta-pill-facebook") %>
+        </li>
+        <li class="share-button"<%= raw(" style=\"display:none\"") unless has_signed -%>>
+          <%= twitter_question_share(
+          tweet_text: "Support my question on @AskThemPPF: #{URI.escape(@question.title)}",
+          target: "_blank",
+          class: "cta-pill cta-pill-twitter") %>
+        </li>
+        <li class="share-button"<%= raw(" style=\"display:none\"") unless has_signed -%>>
+          <%= google_plus_question_share(target: "_blank",
+          class: "cta-pill cta-pill-google") %>
+        </li>
+        <li class="share-button"<%= raw(" style=\"display:none\"") unless has_signed -%>>
+          <%= mail_question_share(@question,
+          subject: "Support my question on AskThem and help get an answer",
+          class: "cta-pill") %>
         </li>
       </ul>
     <% else %>
@@ -181,41 +199,21 @@
             needed to deliver
           </span>
         </div>
-        <% current_url_without_share = current_url.sub("share=true", "share=false") %>
-        <% current_url_without_share_encoded = URI.escape(current_url_without_share) %>
-        <a href='https://www.facebook.com/sharer.php?u=<%= current_url_without_share_encoded -%>' target="_blank" class='modal-share cta-pill cta-pill-facebook'>
-          <i class='icon-facebook'></i>
-          Share on Facebook
-        </a>
+        <%= facebook_question_share(target: "_blank", class: "modal-share cta-pill cta-pill-facebook") %>
         <p class='modal-copy'>When this question reaches the threshold, we'll deliver it publicly and ask <%= @question.person.name %> to respond.</p>
       </div>
 
       <div class='modal-shares'>
-        <a href='https://twitter.com/share?url=<%= current_url_without_share_encoded -%>&text=Support my question on @AskThemPPF: <%= URI.escape(@question.title) %>' target="_blank" class='modal-share cta-pill cta-pill-twitter'>
-          <i class='icon-twitter'></i>
-          Twitter
-        </a>
-        <a href='https://plus.google.com/share?url=<%= current_url_without_share_encoded -%>' target="_blank" class='modal-share cta-pill cta-pill-google'>
-          <i class='icon-google-plus'></i>
-          Google Plus
-        </a>
+        <%= twitter_question_share(
+        tweet_text: "Support my question on @AskThemPPF: #{URI.escape(@question.title)}",
+        target: "_blank",
+        class: "modal-share cta-pill cta-pill-twitter") %>
 
-        <%- mail_body = URI.escape("Sign on to this question on AskThem, a new platform for questions-and-answers with public figures.
+        <%= google_plus_question_share(target: "_blank", class: "modal-share cta-pill cta-pill-google") %>
 
-When it reaches the signature threshold, AskThem will deliver it to its target and ask for a public response:
-
-
-#{@question.title}
-
-#{current_url_without_share}
-
-
-AskThem is free, open-source, and non-profit, working to change the civic culture to ask good questions of people in power.") %>
-
-        <a href='mailto:?subject=Support my question on AskThem and help get an answer&body=<%= mail_body -%>' target="_blank" class='modal-share cta-pill'>
-          <i class='icon-envelope-alt'></i>
-          Email
-        </a>
+        <%= mail_question_share(@question,
+        subject: "Support my question on AskThem and help get an answer",
+        class: "modal-share cta-pill") %>
       </div>
       <%= image_tag('mark.svg', class: 'modal-logo') %>
     </div>

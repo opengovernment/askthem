@@ -6,6 +6,11 @@ $(".sign-on-user").click ->
     success: (resp) ->
       self.after "<a class='sign_on'>Signed On</a>"
       self.hide()
+
+      if $('.share-button').size() > 0
+        $('a.sign_on').fadeOut('slow')
+        $('.share-button').fadeTo('slow', 1)
+
       question_id = self.data("question-id")
       currentCount = $("[data-signature-question-id='" + question_id + "']")
       currentCount.html parseInt(currentCount.html()) + 1
