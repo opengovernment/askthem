@@ -9,6 +9,8 @@ $(".sign-on-user").click ->
 
       if $('.share-button').size() > 0
         $('a.sign_on').fadeOut('slow')
+        $('.has-signed').fadeTo('slow', 1)
+        $('.sharing-text').fadeTo('slow', 1)
         $('.share-button').fadeTo('slow', 1)
 
       question_id = self.data("question-id")

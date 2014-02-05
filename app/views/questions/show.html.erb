@@ -114,10 +114,14 @@
     <% if user_signed_in? %>
       <ul>
         <li>
-          <% has_signed = current_user.question_signed?(@question.id) %>
-          <% unless has_signed %>
+          <%- has_signed = current_user.question_signed?(@question.id) %>
+
+          <h4 class="has-signed"<%= raw(" style=\"display:none\"") unless has_signed -%>>You've signed on</h4>
+          <p class="sharing-text"<%= raw(" style=\"display:none\"") unless has_signed -%>>Feel free to spread the word</p>
+
+          <%- unless has_signed %>
             <%= link_to 'Sign', "#", class: 'cta-pill sign-on-user', :'data-question-id' => @question.id %>
-          <% end %>
+          <%- end %>
         </li>
 
         <li class="share-button first-share"<%= raw(" style=\"display:none\"") unless has_signed -%>>
