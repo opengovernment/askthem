@@ -13,6 +13,9 @@ OpenGovernment::Application.routes.draw do
     root to: 'pages#index'
   end
 
+  # generate a custom robots.txt
+  get 'robots.:format' => 'robots#show'
+
   get 'splash' => 'pages#splash'
   get 'electeds' => 'pages#splash'
   get 'elected_signup' => 'pages#elected_signup'
