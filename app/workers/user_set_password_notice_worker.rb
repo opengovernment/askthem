@@ -6,7 +6,7 @@ class UserSetPasswordNoticeWorker
   # tidy up unaffiliated people that don't have questions
   # meant to be scheduled at a given period after they are created
   def perform(id)
-    self.user = User.find(id)
+    self.user = User.find(id.to_s)
     notify_or_reschedule if user.password_is_placeholder?
 
   rescue Mongoid::Errors::DocumentNotFound
