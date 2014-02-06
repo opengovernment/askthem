@@ -20,6 +20,7 @@
 //= require jquery.equalheights
 //= require authentication
 //= require tabs
+//= require banner
 //= require bills
 //= require questions
 //= require responsive

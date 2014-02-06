@@ -1,0 +1,10 @@
+<%- if ENV["BANNER_HTML"].present? -%>
+  <div class="banner">
+    <div class="banner-content">
+      <a href="#" class="banner-close"><i class="icon-remove"></i></a>
+      <div class="banner-header">
+        <%= raw(ENV["BANNER_HTML"]) %>
+      </div>
+    </div>
+  </div>
+<%- end %>
