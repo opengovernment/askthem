@@ -120,7 +120,7 @@
           <p class="sharing-text"<%= raw(" style=\"display:none\"") unless has_signed -%>>Feel free to spread the word</p>
 
           <%- unless has_signed %>
-            <%= link_to 'Sign', "#", class: 'cta-pill sign-on-user', :'data-question-id' => @question.id %>
+            <%= link_to 'Sign', "#", class: 'cta-pill sign-on-user sign-arrow', :'data-question-id' => @question.id %>
           <%- end %>
         </li>
 
@@ -146,7 +146,7 @@
       </ul>
     <% else %>
       <div class="row last signup">
-        <%= simple_form_for(@user, as: :user, url: registration_url(:user, protocol: Rails.env.production? ? "https://" : "http://")) do |f| %>
+        <%= simple_form_for(@user, as: :user, url: registration_path(:user)) do |f| %>
           <%= hidden_field_tag :question_id, @question.id %>
           <%= f.input :given_name, placeholder: "First Name", label: false %>
           <%= f.input :family_name, placeholder: "Last Name", label: false %>
@@ -158,7 +158,9 @@
           <%#<%= f.input :password, placeholder: "Password", label: false %>
           <%= f.hidden_field :password, value: Devise.friendly_token.first(6) %>
           <%= f.hidden_field :password_is_placeholder, value: true %>
-          <%= f.button :submit, 'Sign', class: 'cta-pill' %>
+
+          <%= link_to 'Sign', "#", class: 'cta-pill sign-on-user sign-arrow', :'data-question-id' => @question.id %>
+          <%= f.button :submit, 'Sign', class: 'cta-pill sign-arrow' %>
         <% end %>
       </div>
     <% end %>
