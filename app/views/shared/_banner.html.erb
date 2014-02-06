@@ -1,4 +1,4 @@
-<%- if ENV["BANNER_HTML"].present? -%>
+<%- if ENV["BANNER_HTML"].present? && session[:banner_viewed].blank? -%>
   <div class="banner">
     <div class="banner-content">
       <a href="#" class="banner-close"><i class="icon-remove"></i></a>
@@ -7,4 +7,5 @@
       </div>
     </div>
   </div>
+  <% session[:banner_viewed] = true %>
 <%- end %>
