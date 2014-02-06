@@ -5,18 +5,20 @@
     <header>
       <h4>
         <span class="emph">Question for:</span>
-        <% if @question.person.image? %>
-          <%= cdn_image_tag(@question.person.image, size: '50x50', alt: '', class: 'official-image avatar-image official-image-big') %>
-        <% end %>
-        <strong><%= link_to @question.person.name, person_path(@question.person.state, @question.person.id), class:'official-name' %></strong>
-        <span class="official-info"><%= person_attributes(@question.person) -%></span>
-        <% if @question.bill_id? %>
-          <span class="emph">on:</span>
-          <strong><%= link_to short_bill_title(@question.bill), bill_path(@jurisdiction.abbreviation, @question.bill.id) %></strong>
-        <% end %>
-        <% if @question.person.verified? -%>
-          <i class='icon-ok-sign is-verified'><span> AskThem Verified</span></i>
-        <% end -%>
+        <div class="question-recipient">
+          <% if @question.person.image? %>
+            <%= cdn_image_tag(@question.person.image, size: '50x50', alt: '', class: 'avatar-image official-image-big') %>
+          <% end %>
+          <strong><%= link_to @question.person.name, person_path(@question.person.state, @question.person.id), class:'official-name' %></strong>
+          <span class="official-info"><%= person_attributes(@question.person) -%></span>
+          <% if @question.bill_id? %>
+            <span class="emph">on:</span>
+            <strong><%= link_to short_bill_title(@question.bill), bill_path(@jurisdiction.abbreviation, @question.bill.id) %></strong>
+          <% end %>
+          <% if @question.person.verified? -%>
+            <i class='icon-ok-sign is-verified'><span> AskThem Verified</span></i>
+          <% end -%>
+        </div>
       </h4>
       <h1><%= @question.title %></h1>
     </header>
