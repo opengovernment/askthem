@@ -33,12 +33,18 @@ class Rating
       person ||= self.person # avoid N+1 query
       metadatum ||= self.metadatum # avoid N+1 query
       sentence = ratingText
-      sentence.sub!(/\[HOUSE\]/, metadatum.chamber_name(person.most_recent(:chamber)))
+
+      if person.most_recent(:chamber)
+        sentence.sub!(/\[HOUSE\]/, metadatum.chamber_name(person.most_recent(:chamber)))
+      end
+
       sentence.sub!(/\[NAME\]/, person.name)
       sentence.sub!(/\[NUMBER\]/, rating)
       sentence.sub!(/\[ORGANIZATION\]/, name)
       sentence.sub!(/\[RATING\]/, rating)
-      sentence.sub!(/\[TITLE\]/, metadatum.chamber_title(person.most_recent(:chamber)))
+      if person.most_recent(:chamber)
+        sentence.sub!(/\[TITLE\]/, metadatum.chamber_title(person.most_recent(:chamber)))
+      end
       sentence.sub!(/\[YEAR\]/, timespan? ? timespan : '')
       sentence.strip.squeeze(' ')
     end
