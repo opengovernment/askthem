@@ -12,7 +12,7 @@ section.questions ol > li div.question_content a.title.question-title
 // Question progress
 div.question_progress
   display: block
-  height: 10px
+  height: 12px
   width: 100%
   border: 1px solid #c1ccc8
   +border-radius(4px)
@@ -20,7 +20,7 @@ div.question_progress
   overflow: hidden
   div.progress_filler
     background: #F47362
-    height: 10px
+    height: 12px
     width: 0
     padding: 1px
     +transition-duration(.5s)
@@ -36,9 +36,7 @@ span.question_progress_count
     bottom: 3px
   display: inline-block
   width: 100%
-  font:
-    size: 0.813em
-    weight: 600
+  font-size: 15px
   color: #7B969E
   line-height: 1.385em
 
@@ -353,6 +351,8 @@ section.question
       &.signup
         border-bottom: 0
         padding-bottom: 0
+    div.sidebar-row
+      padding-top: 0
     ul.recipient
       margin-bottom: 0
       li
@@ -407,6 +407,7 @@ div.actions
   padding: 4.974359%
   vertical-align: top
   a.cta-pill
+    +box-sizing(border-box)
     width: 100%
     text-align: center
   ul
@@ -560,6 +561,6 @@ div.actions
       margin-bottom: 6px
     li
       h4.has-signed
-        margin-top: 10px
+        margin-top: 24px
       p.sharing-text
         font-size: smaller

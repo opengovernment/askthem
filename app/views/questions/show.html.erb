@@ -98,15 +98,15 @@
 
     <h4>Support this question</h4>
 
-    <div class="row">
+    <div class="row sidebar-row">
       <span class="question_progress_count">
-        <strong><span class="question-signature-count"><span data-signature-question-id="<%= @question.id %>"><%= @question.signature_count -%></span> signatures</span></strong>
+        <span class="question-signature-count"><span data-signature-question-id="<%= @question.id %>"><%= @question.signature_count -%></span> signatures</span>
       </span>
       <div class="question_progress">
         <div class="progress_filler" data-width='<%= question_progress_percent(@question) %>'></div>
       </div>
       <span class="question_progress_count count_needed">
-        <strong><span class="question-signature-threshold question-signatures-needed"><%= @question.person.signature_threshold - @question.signature_count -%></span></strong>
+        <span class="question-signature-threshold question-signatures-needed"><%= @question.person.signature_threshold - @question.signature_count -%></span>
         needed to deliver
       </span>
     </div>
@@ -120,7 +120,7 @@
           <p class="sharing-text"<%= raw(" style=\"display:none\"") unless has_signed -%>>Feel free to spread the word</p>
 
           <%- unless has_signed %>
-            <%= link_to 'Sign', "#", class: 'cta-pill sign-on-user', :'data-question-id' => @question.id %>
+            <%= link_to 'Sign', "#", class: 'cta-pill sign-on-user sign-arrow', :'data-question-id' => @question.id %>
           <%- end %>
         </li>
 
@@ -146,7 +146,7 @@
       </ul>
     <% else %>
       <div class="row last signup">
-        <%= simple_form_for(@user, as: :user, url: registration_url(:user, protocol: Rails.env.production? ? "https://" : "http://")) do |f| %>
+        <%= simple_form_for(@user, as: :user, url: registration_path(:user)) do |f| %>
           <%= hidden_field_tag :question_id, @question.id %>
           <%= f.input :given_name, placeholder: "First Name", label: false %>
           <%= f.input :family_name, placeholder: "Last Name", label: false %>
@@ -158,11 +158,14 @@
           <%#<%= f.input :password, placeholder: "Password", label: false %>
           <%= f.hidden_field :password, value: Devise.friendly_token.first(6) %>
           <%= f.hidden_field :password_is_placeholder, value: true %>
-          <%= render partial: "shared/accept_terms", locals: { verb: "signing" } %>
-          <%= f.button :submit, 'Sign', class: 'cta-pill' %>
+
+          <%#= link_to 'Sign', "#", class: 'cta-pill sign-on-user sign-arrow', :'data-question-id' => @question.id %>
+          <%= f.button :submit, 'Sign', class: 'cta-pill sign-arrow' %>
         <% end %>
       </div>
     <% end %>
+    <h5>How it works</h5>
+    <p class="sidebar-text">All US elected officials and verified Twitter users can respond to questions that reach the threshold. Many are pre-committed to reply.</p>
     <% if @question.subject? %>
       <h5>Issue Area</h5>
       <ul class="tags">
@@ -171,6 +174,7 @@
         </li>
       </ul>
     <% end %>
+    <%= render partial: "shared/accept_terms", locals: { verb: "signing" } %>
     <%= link_to "Flag this question", "/support", class: "flag" %><%# @todo JM %>
   </div>
   <%- if @recent_signatures.any? %>
