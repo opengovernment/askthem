@@ -100,13 +100,13 @@
 
     <div class="row">
       <span class="question_progress_count">
-        <strong><span class="question-signature-count"><span data-signature-question-id="<%= @question.id %>"><%= @question.signature_count -%></span> signatures</span></strong>
+        <span class="question-signature-count"><span data-signature-question-id="<%= @question.id %>"><%= @question.signature_count -%></span> signatures</span>
       </span>
       <div class="question_progress">
         <div class="progress_filler" data-width='<%= question_progress_percent(@question) %>'></div>
       </div>
       <span class="question_progress_count count_needed">
-        <strong><span class="question-signature-threshold question-signatures-needed"><%= @question.person.signature_threshold - @question.signature_count -%></span></strong>
+        <span class="question-signature-threshold question-signatures-needed"><%= @question.person.signature_threshold - @question.signature_count -%></span>
         needed to deliver
       </span>
     </div>
