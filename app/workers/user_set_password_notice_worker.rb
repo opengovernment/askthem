@@ -20,7 +20,7 @@ class UserSetPasswordNoticeWorker
       user.password_is_placeholder = false
       user.save!
     else
-      self.class.perform_in(60.minutes, user.id)
+      self.class.perform_in(60.minutes, user.id.to_s)
     end
   end
 end
