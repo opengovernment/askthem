@@ -159,7 +159,7 @@
           <%= f.hidden_field :password, value: Devise.friendly_token.first(6) %>
           <%= f.hidden_field :password_is_placeholder, value: true %>
 
-          <%= link_to 'Sign', "#", class: 'cta-pill sign-on-user sign-arrow', :'data-question-id' => @question.id %>
+          <%#= link_to 'Sign', "#", class: 'cta-pill sign-on-user sign-arrow', :'data-question-id' => @question.id %>
           <%= f.button :submit, 'Sign', class: 'cta-pill sign-arrow' %>
         <% end %>
       </div>
