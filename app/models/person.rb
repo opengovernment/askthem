@@ -27,6 +27,9 @@ class Person
   field :email, type: String
   field '+gender', type: String, as: :gender
   field :photo_url, type: String, as: :image
+  # @todo move chamber to legislator mixin
+  # and refactor dependencies on chamber being present
+  field :chamber, type: String
 
   index(_type: 1)
   index(state: 1)

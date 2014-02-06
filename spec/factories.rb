@@ -45,6 +45,7 @@ FactoryGirl.define do
       given_name "Bernard"
       last_name "Sanders"
       full_name "Bernard Sanders"
+      chamber "upper"
       metadatum { FactoryGirl.create(:metadatum, abbreviation: "vt") }
     end
   end

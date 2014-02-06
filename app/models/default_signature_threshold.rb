@@ -2,7 +2,8 @@
 # @note Based on Popolo.
 class DefaultSignatureThreshold
   DEFAULT_VALUES = { unspecified_person: 500,
-    federal: 5000,
+    unaffiliated: 100,
+    federal: { upper: 1000, lower: 700 },
     major_city_council: 25,
     state: 100,
     governor: 200 }
@@ -19,11 +20,12 @@ class DefaultSignatureThreshold
     when "Councilmember"
       DEFAULT_VALUES[:major_city_council]
     when "FederalLegislator"
-      DEFAULT_VALUES[:federal]
+      DEFAULT_VALUES[:federal][@person.chamber.to_sym]
     when "Governor"
       DEFAULT_VALUES[:governor]
+    when "Person"
+      DEFAULT_VALUES[:unaffiliated]
     else
-      # this covers StateLegislator as default
       DEFAULT_VALUES[:state]
     end
   end

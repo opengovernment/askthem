@@ -22,19 +22,41 @@ describe DefaultSignatureThreshold do
       context "when person is FederalLegislator" do
         let(:person) { FederalLegislator.create(state: "zz") }
 
-        it "returns councilmember default" do
-          expect(DefaultSignatureThreshold.new(person).value)
-            .to eq DefaultSignatureThreshold::DEFAULT_VALUES[:federal]
+        context "and is congressperson" do
+          it "returns congressperson default" do
+            person.write_attribute(:chamber, "lower")
+
+            expect(DefaultSignatureThreshold.new(person).value)
+              .to eq DefaultSignatureThreshold::DEFAULT_VALUES[:federal][:lower]
+          end
+        end
+
+        context "and is senator" do
+          it "returns senator default" do
+            person.write_attribute(:chamber, "upper")
+
+            expect(DefaultSignatureThreshold.new(person).value)
+              .to eq DefaultSignatureThreshold::DEFAULT_VALUES[:federal][:upper]
+          end
         end
       end
 
       context "when person is Governor" do
         let(:person) { Governor.create(state: "zz") }
 
-        it "returns councilmember default" do
+        it "returns governor default" do
           expect(DefaultSignatureThreshold.new(person).value)
             .to eq DefaultSignatureThreshold::DEFAULT_VALUES[:governor]
         end
+      end
+    end
+
+    context "when person is unaffiliated" do
+      let(:person) { Person.create(state: Metadatum::Unaffiliated::ABBREVIATION) }
+
+      it "returns unaffiliated default" do
+        expect(DefaultSignatureThreshold.new(person).value)
+          .to eq DefaultSignatureThreshold::DEFAULT_VALUES[:unaffiliated]
       end
     end
 
