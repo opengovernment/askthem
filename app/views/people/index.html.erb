@@ -1,6 +1,6 @@
 <%= render 'shared/navigation' unless @is_unaffiliated %>
 
-<section class="people listings">
+<section class="people listings unaffiliated-people">
   <%- unless @is_unaffiliated %>
     <div class="filters">
       <span class="info">Filter by:</span><%# @todo DM are these really the filters we're using? %>
