@@ -146,7 +146,7 @@
       </ul>
     <% else %>
       <div class="row last signup">
-        <%= simple_form_for(@user, as: :user, url: registration_path(:user)) do |f| %>
+        <%= simple_form_for(@user, as: :user, url: registration_url(:user, protocol: Rails.env.production? ? "https://" : "http://" )) do |f| %>
           <%= hidden_field_tag :question_id, @question.id %>
           <%= f.input :given_name, placeholder: "First Name", label: false %>
           <%= f.input :family_name, placeholder: "Last Name", label: false %>
