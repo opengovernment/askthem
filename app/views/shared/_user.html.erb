@@ -1,16 +1,19 @@
 <% if user_signed_in? %>
-<li><%= link_to 'My Questions', user_path(current_user) %></li>
-<li><%= link_to 'Settings', edit_user_registration_path %></li>
-<li><%= link_to 'Sign out', destroy_user_session_path %></li>
+<li><%= link_to "My Questions", user_path(current_user) %></li>
+<li><%= link_to "Settings", edit_user_registration_path %></li>
+<li><%= link_to "Sign out", destroy_user_session_path %></li>
 <% if false %>
   <li>
-    <%= link_to '#' do %><%# @todo ST make dropdown appear %>
+    <%= link_to "#" do %><%# @todo ST make dropdown appear %>
       <%= current_user.alternate_name %> <span class="icon-angle-down"></span>
     <% end %>
   </li>
 <% end %>
 <% else %>
-<li><%= link_to 'Sign up', new_user_registration_path %></li>
-<li><%= link_to 'Login', new_user_session_path %></li>
-<li><%= link_to 'Login with Facebook', user_omniauth_authorize_path(:facebook), class: 'facebook-login' %></li>
+<li><%= link_to "Sign up", new_user_registration_path %></li>
+<li><%= link_to "Login", new_user_session_path %></li>
+<li><%= link_to("Login with Facebook",
+                user_omniauth_authorize_url(:facebook,
+                protocol: Rails.env.production? ? "https://" : "http://"),
+                class: "facebook-login") -%></li>
 <% end %>
