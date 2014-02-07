@@ -7,7 +7,7 @@
         <span class="emph">Question for:</span>
         <div class="question-recipient">
           <% if @question.person.image? %>
-            <%= cdn_image_tag(@question.person.image, size: '50x50', alt: '', class: 'avatar-image official-image-big') %>
+            <%= cdn_image_tag(@question.person.image, state: @question.person.state, size: '50x50', alt: '', class: 'avatar-image official-image-big') %>
           <% end %>
           <strong><%= link_to @question.person.name, person_path(@question.person.state, @question.person.id), class:'official-name' %></strong>
           <span class="official-info"><%= person_attributes(@question.person) -%></span>
@@ -41,7 +41,7 @@
     <% if @question.answered? %>
       <div class="recipient_answer recipient">
         <div class="avatar">
-          <%= cdn_image_tag(@question.person.image, size: '130x130', alt: '') %>
+          <%= cdn_image_tag(@question.person.image, state: @question.person.state, size: '130x130', alt: '') %>
         </div>
         <div class="person-info">
           <h2><%= @question.person.name %></h2>

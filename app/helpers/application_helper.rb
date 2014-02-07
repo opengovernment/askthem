@@ -138,6 +138,7 @@ module ApplicationHelper
       image_tag("/assets/placeholder.png")
     else
       return image_tag(url, opts) if (width.blank? || height.blank?) ||
+        (opts[:state] && opts[:state] == Metadatum::Unaffiliated::ABBREVIATION) ||
         Rails.env.development?
 
       image_tag("http://d2xfsikitl0nz3.cloudfront.net/#{CGI.escape(url)}/#{width}/#{height}", opts)

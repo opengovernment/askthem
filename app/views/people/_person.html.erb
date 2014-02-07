@@ -1,7 +1,7 @@
 <li>
   <div class="avatar">
     <% if person.image? %>
-      <%= cdn_image_tag(person.image, size: "60x60", alt: "") %>
+      <%= cdn_image_tag(person.image, state: person.state, size: "60x60", alt: "") %>
     <% else %>
       <%= image_tag("placeholder.png", size: "60x60", alt: "") %>
     <% end %>
