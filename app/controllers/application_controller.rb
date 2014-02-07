@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
     if request.protocol == "https://"
       flash.keep
       location_options = { protocol: "http://", status: :moved_permanently }
-      location_options = new_location_options.merge(request.query_parameters)
+      location_options = location_options.merge(request.query_parameters)
       redirect_to location_options
     end
   end
