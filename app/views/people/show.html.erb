@@ -60,6 +60,16 @@
           </section>
           <% end %>
 
+          <% twitter_id = @person.read_attribute(:twitter_id) %>
+          <% if twitter_id.present? %>
+          <section>
+            <h4>Twitter:</h4>
+            <p>
+              <%= link_to "@#{twitter_id}", "//twitter.com/#{twitter_id}" -%>
+            </p>
+          </section>
+          <% end %>
+
           <% if @person['offices'] -%>
             <% @person['offices'].each do |office| %>
               <section>
