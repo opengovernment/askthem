@@ -23,7 +23,10 @@ class ApplicationController < ActionController::Base
   # before_filter set on individual controllers
   def force_http
     if request.protocol == "https://"
-      redirect_to protocol: "http://", status: :moved_permanently
+      flash.keep
+      redirect_to(protocol: "http://",
+                  query_string: request.query_string,
+                  status: :moved_permanently)
     end
   end
 
