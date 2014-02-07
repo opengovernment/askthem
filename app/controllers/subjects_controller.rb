@@ -9,23 +9,26 @@ class SubjectsController < ApplicationController
 
   def show
     show! do |format|
-      @bills = chain.recent.where(subjects: @subject).includes(:questions).page(params[:page]) # no index includes `session`, so we omit it
-      format.js {render partial: 'page'}
+      @bills = chain.recent.where(subjects: @subject)
+        .includes(:questions)
+        .page(params[:page]) # no index includes `session`, so we omit it
+
+      format.js { render partial: "page" }
     end
   end
 
-private
-
+  private
   # @note MT, RI and WI have inconsistent subject names (typos, etc.).
   def chain
     Bill.connected_to(parent.abbreviation)
   end
 
   def collection
-    @subjects ||= chain.distinct('subjects').sort
+    @subjects ||= chain.distinct("subjects").sort
   end
 
   def resource
-    @subject ||= chain.distinct('subjects').find{|subject| subject.parameterize == params[:id]}
+    @subject ||= chain.distinct("subjects")
+      .find { |subject| subject.parameterize == params[:id].parameterize }
   end
 end
