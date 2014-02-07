@@ -24,9 +24,9 @@ class ApplicationController < ActionController::Base
   def force_http
     if request.protocol == "https://"
       flash.keep
-      redirect_to(protocol: "http://",
-                  query_string: request.query_string,
-                  status: :moved_permanently)
+      location_options = { protocol: "http://", status: :moved_permanently }
+      location_options = new_location_options.merge(request.query_parameters)
+      redirect_to location_options
     end
   end
 
