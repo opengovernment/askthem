@@ -34,11 +34,11 @@
           <span class="attr"><%# pluralize @bill.questions_answered.count, 'answer' %></span> -->
         </div>
         <ol class="actions">
-          <% @bill.dates.each do |action,date| %>
+          <% @bill.dates.each do |action, date| %>
             <% if action == 'first' %>
               <li<% if date %> class="active"<% end %>>
                 Introduced
-                <%= l(date, format: :bill) if date %>
+                <%= l(date, format: :bill) if Time.zone.parse(date.to_s) %>
                 <span class="icon-circle-arrow-right"></span>
               </li>
             <% elsif action == 'passed_lower' %>

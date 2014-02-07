@@ -42,6 +42,8 @@ private
 
   def collection
     # @bills ||= end_of_association_chain.in_session(parent.current_session).includes(:questions).page(params[:page])
-    @bills ||= end_of_association_chain.in_session(parent.current_session).page(params[:page])
+    @bills ||= end_of_association_chain
+      .in_session(parent.current_session)
+      .page(params[:page])
   end
 end
