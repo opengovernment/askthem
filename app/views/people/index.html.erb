@@ -34,7 +34,6 @@
   <%- end %>
 
   <ol class="people-list">
-    <%# spell out arguments for subclasses of Person sake -%>
-    <%= render partial: "people/person", collection: @people %>
+    <%= render @people %>
   </ol>
 </section>

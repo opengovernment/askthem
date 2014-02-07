@@ -47,17 +47,14 @@
   </nav>
   &nbsp;
   <ol class="people-list federal-people-list">
-    <%# spell out arguments for subclasses of Person sake -%>
-    <%= render partial: 'people/person', collection: @federal_people %>
+    <%= render @federal_people %>
   </ol>
   <ol class="people-list state-people-list" style="display:none;">
-    <%# spell out arguments for subclasses of Person sake -%>
-    <%= render partial: 'people/person', object: @governor if @governor %>
-    <%= render partial: 'people/person', collection: @state_people %>
+    <%= render @governor if @governor %>
+    <%= render @state_people %>
   </ol>
   <ol class="people-list municipal-people-list" style="display:none;">
-    <%# spell out arguments for subclasses of Person sake -%>
-    <%# render partial: 'people/person', object: @mayor if @mayor %>
-    <%= render partial: 'people/person', collection: @municipal_people %>
+    <%# render @mayor if @mayor %>
+    <%= render @municipal_people %>
   </ol>
 </section>

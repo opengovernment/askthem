@@ -220,6 +220,12 @@ class Person
     votesmart_url('campaign-finance')
   end
 
+  # so subclasses use standard _person partial
+  # unless otherwise specified
+  def to_partial_path
+    "people/person"
+  end
+
   private
   def votesmart_url(section = nil)
     if votesmart_id
