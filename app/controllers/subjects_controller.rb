@@ -30,5 +30,9 @@ class SubjectsController < ApplicationController
   def resource
     @subject ||= chain.distinct("subjects")
       .find { |subject| subject.parameterize == params[:id].parameterize }
+
+    raise Exception, "Subject #{params[:id]} not valid" unless @subject
+
+    @subject
   end
 end
