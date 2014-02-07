@@ -50,6 +50,19 @@ FactoryGirl.define do
     end
   end
 
+  factory :cached_official do
+    person { FactoryGirl.create(:federal_legislator_bernard_sanders) }
+    metadatum { FactoryGirl.create(:metadatum, abbreviation: "vt") }
+
+    full_name "Bernie Sanders"
+    division_name "Vermont"
+    division_scope "statewide"
+    ocd_division_id "ocd-division/country:us/state:vt"
+    office_level "federal"
+    office_name "United States Senate"
+  end
+
+
   factory :vote do
     metadatum
   end

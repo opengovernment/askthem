@@ -10,4 +10,11 @@ class PersonMailer < ActionMailer::Base
 
     mail to: UserRole.staff_members.pluck(:email), subject: subject
   end
+
+  def notify_staff_bad_person(cached_official)
+    @cached_official = cached_official
+    subject = "Cached Official does not match person"
+
+    mail to: UserRole.staff_members.pluck(:email), subject: subject
+  end
 end

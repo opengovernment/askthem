@@ -111,7 +111,13 @@ class QuestionsController < ApplicationController
       redirect_to question_path(@question.state, @question, share: true)
     else
       set_up_steps
-      flash.now[:alert] = "Whoops! Not quite right. Please try again."
+
+      if @question.person_id.blank?
+        flash.now[:alert] = "Recipient not available due to an error. Staff are looking into it. Please try again later."
+      else
+        flash.now[:alert] = "Whoops! Not quite right. Please try again."
+      end
+
       respond_to do |format|
         format.html { render "new", layout: "data_collection" }
       end
@@ -193,12 +199,23 @@ class QuestionsController < ApplicationController
 
   def set_question_person_id
     person_id = params[:question][:person_id]
+    return unless person_id
 
     unless Person.where(id: person_id).count > 0
-      person_id = CachedOfficial.where(id: person_id).first.person.id
+      person_id = person_id_from_cached_official(person_id)
     end
 
     params[:question][:person_id] = person_id
+  end
+
+  def person_id_from_cached_official(id)
+    cached_official = CachedOfficial.where(id: id).first
+    return cached_official.person.id if cached_official.person
+
+    # alert staff cached_official failed to match a person
+    PersonMailer.notify_staff_bad_person(cached_official).deliver
+
+    nil
   end
 
   def set_is_unaffiliated
