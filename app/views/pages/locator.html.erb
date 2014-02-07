@@ -17,6 +17,12 @@
 <section class="questions locator">
   <ol class="question-list locator-question-list">
     <%= render @questions if @questions %>
+
+    <% if @questions.blank? %>
+      <li>
+        <%= render partial: "shared/no_questions" %>
+      </li>
+    <%- end %>
   </ol>
 </section>
 

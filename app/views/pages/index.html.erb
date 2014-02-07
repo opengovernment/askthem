@@ -25,7 +25,13 @@
       </ul>
     </header>
     <ul class="popular_questions">
-      <%= render partial: 'question', collection: @near_questions %>
+      <%= render partial: "question", collection: @near_questions %>
+
+      <% unless @near_questions.any? %>
+        <li>
+          <%= render partial: "shared/no_questions" %>
+        </li>
+      <%- end %>
     </ul>
   </div>
   <header>
