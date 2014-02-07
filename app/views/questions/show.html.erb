@@ -177,7 +177,7 @@
       </ul>
     <% end %>
     <%= render partial: "shared/accept_terms", locals: { verb: "signing" } %>
-    <%= link_to "Flag this question", "/support", class: "flag" %><%# @todo JM %>
+    <%= link_to "Flag this question", "http://#{ENV["DESK_COM_SITE"]}", class: "flag" %><%# @todo JM %>
   </div>
   <%- if @recent_signatures.any? %>
     <div class="recent-signatures">
