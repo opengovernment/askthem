@@ -107,4 +107,29 @@ describe QuestionsHelper do
   def mail_body_text
     "Sign%20on%20to%20this%20question%20on%20AskThem,%20a%20new%20platform%20for%20questions-and-answers%20with%20public%20figures.%0A%0AWhen%20it%20reaches%20the%20signature%20threshold,%20AskThem%20will%20deliver%20it%20to%20its%20target%20and%20ask%20for%20a%20public%20response:%0A%0A%0Axxx%0A%0Ahttp://test.host%0A%0A%0AAskThem%20is%20free,%20open-source,%20and%20non-profit,%20working%20to%20change%20the%20civic%20culture%20to%20ask%20good%20questions%20of%20people%20in%20power."
   end
+
+  describe "#where_from_for" do
+    let(:user) { FactoryGirl.build(:user, locality: "Berlin", region: "vt") }
+
+    context "when there is locality and region for given user" do
+      it "returns formatted string of location" do
+        expect(helper.where_from_for(user)).to eq ", of Berlin, VT"
+      end
+    end
+
+    context "when there is only one of locality or region for given user" do
+      it "returns formatted string without missing info" do
+        user.region = nil
+        expect(helper.where_from_for(user)).to eq ", of Berlin"
+      end
+    end
+
+    context "when there is no locality and region for given user" do
+      it "returns formatted string of location" do
+        user.locality = nil
+        user.region = nil
+        expect(helper.where_from_for(user)).to be_nil
+      end
+    end
+  end
 end

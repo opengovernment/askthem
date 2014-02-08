@@ -62,4 +62,13 @@ AskThem is free, open-source, and non-profit, working to change the civic cultur
 
     link_to html, raw(url), options
   end
+
+  def where_from_for(user)
+    return unless user.locality.present? || user.region.present?
+
+    where_from_parts = []
+    where_from_parts << user.locality if user.locality.present?
+    where_from_parts << user.region.upcase if user.region.present?
+    ", of #{where_from_parts.join(", ")}"
+  end
 end

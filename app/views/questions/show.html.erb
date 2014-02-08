@@ -35,7 +35,7 @@
             <%= image_tag(@question.user.image.url, size: '30x30', alt: '', class: 'avatar-image') %>
           <% end %>
           <%= @question.user.alternate_name %>
-        <% end %>, of <%= @question.user.locality -%>, <%= @question.user.region.upcase -%>
+        <% end %><%= where_from_for(@question.user) -%>
       </span>
     </span>
     <% if @question.answered? %>
