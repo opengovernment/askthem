@@ -7,6 +7,10 @@ $(".sign-on-user").click ->
       self.after "<a class='sign_on'>Signed On</a>"
       self.hide()
 
+      if $('#modal').size() > 0
+        $('#modal').fadeTo('slow', 1)
+        $('#overlay').fadeTo('slow', 1)
+
       if $('.share-button').size() > 0
         $('a.sign_on').fadeOut('slow')
         $('.has-signed').fadeTo('slow', 1)
