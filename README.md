@@ -136,4 +136,4 @@ bundle exec rake db:mongoid:create_indexes
 
 This project's main repository is on GitHub: [http://github.com/opengovernment/opengovernment-local](http://github.com/opengovernment/opengovernment-local), where your contributions, forks, bug reports, feature requests, and feedback are greatly welcomed.
 
-Copyright (c) 2012-2013 Participatory Politics Foundation, released under the MIT license
+Copyright (c) 2012-2014 Participatory Politics Foundation, released under the open-source AGPLv3 license.
