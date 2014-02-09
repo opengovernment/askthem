@@ -91,12 +91,8 @@ en:
       title: "%{jurisdiction} Questions - AskThem"
       description: "Ask and support questions to your %{jurisdiction} officials"
     show:
-      title: '“%{question}” - %{jurisdiction} - AskThem'
-      description: '“%{question}”
-
-Support this %{jurisdiction} question on AskThem and help get an answer.
-
-AskThem is a free, non-profit platform for questions-and-answers with public figures nationwide.'
+      title: 'Ask %{recipient}: “%{question}” - %{jurisdiction} - AskThem.io'
+      description: Click to support this question on AskThem.io and get a public response.
     new:
       title: Ask a Question - AskThem
       description: Ask a question to your city and state elected officials

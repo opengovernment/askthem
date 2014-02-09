@@ -251,6 +251,18 @@ module ApplicationHelper
     ImageSrcUrl.new(file_or_url).is_image?
   end
 
+  def og_image
+    og_image = "http://www.askthem.io/assets/badge.jpg"
+
+    if @question && @question.media.present? && is_image?(@question.media.url)
+      og_image = @question.media.url
+    elsif @question.person && @question.person.image?
+      og_image = @question.person.image
+    end
+
+    raw("<meta property=\"og:image\" content=\"#{og_image}\">")
+  end
+
   private
   def translate_in_controller_scope(key, args = {})
     args.reverse_merge!(translate_arguments)
@@ -292,6 +304,11 @@ module ApplicationHelper
 
       if @question
         args[:question] = @question.title
+        if @question.person.present? && @question.person.full_name.present?
+          args[:recipient] = @question.person.full_name
+        else
+          args[:recipient] = ""
+        end
       end
 
       if @subject
