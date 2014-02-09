@@ -2,13 +2,13 @@
   <header>
     <div class="avatar">
       <%- if @user.image? %>
-        <%= cdn_image_tag(@user.image.url, size: '130x130', alt: '') %>
+        <%= cdn_image_tag(@user.image.url, size: "130x130", alt: "") %>
       <%- else %>
-        <img src="http://lorempixel.com/130/130/" alt="" />
+        <%= image_tag("placeholder.png", size: "130x130", alt: "") %>
       <%- end %>
     </div>
     <div class="person-info">
-      <h1><%= @user.given_name -%> <%= @user.family_name -%>&nbsp;&nbsp;<% if @user.verified? -%><i class='icon-ok-sign is-verified'><span class='verified-tooltip'>AskThem Verified</span></i><% end -%></h1>
+      <h1><%= @user.given_name -%> <%= @user.family_name -%>&nbsp;&nbsp;<% if @user.verified? -%><i class="icon-ok-sign is-verified"><span class="verified-tooltip">AskThem Verified</span></i><% end -%></h1>
       <%- if @user.locality? && @user.region? %>
         <span class="loc"><%= @user.locality -%>, <%= @user.region.upcase -%></span>
       <%- end %>
@@ -25,8 +25,8 @@
           <% @user.identities.where(status: "being_inspected").each do |identity| -%>
             <div class="identity-inspection-outcome">
               <%= link_to("Person Details", person_path(identity.person.metadatum, identity.person)) -%>:
-              <%= button_to("Verify", identity_path(identity, event: "verify!"), method: 'put', class: "inspect-button") %>
-              <%= button_to("Reject", identity_path(identity, event: "reject!"), method: 'put', class: "inspect-button") %>
+              <%= button_to("Verify", identity_path(identity, event: "verify!"), method: "put", class: "inspect-button") %>
+              <%= button_to("Reject", identity_path(identity, event: "reject!"), method: "put", class: "inspect-button") %>
             </div>
           <% end -%>
         <% end -%>
@@ -45,8 +45,8 @@
     <div class="related_data">
       <nav>
         <ul class="related_nav">
-          <li><%= link_to pluralize(@user.questions.length, 'Question'), user_path(@user.id), tab_options('questions', 'show') %></li>
-          <li><%= link_to pluralize(@user.signatures.length, 'Signature'), signatures_user_path(@user.id), tab_options('signatures') %></li>
+          <li><%= link_to pluralize(@user.questions.length, "Question"), user_path(@user.id), tab_options("questions", "show") %></li>
+          <li><%= link_to pluralize(@user.signatures.length, "Signature"), signatures_user_path(@user.id), tab_options("signatures") %></li>
         </ul>
       </nav>
       <div class="related_content">

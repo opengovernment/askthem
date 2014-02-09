@@ -17,7 +17,7 @@
               <% if person.image? %>
                 <%= cdn_image_tag(person.image, size: '80x80', alt: '', class: 'person_photo') %>
               <% else %>
-                <%= image_tag('http://lorempixel.com/60/60/', size: '60x60', alt: '') %>
+                <%= image_tag('placeholder.png', size: '60x60', alt: '') %>
               <% end %>
             <% end %>
           </div>

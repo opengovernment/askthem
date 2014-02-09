@@ -8,7 +8,9 @@ module SignaturesHelper
                                  alt: "",
                                  class: "avatar-image")
                  else
-                   image_tag("//lorempixel.com/40/40/", class: "avatar-image")
+                   image_tag("placeholder.png",
+                             size: "40x40",
+                             class: "avatar-image")
                  end
 
     description = "#{avatar_tag} #{description}"
