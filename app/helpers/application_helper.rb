@@ -251,13 +251,15 @@ module ApplicationHelper
     ImageSrcUrl.new(file_or_url).is_image?
   end
 
-  def og_image
+  def og_image_tag
     og_image = "http://www.askthem.io/assets/badge.jpg"
 
-    if @question && @question.media.present? && is_image?(@question.media.url)
-      og_image = @question.media.url
-    elsif @question.person && @question.person.image?
-      og_image = @question.person.image
+    if @question
+      if @question.media.present? && is_image?(@question.media.url)
+        og_image = @question.media.url
+      elsif @question.person && @question.person.image?
+        og_image = @question.person.image
+      end
     end
 
     raw("<meta property=\"og:image\" content=\"#{og_image}\">")
