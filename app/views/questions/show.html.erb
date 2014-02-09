@@ -23,7 +23,6 @@
       <h1><%= @question.title %></h1>
     </header>
     <%= simple_format(@question.body) %>
-    <%= render partial: 'media', locals: { question: @question } %>
     <span class="author_wrap">
       <%# HACK: issued_at set to created_at until issued_at is sorted out -%>
       <%# TODO: take out issued_at set to created_at -%>
@@ -38,6 +37,7 @@
         <% end %><%= where_from_for(@question.user) -%>
       </span>
     </span>
+    <%= render partial: 'media', locals: { question: @question } %>
     <% if @question.answered? %>
       <div class="recipient_answer recipient">
         <div class="avatar">
