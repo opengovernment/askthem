@@ -5,9 +5,9 @@ class VideoSrcUrl
     youtube: [/youtu\.be\/([^?]+)/, /youtube\.com\/watch\?v=([^&]+)/],
     vimeo: [/vimeo.com\/([^?]+)/] }
 
-  VIDEO_SITE_VIEWER_BASES = { youtube: "//youtube.com/embed/",
-    youtube_full: "//www.youtube.com/embed/",
-    vimeo: "//player.vimeo.com/video/" }
+  VIDEO_SITE_VIEWER_BASES = { youtube: "http://youtube.com/embed/",
+    youtube_full: "http://www.youtube.com/embed/",
+    vimeo: "http://player.vimeo.com/video/" }
 
   attr_accessor :original_url, :value
 
@@ -30,6 +30,7 @@ class VideoSrcUrl
   private
   def replace_with_viewer_url
     site_key, video_id = find_site_key_and_video_id
+    Rails.logger.debug "what is player url: #{VIDEO_SITE_VIEWER_BASES[site_key]}#{video_id}"
     "#{VIDEO_SITE_VIEWER_BASES[site_key]}#{video_id}"
   end
 
@@ -43,6 +44,7 @@ class VideoSrcUrl
     end
   end
 
+  #     VIDEO_SITE_URL_PATTERNS.values.flatten.select { |v| url =~ v }.any?
   def is_video_service_src?(url = value)
     matches = VIDEO_SITE_VIEWER_BASES.values.select { |v| url.include?(v) }
     matches.any?
