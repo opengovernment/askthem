@@ -152,7 +152,11 @@ class Question
   def modify_media_file_url_if_from_video_site
     if media_file_url.present? && !ImageSrcUrl.new(media_file_url).is_image?
       video_src_url = VideoSrcUrl.new(media_file_url)
-      self.media_file_url = video_src_url.value if video_src_url.is_video?
+      if video_src_url.is_video?
+        self.media_file_url = video_src_url.value
+      else
+        self.media_file_url = "Image or video for sure? #{media_file_url}"
+      end
     end
   end
 end
