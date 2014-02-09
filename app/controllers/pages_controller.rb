@@ -29,7 +29,7 @@ class PagesController < ApplicationController
 
     @national_answers_count = Answer.count
     @national_signatures_count = Signature.count
-    @national_questions = Question.order_by(signature_count: "desc").limit(3)
+    @national_questions = Question.order_by(signature_count: "desc").limit(6)
 
     @user_city = request.location ? request.location.city : "New York"
     # coordinates have to be in GEOjson order, thus reverse
@@ -42,7 +42,7 @@ class PagesController < ApplicationController
 
     @near_signatures = Signature.in(question_id: near_ids)
     @near_answers = Answer.in(question_id: near_ids)
-    @near_questions = @near_questions.order_by(signature_count: "desc").limit(3)
+    @near_questions = @near_questions.order_by(signature_count: "desc").limit(6)
 
     render layout: "homepage"
   end
