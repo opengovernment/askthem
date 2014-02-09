@@ -1,4 +1,4 @@
-# OpenGovernment AskThem: Application
+# AskThem
 
 [![Build Status](https://secure.travis-ci.org/opengovernment/askthem.png)](http://travis-ci.org/opengovernment/askthem)
 [![Dependency Status](https://gemnasium.com/opengovernment/askthem.png)](https://gemnasium.com/opengovernment/askthem)
