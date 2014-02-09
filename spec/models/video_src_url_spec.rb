@@ -35,7 +35,7 @@ describe VideoSrcUrl do
 
     it "returns viewer url for hosted service" do
       original_url = "http://www.youtube.com/watch?v=6IUu2KJI_5k"
-      viewer_url = "http://youtube.com/embed/6IUu2KJI_5k"
+      viewer_url = "http://www.youtube.com/embed/6IUu2KJI_5k"
       expect(VideoSrcUrl.new(original_url).value).to eq viewer_url
     end
   end

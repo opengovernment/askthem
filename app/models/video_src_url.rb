@@ -30,7 +30,6 @@ class VideoSrcUrl
   private
   def replace_with_viewer_url
     site_key, video_id = find_site_key_and_video_id
-    Rails.logger.debug "what is player url: #{VIDEO_SITE_VIEWER_BASES[site_key]}#{video_id}"
     "#{VIDEO_SITE_VIEWER_BASES[site_key]}#{video_id}"
   end
 
@@ -38,6 +37,7 @@ class VideoSrcUrl
     VIDEO_SITE_URL_PATTERNS.each do |key, value|
       value.each do |pattern|
         if original_url =~ pattern
+          key = :youtube_full if key == :youtube
           return [key, $1]
         end
       end
