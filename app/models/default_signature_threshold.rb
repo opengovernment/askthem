@@ -1,12 +1,12 @@
 # Exists only because we blow away the `people` collection regularly.
 # @note Based on Popolo.
 class DefaultSignatureThreshold
-  DEFAULT_VALUES = { unspecified_person: 500,
+  DEFAULT_VALUES = { unspecified_person: 100,
     unaffiliated: 100,
-    federal: { upper: 1000, lower: 700 },
+    federal: { upper: 500, lower: 350 },
     major_city_council: 25,
     state: 100,
-    governor: 200 }
+    governor: 500 }
 
   def initialize(person)
     @person = person if person
