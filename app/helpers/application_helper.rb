@@ -252,17 +252,17 @@ module ApplicationHelper
   end
 
   def og_image_tag
-    og_image = "http://www.askthem.io/assets/badge.jpg"
+    og_image_url = "http://www.askthem.io/assets/badge.jpg"
 
     if @question
       if @question.media.present? && is_image?(@question.media.url)
-        og_image = @question.media.url
-      elsif @question.person && @question.person.image?
-        og_image = @question.person.image
+        og_image_url = @question.media.url
+      elsif @question.person_id.present? && @question.person.image?
+        og_image_url = @question.person.image
       end
     end
 
-    raw("<meta property=\"og:image\" content=\"#{og_image}\">")
+    raw("<meta property=\"og:image\" content=\"#{og_image_url}\">")
   end
 
   private
@@ -306,7 +306,7 @@ module ApplicationHelper
 
       if @question
         args[:question] = @question.title
-        if @question.person.present? && @question.person.full_name.present?
+        if @question.person_id.present? && @question.person.full_name.present?
           args[:recipient] = @question.person.full_name
         else
           args[:recipient] = ""
