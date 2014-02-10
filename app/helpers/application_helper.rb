@@ -258,7 +258,10 @@ module ApplicationHelper
       if @question.media.present? && is_image?(@question.media.url)
         og_image_url = @question.media.url
       elsif @question.person_id.present? && @question.person.image?
-        og_image_url = @question.person.image
+        # twitter profile images are too small
+        unless @question.person.image.include?("pbs.twimg.com/profile_images")
+          og_image_url = @question.person.image
+        end
       end
     end
 
