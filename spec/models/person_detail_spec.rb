@@ -24,7 +24,7 @@ describe PersonDetail do
       end
 
       it "returns hardcoded default from DefaultSignatureThreshold" do
-        expect(@person_detail.signature_threshold).to eq 500
+        expect(@person_detail.signature_threshold).to eq 100
       end
     end
   end
