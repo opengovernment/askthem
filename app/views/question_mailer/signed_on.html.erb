@@ -42,42 +42,34 @@
             <tbody>
               <tr style="border-collapse: collapse;">
                 <td width="500" style="border-collapse: collapse;">
-                  <h2>Thank you for signing on to &ldquo;<%= @question.title %>&rdquo; on AskThem, <%= @user.given_name %></h2>
+                  <h2></Br>Hi <%= @user.given_name %>, thank you so much for signing on to my question.  Can you help us reach the goal?<br><br>
+                  &ldquo;</h2>
+
+                  <h5>Forward this email to friends or visit the <a href="<%= question_url(@question.state, @question.id) %>">question page</a> and post to Facebook.  Facebook is often the best way to get more signers!  If we reach the goal, AskThem will ask for a response.</h5>
 
                   <dl>
-                    <dt>Title:</dt>
-                    <dt><%= @question.title %></dt>
-                    <br>
 
-                    <dt>Topic:</dt>
-                    <dt><%= @question.subject %></dt>
-                    <br>
 
-                    <dt>To:</dt>
+
                     <dt>
-                      <span><%= link_to @question.person.name, person_url(@question.state, @question.person.id) %></span>
-                      <span>(<%= person_attributes(@question.person) %>)</span>
-                    </dt>
-                    <br>
+                    <h3><%= @question.title %>&rdquo;<br></h3>
+                      <h4><%= link_to @question.person.name, person_url(@question.state, @question.person.id) %></h4>
+                      <h4>(<%= person_attributes(@question.person) %>)</h4>
+                      <h4><%= @question.body %></h4>
 
-                    <dt>Body:</dt>
-                    <dt><%= @question.body %></dt>
+                    </dt>
+
                   </dl>
 
                   <p>
                     <a href="<%= question_url(@question.state, @question.id) %>">Here's a permalink to that question</a>, which you can share over email and on Facebook & Twitter.
                   </p>
                   <p>
-                    Now, get others to join you in supporting this question. When it reaches the signature threshold, we'll deliver it publicly to its target and push for a public response.
-                  </p>
-                  <p>
+          <br><br><br>
+          <br><br><br>
                     For tips about how to gather support for this question and more info on how AskThem works, <a href="http://www.askthem.io/faq">please visit our FAQ</a>.
                   </p>
-                  <p>
-                      Thank you,
-                      The AskThem Team
-                  </p>
-                </td>
+                  </td>
               </tr>
             </tbody>
           </table>
