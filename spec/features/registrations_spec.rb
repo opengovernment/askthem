@@ -9,6 +9,7 @@ describe 'registrations' do
     end
 
     it 'can fill out form to sign up', js: true, vcr: true do
+      FactoryGirl.create(:metadatum, abbreviation: "ny")
       user = FactoryGirl.build(:user)
 
       fill_out_sign_up_form_for user

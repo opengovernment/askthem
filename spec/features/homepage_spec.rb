@@ -2,6 +2,10 @@ require "spec_helper"
 require File.expand_path("../features_helper.rb", __FILE__)
 
 describe "pages#index" do
+  before do
+    FactoryGirl.create(:metadatum, abbreviation: "ny")
+  end
+
   describe "Get Answers from Elected Officials", :vcr do
     it "can list questions near an address or zipcode" do
       set_up_ny_local_questions

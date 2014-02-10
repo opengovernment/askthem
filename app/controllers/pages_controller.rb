@@ -27,6 +27,9 @@ class PagesController < ApplicationController
   def index
     @jurisdictions = Metadatum.all.to_a
 
+    # @todo spec, refactor
+    @national_person = Person.featured.first
+
     @national_answers_count = Answer.count
     @national_signatures_count = Signature.count
     @national_questions = Question.order_by(signature_count: "desc").limit(6)
@@ -43,6 +46,15 @@ class PagesController < ApplicationController
     @near_signatures = Signature.in(question_id: near_ids)
     @near_answers = Answer.in(question_id: near_ids)
     @near_questions = @near_questions.order_by(signature_count: "desc").limit(6)
+
+    # @todo spec, refactor
+    if @near_questions.any?
+      @near_questions_people_ids = @near_questions.collect(&:person_id)
+      @near_person = Person.connected_to(@near_questions.first.state)
+      .nin(id: @near_questions_people_ids).first
+    else
+      @near_person = Person.connected_to(default_jurisdiction).first
+    end
 
     render layout: "homepage"
   end

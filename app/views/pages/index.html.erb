@@ -5,6 +5,15 @@
     </div>
   </div> -->
   <div class="leftCol">
+    <%- if @national_person %>
+      <header>
+        <h2>Featured</h2>
+      </header>
+      <ul class="people-list single-featured">
+        <%= render @national_person %>
+      </ul>
+    <%- end %>
+
     <header>
       <h2>Top National Questions</h2>
       <ul>
@@ -17,6 +26,15 @@
     </ul>
   </div>
   <div class="rightCol">
+    <%- if @near_person %>
+      <header>
+        <h2>Here's an Official Near You</h2>
+      </header>
+      <ul class="people-list single-featured">
+        <%= render @near_person %>
+      </ul>
+    <%- end %>
+
     <header>
       <h2>Top Questions Near You</h2>
       <ul class="no-extra-top-margin">

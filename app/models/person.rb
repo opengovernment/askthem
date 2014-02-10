@@ -31,12 +31,18 @@ class Person
   # and refactor dependencies on chamber being present
   field :chamber, type: String
 
+  # whether to show them on homepage or not
+  # assumes only one person flagged featured
+  field :featured, type: Boolean
+
   index(_type: 1)
   index(state: 1)
   index(active: 1)
+  index(featured: 1)
   index(chamber: 1) # only applicable to legislators
 
   scope :active, where(active: true).asc(:chamber, :family_name) # no index includes `last_name`
+  scope :featured, where(featured: true)
 
   delegate :signature_threshold, :biography, :links, to: :person_detail
 
