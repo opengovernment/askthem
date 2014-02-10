@@ -61,10 +61,17 @@ class QuestionsController < ApplicationController
     end
 
   rescue Mongoid::Errors::DocumentNotFound => error
-    if @is_unaffiliated
-      raise error
+    question_different_jurisdiction = Question.where(id: params[:id]).first
+
+    if question_different_jurisdiction
+      correct_jurisdiction = question_different_jurisdiction.state
+      if correct_jurisdiction == Metadatum::Unaffiliated::ABBREVIATION
+        redirect_to unaffiliated_question_path(params[:id], share: params[:share])
+      else
+        redirect_to question_path(correct_jurisdiction, params[:id], share: params[:share])
+      end
     else
-      redirect_to unaffiliated_question_path(params[:id], share: params[:share])
+      raise error
     end
   end
 
