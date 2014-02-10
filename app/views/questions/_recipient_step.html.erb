@@ -34,7 +34,9 @@
       <span class="secure">
         <i class="icon-lock"></i> Enter your address to see your elected officials.
       </span>
-      <a href="/users/sign_in" class="login-link">Already have an AskThem account? Login.</a>
+      <%- unless user_signed_in? %>
+        <a href="/users/sign_in" class="login-link">Already have an AskThem account? Login.</a>
+      <%- end %>
 
       <fieldset class="last">
         <%= f.fields_for :user do |user_form| %>
