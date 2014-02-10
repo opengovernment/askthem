@@ -24,7 +24,7 @@
         <li><%= number_with_delimiter @near_signatures.count -%> Supporters</li>
       </ul>
     </header>
-    <ul class="popular_questions">
+    <ul class="popular_questions match-left-top-margin">
       <%= render partial: "question", collection: @near_questions %>
 
       <% unless @near_questions.any? %>
