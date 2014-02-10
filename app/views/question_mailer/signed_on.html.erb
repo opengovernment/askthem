@@ -42,24 +42,14 @@
             <tbody>
               <tr style="border-collapse: collapse;">
                 <td width="500" style="border-collapse: collapse;">
-                  <h2></Br>Hi <%= @user.given_name %>, thank you so much for signing on to my question.  Can you help us reach the goal?<br><br>
-                  &ldquo;</h2>
+                  <h2></Br>Hi <%= @user.given_name %>, thank you so much for signing on to my question.  Can you help us reach the goal?</h2>
 
+                  <h3>&ldquo;<%= @question.title %>&rdquo;<br></h3>
                   <h5>Forward this email to friends or visit the <a href="<%= question_url(@question.state, @question.id) %>">question page</a> and post to Facebook.  Facebook is often the best way to get more signers!  If we reach the goal, AskThem will ask for a response.</h5>
 
-                  <dl>
-
-
-
-                    <dt>
-                    <h3><%= @question.title %>&rdquo;<br></h3>
-                      <h4><%= link_to @question.person.name, person_url(@question.state, @question.person.id) %></h4>
-                      <h4>(<%= person_attributes(@question.person) %>)</h4>
-                      <h4><%= @question.body %></h4>
-
-                    </dt>
-
-                  </dl>
+                  <h4><%= link_to @question.person.name, person_url(@question.state, @question.person.id) %></h4>
+                  <h4>(<%= person_attributes(@question.person) %>)</h4>
+                  <h4><%= @question.body %></h4>
 
                   <p>
                     <a href="<%= question_url(@question.state, @question.id) %>">Here's a permalink to that question</a>, which you can share over email and on Facebook & Twitter.
