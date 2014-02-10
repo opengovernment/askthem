@@ -132,7 +132,7 @@
         </li>
         <li class="share-button"<%= raw(" style=\"display:none\"") unless has_signed -%>>
           <%= twitter_question_share(
-          tweet_text: "Support my question on @AskThemPPF: #{URI.escape(@question.title)}",
+          tweet_text: tweet_text,
           target: "_blank",
           class: "cta-pill cta-pill-twitter") %>
         </li>
@@ -214,7 +214,7 @@
 
       <div class='modal-shares'>
         <%= twitter_question_share(
-        tweet_text: "Support my question on @AskThemPPF: #{URI.escape(@question.title)}",
+        tweet_text: tweet_text,
         target: "_blank",
         class: "modal-share cta-pill cta-pill-twitter") %>
 

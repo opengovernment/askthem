@@ -71,4 +71,11 @@ AskThem is free, open-source, and non-profit, working to change the civic cultur
     where_from_parts << user.region.upcase if user.region.present?
     ", of #{where_from_parts.join(", ")}"
   end
+
+  def tweet_text
+    text = "Support my question"
+    twitter_id = @question.person.read_attribute(:twitter_id)
+    text += " to @#{twitter_id}" if twitter_id
+    text += " on @AskThemPPF: #{URI.escape(@question.title)}"
+  end
 end
