@@ -16,10 +16,17 @@ class PeopleController < ApplicationController
     tab 'questions'
 
   rescue Mongoid::Errors::DocumentNotFound => error
-    if @is_unaffiliated
-      raise error
+    person_different_jurisdiction = Person.where(id: params[:id]).first
+
+    if person_different_jurisdiction
+      correct_jurisdiction = person_different_jurisdiction.state
+      if correct_jurisdiction == Metadatum::Unaffiliated::ABBREVIATION
+        redirect_to unaffiliated_person_path(params[:id], share: params[:share])
+      else
+        redirect_to person_path(correct_jurisdiction, params[:id], share: params[:share])
+      end
     else
-      redirect_to unaffiliated_person_path(params[:id])
+      raise error
     end
   end
 
