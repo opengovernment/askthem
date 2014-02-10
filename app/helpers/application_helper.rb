@@ -284,7 +284,11 @@ module ApplicationHelper
       args = {}
 
       if @jurisdiction
-        args[:jurisdiction] = @jurisdiction['name']
+        if @jurisdiction.abbreviation != Metadatum::Unaffiliated::ABBREVIATION
+          args[:jurisdiction] = @jurisdiction['name']
+        else
+          args[:jurisdiction] = "Twitter verified"
+        end
 
         # pages#overview
         if @jurisdiction.lower_chamber?
