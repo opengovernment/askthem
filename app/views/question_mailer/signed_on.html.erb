@@ -18,7 +18,7 @@
 <body style="width: 100% !important; background-color: #d8f2f6 !important; margin: 0; padding: 0;" bgcolor="#d8f2f6">
   <table width="100%" cellpadding="0" cellspacing="0" border="0" id="background-table" style="background-color: #d8f2f6; font-family: Roboto, Helvetica, sans-serif; color: #32515a;" bgcolor="#d8f2f6">
     <tbody>
-      <tr id="header" style="border-collapse: collapse; display: block; margin: 45px;">
+      <tr id="header" style="border-collapse: collapse; display: block; margin: 10px 45px 10px 45px;">
         <td align="center" style="border-collapse: collapse;">
           <table width="640" cellpadding="0" cellspacing="0" border="0">
             <tbody>
@@ -28,7 +28,7 @@
                     <img label="AskThem" editable="true" width="135" src="http://www.askthem.io/assets/logo.png" class="w640" border="0" align="top" style="display: block !important; outline: none !important; text-decoration: none !important;" />
                   </a>
                   <p class="tagline" style="color: #82B7C8; position: relative; top: 12px;">
-                    Questions and petitions with public figures
+                    Ask questions and get answers.
                   </p>
                 </div>
               </tr>
@@ -36,25 +36,28 @@
           </table>
         </td>
       </tr>
-      <tr id="main" style="display: block; width: 550px; background-color: #ffffff; -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.1), 0 35px 85px rgba(255, 255, 255, 0.45); -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.1), 0 35px 85px rgba(255, 255, 255, 0.45); box-shadow: 0 0 5px rgba(0, 0, 0, 0.1), 0 35px 85px rgba(255, 255, 255, 0.45); -webkit-border-radius: 0 2px 2px 0; -moz-border-radius: 0 2px 2px 0; -ms-border-radius: 0 2px 2px 0; -o-border-radius: 0 2px 2px 0; padding: 45px 45px 90px;" bgcolor="#ffffff">
+      <tr id="main" style="display: block; width: 550px; background-color: #ffffff; -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.1), 0 35px 85px rgba(255, 255, 255, 0.45); -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.1), 0 35px 85px rgba(255, 255, 255, 0.45); box-shadow: 0 0 5px rgba(0, 0, 0, 0.1), 0 35px 85px rgba(255, 255, 255, 0.45); -webkit-border-radius: 0 2px 2px 0; -moz-border-radius: 0 2px 2px 0; -ms-border-radius: 0 2px 2px 0; -o-border-radius: 0 2px 2px 0; padding: 10px 45px 90px;" bgcolor="#ffffff">
         <td width="500">
           <table width="500" cellpadding="0" cellspacing="0" border="0">
             <tbody>
               <tr style="border-collapse: collapse;">
                 <td width="500" style="border-collapse: collapse;">
-                  <h2></Br>Hi <%= @user.given_name %>, thank you so much for signing on to my question.  Can you help us reach the goal?</h2>
+                  <h2></Br>Hi <%= @user.given_name %>! 
+					  <Br><br>
+					  Thank you so much for signing on to my question to <%= link_to @question.person.name, person_url(@question.state, @question.person.id) %>:
+					  <br><br>
+					   <a href="<%= question_url(@question.state, @question.id) %>"><%= @question.title %></a>
+					   <br><br>
+					   Now I need your help to reach the signature goal and get the question answered.<br><br></h2>
 
-                  <h3>&ldquo;<%= @question.title %>&rdquo;<br></h3>
-                  <h5>Forward this email to friends or visit the <a href="<%= question_url(@question.state, @question.id) %>">question page</a> and post to Facebook.  Facebook is often the best way to get more signers!  If we reach the goal, AskThem will ask for a response.</h5>
-
-                  <h4><%= link_to @question.person.name, person_url(@question.state, @question.person.id) %></h4>
-                  <h4>(<%= person_attributes(@question.person) %>)</h4>
-                  <h4><%= @question.body %></h4>
+                  <p style="font-size: 17px; line-height: 23px;">Forward this email to friends or click on the question above and share on Facebook.
+					  <br><br>Facebook is often the best way to get more signers!  And if we reach the goal, AskThem will ask for a response.</p>
+					  <p>
+						  Thank you!!
+					  </p>
 
                   <p>
-                    <a href="<%= question_url(@question.state, @question.id) %>">Here's a permalink to that question</a>, which you can share over email and on Facebook & Twitter.
-                  </p>
-                  <p>
+          <br><br><br>
           <br><br><br>
           <br><br><br>
                     For tips about how to gather support for this question and more info on how AskThem works, <a href="http://www.askthem.io/faq">please visit our FAQ</a>.
