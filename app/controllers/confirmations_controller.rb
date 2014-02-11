@@ -20,11 +20,15 @@ class ConfirmationsController < Devise::ConfirmationsController
     if resource.errors.empty?
       set_flash_message(:notice, :confirmed) if is_navigational_format?
       sign_in(resource_name, resource)
-      respond_with_navigational(resource){ redirect_to after_confirmation_path_for(resource_name, resource) }
+      respond_with_navigational(resource) { redirect_to after_confirmation_path_for(resource_name, resource) }
+    elsif user_signed_in? && current_user.confirmed? && current_user.email == params[:email]
+      # double click probably, don't sign them out or in, but don't report error
+      # @note definitely be careful with this as email is passed in
+      respond_with_navigational(resource) { redirect_to after_confirmation_path_for(resource_name, resource) }
     else # this part is different
       set_flash_message(:alert, :invalid_confirmation_token) if is_navigational_format?
       notify_airbrake(StandardError.new("Invalid confirmation token: #{params[:confirmation_token]}"))
-      respond_with_navigational(resource.errors, :status => :unprocessable_entity){ redirect_to root_path }
+      respond_with_navigational(resource.errors, :status => :unprocessable_entity) { redirect_to root_path }
     end
   end
 end
