@@ -47,14 +47,14 @@
   </nav>
   &nbsp;
   <ol class="people-list federal-people-list">
-    <%= render @federal_people %>
+    <%= render @federal_people if @federal_people %>
   </ol>
   <ol class="people-list state-people-list" style="display:none;">
     <%= render @governor if @governor %>
-    <%= render @state_people %>
+    <%= render @state_people if @state_people %>
   </ol>
   <ol class="people-list municipal-people-list" style="display:none;">
     <%# render @mayor if @mayor %>
-    <%= render @municipal_people %>
+    <%= render @municipal_people if @municipal_people %>
   </ol>
 </section>
