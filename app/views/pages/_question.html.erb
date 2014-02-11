@@ -13,7 +13,9 @@
           <%= cdn_image_tag(question.person.image, size: '40x40', alt: '', class: 'official-image avatar-image') %>
         <% end %>
         <h4><%= link_to question.person.name, person_path(question.state, person) -%></h4>
+        <%- unless question.state == Metadatum::Unaffiliated::ABBREVIATION  %>
         <span class="jurisdiction"><%# jurisdiction(person).chamber_title(person.most_recent(:chamber)) -%> of <%= question.state.upcase -%></span>
+        <%- end %>
       </div>
     </div>
     <div class="question_stats">
