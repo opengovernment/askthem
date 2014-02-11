@@ -42,8 +42,9 @@ class Rating
       sentence.sub!(/\[NUMBER\]/, rating)
       sentence.sub!(/\[ORGANIZATION\]/, name)
       sentence.sub!(/\[RATING\]/, rating)
-      if person.most_recent(:chamber)
-        sentence.sub!(/\[TITLE\]/, metadatum.chamber_title(person.most_recent(:chamber)))
+      chamber_title = metadatum.chamber_title(person.most_recent(:chamber))
+      if person.most_recent(:chamber) && chamber_title.present?
+        sentence.sub!(/\[TITLE\]/, chamber_title)
       end
       sentence.sub!(/\[YEAR\]/, timespan? ? timespan : '')
       sentence.strip.squeeze(' ')
