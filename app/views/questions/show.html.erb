@@ -25,7 +25,6 @@
         <div class="answered-indicator"><a href="#answer">Answered</a></div>
       <%- end %>
     </header>
-    <%= simple_format(@question.body) %>
     <span class="author_wrap">
       <%# HACK: issued_at set to created_at until issued_at is sorted out -%>
       <%# TODO: take out issued_at set to created_at -%>
@@ -55,7 +54,7 @@
             <span><%= pluralize @question.person.questions_answered.length, 'Answer' %></span>
           </span>
         </div>
-        <p><%= simple_format @question.answers.first.text %></p>
+        <p><%= simple_format(auto_link(@question.answers.first.text)) %></p>
         <span class="pubdate"><time datetime="<%= @question.answers.first.created_at.strftime "%Y-%m-%d" %>" pubdate><%= @question.answers.first.created_at.strftime "%B #{@question.answers.first.created_at.day.ordinalize} %Y" %><sup><%= @question.answers.first.created_at.strftime "%I:%M%p" %></sup></time></span>
       </div>
       <% elsif @user.has_role?(:responder, @question.person)%>

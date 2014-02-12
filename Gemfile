@@ -42,6 +42,9 @@ gem 'google_civic_info', github: 'walter/google_civic_info'
 # Twitter API, used for looking up possible recipients
 gem 'twitter'
 
+# auto_link
+gem 'rinku', require: 'rails_rinku'
+
 group :production do
   gem 'airbrake'
   gem 'fog'
