@@ -27,7 +27,7 @@ class ConfirmationsController < Devise::ConfirmationsController
       respond_with_navigational(resource) { redirect_to after_confirmation_path_for(resource_name, resource) }
     else # this part is different
       set_flash_message(:alert, :invalid_confirmation_token) if is_navigational_format?
-      notify_airbrake(StandardError.new("Invalid confirmation token: #{params[:confirmation_token]}"))
+      notify_airbrake(StandardError.new("Invalid confirmation token: #{params[:confirmation_token]} #{resource.errors.full_messages}"))
       respond_with_navigational(resource.errors, :status => :unprocessable_entity) { redirect_to root_path }
     end
   end
