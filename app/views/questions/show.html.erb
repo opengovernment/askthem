@@ -51,7 +51,7 @@
             <span><%= pluralize @question.person.questions_answered.length, 'Answer' %></span>
           </span>
         </div>
-        <p><%= @question.answers.first.text %></p>
+        <p><%= simple_format @question.answers.first.text %></p>
         <span class="pubdate"><time datetime="<%= @question.answers.first.created_at.strftime "%Y-%m-%d" %>" pubdate><%= @question.answers.first.created_at.strftime "%B #{@question.answers.first.created_at.day.ordinalize} %Y" %><sup><%= @question.answers.first.created_at.strftime "%I:%M%p" %></sup></time></span>
       </div>
       <% elsif @user.has_role?(:responder, @question.person)%>
