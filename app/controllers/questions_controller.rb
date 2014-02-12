@@ -111,7 +111,8 @@ class QuestionsController < ApplicationController
       @question.save
       QuestionMailer.question_posted(@user, @question).deliver
 
-      if @question.state == Metadatum::Unaffiliated::ABBREVIATION
+      if @question.state == Metadatum::Unaffiliated::ABBREVIATION &&
+          @person.questions.count < 2
         PersonMailer.notify_staff_new_from_twitter(@person).deliver
       end
 
