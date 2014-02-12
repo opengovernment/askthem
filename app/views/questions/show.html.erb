@@ -21,6 +21,9 @@
         </div>
       </h4>
       <h1><%= @question.title %></h1>
+      <%- if @question.answered? %>
+        <div class="answered-indicator"><a href="#answer">Answered</a></div>
+      <%- end %>
     </header>
     <%= simple_format(@question.body) %>
     <span class="author_wrap">
@@ -39,6 +42,7 @@
     </span>
     <%= render partial: 'media', locals: { question: @question } %>
     <% if @question.answered? %>
+      <a name="answer"></a>
       <div class="recipient_answer recipient">
         <div class="avatar">
           <%= cdn_image_tag(@question.person.image, state: @question.person.state, size: '130x130', alt: '') %>
