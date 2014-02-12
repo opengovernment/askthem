@@ -1,5 +1,6 @@
 class User
   include Mongoid::Document
+  include Mongoid::Timestamps
 
   # authorization based on roles
   rolify role_cname: 'UserRole'
