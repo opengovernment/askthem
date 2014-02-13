@@ -21,6 +21,7 @@ class Subject
       'Health Insurance',
       'Housing and Property',
       'Immigration',
+      'Marijuana',
       'Mental Health',
       'Prisons',
       'Technology and Communication',
