@@ -218,7 +218,7 @@ class QuestionsController < ApplicationController
 
   def person_id_from_cached_official(id)
     cached_official = CachedOfficial.where(id: id).first
-    return cached_official.person.id if cached_official.person
+    return cached_official.person.id if cached_official && cached_official.person
 
     # alert staff cached_official failed to match a person
     PersonMailer.notify_staff_bad_person(cached_official).deliver
