@@ -252,7 +252,7 @@ module ApplicationHelper
   end
 
   def og_image_tag
-    og_image_url = "http://www.askthem.io/assets/badge.jpg"
+    og_image_url = "http://www.askthem.io/assets/mark.png"
 
     if @question
       if @question.media.present? && is_image?(@question.media.url)
