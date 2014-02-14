@@ -46,7 +46,9 @@
             <li><%= link_to 'Votes', votes_person_path(@jurisdiction.abbreviation, @person.id), tab_options('votes') %></li>
             <li><%= link_to 'Committees', committees_person_path(@jurisdiction.abbreviation, @person.id), tab_options('committees') %></li>
           <% end %>
-          <li><%= link_to 'Interest Groups', ratings_person_path(@jurisdiction.abbreviation, @person.id), tab_options('ratings') %></li>
+          <%- unless @person.state == Metadatum::Unaffiliated::ABBREVIATION %>
+            <li><%= link_to 'Interest Groups', ratings_person_path(@jurisdiction.abbreviation, @person.id), tab_options('ratings') %></li>
+          <%- end %>
         </ul>
       </nav>
 
