@@ -1,5 +1,12 @@
 @import load
 
+div.related_data ul.related_nav li.top-nav-ask-wrap
+  float: right
+  .top-nav-ask
+    margin-top: 9px
+    padding: 10px 16px
+    color: $white
+
 .top-nav-ask
   margin-top: .85em
   float: right
@@ -40,8 +47,8 @@ span.question_progress_count
   color: #7B969E
   line-height: 1.385em
 
-.count_needed
-  text-align: right
+//.count_needed
+  //text-align: right
 
 section.questions
   header
@@ -541,10 +548,17 @@ section.question article span.author_wrap a img.avatar-image, .avatar-image
     width: 275px
     float: right
     clear: both
+  img
+    margin-right: 10px
+    float: left
+
 
 .recent-signature
+  margin-top: 1em
   font-size: .75em
-  margin-top: .5em
+  overflow: auto
+  a
+    display: block
 
 #content-step
   .ref

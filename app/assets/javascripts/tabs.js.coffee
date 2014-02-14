@@ -16,6 +16,7 @@ jQuery ($) ->
 
   # Tabs on people#show and bills#show.
   $('.related_nav a').click (e) ->
+    return if $(e.delegateTarget).hasClass('top-nav-ask')
     e.preventDefault()
     $this = $(this)
     href = $this.attr('href')
