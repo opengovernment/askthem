@@ -4,14 +4,12 @@
       <div class="emph">
         <div class="answered-question-text">
 
-          <%= link_to "Answered Question!",
-          questions_path(@featured_answer.question.state, @featured_answer.question),
-          anchor: "answer" %>
+          <%= link_to "Answered Question!", question_path(@featured_answer.question.state, @featured_answer.question, anchor: "answer") %>
 
           From
 
           <%= link_to "#{@featured_answer.question.person.political_position_title + ' '}#{@featured_answer.question.person.name}",
-          questions_path(@featured_answer.question.state, @featured_answer.question),
+          person_path(@featured_answer.question.person.state, @featured_answer.question.person),
           anchor: "answer" %>
         </div>
         <div class="avatar">
