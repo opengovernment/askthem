@@ -48,7 +48,7 @@
           <li><%= link_to pluralize(@user.questions.length, "Question"), user_path(@user.id), tab_options("questions", "show") %></li>
           <li><%= link_to pluralize(@user.signatures.length, "Signature"), signatures_user_path(@user.id), tab_options("signatures") %></li>
           <li class="top-nav-ask-wrap">
-            <%= generic_ask_question 'Ask a Question', { class: 'cta-pill top-nav-ask'} %>
+            <%= generic_ask_question "Ask a Question", { class: "cta-pill top-nav-ask" } %>
           </li>
         </ul>
       </nav>
