@@ -1,17 +1,28 @@
 <section>
-  <div class="answered-question">
-    <div class="emph">
-      <div class="answered-question-text">
-        <a href="http://www.askthem.io/ny-brooklyn/questions/52f7eba9ec8d83370b000002#answer">Answered Question!</a>
-        From
-        <a href="http://www.askthem.io/ny-brooklyn/people/52e6914bf92ea10b3900000a">NYC Council member Brad Lander</a>
+  <%- if @featured_answer %>
+    <div class="answered-question">
+      <div class="emph">
+        <div class="answered-question-text">
+
+          <%= link_to "Answered Question!",
+          questions_path(@featured_answer.question.state, @featured_answer.question),
+          anchor: "answer" %>
+
+          From
+
+          <%= link_to "#{@featured_answer.question.person.political_position_title + ' '}#{@featured_answer.question.person.name}",
+          questions_path(@featured_answer.question.state, @featured_answer.question),
+          anchor: "answer" %>
+        </div>
+        <div class="avatar">
+          <% if @featured_answer.question.person.image? %>
+            <%= cdn_image_tag(@featured_answer.question.person.image, size: "80x80", alt: "") %>
+          <% end %>
+        </div>
+        <p class="answered-question-subtext">to "<%= @featured_answer.question.title -%>"</p>
       </div>
-      <div class="avatar">
-        <img src="http://d2xfsikitl0nz3.cloudfront.net/http%3A%2F%2Fcouncil.nyc.gov%2Fd39%2Fimages%2Ffeatures%2Fd39lander.jpg/80/80">
-      </div>
-      <p class="answered-question-subtext">on the issue of affordable housing</p>
     </div>
-  </div>
+  <%- end %>
   <div class="leftCol">
     <%- if @national_person %>
       <header>

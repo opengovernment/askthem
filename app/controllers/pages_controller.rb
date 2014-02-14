@@ -28,6 +28,9 @@ class PagesController < ApplicationController
     @jurisdictions = Metadatum.all.to_a
 
     # @todo spec, refactor
+    @featured_answer = Answer.featured.first
+
+    # @todo spec, refactor
     @national_person = Person.featured.first
 
     @national_answers_count = Answer.count
