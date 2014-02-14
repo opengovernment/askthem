@@ -14,7 +14,9 @@ describe QuestionAnsweredNotifierWorker do
       QuestionAnsweredNotifierWorker.new.perform(question.id.to_s)
 
       delivery_count = ActionMailer::Base.deliveries.count
-      expect(delivery_count).to eq 3
+      # expect(delivery_count).to eq 3
+      # only staff members for now
+      expect(delivery_count).to eq 1
     end
   end
 end
