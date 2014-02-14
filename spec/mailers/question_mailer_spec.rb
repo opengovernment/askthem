@@ -24,6 +24,30 @@ describe QuestionMailer do
                                                       question.id))
   end
 
+  it "sends author question answered e-mail" do
+    user = FactoryGirl.create(:user)
+    question = FactoryGirl.create(:question)
+    QuestionMailer.answered_for_author(user, question).deliver
+
+    last_email = ActionMailer::Base.deliveries.last
+    last_email.to.should == [user.email]
+    last_email.subject.should == "Your AskThem.io question '#{question.title}' has been answered"
+    last_email.body.encoded.should match(question_url(question.state,
+                                                      question.id))
+  end
+
+  it "sends signer question answered e-mail" do
+    user = FactoryGirl.create(:user)
+    question = FactoryGirl.create(:question)
+    QuestionMailer.answered_for_signer(user, question).deliver
+
+    last_email = ActionMailer::Base.deliveries.last
+    last_email.to.should == [user.email]
+    last_email.subject.should == "AskThem.io question '#{question.title}' has been answered"
+    last_email.body.encoded.should match(question_url(question.state,
+                                                      question.id))
+  end
+
   it "sends email to person that signature threshold is met" do
     pending "feature being reenabled, see question_mailer#email_person"
 
@@ -52,6 +76,23 @@ describe QuestionMailer do
     last_email = ActionMailer::Base.deliveries.last
     expect(last_email.to).to eq [staff_member.email]
     subject = "A question for '#{person.name}' has reached its goal"
+    expect(last_email.subject).to eq subject
+    expect(last_email.body.encoded).to match(question_url(question.state,
+                                                          question.id))
+  end
+
+  it "sends email to staff members that question has been answered" do
+    person = FactoryGirl.create(:state_legislator_ny_sheldon_silver)
+    question = FactoryGirl.create(:question, person: person, answered: true)
+
+    staff_member = FactoryGirl.create(:user)
+    staff_member.add_role :staff_member
+
+    QuestionMailer.notify_staff_members_answered(question).deliver
+
+    last_email = ActionMailer::Base.deliveries.last
+    expect(last_email.to).to eq [staff_member.email]
+    subject = "'#{person.name}' has answered a question"
     expect(last_email.subject).to eq subject
     expect(last_email.body.encoded).to match(question_url(question.state,
                                                           question.id))

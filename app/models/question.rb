@@ -93,7 +93,7 @@ class Question
   end
 
   def answered?
-    self.answers.any?
+    answers.any?
   end
 
   # @todo delete if unnecessary with only 1 db

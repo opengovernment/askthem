@@ -1,0 +1,16 @@
+Hi <%= @user.given_name -%>!
+
+Exciting News! We wanted to let you know that <%= @question.person.name -%> has replied to the question you submitted:
+
+<%= @question.title %>
+
+<%= question_url(@question.state, @question.id) %>
+
+Click above for the full response!
+
+Congratulations on the success of your question! We'll notify everyone that signed on and share your question-and-answer on our social media channels.
+
+Forward this email to friends or click on the question above and share on Facebook.
+
+Thank you,
+The AskThem Team

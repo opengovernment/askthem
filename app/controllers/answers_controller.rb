@@ -14,6 +14,9 @@ class AnswersController < ApplicationController
         question.answers << answer
         question.save
       end
+
+      QuestionAnsweredNotifierWorker.perform_async(question.id.to_s)
+
       redirect_to question_path(question.state, question.id)
     end
   end

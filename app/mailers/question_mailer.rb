@@ -15,6 +15,18 @@ class QuestionMailer < ActionMailer::Base
     mail to: user.email, subject: "You're Signed On to '#{@question.title}'"
   end
 
+  def answered_for_author(user, question)
+    @user = user
+    @question = question
+    mail to: user.email, subject: "Your AskThem.io question '#{@question.title}' has been answered"
+  end
+
+  def answered_for_signer(user, question)
+    @user = user
+    @question = question
+    mail to: user.email, subject: "AskThem.io question '#{@question.title}' has been answered"
+  end
+
   def email_person(question)
     # @warn TEMP: disable automatic delivery of question for time being
     # rely on staff members manually doing it for now
@@ -28,6 +40,12 @@ class QuestionMailer < ActionMailer::Base
   def notify_staff_question_at_threshold(question)
     @question = question
     subject = "A question for '#{question.person.name}' has reached its goal"
+    mail to: UserRole.staff_members.pluck(:email), subject: subject
+  end
+
+  def notify_staff_members_answered(question)
+    @question = question
+    subject = "'#{question.person.name}' has answered a question"
     mail to: UserRole.staff_members.pluck(:email), subject: subject
   end
 end

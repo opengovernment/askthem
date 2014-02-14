@@ -1,0 +1,16 @@
+Hi <%= @user.given_name -%>!
+
+Exciting news- we've received an answer to the question for <%= @question.person.name -%>:
+
+<%= @question.title %>
+
+<%= question_url(@question.state, @question.id) %>
+
+Click above for the full response!
+
+Thanks for signing on!
+
+Forward this email to friends or click on the question above and share on Facebook.
+
+Thank you,
+The AskThem Team
