@@ -190,7 +190,10 @@ class Person
 
   # Returns the person's committees.
   def committees
-    ids = read_attribute(:roles).map { |x| x['committee_id'] }.compact
+    roles = read_attribute(:roles)
+    return [] unless roles
+
+    ids = roles.map { |x| x['committee_id'] }.compact
     if ids.empty?
       []
     else
