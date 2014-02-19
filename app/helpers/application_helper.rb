@@ -252,20 +252,21 @@ module ApplicationHelper
   end
 
   def og_image_tag
-    og_image_url = "http://www.askthem.io/assets/mark.png"
+    urls = ["http://www.askthem.io/assets/mark.png"]
 
     if @question
       if @question.media.present? && is_image?(@question.media.url)
-        og_image_url = @question.media.url
+        urls.unshift(@question.media.url)
       elsif @question.person_id.present? && @question.person.image?
         # twitter profile images are too small
         unless @question.person.image.include?("pbs.twimg.com/profile_images")
-          og_image_url = @question.person.image
+          urls.unshift(@question.person.image)
         end
       end
     end
 
-    raw("<meta property=\"og:image\" content=\"#{og_image_url}\">")
+    parts = urls.collect { |url| "<meta property=\"og:image\" content=\"#{url}\">" }
+    raw(parts.join(''))
   end
 
   private
