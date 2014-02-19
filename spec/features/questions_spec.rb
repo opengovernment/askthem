@@ -53,7 +53,8 @@ describe 'questions' do
             visit '/vt/questions?gov=state'
             click_link 'Sign'
             page.should have_content 'Signed'
-            page.body.should have_content '1 out of'
+            sleep 1 # loading of question page
+            page.body.should have_content "You've signed on"
           end
         end
       end
@@ -487,9 +488,9 @@ describe 'questions' do
             visit '/vt/questions?gov=state'
             click_link 'Sign'
             page.should have_content 'Signed'
-
+            sleep 1 # loading of question page
             # supporters = creator of question + signers
-            page.body.should have_content '2 out of'
+            page.body.should have_content "You've signed on"
           end
         end
       end

@@ -1,7 +1,8 @@
 $(".sign-on-user").click ->
   self = $(this)
+  questionId = self.data("question-id")
   $.ajax
-    url: "/signatures?question_id=" + self.data("question-id")
+    url: "/signatures?question_id=" + questionId
     type: "POST"
     success: (resp) ->
       self.after "<a class='sign_on'>Signed On</a>"
@@ -25,12 +26,19 @@ $(".sign-on-user").click ->
         $('#modal').fadeTo('slow', 1)
         $('#overlay').fadeTo('slow', 1)
 
-      if $('.share-button').size() > 0
-        $('a.sign_on').fadeOut('slow')
-        $('.has-signed').fadeTo('slow', 1)
-        $('.sharing-text').fadeTo('slow', 1)
-        $('.share-button').fadeTo('slow', 1)
+        if $('.share-button').size() > 0
+          $('a.sign_on').fadeOut('slow')
+          $('.has-signed').fadeTo('slow', 1)
+          $('.sharing-text').fadeTo('slow', 1)
+          $('.share-button').fadeTo('slow', 1)
+      else
+        jurisdiction = $(location).attr('pathname').split('/')[1]
+        questionUrl = ""
+        unless jurisdiction == 'questions'
+          questionUrl = "/#{jurisdiction}"
+        questionUrl += "/questions/#{questionId}?share=true"
 
+        window.location.href = questionUrl
     error: (resp) ->
       console.log "coundnt save!"
 
