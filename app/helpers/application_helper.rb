@@ -251,12 +251,15 @@ module ApplicationHelper
     ImageSrcUrl.new(file_or_url).is_image?
   end
 
+  # @todo a good candidate for a value class
   def og_image_tag
     urls = ["http://www.askthem.io/assets/mark.png"]
 
     if @question
       if @question.media.present? && is_image?(@question.media.url)
-        urls.unshift(@question.media.url)
+        media_url = @question.media.url
+        media_url = "http:#{media_url}" if media_url[0..1] == "//"
+        urls.unshift(media_url)
       elsif @question.person_id.present? && @question.person.image?
         # twitter profile images are too small
         unless @question.person.image.include?("pbs.twimg.com/profile_images")
