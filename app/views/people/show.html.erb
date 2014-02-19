@@ -25,7 +25,9 @@
         <% end -%>
         <div class="attr">
           <span class="count"><%= pluralize @person.questions.count, 'question' %></span>
-          <span class="count"><%= pluralize @person.questions_answered.count, 'answer' %></span>
+          <%- if @person.questions_answered.count > 0 %>
+            <span class="count"><%= pluralize @person.questions_answered.count, 'answer' %></span>
+          <%- end %>
         </div>
       </div>
 

@@ -12,7 +12,9 @@
     <span class="stats">
       <%- if person.questions.count > 0 %>
         <span><%= pluralize person.questions.count, "Question" %></span>
-        <span><%= pluralize person.questions_answered.count, "Answer" %></span>
+        <%- if person.questions_answered.count > 0 %>
+          <span><%= pluralize person.questions_answered.count, "Answer" %></span>
+        <%- end %>
       <%- else %>
         <%= link_to "Ask the first question >>", new_question_path(person.state, person: @person) -%>
       <%- end %>
