@@ -44,21 +44,22 @@
                 <td width="500" style="border-collapse: collapse;">
                   <h2></Br>Hi <%= @user.given_name %>!
 					  <Br><br>
-					  Thank you so much for signing on to my question to <%= @question.person.name %>:
+					  Thank you so much for signing on to my question to <%= @question.person.name -%>:
 					  <br><br>
-					   <a href="<%= question_url(@question.state, @question.id) %>"><%= @question.title %></a>
+					   <a href="<%= question_url(@question.state, @question.id) -%>"><%= @question.title %></a>
 					   <br><br>
 					   Now I need your help to reach the goal and get the question answered.<br><br>Can you take 10 seconds to share this question:</h2>
 
 					   <p>
-						   <a href="https://www.facebook.com/sharer.php?u=http://www.askthem.io/questions/<%= @question.id %>"><img src="http://www.askthem.io/assets/facebook-button-with-text.png"></a>
+						   <a
+						   href="https://www.facebook.com/sharer.php?u=<%= question_url(@question.state, @question.id) -%>"><img src="http://s3.amazonaws.com/data.opengovernment.org/image_assets/facebook-button-with-text.png"></a>
 					   </p>
 
 
                   <p style="font-size: 17px; line-height: 23px;">
-					Facebook is the <em>single most effective</em> way to get more signatures on questions.  If we can reach the threshold, the question will get delivered.  
+					Facebook is the <em>single most effective</em> way to get more signatures on questions. If we can reach the threshold, the question will get delivered.
 				  </p>
-					  
+
 					  <p>You can also forward this email to friends and ask them to click on the question and sign on.
 					  </p>
 						  Thank you so much!!
