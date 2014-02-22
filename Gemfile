@@ -45,6 +45,9 @@ gem 'twitter'
 # auto_link
 gem 'rinku', require: 'rails_rinku'
 
+# use pry as console, even in production
+gem 'pry-rails'
+
 group :production do
   gem 'airbrake'
   gem 'fog'
@@ -64,7 +67,6 @@ group :development do
 end
 
 group :test, :development do
-  gem 'pry-rails'
   gem 'rspec-rails'
 end
 
