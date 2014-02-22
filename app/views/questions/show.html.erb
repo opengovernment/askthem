@@ -25,7 +25,7 @@
         <div class="answered-indicator"><a href="#answer">Answered</a></div>
       <%- end %>
     </header>
-    <%= simple_format(@question.body) %>
+    <%= simple_format(auto_link(@question.body)) %>
     <span class="author_wrap">
       <%# HACK: issued_at set to created_at until issued_at is sorted out -%>
       <%# TODO: take out issued_at set to created_at -%>
