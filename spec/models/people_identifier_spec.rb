@@ -48,6 +48,16 @@ describe PeopleIdentifier do
         person_identifier = PeopleIdentifier.new({ twitter_id: "nonexistenttwitter" })
         expect(person_identifier.people.count).to eq 0
       end
+
+      it "returns person that matches if more than one twitter id exists" do
+        screen_name = "elizabethforma"
+        person = FactoryGirl.create(:person,
+                                    twitter_id: "SenWarren",
+                                    additional_twitter_ids: [screen_name])
+
+        person_identifier = PeopleIdentifier.new({ twitter_id: screen_name })
+        expect(person_identifier.people.first).to eq person
+      end
     end
   end
 end

@@ -22,8 +22,9 @@ class PeopleIdentifier
   end
 
   def people_from_twitter
-    # exact match only to return local results over twitter
-    people = Person.where(twitter_id: regexp_for(params[:twitter_id]))
+    people = Person.any_of({ twitter_id: regexp_for(params[:twitter_id]) },
+                           { additional_twitter_ids:
+                             { "$in" => [params[:twitter_id].downcase] } })
     return people if people.count > 0
 
     TwitterPersonService.new(params[:twitter_id]).people

@@ -31,6 +31,11 @@ class Person
   # and refactor dependencies on chamber being present
   field :chamber, type: String
 
+  # social media handling
+  field :twitter_id, type: String
+  # mainly to be used for quick look up, save as downcase
+  field :additional_twitter_ids, type: Array
+
   # whether to show them on homepage or not
   # assumes only one person flagged featured
   field :featured, type: Boolean
@@ -39,6 +44,8 @@ class Person
   index(state: 1)
   index(active: 1)
   index(featured: 1)
+  index(twitter_id: 1)
+  index(additional_twitter_ids: 1)
   index(chamber: 1) # only applicable to legislators
 
   scope :active, where(active: true).asc(:chamber, :family_name) # no index includes `last_name`
