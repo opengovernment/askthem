@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
-  # rescue_from Mongoid::Errors::DocumentNotFound, with: :not_found
+  rescue_from Mongoid::Errors::DocumentNotFound, with: :redirect_if_possible_or_return_not_found
+
   protect_from_forgery
 
   def default_jurisdiction
@@ -39,6 +40,17 @@ class ApplicationController < ActionController::Base
       end
       format.json { head :not_found }
       format.atom { head :not_found }
+    end
+  end
+
+  def redirect_if_possible_or_return_not_found
+    registered_redirect = RegisteredRedirect.match(request).first
+
+    if registered_redirect
+      redirect_to(registered_redirect.new_url_from(request),
+                  status: registered_redirect.status_code)
+    else
+      not_found
     end
   end
 end
