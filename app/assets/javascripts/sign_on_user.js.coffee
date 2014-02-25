@@ -34,7 +34,7 @@ $(".sign-on-user").click ->
       else
         jurisdiction = $(location).attr('pathname').split('/')[1]
         questionUrl = ""
-        unless jurisdiction == 'questions'
+        if jurisdiction != 'questions' && jurisdiction != 'locator'
           questionUrl = "/#{jurisdiction}"
         questionUrl += "/questions/#{questionId}?share=true"
 
