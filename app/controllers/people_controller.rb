@@ -78,8 +78,8 @@ class PeopleController < ApplicationController
   def tab(tab)
     @tab = tab
     show! do |format|
-      format.html {render action: 'show'}
-      format.js {render partial: @tab}
+      format.html { render action: 'show' }
+      format.js { render partial: @tab }
     end
   end
 

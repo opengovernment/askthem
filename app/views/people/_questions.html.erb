@@ -7,7 +7,9 @@
   <div class="notif info">
     <h3>Nobody has asked any questions yet!</h3>
     <p>Do you want to get the ball rolling?</p>
-    <%= link_to 'Ask this person a Question', new_question_path(@jurisdiction.abbreviation, person: @person), class: 'cta-pill' %>
+    <%= link_to "Ask this person a Question", new_question_path(@jurisdiction.abbreviation, person: @person), class: "cta-pill" %>
   </div>
   <% end %>
+
+  <%= paginate @questions, outer_window: 1, params: { format: nil }, replace: ".related_focus", scroll: '.related_wrap' %>
 </section>
