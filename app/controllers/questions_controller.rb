@@ -221,7 +221,9 @@ class QuestionsController < ApplicationController
     return cached_official.person.id if cached_official && cached_official.person
 
     # alert staff cached_official failed to match a person
-    PersonMailer.notify_staff_bad_person(cached_official).deliver
+    if cached_official
+      PersonMailer.notify_staff_bad_person(cached_official).deliver
+    end
 
     nil
   end
