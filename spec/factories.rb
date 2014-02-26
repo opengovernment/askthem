@@ -131,9 +131,11 @@ FactoryGirl.define do
     password "password"
     coordinates [-73.9998334, 40.7195898]
 
-    # skip confirmation by default
-    after(:build) do |record|
-      record.skip_confirmation!
+    if User.devise_modules.include?(:confirmable)
+      # skip confirmation by default
+      after(:build) do |record|
+        record.skip_confirmation!
+      end
     end
   end
 

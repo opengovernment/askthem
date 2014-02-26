@@ -41,9 +41,10 @@ describe 'registrations' do
 
         expect(Identity.count).to eq 1
         # emails count has three outgoing emails
-        # for user: 1 for confirm + 1 for identity awaiting inspection
+        # for user: 1 for confirm ### now not done
+        # + 1 for identity awaiting inspection
         # + 1 for staff member to let them know a identity needs inspection
-        expect(ActionMailer::Base.deliveries.count).to eq 3
+        expect(ActionMailer::Base.deliveries.count).to eq 2
       end
     end
 

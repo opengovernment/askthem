@@ -25,6 +25,7 @@ class RegistrationsController < Devise::RegistrationsController
         end
       else
         set_flash_message :notice, :"signed_up_but_#{resource.inactive_message}" if is_navigational_format?
+
         expire_session_data_after_sign_in!
         respond_with resource, :location => after_inactive_sign_up_path_for(resource)
       end
@@ -48,8 +49,11 @@ class RegistrationsController < Devise::RegistrationsController
   def add_signature_to_question(user, question_id)
     if question_id
       question = Question.find(question_id)
-      user.signatures.new(question_id: question.id).save
-      respond_with user, :location => question_path(question.state, question.id, :share => true)
+      success = user.signatures.new(question_id: question.id).save
+      if success
+        QuestionMailer.signed_on(current_user, question, true).deliver
+        respond_with user, :location => question_path(question.state, question.id, :share => true)
+      end
     end
   end
 end

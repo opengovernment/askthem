@@ -7,7 +7,6 @@ describe UserSetPasswordNoticeWorker do
     context "when user is confirmed and has placeholder password" do
       it "sends email asking user to set their password" do
         user = FactoryGirl.create(:user)
-        user.confirm!
         user.password_is_placeholder = true
         user.save!
 

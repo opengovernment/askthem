@@ -51,8 +51,6 @@ describe "users" do
       context "as a staff member" do
         before :each do
           @staff_member = FactoryGirl.create(:user)
-          @staff_member.confirmed_at = Time.now
-          @staff_member.save
           @staff_member.add_role :staff_member
         end
 

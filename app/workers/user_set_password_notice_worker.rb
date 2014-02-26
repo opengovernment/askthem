@@ -3,8 +3,6 @@ class UserSetPasswordNoticeWorker
 
   attr_accessor :user
 
-  # tidy up unaffiliated people that don't have questions
-  # meant to be scheduled at a given period after they are created
   def perform(id)
     self.user = User.find(id.to_s)
     notify_or_reschedule if user.password_is_placeholder?
@@ -15,7 +13,7 @@ class UserSetPasswordNoticeWorker
 
   private
   def notify_or_reschedule
-    if user.confirmed?
+    if !user.class.devise_modules.include?(:confirmable) || user.confirmed?
       user.send_reset_password_instructions
       user.password_is_placeholder = false
       user.save!

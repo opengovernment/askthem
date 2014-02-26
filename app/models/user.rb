@@ -14,7 +14,7 @@ class User
   # devise :database_authenticatable, :registerable,
   #        :recoverable, :rememberable, :trackable, :validatable
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable,
-    :confirmable, :omniauthable, :omniauth_providers => [:facebook]
+    :omniauthable, :omniauth_providers => [:facebook]
 
   ## Database authenticatable
   field :email,              :type => String, :default => ""
@@ -43,9 +43,6 @@ class User
   # field :confirmed_at,         :type => Time
   # field :confirmation_sent_at, :type => Time
   # field :unconfirmed_email,    :type => String # Only if using reconfirmable
-  field :confirmation_token,   :type => String
-  field :confirmed_at,         :type => Time
-  field :confirmation_sent_at, :type => Time
 
   ## Lockable
   # field :failed_attempts, :type => Integer, :default => 0 # Only if lock strategy is :failed_attempts
@@ -185,7 +182,7 @@ class User
 
   def send_reset_password_if_password_is_placeholder
     if password_is_placeholder?
-      UserSetPasswordNoticeWorker.perform_in(20.minutes, id.to_s)
+      UserSetPasswordNoticeWorker.perform_in(10.minutes, id.to_s)
     end
   end
 end

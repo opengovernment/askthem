@@ -9,9 +9,10 @@ class QuestionMailer < ActionMailer::Base
     mail to: user.email, subject: "Your Question on AskThem Has Been Posted"
   end
 
-  def signed_on(user, question)
+  def signed_on(user, question, new_registration = false)
     @user = user
     @question = question
+    @new_registration = new_registration
     mail to: user.email, subject: "You're Signed On to '#{@question.title}'"
   end
 
