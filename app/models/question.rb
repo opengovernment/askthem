@@ -1,6 +1,7 @@
 class Question
   include Mongoid::Document
   include Mongoid::Timestamps
+  include AutoHtmlFor
 
   # The author of the question.
   belongs_to :user
@@ -61,10 +62,19 @@ class Question
 
   attr_accessor :person_state, :bill_state
 
-  before_validation :modify_media_file_url_if_from_video_site
-
   after_create :add_signature_of_creating_user
   after_create :copy_coordinates_from_user
+
+  auto_html_for [:body, :media_file_url] do
+    html_escape
+    hashtag
+    image(width: 425)
+    dailymotion(width: 400, height: 250, autoplay: true)
+    vimeo(width: 400, height: 250, autoplay: true)
+    youtube(width: 400, height: 250, autoplay: true)
+    link
+    simple_format
+  end
 
   # @return [Metadatum] the jurisdiction in which the question is asked
   def metadatum
@@ -148,17 +158,5 @@ class Question
 
   def copy_coordinates_from_user
     QuestionCoordinatesWorker.perform_async(id.to_s)
-  end
-
-  # extract correct url for video from youtube/vimeo urls, etc.
-  def modify_media_file_url_if_from_video_site
-    if media_file_url.present? && !ImageSrcUrl.new(media_file_url).is_image?
-      video_src_url = VideoSrcUrl.new(media_file_url)
-      if video_src_url.is_video?
-        self.media_file_url = video_src_url.value
-      else
-        self.media_file_url = "Image or video for sure? #{media_file_url}"
-      end
-    end
   end
 end

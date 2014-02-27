@@ -32,7 +32,11 @@
 
     <h1 id="confirm-question-title"><%= question.title %></h1>
   </header>
-  <%= simple_format(question.body, id: 'confirm-question-body') %>
+  <%- if question.body? %>
+    <%= question.body_html %>
+  <%- else %>
+    <div id="confirm-question-body"></div>
+  <%- end %>
   <% if question.subject.present? %>
     <p id="confirm-issue">Issue: <span id="confirm-issue-value"><%= question.subject -%></span></p>
   <% else %>

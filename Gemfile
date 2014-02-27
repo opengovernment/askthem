@@ -42,8 +42,8 @@ gem 'google_civic_info', github: 'walter/google_civic_info'
 # Twitter API, used for looking up possible recipients
 gem 'twitter'
 
-# auto_link
-gem 'rinku', require: 'rails_rinku'
+# need the latest from master until at least 1.6.2
+gem 'auto_html', github: 'dejan/auto_html'
 
 # use pry as console, even in production
 gem 'pry-rails'

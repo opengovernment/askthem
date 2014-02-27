@@ -1,4 +1,12 @@
 GIT
+  remote: git://github.com/dejan/auto_html.git
+  revision: 69e06965647fe8fa7f35486df11bf16420837a51
+  specs:
+    auto_html (1.6.1)
+      redcarpet (~> 2.0)
+      rinku (~> 1.5.0)
+
+GIT
   remote: git://github.com/walter/google_civic_info.git
   revision: 70215fd12e63decc19211dd6c91e0c93d0c01ef3
   specs:
@@ -251,6 +259,7 @@ GEM
     rake (10.1.1)
     rdoc (3.12.2)
       json (~> 1.4)
+    redcarpet (2.3.0)
     redis (3.0.7)
     redis-namespace (1.4.1)
       redis (~> 3.0.4)
@@ -258,7 +267,7 @@ GEM
       railties (~> 3.1)
     rest-client (1.6.7)
       mime-types (>= 1.16)
-    rinku (1.7.3)
+    rinku (1.5.1)
     rmagick (2.13.2)
     rolify (3.3.0.rc4)
     rspec (2.14.1)
@@ -362,6 +371,7 @@ PLATFORMS
 DEPENDENCIES
   airbrake
   authority
+  auto_html!
   bullet
   capistrano
   capybara
@@ -391,7 +401,6 @@ DEPENDENCIES
   pry-rails
   rails (= 3.2.17)
   rest-client
-  rinku
   rmagick
   rolify (= 3.3.0.rc4)
   rspec-rails

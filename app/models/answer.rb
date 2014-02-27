@@ -1,6 +1,7 @@
 class Answer
   include Mongoid::Document
   include Mongoid::Timestamps
+  include AutoHtmlFor
 
   belongs_to :question
   belongs_to :user
@@ -14,6 +15,17 @@ class Answer
   validates_presence_of :text, :question_id, :user_id
 
   after_create :set_question_answered
+
+  auto_html_for :text do
+    html_escape
+    hashtag
+    image(width: 425)
+    dailymotion(width: 400, height: 250, autoplay: true)
+    vimeo(width: 400, height: 250, autoplay: true)
+    youtube(width: 400, height: 250, autoplay: true)
+    link
+    simple_format
+  end
 
   scope :featured, where(featured: true)
 
