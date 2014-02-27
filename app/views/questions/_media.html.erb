@@ -1,6 +1,7 @@
 <%- if question.media_file_url.present? %>
   <%= question.media_file_url_html %>
-<%- elsif question.media.url.present? %>
+<%- end %>
+<%- if question.media.url.present? %>
   <%- if is_image?(question.media.url) %>
     <%= cdn_image_tag(question.media.url, class: "question-image") %>
   <%- else %>
