@@ -202,6 +202,26 @@ span.tip
           right: 8px solid $white
           bottom: 12px solid rgba($black, 0)
         content: ' '
+  &.question
+    @media (max-width: 420px)
+      display: none
+    @media (min-width: 420px)
+      padding: 10px
+      width: 120px
+      right: -100px
+      +box-shadow(0 3px rgba(0, 0, 0, 0.05))
+      +border-radius(6px)
+      &:before
+        position: absolute
+        top: 26%
+        left: -8px
+        height: 0
+        width: 0
+        border:
+          top: 12px solid rgba($black, 0)
+          right: 8px solid $white
+          bottom: 12px solid rgba($black, 0)
+        content: ' '
 
 // Signup to sign a question - @todo ST: classname too close to "action", rename
 .actions form

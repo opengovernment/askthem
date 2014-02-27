@@ -29,6 +29,9 @@
     </label>
 
     <%= f.text_area :body, placeholder: raw('Go on&hellip;'), cols: '30', rows: '10', validate: true, class: 'question-textarea' %>
+    <span class="tip question">
+      Use image or video URLs to show them. Twitter #hashtags also supported.
+    </span>
 
     <div class="input select icon-angle-down sculpt">
       <% subject_options = raw('<option value="">Select an Issue (optional)</option>') + options_for_select(Subject.all) -%>
