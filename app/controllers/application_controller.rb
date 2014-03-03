@@ -7,14 +7,18 @@ class ApplicationController < ActionController::Base
     return @default_jurisdiction if @default_jurisdiction
     abbreviation = if current_user && current_user.region
                      current_user.region
-                   elsif request.location &&
-                       request.location.coordinates != [0,0] &&
-                       OpenGovernment::STATES.values.include?(request.location.state_code.downcase)
+                   elsif has_useable_location?
                      request.location.state_code.downcase
                    else
                      "ny"
                    end
     @default_jurisdiction = Metadatum.find_by_abbreviation(abbreviation)
+  end
+
+  def has_useable_location?
+    request.location &&
+      request.location.coordinates != [0,0] &&
+      OpenGovernment::STATES.values.include?(request.location.state_code.downcase)
   end
 
   helper_method :default_jurisdiction

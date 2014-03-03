@@ -43,7 +43,35 @@
     </ul>
   </div>
   <div class="rightCol">
-    <%- if @near_person %>
+    <%- if @near_government && @near_government.has_people? %>
+      <header>
+        <h2><%= @near_government.legislature_name -%></h2>
+      </header>
+      <% @local_person = Mayor.where(state: @near_government).first || Councilmember.where(state: @near_government).first %>
+
+      <ul class="people-list single-featured">
+        <li>
+          <div class="avatar">
+            <% if @local_person.image? %>
+              <%= cdn_image_tag(@local_person.image, state: @local_person.state, size: "60x60", alt: "") %>
+            <% else %>
+              <%= image_tag("placeholder.png", size: "60x60", alt: "") %>
+            <% end %>
+          </div>
+          <div class="person-info">
+            <h2><%= link_to "#{@near_government.name} info", jurisdiction_path(@near_government) %></h2>
+              <span class="stats">
+                <%- if @near_government.questions.count > 0 %>
+                  <span><%= pluralize @near_government.questions.count, "Question" %></span>
+                <%- else %>
+                  <%= link_to "Ask the first question >>", new_question_path(@near_government) -%>
+                <%- end %>
+              </span>
+          </div>
+        </li>
+
+      </ul>
+    <%- elsif @near_person %>
       <header>
         <h2>Here's an Official Near You</h2>
       </header>

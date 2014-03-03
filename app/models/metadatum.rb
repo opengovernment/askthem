@@ -19,6 +19,11 @@ class Metadatum
     self.find(abbreviation)
   end
 
+  def self.local_to(locality, region)
+    abbreviation = "#{region.downcase}-#{locality.downcase.gsub(" ", "-")}"
+    where(abbreviation: abbreviation).first
+  end
+
   # Returns whether the jurisdiction has a lower chamber.
   #
   # @return [Boolean] whether the jurisdiction has a lower chamber

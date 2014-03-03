@@ -1,4 +1,7 @@
 class PagesController < ApplicationController
+  DEFAULT_GEOJSON_CENTER = [-73.9998334, 40.7195898]
+  DEFAULT_MUNICIPALITY = "New York"
+
   before_filter :force_http
 
   before_filter :set_jurisdiction, only: [:overview, :lower, :upper, :bills,
@@ -26,38 +29,10 @@ class PagesController < ApplicationController
 
   def index
     @jurisdictions = Metadatum.all.to_a
-
     # @todo spec, refactor
     @featured_answer = Answer.featured.first
-
-    # @todo spec, refactor
-    @national_person = Person.featured.first
-
-    @national_answers_count = Answer.count
-    @national_signatures_count = Signature.count
-    @national_questions = Question.order_by(signature_count: "desc").limit(6)
-
-    @user_city = request.location ? request.location.city : "New York"
-    # coordinates have to be in GEOjson order, thus reverse
-    center = request.location ? request.location.coordinates.reverse : [-73.9998334,
-                                                                        40.7195898]
-
-    @near_questions = Question
-      .where(:coordinates => { "$within" => { "$center" => [center, 1] } })
-    near_ids = @near_questions.collect(&:id)
-
-    @near_signatures = Signature.in(question_id: near_ids)
-    @near_answers = Answer.in(question_id: near_ids)
-    @near_questions = @near_questions.order_by(signature_count: "desc").limit(6)
-
-    # @todo spec, refactor
-    if @near_questions.any?
-      @near_questions_people_ids = @near_questions.collect(&:person_id)
-      @near_person = Person.connected_to(@near_questions.first.state)
-      .nin(id: @near_questions_people_ids).first
-    else
-      @near_person = Person.connected_to(default_jurisdiction).first
-    end
+    set_national_variables
+    set_near_variables
 
     render layout: "homepage"
   end
@@ -127,6 +102,65 @@ class PagesController < ApplicationController
   end
 
   private
+  # mongodb coordinates have to be in GEOjson order, thus reverse
+  def center
+    @center ||= if request.location
+                  request.location.coordinates.reverse
+                else
+                  DEFAULT_GEOJSON_CENTER
+                end
+  end
+
+  def user_city
+    @user_city ||= if request.location
+                     request.location.city
+                   else
+                     DEFAULT_MUNICIPALITY
+                   end
+  end
+
+  # @todo spec
+  def near_person
+    @near_person ||= if @near_questions && @near_questions.any?
+                       not_in_ids = @near_questions.collect(&:person_id)
+                       Person.connected_to(@near_questions.first.state)
+                         .nin(id: not_in_ids).first
+                     else
+                       Person.connected_to(default_jurisdiction).first
+                     end
+  end
+
+  def near_government
+    @near_government ||= if has_useable_location?
+                           Metadatum.local_to(request.location.city,
+                                              request.location.state_code)
+                         end
+  end
+
+  def set_near_variables
+    user_city
+    near_government
+
+    @near_questions = Question
+      .where(:coordinates => { "$within" => { "$center" => [center, 1] } })
+    near_ids = @near_questions.collect(&:id)
+
+    @near_signatures = Signature.in(question_id: near_ids)
+    @near_answers = Answer.in(question_id: near_ids)
+    @near_questions = @near_questions.order_by(signature_count: "desc").limit(6)
+
+    near_person
+  end
+
+  def set_national_variables
+    # @todo spec
+    @national_person = Person.featured.first
+
+    @national_answers_count = Answer.count
+    @national_signatures_count = Signature.count
+    @national_questions = Question.order_by(signature_count: "desc").limit(6)
+  end
+
   def check_can_view_contact_info
     unless current_user.can?(:view_contact_info)
       raise Authority::SecurityViolation.new(current_user,
