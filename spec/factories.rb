@@ -149,4 +149,10 @@ FactoryGirl.define do
     name "Special Investigating Committee on Demolition Practices in the City of Philadelphia"
     state "pa-philadelphia"
   end
+
+  factory :blurb do
+    user
+    headline "Must read!"
+    body "Blah! Blah! Blah! With a dash of yada, yada, yada."
+  end
 end

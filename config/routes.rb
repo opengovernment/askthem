@@ -1,4 +1,6 @@
 OpenGovernment::Application.routes.draw do
+  resources :blurbs
+
   devise_for :users, controllers: {
     registrations: 'registrations',
     confirmations: 'confirmations',

@@ -20,4 +20,8 @@ class ApplicationAuthorizer < Authority::Authorizer
   def self.authorizes_to_destroy_question?(user)
     user.has_role? :staff_member
   end
+
+  def self.authorizes_to_manage_blurbs?(user)
+    user.has_role? :staff_member
+  end
 end

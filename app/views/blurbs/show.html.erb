@@ -1,0 +1,21 @@
+<div class="manage-blurb-show">
+  <div class="blurb-display manage-blurbs-blurb-summary">
+    <%- if @blurb.active? %>
+      <span class="blurb-active">Active</span>
+    <%- end %>
+
+    <div class="emph">
+      <div class="blurb-headline"><%= raw(@blurb.headline) -%></div>
+      <div class="blurb-body">
+        <%= raw(@blurb.body) %>
+      </div>
+    </div>
+  </div>
+  <div class="manage-actions">
+    Actions:
+    <ul>
+      <li><%= link_to "Edit", edit_blurb_path(@blurb) %></li>
+      <li><%= link_to "Back", blurbs_path %></li>
+    </ul>
+  </div>
+</div>

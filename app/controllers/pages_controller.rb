@@ -29,8 +29,13 @@ class PagesController < ApplicationController
 
   def index
     @jurisdictions = Metadatum.all.to_a
-    # @todo spec, refactor
+
+    # @todo spec
     @featured_answer = Answer.featured.first
+
+    # @todo spec
+    @blurb = Blurb.where(active: true).first
+
     set_national_variables
     set_near_variables
 

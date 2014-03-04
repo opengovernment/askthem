@@ -1,0 +1,21 @@
+<li>
+  <div class="blurb-display manage-blurbs-blurb-summary">
+    <%- if blurb.active? %>
+      <div class="blurb-active">Active</div>
+    <%- end %>
+    <div class="emph">
+      <div class="blurb-headline manage-blurb-headline"><%= blurb.headline %></div>
+      <div class="blurb-body">
+        <%= raw(blurb.body) %>
+      </div>
+    </div>
+  </div>
+  <div class="manage-actions">
+    Actions:
+    <ul>
+      <li><%= link_to "Show", blurb %></li>
+      <li><%= link_to "Edit", edit_blurb_path(blurb) %></li>
+      <li><%= link_to "Destroy", blurb, method: :delete, data: { confirm: "Are you sure?" } %></li>
+    </ul>
+  </div>
+</li>
