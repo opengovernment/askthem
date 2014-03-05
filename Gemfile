@@ -77,6 +77,7 @@ group :test do
   gem 'vcr' # play back external HTTP requests
   gem 'webmock' # stub and mock external HTTP requests
   gem 'poltergeist'
+  gem 'fakeredis', require: 'fakeredis/rspec'
 end
 
 group :assets do

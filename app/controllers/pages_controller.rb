@@ -109,16 +109,16 @@ class PagesController < ApplicationController
   private
   # mongodb coordinates have to be in GEOjson order, thus reverse
   def center
-    @center ||= if request.location
-                  request.location.coordinates.reverse
+    @center ||= if has_useable_geo_data_from_ip?
+                  geo_data_from_ip.coordinates.reverse
                 else
                   DEFAULT_GEOJSON_CENTER
                 end
   end
 
   def user_city
-    @user_city ||= if request.location
-                     request.location.city
+    @user_city ||= if has_useable_geo_data_from_ip?
+                     geo_data_from_ip.city
                    else
                      DEFAULT_MUNICIPALITY
                    end
@@ -136,9 +136,9 @@ class PagesController < ApplicationController
   end
 
   def near_government
-    @near_government ||= if has_useable_location?
-                           Metadatum.local_to(request.location.city,
-                                              request.location.state_code)
+    @near_government ||= if has_useable_geo_data_from_ip?
+                           Metadatum.local_to(geo_data_from_ip.city,
+                                              geo_data_from_ip.state_code)
                          end
   end
 

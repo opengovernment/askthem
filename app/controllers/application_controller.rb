@@ -3,22 +3,26 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery
 
+  def geo_data_from_ip
+    @geo_data_from_ip ||= GeoDataFromRequest.new(request).geo_data
+  end
+
   def default_jurisdiction
     return @default_jurisdiction if @default_jurisdiction
     abbreviation = if current_user && current_user.region
                      current_user.region
-                   elsif has_useable_location?
-                     request.location.state_code.downcase
+                   elsif has_useable_geo_data_from_ip?
+                     geo_data_from_ip.state_code.downcase
                    else
                      "ny"
                    end
     @default_jurisdiction = Metadatum.find_by_abbreviation(abbreviation)
   end
 
-  def has_useable_location?
-    request.location &&
-      request.location.coordinates != [0,0] &&
-      OpenGovernment::STATES.values.include?(request.location.state_code.downcase)
+  def has_useable_geo_data_from_ip?
+    @has_useable_location ||= geo_data_from_ip &&
+      geo_data_from_ip.coordinates != [0,0] &&
+      OpenGovernment::STATES.values.include?(geo_data_from_ip.state_code.downcase)
   end
 
   helper_method :default_jurisdiction
