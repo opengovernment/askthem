@@ -11,4 +11,6 @@
     <h3>User hasn't signed on to any questions yet!</h3>
   </div>
   <% end %>
+
+  <%= paginate @signatures, outer_window: 1, params: { format: nil }, replace: ".related_focus", scroll: '.related_wrap' %>
 </section>

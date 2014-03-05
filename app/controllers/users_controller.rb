@@ -7,13 +7,13 @@ class UsersController < ApplicationController
   custom_actions resource: [:questions, :signatures]
 
   def show
-    @questions = resource.questions.includes(:user)
-    tab 'questions'
+    @questions = resource.questions.includes(:user).page(params[:page])
+    tab "questions"
   end
 
   def signatures
-    @signatures = resource.signatures
-    tab 'signatures'
+    @signatures = resource.signatures.page(params[:page])
+    tab "signatures"
   end
 
   private
@@ -21,7 +21,7 @@ class UsersController < ApplicationController
   def tab(tab)
     @tab = tab
     show! do |format|
-      format.html { render action: 'show' }
+      format.html { render action: "show" }
       format.js { render partial: @tab }
     end
   end
