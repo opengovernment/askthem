@@ -356,7 +356,7 @@ GEM
       rack (>= 1.2.1)
     warden (1.2.3)
       rack (>= 1.0)
-    webmock (1.17.3)
+    webmock (1.17.4)
       addressable (>= 2.2.7)
       crack (>= 0.3.2)
     websocket-driver (0.3.1)
