@@ -13,7 +13,7 @@ class PeopleController < ApplicationController
 
   def show
     @questions = resource.questions.includes(:user).page(params[:page])
-    tab 'questions'
+    tab "questions"
 
   rescue Mongoid::Errors::DocumentNotFound => error
     person_different_jurisdiction = Person.where(id: params[:id]).first
@@ -34,23 +34,23 @@ class PeopleController < ApplicationController
     # @bills = resource.bills.recent.includes(:questions).page(params[:page]) # no index includes `session`, so we omit it
     # if we allow questions on bills again, reinstate includes
     @bills = resource.bills.recent.page(params[:page]) # no index includes `session`, so we omit it
-    tab 'bills'
+    tab "bills"
   end
 
   def committees
     # committees trigger a lot of subqueries, only do 5 per page
     @committees = resource.committees.page(params[:page]).per(5)
-    tab 'committees'
+    tab "committees"
   end
 
   def votes
     @votes = resource.votes.page(params[:page])
-    tab 'votes'
+    tab "votes"
   end
 
   def ratings
     @ratings = resource.ratings
-    tab 'ratings'
+    tab "ratings"
   end
 
   private
@@ -79,7 +79,7 @@ class PeopleController < ApplicationController
   def tab(tab)
     @tab = tab
     show! do |format|
-      format.html { render action: 'show' }
+      format.html { render action: "show" }
       format.js { render partial: @tab }
     end
   end
@@ -89,7 +89,7 @@ class PeopleController < ApplicationController
   end
 
   def collection
-    # downcase covers api legacy set 'person' for _type
+    # downcase covers api legacy set "person" for _type
     # @todo evaluate if in for type is too slow
     @people ||= begin
                   people = end_of_association_chain.includes(:questions, :identities)
