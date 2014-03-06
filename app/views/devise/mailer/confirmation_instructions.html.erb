@@ -44,7 +44,7 @@
                 <td width="500" style="border-collapse: collapse;">
                   <p>Please confirm your free AskThem account by clicking the link below:</p>
 
-                  <p><%= link_to 'Confirm my account', confirmation_url(@resource, email: @resource.email, confirmation_token: @resource.confirmation_token) %></p>
+                  <p><%= link_to 'Confirm my account', confirmation_url(@resource, email: @resource.email, confirmation_token: @token) %></p>
                 </td>
               </tr>
             </tbody>
