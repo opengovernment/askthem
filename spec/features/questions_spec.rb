@@ -31,8 +31,11 @@ describe 'questions' do
                                                state: @metadatum.abbreviation,
                                                person: valid_person)
         end
-        FactoryGirl.create(:signature, question: @all_questions.last)
-        FactoryGirl.create(:answer, question: @all_questions.first)
+
+        @first_question = @all_questions.first
+        @last_question = @all_questions.last
+        FactoryGirl.create(:signature, question: @last_question)
+        FactoryGirl.create(:answer, question: @first_question)
       end
 
       it 'returns them' do
@@ -42,7 +45,7 @@ describe 'questions' do
 
       it 'shows the correct threshold for the person' do
         visit '/vt/questions?gov=state'
-        page.body.should have_content "out of #{@all_questions[0].person.signature_threshold}"
+        page.body.should have_content "out of #{@first_question.person.signature_threshold}"
 
       end
 
@@ -61,16 +64,24 @@ describe 'questions' do
 
       context 'when needs_signatures filter is clicked' do
         it 'applies the filter' do
-          visit '/vt/questions/need_signatures?gov=state'
+          @first_question.update_attributes(title: "Give me signatures")
+          @last_question.update_attributes(title: "Does not need signatures")
+
           users = FactoryGirl.create_list(:user, 100)
-          users.each do |u|
-            FactoryGirl.create(:signature, user: u, question: @all_questions.last)
+          users.each do |user|
+            FactoryGirl.create(:signature,
+                               user: user,
+                               question: @last_question)
           end
-          page.should have_no_content "100 out of"
+
+          visit '/vt/questions/need_signatures?gov=state'
+
+          page.should have_no_content @last_question.title
+          page.should have_content @first_question.title
         end
       end
 
-      context 'when have_answers filter is clicked' do
+      context 'when have_answers filter is clicked'  do
         it 'applies the filter' do
           question = FactoryGirl.create(:question,
                                         title: 'This question has an answer',
@@ -84,13 +95,27 @@ describe 'questions' do
 
       context 'when need_answers filter is clicked' do
         it 'applies the filter' do
-          question = FactoryGirl.create(:question,
-                                        title: 'This question has no answer',
+          answered_question = FactoryGirl.create(:question,
+                                        title: 'This question has an answer',
                                         state: @metadatum.abbreviation,
                                         person: valid_person)
-          answer = FactoryGirl.create(:answer, question: question)
+          answer = FactoryGirl.create(:answer, question: answered_question)
+
+          question = FactoryGirl.create(:question,
+                                        title: 'At threshold & has no answer',
+                                        state: @metadatum.abbreviation,
+                                        person: valid_person)
+
+          users = FactoryGirl.create_list(:user, 100)
+          users.each do |user|
+            FactoryGirl.create(:signature,
+                               user: user,
+                               question: question)
+          end
+
           visit '/vt/questions/need_answers?gov=state'
-          page.should have_no_content question.title
+          page.should have_no_content answered_question.title
+          page.should have_content question.title
         end
       end
 
@@ -98,10 +123,9 @@ describe 'questions' do
         it 'applies the filter' do
           visit '/vt/questions/recent?gov=state'
           rendered_questions = page.find('.title.question-input-summary')
-          rendered_questions.should have_content @all_questions.last.title
+          rendered_questions.should have_content @last_question.title
         end
       end
-
     end
   end
 

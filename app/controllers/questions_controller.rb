@@ -31,14 +31,15 @@ class QuestionsController < ApplicationController
   end
 
   def have_answers
-    @questions = end_of_association_chain.any_in(_id: Answer.all.distinct("question_id"))
+    @questions = end_of_association_chain.any_in(id: Answer.all.distinct("question_id"))
       .includes(:user)
       .page(page)
     tab "have_answers"
   end
 
   def need_answers
-    @questions = end_of_association_chain.not_in(_id: Answer.all.distinct("question_id"))
+    @questions = end_of_association_chain.where(threshold_met: true)
+      .not_in(id: Answer.all.distinct("question_id"))
       .includes(:user)
       .page(page)
     tab "need_answers"
