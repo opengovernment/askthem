@@ -2,4 +2,5 @@
   <ol>
     <%= render @ratings %>
   </ol>
+  <%= paginate @ratings, outer_window: 1, params: { format: nil }, replace: ".related_focus", scroll: '.related_wrap' %>
 </section>

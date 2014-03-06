@@ -49,7 +49,7 @@ class PeopleController < ApplicationController
   end
 
   def ratings
-    @ratings = resource.ratings
+    @ratings = resource.ratings.page(params[:page])
     tab "ratings"
   end
 
