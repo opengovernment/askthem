@@ -38,7 +38,8 @@ class PeopleController < ApplicationController
   end
 
   def committees
-    @committees = resource.committees
+    # committees trigger a lot of subqueries, only do 5 per page
+    @committees = resource.committees.page(params[:page]).per(5)
     tab 'committees'
   end
 

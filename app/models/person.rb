@@ -198,14 +198,12 @@ class Person
   # Returns the person's committees.
   def committees
     roles = read_attribute(:roles)
-    return [] unless roles
+    return Committee.where(id: []) unless roles
 
     ids = roles.map { |x| x['committee_id'] }.compact
-    if ids.empty?
-      []
-    else
-      Committee.where(_id: { '$in' => ids }).to_a
-    end
+    return Committee.in(id: []) unless ids.any?
+
+    Committee.in(id: ids)
   end
 
   def verified?

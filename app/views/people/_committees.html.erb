@@ -2,4 +2,6 @@
   <ol class="bills">
     <%= render @committees %>
   </ol>
+
+  <%= paginate @committees, outer_window: 1, params: { format: nil }, replace: ".related_focus", scroll: '.related_wrap' %>
 </section>

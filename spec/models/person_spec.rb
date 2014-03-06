@@ -123,4 +123,17 @@ describe Person do
       expect(identity.person.verified?).to be_true
     end
   end
+
+  describe "#committees" do
+    it "returns empty scope if the user doesn't belong to any committees" do
+      expect(@person.committees.count).to eq 0
+    end
+
+    it "returns committees that the person belongs to" do
+      committee = FactoryGirl.create(:committee)
+      @person.write_attribute(:roles, [{ "committee_id" => committee.id }])
+      expect(@person.committees.count).to eq 1
+      expect(@person.committees.first).to eq committee
+    end
+  end
 end

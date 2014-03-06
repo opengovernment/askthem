@@ -2,26 +2,24 @@
 class Committee
   include Mongoid::Document
 
-  belongs_to :metadatum, foreign_key: 'state'
+  belongs_to :metadatum, foreign_key: "state"
 
-  # Returns the committee's name.
+  # Returns the committee"s name.
   #
-  # @return [String] the committee's name
+  # @return [String] the committee"s name
   # @note From Popolo.
   def name
     read_attribute(:subcommittee) || read_attribute(:committee)
   end
 
-  # Returns the committee's members.
+  # Returns the committee"s members.
   #
-  # @return [Array<Person>] the committee's members
+  # @return the committee"s members as scope
   # @note We do this because the OpenStates database is inconsistent.
   def people
-    ids = read_attribute(:members).map{|x| x['leg_id']}.compact
-    if ids.empty?
-      []
-    else
-      Person.where(_id: {'$in' => ids}).to_a
-    end
+    ids = read_attribute(:members).map { |x| x["leg_id"] }.compact
+    return Person.in(id: []) unless ids.present?
+
+    Person.in(id: ids)
   end
 end
