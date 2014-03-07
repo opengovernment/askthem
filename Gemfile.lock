@@ -7,6 +7,13 @@ GIT
       rinku (~> 1.5.0)
 
 GIT
+  remote: git://github.com/opengovernment/invalid_utf8_rejector.git
+  revision: 3540b5b10fffde0b8531c3df2507b4c35f983771
+  specs:
+    invalid_utf8_rejector (0.0.1)
+      rack (~> 1.0)
+
+GIT
   remote: git://github.com/walter/google_civic_info.git
   revision: 70215fd12e63decc19211dd6c91e0c93d0c01ef3
   specs:
@@ -391,6 +398,7 @@ DEPENDENCIES
   geocoder
   google_civic_info!
   inherited_resources (~> 1.3.1)
+  invalid_utf8_rejector!
   jquery-rails
   kaminari
   mongoid (~> 3.1.2)

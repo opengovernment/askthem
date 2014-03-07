@@ -5,6 +5,8 @@ ruby '1.9.3'
 gem 'rails', '3.2.17'
 gem 'jquery-rails'
 
+gem 'invalid_utf8_rejector', github: 'opengovernment/invalid_utf8_rejector'
+
 gem 'mongoid', '~> 3.1.2'
 gem 'geocoder' # must be after mongoid
 gem 'rmagick'
