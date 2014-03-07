@@ -45,7 +45,7 @@ OpenGovernment::Application.routes.draw do
       end
     end
 
-    resources :people, only: [:index, :show] do
+    resources :people, only: [:index, :show, :update] do
       member do
         get 'bills'
         get 'committees'

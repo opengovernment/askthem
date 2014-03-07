@@ -136,4 +136,15 @@ describe Person do
       expect(@person.committees.first).to eq committee
     end
   end
+
+  describe "#save" do
+    context "when a person is made featured" do
+      it "should make all other people unfeatured" do
+        old_person = FactoryGirl.create(:person, featured: true)
+        person = FactoryGirl.create(:person, featured: true)
+        person.update_attributes(featured: true)
+        expect(old_person.reload.featured?).to be_false
+      end
+    end
+  end
 end

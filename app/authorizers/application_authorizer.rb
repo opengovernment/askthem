@@ -21,6 +21,10 @@ class ApplicationAuthorizer < Authority::Authorizer
     user.has_role? :staff_member
   end
 
+  def self.authorizes_to_manage_person?(user)
+    user.has_role? :staff_member
+  end
+
   def self.authorizes_to_manage_blurbs?(user)
     user.has_role? :staff_member
   end

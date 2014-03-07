@@ -38,7 +38,7 @@ class Person
 
   # whether to show them on homepage or not
   # assumes only one person flagged featured
-  field :featured, type: Boolean
+  field :featured, type: Boolean, default: false
 
   index(_type: 1)
   index(state: 1)
@@ -52,6 +52,9 @@ class Person
   scope :featured, where(featured: true)
 
   delegate :signature_threshold, :biography, :links, to: :person_detail
+
+  # only one featured person at a time
+  after_save :make_all_others_unfeatured, if: :featured?
 
   # expensive, do this only when constrained by connected_to or the like
   def self.some_name_matches(name_fragment)
@@ -260,5 +263,12 @@ class Person
     # id cannot be mass assigned..., have to set it explictly
     # id = attributes['id']
     self
+  end
+
+  def make_all_others_unfeatured
+    # specify superclass to get all people in subclasses
+    Person.featured.nin(id: [id]).each do |record|
+      record.update_attributes(featured: false)
+    end
   end
 end

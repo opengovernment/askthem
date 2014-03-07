@@ -5,11 +5,14 @@ class PeopleController < ApplicationController
   belongs_to :jurisdiction, parent_class: Metadatum, finder: :find_by_abbreviation, param: :jurisdiction
   respond_to :html
   respond_to :js, only: [:show, :bills, :committees, :votes, :ratings]
-  actions :index, :show
+  actions :index, :show, :update
   custom_actions resource: [:bills, :committees, :votes, :ratings]
 
   before_filter :set_is_unaffiliated, only: [:index, :show]
   before_filter :redirect_to_unaffiliated_route_if_necessary, only: [:index, :show]
+
+  before_filter :authenticate_user!, only: :update
+  before_filter :check_can_manage_person, only: :update
 
   def show
     @questions = resource.questions.includes(:user).page(params[:page])
@@ -51,6 +54,14 @@ class PeopleController < ApplicationController
   def ratings
     @ratings = resource.ratings.page(params[:page])
     tab "ratings"
+  end
+
+  def update
+    @person = Person.find(params[:id])
+    params[:person] = params[@person.class.name.tableize.singularize.to_sym]
+    update!(notice: "Person updated") do |format|
+      format.html { redirect_to person_path(@person.state, @person) }
+    end
   end
 
   private
@@ -113,6 +124,14 @@ class PeopleController < ApplicationController
                unaffiliated_person_path(params[:id])
              end
       redirect_to path
+    end
+  end
+
+  def check_can_manage_person
+    unless current_user.can?(:manage_person)
+      raise Authority::SecurityViolation.new(current_user,
+                                             :manage_person,
+                                             PeopleController)
     end
   end
 end

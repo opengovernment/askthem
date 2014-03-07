@@ -8,9 +8,9 @@
   <header>
     <div class="person_info">
       <% if @person.image? %>
-      <div class="avatar">
-      <%= cdn_image_tag(@person.image, state: @person.state, size: '80x80', alt: '', class: 'person_photo') %>
-      </div>
+        <div class="avatar">
+          <%= cdn_image_tag(@person.image, state: @person.state, size: '80x80', alt: '', class: 'person_photo') %>
+        </div>
       <% else %>
         <%= image_tag('placeholder.png', size: '80x80', alt: '') %>
       <% end %>
@@ -57,40 +57,57 @@
       <div class="related_content">
         <%= render partial: @tab %>
         <aside>
+          <%- if user_signed_in? && current_user.has_role?(:staff_member) -%>
+            <div class="question-controls">
+              <h4>Staff Actions:</h4>
+              <ul>
+                <li>
+                  <%- unless @person.featured? %>
+                    <%= form_for @person,
+                      url: person_path(@jurisdiction, @person),
+                      html: { style: "inline" } do |f| -%>
+                      <%= f.hidden_field :featured, value: true -%>
+                      <%= f.submit "Make Featured", class: "cta-pill" %>
+                    <%- end %>
+                  <%- end %>
+                </li>
+              </ul>
+            </div>
+          <%- end %>
+
           <% if @person.email? %>
-          <section>
-            <h4>Email:</h4><p><%= mail_to @person.email %></p>
-          </section>
+            <section>
+              <h4>Email:</h4><p><%= mail_to @person.email %></p>
+            </section>
           <% end %>
 
-          <% twitter_id = @person.read_attribute(:twitter_id) %>
-          <% if twitter_id.present? %>
-          <section>
-            <h4>Twitter:</h4>
-            <p>
-              <%= link_to "@#{twitter_id}", "//twitter.com/#{twitter_id}" -%>
-            </p>
-          </section>
+          <% if @person.twitter_id.present? %>
+            <section>
+              <h4>Twitter:</h4>
+              <p>
+                <%= link_to "@#{@person.twitter_id}", "//twitter.com/#{@person.twitter_id}" -%>
+              </p>
+            </section>
           <% end %>
 
           <% if @person['offices'] -%>
             <% @person['offices'].each do |office| %>
               <section>
                 <% if office['type'] %>
-                <h4>
-                  <%=t office['type'], scope: [:offices, :types], default: office['type'] %>
-                </h4>
+                  <h4>
+                    <%=t office['type'], scope: [:offices, :types], default: office['type'] %>
+                  </h4>
                 <% end %>
                 <ul>
                   <% if office['phone'] %>
                     <li>Tel: <%= office['phone'] %></li>
                   <% end %>
-                    <% if office['fax'] %>
-                      <li>Fax: <%= office['fax'] %></li>
-                    <% end %>
-                    <% if office['address'] %>
-                      <li><%= simple_format office['address'] %></li>
-                    <% end %>
+                  <% if office['fax'] %>
+                    <li>Fax: <%= office['fax'] %></li>
+                  <% end %>
+                  <% if office['address'] %>
+                    <li><%= simple_format office['address'] %></li>
+                  <% end %>
                 </ul>
               </section>
             <% end %>
