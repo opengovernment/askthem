@@ -47,6 +47,8 @@ class Question
 
   field :answered, type: Boolean, default: false
 
+  field :delivered, type: Boolean, default: false
+
   index(state: 1)
   index(person_id: 1, answered: 1)
   index(bill_id: 1, answered: 1)

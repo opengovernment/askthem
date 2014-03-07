@@ -23,6 +23,8 @@
       <h1><%= @question.title %></h1>
       <%- if @question.answered? %>
         <div class="answered-indicator"><a href="#answer">Answered</a></div>
+      <%- elsif @question.delivered? %>
+        <div class="delivered-indicator">Delivered</div>
       <%- end %>
     </header>
     <%= @question.body_html %>
@@ -90,12 +92,22 @@
 
     <% if user_signed_in? && current_user.has_role?(:staff_member) -%>
       <div class="question-controls">
-        <div class="controls">
+        <div>
           <h4>Staff Actions:</h4>
           <ul>
             <li>
-              <%= link_to "Delete", question_path(@jurisdiction, @question),
-              method: :delete, data: { confirm: "Are you sure?" } %>
+              <%- unless @question.delivered? %>
+                <%= form_for @question,
+                  url: question_path(@jurisdiction, @question),
+                  html: { style: "inline" } do |f| -%>
+                  <%= f.hidden_field :delivered, value: true -%>
+                  <%= f.submit "Mark as Delivered", class: "cta-pill" %>
+                <%- end %>
+              <%- end %>
+            </li>
+            <li>
+              <%= button_to "Delete", question_path(@jurisdiction, @question),
+              method: :delete, data: { confirm: "Are you sure?" }, class: "cta-pill" %>
             </li>
           </ul>
         </div>

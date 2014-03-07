@@ -5,17 +5,17 @@ class QuestionsController < ApplicationController
   belongs_to :jurisdiction, parent_class: Metadatum, finder: :find_by_abbreviation, param: :jurisdiction
   respond_to :html
   respond_to :js, only: :index
-  actions :index, :show, :new, :create, :destroy
+  actions :index, :show, :new, :create, :update, :destroy
   custom_actions resource: [:need_signatures, :have_answers, :need_answers, :recent]
 
   before_filter :set_state_code, only: [:show, :new, :create, :need_signatures,
-                                        :have_answers, :need_answers, :recent,
+                                        :have_answers, :need_answers, :recent, :update,
                                         :destroy]
   before_filter :set_question_person_id, only: :create
   before_filter :set_is_unaffiliated, only: [:index, :show]
   before_filter :redirect_to_unaffiliated_route_if_necessary, only: [:index, :show]
-  before_filter :authenticate_user!, only: [:destroy]
-  before_filter :check_can_destroy_question, only: :destroy
+  before_filter :authenticate_user!, only: [:destroy, :update]
+  before_filter :check_can_manage_question, only: [:destroy, :update]
 
   def index
     index! do |format|
@@ -133,6 +133,12 @@ class QuestionsController < ApplicationController
     end
   end
 
+  def update
+    update!(notice: "Question updated") do |format|
+      format.html { redirect_to question_path(@question.state, @question) }
+    end
+  end
+
   private
   def page
     params[:page] || 1
@@ -236,7 +242,7 @@ class QuestionsController < ApplicationController
 
   def redirect_to_unaffiliated_route_if_necessary
     if request.fullpath.include?(Metadatum::Unaffiliated::ABBREVIATION)
-      logger.debug("in redirect and matching fullpath")
+
       path = if params[:action] == "index"
                unaffiliated_questions_path
              else
@@ -246,10 +252,10 @@ class QuestionsController < ApplicationController
     end
   end
 
-  def check_can_destroy_question
-    unless current_user.can?(:destroy_question)
+  def check_can_manage_question
+    unless current_user.can?(:manage_question)
       raise Authority::SecurityViolation.new(current_user,
-                                             :destroy_question,
+                                             :manage_question,
                                              QuestionsController)
     end
   end
