@@ -15,6 +15,7 @@ class Answer
   validates_presence_of :text, :question_id, :user_id
 
   after_create :set_question_answered
+  after_destroy :set_question_unanswered
 
   auto_html_for :text do
     html_escape
@@ -33,6 +34,13 @@ class Answer
   def set_question_answered
     if question.answered?
       question.answered = true
+      question.save!
+    end
+  end
+
+  def set_question_unanswered
+    unless question.answered?
+      question.answered = false
       question.save!
     end
   end
