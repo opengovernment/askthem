@@ -10,12 +10,15 @@ class Answer
 
   # whether to show them on homepage or not
   # assumes only one answer flagged featured
-  field :featured, type: Boolean
+  field :featured, type: Boolean, default: false
 
   validates_presence_of :text, :question_id, :user_id
 
   after_create :set_question_answered
   after_destroy :set_question_unanswered
+
+  # only one featured answer at a time
+  after_save :make_all_others_unfeatured, if: :featured?
 
   auto_html_for :text do
     html_escape
@@ -42,6 +45,13 @@ class Answer
     unless question.answered?
       question.answered = false
       question.save!
+    end
+  end
+
+  def make_all_others_unfeatured
+    # specify superclass to get all people in subclasses
+    self.class.featured.nin(id: [id]).each do |record|
+      record.update_attributes(featured: false)
     end
   end
 end

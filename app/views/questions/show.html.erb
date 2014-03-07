@@ -106,6 +106,16 @@
               <%- end %>
             </li>
             <li>
+              <%- if @question.answered? && !@question.answers.select(&:featured).any? %>
+                <%= form_for @question.answers.first,
+                  url: answer_path(@question.answers.first),
+                  html: { style: "inline" } do |f| -%>
+                  <%= f.hidden_field :featured, value: true -%>
+                  <%= f.submit "Feature Answer", class: "cta-pill" %>
+                <%- end %>
+              <%- end %>
+            </li>
+            <li>
               <%= button_to "Delete", question_path(@jurisdiction, @question),
               method: :delete, data: { confirm: "Are you sure?" }, class: "cta-pill" %>
             </li>

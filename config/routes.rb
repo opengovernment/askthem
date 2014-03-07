@@ -34,7 +34,7 @@ OpenGovernment::Application.routes.draw do
     end
   end
   resources :signatures, only: :create
-  resources :answers, only: :create
+  resources :answers, only: [:create, :update]
 
   resources :identities, only: :update
 
