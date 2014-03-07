@@ -8,7 +8,7 @@ GIT
 
 GIT
   remote: git://github.com/opengovernment/invalid_utf8_rejector.git
-  revision: 3540b5b10fffde0b8531c3df2507b4c35f983771
+  revision: 3ab61267e5e948923c079b2f3021a2644c41fe8f
   specs:
     invalid_utf8_rejector (0.0.1)
       rack (~> 1.0)
