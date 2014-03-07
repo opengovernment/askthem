@@ -33,7 +33,7 @@ class PeopleController < ApplicationController
   def bills
     # @bills = resource.bills.recent.includes(:questions).page(params[:page]) # no index includes `session`, so we omit it
     # if we allow questions on bills again, reinstate includes
-    @bills = resource.bills.recent.page(params[:page]) # no index includes `session`, so we omit it
+    @bills = resource.bills.recent.page(params[:page]).per(10) # no index includes `session`, so we omit it
     tab "bills"
   end
 
