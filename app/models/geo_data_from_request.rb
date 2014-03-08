@@ -24,6 +24,6 @@ class GeoDataFromRequest
 
   def existing_value
     geo_data_as_dump = redis.get(ip)
-    geo_data_as_dump.present? ? Marshal.load(geo_data_as_dump) : nil
+    geo_data_as_dump && !geo_data_as_dump.empty? ? Marshal.load(geo_data_as_dump) : nil
   end
 end
