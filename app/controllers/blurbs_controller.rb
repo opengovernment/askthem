@@ -4,6 +4,16 @@ class BlurbsController < InheritedResources::Base
   before_filter :check_manage_blurbs
   before_filter :set_blurb_user, only: :create
 
+  def new
+    @target_url = params[:target_url] ||  "/"
+    new!
+  end
+
+  def edit
+    @target_url = params[:target_url] ||  resource.target_url
+    edit!
+  end
+
   private
   def set_blurb_user
     params[:blurb][:user] = current_user
