@@ -16,7 +16,7 @@
           <span><%= pluralize person.questions_answered.count, "Answer" %></span>
         <%- end %>
       <%- else %>
-        <%= link_to "Ask the first question >>", new_question_path(person.state, person: @person) -%>
+        <%= link_to "Ask the first question >>", new_question_path(person.state, person: person) -%>
       <%- end %>
     </span>
   </div>
