@@ -71,9 +71,9 @@ class Question
     html_escape
     hashtag
     image(width: 425)
-    dailymotion(width: 400, height: 250, autoplay: true)
-    vimeo(width: 400, height: 250, autoplay: true)
-    youtube(width: 400, height: 250, autoplay: true)
+    dailymotion(width: 400, height: 250, autoplay: false)
+    vimeo(width: 400, height: 250, autoplay: false)
+    youtube(width: 400, height: 250, autoplay: false)
     link
     simple_format
   end
