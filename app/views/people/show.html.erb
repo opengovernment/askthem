@@ -6,6 +6,8 @@
 
 <section class="people">
   <header>
+    <%= render @blurb if @blurb %>
+
     <div class="person_info">
       <% if @person.image? %>
         <div class="avatar">
@@ -70,6 +72,11 @@
                       <%= f.submit "Make Featured", class: "cta-pill" %>
                     <%- end %>
                   <%- end %>
+                </li>
+                <li>
+                  <%= link_to "Add blurb",
+                  new_blurb_path(target_url: person_path(@jurisdiction, @person)),
+                  class: "cta-pill" %>
                 </li>
               </ul>
             </div>

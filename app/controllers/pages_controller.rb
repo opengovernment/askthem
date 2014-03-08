@@ -34,7 +34,7 @@ class PagesController < ApplicationController
     @featured_answer = Answer.featured.first
 
     # @todo spec
-    @blurb = Blurb.where(active: true).first
+    @blurb = Blurb.active.where(target_url: "/").first
 
     set_national_variables
     set_near_variables

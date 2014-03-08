@@ -1,5 +1,9 @@
 <div class="manage-blurb-show">
   <div class="blurb-display manage-blurbs-blurb-summary">
+    <%- if @blurb.target_url.present? %>
+      <div class="blurb-target-url"><%= link_to @blurb.target_url, @blurb.target_url -%></div>
+    <%- end %>
+
     <%- if @blurb.active? %>
       <span class="blurb-active">Active</span>
     <%- end %>

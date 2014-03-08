@@ -15,6 +15,7 @@ class PeopleController < ApplicationController
   before_filter :check_can_manage_person, only: :update
 
   def show
+    @blurb = Blurb.active.where(target_url: person_path(parent, resource)).first
     @questions = resource.questions.includes(:user).page(params[:page])
     tab "questions"
 

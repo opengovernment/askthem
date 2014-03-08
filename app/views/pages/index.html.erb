@@ -1,15 +1,6 @@
 <section>
   <%- if @blurb %>
-    <div class="blurb-display">
-      <div class="emph">
-        <div class="blurb-headline">
-          <%= @blurb.headline -%>
-        </div>
-        <div class="blurb-body">
-          <%= raw(@blurb.body) -%>
-        </div>
-      </div>
-    </div>
+    <%= render @blurb %>
   <%- elsif @featured_answer %>
     <div class="answered-question">
       <div class="emph">
