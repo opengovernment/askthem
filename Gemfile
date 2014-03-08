@@ -45,7 +45,7 @@ gem 'google_civic_info', github: 'walter/google_civic_info'
 gem 'twitter'
 
 # need the latest from master until at least 1.6.2
-gem 'auto_html', github: 'dejan/auto_html'
+gem 'auto_html', github: 'opengovernment/auto_html'
 
 # use pry as console, even in production
 gem 'pry-rails'

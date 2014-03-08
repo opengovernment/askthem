@@ -1,6 +1,6 @@
 GIT
-  remote: git://github.com/dejan/auto_html.git
-  revision: 69e06965647fe8fa7f35486df11bf16420837a51
+  remote: git://github.com/opengovernment/auto_html.git
+  revision: d3223ad11a55764781c1ab016659b11c83271a3b
   specs:
     auto_html (1.6.1)
       redcarpet (~> 2.0)
