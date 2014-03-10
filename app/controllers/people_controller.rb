@@ -16,7 +16,7 @@ class PeopleController < ApplicationController
 
   def show
     @blurb = Blurb.active.where(target_url: person_path(parent, resource)).first
-    @questions = resource.questions.includes(:user).page(params[:page])
+    @questions = resource.questions.includes(:user).desc(:created_at).page(params[:page])
     tab "questions"
 
   rescue Mongoid::Errors::DocumentNotFound => error
