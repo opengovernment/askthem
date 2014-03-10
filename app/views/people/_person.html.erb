@@ -13,10 +13,10 @@
       <%- if person.questions.count > 0 %>
         <span><%= pluralize person.questions.count, "Question" %></span>
         <%- if person.questions_answered.count > 0 %>
-          <span><%= pluralize person.questions_answered.count, "Answer" %></span>
+          <span><%= link_to(pluralize(person.questions_answered.count, "Answer"), have_answers_questions_path(person.state, person: person)) -%></span>
         <%- end %>
       <%- else %>
-        <%= link_to "Ask the first question >>", new_question_path(person.state, person: person) -%>
+        <%= link_to "Ask the first question >>", new_question_path(person.state, person: @person) -%>
       <%- end %>
     </span>
   </div>

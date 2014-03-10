@@ -28,7 +28,7 @@
         <div class="attr">
           <span class="count"><%= pluralize @person.questions.count, 'question' %></span>
           <%- if @person.questions_answered.count > 0 %>
-            <span class="count"><%= pluralize @person.questions_answered.count, 'answer' %></span>
+            <span class="count"><%= link_to(pluralize(@person.questions_answered.count, "answer"), have_answers_questions_path(@person.state, person: @person)) -%></span>
           <%- end %>
         </div>
       </div>

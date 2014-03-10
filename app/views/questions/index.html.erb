@@ -18,7 +18,7 @@
         filter_options("recent") %>
 
       <%- if @person %>
-        <span class="filtered-by-person">for <%= @person.name -%></span>
+        <span class="filtered-by-person">for <%= link_to(@person.name, person_path(@person.state, @person)) -%></span>
       <%- end %>
 
       <!--
