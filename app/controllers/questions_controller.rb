@@ -12,11 +12,13 @@ class QuestionsController < ApplicationController
                                         :have_answers, :need_answers, :recent, :update,
                                         :destroy]
   before_filter :set_question_person_id, only: :create
-  before_filter :set_is_unaffiliated, only: [:index, :show]
+  before_filter :set_is_unaffiliated, only: [:index, :show, :need_signatures,
+                                             :have_answers, :need_answers, :recent]
   before_filter :redirect_to_unaffiliated_route_if_necessary, only: [:index, :show]
   before_filter :authenticate_user!, only: [:destroy, :update]
   before_filter :check_can_manage_question, only: [:destroy, :update]
-
+  before_filter :set_person, only: [:index, :need_signatures, :have_answers,
+                                    :need_answers, :recent]
   def index
     index! do |format|
       format.js { render partial: "page" }
@@ -46,7 +48,7 @@ class QuestionsController < ApplicationController
   end
 
   def recent
-    @questions = end_of_association_chain.desc(:issued_at)
+    @questions = end_of_association_chain.desc(:created_at)
       .includes(:user)
       .page(page)
     tab "recent"
@@ -58,7 +60,7 @@ class QuestionsController < ApplicationController
       @recent_signatures = @question.signatures
         .includes(:user)
         .where(:user_id.nin => [@question.user_id])
-        .order_by(created_at: "DESC").limit(5)
+        .desc(:created_at).limit(5)
     end
 
   rescue Mongoid::Errors::DocumentNotFound => error
@@ -183,13 +185,13 @@ class QuestionsController < ApplicationController
     @relevant_steps
   end
 
-  # @todo: questions are currently always created in default session
-  # rather than session of owning metadatum
-  # which can lead to unexpected results when using "in" query
-  # unify databases or make consistent
   def end_of_association_chain
     abbreviation = parent.abbreviation
-    person_ids = Person.only_types(types).connected_to(abbreviation).collect(&:id)
+    person_ids = if @person
+                   [@person.id]
+                 else
+                   Person.only_types(types).connected_to(abbreviation).collect(&:id)
+                 end
     Question.connected_to(abbreviation).in(person_id: person_ids)
   end
 
@@ -257,6 +259,12 @@ class QuestionsController < ApplicationController
       raise Authority::SecurityViolation.new(current_user,
                                              :manage_question,
                                              QuestionsController)
+    end
+  end
+
+  def set_person
+    if params[:person]
+      @person = Person.connected_to(parent.abbreviation).find(params[:person])
     end
   end
 end

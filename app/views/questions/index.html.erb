@@ -1,14 +1,25 @@
 <%= render 'shared/navigation' unless @is_unaffiliated %>
 
-<section class="questions listings">
-  <%- unless @is_unaffiliated %>
+<section class="questions listings <%= 'unaffiliated' if @is_unaffiliated -%>">
     <div class="filters">
       <span class="info">Show:</span><%# @todo DM are these really the filters we're using? %>
 
-      <%= link_to raw('<span class="use"></span>Need Signatures'), need_signatures_questions_path(gov: @gov), filter_options("need_signatures") %>
-      <%= link_to raw('<span class="use"></span>Have Answers'), have_answers_questions_path(gov: @gov), filter_options("have_answers") %>
-      <%= link_to raw('<span class="use"></span>Need Answers'), need_answers_questions_path(gov: @gov), filter_options("need_answers") %>
-      <%= link_to raw('<span class="use"></span>Recent'), recent_questions_path(gov: @gov), filter_options("recent") %>
+      <%= link_to raw('<span class="use"></span>Need Signatures'),
+        need_signatures_questions_path(gov: @gov, person: @person),
+        filter_options("need_signatures") %>
+      <%= link_to raw('<span class="use"></span>Have Answers'),
+        have_answers_questions_path(gov: @gov, person: @person),
+        filter_options("have_answers") %>
+      <%= link_to raw('<span class="use"></span>Need Answers'),
+        need_answers_questions_path(gov: @gov, person: @person),
+        filter_options("need_answers") %>
+      <%= link_to raw('<span class="use"></span>Recent'),
+        recent_questions_path(gov: @gov, person: @person),
+        filter_options("recent") %>
+
+      <%- if @person %>
+        <span class="filtered-by-person">for <%= @person.name -%></span>
+      <%- end %>
 
       <!--
       <div class="search"><%# @todo DM full-text search within state? %>
@@ -17,7 +28,6 @@
       </div>
       -->
     </div>
-  <%- end %>
 
   <%= render partial: "page" %>
 </section>
