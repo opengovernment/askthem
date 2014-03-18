@@ -19,6 +19,8 @@ class QuestionsController < ApplicationController
   before_filter :check_can_manage_question, only: [:destroy, :update]
   before_filter :set_person, only: [:index, :need_signatures, :have_answers,
                                     :need_answers, :recent]
+  before_filter :set_is_national, only: [:index, :need_signatures, :have_answers,
+                                         :need_answers, :recent]
   def index
     index! do |format|
       format.js { render partial: "page" }
@@ -187,6 +189,8 @@ class QuestionsController < ApplicationController
 
   def end_of_association_chain
     abbreviation = parent.abbreviation
+    return Question if abbreviation == Metadatum::Us::ABBREVIATION
+
     person_ids = if @person
                    [@person.id]
                  else
@@ -266,5 +270,9 @@ class QuestionsController < ApplicationController
     if params[:person]
       @person = Person.connected_to(parent.abbreviation).find(params[:person])
     end
+  end
+
+  def set_is_national
+    @is_national = params[:jurisdiction] == Metadatum::Us::ABBREVIATION
   end
 end

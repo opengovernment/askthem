@@ -1,6 +1,6 @@
-<%= render 'shared/navigation' unless @is_unaffiliated %>
+<%= render 'shared/navigation' if !@is_unaffiliated && !@is_national %>
 
-<section class="questions listings <%= 'unaffiliated' if @is_unaffiliated -%>">
+<section class="questions listings <%= 'unaffiliated' if @is_unaffiliated || @is_national -%>">
     <div class="filters">
       <span class="info">Show:</span><%# @todo DM are these really the filters we're using? %>
 
