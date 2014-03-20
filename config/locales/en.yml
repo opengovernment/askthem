@@ -93,6 +93,7 @@ en:
     show:
       title: 'Ask %{recipient}: “%{question}” - %{jurisdiction} - AskThem.io'
       description: Click to support this question on AskThem.io and get a public response.
+      description_answered: Share the answer to this question on AskThem.io
     new:
       title: Ask a Question - AskThem
       description: Ask a question to your city and state elected officials

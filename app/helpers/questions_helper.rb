@@ -42,9 +42,15 @@ module QuestionsHelper
   end
 
   def mail_body_for(question)
-    URI.escape("Sign on to this question on AskThem, a new platform for questions-and-answers with public figures.
+    preface = if question.answered?
+                "See #{question.person.name}'s answer on AskThem, a new platform for questions-and-answers with public figures:"
+              else
+                "Sign on to this question on AskThem, a new platform for questions-and-answers with public figures.
 
-When it reaches the signature threshold, AskThem will deliver it to its target and ask for a public response:
+When it reaches the signature threshold, AskThem will deliver it to its target and ask for a public response:"
+              end
+
+    URI.escape("#{preface}
 
 
 #{question.title}
@@ -73,9 +79,19 @@ AskThem is free, open-source, and non-profit, working to change the civic cultur
   end
 
   def tweet_text
-    text = "Support my question"
-    twitter_id = @question.person.read_attribute(:twitter_id)
-    text += " to @#{twitter_id}" if twitter_id
-    text += " on @AskThemPPF: #{URI.escape(@question.title)}"
+    name = if @question.person.twitter_id
+             "@#{@question.person.twitter_id}"
+           else
+             @question.person.name
+           end
+
+
+    text = if @question.answered?
+             "Share #{name}'s answer"
+           else
+             "Support my question to #{name}"
+           end
+
+    text += " on @AskThemPPF: #{URI.escape(truncate(@question.title, length: 57, separator: " "))}"
   end
 end

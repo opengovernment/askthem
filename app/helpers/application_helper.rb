@@ -15,7 +15,9 @@ module ApplicationHelper
 
   # Called by the page layout.
   def description(args = {})
-    translate_in_controller_scope("#{controller.action_name}.description", params.slice(:page).merge(default: '').merge(args))
+    key_end = "description"
+    key_end += "_answered" if @question && @question.answered?
+    translate_in_controller_scope("#{controller.action_name}.#{key_end}", params.slice(:page).merge(default: '').merge(args))
   end
 
   # @return [Boolean] whether the current jurisdiction is at the federal level
