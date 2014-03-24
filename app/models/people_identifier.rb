@@ -31,7 +31,13 @@ class PeopleIdentifier
   end
 
   def people_from_name_fragment
-    Person.active.connected_to(params[:jurisdiction])
-      .some_name_matches(params[:name_fragment])
+    # get list of abbreviations within state
+    # e.g. ny ny-new-york ny-brooklyn
+    # rather than only connected to current jurisdiction,
+    # use "in" on abbreviations
+    state = params[:jurisdiction].split("-").first
+    in_state = Metadatum.where(abbreviation: /^#{state}/).collect(&:id)
+
+    Person.active.in(state: in_state).some_name_matches(params[:name_fragment])
   end
 end
