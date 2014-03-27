@@ -17,7 +17,7 @@ class Governor < Person
     location = LocationFormatter.new(location).format
     return where(id: []) unless location
 
-    where(state: location.state_code.downcase)
+    where(state: JurisdictionId.new(state: location.state_code).id)
   end
 
   private

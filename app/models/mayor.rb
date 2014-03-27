@@ -6,10 +6,7 @@ class Mayor < Person
     city = location.city
     return where(id: []) unless city
 
-    state = location.state_code.downcase
-
-    # @todo better handle unicode
-    city = city.downcase.gsub(" ", "-")
-    where(state: "#{state}-#{city}")
+    where(state: JurisdictionId.new(state: location.state_code,
+                                    municipality: city).id)
   end
 end

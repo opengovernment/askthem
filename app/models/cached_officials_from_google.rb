@@ -78,12 +78,12 @@ class CachedOfficialsFromGoogle
     when *use_state_scopes
       state
     when "citywide", "citycouncil"
-      "#{state}-#{city.gsub(" ", "-").gsub("_", "-")}"
+      JurisdictionId.new(state: state, municipality: city).id
     when "countywide"
       # HACK, shouldn't rely on internals of ocd_division_id structure
       # but relying on name means may include "County" at end
       county = division.ocd_division_id.split("/").last.split("county\:").last
-      "#{state}-county-#{county.gsub("_", "-")}"
+      JurisdictionId.new(state: state, county: county).id
     when "national"
       Metadatum::Us::ABBREVIATION
     end

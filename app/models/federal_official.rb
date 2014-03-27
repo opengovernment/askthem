@@ -3,6 +3,6 @@ class FederalOfficial < Person
     location = LocationFormatter.new(location).format
     return where(id: []) unless location
 
-    where(state: location.country_code.downcase)
+    where(state: JurisdictionId.new(state: location.country_code).id)
   end
 end

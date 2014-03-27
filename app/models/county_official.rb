@@ -3,10 +3,7 @@ class CountyOfficial < Person
     location = LocationFormatter.new(location).format
     return where(id: []) unless location
 
-    # @todo DRY up state-city id construction (see mayor, etc.)
-    state = location.state_code.downcase
-    # @todo better handle unicode
-    county = location.sub_state_code.downcase.gsub(" ", "-")
-    where(state: "#{state}-county-#{county}")
+    where(state: JurisdictionId.new(state: location.state_code,
+                                    county: location.sub_state_code).id)
   end
 end

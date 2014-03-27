@@ -15,13 +15,16 @@ class Metadatum
   field :_id, type: String, default: -> {abbreviation}
   field :abbreviation, type: String
 
+  # if this metadatum is a city, whether it should be default listed for state
+  field :default_city_for_state, type: Boolean, default: false
+
   def self.find_by_abbreviation(abbreviation)
     self.find(abbreviation)
   end
 
   def self.local_to(locality, region)
-    abbreviation = "#{region.downcase}-#{locality.downcase.gsub(" ", "-")}"
-    where(abbreviation: abbreviation).first
+    where(abbreviation: JurisdictionId.new(state: region,
+                                           municipality: locality).id).first
   end
 
   # Returns whether the jurisdiction has a lower chamber.
