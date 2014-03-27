@@ -25,7 +25,8 @@ describe Metadatum::Us do
           chambers: { "upper" => { "name" => "Senate", "title" => "Senator" },
             "lower" => { "name" => "House", "title" => "Representative" } },
           name: "United States",
-          legislature_name: "United States Congress"
+          legislature_name: "United States Congress",
+          default_city_for_state: false
         }.with_indifferent_access
       end
     end

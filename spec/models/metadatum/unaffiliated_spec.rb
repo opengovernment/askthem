@@ -23,7 +23,8 @@ describe Metadatum::Unaffiliated do
           "_id" => "unaffiliated",
           chambers: { "lower" => { "name" => "Unspecified", "title" => "" } },
           name: "Unaffiliated",
-          legislature_name: ""
+          legislature_name: "",
+          default_city_for_state: false
         }.with_indifferent_access
       end
     end

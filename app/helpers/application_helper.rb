@@ -66,10 +66,6 @@ module ApplicationHelper
     end
   end
 
-  def state_abbreviation
-    @jurisdiction.abbreviation[/\A[a-z]{2}/]
-  end
-
   def state_name
     if state? || federal?
       @jurisdiction['name']
@@ -79,10 +75,6 @@ module ApplicationHelper
     else
       '#'
     end
-  end
-
-  def local_jurisdictions
-    Metadatum.where(abbreviation: /#{state_abbreviation}-/i)
   end
 
   # Return's a bill's truncated title.

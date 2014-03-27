@@ -20,7 +20,7 @@ class UserSetLocalJurisdictionAbbreviationWorker
     municipality = user.locality
 
     if user.coordinates && (state.blank? || municipality.blank?)
-      geo = Geocoder.search(user.coordinates.reverse)
+      geo = Geocoder.search(user.coordinates.reverse).first
       state = geo.state_code
       municipality = geo.city
     end

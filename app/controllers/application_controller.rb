@@ -25,8 +25,6 @@ class ApplicationController < ActionController::Base
       OpenGovernment::STATES.values.include?(geo_data_from_ip.state_code.downcase)
   end
 
-  helper_method :default_jurisdiction
-
   # @see http://robert-reiz.com/2012/07/09/ssl-in-ruby-on-rails/
   # third party resources make https everywhere problematic
   # before_filter set on individual controllers
@@ -38,6 +36,46 @@ class ApplicationController < ActionController::Base
       redirect_to location_options
     end
   end
+
+  def state_abbreviation
+    return "" unless @jurisdiction
+
+    @jurisdiction.abbreviation[/\A[a-z]{2}/]
+  end
+
+  def local_jurisdictions
+    return @local_jurisdictions if @local_jurisdictions
+
+    @local_jurisdictions = if state_abbreviation.present?
+                             Metadatum.where(abbreviation: /#{state_abbreviation}-/i)
+                           else
+                             Metadatum.where(id: [])
+                           end
+  end
+
+  # @todo pretty ugly, refactor into value object maybe
+  def local_jurisdiction
+    return @local_jurisdiction if @local_jurisdiction
+    if @jurisdiction && @jurisdiction.id.include?("-")
+      return @local_jurisdiction = @jurisdiction
+    end
+
+    @local_jurisdiction = current_user.local_jurisdiction if current_user
+
+    unless local_jurisdictions.include?(@local_jurisdiction)
+      @local_jurisdiction = if has_useable_geo_data_from_ip? &&
+                                geo_data_from_ip.state_code.downcase == state_abbreviation
+                              Metadatum.where(id: JurisdictionId.new(state: state_abbreviation,
+                                                                     municipality: geo_data_from_ip.city).id).first
+                            else
+                              local_jurisdictions.where(default_city_for_state: true).first || local_jurisdictions.first
+                            end
+    end
+
+    @local_jurisdiction
+  end
+
+  helper_method :default_jurisdiction, :state_abbreviation, :local_jurisdictions, :local_jurisdiction
 
   private
   def not_found

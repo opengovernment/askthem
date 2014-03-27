@@ -22,7 +22,7 @@ describe Metadatum::SeedCities do
       end
 
       def attributes
-        {"_id"=>"pa-philadelphia", "_ignored_scraped_sessions"=>["2011", "2010", "2009", "2008", "2007", "2006", "2005", "2004", "2003", "2002", "2001", "2000", "1999", "1998", "1997"], "abbreviation"=>"pa-philadelphia", "capitol_timezone"=>"America/New_York", "chambers"=>{"upper"=>{"name"=>"Council", "title"=>"Councilmember"}}, "feature_flags"=>[], "latest_update" => Time.zone.parse("2013-02-26 03:00:04 UTC"), "legislature_name"=>"Philadelphia City Council", "name"=>"Philadelphia", "session_details"=>{"2013"=>{"_scraped_name"=>"2013", "display_name"=>"2013 Legislative Session", "type"=>"primary"}, "2012"=>{"_scraped_name"=>"2012", "display_name"=>"2012 Legislative Session", "type"=>"primary"}}, "terms"=>[{"end_year"=>2016, "start_year"=>2012, "name"=>"2012-2016", "sessions"=>["2013", "2012"]}]}.with_indifferent_access
+        {"_id"=>"pa-philadelphia", "_ignored_scraped_sessions"=>["2011", "2010", "2009", "2008", "2007", "2006", "2005", "2004", "2003", "2002", "2001", "2000", "1999", "1998", "1997"], "abbreviation"=>"pa-philadelphia", "capitol_timezone"=>"America/New_York", "chambers"=>{"upper"=>{"name"=>"Council", "title"=>"Councilmember"}}, "feature_flags"=>[], "default_city_for_state"=>false, "latest_update" => Time.zone.parse("2013-02-26 03:00:04 UTC"), "legislature_name"=>"Philadelphia City Council", "name"=>"Philadelphia", "session_details"=>{"2013"=>{"_scraped_name"=>"2013", "display_name"=>"2013 Legislative Session", "type"=>"primary"}, "2012"=>{"_scraped_name"=>"2012", "display_name"=>"2012 Legislative Session", "type"=>"primary"}}, "terms"=>[{"end_year"=>2016, "start_year"=>2012, "name"=>"2012-2016", "sessions"=>["2013", "2012"]}]}.with_indifferent_access
       end
     end
   end
@@ -46,7 +46,7 @@ describe Metadatum::SeedCities do
       end
 
       def attributes
-        {"abbreviation"=>"il-chicago", "capitol_timezone"=>"America/Chicago", "chambers"=>{"upper"=>{"name"=>"Council", "title"=>"Councilmember"}}, "feature_flags"=>[], "latest_update"=>Time.zone.parse("2013-11-11 03:00:04 UTC"), "legislature_name"=>"Chicago City Council", "name"=>"City of Chicago", "session_details"=>{"2013"=>{"_scraped_name"=>"2013", "display_name"=>"2013 Legislative Session", "type"=>"primary"}}, "terms"=>[{"end_year"=>2014, "start_year"=>2013, "name"=>"2013-2014", "sessions"=>["2013"]}], "_id"=>"il-chicago"}
+        {"abbreviation"=>"il-chicago", "capitol_timezone"=>"America/Chicago", "chambers"=>{"upper"=>{"name"=>"Council", "title"=>"Councilmember"}}, "feature_flags"=>[], "latest_update"=>Time.zone.parse("2013-11-11 03:00:04 UTC"), "legislature_name"=>"Chicago City Council", "name"=>"City of Chicago", "session_details"=>{"2013"=>{"_scraped_name"=>"2013", "display_name"=>"2013 Legislative Session", "type"=>"primary"}}, "terms"=>[{"end_year"=>2014, "start_year"=>2013, "name"=>"2013-2014", "sessions"=>["2013"]}], "_id"=>"il-chicago", "default_city_for_state"=>false}
       end
     end
   end

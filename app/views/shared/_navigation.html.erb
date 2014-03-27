@@ -13,16 +13,45 @@
         <% end %>
         <i class="icon-angle-down"></i>
       </li>
-      <%# @todo needs drop down or something that handles multiple cities %>
-      <% local_jurisdictions.each do |city| %>
-        <% if %w(pa-philadelphia ca-san-jose il-chicago ny-new-york).include?(city.abbreviation) -%>
-          <li <%= @jurisdiction.abbreviation == city.abbreviation ? raw(' class="active"') : '' %> >
-            <%= link_to jurisdiction_path(jurisdiction: city.abbreviation) do %>
-              <%= city.name %>
-            <% end %>
-            <i class="icon-angle-down"></i>
-          </li>
-        <% end %>
+      <%- if local_jurisdiction %>
+        <li <%= @jurisdiction.abbreviation == local_jurisdiction.abbreviation ? raw(' class="active"') : '' %> >
+          <%= link_to jurisdiction_path(jurisdiction: local_jurisdiction.abbreviation) do %>
+            <%= local_jurisdiction.name %>
+          <% end %>
+          <%- if local_jurisdictions.count > 1 %>
+            <span class="jurisdiction-change"><a href="#" class="navigation-modal-open">change</a></span>
+            <%- counties = local_jurisdictions.select { |lj| lj.id.include?("-county") } %>
+            <%- cities = local_jurisdictions - counties - [local_jurisdiction] %>
+            <div id="overlay" style="display:none;"></div>
+            <div id="modal" style="display:none;">
+              <div class="modal-content">
+                <a href='#' class="modal-close"><i class="icon-remove"></i></a>
+                <h2 class="modal-header">
+                  Choose a different place
+                </h2>
+                <div class="modal-copy-wrap">
+                  <%- if cities.any? %>
+                    <ul>
+                      <%- cities.each do |city| %>
+                        <li><%= link_to city.name, jurisdiction_path(jurisdiction: city.abbreviation) -%></li>
+                      <%- end %>
+                    </ul>
+                  <%- end %>
+
+                  <%- if counties.any? %>
+                    <ul>
+                      <%- counties.each do |county| %>
+                        <li><%= link_to county.name, jurisdiction_path(jurisdiction: county.abbreviation) -%></li>
+                      <%- end %>
+                    </ul>
+                  <%- end %>
+                </div>
+              </div>
+              <%= image_tag("mark.svg", class: "modal-logo") %>
+            </div>
+          <%- end %>
+          <i class="icon-angle-down"></i>
+        </li>
       <% end %>
     </ul>
     <% unless (params[:controller] == 'questions' && params[:action] == 'show') %>

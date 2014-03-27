@@ -15,7 +15,7 @@ describe SignaturesHelper do
     end
 
     context "when there is only a zipcode" do
-      it "returns signer's name only" do
+      it "returns signer's name only", :vcr do
         signer = FactoryGirl.create(:user, locality: "", region: "")
         without_where = "#{signer.given_name} #{signer.family_name}"
 
