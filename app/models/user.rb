@@ -84,6 +84,7 @@ class User
   field :region, type: String
   field :postal_code, type: String
   field :country, type: String, default: 'US'
+  field :local_jurisdiction_abbreviation, type: String
 
   index('authentications.provider' => 1, 'authentications.uid' => 1)
 
@@ -99,6 +100,7 @@ class User
 
   after_create :trigger_geocoding
   after_create :send_reset_password_if_password_is_placeholder
+  after_create :set_local_jurisdiction_abbreviation
 
   # Called by RegistrationsController.
   def self.new_with_session(params, session)
@@ -170,6 +172,10 @@ class User
 
   alias_method :for_new_question?, :for_new_question
 
+  def local_jurisdiction
+    Metadatum.where(id: local_jurisdiction_abbreviation).first
+  end
+
   private
   # Unlike Devise, doesn't require password confirmations.
   def set_password_confirmation
@@ -184,5 +190,9 @@ class User
     if password_is_placeholder?
       UserSetPasswordNoticeWorker.perform_in(10.minutes, id.to_s)
     end
+  end
+
+  def set_local_jurisdiction_abbreviation
+    UserSetLocalJurisdictionAbbreviationWorker.perform_in(2.minutes, id.to_s)
   end
 end

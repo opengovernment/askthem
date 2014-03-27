@@ -50,7 +50,7 @@ describe User do
       end
     end
 
-    describe 'address_for_geocoding' do
+    describe "address_for_geocoding" do
       it "should return the user's address for geocoding" do
         user.address_for_geocoding.should == '148 Lafayette St, New York, ny, US, 10013'
       end
@@ -72,6 +72,16 @@ describe User do
         end
       end
     end
+
+    describe "local_jurisdiction" do
+      it "should return a metadatum that matches the user's city if exists" do
+        abbreviation = "ny-new-york"
+        new_york = FactoryGirl.create(:metadatum, abbreviation: abbreviation)
+        user.local_jurisdiction_abbreviation = abbreviation
+
+        expect(user.local_jurisdiction).to eq new_york
+      end
+    end
   end
 
   context "with after_create callback" do
@@ -80,6 +90,11 @@ describe User do
       user.coordinates = nil
       user.save
       expect(user.reload.to_coordinates).to eq [40.7195898, -73.9998334]
+    end
+
+    it "sets local_jurisidiction_abbreviation" do
+      user = FactoryGirl.create(:user)
+      expect(user.reload.local_jurisdiction_abbreviation).to eq "ny-new-york"
     end
   end
 end
