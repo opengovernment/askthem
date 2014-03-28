@@ -7,6 +7,8 @@ class UserSetLocalJurisdictionAbbreviationWorker
     user = User.find(id.to_s)
     options = set_options_from(user)
 
+    return if options[:state].nil?
+
     user.local_jurisdiction_abbreviation = JurisdictionId.new(options).id
     user.save!
 
