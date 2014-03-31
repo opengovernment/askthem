@@ -33,7 +33,8 @@ class CachedOfficialsFromGoogle
 
   # skip president & vice president, county, city officials, state officials
   def skip_for_now(office, division)
-    (office.level == "county") ||
+    (office.level == "county" && (office.name.downcase != "mayor" &&
+        !office.name.downcase.include?("council"))) ||
       (office.level == "federal" && division.scope == "national") ||
       ((office.level == "city" || office.level == "other") &&
        division.scope.downcase == "citywide" &&
