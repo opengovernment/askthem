@@ -39,6 +39,7 @@ class Subject
       'Federal, State, and Local Relations',  # Federal, State and Local Relations
       'Government Reform',                    # Government Operations
       'Health',                               # Health and Health Care
+      'Intellecutal Property',                # Intellectual Property
       'Labor and Employment',                 # Employment and Affirmative Action | Labor Unions
       'Judiciary',                            # Judicial Branch
       'Legislative Affairs',                  # Legislative Branch
