@@ -141,7 +141,7 @@ class CachedOfficial
   # differentiator is _type
   # office_level: city division_scope: cityWide - mayor, other city officials
   # office_level: city division_scope: cityCouncil - councilmembers
-  # office_level: county division_scope: countyWide - county officials
+  # office_level: county division_scope: countyWide - county officials, county mayor, & councilors
   # office_level: state division_scope: statewide - governor, other state officials
   # office_level: state division_scope: stateUpper - state senators
   # office_level: state division_scope: stateLower - state representatives
@@ -168,7 +168,13 @@ class CachedOfficial
           raise "Unknown office_level and division_scope combination"
         end
       when "county"
-        "CountyOfficial"
+        if office_name == "Mayor"
+          "Mayor"
+        elsif office_name =~ /council/i
+          "Councilmember"
+        else
+          "CountyOfficial"
+        end
       when "state"
         case division_scope.downcase
         when "stateupper", "statelower"
