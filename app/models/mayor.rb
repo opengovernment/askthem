@@ -6,7 +6,10 @@ class Mayor < Person
     city = location.city
     return where(id: []) unless city
 
-    where(state: JurisdictionId.new(state: location.state_code,
-                                    municipality: city).id)
+    # handle special case where mayor is on county as well
+    any_of({ state: JurisdictionId.new(state: location.state_code,
+                                       municipality: city).id },
+           { state: JurisdictionId.new(state: location.state_code,
+                                       county: city).id })
   end
 end
