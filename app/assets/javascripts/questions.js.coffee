@@ -164,6 +164,16 @@ jQuery ($) ->
     personLi = e.delegateTarget
 
     name = $(personLi).children('h2').text()
+
+    # if click is for "more choices"
+    # show remaining results rather than selecting person
+    # and return early
+    # @todo, replace hardcoding
+    if name == "Click for More Choices"
+      $(personLi).hide()
+      $(personLi).parent().children('li.more-people').fadeTo(300, 1)
+      return
+
     avatarHtml = $(personLi).children('.avatar').html()
     jurisdiction = $(personLi).children('.person-info').children('.jurisdiction').text()
 
@@ -220,6 +230,9 @@ jQuery ($) ->
     personList.html('')
     $('#question_person_id').remove() # our radio buttons replace this below
     if $(data).length > 0
+      morePeopleThreshold = 8
+      totalPeople = $(data).length
+      personCount = 1
       $(data).each ->
         liVal = '<li style="display:none;">'
         liVal += '<div class="select_box">'
@@ -249,7 +262,13 @@ jQuery ($) ->
 
         personList.append liVal
 
-        personList.children('li:last').fadeTo(300, 1)
+        if (totalPeople <= morePeopleThreshold) || (personCount < morePeopleThreshold)
+          personList.children('li:last').fadeTo(300, 1)
+        else
+          personList.children('li:last').addClass('more-people')
+          addMoreChoicesBox(personList) if personCount == morePeopleThreshold
+
+        personCount++
         $('.click-recipient-for-next-step').show() if lookupDiv != 'div.address_lookup'
 
       loading.hide()
@@ -262,6 +281,23 @@ jQuery ($) ->
     else
       loading.hide()
       $('.nothing-matching').show()
+
+  addMoreChoicesBox = (list)->
+        liVal = '<li style="display:none;">'
+        liVal += '<div class="select_box">'
+        liVal += "<input type=\"radio\" name=\"more-choices\" id=\"more-choices\" /></div>"
+
+        liVal += '<div class="avatar">'
+        placeholderUrl = "http://" + $(location).attr('host') + "/assets/placeholder.png"
+        liVal += "<img src=\"http://d2xfsikitl0nz3.cloudfront.net/#{encodeURIComponent(placeholderUrl)}/60/60\" width=\"60\" height=\"60\" alt=\"\" />"
+        liVal += '</div>'
+
+        liVal += "<h2>Click for More Choices</h2>"
+
+        liVal += "</li>"
+
+        list.append liVal
+        list.children('li:last').fadeTo(300, 1)
 
   hideLaterSteps = (->
     $('article.not-first-step').each ->
