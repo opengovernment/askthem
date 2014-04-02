@@ -16,6 +16,8 @@ class GeoDataFromRequest
   private
   def redis
     @redis ||= Redis.new
+  rescue Redis::CannotConnectError
+    NullRedis.new
   end
 
   def ip
@@ -25,5 +27,15 @@ class GeoDataFromRequest
   def existing_value
     geo_data_as_dump = redis.get(ip)
     geo_data_as_dump && !geo_data_as_dump.empty? ? Marshal.load(geo_data_as_dump) : nil
+  end
+
+  # answer the same API that we need from Redis, but do nothing
+  # useful for handling connectivity issues
+  class NullRedis
+    def set(key, value)
+    end
+
+    def get(key)
+    end
   end
 end
