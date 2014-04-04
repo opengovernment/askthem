@@ -47,7 +47,7 @@ class ApplicationController < ActionController::Base
     return @local_jurisdictions if @local_jurisdictions
 
     @local_jurisdictions = if state_abbreviation.present?
-                             Metadatum.where(abbreviation: /#{state_abbreviation}-/i)
+                             Metadatum.where(abbreviation: /^#{state_abbreviation}-/i)
                            else
                              Metadatum.where(id: [])
                            end
