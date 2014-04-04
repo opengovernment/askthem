@@ -1,7 +1,7 @@
 $('#overlay, .modal-close, .navigation-overlay').click(function() {
-  $('#overlay, #modal').fadeOut('fast');
+  $('#overlay, #modal, .navigation-overlay, .navigation-modal').fadeOut('fast');
 });
 
 $('.navigation-modal-open').click(function() {
-  $('.navigation-overlay, .navigation-modal').fadeTo('slow', 1)
+  $('.navigation-overlay, .navigation-modal, i.icon-remove').fadeTo('slow', 1)
 });
