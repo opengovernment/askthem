@@ -44,9 +44,11 @@ describe 'questions' do
       end
 
       it 'shows the correct threshold for the person' do
+        50.times do
+          FactoryGirl.create(:signature, question: @last_question)
+        end
         visit '/vt/questions?gov=state'
         page.body.should have_content "out of #{@first_question.person.signature_threshold}"
-
       end
 
       context 'as signed in user' do
