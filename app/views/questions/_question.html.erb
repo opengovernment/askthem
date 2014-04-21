@@ -31,7 +31,7 @@
     </span>
   </div>
   <%- progress_as_percent = question_progress_percent(question) %>
-  <%- if progress_as_percent >= 50.0 %>
+  <%- if progress_as_percent >= 50.0 || staff_member? %>
   <ul class="activity">
     <li>
       <div class="question_progress progress-bar">

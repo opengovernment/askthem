@@ -90,7 +90,7 @@
   <a name="sign_on_q"></a>
   <div class="actions">
 
-    <% if user_signed_in? && current_user.has_role?(:staff_member) -%>
+    <% if staff_member? -%>
       <div class="question-controls">
         <div>
           <h4>Staff Actions:</h4>

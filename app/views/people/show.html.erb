@@ -59,7 +59,7 @@
       <div class="related_content">
         <%= render partial: @tab %>
         <aside>
-          <%- if user_signed_in? && current_user.has_role?(:staff_member) -%>
+          <%- if staff_member? -%>
             <div class="question-controls">
               <h4>Staff Actions:</h4>
               <ul>

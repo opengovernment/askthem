@@ -75,7 +75,11 @@ class ApplicationController < ActionController::Base
     @local_jurisdiction
   end
 
-  helper_method :default_jurisdiction, :state_abbreviation, :local_jurisdictions, :local_jurisdiction
+  def staff_member?
+    user_signed_in? && current_user.has_role?(:staff_member)
+  end
+
+  helper_method :default_jurisdiction, :state_abbreviation, :local_jurisdictions, :local_jurisdiction, :staff_member?
 
   private
   def not_found

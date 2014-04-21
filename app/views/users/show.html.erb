@@ -18,7 +18,7 @@
         <li><a href="#">steventrevathan.com</a></li>
       </ul> -->
     </div>
-    <% if user_signed_in? && current_user.has_role?(:staff_member) -%>
+    <% if staff_member? -%>
       <div class="identity-controls">
         <% if @user.identities.where(status: "being_inspected").count > 0 -%>
           <h3>Inspect</h3>
