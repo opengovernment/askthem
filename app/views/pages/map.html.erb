@@ -86,3 +86,16 @@ d3.json("/us.json", function(error, us) {
 });
 
 </script>
+
+<%- if staff_member? %>
+  <h4>Stats</h4>
+
+  <ul class="stats">
+    <li>Users: <span class="stat"><%= User.count -%></span></li>
+    <li>Questions: <span class="stat"><%= Question.count -%></span></li>
+    <li>Signatures: <span class="stat"><%= Signature.count -%></span></li>
+    <li>Answers: <span class="stat"><%= Answer.count -%></span></li>
+    <li>Elected Officials and Public Figures: <span class="stat"><%= Person.count -%></span></li>
+    <li>Jurisdictions: <span class="stat"><%= Metadatum.count -%></span></li>
+  </ul>
+<%- end %>
