@@ -56,7 +56,7 @@ GEM
       multi_json
     arel (3.0.3)
     atomic (1.1.14)
-    authority (2.7.0)
+    authority (3.0.0)
       activesupport (>= 3.0.0)
       rake (>= 0.8.7)
     bcrypt (3.1.7)
