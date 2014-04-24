@@ -357,7 +357,7 @@ GEM
       rack
       raindrops (~> 0.7)
     uniform_notifier (1.4.0)
-    vcr (2.5.0)
+    vcr (2.9.0)
     vidibus-validate_uri (0.3.0)
       activemodel (>= 3)
       activesupport (>= 3)
