@@ -1,0 +1,13 @@
+<section class="question ask">
+  <%= form_for @question, url: question_path(@state_code, @question), validate: true, html: { accept_charset: "utf-8" } do |f| %>
+    <% @question.errors.full_messages.each do |message| -%>
+      <p class="alert"><%= message -%></p>
+    <% end -%>
+
+    <% locals = { jurisdiction: @jurisdiction, question: @question, person: @person, bill: @bill, relevant_steps: @relevant_steps, f: f } -%>
+
+    <%= render partial: "content_step", locals: locals.merge({ step: "content" }) %>
+
+    <div class="controls"><%= f.submit "Update", class: "cta-pill" %></div>
+  <% end %>
+</section>

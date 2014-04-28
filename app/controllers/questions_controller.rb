@@ -5,18 +5,18 @@ class QuestionsController < ApplicationController
   belongs_to :jurisdiction, parent_class: Metadatum, finder: :find_by_abbreviation, param: :jurisdiction
   respond_to :html
   respond_to :js, only: :index
-  actions :index, :show, :new, :create, :update, :destroy
+  actions :index, :show, :new, :create, :edit, :update, :destroy
   custom_actions resource: [:need_signatures, :have_answers, :need_answers, :recent]
 
   before_filter :set_state_code, only: [:show, :new, :create, :need_signatures,
-                                        :have_answers, :need_answers, :recent, :update,
-                                        :destroy]
+                                        :have_answers, :need_answers, :recent,
+                                        :edit, :update, :destroy]
   before_filter :set_question_person_id, only: :create
   before_filter :set_is_unaffiliated, only: [:index, :show, :need_signatures,
                                              :have_answers, :need_answers, :recent]
   before_filter :redirect_to_unaffiliated_route_if_necessary, only: [:index, :show]
-  before_filter :authenticate_user!, only: [:destroy, :update]
-  before_filter :check_can_manage_question, only: [:destroy, :update]
+  before_filter :authenticate_user!, only: [:edit, :destroy, :update]
+  before_filter :check_can_manage_question, only: [:edit, :destroy, :update]
   before_filter :set_person, only: [:index, :need_signatures, :have_answers,
                                     :need_answers, :recent]
   before_filter :set_is_national, only: [:index, :need_signatures, :have_answers,
@@ -137,6 +137,17 @@ class QuestionsController < ApplicationController
     end
   end
 
+  def edit
+    set_up_steps
+
+    @question = Question.connected_to(@state_code).find(params[:id])
+    @user = @question.user
+    @bill = @question.bill
+    @person = @question.person
+
+    render layout: "data_collection"
+  end
+
   def update
     update!(notice: "Question updated") do |format|
       format.html { redirect_to question_path(@question.state, @question) }
@@ -181,6 +192,10 @@ class QuestionsController < ApplicationController
   # user is logged in (no sign_up step)
   # person is passed in (no recipient step)
   def relevant_steps
+    if %w(edit update).include?(params[:action])
+      return @relevant_steps = ["content"]
+    end
+
     @relevant_steps = %w(recipient content sign_up confirm)
     @relevant_steps.delete("recipient") if params[:person]
     @relevant_steps.delete("sign_up") if user_signed_in?

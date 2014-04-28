@@ -112,7 +112,7 @@ class Question
   # i.e. does belongs_to now work
   # @return [Bill] the bill the question is about
   def bill
-    Bill.find(bill_id)
+    Bill.where(id: bill_id).first
   end
 
   # @todo delete if unnecessary with only 1 db
