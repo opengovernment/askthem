@@ -3,7 +3,7 @@ class AnswersController < ApplicationController
 
   respond_to :html
   before_filter :authenticate_user!
-  before_filter :check_can_manage_question, only: :update
+  before_filter :check_can_manage_question, only: [:edit, :update]
 
   def create
     question = Question.find(params[:question_id])
@@ -20,6 +20,12 @@ class AnswersController < ApplicationController
 
       redirect_to question_path(question.state, question.id)
     end
+  end
+
+  def edit
+    @answer = Answer.find(params[:id])
+
+    render layout: "data_collection"
   end
 
   def update

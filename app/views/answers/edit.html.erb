@@ -1,0 +1,12 @@
+<section class="recipient-answer-form">
+  <h2>Edit this Answer as <strong><%= @answer.question.person.name %></strong></h2>
+  <%= simple_form_for @answer, url: answer_path(@answer), html: { accept_charset: "utf-8" } do |f| %>
+    <% @answer.errors.full_messages.each do |message| -%>
+      <p class="alert"><%= message -%></p>
+    <% end -%>
+
+    <%= f.input :text, as: :text, label: false %>
+
+    <div class="controls"><%= f.submit "Update", class: "cta-pill" %></div>
+  <% end %>
+</section>
