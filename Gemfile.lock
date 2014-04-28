@@ -156,7 +156,7 @@ GEM
       ruby-hmac
     formatador (0.2.4)
     fssm (0.2.10)
-    geocoder (1.1.8)
+    geocoder (1.2.0)
     has_scope (0.5.1)
     hashie (2.0.5)
     highline (1.6.19)

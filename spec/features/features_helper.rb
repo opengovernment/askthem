@@ -24,8 +24,27 @@ def as_visitor(user = nil, &block)
   return self
 end
 
+def set_location_in_redis_for_ip
+  attributes = { ip: "161.185.30.156",
+    country_code: "US",
+    country_name: "United States",
+    region_code: "NY",
+    region_name: "New York",
+    city: "Brooklyn",
+    zipcode: "11201",
+    latitude: 40.6944,
+    longitude: -73.9906,
+    metro_code: "501",
+    area_code: "718" }
+
+  redis = Redis.new
+  redis.set("161.185.30.156",
+            Marshal.dump(Geocoder::Result::Freegeoip.new(attributes)))
+end
+
 RSpec.configure do |config|
   config.after(:each) { Warden.test_reset! }
+  config.before(:each) { set_location_in_redis_for_ip }
 end
 
 # common helpers
