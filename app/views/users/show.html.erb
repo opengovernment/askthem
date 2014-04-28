@@ -56,6 +56,11 @@
         <%= render partial: @tab %>
 
         <aside>
+          <%- if staff_member? -%>
+            <section>
+              <h4>Email:</h4><p><%= mail_to @user.email %></p>
+            </section>
+          <%- end %>
           <section>
             <h4>Top Issues</h4>
             <ul>
