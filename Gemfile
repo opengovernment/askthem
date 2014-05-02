@@ -53,7 +53,7 @@ gem 'pry-rails'
 group :production do
   gem 'airbrake'
   gem 'fog'
-  gem 'newrelic_rpm'
+  gem 'newrelic_rpm', '3.7.3.204'
   gem 'nokogiri', '1.5.10'
 end
 
