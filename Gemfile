@@ -10,6 +10,7 @@ gem 'invalid_utf8_rejector', github: 'opengovernment/invalid_utf8_rejector'
 gem 'mongoid', '~> 3.1.2'
 gem 'geocoder' # must be after mongoid
 gem 'rmagick'
+gem 'carrierwave', '~> 0.9.0'
 gem 'carrierwave-mongoid'
 gem 'carrierwave-video-thumbnailer'
 gem 'vidibus-validate_uri'
