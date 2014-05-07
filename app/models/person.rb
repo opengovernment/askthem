@@ -27,6 +27,7 @@ class Person
   field :email, type: String
   field '+gender', type: String, as: :gender
   field :photo_url, type: String, as: :image
+  field :old_photo_urls, type: Array
   # @todo move chamber to legislator mixin
   # and refactor dependencies on chamber being present
   field :chamber, type: String
@@ -241,6 +242,14 @@ class Person
   # unless otherwise specified
   def to_partial_path
     "people/person"
+  end
+
+  def archive_photo_url
+    old_photo_urls = Array(old_photo_urls)
+    old_photo_urls << photo_url
+    self.old_photo_urls = old_photo_urls
+    self.photo_url = nil
+    save!
   end
 
   private

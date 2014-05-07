@@ -1,0 +1,36 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: http://w3.legis.state.ak.us/images/senate/STGGGGG.jpg
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Ruby Net/HTTP used for link checking mechanism AskThem.io
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 302
+      message: Found
+    headers:
+      Date:
+      - Wed, 07 May 2014 04:22:41 GMT
+      Server:
+      - Apache
+      Location:
+      - http://w3.legis.state.ak.us/error/404.php
+      Content-Type:
+      - text/html; charset=iso-8859-1
+      Via:
+      - 1.1 BC2-ACLD
+      Connection:
+      - close
+    body:
+      encoding: US-ASCII
+      string: ''
+    http_version: 
+  recorded_at: Wed, 07 May 2014 04:22:42 GMT
+recorded_with: VCR 2.9.0

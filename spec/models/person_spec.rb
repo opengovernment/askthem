@@ -147,4 +147,15 @@ describe Person do
       end
     end
   end
+
+  describe "#archive_photo_url" do
+    it "should move photo_url to old_photo_urls" do
+      photo_url = "http://example.com/example.jpg"
+      person = FactoryGirl.create(:person, photo_url: photo_url)
+      person.archive_photo_url
+      person.reload
+      expect(person.old_photo_urls).to eq [photo_url]
+      expect(person.photo_url).to be_nil
+    end
+  end
 end
