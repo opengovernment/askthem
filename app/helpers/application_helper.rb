@@ -128,7 +128,7 @@ module ApplicationHelper
 
     url = "http:#{url}" if url.present? && url[0..1] == "//"
 
-    if url.blank? || (url.include? 'ballotpedia')
+    if url.blank? || (url.include?('ballotpedia.org/wiki/index.php/Images'))
       image_tag("/assets/placeholder.png")
     else
       return image_tag(url, opts) if (width.blank? || height.blank?) ||
