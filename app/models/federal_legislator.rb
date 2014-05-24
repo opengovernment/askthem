@@ -17,7 +17,7 @@ class FederalLegislator < Person
   end
 
   def image
-    "#{PHOTOS_BASE_URL}#{id}.jpg"
+    read_attribute(:photo_url) || "#{PHOTOS_BASE_URL}#{id}.jpg"
   end
 
   alias_method :photo_url, :image

@@ -15,11 +15,24 @@ describe FederalLegislator do
   end
 
   describe "#image" do
-    it "returns standard URL for where to find 100x125 image" do
-      federal_legislator = FederalLegislator.new
-      federal_legislator.id = "K000385"
-      image_url = "#{FederalLegislator::PHOTOS_BASE_URL}#{federal_legislator.id}.jpg"
-      expect(federal_legislator.image).to eq image_url
+    let(:federal_legislator) { FederalLegislator.new }
+
+    context "when there isn't a custom photo_url attribute" do
+      it "returns standard URL for where to find 100x125 image" do
+        federal_legislator.id = "K000385"
+        image_url = "#{FederalLegislator::PHOTOS_BASE_URL}#{federal_legislator.id}.jpg"
+
+        expect(federal_legislator.image).to eq image_url
+      end
+    end
+
+    context "when there is a custom photo_url attribute" do
+      it "returns the photo_url attribute value" do
+        photo_url = "http://example.com/test.jpg"
+        federal_legislator.photo_url = photo_url
+
+        expect(federal_legislator.image).to eq photo_url
+      end
     end
   end
 
