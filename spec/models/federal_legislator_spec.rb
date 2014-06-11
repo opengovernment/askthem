@@ -18,7 +18,7 @@ describe FederalLegislator do
     let(:federal_legislator) { FederalLegislator.new }
 
     context "when there isn't a custom photo_url attribute" do
-      it "returns standard URL for where to find 100x125 image" do
+      it "returns standard URL for where to find base image" do
         federal_legislator.id = "K000385"
         image_url = "#{FederalLegislator::PHOTOS_BASE_URL}#{federal_legislator.id}.jpg"
 

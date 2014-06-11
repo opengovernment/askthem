@@ -6,7 +6,7 @@ class FederalLegislator < Person
   include Legislator
   extend LegislatorFinder
 
-  PHOTOS_BASE_URL = "http://#{ENV['AWS_DIRECTORY']}#{ENV['AWS_HOST_STUB']}/photos/federal/100x125/"
+  PHOTOS_BASE_URL = "http://theunitedstates.io/images/congress/225x275/"
 
   def self.default_api
     SunlightCongressLegislatorService
