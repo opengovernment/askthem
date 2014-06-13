@@ -11,7 +11,7 @@ class GeoDataFromRequest
     redis.set(ip, Marshal.dump(@geo_data)) unless existing_value
 
     @geo_data
-  rescue Errno::ECONNREFUSED
+  rescue Errno::ECONNREFUSED, Errno::ECONNRESET
     nil
   end
 
