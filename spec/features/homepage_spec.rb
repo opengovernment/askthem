@@ -18,7 +18,9 @@ describe "pages#index" do
     end
 
     it "can search for federal people matching an address or zipcode" do
-      FactoryGirl.create :federal_legislator_bernard_sanders
+      bernie = FactoryGirl.create :federal_legislator_bernard_sanders
+      bernie.update_attribute(:active, true)
+
       visit "/"
       fill_in "q", with: "05602"
       click_button "Search"

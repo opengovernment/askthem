@@ -186,20 +186,20 @@ class PagesController < ApplicationController
         .where(:coordinates => { "$within" => { "$center" => [center, 1] } })
         .order_by(signature_count: "desc").limit(10)
 
-      @federal_people = FederalLegislator.includes(:questions, :identities)
+      @federal_people = FederalLegislator.includes(:questions, :identities).active
         .for_location(geodata)
 
-      @state_people = StateLegislator.includes(:questions, :identities, :metadatum)
+      @state_people = StateLegislator.includes(:questions, :identities, :metadatum).active
         .for_location(geodata)
 
       # since we return all councilmembers for a city, regardless of "nearness"
       # order alphabetically by last name
-      @municipal_people = Mayor.includes(:questions, :identities)
+      @municipal_people = Mayor.includes(:questions, :identities).active
         .for_location(geodata) +
-        Councilmember.includes(:questions, :identities, :metadatum)
+        Councilmember.includes(:questions, :identities, :metadatum).active
         .for_location(geodata).order_by([["last_name", "ASC"]])
 
-      @governor = Governor.includes(:questions, :identities, :metadatum)
+      @governor = Governor.includes(:questions, :identities, :metadatum).active
         .for_location(geodata).first
     else
       flash.now[:alert] = "Whoops! We couldn't find a location for #{address}."
@@ -237,9 +237,9 @@ class PagesController < ApplicationController
   end
 
   def tab(tab)
-    @governor = Governor.connected_to(@jurisdiction.abbreviation).first
-    @mayor = Mayor.connected_to(@jurisdiction.abbreviation).first ||
-      Councilmember.connected_to(@jurisdiction.abbreviation)
+    @governor = Governor.connected_to(@jurisdiction.abbreviation).active.first
+    @mayor = Mayor.connected_to(@jurisdiction.abbreviation).active.first ||
+      Councilmember.connected_to(@jurisdiction.abbreviation).active
       .where(district: "Mayor").first
 
     # Each pair of `@lower` and `@upper` lines must be run together, as below,
