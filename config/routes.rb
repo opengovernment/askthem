@@ -24,6 +24,7 @@ OpenGovernment::Application.routes.draw do
   get 'about', to: 'pages#about'
   get 'support', to: 'pages#support'
   get 'faq', to: 'pages#faq'
+  get 'honestads', to: 'pages#honestads'
   get 'map', to: 'pages#map'
   get 'terms-of-service', to: 'pages#terms_of_service'
   get 'privacy-policy', to: 'pages#privacy_policy'

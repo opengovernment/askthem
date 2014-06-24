@@ -1,0 +1,30 @@
+<nav>
+  <ul class="level">
+    <li class="active" id="federal-people">
+      <a href="#">Federal</a>
+      <i class="icon-angle-down"></i>
+    </li>
+    <li id="state-people">
+      <a href="#">State</a>
+      <i class="icon-angle-down"></i>
+    </li>
+    <% if municipal_people && municipal_people.count > 0 -%>
+      <li id="municipal-people">
+        <a href="#"><%= municipality -%></a>
+        <i class="icon-angle-down"></i>
+      </li>
+    <% end -%>
+  </ul>
+</nav>
+&nbsp;
+<ol class="people-list federal-people-list">
+  <%= render federal_people if federal_people %>
+</ol>
+<ol class="people-list state-people-list" style="display:none;">
+  <%= render governor if governor %>
+  <%= render state_people if state_people %>
+</ol>
+<ol class="people-list municipal-people-list" style="display:none;">
+  <%# render mayor if mayor %>
+  <%= render municipal_people if municipal_people %>
+</ol>

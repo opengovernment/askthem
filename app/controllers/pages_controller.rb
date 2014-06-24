@@ -13,6 +13,15 @@ class PagesController < ApplicationController
   respond_to :json, only: [:locator, :identifier]
   respond_to :csv, only: [:contact_info]
 
+  def honestads
+    if has_useable_geo_data_from_ip?
+      @postal_code = geo_data_from_ip.postal_code
+      if @postal_code.present?
+        set_variables_for(@postal_code)
+      end
+    end
+  end
+
   def map
     if params[:jurisdiction]
       @jurisdiction = Metadatum.find_by_abbreviation(params[:jurisdiction])

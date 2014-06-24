@@ -1,0 +1,41 @@
+<section class="static">
+  <h1>HonestAds and AskThem</h1>
+  <div class="related_data">
+    <p>HonestAds is partnering with AskThem to deliver a powerful question to everyone running for office in 2014.</p>
+
+    <p>Tell a candidate directly, "it's not enough for you to 'approve this ad.'" Ask them: "Will you approve 'the truth' of your campaign ads?"</p>
+
+    <div style="text-align: center; margin-top: 30px; margin-bottom: 30px;">
+      <img src="https://cloud.githubusercontent.com/assets/116819/3334610/73c1acc0-f802-11e3-8a8c-185f8678c9a4.png" width="658" height="519" alt="image of example question. " >
+    </div>
+
+    <p>HonestAds is partnering with AskThem to deliver a powerful question to everyone running for office in 2014.</p>
+
+    <p>Tell a candidate directly, "it's not enough for you to 'approve this ad.'" Ask them: "Will you approve 'the truth' of your campaign ads?"</p>
+
+
+    <%- if @postal_code.present? %>
+      <section class="officials locator" style="width:100%; float: right; margin-bottom: 30px;">
+        <%= render partial: "people_for_location",
+          locals: { municipality: @municipality,  municipal_people: @municipal_people,
+          federal_people: @federal_people, governor: @governor,
+          state_people: @state_people } %>
+      </section>
+    <%- end %>
+
+
+    <p>To browse elected officials by state, visit <a href="/map">AskThem's national map page</a>.</p>
+
+    <p>To ask this HonestAds question to a candidate for office who is not currently an elected official, first search for him or her on AskThem - click "Ask your own question" and then the button "Their Twitter Name".</p>
+
+    <div style="text-align: center; margin-bottom: 30px;"><%= generic_ask_question 'Ask your own Question', { class: 'cta-pill'} %></div>
+
+    <p>If he or she is verified on Twitter, their name should appear here on AskThem; if he or she is not, email us with the declared candidate you're trying to find, and we can add them manually.</p>
+
+    <div style="text-align: center; margin-top: 30px; margin-bottom: 30px;">
+      <img src="https://cloud.githubusercontent.com/assets/116819/3334609/73c1181e-f802-11e3-973e-026d357dee6d.png" width="608" height="646" alt="example image of question recipient lookup via Twitter. " >
+    </div>
+
+    <p>Questions and comments welcome, we're here to help - email <%= mail_to "maryam@askthem.io" -%>, and we'll get back to you right away to help your question succeed.</p>
+  </div>
+</section>
