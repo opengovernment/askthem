@@ -12,6 +12,8 @@ class Blurb
   # if "/" then blurb is for homepage
   field :target_url, type: String, default: "/"
 
+  field :avatar_url, type: String
+
   # only one active blurb at a time
   after_save :make_all_others_inactive, if: :active?
 

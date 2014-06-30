@@ -13,6 +13,7 @@
     <%= f.input :target_url, as: :hidden, input_html: { value: @target_url } %>
     <%= f.input :active, as: :radio_buttons %>
     <%= f.text_area :headline, placeholder: raw("Headline"), maxlength: "100", rows: "1" %>
+    <%= f.text_field :avatar_url, placeholder: raw("URL for avatar image") %>
     <%= f.text_area :body, placeholder: raw("Short body, HTML allowed, but keep it simple and valid!"), rows: "1" %>
   </div>
 

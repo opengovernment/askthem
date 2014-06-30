@@ -10,6 +10,11 @@
 
     <div class="emph">
       <div class="blurb-headline"><%= raw(@blurb.headline) -%></div>
+      <div class="avatar">
+        <%- if @blurb.avatar_url? %>
+          <%= cdn_image_tag(@blurb.avatar_url, size: "60x60", alt: "") %>
+        <%- end %>
+      </div>
       <div class="blurb-body">
         <%= raw(@blurb.body) %>
       </div>
