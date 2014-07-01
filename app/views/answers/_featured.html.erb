@@ -11,7 +11,7 @@
 
       From
 
-      <%= link_to "#{featured.question.person.political_position_title + ' '}#{featured.question.person.name}",
+      <%= link_to "#{(featured.question.person.political_position_title || '') + ' '}#{featured.question.person.name}",
       person_path(featured.question.person.state, featured.question.person),
       anchor: "answer" %>
     </div>
