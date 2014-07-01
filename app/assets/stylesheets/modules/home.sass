@@ -341,31 +341,106 @@ div.emph
   margin-top: 6px
   margin-bottom: 6px
 
-.blurb-display, .answered-question
+.blurb-featureds-and-form
   padding-top: 42px
+  /* background: #f7f7f7 */
+  .featured
+    background: #f7f7f7
+    width: 100%
+    height: 42px
+.blurb-display, .answered-question, .featured
   .emph
     padding-top: 10px
-    height: 42px
+    @media (min-width: 420px)
+      height: 42px
+    @media (max-width: 420px)
+      height: 110px
   .avatar
     margin:
       right: 10px
       left: 10px
-    float: left
     height: 30px
     width: 30px
+    display: inline-block
+    float: left
 
-.blurb-headline, .answered-question-text
+.blurb-headline, .answered-question-text, .featured-headline
   z-index: 100
-  padding-left: 2em
   float: left
   position: relative
   top: 6px
+  display: inline-block
+  @media (min-width: 420px)
+    text-align: right
+    margin-left: 10px
 
-.blurb-body, .answered-question-subtext
+.blurb-body, .answered-question-subtext, .featured-body
   position: relative
   top: 6px
   text-transform: none
+  float: left
+  display: inline-block
+  @media (min-width: 420px)
+    margin-left: 5px
 
 .blurb-body
   .avatar
     margin-top: -5px
+
+.center-button
+  float: right
+  width: 65%
+
+.locator-form
+  padding-top: 30px
+  @media (max-width: 420px)
+    padding-top: 100px
+  width: 100%
+
+  input[type=text]
+    float: left
+    font-size: 18px
+    padding: 5px 63px 5px 12px
+    display: inline-block
+    height: 60px
+    +box-sizing(border-box)
+    +box-shadow(0 0 0 3px rgba($black, 0.1))
+    border: 1px solid #B9CDD0
+    +border-radius(3px)
+    background: rgba($white, 0.5)
+    @media (min-width: 420px)
+      margin-left: 30%
+      width: 40%
+      max-width: 48%
+    @media (max-width: 420px)
+      font-size: 11px
+      text-transform: lowercase
+      padding:
+        left: 1px
+        right: 1px
+    &:focus
+      background: rgba($white,1)
+
+  input[type=submit].cta-pill
+    @media (min-width: 420px)
+      margin-left: -6%
+    @media (max-width: 420px)
+      margin-left: -32%
+    height: 58px
+    width: 58px
+    border: none
+    background:
+      image: url(/assets/mag_glass@2x.png)
+      repeat: no-repeat
+      position: center center
+      size: 18px
+    box-shadow: none
+    text-indent: -9999px
+    &:hover
+      display: inline-block
+      top: 0
+    &:active
+      display: inline-block
+      top: 0
+    &:focus
+      outline: none

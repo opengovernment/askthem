@@ -1,0 +1,27 @@
+<div class="featured">
+  <div class="emph">
+    <div class="avatar">
+      <% if featured.image? %>
+        <%= cdn_image_tag(featured.image, state: featured.state, size: "60x60", alt: "") %>
+      <% else %>
+        <%= image_tag("placeholder.png", size: "60x60", alt: "") %>
+      <% end %>
+    </div>
+    <div class="featured-headline">
+      <%= link_to featured.name, person_path(featured["state"], featured) %>&nbsp;&nbsp;<% if featured.verified? -%><i class="icon-ok-sign is-verified"><span class="verified-tooltip">AskThem Verified</span></i><% end -%>
+      <span class="jurisdiction"><%= person_attributes(featured) %></span>
+    </div>
+    <div class="featured-body">
+      <span class="stats">
+        <%- if featured.questions.count > 0 %>
+          <span><%= pluralize featured.questions.count, "Question" %></span>
+          <%- if featured.questions_answered.count > 0 %>
+            <span><%= link_to(pluralize(featured.questions_answered.count, "Answer"), have_answers_questions_path(featured.state, person: featured)) -%></span>
+          <%- end %>
+        <%- else %>
+          <%= link_to "Ask the first question >>", new_question_path(featured.state, person: featured) -%>
+        <%- end %>
+      </span>
+    </div>
+  </div>
+</div>

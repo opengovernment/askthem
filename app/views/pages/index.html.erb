@@ -1,29 +1,24 @@
 <section>
-  <%- if @blurb %>
-    <%= render @blurb %>
-  <%- elsif @featured_answer %>
-    <div class="answered-question">
-      <div class="emph">
-        <div class="answered-question-text">
+  <div class="blurb-featureds-and-form">
+    <%- if @blurb %>
+      <%= render @blurb %>
+    <%- end %>
 
-          <%= link_to "Answered Question!", question_path(@featured_answer.question.state, @featured_answer.question, anchor: "answer") %>
+    <%- if @featured_answer %>
+      <%= render partial: "answers/featured", object: @featured_answer %>
+    <%- end %>
 
-          From
+    <%- if @national_person %>
+        <%= render partial: "people/featured", object: @national_person %>
+    <%- end %>
 
-          <%= link_to "#{@featured_answer.question.person.political_position_title + ' '}#{@featured_answer.question.person.name}",
-          person_path(@featured_answer.question.person.state, @featured_answer.question.person),
-          anchor: "answer" %>
-        </div>
-        <div class="avatar">
-          <% if @featured_answer.question.person.image? %>
-            <%= cdn_image_tag(@featured_answer.question.person.image, size: "80x80", alt: "") %>
-          <% end %>
-        </div>
-        <p class="answered-question-subtext">to "<%= @featured_answer.question.title -%>"</p>
-      </div>
-    </div>
-  <%- end %>
-  <div class="leftCol">
+    <form action="/locator" class="locator-form">
+      <input type="text" name="q" id="q" placeholder="Enter City and State, or ZIP code" />
+      <input type="submit" value="Search" class="cta-pill" />
+    </form>
+  </div>
+  <!-- hide left column for now, keep for reference -->
+  <div class="leftCol" style="display: none;">
     <%- if @national_person %>
       <header>
         <h2>Featured</h2>
@@ -44,7 +39,8 @@
       <%= render partial: 'question', collection: @national_questions %>
     </ul>
   </div>
-  <div class="rightCol">
+  <!-- hide right column for now, keep for reference -->
+  <div class="rightCol" style="display: none;">
     <%- if @near_government && @near_government.has_people? %>
       <header>
         <h2><%= @near_government.legislature_name -%></h2>

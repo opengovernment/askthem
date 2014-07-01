@@ -9,12 +9,12 @@
     <%- end %>
 
     <div class="emph">
-      <div class="blurb-headline manage-blurb-headline"><%= managed_blurb.headline %></div>
       <div class="avatar">
         <%- if managed_blurb.avatar_url? %>
           <%= cdn_image_tag(managed_blurb.avatar_url, size: "60x60", alt: "") %>
         <%- end %>
       </div>
+      <div class="blurb-headline manage-blurb-headline"><%= managed_blurb.headline %></div>
       <div class="blurb-body">
         <%= raw(managed_blurb.body) %>
       </div>
