@@ -56,5 +56,17 @@ describe ApplicationAuthorizer do
       user = FactoryGirl.create(:user)
       expect(user.can?(:manage_user)).to be_false
     end
+
+    it "lets staff member view signatures" do
+      staff_member = FactoryGirl.create(:user)
+      staff_member.add_role :staff_member
+
+      expect(staff_member.can?(:view_signatures)).to be_true
+    end
+
+    it "does not let normal users view signatures" do
+      user = FactoryGirl.create(:user)
+      expect(user.can?(:view_signatures)).to be_false
+    end
   end
 end

@@ -63,6 +63,8 @@ OpenGovernment::Application.routes.draw do
         get 'need_answers'
         get 'recent'
       end
+
+      resources :signatures, only: :index
     end
 
     resources :subjects, only: [:index, :show]

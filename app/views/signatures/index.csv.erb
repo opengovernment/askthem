@@ -1,0 +1,6 @@
+<%- headers = ["First Name", "Last Name", "Email", "Zipcode"] -%>
+<%= CSV.generate_line headers -%>
+<%- @signers.each do |user| -%>
+<%- row = [user.given_name, user.family_name, user.email, user.postal_code] -%>
+<%= CSV.generate_line row -%>
+<%- end -%>
