@@ -3,6 +3,6 @@
   <a href="/terms-of-service">terms of use</a> and
   <a href="/privacy-policy">privacy policy</a>
   <%- if @question && @question.user.partner? %>
-    and may receive updates from <%= link_to @question.user.name, user_path(@question.user) -%>
+    and may receive updates from <%= link_to @question.user.given_name, user_path(@question.user) -%>
   <%- end %>
 </div>
