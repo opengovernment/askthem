@@ -44,5 +44,17 @@ describe ApplicationAuthorizer do
       user = FactoryGirl.create(:user)
       expect(user.can?(:manage_blurbs)).to be_false
     end
+
+    it "lets staff member manage user" do
+      staff_member = FactoryGirl.create(:user)
+      staff_member.add_role :staff_member
+
+      expect(staff_member.can?(:manage_user)).to be_true
+    end
+
+    it "does not let normal users manage user" do
+      user = FactoryGirl.create(:user)
+      expect(user.can?(:manage_user)).to be_false
+    end
   end
 end

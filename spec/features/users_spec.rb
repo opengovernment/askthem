@@ -71,5 +71,34 @@ describe "users" do
         end
       end
     end
+
+    context "as a staff member" do
+      let(:user) { FactoryGirl.create(:user) }
+
+      before :each do
+        @staff_member = FactoryGirl.create(:user)
+        @staff_member.add_role :staff_member
+      end
+
+      it "can click make partner and user is made partner" do
+        as_user(@staff_member) do
+          visit "/users/#{user.id}"
+          click_button "Make Partner"
+          page.should have_content "Partner"
+          find_button "Revoke"
+        end
+      end
+
+      it "can click revoke and user partnership is dropped" do
+        user.partner = true
+        user.save!
+
+        as_user(@staff_member) do
+          visit "/users/#{user.id}"
+          click_button "Revoke"
+          find_button "Make Partner"
+        end
+      end
+    end
   end
 end

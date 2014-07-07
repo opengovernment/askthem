@@ -86,6 +86,10 @@ class User
   field :country, type: String, default: 'US'
   field :local_jurisdiction_abbreviation, type: String
 
+  # is this partner organization
+  # that we may share signature data with?
+  field :partner, type: Boolean, default: false
+
   index('authentications.provider' => 1, 'authentications.uid' => 1)
 
   validates_presence_of :given_name, :family_name, :email

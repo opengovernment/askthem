@@ -59,6 +59,12 @@
           <%- if staff_member? -%>
             <section>
               <h4>Email:</h4><p><%= mail_to @user.email %></p>
+              <%- if @user.partner? -%>
+                <h4>Partner</h4>
+                <%= button_to("Revoke", { action: "update", "user[partner]" => false }, method: "put", class: "cta-pill") %>
+              <%- else %>
+                <%= button_to("Make Partner", { action: "update", "user[partner]" => true }, method: "put", class: "cta-pill") %>
+              <%- end %>
             </section>
           <%- end %>
           <section>
