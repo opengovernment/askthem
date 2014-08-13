@@ -75,7 +75,7 @@
         var cssLink = jQuery("<link>", {
           rel: "stylesheet",
           type: "text/css",
-          href: "at-widget-style.css"
+          href: "//www.askthem.io/widgets/zip/widget.css"
         });
 
         cssLink.appendTo('head');
@@ -102,21 +102,21 @@
           var headline = 'ASK POLITICIANS THIS QUESTION!';
           if(paramsDiv) {
             if (jQuery(paramsDiv).find('.headline').length > 0) headline = jQuery(paramsDiv).find('.headline').html();
-          } else if (jQuery(this).data('headline').length > 0) {
+          } else if (typeof jQuery(this).data('headline') !== "undefined") {
             headline = jQuery(this).data('headline');
           }
 
           var questionSummary = 'Will you state: "I approve <b>the truth</b> of this message" in your political ads?  Why or why not?';
           if(paramsDiv) {
             if (jQuery(paramsDiv).find('.question-summary').length > 0) questionSummary = jQuery(paramsDiv).find('.question-summary').html();
-          } else if (jQuery(this).data('question-summary').length > 0) {
+          } else if (typeof jQuery(this).data('question-summary') !== "undefined") {
             questionSummary = jQuery(this).data('question-summary');
           }
 
           var questionBody = '';
           if(paramsDiv) {
             if (jQuery(paramsDiv).find('.question-body').length > 0) questionBody = jQuery(paramsDiv).find('.question-body').html();
-          } else if (jQuery(this).data('question-body').length > 0) {
+          } else if (typeof jQuery(this).data('question-body') !== "undefined") {
             questionBody = jQuery(this).data('question-body');
           }
 
