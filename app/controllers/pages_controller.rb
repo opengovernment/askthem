@@ -13,6 +13,8 @@ class PagesController < ApplicationController
   respond_to :json, only: [:locator, :identifier]
   respond_to :csv, only: [:contact_info]
 
+  after_filter :set_access_control_headers, only: [:locator, :identifier]
+
   def honestads
     if has_useable_geo_data_from_ip?
       @postal_code = geo_data_from_ip.postal_code
@@ -217,7 +219,7 @@ class PagesController < ApplicationController
 
   def limited_json_for(people)
     only = [:party]
-    methods = [:id, :full_name, :photo_url,
+    methods = [:id, :full_name, :photo_url, :state,
                :political_position_title, :most_recent_district]
 
     people.as_json only: only, methods: methods
@@ -321,5 +323,10 @@ class PagesController < ApplicationController
   rescue
     # @todo report error and non-coverage of address
     limited_json_for(Person.results_for_location(@address))
+  end
+
+  def set_access_control_headers
+    headers['Access-Control-Allow-Origin'] = '*'
+    headers['Access-Control-Request-Method'] = '*'
   end
 end
