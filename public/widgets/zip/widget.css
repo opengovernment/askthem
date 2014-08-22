@@ -59,7 +59,9 @@
 }
 
 .at-widget fieldset {
-  border: none;
+  border: 0;
+  margin: 0;
+  padding: 0;
 }
 .at-widget input {
   margin-top: 1px;
