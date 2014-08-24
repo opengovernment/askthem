@@ -1,0 +1,71 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://maps.googleapis.com/maps/api/geocode/json?address=222%20Elm%20St,%20Montpelier,%20VT%2005602&language=en&sensor=false
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Sun, 24 Aug 2014 23:02:48 GMT
+      Expires:
+      - Mon, 25 Aug 2014 23:02:48 GMT
+      Cache-Control:
+      - public, max-age=86400
+      Access-Control-Allow-Origin:
+      - ! '*'
+      Server:
+      - mafe
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Alternate-Protocol:
+      - 80:quic
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: US-ASCII
+      string: ! "{\n   \"results\" : [\n      {\n         \"address_components\" :
+        [\n            {\n               \"long_name\" : \"222\",\n               \"short_name\"
+        : \"222\",\n               \"types\" : [ \"street_number\" ]\n            },\n
+        \           {\n               \"long_name\" : \"Elm Street\",\n               \"short_name\"
+        : \"Elm St\",\n               \"types\" : [ \"route\" ]\n            },\n
+        \           {\n               \"long_name\" : \"Montpelier\",\n               \"short_name\"
+        : \"Montpelier\",\n               \"types\" : [ \"locality\", \"political\"
+        ]\n            },\n            {\n               \"long_name\" : \"Washington
+        County\",\n               \"short_name\" : \"Washington County\",\n               \"types\"
+        : [ \"administrative_area_level_2\", \"political\" ]\n            },\n            {\n
+        \              \"long_name\" : \"Vermont\",\n               \"short_name\"
+        : \"VT\",\n               \"types\" : [ \"administrative_area_level_1\", \"political\"
+        ]\n            },\n            {\n               \"long_name\" : \"United
+        States\",\n               \"short_name\" : \"US\",\n               \"types\"
+        : [ \"country\", \"political\" ]\n            },\n            {\n               \"long_name\"
+        : \"05602\",\n               \"short_name\" : \"05602\",\n               \"types\"
+        : [ \"postal_code\" ]\n            }\n         ],\n         \"formatted_address\"
+        : \"222 Elm Street, Montpelier, VT 05602, USA\",\n         \"geometry\" :
+        {\n            \"location\" : {\n               \"lat\" : 44.26502989999999,\n
+        \              \"lng\" : -72.57076309999999\n            },\n            \"location_type\"
+        : \"ROOFTOP\",\n            \"viewport\" : {\n               \"northeast\"
+        : {\n                  \"lat\" : 44.26637888029149,\n                  \"lng\"
+        : -72.56941411970848\n               },\n               \"southwest\" : {\n
+        \                 \"lat\" : 44.2636809197085,\n                  \"lng\" :
+        -72.57211208029149\n               }\n            }\n         },\n         \"types\"
+        : [ \"street_address\" ]\n      }\n   ],\n   \"status\" : \"OK\"\n}\n"
+    http_version: 
+  recorded_at: Sun, 24 Aug 2014 23:02:48 GMT
+recorded_with: VCR 2.9.0

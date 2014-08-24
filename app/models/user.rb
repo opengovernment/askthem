@@ -184,6 +184,17 @@ class User
     Metadatum.where(id: local_jurisdiction_abbreviation).first
   end
 
+  def update_address_from_string(address_string)
+    location = LocationFormatter.new(address_string).format
+
+    self.street_address = location.street_address
+    self.locality = location.city
+    self.region = location.state_code
+    self.country = location.country_code
+    self.postal_code = location.postal_code
+    self.coordinates = location.coordinates.reverse
+  end
+
   private
   # Unlike Devise, doesn't require password confirmations.
   def set_password_confirmation

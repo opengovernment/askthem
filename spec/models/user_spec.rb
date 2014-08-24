@@ -84,6 +84,19 @@ describe User do
     end
   end
 
+  describe "#update_address_from_string", vcr: true do
+    let(:user) { User.new }
+
+    it "populates address attributes for user" do
+      address_string = "222 Elm St, Montpelier, VT 05602"
+      full_address = "222 Elm Street, Montpelier, VT, US, 05602"
+
+      user.update_address_from_string(address_string)
+
+      expect(user.address_for_geocoding).to eq full_address
+    end
+  end
+
   context "with after_create callback" do
     it "geocodes address to lat long", :vcr do
       user = FactoryGirl.build(:user)
