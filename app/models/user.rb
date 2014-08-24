@@ -90,6 +90,10 @@ class User
   # that we may share signature data with?
   field :partner, type: Boolean, default: false
 
+  # or is this user referred by a partner (rather a partner org itself)
+  # name, url are basic subfields
+  field :referring_partner_info, type: Hash
+
   index('authentications.provider' => 1, 'authentications.uid' => 1)
 
   validates_presence_of :given_name, :family_name, :email

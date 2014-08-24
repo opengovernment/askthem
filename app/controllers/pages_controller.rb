@@ -87,6 +87,20 @@ class PagesController < ApplicationController
     @address = params[:q]
     if request.format != :json
       set_variables_for(@address)
+      @only_show = params[:only_show]
+
+      if params["partner[name]"] || params["partner[url]"]
+        referring_partner_info = { name: params["partner[name]"],
+                                   url: params["partner[url]"] }
+        session[:referring_partner_info] = referring_partner_info
+      end
+
+      if params["question[title]"] || params["question[body]"]
+        question_skeleton = { title: params["question[title]"],
+                              body: params["question[body]"] }
+        session[:question_skeleton] = question_skeleton
+      end
+
     else
       respond_with locator_json_for(@address)
     end

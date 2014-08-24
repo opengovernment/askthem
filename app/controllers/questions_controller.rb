@@ -96,6 +96,11 @@ class QuestionsController < ApplicationController
       @question.bill = @bill
     end
 
+    if session[:question_skeleton]
+      @question.title = session[:question_skeleton][:title]
+      @question.body = session[:question_skeleton][:body]
+    end
+
     render layout: "data_collection"
   end
 
@@ -108,6 +113,10 @@ class QuestionsController < ApplicationController
       @question.state = @state_code
     end
     @user = @question.user
+
+    if session[:referring_partner_info]
+      @user.referring_partner_info = session[:referring_partner_info]
+    end
 
     # mongoid nested user
     # saving doesn't prevent question saving for belongs_to

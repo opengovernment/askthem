@@ -1,6 +1,36 @@
 require "spec_helper"
 
 describe PagesController do
+  describe "#locator" do
+    context "when passed partner info parameters" do
+      before do
+        @person = FactoryGirl.create(:federal_legislator_bernard_sanders)
+        @person.write_attribute(:active, true)
+        @person.save
+      end
+
+      it "stores info in user session", vcr: true do
+        referring_partner = { name: "Someone Special",
+                              url: "http://example.com" }
+        post :locator, { q: "05602",
+                         "partner[name]" => referring_partner[:name],
+                         "partner[url]" => referring_partner[:url] }
+        expect(session[:referring_partner_info]).to eq referring_partner
+      end
+    end
+
+    context "when passed question parameters" do
+      it "stores info in user session", vcr: true do
+        question = { title: "Blah, blah",
+                     body: "yada, yada, yada" }
+        post :locator, { q: "05602",
+                         "question[title]" => question[:title],
+                         "question[body]" => question[:body] }
+        expect(session[:question_skeleton]).to eq question
+      end
+    end
+  end
+
   context "when requesting csv" do
     context "and logged out" do
       it "should refuse access" do
@@ -111,6 +141,7 @@ describe PagesController do
                               :photo_url,
                               :party],
                        methods: [:id,
+                                 :state,
                                  :political_position_title,
                                  :most_recent_district] })
     end

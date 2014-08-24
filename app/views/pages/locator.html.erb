@@ -1,20 +1,20 @@
 <nav class="questions-or-officials">
   <ul class="level">
-    <li class="active">
+    <li<%= raw(' class="active"') if !@only_show || @only_show == "questions" -%>>
     <a href="#" id="questions-near">See Questions Near You</a>
     <i class="icon-angle-down"></i>
   </li>
-  <li>
+  <li<%= raw(' class="active"') if @only_show && @only_show == "people" -%>>
     <a href="#" id="officials-near">See Your Elected Officials</a>
     <% if @federal_people && @federal_people.count > 0 -%>
       <%= cdn_image_tag(@federal_people.first.image, size: '30x30', alt: '', class: 'preview-avatar') %>
     <% end -%>
     <i class="icon-angle-down"></i></li>
-  <%= generic_ask_question 'Ask a Question', { class: 'cta-pill'} %>
+  <%= generic_ask_question 'Ask a Question', { class: 'cta-pill'} unless @only_show %>
   </ul>
 </nav>
 
-<section class="questions locator">
+<section class="questions locator"<%= raw(' style="display:none;"') if @only_show && @only_show != "questions" -%>>
   <ol class="question-list locator-question-list">
     <%= render @questions if @questions %>
 
@@ -26,7 +26,7 @@
   </ol>
 </section>
 
-<section class="officials locator" style="display:none;">
+<section class="officials locator"<%= raw(' style="display:none;"') if !@only_show || @only_show != "people" -%>>
   <%= render partial: "people_for_location",
     locals: { municipality: @municipality,  municipal_people: @municipal_people,
     federal_people: @federal_people, governor: @governor,

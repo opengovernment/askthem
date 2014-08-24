@@ -1,3 +1,5 @@
+<% with_button = @only_show && @only_show == "people" %>
+
 <li>
   <div class="avatar">
     <% if person.image? %>
@@ -15,9 +17,12 @@
         <%- if person.questions_answered.count > 0 %>
           <span><%= link_to(pluralize(person.questions_answered.count, "Answer"), have_answers_questions_path(person.state, person: person)) -%></span>
         <%- end %>
-      <%- else %>
+      <%- elsif with_button == false %>
         <%= link_to "Ask the first question >>", new_question_path(person.state, person: person) -%>
       <%- end %>
     </span>
+    <%- if with_button %>
+      <%= link_to "Ask question", new_question_path(person.state, person: person), class: "cta-pill person-list-button" -%>
+    <%- end %>
   </div>
 </li>
