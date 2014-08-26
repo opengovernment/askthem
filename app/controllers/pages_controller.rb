@@ -351,6 +351,7 @@ class PagesController < ApplicationController
                                end
 
       referring_partner_info[:submitted_address] = params[:q]
+      referring_partner_info[:return_url] = request.referer
 
       session[:referring_partner_info] = referring_partner_info
     end

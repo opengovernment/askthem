@@ -12,6 +12,7 @@ describe PagesController do
       it "stores info in user session", vcr: true do
         referring_partner = { name: "Someone Special",
                               url: "http://example.com",
+                              return_url: nil,
                               submitted_address: "05602" }
         post :locator, { q: "05602",
                          "partner[name]" => referring_partner[:name],
