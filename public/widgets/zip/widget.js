@@ -43,13 +43,30 @@
     main();
   }
 
-  function htmlTemplate(tagId, headline, questionSummary) {
+  function htmlTemplate(tagId, options) {
+    headline = options.headline;
+    summary = options.questionSummary;
+    body = options.questionBody;
+    name = options.partner.name;
+    url = options.partner.url;
+    logo = options.partner.logo;
+
     var html = '<div class="at-widget" id="' + tagId + '">';
     html += '<h4>' + headline + '</h4>';
-    html += '<div class="description"><p>' + questionSummary + '</p></div>';
+    html += '<div class="description"><p>' + summary + '</p></div>';
     html += '\
     <form action="http://www.askthem.io/locator">\
       <fieldset>\
+        <input type="hidden" name="question[title]" value="' + summary + '">';
+    html += '\
+        <input type="hidden" name="question[body]" value="' + body + '">';
+    html += '\
+        <input type="hidden" name="partner[name]" value="' + name + '">';
+    html += '\
+        <input type="hidden" name="partner[url]" value="' + url + '">';
+    html += '\
+        <input type="hidden" name="partner[logo]" value="' + logo + '">';
+    html += '\
         <input type="text" name="q" class="zip" placeholder="Zip Code">\
         <div class="button">\
           <div class="sign">\
@@ -120,8 +137,42 @@
             questionBody = jQuery(this).data('question-body');
           }
 
+          var partnerName = "HonestAds";
+          if(paramsDiv) {
+            if (jQuery(paramsDiv).find('.partner-name').length > 0) partnerLogo = jQuery(paramsDiv).find('.parnter-name').html();
+          } else if (typeof jQuery(this).data('partner-name') !== "undefined") {
+            partnerName = jQuery(this).data('partner-name');
+          }
+
+          var partnerUrl = "http://honestads.org/";
+          if(paramsDiv) {
+            if (jQuery(paramsDiv).find('.partner-url').length > 0) partnerUrl = jQuery(paramsDiv).find('.parnter-url').html();
+          } else if (typeof jQuery(this).data('partner-url') !== "undefined") {
+            partnerUrl = jQuery(this).data('partner-url');
+          }
+
+          var partnerLogo = '';
+          if(paramsDiv) {
+            if (jQuery(paramsDiv).find('.partner-logo').length > 0) partnerLogo = jQuery(paramsDiv).find('.parnter-logo').html();
+          } else if (typeof jQuery(this).data('partner-logo') !== "undefined") {
+            partnerLogo = jQuery(this).data('partner-logo');
+          } else if (parnterName == "HonestAds") {
+            var partnerLogo = "http://honestads.org/img/logo.png";
+          }
+
+          var options = {
+            headline: headline,
+            questionSummary: questionSummary,
+            questionBody: questionBody,
+            partner: {
+              name: partnerName,
+              url: partnerUrl,
+              logo: partnerLogo
+            }
+          };
+
           // add our HTML
-          jQuery(this).after(htmlTemplate(tagId, headline, questionSummary));
+          jQuery(this).after(htmlTemplate(tagId, options));
 
           // register click handling for button div
           var widgetContainer = jQuery(tagIdSelector);
