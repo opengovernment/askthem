@@ -55,7 +55,7 @@
     html += '<h4>' + headline + '</h4>';
     html += '<div class="description"><p>' + summary + '</p></div>';
     html += '\
-    <form action="http://www.askthem.io/locator">\
+    <form action="http://www.askthem.io/locator" method="post">\
       <fieldset>\
         <input type="hidden" name="question[title]" value="' + summary + '">';
     html += '\
