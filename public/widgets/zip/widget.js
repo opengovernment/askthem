@@ -57,6 +57,7 @@
     html += '\
     <form action="http://www.askthem.io/locator" method="post">\
       <fieldset>\
+        <input type="hidden" name="only_show" value="people">\
         <input type="hidden" name="question[title]" value="' + summary + '">';
     html += '\
         <input type="hidden" name="question[body]" value="' + body + '">';
