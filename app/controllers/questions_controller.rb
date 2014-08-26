@@ -97,7 +97,8 @@ class QuestionsController < ApplicationController
     end
 
     if session[:question_skeleton]
-      @question.title = session[:question_skeleton][:title]
+      sanitized_title = ActionController::Base.helpers.strip_tags(session[:question_skeleton][:title])
+      @question.title = sanitized_title
       @question.body = session[:question_skeleton][:body]
     end
 
