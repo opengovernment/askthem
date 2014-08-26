@@ -139,24 +139,24 @@
 
           var partnerName = "HonestAds";
           if(paramsDiv) {
-            if (jQuery(paramsDiv).find('.partner-name').length > 0) partnerLogo = jQuery(paramsDiv).find('.parnter-name').html();
+            if (jQuery(paramsDiv).find('.partner-name').length > 0) partnerLogo = jQuery(paramsDiv).find('.partner-name').html();
           } else if (typeof jQuery(this).data('partner-name') !== "undefined") {
             partnerName = jQuery(this).data('partner-name');
           }
 
           var partnerUrl = "http://honestads.org/";
           if(paramsDiv) {
-            if (jQuery(paramsDiv).find('.partner-url').length > 0) partnerUrl = jQuery(paramsDiv).find('.parnter-url').html();
+            if (jQuery(paramsDiv).find('.partner-url').length > 0) partnerUrl = jQuery(paramsDiv).find('.partner-url').html();
           } else if (typeof jQuery(this).data('partner-url') !== "undefined") {
             partnerUrl = jQuery(this).data('partner-url');
           }
 
           var partnerLogo = '';
           if(paramsDiv) {
-            if (jQuery(paramsDiv).find('.partner-logo').length > 0) partnerLogo = jQuery(paramsDiv).find('.parnter-logo').html();
+            if (jQuery(paramsDiv).find('.partner-logo').length > 0) partnerLogo = jQuery(paramsDiv).find('.partner-logo').html();
           } else if (typeof jQuery(this).data('partner-logo') !== "undefined") {
             partnerLogo = jQuery(this).data('partner-logo');
-          } else if (parnterName == "HonestAds") {
+          } else if (partnerName == "HonestAds") {
             var partnerLogo = "http://honestads.org/img/logo.png";
           }
 
