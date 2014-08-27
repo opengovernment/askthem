@@ -102,7 +102,7 @@ class User
   validates_inclusion_of :country, in: %w(US), allow_blank: true
 
   attr_accessor :for_new_question
-  validates_presence_of :street_address, :locality, if: :for_new_question?
+  validates_presence_of :locality, if: :for_new_question?
 
   before_validation :set_password_confirmation
 
@@ -189,10 +189,24 @@ class User
 
     self.street_address = location.street_address
     self.locality = location.city
-    self.region = location.state_code
+    self.region = location.state_code.downcase
     self.country = location.country_code
     self.postal_code = location.postal_code
     self.coordinates = location.coordinates.reverse
+  end
+
+  def set_attributes_based_on_partner
+    return unless referring_partner_info.present?
+
+    self.password = Devise.friendly_token.first(6)
+    self.password_is_placeholder = true
+
+    self.given_name = email.split("@").first if email
+    self.family_name = "from #{referring_partner_info[:name]}"
+
+    if referring_partner_info[:submitted_address]
+      update_address_from_string(referring_partner_info[:submitted_address])
+    end
   end
 
   private

@@ -8,19 +8,23 @@
 
   <fieldset>
     <%= f.fields_for :user do |user_form| %>
-      <label for="firstname" class="lesser">First Name</label>
-      <%= user_form.text_field :given_name, placeholder: 'John' %>
+      <%- unless @from_partner %>
+        <label for="firstname" class="lesser">First Name</label>
+        <%= user_form.text_field :given_name, placeholder: 'John' %>
 
-      <label for="lastname" class="lesser">Last Name</label>
-      <%= user_form.text_field :family_name, placeholder: 'Doe' %>
+        <label for="lastname" class="lesser">Last Name</label>
+        <%= user_form.text_field :family_name, placeholder: 'Doe' %>
+      <%- end %>
 
       <label for="email" class="lesser">Email</label>
       <%= user_form.text_field :email, placeholder: 'john.doe@gmail.com' %>
 
-      <label for="password" class="lesser">Choose a Password</label>
-      <%= user_form.password_field :password %>
+      <%- unless @from_partner %>
+        <label for="password" class="lesser">Choose a Password</label>
+        <%= user_form.password_field :password %>
+      <%- end %>
 
-      <% unless relevant_steps.include?('recipient') %>
+      <% if !relevant_steps.include?('recipient') && !@from_partner %>
         <label for="street" class="lesser">Address</label>
         <%= user_form.text_field :street_address, placeholder: 'Street Address' %>
 

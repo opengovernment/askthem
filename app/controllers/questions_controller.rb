@@ -102,8 +102,11 @@ class QuestionsController < ApplicationController
       @question.body = session[:question_skeleton][:body]
     end
 
-    if session[:referring_partner_info] &&
-       session[:referring_partner_info][:submitted_address]
+    if session[:referring_partner_info].present?
+      @from_partner = true
+      @referring_partner_info = session[:referring_partner_info]
+
+      # TODO: take this out, when not necessary (only needed in create)
       submitted_address = session[:referring_partner_info][:submitted_address]
       @question.user.update_address_from_string(submitted_address)
     end
@@ -121,11 +124,9 @@ class QuestionsController < ApplicationController
     end
     @user = @question.user
 
-    if session[:referring_partner_info]
+    if session[:referring_partner_info].present?
       @user.referring_partner_info = session[:referring_partner_info]
-      if @user.referring_partner_info[:submitted_address]
-        @user.update_address_from_string(referring_partner_info[:submitted_address])
-      end
+      @user.set_attributes_based_on_partner
     end
 
     # mongoid nested user
@@ -145,6 +146,7 @@ class QuestionsController < ApplicationController
       set_up_steps
 
       if @question.person_id.blank?
+        # TODO: email details of question to staff so they may follow up with user
         flash.now[:alert] = "Recipient not available due to an error. Staff are looking into it. Please try again later."
       else
         flash.now[:alert] = "Whoops! Not quite right. Please try again."

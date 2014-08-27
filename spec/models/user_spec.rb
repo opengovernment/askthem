@@ -89,11 +89,31 @@ describe User do
 
     it "populates address attributes for user" do
       address_string = "222 Elm St, Montpelier, VT 05602"
-      full_address = "222 Elm Street, Montpelier, VT, US, 05602"
+      full_address = "222 Elm Street, Montpelier, vt, US, 05602"
 
       user.update_address_from_string(address_string)
 
       expect(user.address_for_geocoding).to eq full_address
+    end
+  end
+
+  describe "#set_attributes_based_on_partner", vcr: true do
+    let(:user) { User.new }
+
+    it "populates appropriate attributes based on partner" do
+      referring_partner = { name: "Partner",
+                            url: "http://example.com",
+                            submitted_address: "05602" }
+
+      user.email = "bernice@example.com"
+      user.referring_partner_info = referring_partner
+      user.set_attributes_based_on_partner
+
+      expect(user.given_name).to eq "bernice"
+      expect(user.family_name).to eq "from Partner"
+      expect(user.password).to_not be_nil
+      expect(user.password_is_placeholder?).to be_true
+      expect(user.locality).to eq "Montpelier"
     end
   end
 

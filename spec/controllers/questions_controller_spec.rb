@@ -31,16 +31,15 @@ describe QuestionsController do
     end
 
     context "when referring_partner_in is passed in via session" do
+      let(:question_attributes) { { title: "X",
+                                    body: "Y",
+                                    person_id: @person.id,
+                                    user: { email: "bernice@example.com" } } }
+
+      let(:referring_partner) { { name: "Someone Special",
+                                  url: "http://example.com" } }
+
       it "populate question.user with referring_partner_info" do
-        question_attributes = { title: "X",
-                                body: "Y",
-                                person_id: @person.id,
-                                user: { email: "test@example.com",
-                                        postal_code: "05602" } }
-
-        referring_partner = { name: "Someone Special",
-                              url: "http://example.com" }
-
         session[:referring_partner_info] = referring_partner
 
         post :create, jurisdiction: @person.state, question: question_attributes
@@ -48,6 +47,19 @@ describe QuestionsController do
         new_user = assigns(:user)
 
         expect(new_user.referring_partner_info).to eq referring_partner
+      end
+
+      it "populate question.user with attributes based on partner" do
+        session[:referring_partner_info] = referring_partner
+
+        post :create, jurisdiction: @person.state, question: question_attributes
+
+        new_user = assigns(:user)
+
+        expect(new_user.given_name).to eq "bernice"
+        expect(new_user.family_name).to eq "from Someone Special"
+        expect(new_user.password).to_not be_nil
+        expect(new_user.password_is_placeholder?).to be_true
       end
     end
   end

@@ -42,19 +42,21 @@
   <% else %>
     <p style="display:none;" id="confirm-issue">Issue: <span id="confirm-issue-value"></span></p>
   <% end %>
-  <span class="author_wrap">
-    <span class="posted">Posted by</span>
-    <span class="author">
-      <% if question.user.image? %>
-      <%= image_tag(question.user.image.url, size: '40x40', alt: '') %>
-      <% end %>
-      <%= question.user.alternate_name %>
-      <% unless question.user.alternate_name.present? %>
-        <span class="firstname"></span>
-        <span class="lastname"></span>
-      <% end %>
+  <%- unless @from_partner %>
+    <span class="author_wrap">
+      <span class="posted">Posted by</span>
+      <span class="author">
+        <% if question.user.image? %>
+          <%= image_tag(question.user.image.url, size: '40x40', alt: '') %>
+        <% end %>
+        <%= question.user.alternate_name %>
+        <% unless question.user.alternate_name.present? %>
+          <span class="firstname"></span>
+          <span class="lastname"></span>
+        <% end %>
+      </span>
     </span>
-  </span>
+  <%- end %>
 
   <div class="controls"><%= f.submit 'Publish', class: 'cta-pill' %></div>
 </article>
