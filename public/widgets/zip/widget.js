@@ -58,9 +58,9 @@
     <form action="http://www.askthem.io/locator" method="post">\
       <fieldset>\
         <input type="hidden" name="only_show" value="people">\
-        <input type="hidden" name="question[title]" value="' + summary + '">';
+        <input type="hidden" name="question[title]" value="' + summary.replace(/"/g, '&quot;') + '">';
     html += '\
-        <input type="hidden" name="question[body]" value="' + body + '">';
+        <input type="hidden" name="question[body]" value="' + body.replace(/"/g, '&quot;') + '">';
     html += '\
         <input type="hidden" name="partner[name]" value="' + name + '">';
     html += '\
@@ -105,7 +105,7 @@
           // set defaults, use data attributes where possible
           // hidden divs where we need html
           var tagId = 'at-question-' + i.toString();
-          if (jQuery(this).data('tag-id').length > 0) tagId = jQuery(this).data('tag-id');
+          if (jQuery(this).data('tag-id') && jQuery(this).data('tag-id').length > 0) tagId = jQuery(this).data('tag-id');
 
           var tagIdSelector = "#"+tagId;
 
