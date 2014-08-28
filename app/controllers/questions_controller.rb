@@ -317,7 +317,7 @@ class QuestionsController < ApplicationController
       message = "Thanks for your question!"
       message += " You can keep checking out AskThem.io or"
       message += " return to"
-      message += " <a href\"#{info[:return_url]}\">#{info[:name]}</a>."
+      message += " <a href=\"#{info[:return_url]}\">#{info[:name]}</a>."
       flash[:notice] = message
     end
   end
