@@ -137,15 +137,17 @@ class QuestionsController < ApplicationController
         PersonMailer.notify_staff_new_from_twitter(@person).deliver
       end
 
+      set_referring_partner_flash_if_necessary_for(@user)
+
       redirect_to question_path(@question.state, @question, share: true)
     else
       set_up_steps
 
       if @question.person_id.blank?
         # TODO: email details of question to staff so they may follow up with user
-        flash.now[:alert] = "Recipient not available due to an error. Staff are looking into it. Please try again later."
+        flash[:alert] = "Recipient not available due to an error. Staff are looking into it. Please try again later."
       else
-        flash.now[:alert] = "Whoops! Not quite right. Please try again."
+        flash[:alert] = "Whoops! Not quite right. Please try again."
       end
 
       respond_to do |format|
@@ -306,5 +308,17 @@ class QuestionsController < ApplicationController
 
   def set_is_national
     @is_national = params[:jurisdiction] == Metadatum::Us::ABBREVIATION
+  end
+
+  def set_referring_partner_flash_if_necessary_for(user)
+    info = user.referring_partner_info
+
+    if info && info[:return_url]
+      message = "Thanks for your question!"
+      message += " You can keep checking out AskThem.io or"
+      message += " return to"
+      message += " <a href\"#{info[:return_url]}\">#{info[:name]}</a>."
+      flash[:notice] = message
+    end
   end
 end

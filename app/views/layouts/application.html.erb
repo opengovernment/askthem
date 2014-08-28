@@ -66,7 +66,7 @@
   <section>
     <div class="content_body">
       <% if notice %>
-        <p class="notice"><%= notice %></p>
+        <p class="notice"><%= raw(notice) %></p>
       <% end %>
       <% if alert %>
         <p class="alert"><%= alert %></p>
