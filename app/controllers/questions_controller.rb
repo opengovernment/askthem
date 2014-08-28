@@ -105,10 +105,6 @@ class QuestionsController < ApplicationController
     if session[:referring_partner_info].present?
       @from_partner = true
       @referring_partner_info = session[:referring_partner_info]
-
-      # TODO: take this out, when not necessary (only needed in create)
-      submitted_address = session[:referring_partner_info][:submitted_address]
-      @question.user.update_address_from_string(submitted_address)
     end
 
     render layout: "data_collection"
