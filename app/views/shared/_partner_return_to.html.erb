@@ -3,7 +3,7 @@
   <%- target_url = info[:return_url] || info[:url] %>
   <%- link_content = info[:name] %>
   <%- if info[:logo] %>
-    <%- link_content = image_tag(info[:logo], class: "partner-logo") %>
+    <%- link_content = image_tag(info[:logo], class: "partner-logo", alt: info[:name]) %>
   <%- end %>
 
   <div class="partner-return-to">
