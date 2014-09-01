@@ -140,7 +140,7 @@
 
           var partnerName = "HonestAds";
           if(paramsDiv) {
-            if (jQuery(paramsDiv).find('.partner-name').length > 0) partnerLogo = jQuery(paramsDiv).find('.partner-name').html();
+            if (jQuery(paramsDiv).find('.partner-name').length > 0) partnerName = jQuery(paramsDiv).find('.partner-name').html();
           } else if (typeof jQuery(this).data('partner-name') !== "undefined") {
             partnerName = jQuery(this).data('partner-name');
           }
@@ -152,13 +152,11 @@
             partnerUrl = jQuery(this).data('partner-url');
           }
 
-          var partnerLogo = '';
+          var partnerLogo = 'http://honestads.org/img/logo.png';
           if(paramsDiv) {
             if (jQuery(paramsDiv).find('.partner-logo').length > 0) partnerLogo = jQuery(paramsDiv).find('.partner-logo').html();
           } else if (typeof jQuery(this).data('partner-logo') !== "undefined") {
             partnerLogo = jQuery(this).data('partner-logo');
-          } else if (partnerName == "HonestAds") {
-            var partnerLogo = "http://honestads.org/img/logo.png";
           }
 
           var options = {

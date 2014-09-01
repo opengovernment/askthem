@@ -93,6 +93,8 @@ class PagesController < ApplicationController
       set_referring_partner_if_necessary
 
       set_question_skeleton_if_necessary
+
+      redirect_to "/" if @address.blank? && session[:referring_partner_info]
     else
       respond_with locator_json_for(@address)
     end
