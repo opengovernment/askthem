@@ -1,0 +1,12 @@
+<%- info = session[:referring_partner_info] %>
+<%- if info %>
+  <%- target_url = info[:return_url] || info[:url] %>
+  <%- link_content = info[:name] %>
+  <%- if info[:logo] %>
+    <%- link_content = image_tag(info[:logo], class: "partner-logo") %>
+  <%- end %>
+
+  <div class="partner-return-to">
+    return to <%= raw("<a href=\"#{target_url}\">#{link_content}</a>") -%>
+  </div>
+<%- end %>

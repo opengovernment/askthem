@@ -117,11 +117,13 @@
     <div class="clear"></div>
   </footer>
 
-<%= render "shared/facebook_connect" %>
+  <%= render partial: 'shared/partner_return_to' %>
 
-<%= javascript_include_tag 'application' %>
+  <%= render "shared/facebook_connect" %>
 
-<%= render "shared/google_analytics" %>
+  <%= javascript_include_tag 'application' %>
+
+  <%= render "shared/google_analytics" %>
 
 </body>
 </html>
