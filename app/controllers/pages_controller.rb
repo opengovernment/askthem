@@ -94,7 +94,7 @@ class PagesController < ApplicationController
 
       set_question_skeleton_if_necessary
 
-      redirect_to "/" if @address.blank? && session[:referring_partner_info]
+      redirect_to_partner_page_if_no_address
     else
       respond_with locator_json_for(@address)
     end
@@ -373,6 +373,13 @@ class PagesController < ApplicationController
                           end
 
       session[:question_skeleton] = question_skeleton
+    end
+  end
+
+  def redirect_to_partner_page_if_no_address
+    if @address.blank? && session[:referring_partner_info]
+      partnership_page = "/#{session[:referring_partner_info][:name].gsub(" ", "_")}"
+      redirect_to partnership_page.downcase
     end
   end
 end
