@@ -117,27 +117,6 @@
             }
           })
 
-          var headline = 'ASK POLITICIANS THIS QUESTION!';
-          if(paramsDiv) {
-            if (jQuery(paramsDiv).find('.headline').length > 0) headline = jQuery(paramsDiv).find('.headline').html();
-          } else if (typeof jQuery(this).data('headline') !== "undefined") {
-            headline = jQuery(this).data('headline');
-          }
-
-          var questionSummary = 'Will you state: "I approve <b>the truth</b> of this message" in your political ads?  Why or why not?';
-          if(paramsDiv) {
-            if (jQuery(paramsDiv).find('.question-summary').length > 0) questionSummary = jQuery(paramsDiv).find('.question-summary').html();
-          } else if (typeof jQuery(this).data('question-summary') !== "undefined") {
-            questionSummary = jQuery(this).data('question-summary');
-          }
-
-          var questionBody = '';
-          if(paramsDiv) {
-            if (jQuery(paramsDiv).find('.question-body').length > 0) questionBody = jQuery(paramsDiv).find('.question-body').html();
-          } else if (typeof jQuery(this).data('question-body') !== "undefined") {
-            questionBody = jQuery(this).data('question-body');
-          }
-
           var partnerName = "HonestAds";
           if(paramsDiv) {
             if (jQuery(paramsDiv).find('.partner-name').length > 0) partnerName = jQuery(paramsDiv).find('.partner-name').html();
@@ -145,18 +124,60 @@
             partnerName = jQuery(this).data('partner-name');
           }
 
-          var partnerUrl = "http://honestads.org/";
+          /* adjust defaults based on partner */
+          var partnerUrl = "";
+          if(partnerName === 'HonestAds') {
+            partnerUrl = "http://honestads.org/";
+          }
+
           if(paramsDiv) {
             if (jQuery(paramsDiv).find('.partner-url').length > 0) partnerUrl = jQuery(paramsDiv).find('.partner-url').html();
           } else if (typeof jQuery(this).data('partner-url') !== "undefined") {
             partnerUrl = jQuery(this).data('partner-url');
           }
 
-          var partnerLogo = 'http://honestads.org/img/logo.png';
+          var partnerLogo = '';
+          if(partnerName === 'HonestAds') {
+            partnerLogo = 'http://honestads.org/img/logo.png';
+          }
+
           if(paramsDiv) {
             if (jQuery(paramsDiv).find('.partner-logo').length > 0) partnerLogo = jQuery(paramsDiv).find('.partner-logo').html();
           } else if (typeof jQuery(this).data('partner-logo') !== "undefined") {
             partnerLogo = jQuery(this).data('partner-logo');
+          }
+
+          var headline = '';
+          if(partnerName === 'HonestAds') {
+            headline = 'ASK POLITICIANS THIS QUESTION!';
+          }
+
+          if(paramsDiv) {
+            if (jQuery(paramsDiv).find('.headline').length > 0) headline = jQuery(paramsDiv).find('.headline').html();
+          } else if (typeof jQuery(this).data('headline') !== "undefined") {
+            headline = jQuery(this).data('headline');
+          }
+
+          var questionSummary = '';
+          if(partnerName === 'HonestAds') {
+            questionSummary = 'Will you state "I approve the <b>truth</b> of this message" in your political ads?';
+          }
+
+          if(paramsDiv) {
+            if (jQuery(paramsDiv).find('.question-summary').length > 0) questionSummary = jQuery(paramsDiv).find('.question-summary').html();
+          } else if (typeof jQuery(this).data('question-summary') !== "undefined") {
+            questionSummary = jQuery(this).data('question-summary');
+          }
+
+          var questionBody = '';
+          if(partnerName === 'HonestAds') {
+            questionBody = 'Since "I approve this message" doesn\'t mean your ad is true, will you say "I approve the truth of this message" instead? Why or why not? #honestads';
+          }
+
+          if(paramsDiv) {
+            if (jQuery(paramsDiv).find('.question-body').length > 0) questionBody = jQuery(paramsDiv).find('.question-body').html();
+          } else if (typeof jQuery(this).data('question-body') !== "undefined") {
+            questionBody = jQuery(this).data('question-body');
           }
 
           var options = {
