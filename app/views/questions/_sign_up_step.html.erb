@@ -2,9 +2,15 @@
   <header>
     <h1 class="action">Your Profile</h1>
   </header>
-  <label for="question">Personal info
-    <span class="details">Tell us a little bit about yourself!</span>
-  </label>
+  <%- if !@from_partner %>
+    <label for="question">Personal info
+      <span class="details">Tell us a little bit about yourself!</span>
+    </label>
+  <%- else %>
+    <label for="question">
+      Your email address is required to send your question and to share the results with you.
+    </label>
+  <%- end %>
 
   <fieldset>
     <%= f.fields_for :user do |user_form| %>
@@ -42,5 +48,8 @@
       <% end %>
     <% end %>
   </fieldset>
-  <a href="/users/sign_in" class="push">Already have an AskThem account? Login.</a>
+
+  <%- if !@from_partner || @referring_partner_info[:name] != "HonestAds" %>
+    <a href="/users/sign_in" class="push">Already have an AskThem account? Login.</a>
+  <%- end %>
 </article>

@@ -24,7 +24,10 @@
       <%= f.text_area :title, placeholder: raw('Summary&hellip;'), maxlength: '100', cols: '30', rows: '2', validate: true, class: 'question-title' %>
     </div>
 
-    <label for="question_body">Full Question (optional)
+    <label for="question_body">
+      <%- if !@from_partner || @referring_partner_info[:name] != "HonestAds" %>
+        Full Question (optional)
+      <%- end %>
       <span class="question_details">Why is this important? Give it your all!</span>
     </label>
 
@@ -33,13 +36,15 @@
       Use image or video URLs to show them. Twitter #hashtags also supported.
     </span>
 
-    <div class="input select icon-angle-down sculpt">
-      <% subject_options = raw('<option value="">Select an Issue (optional)</option>') + options_for_select(Subject.all) -%>
-      <%= f.select :subject, subject_options %>
-    </div>
+    <%- if !@from_partner || @referring_partner_info[:name] != "HonestAds" %>
+      <div class="input select icon-angle-down sculpt">
+        <% subject_options = raw('<option value="">Select an Issue (optional)</option>') + options_for_select(Subject.all) -%>
+        <%= f.select :subject, subject_options %>
+      </div>
+    <%- end %>
 
     <%# #@todo functionality needs to be tied in, gave method :subject for now, but probably should be :media -%>
-    <label for="question_media">Add a photo</label>
+    <label for="question_media">Add a photo to accompany your question</label>
     <div>
       <%= f.file_field :media, class: 'question_media' %>
       <%= f.text_field :media_file_url, placeholder: raw('Or paste a link to a photo') %>
