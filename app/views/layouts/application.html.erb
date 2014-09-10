@@ -29,6 +29,7 @@
   <%= javascript_include_tag 'modernizr-2.5.3.min.js' %>
   <%= stylesheet_link_tag 'application', media: 'all' %>
   <%= csrf_meta_tags %>
+
 </head>
 <body>
   <div id="fb-root"></div>
@@ -118,6 +119,8 @@
   </footer>
 
   <%= render partial: 'shared/partner_return_to' %>
+
+  <script src="//widget.battleforthenet.com/widget.min.js" async>
 
   <%= render "shared/facebook_connect" %>
 
