@@ -15,4 +15,8 @@ class Candidate < Person
     location = LocationFormatter.new(location).format
     return where(id: [])
   end
+
+  def political_position_title
+    "Candidate for #{metadatum.read_attribute(:name)} #{running_for_position}"
+  end
 end
