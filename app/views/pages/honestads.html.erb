@@ -1,13 +1,9 @@
 <section class="static">
   <h1>HonestAds and AskThem</h1>
   <div class="related_data">
-    <p>HonestAds is partnering with AskThem to deliver a powerful question to everyone running for office in 2014.</p>
+    <p>HonestAds and AskThem can deliver your question to most elected officials and candidates.</p>
 
-    <p>Tell a candidate directly, "it's not enough for you to 'approve this ad.'" Ask them: "Will you approve 'the truth' of your campaign ads?"</p>
-
-    <div style="text-align: center; margin-top: 30px; margin-bottom: 30px;">
-      <img src="https://cloud.githubusercontent.com/assets/116819/3334610/73c1acc0-f802-11e3-8a8c-185f8678c9a4.png" width="658" height="519" alt="image of example question. " >
-    </div>
+    <p>You can select your recipient by entering your zip code and clicking the AskThem button:</p>
 
     <%- if @postal_code.present? %>
       <section class="officials locator" style="width:100%; float: right; margin-bottom: 30px;">
@@ -18,19 +14,11 @@
       </section>
     <%- end %>
 
+	<p>If you want to question elected officials and candidates by state, click “See all states” at the top of the page.</p>
 
-    <p>To browse elected officials by state, visit <a href="/map">AskThem's national map page</a>.</p>
+	<p>If you are unable to find an official or candidate, let us know and we will be sure their name is added.  Any problems or comments, email us: maryam@askthem.io.</p>
 
-    <p>To ask this HonestAds question to a candidate for office who is not currently an elected official, first search for him or her on AskThem - click "Ask your own question" and then the button "Their Twitter Name".</p>
+	<p>We're here to help and will get back to you right away to help your question succeed.</p>
 
-    <div style="text-align: center; margin-bottom: 30px;"><%= generic_ask_question 'Ask your own Question', { class: 'cta-pill'} %></div>
-
-    <p>If he or she is verified on Twitter, their name should appear here on AskThem; if he or she is not, email us with the declared candidate you're trying to find, and we can add them manually.</p>
-
-    <div style="text-align: center; margin-top: 30px; margin-bottom: 30px;">
-      <img src="https://cloud.githubusercontent.com/assets/116819/3334609/73c1181e-f802-11e3-973e-026d357dee6d.png" width="608" height="646" alt="example image of question recipient lookup via Twitter. " >
-    </div>
-
-    <p>Questions and comments welcome, we're here to help - email <%= mail_to "maryam@askthem.io" -%>, and we'll get back to you right away to help your question succeed.</p>
   </div>
 </section>
