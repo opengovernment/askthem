@@ -9,4 +9,10 @@ class Candidate < Person
   # these are populated by copying fields from current office holder
   field :ocd_division_id, type: String
   field :running_for_position, type: String
+
+  # for now, returns no results
+  def self.for_location(location)
+    location = LocationFormatter.new(location).format
+    return where(id: [])
+  end
 end
