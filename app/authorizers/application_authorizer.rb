@@ -36,4 +36,8 @@ class ApplicationAuthorizer < Authority::Authorizer
   def self.authorizes_to_view_signatures?(user)
     user.has_role? :staff_member
   end
+
+  def self.authorizes_to_manage_candidates?(user)
+    user.has_role? :staff_member
+  end
 end

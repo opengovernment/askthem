@@ -1,0 +1,8 @@
+<h1>Editing candidate</h1>
+
+<%= render "form" %>
+
+<div class="manage-candidates-navigation">
+  <%= link_to "Show", candidate_path(parent, @candidate) %> |
+  <%= link_to "Back", candidates_path(parent) %>
+</div>

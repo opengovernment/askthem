@@ -1,0 +1,34 @@
+<%= simple_form_for(@candidate) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :ocd_division_id, as: :hidden %>
+    <%= f.input :current_office_holder_id, as: :hidden %>
+    <%= f.input :state, as: :hidden, value: parent.abbreviation %>
+
+    <label for="twitter_id">Twitter</label>
+    <%= f.text_field :twitter_id, placeholder: "Load from which twitter account?" %>
+
+    <label for="current_office_holder_name">Current office holder</label>
+    <%= f.text_field :current_office_holder_name, placeholder: "Current office holder's name?" %>
+
+    <label for="running_for_position">Office</label>
+    <%= f.text_field :running_for_position, placeholder: "Which office is the candidate running for?" %>
+
+    <label for="full_name">Full name</label>
+    <%= f.text_field :full_name, placeholder: "Full Name" %>
+
+    <label for="email">Email</label>
+    <%= f.text_field :email, placeholder: "Email" %>
+
+    <label for="photo_url">URL for avatar image</label>
+    <%= f.text_field :photo_url, placeholder: "URL for avatar image" %>
+
+    <label for="party">Party affiliation</label>
+    <%= f.text_field :party, placeholder: "Party" %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, class: "cta-pill" %>
+  </div>
+<% end %>

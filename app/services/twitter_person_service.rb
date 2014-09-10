@@ -3,12 +3,12 @@ require "twitter_person_adapter"
 class TwitterPersonService
   attr_accessor :client, :screen_name, :matching_users, :people
 
-  def initialize(screen_name)
+  def initialize(screen_name, persist_people = true)
     self.screen_name = screen_name
     self.client = Twitter::REST::Client.new(config)
 
     matching_users.each do |match|
-      self.people << find_or_create_person_from(match)
+      self.people << find_or_create_person_from(match) if persist_people
     end
   end
 

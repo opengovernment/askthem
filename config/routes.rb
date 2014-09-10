@@ -76,6 +76,8 @@ OpenGovernment::Application.routes.draw do
     match 'overview/votes' => 'pages#key_votes', as: :key_votes_overview, via: :get
 
     get 'map', to: 'pages#map'
+
+    resources :candidates
   end
 
   match 'locator' => 'pages#locator', as: :locator, via: [:get, :post]

@@ -16,6 +16,9 @@ class Person
   # identified as the same person, thus has_many
   has_many :identities
 
+  # candidates that are running against this person
+  has_many :opponents, class_name: "Candidate", inverse_of: :current_office_holder
+
   # Popolo fields and aliases.
   field :full_name, type: String, as: :name
   field :leg_id, type: String, as: :slug

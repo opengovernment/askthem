@@ -1,0 +1,20 @@
+<li>
+  <div class="candidate-display manage-candidates-candidate-summary">
+    <div class="emph">
+      <div class="avatar">
+        <%- if managed_candidate.photo_url? %>
+          <%= cdn_image_tag(managed_candidate.photo_url, size: "60x60", alt: "") %>
+        <%- end %>
+      </div>
+      <div class="candidate-headline manage-candidate-full-name"><%= managed_candidate.full_name %></div>
+    </div>
+  </div>
+  <div class="manage-actions">
+    Actions:
+    <ul>
+      <!-- <li><%= link_to "Show", candidate_path(parent, managed_candidate) %></li> -->
+      <li><%= link_to "Edit", edit_candidate_path(parent, managed_candidate) %></li>
+      <li><%= link_to "Destroy", candidate_path(parent, managed_candidate), method: :delete, data: { confirm: "Are you sure?" } %></li>
+    </ul>
+  </div>
+</li>

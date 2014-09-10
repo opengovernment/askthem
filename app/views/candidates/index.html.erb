@@ -1,0 +1,17 @@
+<h1>Candidates</h1>
+
+<ul class="manage-candidates-list">
+  <%= render partial: "managed_candidate", collection: @candidates %>
+  <li>
+    <%= form_tag new_candidate_path, method: "get", class: "pre-populate-candidate-form" do -%>
+      <%= label_tag :twitter_id, "Twitter id:" %>
+      <%= text_field_tag :twitter_id %>
+
+      <%= label_tag :current_office_holder_name, "Name of current office holder:" %>
+      <%= text_field_tag :current_office_holder_name %>
+
+      <%= submit_tag "New Candidate", class: "cta-pill" %>
+    <% end -%>
+  </li>
+  <!-- <li><%= link_to "New Candidate", new_candidate_path %></li> -->
+</ul>
