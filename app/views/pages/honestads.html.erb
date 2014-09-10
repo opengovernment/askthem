@@ -5,20 +5,16 @@
 
     <p>You can select your recipient by entering your zip code and clicking the AskThem button:</p>
 
-    <%- if @postal_code.present? %>
-      <section class="officials locator" style="width:100%; float: right; margin-bottom: 30px;">
-        <%= render partial: "people_for_location",
-          locals: { municipality: @municipality,  municipal_people: @municipal_people,
-          federal_people: @federal_people, governor: @governor,
-          state_people: @state_people } %>
-      </section>
-    <%- end %>
+    <div style="float:left; margin-left: 7%; margin-bottom: 1em;">
+      <script class="at-widget-loader" src="http://www.askthem.io/widgets/zip/widget.js" type="text/javascript" async=""></script>
+    </div>
 
-	<p>If you want to question elected officials and candidates by state, click “See all states” at the top of the page.</p>
+    <div style="clear: both;"></div>
 
-	<p>If you are unable to find an official or candidate, let us know and we will be sure their name is added.  Any problems or comments, email us: maryam@askthem.io.</p>
+	  <p>If you want to question elected officials and candidates by state, click “See all states” at the top of the page.</p>
 
-	<p>We're here to help and will get back to you right away to help your question succeed.</p>
+	  <p>If you are unable to find an official or candidate, let us know and we will be sure their name is added.  Any problems or comments, email us: <%= mail_to "maryam@askthem.io" -%>.</p>
 
+	  <p>We're here to help and will get back to you right away to help your question succeed.</p>
   </div>
 </section>

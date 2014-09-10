@@ -1,49 +1,21 @@
-/* REMOVE, demo purposes only */
-@font-face {
-  font-family: 'GothamMedium';
-  src: url('http://honestads.dev.rollstudio.it/wp-content/themes/honestads/fonts/gotham-medium.eot');
-  src: url('http://honestads.dev.rollstudio.it/wp-content/themes/honestads/fonts/gotham-medium.eot') format('embedded-opentype'),
-  url('http://honestads.dev.rollstudio.it/wp-content/themes/honestads/fonts/gotham-medium.woff') format('woff'),
-  url('http://honestads.dev.rollstudio.it/wp-content/themes/honestads/fonts/gotham-medium.ttf') format('truetype'),
-  url('http://honestads.dev.rollstudio.it/wp-content/themes/honestads/fonts/gotham-medium.svg#GothamMedium') format('svg');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'GothamLightRegular';
-  src: url('http://honestads.dev.rollstudio.it/wp-content/themes/honestads/fonts/gotham-light.eot');
-  src: url('http://honestads.dev.rollstudio.it/wp-content/themes/honestads/fonts/gotham-light.eot') format('embedded-opentype'),
-  url('http://honestads.dev.rollstudio.it/wp-content/themes/honestads/fonts/gotham-light.woff') format('woff'),
-  url('http://honestads.dev.rollstudio.it/wp-content/themes/honestads/fonts/gotham-light.ttf') format('truetype'),
-  url('http://honestads.dev.rollstudio.it/wp-content/themes/honestads/fonts/gotham-light.svg#GothamLightRegular') format('svg');
-  font-weight: normal;
-  font-style: normal;
-}
-
-/* END REMOVE, demo purposes only */
-
 /* TODO: host site needs to declare these */
 .at-widget {
   width: 580px;
 }
 
 .at-widget input {
-  font-family: 'GothamLightRegular';
   font-size: 13px;
   text-transform: none;
   color: #231f20;
 }
 
 .at-widget h4 {
-  font-family: "GothamMedium";
   font-size: 16px;
   color: #231f20;
   text-transform: uppercase;
 }
 
 .at-widget .description {
-  font-family: "GothamLightRegular";
   font-size: 15px;
   color: #231f20;
 }
