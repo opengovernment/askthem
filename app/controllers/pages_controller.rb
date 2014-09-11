@@ -94,6 +94,8 @@ class PagesController < ApplicationController
 
       set_question_skeleton_if_necessary
 
+      set_candidates_if_referring_partner
+
       redirect_to_partner_page_if_no_address
     else
       respond_with locator_json_for(@address)
@@ -341,10 +343,10 @@ class PagesController < ApplicationController
   # sometimes params picks up hash values automatically (url query string)
   # other times not (post), so unfortunately we are bit defensive here
   def set_referring_partner_if_necessary
-    has_partner = (params[:partner] || params["partner[name]"] ||
-                   params["partner[url]"])
+    @has_partner = (params[:partner] || params["partner[name]"] ||
+                    params["partner[url]"])
 
-    if has_partner
+    if @has_partner
       referring_partner_info = if params[:partner]
                                  params[:partner]
                                else
@@ -373,6 +375,60 @@ class PagesController < ApplicationController
                           end
 
       session[:question_skeleton] = question_skeleton
+    end
+  end
+
+  def people_collections
+    people_collections = {}
+
+    people_collections[:governor_ids] = [@governor.id] if @governor
+
+    if @federal_people
+      people_collections[:federal_people_ids] = @federal_people.collect(&:id)
+    end
+
+    if @state_people
+      people_collections[:state_people_ids] = @state_people.collect(&:id)
+    end
+
+    if @municipal_people
+      people_collections[:municipal_people_ids] = @municipal_people.collect(&:id)
+    end
+
+    people_collections
+  end
+
+  def candidates_for(ids)
+    Candidate.includes(:questions, :identities, :metadatum,
+                       :current_office_holder).
+      in(current_office_holder_id: ids)
+  end
+
+  def update_variable_of_with(variable_name, candidates)
+    unless variable_name == "@governor"
+      existing_people = instance_variable_get(variable_name)
+      instance_variable_set(variable_name, existing_people + candidates)
+    end
+  end
+
+  def set_candidates_if_referring_partner
+    return unless @has_partner
+
+    extra_state_candidates = []
+    people_collections.each do |name, ids|
+      next unless ids.any?
+
+      variable_name = "@#{name.to_s.sub('_ids', '')}"
+
+      if variable_name == "@governor"
+        extra_state_candidates = candidates_for(ids)
+      elsif variable_name == "@state_people"
+        candidates = extra_state_candidates + candidates_for(ids)
+      else
+        candidates = candidates_for(ids)
+      end
+
+      update_variable_of_with(variable_name, candidates)
     end
   end
 

@@ -211,7 +211,7 @@ module ApplicationHelper
     district_name = district_name(person.most_recent(:district))
     parts << district_name if district_name
 
-    parts << person["party"] if person["party"]
+    parts << person["party"] if person["party"].present?
     parts.join(delimiter)
   end
 
