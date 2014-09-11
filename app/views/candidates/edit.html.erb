@@ -1,6 +1,8 @@
 <h1>Editing candidate</h1>
 
-<%= render "form" %>
+<%= simple_form_for(@candidate, url: candidate_path(parent, @candidate)) do |f| %>
+  <%= render partial: "form", locals: { f: f } %>
+<% end %>
 
 <div class="manage-candidates-navigation">
   <%= link_to "Show", candidate_path(parent, @candidate) %> |

@@ -35,11 +35,20 @@ class CandidatesController < ApplicationController
   def edit
     edit! do
       @candidate.current_office_holder_name = @candidate.current_office_holder.full_name
+      logger.debug(self.inspect)
     end
   end
 
   def create
     create! { candidates_path parent }
+  end
+
+  def update
+    update! { candidates_path parent }
+  end
+
+  def destroy
+    destroy! { candidates_path parent }
   end
 
   private
