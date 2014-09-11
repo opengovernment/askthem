@@ -138,7 +138,7 @@
 
           var partnerLogo = '';
           if(partnerName === 'HonestAds') {
-            partnerLogo = 'http://honestads.org/img/logo.png';
+            partnerLogo = '//www.askthem.io/widgets/zip/honestads2.png';
           }
 
           if(paramsDiv) {
