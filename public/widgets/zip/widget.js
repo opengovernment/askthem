@@ -171,7 +171,7 @@
 
           var questionBody = '';
           if(partnerName === 'HonestAds') {
-            questionBody = 'Since "I approve this message" doesn\'t mean your ad is true, will you say "I approve the truth of this message" instead? Why or why not? #honestads';
+            questionBody = 'Just stating "I approve this message" doesn\'t mean your ad is true. If you want my support, I need the truth. #HonestAdsorg';
           }
 
           if(paramsDiv) {

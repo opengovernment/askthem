@@ -28,12 +28,12 @@
       <%- if !@from_partner || @referring_partner_info[:name] != "HonestAds" %>
         Full Question (optional)
       <%- end %>
-      <span class="question_details">Why is this important? Give it your all!</span>
+      <span class="question_details">Why is this important?<%- if !@from_partner %> Give it your all!<%- end %></span>
     </label>
 
     <%= f.text_area :body, placeholder: raw('Go on&hellip;'), cols: '30', rows: '10', validate: true, class: 'question-textarea' %>
     <span class="tip question">
-      Use image or video URLs to show them. Twitter #hashtags also supported.
+      Add image or video links to show them. Twitter #hashtags work too.
     </span>
 
     <%- if !@from_partner || @referring_partner_info[:name] != "HonestAds" %>
