@@ -52,6 +52,15 @@ describe DefaultSignatureThreshold do
     end
 
     context "when person is unaffiliated" do
+      let(:person) { Candidate.create(state: 'vt') }
+
+      it "returns candidate default" do
+        expect(DefaultSignatureThreshold.new(person).value)
+          .to eq DefaultSignatureThreshold::DEFAULT_VALUES[:candidate]
+      end
+    end
+
+    context "when person is unaffiliated" do
       let(:person) { Person.create(state: Metadatum::Unaffiliated::ABBREVIATION) }
 
       it "returns unaffiliated default" do

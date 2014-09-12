@@ -1,8 +1,7 @@
-# Exists only because we blow away the `people` collection regularly.
-# @note Based on Popolo.
 class DefaultSignatureThreshold
-  DEFAULT_VALUES = { unspecified_person: 100,
+  DEFAULT_VALUES = { unspecified_person: 15,
     unaffiliated: 100,
+    candidate: 15,
     federal: { upper: 500, lower: 350 },
     major_city_council: 25,
     state: 100,
@@ -23,10 +22,12 @@ class DefaultSignatureThreshold
       DEFAULT_VALUES[:federal][@person.chamber.to_sym]
     when "Governor"
       DEFAULT_VALUES[:governor]
+    when "Candidate"
+      DEFAULT_VALUES[:candidate]
     when "Person"
       DEFAULT_VALUES[:unaffiliated]
     else
-      DEFAULT_VALUES[:state]
+      DEFAULT_VALUES[:unspecified_person]
     end
   end
 end
