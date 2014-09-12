@@ -32,5 +32,22 @@ describe Candidate do
         expect(candidate.political_position_title).to eq result
       end
     end
+
+    context "when there is an executive, i.e. governor, current_office_holder" do
+      it "returns as candidate for office without district" do
+        state = FactoryGirl.create(:metadatum, abbreviation: "vt")
+        state.write_attribute(:name, "Vermont")
+        state.save!
+
+        candidate = Candidate.new(state: state.abbreviation)
+        candidate.write_attribute(:running_for_position, "Governor")
+        governor = Governor.new
+        candidate.stub(current_office_holder: governor)
+
+        result = "Candidate for #{state.name} Governor"
+
+        expect(candidate.political_position_title).to eq result
+      end
+    end
   end
 end

@@ -19,10 +19,17 @@ class Candidate < Person
   def political_position_title
     representing_area = metadatum.read_attribute(:name)
 
-    if current_office_holder && current_office_holder.most_recent_district
+    if has_district?
       representing_area += ", District #{current_office_holder.most_recent_district}, "
     end
 
     "Candidate for #{representing_area} #{running_for_position}"
+  end
+
+  private
+  def has_district?
+    current_office_holder &&
+    current_office_holder.respond_to?(:most_recent_district) &&
+    current_office_holder.most_recent_district
   end
 end
