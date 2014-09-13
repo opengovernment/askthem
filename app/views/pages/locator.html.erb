@@ -40,3 +40,11 @@
     federal_people: @federal_people, governor: @governor,
     state_people: @state_people } %>
 </section>
+
+<%- if @has_partner %>
+  <div class="more-candidates-info">
+    <p>Select a politician above to ask the <%= session[:referring_partner_info][:name] -%> question.</p>
+    <p>For a full list of candidates you can question, <a href="http://www.participatorypolitics.org/crowdsource-questions-to-candidates-during-election-season/">visit here</a>. For a full list of elected officials, visit our <a href="/map">national map</a>.</p>
+    <p>To ask a question to someone you don't see here, just email us and we'll get it asked right away: <%= mail_to("maryam@askthem.io", "maryam -at- askthem.io") -%>.</p>
+  </div>
+<%- end %>
