@@ -253,12 +253,12 @@
           <%- if @question.signature_count < @question.person.signature_threshold %>
             <span class="question_progress_count count_needed">
               <strong><span class="question-signature-threshold question-signatures-needed"><%= @question.person.signature_threshold - @question.signature_count -%></span></strong>
-              needed to deliver
+              more to goal
             </span>
           <%- end %>
         </div>
         <%= facebook_question_share(target: "_blank", class: "modal-share cta-pill cta-pill-facebook") %>
-        <p class='modal-copy'>When this question reaches the threshold, we'll deliver it publicly and ask <%= @question.person.name %> to respond.</p>
+        <p class='modal-copy'>We'll deliver this question publicly and ask <%= @question.person.name %> to respond.</p>
       </div>
 
       <div class='modal-shares'>
