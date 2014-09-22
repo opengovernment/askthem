@@ -27,7 +27,7 @@
   float: left;
   border: 1px solid #c6c7c7;
   text-align: center;
-  padding-bottom: 50px;
+  padding-bottom: 0;
 }
 
 .at-widget fieldset {
