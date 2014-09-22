@@ -48,6 +48,17 @@ describe User do
 
         user.top_issues.should == ["A Great Subject"]
       end
+
+      it "should return an empty array if questions have no subjects" do
+
+        2.times do
+          question = FactoryGirl.create(:question, user: user)
+          question.subject = nil
+          question.save
+        end
+
+        user.top_issues.should == []
+      end
     end
 
     describe "address_for_geocoding" do

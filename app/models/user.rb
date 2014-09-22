@@ -146,7 +146,7 @@ class User
   end
 
   def top_issues
-    questions.map { |q| q.subject }.uniq.sort
+    questions.map { |q| q.subject }.uniq.compact.sort
   end
 
   # @return [String] the user's address for geocoding
