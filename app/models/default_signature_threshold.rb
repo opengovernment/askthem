@@ -1,7 +1,7 @@
 class DefaultSignatureThreshold
   DEFAULT_VALUES = { unspecified_person: 100,
     unaffiliated: 100,
-    candidate: 25,
+    candidate: 15,
     federal: { upper: 500, lower: 350 },
     major_city_council: 25,
     state: 100,
