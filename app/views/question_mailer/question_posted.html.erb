@@ -31,8 +31,10 @@
                     Ask questions and get answers.
                   </p>
                   <%- if @user.created_at.to_date == Time.zone.now.to_date && @user.referring_partner_info.present? %>
+                    <% logo_url = @user.referring_partner_info[:logo] -%>
+                    <% logo_url = logo_url.gsub("//", "http://") unless logo_url.include?("http") -%>
                     <a href="<%= @user.referring_partner_info[:url] -%>" class="logo" style="margin-right: 45px; float: right; position: relative; top: -30px; text-decoration: none;">
-                      <img label="<%= @user.referring_partner_info[:name] -%>" editable="true" width="135" src="<%= @user.referring_partner_info[:logo] -%>" class="w640" border="0" align="top" style="outline: none !important; text-decoration: none !important;" />
+                    <img label="<%= @user.referring_partner_info[:name] -%>" editable="true" width="135" src="<%= logo_url -%>" class="w640" border="0" align="top" style="outline: none !important; text-decoration: none !important;" />
                     </a>
                   <%- end %>
                 </div>
