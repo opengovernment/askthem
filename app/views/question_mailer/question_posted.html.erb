@@ -30,6 +30,11 @@
                   <p class="tagline" style="color: #82B7C8; position: relative; top: 12px;">
                     Ask questions and get answers.
                   </p>
+                  <%- if @user.created_at.to_date == Time.zone.now.to_date && @user.referring_partner_info.present? %>
+                    <a href="<%= @user.referring_partner_info[:url] -%>" class="logo" style="margin-right: 45px; float: right; position: relative; top: -30px; text-decoration: none;">
+                      <img label="<%= @user.referring_partner_info[:name] -%>" editable="true" width="135" src="<%= @user.referring_partner_info[:logo] -%>" class="w640" border="0" align="top" style="outline: none !important; text-decoration: none !important;" />
+                    </a>
+                  <%- end %>
                 </div>
               </tr>
             </tbody>
@@ -42,6 +47,10 @@
             <tbody>
               <tr style="border-collapse: collapse;">
                 <td width="500" style="border-collapse: collapse;">
+                  <%- if @user.created_at.to_date == Time.zone.now.to_date && @user.referring_partner_info.present? %>
+                    <%- partner_template = "#{@user.referring_partner_info[:name].downcase}_question_posted" %>
+                    <%= render partial: partner_template, locals: { user: @user, question: @question } -%>
+                  <%- else %>
                   <h2>Great work, <%= @user.given_name %>, your question is posted.
 					  <br><br>Now it's time to organize!
 				  </h2>
@@ -83,6 +92,7 @@
                       Thank you,<br><br>
                       The AskThem Team
                   </p>
+                  <%- end %>
                 </td>
               </tr>
             </tbody>

@@ -1,0 +1,46 @@
+<h2>Thanks for supporting the HonestAds question.</h2>
+
+<p>The fact that there’s strength in numbers really applies here. The more times a question is received by your recipient, the more attention it will get.</p>
+
+<p>So, here are 4 fast and easy ways to gain support. Choose one or more:<br>&nbsp;</p>
+
+<p><strong>EMAIL</strong><br>Forward this email to at least 5 friends. Statistics show emails continue to get support and get passed on to others.<br>&nbsp;</p>
+
+<p><strong>FACEBOOK</strong><br>Share the question on Facebook. We’re finding this is the most powerful way to get more signers.<br>&nbsp;</p>
+
+<p><strong>TWEET</strong><br>Tweet from our question page. You can reach, literally, thousands of people in a very short time.<br>&nbsp;</p>
+
+<p><strong>TELL YOUR FRIENDS</strong><br>Friends trust friends, and word-of-mouth is never outdated.<br>&nbsp;</p>
+
+<p>If you have any questions, please don't hesitate to email Maryam at maryam@askthem.io.</p>
+<br><br>
+
+<p>And here’s your question to pass along:</p>
+
+<dl>
+  <dt><h3><a style="color: #82B7C8;" href="<%= question_url(question.state, question.id) %>"><%= question.title %></a></h3></dt>
+  <br>
+
+  <%- if question.subject.present? %>
+    <dt><%= question.subject %></dt>
+    <br>
+  <%- end %>
+
+  <dt>
+    <span><%= link_to question.person.name, person_url(question.state, question.person.id) %></span>
+    <span>(<%= person_attributes(question.person) %>)</span>
+  </dt>
+  <br>
+
+
+  <dt><%= question.body %></dt>
+  <br>
+</dl>
+
+<p>
+  For more tips on gathering support for this question and more info on how AskThem works, <a href="http://www.askthem.io/faq">please visit our FAQ</a>.
+</p>
+<p>
+  Many thanks for taking action!<br><br>
+  The AskThem Team
+</p>

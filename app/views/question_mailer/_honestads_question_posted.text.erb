@@ -1,0 +1,36 @@
+Thanks for supporting the HonestAds question.
+
+The fact that there’s strength in numbers really applies here. The more times a question is received by your recipient, the more attention it will get.
+
+So, here are 4 fast and easy ways to gain support. Choose one or more:
+
+
+EMAIL: Forward this email to at least 5 friends. Statistics show emails continue to get support and get passed on to others.
+
+FACEBOOK: Share the question on Facebook. We’re finding this is the most powerful way to get more signers.
+
+TWEET: Tweet from our question page. You can reach, literally, thousands of people in a very short time.
+
+TELL YOUR FRIENDS: Friends trust friends, and word-of-mouth is never outdated.
+
+
+If you have any questions, please don't hesitate to email Maryam at maryam@askthem.io.
+
+And here’s your question to pass along:
+
+<%= question.title -%> (<%= question_url(question.state, question.id) -%>)
+
+<%- if question.subject.present? %>
+  <%= question.subject %>
+<%- end %>
+
+<%= question.person.name -%> (<%= person_attributes(question.person) %>)
+More information about <%= question.person.name -%> can be found at <%= person_url(question.state, question.person.id) -%>
+
+<%= question.body -%>
+
+
+For more tips on gathering support for this question and more info on how AskThem works, please visit our FAQ (http://www.askthem.io/faq).
+
+Many thanks for taking action!
+The AskThem Team

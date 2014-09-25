@@ -1,44 +1,52 @@
-Great work, <%= @user.given_name %>, your question is posted.
+<%- if @user.created_at.to_date == Time.zone.now.to_date && @user.referring_partner_info.present? %>
+  <%- partner_template = "#{@user.referring_partner_info[:name].downcase}_question_posted" %>
+  <%= render partial: partner_template, locals: { user: @user, question: @question } -%>
+<%- else %>
 
-Now it's time to organize!
+  Great work, <%= @user.given_name %>, your question is posted.
 
-To get an answer, you need to share your question with as many people as possible.
+  Now it's time to organize!
 
-STEP 1:
+  To get an answer, you need to share your question with as many people as possible.
 
-Forward this email to at least 5 friends and ask them to sign the question by clicking below and then *share it to Facebook*.
+  STEP 1:
 
-STEP 2:
+  Forward this email to at least 5 friends and ask them to sign the question by clicking below and then *share it to Facebook*.
 
-Share the question on Facebook yourself. This is the single most powerful way to get more signers.
+  STEP 2:
 
-STEP 3:
+  Share the question on Facebook yourself. This is the single most powerful way to get more signers.
 
-Finally, if you have a Twitter account, visit the question page and share to Twitter. This can echo to thousands of people in a very short period of time.
+  STEP 3:
 
-Good luck!
+  Finally, if you have a Twitter account, visit the question page and share to Twitter. This can echo to thousands of people in a very short period of time.
 
-We hope you reach the threshold-- remember to check your progress daily and keep sharing the question. If you have any questions, please don't hesitate to email Maryam at maryam@askthem.io.
+  Good luck!
 
-Thank you for posting your question to AskThem, <%= @user.given_name %>
+  We hope you reach the threshold-- remember to check your progress daily and keep sharing the question. If you have any questions, please don't hesitate to email Maryam at maryam@askthem.io.
 
-Title
-<%= @question.title %>
+  Thank you for posting your question to AskThem, <%= @user.given_name %>
 
-Topic
-<%= @question.subject %>
+  Title
+  <%= @question.title %>
 
-To
-<%= link_to @question.person.name, person_url(@question.state, @question.person.id) %>
-(<%= person_attributes(@question.person) %>)
+  <%- if @question.subject.present? %>
+    Topic
+    <%= @question.subject %>
+  <%- end %>
 
-Body
-<%= @question.body %>
+  To
+  <%= @question.person.name -%> (<%= person_attributes(@question.person) %>)
+  More information about <%= @question.person.name -%> can be found at <%= person_url(@question.state, @question.person.id) -%>
+
+  Body
+  <%= @question.body %>
 
 
-Here's a permalink to your question, which you can share over email and on Facebook & Twitter: <%= question_url(@question.state, @question.id) %>
+  Here's a permalink to your question, which you can share over email and on Facebook & Twitter: <%= question_url(@question.state, @question.id) %>
 
-For tips about how to gather support for this question and more info on how AskThem works, please visit our FAQ: http://www.askthem.io/faq.
+  For tips about how to gather support for this question and more info on how AskThem works, please visit our FAQ: http://www.askthem.io/faq.
 
-Thank you,
-The AskThem Team
+  Thank you,
+  The AskThem Team
+<%- end %>
