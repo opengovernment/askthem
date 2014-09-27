@@ -1,4 +1,4 @@
-<%- if @user.created_at.to_date == Time.zone.now.to_date && @user.referring_partner_info.present? %>
+<%- if @user.created_at && @user.created_at.to_date == Time.zone.now.to_date && @user.referring_partner_info.present? %>
   <%- partner_template = "#{@user.referring_partner_info[:name].downcase}_question_posted" %>
   <%= render partial: partner_template, locals: { user: @user, question: @question } -%>
 <%- else %>
