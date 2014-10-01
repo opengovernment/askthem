@@ -22,8 +22,11 @@
         <%= user_form.text_field :family_name, placeholder: 'Doe' %>
       <%- end %>
 
-      <label for="email" class="lesser">Email</label>
+      <label for="email" class="lesser">Email<%= " *" if @from_partner -%></label>
       <%= user_form.text_field :email, placeholder: 'john.doe@gmail.com' %>
+      <%- if @from_partner %>
+        <div class="or-login">* or you can <a href="/users/sign_in">login</a> if already an AskThem member</div>
+      <%- end %>
 
       <%- unless @from_partner %>
         <label for="password" class="lesser">Choose a Password</label>

@@ -197,6 +197,7 @@ class User
 
   def set_attributes_based_on_partner
     return unless referring_partner_info.present?
+    return if persisted?
 
     self.password = Devise.friendly_token.first(6)
     self.password_is_placeholder = true

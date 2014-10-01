@@ -21,6 +21,9 @@ class QuestionsController < ApplicationController
                                     :need_answers, :recent]
   before_filter :set_is_national, only: [:index, :need_signatures, :have_answers,
                                          :need_answers, :recent]
+
+  # in case new was a post
+  after_filter :store_location_for_new_question, only: [:new]
   def index
     index! do |format|
       format.js { render partial: "page" }
@@ -320,5 +323,9 @@ class QuestionsController < ApplicationController
       message += " <a href=\"#{info[:return_url]}\">#{info[:name]}</a>."
       flash[:notice] = message
     end
+  end
+
+  def store_location_for_new_question
+    session[:previous_url] = request.fullpath
   end
 end

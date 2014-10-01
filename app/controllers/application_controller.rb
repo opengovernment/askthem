@@ -3,6 +3,9 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery
 
+  # old version of devise, have to do this manually
+  after_filter :store_location
+
   def geo_data_from_ip
     @geo_data_from_ip ||= GeoDataFromRequest.new(request).geo_data
   end
@@ -81,6 +84,19 @@ class ApplicationController < ActionController::Base
 
   helper_method :default_jurisdiction, :state_abbreviation, :local_jurisdictions, :local_jurisdiction, :staff_member?
 
+  protected
+  def store_location
+    # store last url - this is needed for post-login redirect to whatever the user last visited.
+    return unless request.get?
+    return unless is_valid_redirect_target?
+
+    session[:previous_url] = request.fullpath
+  end
+
+  def after_sign_in_path_for(resource)
+    session[:previous_url] || root_path
+  end
+
   private
   def not_found
     respond_to do |format|
@@ -102,5 +118,15 @@ class ApplicationController < ActionController::Base
     else
       not_found
     end
+  end
+
+  def is_valid_redirect_target?
+    request.path != "/users/sign_in" &&
+      request.path != "/users/sign_up" &&
+      request.path != "/users/password/new" &&
+      request.path != "/users/password/edit" &&
+      request.path != "/users/confirmation" &&
+      request.path != "/users/sign_out" &&
+      !request.xhr?
   end
 end

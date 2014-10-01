@@ -2,6 +2,8 @@ class PagesController < ApplicationController
   DEFAULT_GEOJSON_CENTER = [-73.9998334, 40.7195898]
   DEFAULT_MUNICIPALITY = "New York"
 
+  skip_before_filter :verify_authenticity_token, :only => [:locator, :identifier]
+
   before_filter :force_http
 
   before_filter :set_jurisdiction, only: [:overview, :lower, :upper, :bills,
@@ -14,6 +16,9 @@ class PagesController < ApplicationController
   respond_to :csv, only: [:contact_info]
 
   after_filter :set_access_control_headers, only: [:locator, :identifier]
+
+  # in case locator was a post
+  after_filter :store_location_for_locator, only: [:locator]
 
   def honestads
     if has_useable_geo_data_from_ip?
@@ -437,5 +442,9 @@ class PagesController < ApplicationController
       partnership_page = "/#{session[:referring_partner_info][:name].gsub(" ", "_")}"
       redirect_to partnership_page.downcase
     end
+  end
+
+  def store_location_for_locator
+    session[:previous_url] = "/locator?q=#{params[:q]}&only_show=#{params[:only_show]}"
   end
 end
