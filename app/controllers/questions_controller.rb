@@ -142,6 +142,7 @@ class QuestionsController < ApplicationController
 
       set_referring_partner_flash_if_necessary_for(@user)
 
+      sign_in @user
       redirect_to question_path(@question.state, @question, share: true)
     else
       set_up_steps
