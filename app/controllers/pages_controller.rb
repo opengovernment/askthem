@@ -52,8 +52,9 @@ class PagesController < ApplicationController
     # @todo spec
     @blurb = Blurb.active.where(target_url: "/").first
 
-    set_national_variables
-    set_near_variables
+    # set_national_variables
+    # set_near_variables
+    @national_person = Person.featured.first
 
     render layout: "homepage"
   end
