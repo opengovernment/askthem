@@ -33,5 +33,12 @@ describe Blurb do
         expect(old_blurb.reload.active?).to be_true
       end
     end
+
+    context "when no target_url is specified" do
+      it "should make target_url the homepgate by default" do
+        blurb = FactoryGirl.create(:blurb)
+        expect(blurb.reload.target_url).to eq "/"
+      end
+    end
   end
 end
