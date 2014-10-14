@@ -1,5 +1,5 @@
 <%- info = session[:referring_partner_info] %>
-<%- if info %>
+<%- if info && info[:name].present? %>
   <%- target_url = info[:return_url] || info[:url] %>
   <%- link_content = info[:name] %>
   <%- if info[:logo] %>

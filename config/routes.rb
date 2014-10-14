@@ -28,6 +28,7 @@ OpenGovernment::Application.routes.draw do
   get 'map', to: 'pages#map'
   get 'terms-of-service', to: 'pages#terms_of_service'
   get 'privacy-policy', to: 'pages#privacy_policy'
+  get 'candidates', to: 'pages#candidates'
 
   resources :users, only: [:show, :update] do
     member do

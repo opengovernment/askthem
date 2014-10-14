@@ -203,7 +203,11 @@ class User
     self.password_is_placeholder = true
 
     self.given_name = email.split("@").first if email
-    self.family_name = "from #{referring_partner_info[:name]}"
+    if referring_partner_info[:name].present?
+      self.family_name = "from #{referring_partner_info[:name]}"
+    else
+      self.family_name = "no last name given"
+    end
 
     if referring_partner_info[:submitted_address]
       update_address_from_string(referring_partner_info[:submitted_address])

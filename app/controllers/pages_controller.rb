@@ -20,13 +20,10 @@ class PagesController < ApplicationController
   # in case locator was a post
   after_filter :store_location_for_locator, only: [:locator]
 
+  def candidates
+  end
+
   def honestads
-    if has_useable_geo_data_from_ip?
-      @postal_code = geo_data_from_ip.postal_code
-      if @postal_code.present?
-        set_variables_for(@postal_code)
-      end
-    end
   end
 
   def map
@@ -349,8 +346,9 @@ class PagesController < ApplicationController
   # sometimes params picks up hash values automatically (url query string)
   # other times not (post), so unfortunately we are bit defensive here
   def set_referring_partner_if_necessary
-    @has_partner = (params[:partner] || params["partner[name]"] ||
-                    params["partner[url]"])
+    @has_partner = (params[:partner] ||
+                    params["partner[name]"].present? ||
+                    params["partner[url]"].present?)
 
     if @has_partner
       referring_partner_info = if params[:partner]

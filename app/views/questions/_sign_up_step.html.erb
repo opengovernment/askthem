@@ -52,7 +52,7 @@
     <% end %>
   </fieldset>
 
-  <%- if !@from_partner || @referring_partner_info[:name] != "HonestAds" %>
+  <%- if !@from_partner %>
     <a href="/users/sign_in" class="push">Already have an AskThem account? Login.</a>
   <%- end %>
 </article>

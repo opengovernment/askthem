@@ -317,7 +317,7 @@ class QuestionsController < ApplicationController
   def set_referring_partner_flash_if_necessary_for(user)
     info = user.referring_partner_info
 
-    if info && info[:return_url]
+    if info && info[:name].present? && info[:return_url].present?
       message = "Thanks for your question!"
       message += " You can keep checking out AskThem.io or"
       message += " return to"
