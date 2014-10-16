@@ -209,7 +209,7 @@ class User
       self.family_name = "no last name given"
     end
 
-    if referring_partner_info[:submitted_address]
+    if referring_partner_info[:submitted_address].present?
       update_address_from_string(referring_partner_info[:submitted_address])
     end
   end
