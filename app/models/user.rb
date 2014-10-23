@@ -186,6 +186,7 @@ class User
 
   def update_address_from_string(address_string)
     location = LocationFormatter.new(address_string).format
+    return unless location.present?
 
     self.street_address = location.street_address
     self.locality = location.city
