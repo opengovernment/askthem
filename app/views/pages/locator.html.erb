@@ -13,6 +13,10 @@
       <%- elected_text = "#{elected_text} and Candidates" %>
     <%- end %>
 
+    <%- if @governor %>
+      <%- elected_text = "#{elected_text} in #{@governor.metadatum.name}" %>
+    <%- end %>
+
     <a href="#" id="officials-near"><%= elected_text -%></a>
     <% if @federal_people && @federal_people.count > 0 -%>
       <%= cdn_image_tag(@federal_people.first.image, size: '30x30', alt: '', class: 'preview-avatar') %>
