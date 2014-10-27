@@ -156,10 +156,10 @@ class CachedOfficial
         case division_scope.downcase
         when "citycouncil"
           "Councilmember"
-        when "citywide"
+        when "citywide", "ward"
           if office_name == "Mayor"
             "Mayor"
-          elsif office_name =~ /council/i
+          elsif office_name =~ /council/i || office_name =~ /board/i
             "Councilmember"
           else
             "MunicipalOfficial"

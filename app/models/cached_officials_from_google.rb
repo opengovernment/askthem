@@ -78,7 +78,7 @@ class CachedOfficialsFromGoogle
     case division.scope.downcase
     when *use_state_scopes
       state
-    when "citywide", "citycouncil"
+    when "citywide", "citycouncil", "ward"
       JurisdictionId.new(state: state, municipality: city).id
     when "countywide"
       # HACK, shouldn't rely on internals of ocd_division_id structure
