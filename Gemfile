@@ -17,7 +17,7 @@ gem 'vidibus-validate_uri'
 gem 'client_side_validations'
 gem 'client_side_validations-mongoid'
 gem 'sidekiq'
-gem 'inherited_resources', '~> 1.3.1'
+gem 'inherited_resources', '~> 1.5.1'
 gem 'simple_form'
 gem 'kaminari'
 gem 'coveralls', require: false
