@@ -285,7 +285,7 @@ GEM
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
     rinku (1.5.1)
-    rmagick (2.13.2)
+    rmagick (2.13.3)
     rolify (3.3.0.rc4)
     rspec (2.14.1)
       rspec-core (~> 2.14.0)
