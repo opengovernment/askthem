@@ -43,7 +43,7 @@ gem 'rest-client'
 gem 'google_civic_info', github: 'walter/google_civic_info'
 
 # Twitter API, used for looking up possible recipients
-gem 'twitter'
+gem 'twitter', '5.5.1'
 
 # need the latest from master until at least 1.6.2
 gem 'auto_html', github: 'opengovernment/auto_html'
