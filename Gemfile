@@ -16,7 +16,7 @@ gem 'carrierwave-video-thumbnailer'
 gem 'vidibus-validate_uri'
 gem 'client_side_validations'
 gem 'client_side_validations-mongoid'
-gem 'sidekiq'
+gem 'sidekiq', '3.2.1' # anything above requires ruby > 1.9.3
 gem 'inherited_resources', '~> 1.5.1'
 gem 'simple_form'
 gem 'kaminari'
