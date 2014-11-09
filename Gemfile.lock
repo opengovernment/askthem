@@ -427,7 +427,7 @@ DEPENDENCIES
   rails (= 3.2.20)
   rest-client
   rmagick
-  rolify (= 3.3.0.rc4)
+  rolify
   rspec-rails
   ruby-growl (= 3.0)
   ruby-progressbar

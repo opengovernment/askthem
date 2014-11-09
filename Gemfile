@@ -33,7 +33,7 @@ gem 'omniauth-gplus'
 
 # Authorization
 gem 'authority'
-gem 'rolify', '3.3.0.rc4'
+gem 'rolify'
 
 # Rake tasks
 gem 'ruby-progressbar'
