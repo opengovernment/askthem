@@ -67,10 +67,19 @@ class Question
   after_create :add_signature_of_creating_user
   after_create :copy_coordinates_from_user
 
+  AutoHtml.add_filter(:image).with({ alt: "", width: "", class: "" }) do |text, options|
+    r = Redcarpet::Markdown.new(NoParagraphRenderer)
+    alt, width, html_class = options[:alt], options[:width], options[:class]
+    options[:proxy] ||= ""
+    text.gsub(/(?<!src=")https?:\/\/.+?\.(jpg|jpeg|bmp|gif|png)(\?\S+)?/i) do |match|
+        r.render("<img src=\"#{options[:proxy]}#{match}\" alt=\"#{alt}\" width=\"#{width}\" class=\"#{html_class}\">")
+    end
+  end
+
   auto_html_for [:body, :media_file_url] do
     html_escape
     hashtag
-    image(width: 425)
+    image(width: 425, class: "question-image")
     dailymotion(width: 400, height: 250, autoplay: false)
     vimeo(width: 400, height: 250, autoplay: false)
     youtube(width: 400, height: 250, autoplay: false)
