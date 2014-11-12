@@ -1,5 +1,9 @@
 <li>
   <div class="candidate-display manage-candidates-candidate-summary">
+    <%- if managed_candidate.active? %>
+      <div class="candidate-active">Active</div>
+    <%- end %>
+
     <div class="emph">
       <div class="avatar">
         <%- if managed_candidate.photo_url? %>

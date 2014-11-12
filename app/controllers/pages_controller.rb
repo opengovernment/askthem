@@ -405,6 +405,7 @@ class PagesController < ApplicationController
   def candidates_for(ids)
     Candidate.includes(:questions, :identities, :metadatum,
                        :current_office_holder).
+      active.
       in(current_office_holder_id: ids)
   end
 

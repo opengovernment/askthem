@@ -9,6 +9,11 @@ class Candidate < Person
   # these are populated by copying fields from current office holder
   field :ocd_division_id, type: String
   field :running_for_position, type: String
+  # TODO: this should be really be declared on person
+  # but requires some investigation of ramifications
+  field :active, type: Boolean, default: false
+
+  before_create :set_active
 
   # for now, returns no results
   def self.for_location(location)
@@ -31,5 +36,9 @@ class Candidate < Person
     current_office_holder &&
     current_office_holder.respond_to?(:most_recent_district) &&
     current_office_holder.most_recent_district
+  end
+
+  def set_active
+    write_attribute :active, true
   end
 end
