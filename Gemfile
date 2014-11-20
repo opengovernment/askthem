@@ -2,7 +2,7 @@
 source 'https://rubygems.org'
 ruby '1.9.3'
 
-gem 'rails', '3.2.20'
+gem 'rails', '3.2.21'
 gem 'jquery-rails'
 
 gem 'invalid_utf8_rejector', github: 'opengovernment/invalid_utf8_rejector'
