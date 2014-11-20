@@ -195,7 +195,7 @@ class QuestionsController < ApplicationController
                  ["Person"]
                else
                  if @jurisdiction && @jurisdiction.abbreviation.include?("-")
-                   ["Councilmember"]
+                   ["Councilmember", "Mayor"]
                  else
                    @gov = "federal"
                    ["FederalLegislator"]
