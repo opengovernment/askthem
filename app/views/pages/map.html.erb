@@ -9,7 +9,7 @@
     <% if @current_state && @current_state == details[:abbr] %>
       <% state_classes += " current-state" %>
     <% end %>
-    <%= link_to "#{name} (#{details[:count]})", "/#{details[:abbr]}", class: state_classes, data: { count: details[:count] } %>
+    <%= link_to "#{name} (#{details[:count]})", "/#{details[:abbr]}/questions/recent?gov=state", id: "#{details[:abbr]}-target", class: state_classes, data: { count: details[:count] } %>
   <%- end %>
 </div>
 
@@ -26,7 +26,7 @@ function showTooltip(el, data) {
          .style('top', center[1] + el.parentNode.offsetTop - 60 + 'px');
 
   stateId = data.id.toLowerCase();
-  stateCount = jQuery("a.state-link[href='/" + stateId +"']").attr("data-count");
+  stateCount = jQuery("#" + stateId +"-target").attr("data-count");
   tooltip.select(".map-tooltip-state-name").text(data.properties.name + " (" + stateCount + ")");
 }
 
@@ -75,7 +75,7 @@ d3.json("/us.json", function(error, us) {
         showTooltip(this, data);
       })
       .on("click", function(data) {
-        location.href = data.id.toLowerCase();
+        location.href = data.id.toLowerCase() + "/questions/recent?gov=state";
       })
       ;
 
@@ -88,6 +88,7 @@ d3.json("/us.json", function(error, us) {
 </script>
 
 <%- if staff_member? %>
+  <br>
   <h4>Stats</h4>
 
   <ul class="stats">
