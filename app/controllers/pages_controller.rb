@@ -34,6 +34,7 @@ class PagesController < ApplicationController
       @current_state = @jurisdiction.abbreviation.split("-").first
     end
     @states = states_info
+    @cities = Metadatum.where(abbreviation: /-/).order_by(abbreviation: "asc").includes(:questions)
   end
 
   def splash

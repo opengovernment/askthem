@@ -87,16 +87,45 @@ d3.json("/us.json", function(error, us) {
 
 </script>
 
-<%- if staff_member? %>
-  <br>
-  <h4>Stats</h4>
+<div class="city-questions">
+  <h2>City Questions</h3>
+  <ul class="state-with-cities-list">
+    <%- current_state = @cities.first.id.split("-").first %>
+    <li><%= current_state.upcase %></li>
 
-  <ul class="stats">
-    <li>Users: <span class="stat"><%= User.count -%></span></li>
-    <li>Questions: <span class="stat"><%= Question.count -%></span></li>
-    <li>Signatures: <span class="stat"><%= Signature.count -%></span></li>
-    <li>Answers: <span class="stat"><%= Answer.count -%></span></li>
-    <li>Elected Officials and Public Figures: <span class="stat"><%= Person.count -%></span></li>
-    <li>Jurisdictions: <span class="stat"><%= Metadatum.count -%></span></li>
+    <ul class="cities-for-state-list">
+
+      <%- @cities.each do |city| %>
+        <%- state_for_city = city.id.split("-").first %>
+        <%- if state_for_city != current_state %>
+          <%- current_state = state_for_city %>
+    </ul>
+    <li><%= current_state.upcase %></li>
+    <ul class="cities-for-state-list">
+        <%- end %>
+
+        <%- question_count = city.questions.count %>
+
+        <li>
+          <%= link_to "#{city.name} (#{question_count})", "/#{city.id}/questions/recent", class: "city-link", id: "#{city.id}-target", data: { count: question_count } %>
+        </li>
+
+      <%- end %>
+    </ul>
   </ul>
+</div>
+
+<%- if staff_member? %>
+  <div class="stats">
+    <h4>Stats</h4>
+
+    <ul class="stats">
+      <li>Users: <span class="stat"><%= User.count -%></span></li>
+      <li>Questions: <span class="stat"><%= Question.count -%></span></li>
+      <li>Signatures: <span class="stat"><%= Signature.count -%></span></li>
+      <li>Answers: <span class="stat"><%= Answer.count -%></span></li>
+      <li>Elected Officials and Public Figures: <span class="stat"><%= Person.count -%></span></li>
+      <li>Jurisdictions: <span class="stat"><%= Metadatum.count -%></span></li>
+    </ul>
+  </div>
 <%- end %>

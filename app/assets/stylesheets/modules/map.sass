@@ -27,13 +27,16 @@
     top: 42px
     bottom: 16px
 
-.state-links
+.state-links, .state-with-cities-list
   margin-top: 3em
   @media (min-width: 420px)
     @include column-count(5)
     overflow: hidden
 
-.state-link
+.state-with-cities-list
+  margin-top: 1em
+
+.state-link, .city-link
   display: block
   font-size: 14px
   line-height: 1.5
@@ -77,6 +80,9 @@
     linecap: round
   pointer-events: none
 
+div.stats
+  margin-top: 3em
+
 ul.stats
   margin-bottom: 1em
   li
@@ -85,3 +91,6 @@ ul.stats
     font-size: smaller
     span.stat
       font-weight: bold
+
+.city-questions
+  margin-top: 3em
