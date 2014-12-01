@@ -43,6 +43,10 @@
           <%= f.input :password, hint: false, label: "Change Password", input_html: {autocomplete: "off"} %>
           <span class="tip private">leave blank if you don't want to change it</span>
         </div>
+        <div class="pill_wrap">
+          <%= f.input :email_is_disabled, hint: false, label: "Disable emails?", as: :radio_buttons %>
+          <span class="tip private">Change to yes if you do not want to receive email notifications</span>
+        </div>
       </fieldset>
     </div>
     <div class="controls">
