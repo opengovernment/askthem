@@ -65,6 +65,12 @@
               <%- else %>
                 <%= button_to("Make Partner", { action: "update", "user[partner]" => true }, method: "put", class: "cta-pill") %>
               <%- end %>
+              <%- if @user.email_is_disabled? -%>
+                <h4>Email disabled</h4>
+                <%= button_to("Enable email", { action: "update", "user[email_is_disabled]" => false }, method: "put", class: "cta-pill") %>
+              <%- else %>
+                <%= button_to("Disable email", { action: "update", "user[email_is_disabled]" => true }, method: "put", class: "cta-pill") %>
+              <%- end %>
             </section>
           <%- end %>
           <section>

@@ -99,6 +99,26 @@ describe "users" do
           find_button "Make Partner"
         end
       end
+
+      it "can click disable email and user's email is disabled" do
+        as_user(@staff_member) do
+          visit "/users/#{user.id}"
+          click_button "Disable email"
+          page.should have_content "Email disabled"
+          find_button "Enable email"
+        end
+      end
+
+      it "can click revoke and user partnership is dropped" do
+        user.email_is_disabled = true
+        user.save!
+
+        as_user(@staff_member) do
+          visit "/users/#{user.id}"
+          click_button "Enable email"
+          find_button "Disable email"
+        end
+      end
     end
   end
 end
