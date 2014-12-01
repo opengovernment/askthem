@@ -5,7 +5,10 @@ class UserSetPasswordNoticeWorker
 
   def perform(id)
     self.user = User.find(id.to_s)
-    notify_or_reschedule if user.password_is_placeholder?
+
+    if user.password_is_placeholder? && !user.email_is_disabled?
+      notify_or_reschedule
+    end
 
   rescue Mongoid::Errors::DocumentNotFound
     logger.info "User: #{id} appears to have been deleted"
