@@ -20,6 +20,11 @@ class User
   field :email,              :type => String, :default => ""
   field :encrypted_password, :type => String, :default => ""
 
+  # if the user's email address has previously bounced or they have complained
+  # or they have opted out of email notifications
+  # we don't send them emails
+  field :email_is_disabled, type: Boolean, default: false
+
   ## Recoverable
   field :reset_password_token,   :type => String
   field :reset_password_sent_at, :type => Time

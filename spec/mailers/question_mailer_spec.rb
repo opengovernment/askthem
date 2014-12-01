@@ -97,4 +97,38 @@ describe QuestionMailer do
     expect(last_email.body.encoded).to match(question_url(question.state,
                                                           question.id))
   end
+
+  context "when email_is_disabled is true" do
+    it "does not send question posted e-mail" do
+      user = FactoryGirl.create(:user, email_is_disabled: true)
+      question = FactoryGirl.create(:question)
+
+      expect { QuestionMailer.question_posted(user, question).deliver }
+        .to_not change { ActionMailer::Base.deliveries.count }.from(0).to(1)
+    end
+
+    it "does not send signed on to question e-mail" do
+      user = FactoryGirl.create(:user, email_is_disabled: true)
+      question = FactoryGirl.create(:question)
+
+      expect { QuestionMailer.signed_on(user, question).deliver }
+        .to_not change { ActionMailer::Base.deliveries.count }.from(0).to(1)
+    end
+
+    it "does not send author question answered e-mail" do
+      user = FactoryGirl.create(:user, email_is_disabled: true)
+      question = FactoryGirl.create(:question)
+
+      expect { QuestionMailer.answered_for_author(user, question).deliver }
+        .to_not change { ActionMailer::Base.deliveries.count }.from(0).to(1)
+    end
+
+    it "does not send signer question answered e-mail" do
+      user = FactoryGirl.create(:user, email_is_disabled: true)
+      question = FactoryGirl.create(:question)
+
+      expect { QuestionMailer.answered_for_signer(user, question).deliver }
+        .to_not change { ActionMailer::Base.deliveries.count }.from(0).to(1)
+    end
+  end
 end

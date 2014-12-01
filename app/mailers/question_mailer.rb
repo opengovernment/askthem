@@ -4,12 +4,16 @@ class QuestionMailer < ActionMailer::Base
   default from: ENV["NOTIFICATION_SENDER_EMAIL"]
 
   def question_posted(user, question)
+    return if user.email_is_disabled?
+
     @user = user
     @question = question
     mail to: user.email, subject: "Your Question on AskThem Has Been Posted"
   end
 
   def signed_on(user, question, new_registration = false)
+    return if user.email_is_disabled?
+
     @user = user
     @question = question
     @new_registration = new_registration
@@ -17,12 +21,16 @@ class QuestionMailer < ActionMailer::Base
   end
 
   def answered_for_author(user, question)
+    return if user.email_is_disabled?
+
     @user = user
     @question = question
     mail to: user.email, subject: "Your AskThem.io question '#{@question.title}' has been answered"
   end
 
   def answered_for_signer(user, question)
+    return if user.email_is_disabled?
+
     @user = user
     @question = question
     mail to: user.email, subject: "AskThem.io question '#{@question.title}' has been answered"
