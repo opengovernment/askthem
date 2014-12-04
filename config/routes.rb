@@ -81,6 +81,8 @@ OpenGovernment::Application.routes.draw do
     resources :candidates
   end
 
+  match 'email_upkeep' => 'email_upkeep#index', as: :email_upkeep, via: [:post]
+
   match 'locator' => 'pages#locator', as: :locator, via: [:get, :post]
   match 'identifier' => 'pages#identifier', as: :identifier, via: :get
   match 'contact_info' => 'pages#contact_info', as: :contact_info, via: :get
