@@ -3,6 +3,11 @@ require 'spec_helper'
 describe EmailUpkeepController do
   describe "POST index" do
     context "when a valid json bounce object is sent" do
+      before do
+        @original_aws_sns_topic_arns = ENV["AWS_SNS_TOPIC_ARNS"]
+        ENV["AWS_SNS_TOPIC_ARNS"] = "arn:aws:sns:us-east-1:535280530538:email_bounces"
+      end
+
       it "should update corresponding user's email_is_disabled to true" do
         user = FactoryGirl.create(:user, email: "foo@example.com")
 
@@ -10,6 +15,10 @@ describe EmailUpkeepController do
 
         expect(response.code).to eq "204"
         expect(user.reload.email_is_disabled).to eq true
+      end
+
+      after do
+        ENV["AWS_SNS_TOPIC_ARNS"] = @original_aws_sns_topic_arns
       end
 
       def valid_bounce
