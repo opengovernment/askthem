@@ -2,6 +2,18 @@ require 'spec_helper'
 
 describe EmailUpkeepController do
   describe "POST index" do
+    context "when a subscription confirmation is sent" do
+      it "should request subscription url and end processing", vcr: true do
+        post :index, subscription_confirmation_params.merge({ format: :json })
+        expect(response.code).to eq "204"
+      end
+
+      def subscription_confirmation_params
+        { "Type" => "SubscriptionConfirmation",
+          "SubscribeURL" => "http://example.com/" }
+      end
+    end
+
     context "when a valid json bounce object is sent" do
       before do
         @original_aws_sns_topic_arns = ENV["AWS_SNS_TOPIC_ARNS"]
