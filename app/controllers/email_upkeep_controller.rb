@@ -6,7 +6,7 @@ class EmailUpkeepController < ApplicationController
     when "SubscriptionConfirmation"
       handle_subscription_confirmation
     when "Notification"
-      handle_bounce
+      handle_notification
     else
       raise "Unhandled request"
     end
@@ -15,34 +15,66 @@ class EmailUpkeepController < ApplicationController
   end
 
   private
-  def recipient_email_addresses_from(message_data)
-    bounce = message_data.fetch("bounce")
-    recipients = bounce.fetch("bouncedRecipients", [])
-    recipients.inject([]) do |email_addresses, recipient|
-      email_addresses << recipient["emailAddress"] if recipient["emailAddress"]
-    end
-  end
-
-  def valid_topic_arns
-    ENV.fetch("AWS_SNS_TOPIC_ARNS", String.new).split(",")
-  end
-
   def handle_subscription_confirmation
     uri = URI.parse(params["SubscribeURL"])
     response = Net::HTTP.get_response(uri)
     logger.info "requested SubscribeURL #{uri}"
   end
 
-  def handle_bounce
-    raise "Must contain SNS Message" unless params["Message"].present?
+  def valid_topic_arns
+    ENV.fetch("AWS_SNS_TOPIC_ARNS", String.new).split(",")
+  end
+
+  def check_necessary_input
     unless valid_topic_arns.include?(params["TopicArn"])
       raise "Must come from valid AWS SNS queue"
     end
+    raise "Must contain SNS Message" unless params["Message"].present?
+  end
 
-    # would be good to do further scrutiny of incoming json for security reasons
-    recipient_email_addresses_from(params["Message"]).each do |email_address|
-      user = User.where(email: email_address).first
-      user.update_attributes(email_is_disabled: true) if user
+  def handle_notification
+    check_necessary_input
+
+    SnsNotification.new(params["Message"]).handle
+  end
+
+  class SnsNotification
+    attr_accessor :message, :type, :sub_message
+
+    def initialize(message)
+      @message = message
+      @type = message["notificationType"]
+      @sub_message = message[type.downcase]
+    end
+
+    def handle
+      emails.each { |email| update_matching_user(email) }
+    end
+
+    private
+    def emails
+      recipients = sub_message.fetch(recipients_key, [])
+
+      recipients.inject([]) do |emails, recipient|
+        emails << recipient["emailAddress"] if recipient["emailAddress"]
+      end
+    end
+
+    def recipients_key
+      type == "Bounce" ? "bouncedRecipients" : "complainedRecipients"
+    end
+
+    def update_matching_user(email)
+      user = User.where(email: email).first
+
+      if user
+        user.update_attributes(email_is_disabled: true,
+                               email_disabled_reason: reason)
+      end
+    end
+
+    def reason
+      type == "Complaint" ? sub_message["complaintFeedbackType"] : "bounce"
     end
   end
 end

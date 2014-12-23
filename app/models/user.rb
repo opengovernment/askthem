@@ -24,6 +24,7 @@ class User
   # or they have opted out of email notifications
   # we don't send them emails
   field :email_is_disabled, type: Boolean, default: false
+  field :email_disabled_reason, type: String
 
   ## Recoverable
   field :reset_password_token,   :type => String
