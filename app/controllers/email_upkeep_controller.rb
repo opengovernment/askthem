@@ -8,6 +8,7 @@ class EmailUpkeepController < ApplicationController
     when "Notification"
       handle_notification
     else
+      logger.info "Email upkeep unhandled parameters: #{params.inspect}"
       raise "Unhandled request"
     end
 
