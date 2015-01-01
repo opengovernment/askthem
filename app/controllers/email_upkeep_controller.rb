@@ -2,13 +2,15 @@ class EmailUpkeepController < ApplicationController
   skip_before_filter :verify_authenticity_token
 
   def index
-    case params["Type"]
+    @body = JSON.parse(request.raw_post)
+
+    case @body["Type"]
     when "SubscriptionConfirmation"
       handle_subscription_confirmation
     when "Notification"
       handle_notification
     else
-      logger.info "Email upkeep unhandled parameters: #{params.inspect}"
+      logger.info "Email upkeep unhandled @body: #{@body.inspect}"
       raise "Unhandled request"
     end
 
@@ -17,7 +19,7 @@ class EmailUpkeepController < ApplicationController
 
   private
   def handle_subscription_confirmation
-    uri = URI.parse(params["SubscribeURL"])
+    uri = URI.parse(@body["SubscribeURL"])
     response = Net::HTTP.get_response(uri)
     logger.info "requested SubscribeURL #{uri}"
   end
@@ -27,16 +29,16 @@ class EmailUpkeepController < ApplicationController
   end
 
   def check_necessary_input
-    unless valid_topic_arns.include?(params["TopicArn"])
+    unless valid_topic_arns.include?(@body["TopicArn"])
       raise "Must come from valid AWS SNS queue"
     end
-    raise "Must contain SNS Message" unless params["Message"].present?
+    raise "Must contain SNS Message" unless @body["Message"].present?
   end
 
   def handle_notification
     check_necessary_input
 
-    SnsNotification.new(params["Message"]).handle
+    SnsNotification.new(@body["Message"]).handle
   end
 
   class SnsNotification

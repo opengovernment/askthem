@@ -4,7 +4,8 @@ describe EmailUpkeepController do
   describe "POST index" do
     context "when a subscription confirmation is sent" do
       it "should request subscription url and end processing", vcr: true do
-        post :index, subscription_confirmation_params.merge({ format: :json })
+        request.env["RAW_POST_DATA"]  = subscription_confirmation_params.to_json
+        post :index, format: :json
         expect(response.code).to eq "204"
       end
 
@@ -23,7 +24,8 @@ describe EmailUpkeepController do
       it "should update corresponding user's email_is_disabled to true" do
         user = FactoryGirl.create(:user, email: "foo@example.com")
 
-        post :index, valid_bounce.merge({ format: :json })
+        request.env["RAW_POST_DATA"] = valid_bounce.to_json
+        post :index, format: :json
 
         expect(response.code).to eq "204"
         expect(user.reload.email_is_disabled).to eq true

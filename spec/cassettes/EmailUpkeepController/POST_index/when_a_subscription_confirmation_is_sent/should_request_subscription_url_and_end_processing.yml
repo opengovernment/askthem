@@ -23,21 +23,27 @@ http_interactions:
       Content-Type:
       - text/html
       Date:
-      - Wed, 10 Dec 2014 17:08:30 GMT
+      - Fri, 26 Dec 2014 00:35:15 GMT
       Etag:
       - ! '"359670651"'
       Expires:
-      - Wed, 17 Dec 2014 17:08:30 GMT
+      - Fri, 02 Jan 2015 00:35:15 GMT
       Last-Modified:
       - Fri, 09 Aug 2013 23:54:35 GMT
       Server:
-      - ECS (ftw/FBE4)
+      - ECS (rhv/818F)
       X-Cache:
       - HIT
       X-Ec-Custom-Error:
       - '1'
+      Via:
+      - 1.1 BC2-ACLD
       Content-Length:
       - '1270'
+      Connection:
+      - Keep-Alive
+      Age:
+      - '599914'
     body:
       encoding: US-ASCII
       string: ! "<!doctype html>\n<html>\n<head>\n    <title>Example Domain</title>\n\n
@@ -58,5 +64,5 @@ http_interactions:
         or asking for permission.</p>\n    <p><a href=\"http://www.iana.org/domains/example\">More
         information...</a></p>\n</div>\n</body>\n</html>\n"
     http_version: 
-  recorded_at: Wed, 10 Dec 2014 17:08:30 GMT
+  recorded_at: Thu, 01 Jan 2015 23:13:49 GMT
 recorded_with: VCR 2.9.0
