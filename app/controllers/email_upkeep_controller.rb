@@ -20,8 +20,16 @@ class EmailUpkeepController < ApplicationController
   private
   def handle_subscription_confirmation
     uri = URI.parse(@body["SubscribeURL"])
-    response = Net::HTTP.get_response(uri)
-    logger.info "requested SubscribeURL #{uri}"
+    logger.info "requested SubscribeURL #{uri.inspect}"
+
+    http = Net::HTTP.new(uri.host, uri.port)
+    if uri.scheme == "https"
+      http.use_ssl = true
+      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    end
+
+    request = Net::HTTP::Get.new(uri.request_uri)
+    response = http.request(request)
   end
 
   def valid_topic_arns
