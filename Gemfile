@@ -7,6 +7,8 @@ gem 'jquery-rails'
 
 gem 'invalid_utf8_rejector', github: 'opengovernment/invalid_utf8_rejector'
 
+gem 'rack-cors', :require => 'rack/cors'
+
 gem 'mongoid', '~> 3.1.2'
 gem 'geocoder' # must be after mongoid
 gem 'rmagick'
