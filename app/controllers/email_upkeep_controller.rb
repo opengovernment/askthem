@@ -69,6 +69,10 @@ class EmailUpkeepController < ApplicationController
       recipients.inject([]) do |emails, recipient|
         emails << recipient["emailAddress"] if recipient["emailAddress"]
       end
+
+      rescue => error
+        logger.debu("what is message: #{message.inspect}")
+        raise error
     end
 
     def recipients_key
