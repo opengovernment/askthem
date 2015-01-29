@@ -10,7 +10,7 @@ class EmailUpkeepController < ApplicationController
     when "Notification"
       handle_notification
     else
-      logger.info "Email upkeep unhandled @body: #{@body.inspect}"
+      Rails.logger.info "Email upkeep unhandled @body: #{@body.inspect}"
       raise "Unhandled request"
     end
 
@@ -53,9 +53,9 @@ class EmailUpkeepController < ApplicationController
     attr_accessor :message, :type, :sub_message
 
     def initialize(message)
-      @message = message
-      @type = message["notificationType"]
-      @sub_message = message[type.downcase]
+      @message = message.kind_of?(Hash) ? message : JSON.parse(message)
+      @type = @message["notificationType"]
+      @sub_message = @message[type.downcase]
     end
 
     def handle
@@ -71,7 +71,7 @@ class EmailUpkeepController < ApplicationController
       end
 
       rescue => error
-        logger.debu("what is message: #{message.inspect}")
+        Rails.logger.info("what is message: #{message.inspect}")
         raise error
     end
 

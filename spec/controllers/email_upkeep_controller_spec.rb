@@ -31,6 +31,24 @@ describe EmailUpkeepController do
         expect(user.reload.email_is_disabled).to eq true
       end
 
+      context "and Message is a string" do
+        it "should update corresponding user's email_is_disabled to true" do
+          user = FactoryGirl.create(:user, email: "foo@example.com")
+
+          request.env["RAW_POST_DATA"] = valid_bounce_with_string_message.to_json
+          post :index, format: :json
+
+          expect(response.code).to eq "204"
+          expect(user.reload.email_is_disabled).to eq true
+        end
+
+        def valid_bounce_with_string_message
+          bounce_hash = valid_bounce
+          bounce_hash["Message"] = "{\"notificationType\":\"Bounce\",\"bounce\":{\"bounceSubType\":\"Suppressed\",\"bounceType\":\"Permanent\",\"reportingMTA\":\"dns; amazonses.com\",\"bouncedRecipients\":[{\"status\":\"5.1.1\",\"action\":\"failed\",\"diagnosticCode\":\"Amazon SES has suppressed sending to this address because it has a recent history of bouncing as an invalid address. For more information about how to remove an address from the suppression list, see the Amazon SES Developer Guide: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/remove-from-suppressionlist.html \",\"emailAddress\":\"foo@example.com\"}],\"timestamp\":\"2015-01-29T16:26:29.367Z\",\"feedbackId\":\"0000014b3683e81e-941bb873-a7d3-11e4-917b-b5c734026fca-000000\"},\"mail\":{\"timestamp\":\"2015-01-29T16:26:28.000Z\",\"source\":\"support@askthem.io\",\"messageId\":\"0000014b3683e5d4-478c1a60-75d0-4388-b784-1aa68f2139ba-000000\",\"destination\":[\"foo@example.com\"]}}"
+          bounce_hash
+        end
+      end
+
       after do
         ENV["AWS_SNS_TOPIC_ARNS"] = @original_aws_sns_topic_arns
       end
