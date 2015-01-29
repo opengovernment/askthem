@@ -128,7 +128,8 @@ module ApplicationHelper
 
     url = "http:#{url}" if url.present? && url[0..1] == "//"
     placeholder_url_path = "/assets/placeholder.png"
-    api_key = ENV["EMBEDLY_API_KEY"]
+    # api_key = ENV["EMBEDLY_API_KEY"]
+    api_key = "099581ac0bab44b6bfc0e3d19e0012d7"
 
     if url.blank? || (url.include?('ballotpedia.org/wiki/index.php/Images'))
       image_tag(placeholder_url_path)
