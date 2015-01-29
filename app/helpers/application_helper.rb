@@ -139,14 +139,14 @@ module ApplicationHelper
         api_key.blank? ||
         Rails.env.development?
 
+        image_tag(url, opts)
+      else
         full_placeholder_url_escaped = CGI.escape(request.protocol +
                                                   request.host +
                                                   placeholder_url_path)
 
         # image_tag("http://d2xfsikitl0nz3.cloudfront.net/#{CGI.escape(url)}/#{width}/#{height}", opts)
         image_tag("http://i.embed.ly/1/display/crop?key=#{api_key}&url=#{CGI.escape(url)}&errorurl=#{full_placeholder_url_escaped}&width=#{width}&height=#{height}", opts)
-      else
-        image_tag(url, opts)
       end
     end
   end
