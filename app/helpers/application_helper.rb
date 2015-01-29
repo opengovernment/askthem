@@ -127,15 +127,26 @@ module ApplicationHelper
     end
 
     url = "http:#{url}" if url.present? && url[0..1] == "//"
+    placeholder_url_path = "/assets/placeholder.png"
+    api_key = ENV["EMBEDLY_API_KEY"]
 
     if url.blank? || (url.include?('ballotpedia.org/wiki/index.php/Images'))
-      image_tag("/assets/placeholder.png")
+      image_tag(placeholder_url_path)
     else
-      return image_tag(url, opts) if (width.blank? || height.blank?) ||
+      if (width.blank? || height.blank?) ||
         (opts[:state] && opts[:state] == Metadatum::Unaffiliated::ABBREVIATION) ||
+        api_key.blank? ||
         Rails.env.development?
 
-      image_tag("http://d2xfsikitl0nz3.cloudfront.net/#{CGI.escape(url)}/#{width}/#{height}", opts)
+        full_placeholder_url_escaped = CGI.escape(request.protocol +
+                                                  request.host +
+                                                  placeholder_url_path)
+
+        # image_tag("http://d2xfsikitl0nz3.cloudfront.net/#{CGI.escape(url)}/#{width}/#{height}", opts)
+        image_tag("http://i.embed.ly/1/display/crop?key=#{api_key}&url=#{CGI.escape(url)}&errorurl=#{full_placeholder_url_escaped}&width=#{width}&height=#{height}", opts)
+      else
+        image_tag(url, opts)
+      end
     end
   end
 
