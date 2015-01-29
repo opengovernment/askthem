@@ -20,7 +20,7 @@ class EmailUpkeepController < ApplicationController
   private
   def handle_subscription_confirmation
     uri = URI.parse(@body["SubscribeURL"])
-    logger.info "requested SubscribeURL #{uri.inspect}"
+    Rails.logger.info "requested SubscribeURL #{uri.inspect}"
 
     http = Net::HTTP.new(uri.host, uri.port)
     if uri.scheme == "https"
