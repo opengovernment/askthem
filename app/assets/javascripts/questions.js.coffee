@@ -1,4 +1,12 @@
 jQuery ($) ->
+  imageApiKey = "099581ac0bab44b6bfc0e3d19e0012d7"
+
+  placeholderUrl = "http://" + $(location).attr('host') + "/assets/placeholder.png"
+
+  placeholderImageUrlEscaped = encodeURIComponent(placeholderUrl)
+
+  imageProxyUrlBase = "http://i.embed.ly/1/display/crop?key=#{imageApiKey}&errorurl=#{placeholderImageUrlEscaped}&width=60&height=60"
+
   isHeadless = ->
     navigator.userAgent.indexOf('PhantomJS') > -1
 
@@ -240,10 +248,9 @@ jQuery ($) ->
 
         liVal += '<div class="avatar">'
         if @photo_url? and $.trim(@photo_url) != ''
-          liVal += "<img src=\"http://d2xfsikitl0nz3.cloudfront.net/#{encodeURIComponent(@photo_url)}/60/60\" width=\"60\" height=\"60\" alt=\"\" />"
+          liVal += "<img src=\"#{imageProxyUrlBase}&url=#{encodeURIComponent(@photo_url)}\" width=\"60\" height=\"60\" alt=\"\" />"
         else
-          placeholderUrl = "http://" + $(location).attr('host') + "/assets/placeholder.png"
-          liVal += "<img src=\"http://d2xfsikitl0nz3.cloudfront.net/#{encodeURIComponent(placeholderUrl)}/60/60\" width=\"60\" height=\"60\" alt=\"\" />"
+          liVal += "<img src=\"#{imageProxyUrlBase}&url=#{placeholderImageUrlEscaped}\" width=\"60\" height=\"60\" alt=\"\" />"
         liVal += '</div>'
 
         liVal += "<h2>#{@full_name}</h2>"
@@ -288,8 +295,7 @@ jQuery ($) ->
         liVal += "<input type=\"radio\" name=\"more-choices\" id=\"more-choices\" /></div>"
 
         liVal += '<div class="avatar">'
-        placeholderUrl = "http://" + $(location).attr('host') + "/assets/placeholder.png"
-        liVal += "<img src=\"http://d2xfsikitl0nz3.cloudfront.net/#{encodeURIComponent(placeholderUrl)}/60/60\" width=\"60\" height=\"60\" alt=\"\" />"
+        liVal += "<img src=\"#{imageProxyUrlBase}&url=#{placeholderImageUrlEscaped}\" width=\"60\" height=\"60\" alt=\"\" />"
         liVal += '</div>'
 
         liVal += "<h2>Click for More Choices</h2>"

@@ -26,7 +26,10 @@ jQuery ($) ->
 
             divVal += '<div class="avatar">'
             if @photo_url?
-              divVal += "<img src=\"http://d2xfsikitl0nz3.cloudfront.net/#{encodeURIComponent(@photo_url)}/60/60\" width=\"60\" height=\"60\" alt=\"\" />"
+              placeholderImageUrlEscaped = encodeURIComponent("http://" + $(location).attr('host') + "/assets/placeholder.png")
+              imageApiKey = "099581ac0bab44b6bfc0e3d19e0012d7"
+
+              divVal += "<img src=\"http://i.embed.ly/1/display/crop?key=#{imageApiKey}&errorurl=#{placeholderImageUrlEscaped}&width=60&height=60&url=#{encodeURIComponent(@photo_url)}\" width=\"60\" height=\"60\" alt=\"\" />"
             else
               divVal += "<img src=\"http://lorempixel.com/60/60/\" width=\"60\" height=\"60\" alt=\"\" />"
             divVal += '</div>'
