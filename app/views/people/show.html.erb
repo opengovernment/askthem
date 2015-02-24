@@ -106,13 +106,13 @@
                   </h4>
                 <% end %>
                 <ul>
-                  <% if office['phone'] %>
+                  <% if office['phone'] && office['address'].is_a?(String) %>
                     <li>Tel: <%= office['phone'] %></li>
                   <% end %>
-                  <% if office['fax'] %>
+                  <% if office['fax'] && office['address'].is_a?(String) %>
                     <li>Fax: <%= office['fax'] %></li>
                   <% end %>
-                  <% if office['address'] %>
+                  <% if office['address'] && office['address'].is_a?(String) %>
                     <li><%= simple_format office['address'] %></li>
                   <% end %>
                 </ul>
