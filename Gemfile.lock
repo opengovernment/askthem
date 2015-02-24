@@ -15,7 +15,7 @@ GIT
 
 GIT
   remote: git://github.com/walter/google_civic_info.git
-  revision: 70215fd12e63decc19211dd6c91e0c93d0c01ef3
+  revision: 1585ef2e342647f8511089b3cf8340b1a4b6e582
   specs:
     google_civic_info (0.0.1)
       json
@@ -176,7 +176,7 @@ GEM
     jquery-rails (3.1.2)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
-    json (1.8.1)
+    json (1.8.2)
     jwt (0.1.11)
       multi_json (>= 1.5)
     kaminari (0.16.1)

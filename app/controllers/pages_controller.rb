@@ -334,7 +334,8 @@ class PagesController < ApplicationController
 
   def locator_json_for(address)
     limited_json_for(CachedOfficialsFromGoogle.new(@address))
-  rescue
+  rescue => e
+    logger.info("GoogleCivicInfo error or parsing error: #{e}")
     # @todo report error and non-coverage of address
     limited_json_for(Person.results_for_location(@address))
   end

@@ -23,6 +23,8 @@ class CachedOfficial
 
   field :office_name, type: String, as: :political_position_title
   field :office_level, type: String
+  field :office_levels, type: Array, default: []
+  field :office_roles, type: Array, default: []
 
   field :division_name, type: String, as: :most_recent_district
   field :division_scope, type: String
@@ -56,6 +58,8 @@ class CachedOfficial
     return unless office.present?
     self.office_name = office["name"]
     self.office_level = office["level"]
+    self.office_levels = Array(office["levels"])
+    self.office_roles = Array(office["roles"])
   end
 
   def set_division_data

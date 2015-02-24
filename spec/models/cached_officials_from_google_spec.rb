@@ -12,7 +12,8 @@ describe CachedOfficialsFromGoogle do
     end
 
     def official_names
-      ["Daniel L Squadron", "Andrew Cuomo", "Charles E. Schumer", "Kirsten E. Gillibrand", "Margaret Chin", "Michael R. Bloomberg", "Jerrold Nadler"]
+      ["Daniel L Squadron", "Charles E. Schumer", "Kirsten E. Gillibrand",
+       "Andrew M. Cuomo", "Bill de Blasio", "Jerrold Nadler", "Margaret Chin"]
     end
   end
 
