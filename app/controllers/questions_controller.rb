@@ -5,6 +5,7 @@ class QuestionsController < ApplicationController
   belongs_to :jurisdiction, parent_class: Metadatum, finder: :find_by_abbreviation, param: :jurisdiction
   respond_to :html
   respond_to :js, only: :index
+  respond_to :json, only: [:create]
   actions :index, :show, :new, :create, :edit, :update, :destroy
   custom_actions resource: [:need_signatures, :have_answers, :need_answers, :recent]
 
@@ -123,8 +124,10 @@ class QuestionsController < ApplicationController
     end
     @user = @question.user
 
-    if session[:referring_partner_info].present?
-      @user.referring_partner_info = session[:referring_partner_info]
+    partner = session[:referring_partner_info] || params[:partner]
+
+    if partner.present?
+      @user.referring_partner_info = partner
       @user.set_attributes_based_on_partner
     end
 

@@ -30,36 +30,66 @@ describe QuestionsController do
       @person.save
     end
 
-    context "when referring_partner_in is passed in via session" do
+    context "when referring_partner_in is passed" do
       let(:question_attributes) { { title: "X",
-                                    body: "Y",
-                                    person_id: @person.id,
-                                    user: { email: "bernice@example.com" } } }
+          body: "Y",
+          person_id: @person.id,
+          user: { email: "bernice@example.com" } } }
 
       let(:referring_partner) { { name: "Someone Special",
-                                  url: "http://example.com" } }
+          url: "http://example.com" } }
 
-      it "populate question.user with referring_partner_info" do
-        session[:referring_partner_info] = referring_partner
+      context "via session" do
+        it "populate question.user with referring_partner_info" do
+          session[:referring_partner_info] = referring_partner
 
-        post :create, jurisdiction: @person.state, question: question_attributes
+          post :create, jurisdiction: @person.state, question: question_attributes
 
-        new_user = assigns(:user)
+          new_user = assigns(:user)
 
-        expect(new_user.referring_partner_info).to eq referring_partner
+          expect(new_user.referring_partner_info).to eq referring_partner
+        end
+
+        it "populate question.user with attributes based on partner" do
+          session[:referring_partner_info] = referring_partner
+
+          post :create, jurisdiction: @person.state, question: question_attributes
+
+          new_user = assigns(:user)
+
+          expect(new_user.given_name).to eq "bernice"
+          expect(new_user.family_name).to eq "from Someone Special"
+          expect(new_user.password).to_not be_nil
+          expect(new_user.password_is_placeholder?).to be_true
+        end
       end
 
-      it "populate question.user with attributes based on partner" do
-        session[:referring_partner_info] = referring_partner
+      context "via partner in params" do
+        it "populate question.user with referring_partner_info" do
+          post(:create,
+               jurisdiction: @person.state,
+               question: question_attributes,
+               partner: referring_partner)
 
-        post :create, jurisdiction: @person.state, question: question_attributes
+          new_user = assigns(:user)
 
-        new_user = assigns(:user)
+          expect(new_user.referring_partner_info)
+            .to eq referring_partner.with_indifferent_access
+        end
 
-        expect(new_user.given_name).to eq "bernice"
-        expect(new_user.family_name).to eq "from Someone Special"
-        expect(new_user.password).to_not be_nil
-        expect(new_user.password_is_placeholder?).to be_true
+        it "populate question.user with attributes based on partner" do
+          post(:create,
+               jurisdiction: @person.state,
+               question: question_attributes,
+               partner: referring_partner)
+
+          new_user = assigns(:user)
+
+          expect(new_user.given_name).to eq "bernice"
+          expect(new_user.family_name).to eq "from Someone Special"
+          expect(new_user.password).to_not be_nil
+          expect(new_user.password_is_placeholder?).to be_true
+        end
       end
     end
   end
