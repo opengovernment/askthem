@@ -23,21 +23,22 @@ describe QuestionsController do
     end
   end
 
-  describe "#create" do
+  describe "#create", vcr: true do
     before do
       @person = FactoryGirl.create(:federal_legislator_bernard_sanders)
       @person.write_attribute(:active, true)
       @person.save
     end
 
-    context "when referring_partner_in is passed" do
-      let(:question_attributes) { { title: "X",
+    context "when referring_partner_info is passed" do
+      let(:question_attributes) { { title: "XXX",
           body: "Y",
           person_id: @person.id,
           user: { email: "bernice@example.com" } } }
 
       let(:referring_partner) { { name: "Someone Special",
-          url: "http://example.com" } }
+          url: "http://example.com",
+          submitted_address: '05602' } }
 
       context "via session" do
         it "populate question.user with referring_partner_info" do
@@ -89,6 +90,46 @@ describe QuestionsController do
           expect(new_user.family_name).to eq "from Someone Special"
           expect(new_user.password).to_not be_nil
           expect(new_user.password_is_placeholder?).to be_true
+        end
+
+        context "and the format is json" do
+          let(:request_headers) { {
+              "Accept" => "application/json",
+              "Content-Type" => "application/json"
+            }
+          }
+
+          let(:json_params) { {
+              jurisdiction: @person.state,
+              question: question_attributes,
+              partner: referring_partner,
+              format: :json
+            }
+          }
+
+          it "if valid, it populates question, user, and person correctly" do
+            post :create, json_params, request_headers
+
+            new_user = assigns(:user)
+
+            expect(Question.last.title).to eq json_params[:question][:title]
+            expect(Question.last.person_id)
+              .to eq json_params[:question][:person_id]
+            expect(new_user.referring_partner_info)
+              .to eq referring_partner.with_indifferent_access
+          end
+
+          it "if invalid, it returns errors in json" do
+            invalid_json_params = json_params
+            invalid_json_params[:question][:title] = "X"
+
+            post :create, json_params, request_headers
+
+            json = JSON.parse(response.body)
+
+            expect(json["title"].first.include?("is too short")).to be_true
+            expect(response.code).to eq("422")
+          end
         end
       end
     end

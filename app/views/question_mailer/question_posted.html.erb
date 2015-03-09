@@ -32,7 +32,9 @@
                   </p>
                   <%- if @user.created_at && @user.created_at.to_date == Time.zone.now.to_date && @user.referring_partner_info.present? && @user.referring_partner_info[:name].present? %>
                     <% logo_url = @user.referring_partner_info[:logo] -%>
-                    <% logo_url = logo_url.gsub("//", "http://") unless logo_url.include?("http") -%>
+                    <%- if logo_url.present? %>
+                      <% logo_url = logo_url.gsub("//", "http://") unless logo_url.include?("http") -%>
+                    <%- end %>
                     <a href="<%= @user.referring_partner_info[:url] -%>" class="logo" style="margin-right: 45px; float: right; position: relative; top: -30px; text-decoration: none;">
                     <img label="<%= @user.referring_partner_info[:name] -%>" editable="true" width="135" src="<%= logo_url -%>" class="w640" border="0" align="top" style="outline: none !important; text-decoration: none !important;" />
                     </a>
@@ -50,8 +52,11 @@
               <tr style="border-collapse: collapse;">
                 <td width="500" style="border-collapse: collapse;">
                   <%- if @user.created_at && @user.created_at.to_date == Time.zone.now.to_date && @user.referring_partner_info.present? && @user.referring_partner_info[:name].present? %>
-                    <%- partner_template = "#{@user.referring_partner_info[:name].downcase}_question_posted" %>
-                    <%= render partial: partner_template, locals: { user: @user, question: @question } -%>
+                    <%- partner_template = "#{@user.referring_partner_info[:name].downcase.strip.gsub(' ', '_')}_question_posted" %>
+                    <%# right now this is disabled except for honest ads -%>
+                    <%- if partner_template.include?("honest") %>
+                      <%= render partial: partner_template, locals: { user: @user, question: @question } -%>
+                    <%- end %>
                   <%- else %>
                   <h2>Great work, <%= @user.given_name %>, your question is posted.
 					  <br><br>Now it's time to organize!
