@@ -49,10 +49,13 @@ class Question
 
   field :delivered, type: Boolean, default: false
 
+  field :originating_url, type: String
+
   index(state: 1)
   index(person_id: 1, answered: 1)
   index(bill_id: 1, answered: 1)
   index({ coordinates: "2d" }, { background: true })
+  index(originating_url: 1)
 
   validates_presence_of :state, :person_id, :user_id, :title
   validates_length_of :title, within: 3..100, allow_blank: true

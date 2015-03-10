@@ -41,6 +41,11 @@
           <%= @question.user.alternate_name %>
         <% end %><%= where_from_for(@question.user) -%>
       </span>
+      <span class="posted">
+        <%- if @question.originating_url.present? %>
+          via <%= link_to @question.originating_url, @question.originating_url -%>
+        <% end %>
+      </span>
     </span>
     <%= render partial: 'media', locals: { question: @question } %>
     <% if @question.answered? %>
