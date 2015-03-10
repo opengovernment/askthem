@@ -125,7 +125,7 @@ class QuestionsController < ApplicationController
     @user = @question.user
 
     partner = session[:referring_partner_info] || params[:partner]
-    if partner.present?
+    if partner.present? && @user
       @user.referring_partner_info = partner
       @user.set_attributes_based_on_partner
     end
