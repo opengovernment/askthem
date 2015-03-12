@@ -97,7 +97,7 @@
 
     // in dev, loading fails in chrome with security issue, due to CORs no in pow
     // No 'Access-Control-Allow-Origin' header is present on the requested resource. Origin 'null' is therefore not allowed access.
-    jQuery.get('http://askthem.dev/widgets/address/app-concoction.txt', function(data) {
+    jQuery.get('http://www.askthem.io/widgets/address/app-concoction.txt', function(data) {
       appConcoction = data;
 
       // var appCode = appConcoction.replace(/\\/g, '\\');
@@ -154,12 +154,12 @@
       // We can use jQuery here
 
       // load css, only if it hasn't been loaded
-      var cssUrls = ['http://askthem.dev/widgets/address/assets/vendor-ba26407e909fb4a64f1f0a2ade32443c.css',
-                     'http://askthem.dev/widgets/address/assets/address-widget-9da5cd2a172e3d74fd645484240c5fd3.css'];
+      var cssUrls = ['http://www.askthem.io/widgets/address/assets/vendor-ba26407e909fb4a64f1f0a2ade32443c.css',
+                     'http://www.askthem.io/widgets/address/assets/address-widget-9da5cd2a172e3d74fd645484240c5fd3.css'];
 
       addCssLinksIfNecessary(cssUrls);
 
-      var jsUrls = ['http://askthem.dev/widgets/address/assets/vendor-14893c922328afae99c18b2576cbb03d.js'];
+      var jsUrls = ['http://www.askthem.io/widgets/address/assets/vendor-14893c922328afae99c18b2576cbb03d.js'];
 
       // track if all our scripts have loaded globally
       // we increment and decrement within addJSIfNecessary
