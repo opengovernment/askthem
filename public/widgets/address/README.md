@@ -72,6 +72,10 @@ This can be tricky and is the hardest step.
   * replace the *2nd* argument to this function call with the *new* content with
   "tagId" in it in widget.js
 
+* if you have doing development based on a local dev server and have
+  changed hostname for resources to something other than under
+  www.askthem.io, make sure to change it back!
+
 * last, commit your changes, push them, and deploy
 
 Your changes to the address widget is now ready on http://askthem.io.
