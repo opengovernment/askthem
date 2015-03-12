@@ -15,6 +15,19 @@ describe PeopleIdentifier do
       end
     end
 
+    context "when an person_id is submitted" do
+      it "returns person with person_id if one exists" do
+        person = FactoryGirl.create(:state_legislator_ny_sheldon_silver)
+        person_identifier = PeopleIdentifier.new({ person_id: person.id })
+        expect(person_identifier.people.first).to eq person
+      end
+
+      it "returns no people when no one with person_id is in db" do
+        person_identifier = PeopleIdentifier.new({ person_id: 0 })
+        expect(person_identifier.people.count).to eq 0
+      end
+    end
+
     context "when an name_fragrment is submitted for a state" do
       it "returns person that matches if one exists" do
         person = FactoryGirl.create(:state_legislator_ny_sheldon_silver)

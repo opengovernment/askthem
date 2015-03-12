@@ -11,6 +11,8 @@ class PeopleIdentifier
                   Person.where(email: regexp_for(params[:email]))
                 elsif params[:twitter_id]
                   people_from_twitter
+                elsif params[:person_id]
+                  Person.where(id: params[:person_id])
                 else
                   people_from_name_fragment
                 end

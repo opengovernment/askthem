@@ -106,6 +106,13 @@ describe PagesController do
         expect(JSON.parse(response.body)).to eq expected_from_json
       end
 
+      it "takes a person_id and returns matching person" do
+        @person = FactoryGirl.create(:state_legislator_ny_sheldon_silver)
+
+        get :identifier, format: :json, person_id: @person.id
+        expect(JSON.parse(response.body)).to eq expected_from_json
+      end
+
       context "when submittting a twitter_id" do
         context "and there is a person in the db with that twitter_id" do
           it "returns matching person from db" do
