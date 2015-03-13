@@ -218,6 +218,14 @@ class User
 
     if referring_partner_info[:submitted_address].present?
       update_address_from_string(referring_partner_info[:submitted_address])
+
+      logger.info("no location found - submitted address for user with email #{email} is #{referring_partner_info[:submitted_address]}")
+
+      # probably from outside states
+      # give them a pass since they are from a widget
+      if postal_code.blank?
+        self.postal_code = '00000'
+      end
     end
   end
 
