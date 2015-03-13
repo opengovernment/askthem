@@ -23,7 +23,7 @@ via AskThem.io:
 ```
 cd address-widget
 mkdir production # or rm -rf production/* if it already exists
-ember build -o production -b production
+ember build -e production -o production
 ```
 
  The build will give you three things you need, the
@@ -66,7 +66,9 @@ This can be tricky and is the hardest step.
   * notice the meta tag with name "address-widget/config/environment"? copy the *content*
   from that tag to some temporary location where you can edit it
   * search and replace the string "%22address-widget%22" with "%22' + tagId + '%22" in
-  the content you copied in its temporary location
+   the content you copied in its temporary location
+  * search and replace the string "%23address-widget-container" with
+   "%23'+ tagId +'-container" in the content you copied in its temporary location
   * back in the widget.js file in your text editor, find the function call that starts with this:
   "_createMetaTag(tagId + '/config/environment',"
   * replace the *2nd* argument to this function call with the *new* content with

@@ -81,7 +81,7 @@
 
     // needed to set up our instance of an ember app
     _createMetaTag(tagId + '/config/environment',
-                   '%7B%22modulePrefix%22%3A%22' + tagId + '%22%2C%22environment%22%3A%22production%22%2C%22locationType%22%3A%22none%22%2C%22contentSecurityPolicy%22%3A%7B%22default-src%22%3A%22%27none%27%22%2C%22script-src%22%3A%22%27self%27%20http%3A//ember.dev%3A35729/%22%2C%22font-src%22%3A%22%27self%27%20http%3A//www.askthem.io/%22%2C%22connect-src%22%3A%22%27self%27%20http%3A//www.askthem.io/%20http%3A//askthem.dev/%20ws%3A//ember.dev%3A35729/%22%2C%22img-src%22%3A%22%27self%27%20http%3A//i.embed.ly/%20http%3A//www.askthem.io/%20http%3A//askthem.dev/%22%2C%22style-src%22%3A%22%27self%27%22%2C%22media-src%22%3A%22%27self%27%22%7D%2C%22EmberENV%22%3A%7B%22FEATURES%22%3A%7B%22ember-htmlbars%22%3Atrue%7D%7D%2C%22APP%22%3A%7B%22rootElement%22%3A%22%23address-widget-container%22%2C%22askThemHost%22%3A%22www.askthem.io%22%2C%22name%22%3A%22' + tagId + '%22%2C%22version%22%3A%220.0.0.fb215bb7%22%7D%2C%22optionsConfig%22%3A%7B%7D%2C%22ember-apijax%22%3A%7B%22host%22%3A%22http%3A//www.askthem.io%22%7D%2C%22contentSecurityPolicyHeader%22%3A%22Content-Security-Policy-Report-Only%22%2C%22exportApplicationGlobal%22%3Afalse%7D')
+                   '%7B%22modulePrefix%22%3A%22' + tagId + '%22%2C%22environment%22%3A%22production%22%2C%22locationType%22%3A%22none%22%2C%22contentSecurityPolicy%22%3A%7B%22default-src%22%3A%22%27none%27%22%2C%22script-src%22%3A%22%27self%27%20http%3A//ember.dev%3A35729/%22%2C%22font-src%22%3A%22%27self%27%20http%3A//www.askthem.io/%22%2C%22connect-src%22%3A%22%27self%27%20http%3A//www.askthem.io/%20http%3A//askthem.dev/%20ws%3A//ember.dev%3A35729/%22%2C%22img-src%22%3A%22%27self%27%20http%3A//i.embed.ly/%20http%3A//www.askthem.io/%20http%3A//askthem.dev/%22%2C%22style-src%22%3A%22%27self%27%22%2C%22media-src%22%3A%22%27self%27%22%7D%2C%22EmberENV%22%3A%7B%22FEATURES%22%3A%7B%22ember-htmlbars%22%3Atrue%7D%7D%2C%22APP%22%3A%7B%22rootElement%22%3A%22%23' + tagId + '-container%22%2C%22askThemHost%22%3A%22www.askthem.io%22%2C%22name%22%3A%22' + tagId + '%22%2C%22version%22%3A%220.0.0.fdbcefdc%22%7D%2C%22optionsConfig%22%3A%7B%7D%2C%22ember-apijax%22%3A%7B%22host%22%3A%22http%3A//www.askthem.io%22%7D%2C%22contentSecurityPolicyHeader%22%3A%22Content-Security-Policy-Report-Only%22%2C%22exportApplicationGlobal%22%3Afalse%7D')
 
     // add meta tags for each of our options, namespaced to our tagId
     // they will be read by our application and set app vars
@@ -155,7 +155,7 @@
 
       // load css, only if it hasn't been loaded
       var cssUrls = ['http://www.askthem.io/widgets/address/assets/vendor-ba26407e909fb4a64f1f0a2ade32443c.css',
-                     'http://www.askthem.io/widgets/address/assets/address-widget-9da5cd2a172e3d74fd645484240c5fd3.css'];
+                     'http://www.askthem.io/widgets/address/assets/address-widget-de334b446de5592c226959939e10fd3c.css'];
 
       addCssLinksIfNecessary(cssUrls);
 
