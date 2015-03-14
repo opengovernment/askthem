@@ -172,7 +172,7 @@
           // parse our parameters
           // set defaults, use data attributes where possible
           // hidden divs where we need html
-          var tagId = 'at-question-' + i.toString();
+          var tagId = 'at-person-widget-' + i.toString();
           if (jQuery(this).data('tag-id') && jQuery(this).data('tag-id').length > 0) tagId = jQuery(this).data('tag-id');
 
           var tagIdSelector = "#"+tagId;
