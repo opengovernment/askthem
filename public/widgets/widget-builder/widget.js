@@ -155,7 +155,7 @@
 
       // load css, only if it hasn't been loaded
       var cssUrls = ['http://www.askthem.io/widgets/widget-builder/assets/vendor-ba26407e909fb4a64f1f0a2ade32443c.css',
-                     'http://www.askthem.io/widgets/widget-builder/assets/widget-builder-widget-fc4b8ca8e839dd39d2d9b2f4af0fb4c6.css'];
+                     'http://www.askthem.io/widgets/widget-builder/assets/widget-builder-widget-e9923a4753a83d90577a16682bf95024.css'];
 
       addCssLinksIfNecessary(cssUrls);
 
