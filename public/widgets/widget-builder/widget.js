@@ -159,7 +159,7 @@
 
       addCssLinksIfNecessary(cssUrls);
 
-      var jsUrls = ['http://www.askthem.io/widgets/widget-builder/assets/vendor-682986e0ca4d48c96eb18b0408334ac6.js'];
+      var jsUrls = ['http://www.askthem.io/widgets/widget-builder/assets/vendor-4eac7f1e9eed0dee3fa372084070809c.js'];
 
       // track if all our scripts have loaded globally
       // we increment and decrement within addJSIfNecessary
