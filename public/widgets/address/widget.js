@@ -155,11 +155,11 @@
 
       // load css, only if it hasn't been loaded
       var cssUrls = ['http://www.askthem.io/widgets/address/assets/vendor-ba26407e909fb4a64f1f0a2ade32443c.css',
-                     'http://www.askthem.io/widgets/address/assets/address-widget-55057c8018293f569fb9d422d5f0cb79.css'];
+                     'http://www.askthem.io/widgets/address/assets/address-widget-f6cc94e43aaf608ff909368ac5b59e29.css'];
 
       addCssLinksIfNecessary(cssUrls);
 
-      var jsUrls = ['http://www.askthem.io/widgets/address/assets/vendor-a242088275681621cfe323d08e014443.js'];
+      var jsUrls = ['http://www.askthem.io/widgets/address/assets/vendor-ade829476ace9e79a697b45904164efd.js'];
 
       // track if all our scripts have loaded globally
       // we increment and decrement within addJSIfNecessary
