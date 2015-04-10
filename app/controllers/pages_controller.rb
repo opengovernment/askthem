@@ -26,6 +26,9 @@ class PagesController < ApplicationController
   def honestads
   end
 
+  def widget_builder
+  end
+
   def map
     if params[:jurisdiction]
       @jurisdiction = Metadatum.find_by_abbreviation(params[:jurisdiction])

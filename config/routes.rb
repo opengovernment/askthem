@@ -18,6 +18,7 @@ OpenGovernment::Application.routes.draw do
   # generate a custom robots.txt
   get 'robots.:format' => 'robots#show'
 
+  get 'widgets/builder' => 'pages#widget_builder'
   get 'splash' => 'pages#splash'
   get 'electeds' => 'pages#splash'
   get 'elected_signup' => 'pages#elected_signup'
