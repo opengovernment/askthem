@@ -10,7 +10,7 @@ class PeopleIdentifier
                   # annoying that you can't do case insensitive without a regex
                   Person.where(email: regexp_for(params[:email]))
                 elsif params[:twitter_id]
-                  people_from_twitter
+                  people_from_twitter(params[:unverified])
                 elsif params[:person_id]
                   Person.where(id: params[:person_id])
                 else
@@ -23,13 +23,13 @@ class PeopleIdentifier
     /\A#{Regexp.escape(string)}\z/i
   end
 
-  def people_from_twitter
+  def people_from_twitter(unverified = false)
     people = Person.any_of({ twitter_id: regexp_for(params[:twitter_id]) },
                            { additional_twitter_ids:
                              { "$in" => [params[:twitter_id].downcase] } })
     return people if people.count > 0
 
-    TwitterPersonService.new(params[:twitter_id]).people
+    TwitterPersonService.new(params[:twitter_id], true, unverified).people
   end
 
   def people_from_name_fragment
