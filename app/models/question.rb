@@ -51,6 +51,9 @@ class Question
 
   field :originating_url, type: String
 
+  field :needs_confirmation, type: Boolean, default: false
+  field :confirm_code, type: String
+
   index(state: 1)
   index(person_id: 1, answered: 1)
   index(bill_id: 1, answered: 1)

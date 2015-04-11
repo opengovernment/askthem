@@ -62,6 +62,17 @@ class QuestionsController < ApplicationController
 
   def show
     @user = user_signed_in? ? current_user : User.new
+    if params[:code]
+      confirmed_question = Question.where(id: params[:id])
+                           .where(confirm_code: params[:code]).first
+      if confirmed_question
+        confirmed_question.update_attributes({ needs_confirmation: false })
+        flash[:notice] = "Thanks for confirming! Your question is now live!"
+      else
+        raise "unauthorized access"
+      end
+    end
+
     show! do
       @recent_signatures = @question.signatures
         .includes(:user)
@@ -70,7 +81,8 @@ class QuestionsController < ApplicationController
     end
 
   rescue Mongoid::Errors::DocumentNotFound => error
-    question_different_jurisdiction = Question.where(id: params[:id]).first
+    question_different_jurisdiction = Question.where(id: params[:id])
+                                      .where(needs_confirmation: false).first
 
     if question_different_jurisdiction
       correct_jurisdiction = question_different_jurisdiction.state
@@ -126,8 +138,20 @@ class QuestionsController < ApplicationController
 
     partner = session[:referring_partner_info] || params[:partner]
     if partner.present? && @user
-      @user.referring_partner_info = partner
-      @user.set_attributes_based_on_partner
+      existing_user = User.where(email: @question.user.email).first
+
+      # if we have an existing user and that user has a working email
+      # update question params w/ existing user
+      # if they have bouncing email, they will fail validation as they should
+      if existing_user && !existing_user.email_is_disabled?
+        @question.user = existing_user
+        @question.needs_confirmation = true
+        @question.confirm_code = SecureRandom.urlsafe_base64
+        @user = existing_user
+      else
+        @user.referring_partner_info = partner
+        @user.set_attributes_based_on_partner
+      end
     end
 
     # mongoid nested user
@@ -249,6 +273,7 @@ class QuestionsController < ApplicationController
                    Person.only_types(types).connected_to(abbreviation).collect(&:id)
                  end
     Question.connected_to(abbreviation).in(person_id: person_ids)
+      .where(needs_confirmation: false)
   end
 
   def collection
@@ -258,7 +283,8 @@ class QuestionsController < ApplicationController
   end
 
   def resource
-    @question ||= Question.where(state: @state_code).find(params[:id])
+    @question ||= Question.where(state: @state_code)
+                .where(needs_confirmation: false).find(params[:id])
   end
 
   private

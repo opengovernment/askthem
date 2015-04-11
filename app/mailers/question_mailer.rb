@@ -8,7 +8,13 @@ class QuestionMailer < ActionMailer::Base
 
     @user = user
     @question = question
-    mail to: user.email, subject: "Your Question on AskThem Has Been Posted"
+
+    @subject = "Your Question on AskThem Has Been Posted"
+    if question.needs_confirmation?
+      @subject = "Your Question on AskThem Needs Confirmation to be Posted"
+    end
+
+    mail to: user.email, subject: @subject
   end
 
   def signed_on(user, question, new_registration = false)

@@ -1,4 +1,4 @@
-<%- if @user.created_at && @user.created_at.to_date == Time.zone.now.to_date && @user.referring_partner_info.present? && @user.referring_partner_info[:name].present? %>
+<%- if @user.created_at && @user.created_at.to_date == Time.zone.now.to_date && @user.referring_partner_info.present? && @user.referring_partner_info[:name].present? && @user.referring_partner_info[:name].downcase.include?('honest') %>
   <%- partner_template = "#{@user.referring_partner_info[:name].strip.downcase.gsub(' ', '_')}_question_posted" %>
   <%# right now this is disabled except for honest ads -%>
   <%- if partner_template.include?("honest") %>
@@ -6,9 +6,19 @@
   <%- end %>
 <%- else %>
 
+  <%- if @question.needs_confirmation? %>
+  Hey <%= @user.given_name %>, someone using your email submitted a question. Hopefully it was you!
+
+  If it was you, please confirm that it's your question by visiting the following link:
+
+  <%= question_url(@question.state, @question.id, code: @question.confirm_code) %>
+
+  After the question has been confirmed, we'll make it live and then it's time to organize!
+  <%- else %>
   Great work, <%= @user.given_name %>, your question is posted.
 
   Now it's time to organize!
+  <%- end %>
 
   To get an answer, you need to share your question with as many people as possible.
 

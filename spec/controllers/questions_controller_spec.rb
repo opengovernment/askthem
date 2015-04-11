@@ -130,6 +130,22 @@ describe QuestionsController do
             expect(json["title"].first.include?("is too short")).to be_true
             expect(response.code).to eq("422")
           end
+
+          it "if user exists w/ email, question is marked unconfirmed" do
+            existing_user = FactoryGirl
+                            .create(:user,
+                                    email: question_attributes[:user][:email])
+
+            post :create, json_params, request_headers
+
+            user = assigns(:user)
+
+            question = Question.last
+            expect(question.title).to eq json_params[:question][:title]
+            expect(question.needs_confirmation?).to be_true
+            expect(question.confirm_code).to_not be_nil
+            expect(user.email).to eq existing_user.email
+          end
         end
       end
     end

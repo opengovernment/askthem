@@ -12,6 +12,21 @@ describe QuestionMailer do
     last_email.body.encoded.should match( question_url(question.state, question.id) )
   end
 
+  context "if queston needs_confirmation" do
+    it "sends question posted e-mail w/ please confirm message" do
+      user = FactoryGirl.create(:user)
+      question = FactoryGirl.create(:question, needs_confirmation: true)
+      QuestionMailer.question_posted(user, question).deliver
+
+      last_email = ActionMailer::Base.deliveries.last
+      last_email.to.should == [user.email]
+      subject = "Your Question on AskThem Needs Confirmation to be Posted"
+      last_email.subject.should eq(subject)
+      last_email.body.encoded.should match( question_url(question.state,
+                                                         question.id))
+    end
+  end
+
   it "sends signed on to question e-mail" do
     user = FactoryGirl.create(:user)
     question = FactoryGirl.create(:question)

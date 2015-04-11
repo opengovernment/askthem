@@ -51,16 +51,26 @@
             <tbody>
               <tr style="border-collapse: collapse;">
                 <td width="500" style="border-collapse: collapse;">
-                  <%- if @user.created_at && @user.created_at.to_date == Time.zone.now.to_date && @user.referring_partner_info.present? && @user.referring_partner_info[:name].present? %>
+                  <%- if @user.created_at && @user.created_at.to_date == Time.zone.now.to_date && @user.referring_partner_info.present? && @user.referring_partner_info[:name].present? && @user.referring_partner_info[:name].downcase.include?('honest') %>
                     <%- partner_template = "#{@user.referring_partner_info[:name].downcase.strip.gsub(' ', '_')}_question_posted" %>
                     <%# right now this is disabled except for honest ads -%>
                     <%- if partner_template.include?("honest") %>
                       <%= render partial: partner_template, locals: { user: @user, question: @question } -%>
                     <%- end %>
                   <%- else %>
-                  <h2>Great work, <%= @user.given_name %>, your question is posted.
-					  <br><br>Now it's time to organize!
-				  </h2>
+                    <%- if @question.needs_confirmation? %>
+                      <h2>Hey <%= @user.given_name %>, someone using your email submitted a question. Hopefully it was you!</h2>
+
+                      <p>If it was you, <strong>please confirm that it's your question by visiting the following link:</strong></p>
+
+                      <p><a style="color: #82B7C8;" href="<%= question_url(@question.state, @question.id, code: @question.confirm_code) -%>"><%= question_url(@question.state, @question.id, code: @question.confirm_code) -%></a></p>
+
+                      <p>After the question has been confirmed, we'll make it live and then it's time to organize!</p>
+                    <%- else %>
+                      <h2>Great work, <%= @user.given_name %>, your question is posted.
+                        <br><br>Now it's time to organize!
+             				  </h2>
+                    <%- end %>
 
 				  <p>To get an answer, you need to share your question with as many people as possible.<br>&nbsp;</p>
 

@@ -174,7 +174,7 @@ class PagesController < ApplicationController
     user_city
     near_government
 
-    @near_questions = Question
+    @near_questions = Question.where(needs_confirmation: false)
       .where(:coordinates => { "$within" => { "$center" => [center, 1] } })
     near_ids = @near_questions.collect(&:id)
 
@@ -191,7 +191,8 @@ class PagesController < ApplicationController
 
     @national_answers_count = Answer.count
     @national_signatures_count = Signature.count
-    @national_questions = Question.order_by(signature_count: "desc").limit(6)
+    @national_questions = Question.where(needs_confirmation: false)
+                          .order_by(signature_count: "desc").limit(6)
   end
 
   def check_can_view_contact_info
@@ -210,7 +211,7 @@ class PagesController < ApplicationController
 
       @municipality = geodata.city
 
-      @questions = Question.includes(:user)
+      @questions = Question.includes(:user).where(needs_confirmation: false)
         .where(:coordinates => { "$within" => { "$center" => [center, 1] } })
         .order_by(signature_count: "desc").limit(10)
 
