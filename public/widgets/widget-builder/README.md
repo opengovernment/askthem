@@ -67,7 +67,7 @@ This can be tricky and is the hardest step.
   from that tag to some temporary location where you can edit it
   * search and replace the string "%22widget-builder-widget%22" with "%22' + tagId + '%22" in
   the content you copied in its temporary location
-  * search and replace the string "%23address-widget-container" with
+  * search and replace the string "%23widget-builder-widget-container" with
    "%23'+ tagId +'-container" in the content you copied in its temporary location
 * back in the widget.js file in your text editor, find the function call that starts with this:
   "_createMetaTag(tagId + '/config/environment',"
