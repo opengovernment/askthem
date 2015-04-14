@@ -16,7 +16,7 @@ class PeopleController < ApplicationController
 
   def show
     @blurb = Blurb.active.where(target_url: person_path(parent, resource)).first
-    @questions = resource.questions.where(needs_confirmation: false)
+    @questions = resource.questions.in(needs_confirmation: [nil, false])
                  .includes(:user).desc(:created_at).page(params[:page])
     tab "questions"
 

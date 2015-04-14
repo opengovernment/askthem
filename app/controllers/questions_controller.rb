@@ -82,7 +82,7 @@ class QuestionsController < ApplicationController
 
   rescue Mongoid::Errors::DocumentNotFound => error
     question_different_jurisdiction = Question.where(id: params[:id])
-                                      .where(needs_confirmation: false).first
+                                      .in(needs_confirmation: [nil, false]).first
 
     if question_different_jurisdiction
       correct_jurisdiction = question_different_jurisdiction.state
@@ -273,7 +273,7 @@ class QuestionsController < ApplicationController
                    Person.only_types(types).connected_to(abbreviation).collect(&:id)
                  end
     Question.connected_to(abbreviation).in(person_id: person_ids)
-      .where(needs_confirmation: false)
+      .in(needs_confirmation: [nil, false])
   end
 
   def collection
@@ -284,7 +284,7 @@ class QuestionsController < ApplicationController
 
   def resource
     @question ||= Question.where(state: @state_code)
-                .where(needs_confirmation: false).find(params[:id])
+      .in(needs_confirmation: [nil, false]).find(params[:id])
   end
 
   private

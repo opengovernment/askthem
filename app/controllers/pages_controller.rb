@@ -174,7 +174,7 @@ class PagesController < ApplicationController
     user_city
     near_government
 
-    @near_questions = Question.where(needs_confirmation: false)
+    @near_questions = Question.in(needs_confirmation: [nil, false])
       .where(:coordinates => { "$within" => { "$center" => [center, 1] } })
     near_ids = @near_questions.collect(&:id)
 
@@ -191,7 +191,7 @@ class PagesController < ApplicationController
 
     @national_answers_count = Answer.count
     @national_signatures_count = Signature.count
-    @national_questions = Question.where(needs_confirmation: false)
+    @national_questions = Question.in(needs_confirmation: [nil, false])
                           .order_by(signature_count: "desc").limit(6)
   end
 
@@ -211,7 +211,7 @@ class PagesController < ApplicationController
 
       @municipality = geodata.city
 
-      @questions = Question.includes(:user).where(needs_confirmation: false)
+      @questions = Question.includes(:user).in(needs_confirmation: [nil, false])
         .where(:coordinates => { "$within" => { "$center" => [center, 1] } })
         .order_by(signature_count: "desc").limit(10)
 
