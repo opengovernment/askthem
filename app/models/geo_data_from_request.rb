@@ -18,7 +18,7 @@ class GeoDataFromRequest
   private
   def redis
     @redis ||= Redis.new
-  rescue Redis::CannotConnectError
+  rescue Redis::CannotConnectError, Errno::ENETUNREACH
     NullRedis.new
   end
 
