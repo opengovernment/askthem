@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { cookies } from "next/headers";
 import { randomUUID } from "crypto";
+import { recordSignatureInAN } from "@/lib/action-network";
+import { sendQuestionSigned } from "@/lib/email";
 
 // Get or create a temporary anonymous user for demo purposes.
 // In production this would use real auth (OAuth session).
@@ -70,6 +72,39 @@ export async function POST(request: NextRequest) {
       data: { upvoteCount: { increment: 1 } },
     }),
   ]);
+
+  // Fire-and-forget: sync signature to Action Network and send confirmation.
+  const isRealUser = !user.email.endsWith("@demo.askthem.local");
+  if (isRealUser) {
+    const fullQuestion = await prisma.question.findUnique({
+      where: { id: questionId },
+      include: { official: true, categoryTags: true },
+    });
+
+    if (fullQuestion) {
+      const tags = fullQuestion.categoryTags.map((t) => t.tag);
+      recordSignatureInAN(user.email, questionId, tags).catch(() => {});
+
+      sendQuestionSigned(user.email, {
+        questionId,
+        questionText: fullQuestion.text,
+        officialName: fullQuestion.official.name,
+        officialTitle: fullQuestion.official.title,
+      }).then((messageId) => {
+        if (messageId) {
+          prisma.emailEvent.create({
+            data: {
+              userId: user.id,
+              questionId,
+              emailType: "question_signed",
+              subject: `You signed a question to ${fullQuestion.official.name}`,
+              messageId,
+            },
+          }).catch(() => {});
+        }
+      }).catch(() => {});
+    }
+  }
 
   return NextResponse.json({ upvoted: true, upvoteCount: question.upvoteCount + 1 });
 }

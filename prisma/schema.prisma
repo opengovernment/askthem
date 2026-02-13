@@ -21,12 +21,15 @@ model User {
   zip               String?
   isAddressVerified Boolean  @default(false)
   role              String   @default("user") // "user" | "moderator" | "admin"
+  actionNetworkId   String?  // Action Network person UUID (synced on registration)
+  emailConsent      Boolean  @default(false) // user opted in to email communications
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
 
   questions   Question[]
   upvotes     Upvote[]
   oauthAccounts OAuthAccount[]
+  emailEvents EmailEvent[]
 }
 
 model OAuthAccount {
@@ -92,6 +95,7 @@ model Question {
   categoryTags QuestionTag[]
   upvotes      Upvote[]
   answer       Answer?
+  emailEvents  EmailEvent[]
 }
 
 model QuestionTag {
@@ -127,6 +131,21 @@ model Answer {
   responseAudioUrl String?
   postedBy         String   // moderator ID who posted the answer
   respondedAt      DateTime @default(now())
+}
+
+// ─── Email Events (transactional email audit log) ────────────────────
+
+model EmailEvent {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  questionId  String?
+  question    Question? @relation(fields: [questionId], references: [id])
+  emailType   String   // "question_submitted" | "question_signed" | "question_delivered" | "question_answered"
+  subject     String
+  sentAt      DateTime @default(now())
+  messageId   String?  // Mailgun message ID for tracking
+  status      String   @default("sent") // "sent" | "delivered" | "bounced" | "failed"
 }
 
 // ─── API Access (for future tiered API) ──────────────────────────────

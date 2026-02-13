@@ -3,6 +3,8 @@ import { prisma } from "@/lib/prisma";
 import { cookies } from "next/headers";
 import { randomUUID } from "crypto";
 import { POLICY_AREAS } from "@/lib/types";
+import { syncPersonToAN } from "@/lib/action-network";
+import { sendQuestionSubmitted } from "@/lib/email";
 
 async function getOrCreateAnonUser() {
   const cookieStore = await cookies();
@@ -106,6 +108,43 @@ export async function POST(request: NextRequest) {
       author: true,
     },
   });
+
+  // Fire-and-forget: sync author to Action Network and send confirmation email.
+  // These are non-blocking — question creation succeeds regardless.
+  const isRealUser = !user.email.endsWith("@demo.askthem.local");
+  if (isRealUser) {
+    syncPersonToAN({
+      email: user.email,
+      name: user.name,
+      state: user.state,
+      city: user.city,
+      zip: user.zip,
+      districtTag,
+    }).then((anId) => {
+      if (anId && !user.actionNetworkId) {
+        prisma.user.update({ where: { id: user.id }, data: { actionNetworkId: anId } }).catch(() => {});
+      }
+    }).catch(() => {});
+
+    sendQuestionSubmitted(user.email, {
+      questionId: question.id,
+      questionText: question.text,
+      officialName: question.official.name,
+      officialTitle: question.official.title,
+    }).then((messageId) => {
+      if (messageId) {
+        prisma.emailEvent.create({
+          data: {
+            userId: user.id,
+            questionId: question.id,
+            emailType: "question_submitted",
+            subject: `Your question to ${question.official.name} was submitted`,
+            messageId,
+          },
+        }).catch(() => {});
+      }
+    }).catch(() => {});
+  }
 
   return NextResponse.json({ id: question.id, status: question.status }, { status: 201 });
 }
