@@ -1,4 +1,4 @@
-import { searchQuestions, getPopularQuestions } from "@/lib/mock-data";
+import { searchQuestions, getPopularQuestions } from "@/lib/queries";
 import { QuestionCard } from "@/components/QuestionCard";
 import { SearchBar } from "@/components/SearchBar";
 import Link from "next/link";
@@ -9,7 +9,7 @@ interface PageProps {
 
 export default async function QuestionsPage({ searchParams }: PageProps) {
   const { search } = await searchParams;
-  const questions = search ? searchQuestions(search) : getPopularQuestions(20);
+  const questions = search ? await searchQuestions(search) : await getPopularQuestions(20);
 
   return (
     <div className="min-h-screen bg-gray-50">

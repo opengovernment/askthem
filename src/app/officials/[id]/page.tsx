@@ -1,4 +1,4 @@
-import { officials, getQuestionsByOfficialId } from "@/lib/mock-data";
+import { getOfficialById, getQuestionsByOfficialId } from "@/lib/queries";
 import { QuestionCard } from "@/components/QuestionCard";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -9,10 +9,10 @@ interface PageProps {
 
 export default async function OfficialPage({ params }: PageProps) {
   const { id } = await params;
-  const official = officials.find((o) => o.id === id);
+  const official = await getOfficialById(id);
   if (!official) notFound();
 
-  const questions = getQuestionsByOfficialId(official.id);
+  const questions = await getQuestionsByOfficialId(official.id);
 
   return (
     <div className="min-h-screen bg-gray-50">

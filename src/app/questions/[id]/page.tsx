@@ -1,4 +1,4 @@
-import { getQuestionById, getOfficialById } from "@/lib/mock-data";
+import { getQuestionById } from "@/lib/queries";
 import { UpvoteButton } from "@/components/UpvoteButton";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -9,10 +9,10 @@ interface PageProps {
 
 export default async function QuestionPage({ params }: PageProps) {
   const { id } = await params;
-  const question = getQuestionById(id);
+  const question = await getQuestionById(id);
   if (!question) notFound();
 
-  const official = getOfficialById(question.officialId);
+  const { official, author, answer } = question;
 
   const statusLabels: Record<string, { label: string; color: string }> = {
     pending_review: { label: "Pending Review", color: "bg-yellow-100 text-yellow-800" },
@@ -21,7 +21,7 @@ export default async function QuestionPage({ params }: PageProps) {
     answered: { label: "Answered", color: "bg-green-100 text-green-800" },
   };
 
-  const status = statusLabels[question.status];
+  const status = statusLabels[question.status] ?? statusLabels.published;
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -35,9 +35,9 @@ export default async function QuestionPage({ params }: PageProps) {
             <span className={`rounded-full px-3 py-1 text-sm font-medium ${status.color}`}>
               {status.label}
             </span>
-            {question.categoryTags.map((tag) => (
-              <span key={tag} className="rounded bg-gray-100 px-2 py-0.5 text-xs text-gray-600">
-                {tag}
+            {question.categoryTags.map((ct) => (
+              <span key={ct.tag} className="rounded bg-gray-100 px-2 py-0.5 text-xs text-gray-600">
+                {ct.tag}
               </span>
             ))}
             <span className="rounded bg-indigo-50 px-2 py-0.5 text-xs text-indigo-600">
@@ -50,8 +50,11 @@ export default async function QuestionPage({ params }: PageProps) {
             <div className="flex-1">
               <h1 className="mb-3 text-2xl font-bold text-gray-900">{question.text}</h1>
               <p className="mb-4 text-sm text-gray-500">
-                Asked by <span className="font-medium text-gray-700">{question.authorName}</span>{" "}
-                from {question.authorCity}, {question.authorState} on{" "}
+                Asked by <span className="font-medium text-gray-700">{author.name}</span>{" "}
+                {author.city && author.state
+                  ? `from ${author.city}, ${author.state} `
+                  : ""}
+                on{" "}
                 {new Date(question.createdAt).toLocaleDateString("en-US", {
                   year: "numeric",
                   month: "long",
@@ -59,22 +62,20 @@ export default async function QuestionPage({ params }: PageProps) {
                 })}
               </p>
 
-              {official && (
-                <div className="rounded-lg border border-gray-100 bg-gray-50 p-4">
-                  <p className="mb-1 text-sm font-medium text-gray-500">Directed to:</p>
-                  <Link
-                    href={`/officials/${official.id}`}
-                    className="text-lg font-semibold text-indigo-600 hover:text-indigo-800"
-                  >
-                    {official.name}
-                  </Link>
-                  <p className="text-sm text-gray-600">
-                    {official.title} &middot; {official.party === "D" ? "Democrat" : "Republican"}{" "}
-                    &middot; {official.state}
-                    {official.district ? `, ${official.district}` : ""}
-                  </p>
-                </div>
-              )}
+              <div className="rounded-lg border border-gray-100 bg-gray-50 p-4">
+                <p className="mb-1 text-sm font-medium text-gray-500">Directed to:</p>
+                <Link
+                  href={`/officials/${official.id}`}
+                  className="text-lg font-semibold text-indigo-600 hover:text-indigo-800"
+                >
+                  {official.name}
+                </Link>
+                <p className="text-sm text-gray-600">
+                  {official.title} &middot; {official.party === "D" ? "Democrat" : "Republican"}{" "}
+                  &middot; {official.state}
+                  {official.district ? `, ${official.district}` : ""}
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -93,7 +94,7 @@ export default async function QuestionPage({ params }: PageProps) {
         )}
 
         {/* Answer section */}
-        {question.answer && (
+        {answer && (
           <div className="mt-6 rounded-lg border border-green-200 bg-green-50 p-6">
             <div className="mb-3 flex items-center gap-2">
               <div className="flex h-8 w-8 items-center justify-center rounded-full bg-green-200 text-sm font-bold text-green-800">
@@ -101,10 +102,10 @@ export default async function QuestionPage({ params }: PageProps) {
               </div>
               <div>
                 <p className="font-semibold text-green-900">
-                  Official Response from {official?.name}
+                  Official Response from {official.name}
                 </p>
                 <p className="text-xs text-green-700">
-                  {new Date(question.answer.respondedAt).toLocaleDateString("en-US", {
+                  {new Date(answer.respondedAt).toLocaleDateString("en-US", {
                     year: "numeric",
                     month: "long",
                     day: "numeric",
@@ -112,10 +113,10 @@ export default async function QuestionPage({ params }: PageProps) {
                 </p>
               </div>
             </div>
-            {question.answer.responseText && (
-              <p className="leading-relaxed text-gray-800">{question.answer.responseText}</p>
+            {answer.responseText && (
+              <p className="leading-relaxed text-gray-800">{answer.responseText}</p>
             )}
-            {question.answer.responseVideoUrl && (
+            {answer.responseVideoUrl && (
               <p className="mt-3 text-sm text-indigo-600">
                 Video response available (player coming soon)
               </p>

@@ -1,15 +1,30 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { officials } from "@/lib/mock-data";
 import { POLICY_AREAS } from "@/lib/types";
 
+interface OfficialOption {
+  id: string;
+  name: string;
+  title: string;
+  state: string;
+  district: string | null;
+}
+
 export default function AskPage() {
+  const [officials, setOfficials] = useState<OfficialOption[]>([]);
   const [selectedOfficial, setSelectedOfficial] = useState("");
   const [questionText, setQuestionText] = useState("");
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [submitted, setSubmitted] = useState(false);
+
+  useEffect(() => {
+    fetch("/api/officials")
+      .then((res) => res.json())
+      .then(setOfficials)
+      .catch(() => {});
+  }, []);
 
   function toggleTag(tag: string) {
     setSelectedTags((prev) =>

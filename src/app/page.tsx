@@ -1,10 +1,12 @@
 import { SearchBar } from "@/components/SearchBar";
 import { QuestionCard } from "@/components/QuestionCard";
-import { getPopularQuestions } from "@/lib/mock-data";
+import { getPopularQuestions } from "@/lib/queries";
 import Link from "next/link";
 
-export default function Home() {
-  const popularQuestions = getPopularQuestions(6);
+export const dynamic = "force-dynamic";
+
+export default async function Home() {
+  const popularQuestions = await getPopularQuestions(6);
 
   return (
     <div className="min-h-screen bg-gray-50">

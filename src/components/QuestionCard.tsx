@@ -1,15 +1,23 @@
 "use client";
 
 import Link from "next/link";
-import { Question } from "@/lib/types";
-import { getOfficialById } from "@/lib/mock-data";
 import { UpvoteButton } from "./UpvoteButton";
 
 interface QuestionCardProps {
-  question: Question;
+  question: {
+    id: string;
+    text: string;
+    status: string;
+    upvoteCount: number;
+    districtTag: string;
+    createdAt: Date;
+    author: { name: string; city: string | null; state: string | null };
+    official: { id: string; name: string; title: string };
+    categoryTags: { tag: string }[];
+  };
 }
 
-const statusLabels: Record<Question["status"], { label: string; color: string }> = {
+const statusLabels: Record<string, { label: string; color: string }> = {
   pending_review: { label: "Pending Review", color: "bg-yellow-100 text-yellow-800" },
   published: { label: "Published", color: "bg-blue-100 text-blue-800" },
   delivered: { label: "Delivered", color: "bg-purple-100 text-purple-800" },
@@ -17,8 +25,7 @@ const statusLabels: Record<Question["status"], { label: string; color: string }>
 };
 
 export function QuestionCard({ question }: QuestionCardProps) {
-  const official = getOfficialById(question.officialId);
-  const status = statusLabels[question.status];
+  const status = statusLabels[question.status] ?? statusLabels.published;
 
   return (
     <div className="rounded-lg border border-gray-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md">
@@ -29,14 +36,12 @@ export function QuestionCard({ question }: QuestionCardProps) {
             <span className={`rounded-full px-2.5 py-0.5 text-xs font-medium ${status.color}`}>
               {status.label}
             </span>
-            {official && (
-              <Link
-                href={`/officials/${official.id}`}
-                className="text-sm text-indigo-600 hover:text-indigo-800"
-              >
-                To: {official.name} ({official.title})
-              </Link>
-            )}
+            <Link
+              href={`/officials/${question.official.id}`}
+              className="text-sm text-indigo-600 hover:text-indigo-800"
+            >
+              To: {question.official.name} ({question.official.title})
+            </Link>
           </div>
           <Link href={`/questions/${question.id}`} className="group">
             <h3 className="mb-2 text-lg font-medium text-gray-900 group-hover:text-indigo-600">
@@ -45,18 +50,21 @@ export function QuestionCard({ question }: QuestionCardProps) {
           </Link>
           <div className="flex flex-wrap items-center gap-2 text-sm text-gray-500">
             <span>
-              Asked by {question.authorName} from {question.authorCity}, {question.authorState}
+              Asked by {question.author.name}
+              {question.author.city && question.author.state
+                ? ` from ${question.author.city}, ${question.author.state}`
+                : ""}
             </span>
             <span>&middot;</span>
             <span>{new Date(question.createdAt).toLocaleDateString()}</span>
           </div>
           <div className="mt-2 flex flex-wrap gap-1.5">
-            {question.categoryTags.map((tag) => (
+            {question.categoryTags.map((ct) => (
               <span
-                key={tag}
+                key={ct.tag}
                 className="rounded bg-gray-100 px-2 py-0.5 text-xs text-gray-600"
               >
-                {tag}
+                {ct.tag}
               </span>
             ))}
             <span className="rounded bg-indigo-50 px-2 py-0.5 text-xs text-indigo-600">
