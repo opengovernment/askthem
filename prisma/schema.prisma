@@ -1,0 +1,144 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+// ─── Users & Authentication ──────────────────────────────────────────
+
+model User {
+  id                String   @id @default(cuid())
+  email             String   @unique
+  name              String
+  streetAddress     String?
+  city              String?
+  state             String?
+  zip               String?
+  isAddressVerified Boolean  @default(false)
+  role              String   @default("user") // "user" | "moderator" | "admin"
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  questions   Question[]
+  upvotes     Upvote[]
+  oauthAccounts OAuthAccount[]
+}
+
+model OAuthAccount {
+  id         String @id @default(cuid())
+  provider   String // "google", "github", etc.
+  providerId String
+  userId     String
+  user       User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerId])
+}
+
+// ─── Elected Officials ───────────────────────────────────────────────
+
+model Official {
+  id       String  @id @default(cuid())
+  name     String
+  title    String
+  party    String
+  state    String
+  district String?
+  chamber  String  // "senate" | "house" | "state_senate" | "state_house" | "local"
+  photoUrl String?
+  email    String?
+  twitter  String?
+  phone    String?
+  website  String?
+
+  questions       Question[]
+  userDistricts   UserDistrict[]
+}
+
+// Maps users to their elected officials based on address lookup
+model UserDistrict {
+  id         String @id @default(cuid())
+  userId     String
+  officialId String
+  official   Official @relation(fields: [officialId], references: [id])
+
+  @@unique([userId, officialId])
+}
+
+// ─── Questions ───────────────────────────────────────────────────────
+
+model Question {
+  id          String   @id @default(cuid())
+  text        String
+  authorId    String
+  author      User     @relation(fields: [authorId], references: [id])
+  officialId  String
+  official    Official @relation(fields: [officialId], references: [id])
+  districtTag String
+  status      String   @default("pending_review") // "pending_review" | "published" | "delivered" | "answered"
+  upvoteCount Int      @default(0) // denormalized for fast sorting
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Delivery tracking
+  deliveredAt      DateTime?
+  deliveredVia     String?    // "email" | "twitter" | "facebook" | "mail"
+  deliveredBy      String?    // moderator ID who delivered
+
+  categoryTags QuestionTag[]
+  upvotes      Upvote[]
+  answer       Answer?
+}
+
+model QuestionTag {
+  id         String   @id @default(cuid())
+  questionId String
+  question   Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  tag        String   // Policy area from Congress.gov
+
+  @@unique([questionId, tag])
+}
+
+// ─── Upvotes ─────────────────────────────────────────────────────────
+
+model Upvote {
+  id         String   @id @default(cuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id])
+  questionId String
+  question   Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  createdAt  DateTime @default(now())
+
+  @@unique([userId, questionId])
+}
+
+// ─── Answers ─────────────────────────────────────────────────────────
+
+model Answer {
+  id               String   @id @default(cuid())
+  questionId       String   @unique
+  question         Question @relation(fields: [questionId], references: [id])
+  responseText     String?
+  responseVideoUrl String?
+  responseAudioUrl String?
+  postedBy         String   // moderator ID who posted the answer
+  respondedAt      DateTime @default(now())
+}
+
+// ─── API Access (for future tiered API) ──────────────────────────────
+
+model ApiKey {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  name      String
+  tier      String   @default("free") // "free" | "basic" | "pro" | "enterprise"
+  userId    String?
+  rateLimit Int      @default(100) // requests per hour
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  lastUsedAt DateTime?
+}
