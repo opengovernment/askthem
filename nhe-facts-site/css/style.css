@@ -222,6 +222,135 @@ section h2 {
   margin-top: 0.25rem;
 }
 
+/* ===== Historical Bar Chart ===== */
+.historical-chart {
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 2rem;
+}
+
+.chart-note {
+  font-size: 0.95rem;
+  color: var(--color-text-light);
+  margin-bottom: 2rem;
+  max-width: 700px;
+}
+
+.vertical-chart {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  height: 340px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 1.5rem 1.5rem 0;
+  overflow: hidden;
+}
+
+.chart-y-axis {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-bottom: 2.5rem;
+  padding-right: 0.75rem;
+  font-size: 0.75rem;
+  color: var(--color-text-light);
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.chart-bars {
+  display: flex;
+  flex: 1;
+  align-items: flex-end;
+  gap: 0.5rem;
+  padding-bottom: 2.5rem;
+  border-left: 2px solid var(--color-border);
+  border-bottom: 2px solid var(--color-border);
+  position: relative;
+}
+
+.chart-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  height: 100%;
+  position: relative;
+}
+
+.chart-bar {
+  width: 70%;
+  max-width: 56px;
+  height: var(--bar-h);
+  background: linear-gradient(180deg, var(--color-primary-light) 0%, var(--color-primary) 100%);
+  border-radius: 4px 4px 0 0;
+  transition: opacity 0.2s;
+}
+
+.chart-col:hover .chart-bar {
+  opacity: 0.85;
+}
+
+.highlight-down .chart-bar {
+  background: linear-gradient(180deg, #e67e22 0%, #d35400 100%);
+}
+
+.highlight-up .chart-bar {
+  background: linear-gradient(180deg, #27ae60 0%, #1e8449 100%);
+}
+
+.chart-val {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: 0.25rem;
+}
+
+.chart-year {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-text-light);
+  position: absolute;
+  bottom: -2rem;
+}
+
+.chart-source {
+  font-size: 0.8rem;
+  color: var(--color-text-light);
+  margin-top: 1rem;
+  font-style: italic;
+}
+
+@media (max-width: 640px) {
+  .vertical-chart {
+    height: 280px;
+    padding: 1rem 0.75rem 0;
+  }
+
+  .chart-bars {
+    gap: 0.2rem;
+  }
+
+  .chart-val {
+    font-size: 0.55rem;
+  }
+
+  .chart-year {
+    font-size: 0.6rem;
+  }
+
+  .chart-y-axis {
+    font-size: 0.6rem;
+    padding-right: 0.4rem;
+  }
+
+  .chart-bar {
+    max-width: 32px;
+  }
+}
+
 /* ===== Outlook ===== */
 .outlook-content {
   display: grid;
