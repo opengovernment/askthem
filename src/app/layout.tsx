@@ -7,6 +7,11 @@ export const metadata: Metadata = {
   title: "AskThem - Ask Your Elected Officials",
   description:
     "A civic engagement platform where constituents ask questions and elected officials answer publicly.",
+  alternates: {
+    types: {
+      "application/rss+xml": "/feed.xml",
+    },
+  },
 };
 
 export default function RootLayout({
@@ -72,6 +77,11 @@ export default function RootLayout({
             <p>
               A civic engagement platform for democratic dialogue. Questions are only delivered
               after constituent verification.
+            </p>
+            <p className="mt-2">
+              <Link href="/feed.xml" className="text-indigo-500 hover:text-indigo-600">
+                RSS Feed
+              </Link>
             </p>
           </div>
         </footer>

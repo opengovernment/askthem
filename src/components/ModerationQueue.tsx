@@ -51,7 +51,7 @@ function ModerationCard({
       });
 
       if (res.ok) {
-        const data = await res.json();
+        await res.json();
         setResult(
           action === "publish"
             ? "Published"
@@ -62,8 +62,8 @@ function ModerationCard({
         // Refresh server data after a brief pause so user sees the result
         setTimeout(() => router.refresh(), 800);
       } else {
-        const data = await res.json();
-        setResult(`Error: ${data.error}`);
+        const errData = await res.json();
+        setResult(`Error: ${errData.error}`);
       }
     } catch {
       setResult("Network error");

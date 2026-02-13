@@ -7,7 +7,7 @@ import { randomUUID } from "crypto";
 // In production this would use real auth (OAuth session).
 async function getOrCreateAnonUser() {
   const cookieStore = await cookies();
-  let userId = cookieStore.get("anon_user_id")?.value;
+  const userId = cookieStore.get("anon_user_id")?.value;
 
   if (userId) {
     const user = await prisma.user.findUnique({ where: { id: userId } });
