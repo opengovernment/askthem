@@ -35,11 +35,20 @@ export async function POST(request: NextRequest) {
         data: { upvoteCount: { decrement: 1 } },
       }),
     ]);
-    return NextResponse.json({ upvoted: false, upvoteCount: question.upvoteCount - 1 });
+    return NextResponse.json({
+      upvoted: false,
+      upvoteCount: question.upvoteCount - 1,
+      isConstituent: existing.isConstituent,
+    });
   }
 
+  // Determine if the user is a verified constituent of this question's official
+  const isConstituent = !!(await prisma.userDistrict.findUnique({
+    where: { userId_officialId: { userId: user.id, officialId: question.officialId } },
+  }));
+
   await prisma.$transaction([
-    prisma.upvote.create({ data: { userId: user.id, questionId } }),
+    prisma.upvote.create({ data: { userId: user.id, questionId, isConstituent } }),
     prisma.question.update({
       where: { id: questionId },
       data: { upvoteCount: { increment: 1 } },
@@ -76,5 +85,9 @@ export async function POST(request: NextRequest) {
     }).catch(() => {});
   }
 
-  return NextResponse.json({ upvoted: true, upvoteCount: question.upvoteCount + 1 });
+  return NextResponse.json({
+    upvoted: true,
+    upvoteCount: question.upvoteCount + 1,
+    isConstituent,
+  });
 }

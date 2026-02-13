@@ -35,7 +35,7 @@ export default async function QuestionPage({ params }: PageProps) {
   if (!question) notFound();
 
   const { official, author, answer } = question;
-  const signatureCounts = await getSignatureCounts(question.id, official.id);
+  const signatureCounts = await getSignatureCounts(question.id);
 
   const statusLabels: Record<string, { label: string; color: string }> = {
     pending_review: { label: "Pending Review", color: "bg-yellow-100 text-yellow-800" },
