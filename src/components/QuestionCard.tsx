@@ -34,7 +34,16 @@ export function QuestionCard({ question }: QuestionCardProps) {
         <UpvoteButton questionId={question.id} initialCount={question.upvoteCount} />
         <div className="min-w-0 flex-1">
           <div className="mb-2 flex flex-wrap items-center gap-2">
-            <span className={`rounded-full px-2.5 py-0.5 text-xs font-medium ${status.color}`}>
+            <span className={`inline-flex items-center gap-1 rounded-full font-medium ${
+              question.status === "answered"
+                ? "bg-green-100 px-3 py-1 text-sm text-green-800"
+                : `px-2.5 py-0.5 text-xs ${status.color}`
+            }`}>
+              {question.status === "answered" && (
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" />
+                </svg>
+              )}
               {status.label}
             </span>
             <Link

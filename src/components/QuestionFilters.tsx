@@ -16,6 +16,7 @@ export function QuestionFilters({ tags, officials, activeStates, districts }: Qu
   const searchParams = useSearchParams();
 
   const currentSort = searchParams.get("sort") || "votes";
+  const currentStatus = searchParams.get("status") || "";
   const currentTag = searchParams.get("tag") || "";
   const currentOfficial = searchParams.get("official") || "";
   const currentState = searchParams.get("state") || "";
@@ -38,7 +39,7 @@ export function QuestionFilters({ tags, officials, activeStates, districts }: Qu
     [router, searchParams],
   );
 
-  const hasFilters = currentTag || currentOfficial || currentState || currentDistrict || currentSort !== "votes";
+  const hasFilters = currentTag || currentOfficial || currentState || currentDistrict || currentStatus || currentSort !== "votes";
 
   return (
     <div className="flex flex-wrap items-center gap-3">
@@ -50,6 +51,17 @@ export function QuestionFilters({ tags, officials, activeStates, districts }: Qu
         <option value="votes">Most Votes</option>
         <option value="newest">Newest</option>
         <option value="oldest">Oldest</option>
+      </select>
+
+      <select
+        value={currentStatus}
+        onChange={(e) => updateParam("status", e.target.value)}
+        className="rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 focus:outline-none"
+      >
+        <option value="">All Statuses</option>
+        <option value="answered">Answered</option>
+        <option value="delivered">Delivered</option>
+        <option value="published">Published</option>
       </select>
 
       <select

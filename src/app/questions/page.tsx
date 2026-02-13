@@ -17,6 +17,7 @@ interface PageProps {
   searchParams: Promise<{
     search?: string;
     sort?: string;
+    status?: string;
     tag?: string;
     official?: string;
     state?: string;
@@ -30,6 +31,7 @@ export default async function QuestionsPage({ searchParams }: PageProps) {
     getFilteredQuestions({
       search: params.search,
       sort: (params.sort as "votes" | "newest" | "oldest") || "votes",
+      status: params.status,
       tag: params.tag,
       officialId: params.official,
       state: params.state,
@@ -41,7 +43,7 @@ export default async function QuestionsPage({ searchParams }: PageProps) {
     params.state ? getDistrictsForState(params.state) : Promise.resolve([]),
   ]);
 
-  const hasActiveFilters = params.search || params.tag || params.official || params.state || params.district;
+  const hasActiveFilters = params.search || params.status || params.tag || params.official || params.state || params.district;
 
   return (
     <div className="min-h-screen bg-gray-50">
