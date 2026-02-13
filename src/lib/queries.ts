@@ -56,3 +56,23 @@ export async function getAllOfficials() {
     orderBy: { name: "asc" },
   });
 }
+
+// ─── Moderator queries ──────────────────────────────────────────────
+
+export async function getQuestionsByStatus(status: string) {
+  return prisma.question.findMany({
+    where: { status },
+    include: questionInclude,
+    orderBy: { createdAt: "desc" },
+  });
+}
+
+export async function getQuestionCounts() {
+  const [pendingReview, published, delivered, answered] = await Promise.all([
+    prisma.question.count({ where: { status: "pending_review" } }),
+    prisma.question.count({ where: { status: "published" } }),
+    prisma.question.count({ where: { status: "delivered" } }),
+    prisma.question.count({ where: { status: "answered" } }),
+  ]);
+  return { pendingReview, published, delivered, answered };
+}

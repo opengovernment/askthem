@@ -29,6 +29,12 @@ export default function RootLayout({
               >
                 Ask a Question
               </Link>
+              <Link
+                href="/moderate"
+                className="text-sm font-medium text-gray-400 hover:text-gray-600"
+              >
+                Moderate
+              </Link>
               <button className="rounded-full bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700">
                 Sign In
               </button>

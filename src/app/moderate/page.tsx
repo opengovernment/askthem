@@ -1,0 +1,74 @@
+import { getQuestionsByStatus, getQuestionCounts } from "@/lib/queries";
+import { ModerationQueue } from "@/components/ModerationQueue";
+import Link from "next/link";
+
+export const dynamic = "force-dynamic";
+
+interface PageProps {
+  searchParams: Promise<{ tab?: string }>;
+}
+
+export default async function ModeratePage({ searchParams }: PageProps) {
+  const { tab } = await searchParams;
+  const activeTab = tab || "pending_review";
+  const counts = await getQuestionCounts();
+  const questions = await getQuestionsByStatus(activeTab);
+
+  const tabs = [
+    { key: "pending_review", label: "Pending Review", count: counts.pendingReview },
+    { key: "published", label: "Published", count: counts.published },
+    { key: "delivered", label: "Delivered", count: counts.delivered },
+    { key: "answered", label: "Answered", count: counts.answered },
+  ];
+
+  return (
+    <div className="min-h-screen bg-gray-50">
+      <div className="mx-auto max-w-4xl px-4 py-10">
+        <div className="mb-8">
+          <Link href="/" className="mb-4 inline-block text-sm text-indigo-600 hover:text-indigo-800">
+            &larr; Back to site
+          </Link>
+          <h1 className="text-3xl font-bold text-gray-900">Moderator Dashboard</h1>
+          <p className="mt-1 text-gray-500">
+            Review, approve, and manage submitted questions.
+          </p>
+        </div>
+
+        {/* Status tabs */}
+        <div className="mb-6 flex gap-1 rounded-lg bg-gray-100 p-1">
+          {tabs.map((t) => (
+            <Link
+              key={t.key}
+              href={`/moderate?tab=${t.key}`}
+              className={`flex-1 rounded-md px-3 py-2 text-center text-sm font-medium transition-colors ${
+                activeTab === t.key
+                  ? "bg-white text-gray-900 shadow-sm"
+                  : "text-gray-500 hover:text-gray-700"
+              }`}
+            >
+              {t.label}
+              <span
+                className={`ml-1.5 inline-flex items-center justify-center rounded-full px-2 py-0.5 text-xs ${
+                  activeTab === t.key
+                    ? "bg-indigo-100 text-indigo-700"
+                    : "bg-gray-200 text-gray-600"
+                }`}
+              >
+                {t.count}
+              </span>
+            </Link>
+          ))}
+        </div>
+
+        {/* Question list */}
+        {questions.length === 0 ? (
+          <div className="rounded-lg border border-gray-200 bg-white p-12 text-center">
+            <p className="text-gray-500">No questions with this status.</p>
+          </div>
+        ) : (
+          <ModerationQueue questions={questions} activeTab={activeTab} />
+        )}
+      </div>
+    </div>
+  );
+}
