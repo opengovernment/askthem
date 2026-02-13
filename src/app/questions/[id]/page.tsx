@@ -1,5 +1,6 @@
 import { getQuestionById } from "@/lib/queries";
 import { UpvoteButton } from "@/components/UpvoteButton";
+import { ShareButton } from "@/components/ShareButton";
 import { AnswerForm } from "@/components/AnswerForm";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -62,6 +63,10 @@ export default async function QuestionPage({ params }: PageProps) {
                   day: "numeric",
                 })}
               </p>
+
+              <div className="mb-4">
+                <ShareButton questionId={question.id} text={question.text} />
+              </div>
 
               <div className="rounded-lg border border-gray-100 bg-gray-50 p-4">
                 <p className="mb-1 text-sm font-medium text-gray-500">Directed to:</p>

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { UpvoteButton } from "./UpvoteButton";
+import { ShareButton } from "./ShareButton";
 
 interface QuestionCardProps {
   question: {
@@ -57,6 +58,8 @@ export function QuestionCard({ question }: QuestionCardProps) {
             </span>
             <span>&middot;</span>
             <span>{new Date(question.createdAt).toLocaleDateString()}</span>
+            <span>&middot;</span>
+            <ShareButton questionId={question.id} text={question.text} />
           </div>
           <div className="mt-2 flex flex-wrap gap-1.5">
             {question.categoryTags.map((ct) => (

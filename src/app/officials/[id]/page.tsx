@@ -14,17 +14,27 @@ export default async function OfficialPage({ params }: PageProps) {
 
   const questions = await getQuestionsByOfficialId(official.id);
 
+  // Compute stats from the questions
+  const totalUpvotes = questions.reduce((sum, q) => sum + q.upvoteCount, 0);
+  const answeredCount = questions.filter((q) => q.status === "answered").length;
+  const deliveredCount = questions.filter((q) => q.status === "delivered").length;
+  const pendingCount = questions.filter(
+    (q) => q.status === "published",
+  ).length;
+  const responseRate =
+    questions.length > 0 ? Math.round((answeredCount / questions.length) * 100) : 0;
+
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="mx-auto max-w-3xl px-4 py-10">
-        <Link href="/" className="mb-6 inline-block text-sm text-indigo-600 hover:text-indigo-800">
-          &larr; Back to all questions
+        <Link href="/officials" className="mb-6 inline-block text-sm text-indigo-600 hover:text-indigo-800">
+          &larr; All Officials
         </Link>
 
         {/* Official Profile Header */}
-        <div className="mb-8 rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
+        <div className="mb-6 rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
           <div className="flex items-start gap-4">
-            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-indigo-100 text-xl font-bold text-indigo-600">
+            <div className="flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-full bg-indigo-100 text-xl font-bold text-indigo-600">
               {official.name
                 .split(" ")
                 .map((n) => n[0])
@@ -45,15 +55,68 @@ export default async function OfficialPage({ params }: PageProps) {
                 {official.twitter && (
                   <span className="text-gray-500">Twitter: {official.twitter}</span>
                 )}
+                {official.website && (
+                  <a
+                    href={official.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-indigo-600 hover:text-indigo-800"
+                  >
+                    Website
+                  </a>
+                )}
               </div>
             </div>
           </div>
         </div>
 
+        {/* Stats */}
+        {questions.length > 0 && (
+          <div className="mb-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
+            <div className="rounded-lg border border-gray-200 bg-white p-4 text-center">
+              <p className="text-2xl font-bold text-gray-900">{questions.length}</p>
+              <p className="text-xs text-gray-500">Questions</p>
+            </div>
+            <div className="rounded-lg border border-gray-200 bg-white p-4 text-center">
+              <p className="text-2xl font-bold text-green-600">{answeredCount}</p>
+              <p className="text-xs text-gray-500">Answered</p>
+            </div>
+            <div className="rounded-lg border border-gray-200 bg-white p-4 text-center">
+              <p className="text-2xl font-bold text-indigo-600">{totalUpvotes.toLocaleString()}</p>
+              <p className="text-xs text-gray-500">Total Upvotes</p>
+            </div>
+            <div className="rounded-lg border border-gray-200 bg-white p-4 text-center">
+              <p className="text-2xl font-bold text-gray-900">{responseRate}%</p>
+              <p className="text-xs text-gray-500">Response Rate</p>
+            </div>
+          </div>
+        )}
+
+        {/* Status breakdown */}
+        {questions.length > 0 && (
+          <div className="mb-6 flex flex-wrap gap-2">
+            {pendingCount > 0 && (
+              <span className="rounded-full bg-blue-100 px-3 py-1 text-xs font-medium text-blue-800">
+                {pendingCount} awaiting delivery
+              </span>
+            )}
+            {deliveredCount > 0 && (
+              <span className="rounded-full bg-purple-100 px-3 py-1 text-xs font-medium text-purple-800">
+                {deliveredCount} delivered, awaiting response
+              </span>
+            )}
+            {answeredCount > 0 && (
+              <span className="rounded-full bg-green-100 px-3 py-1 text-xs font-medium text-green-800">
+                {answeredCount} answered
+              </span>
+            )}
+          </div>
+        )}
+
         {/* Questions for this official */}
         <div className="mb-4 flex items-center justify-between">
           <h2 className="text-xl font-bold text-gray-900">
-            Questions ({questions.length})
+            Questions
           </h2>
           <Link
             href="/ask"
