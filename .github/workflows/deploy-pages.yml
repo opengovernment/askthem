@@ -9,7 +9,7 @@ name: Deploy Static Site to GitHub Pages
 
 on:
   push:
-    branches: ["main"]
+    branches: ["main", "claude/deploy-static-website-U4ChW"]
   workflow_dispatch: # allows manual trigger from Actions tab
 
 permissions:
@@ -37,9 +37,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload the entire repo root as the site.
-          # Change this to './docs' or './public' if your HTML lives in a subfolder.
-          path: "."
+          path: "./nhe-facts-site"
 
       - name: Deploy to GitHub Pages
         id: deployment
