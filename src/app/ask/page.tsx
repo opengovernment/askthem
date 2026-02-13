@@ -18,6 +18,8 @@ export default function AskPage() {
   const [questionText, setQuestionText] = useState("");
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     fetch("/api/officials")
@@ -32,11 +34,34 @@ export default function AskPage() {
     );
   }
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!selectedOfficial || !questionText.trim() || selectedTags.length === 0) return;
-    // TODO: Call API to submit question for content moderation review
-    setSubmitted(true);
+    setIsSubmitting(true);
+    setError("");
+
+    try {
+      const res = await fetch("/api/questions", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          officialId: selectedOfficial,
+          text: questionText.trim(),
+          tags: selectedTags,
+        }),
+      });
+
+      if (res.ok) {
+        setSubmitted(true);
+      } else {
+        const data = await res.json();
+        setError(data.error || "Something went wrong. Please try again.");
+      }
+    } catch {
+      setError("Network error. Please check your connection and try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   if (submitted) {
@@ -158,13 +183,20 @@ export default function AskPage() {
             </div>
           </div>
 
+          {/* Error message */}
+          {error && (
+            <div className="rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-700">
+              {error}
+            </div>
+          )}
+
           {/* Submit */}
           <button
             type="submit"
-            disabled={!selectedOfficial || !questionText.trim() || selectedTags.length === 0}
+            disabled={isSubmitting || !selectedOfficial || !questionText.trim() || selectedTags.length === 0}
             className="w-full rounded-full bg-indigo-600 px-6 py-3.5 font-medium text-white transition-colors hover:bg-indigo-700 disabled:cursor-not-allowed disabled:bg-gray-300"
           >
-            Submit Question for Review
+            {isSubmitting ? "Submitting..." : "Submit Question for Review"}
           </button>
         </form>
       </div>
