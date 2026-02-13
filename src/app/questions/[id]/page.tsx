@@ -1,6 +1,7 @@
-import { getQuestionById } from "@/lib/queries";
+import { getQuestionById, getSignatureCounts } from "@/lib/queries";
 import { UpvoteButton } from "@/components/UpvoteButton";
 import { ShareButton } from "@/components/ShareButton";
+import { SignatureCounts } from "@/components/SignatureCounts";
 import { AnswerForm } from "@/components/AnswerForm";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -34,6 +35,7 @@ export default async function QuestionPage({ params }: PageProps) {
   if (!question) notFound();
 
   const { official, author, answer } = question;
+  const signatureCounts = await getSignatureCounts(question.id, official.id);
 
   const statusLabels: Record<string, { label: string; color: string }> = {
     pending_review: { label: "Pending Review", color: "bg-yellow-100 text-yellow-800" },
@@ -105,18 +107,15 @@ export default async function QuestionPage({ params }: PageProps) {
           </div>
         </div>
 
-        {/* Sign this question CTA */}
-        {question.status !== "answered" && (
-          <div className="mt-6 rounded-lg border border-indigo-200 bg-indigo-50 p-5 text-center">
-            <p className="mb-3 text-gray-700">
-              Want this question answered? Upvote it to show your support.
-            </p>
-            <p className="text-sm text-gray-500">
-              Questions are delivered to officials once they reach enough constituent support.
-              You must be a registered constituent to upvote.
-            </p>
-          </div>
-        )}
+        {/* Signature counts breakdown */}
+        <div className="mt-6">
+          <SignatureCounts
+            total={signatureCounts.total}
+            constituent={signatureCounts.constituent}
+            supporting={signatureCounts.supporting}
+            isAnswered={question.status === "answered"}
+          />
+        </div>
 
         {/* Answer form for delivered questions without an answer */}
         {question.status === "delivered" && !answer && (

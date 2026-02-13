@@ -195,6 +195,21 @@ export async function getTrendingTags(limit = 8) {
   return tags.map((t) => ({ tag: t.tag, count: t._count.tag }));
 }
 
+// ─── Signature counts (constituent vs supporting) ───────────────────
+
+export async function getSignatureCounts(questionId: string, officialId: string) {
+  const [total, constituent] = await Promise.all([
+    prisma.upvote.count({ where: { questionId } }),
+    prisma.upvote.count({
+      where: {
+        questionId,
+        user: { userDistricts: { some: { officialId } } },
+      },
+    }),
+  ]);
+  return { total, constituent, supporting: total - constituent };
+}
+
 // ─── Moderator queries ──────────────────────────────────────────────
 
 export async function getQuestionsByStatus(status: string) {
