@@ -24,6 +24,12 @@ export default function RootLayout({
             </Link>
             <div className="flex items-center gap-4">
               <Link
+                href="/officials"
+                className="text-sm font-medium text-gray-600 hover:text-indigo-600"
+              >
+                Officials
+              </Link>
+              <Link
                 href="/ask"
                 className="text-sm font-medium text-gray-600 hover:text-indigo-600"
               >

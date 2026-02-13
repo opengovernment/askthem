@@ -312,6 +312,61 @@ async function main() {
     },
   });
 
+  // Pending review questions (for moderator dashboard demo)
+  await prisma.question.create({
+    data: {
+      id: "q7",
+      text: "Why haven't you held a town hall in our district in over two years? When will you face your constituents in person?",
+      authorId: aaliyah.id,
+      officialId: aoc.id,
+      districtTag: "NY-14",
+      upvoteCount: 0,
+      status: "pending_review",
+      createdAt: new Date("2026-02-12T15:00:00Z"),
+      categoryTags: {
+        create: [{ tag: "Government Operations and Politics" }],
+      },
+    },
+  });
+
+  await prisma.question.create({
+    data: {
+      id: "q8",
+      text: "What is your plan to reduce the federal deficit without cutting Social Security or Medicare benefits?",
+      authorId: tom.id,
+      officialId: cruz.id,
+      districtTag: "TX-Senate",
+      upvoteCount: 0,
+      status: "pending_review",
+      createdAt: new Date("2026-02-12T17:30:00Z"),
+      categoryTags: {
+        create: [
+          { tag: "Economics and Public Finance" },
+          { tag: "Social Welfare" },
+        ],
+      },
+    },
+  });
+
+  await prisma.question.create({
+    data: {
+      id: "q9",
+      text: "Will you support legislation to require broadband internet providers to offer affordable plans in rural Pennsylvania?",
+      authorId: tom.id,
+      officialId: fetterman.id,
+      districtTag: "PA-Senate",
+      upvoteCount: 0,
+      status: "pending_review",
+      createdAt: new Date("2026-02-13T09:00:00Z"),
+      categoryTags: {
+        create: [
+          { tag: "Science, Technology, Communications" },
+          { tag: "Commerce" },
+        ],
+      },
+    },
+  });
+
   // Create some upvotes
   await prisma.upvote.createMany({
     data: [
