@@ -4,9 +4,28 @@ import { ShareButton } from "@/components/ShareButton";
 import { AnswerForm } from "@/components/AnswerForm";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 
 interface PageProps {
   params: Promise<{ id: string }>;
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { id } = await params;
+  const question = await getQuestionById(id);
+  if (!question) return { title: "Question Not Found - AskThem" };
+
+  const truncated =
+    question.text.length > 120 ? question.text.slice(0, 120) + "..." : question.text;
+  return {
+    title: `${truncated} - AskThem`,
+    description: `Question for ${question.official.name}: ${question.text}`,
+    openGraph: {
+      title: truncated,
+      description: `Asked to ${question.official.name} (${question.official.title}). ${question.upvoteCount} upvotes.`,
+      type: "article",
+    },
+  };
 }
 
 export default async function QuestionPage({ params }: PageProps) {

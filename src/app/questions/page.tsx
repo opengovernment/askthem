@@ -4,6 +4,12 @@ import { SearchBar } from "@/components/SearchBar";
 import { QuestionFilters } from "@/components/QuestionFilters";
 import Link from "next/link";
 import { Suspense } from "react";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "All Questions - AskThem",
+  description: "Browse, search, and filter questions asked to elected officials by constituents.",
+};
 
 export const dynamic = "force-dynamic";
 

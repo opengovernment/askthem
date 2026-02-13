@@ -1,5 +1,11 @@
 import { getAllOfficials } from "@/lib/queries";
 import Link from "next/link";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Elected Officials - AskThem",
+  description: "Browse elected officials and see what questions constituents are asking them.",
+};
 
 export const dynamic = "force-dynamic";
 

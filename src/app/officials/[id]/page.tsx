@@ -2,9 +2,26 @@ import { getOfficialById, getQuestionsByOfficialId } from "@/lib/queries";
 import { QuestionCard } from "@/components/QuestionCard";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 
 interface PageProps {
   params: Promise<{ id: string }>;
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { id } = await params;
+  const official = await getOfficialById(id);
+  if (!official) return { title: "Official Not Found - AskThem" };
+
+  return {
+    title: `${official.name} - ${official.title} - AskThem`,
+    description: `Ask ${official.name} (${official.title}, ${official.party === "D" ? "Democrat" : "Republican"}, ${official.state}) questions and see their responses.`,
+    openGraph: {
+      title: `${official.name} - ${official.title}`,
+      description: `Ask questions to ${official.name} on AskThem.`,
+      type: "profile",
+    },
+  };
 }
 
 export default async function OfficialPage({ params }: PageProps) {
