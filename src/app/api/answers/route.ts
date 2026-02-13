@@ -3,23 +3,30 @@ import { prisma } from "@/lib/prisma";
 import { tagSignersInAN } from "@/lib/action-network";
 import { sendQuestionAnswered } from "@/lib/email";
 
+import { requireModerator } from "@/lib/session";
+
 // POST /api/answers — post an official's answer to a delivered question
-// In production, require moderator session. Demo mode: unguarded.
 export async function POST(request: NextRequest) {
+  const moderator = await requireModerator();
+  if (!moderator) {
+    return NextResponse.json({ error: "Moderator access required" }, { status: 403 });
+  }
+
   const body = await request.json();
-  const { questionId, responseText, responseVideoUrl } = body as {
+  const { questionId, responseText, responseVideoUrl, sourceUrl } = body as {
     questionId?: string;
     responseText?: string;
     responseVideoUrl?: string;
+    sourceUrl?: string;
   };
 
   if (!questionId || typeof questionId !== "string") {
     return NextResponse.json({ error: "questionId is required" }, { status: 400 });
   }
 
-  if (!responseText && !responseVideoUrl) {
+  if (!responseText && !responseVideoUrl && !sourceUrl) {
     return NextResponse.json(
-      { error: "At least one of responseText or responseVideoUrl is required" },
+      { error: "At least one of responseText, responseVideoUrl, or sourceUrl is required" },
       { status: 400 },
     );
   }
@@ -51,8 +58,9 @@ export async function POST(request: NextRequest) {
         questionId,
         responseText: responseText ?? null,
         responseVideoUrl: responseVideoUrl ?? null,
+        sourceUrl: sourceUrl ?? null,
         respondedAt: new Date(),
-        postedBy: "mod-sarah", // In production, use session user
+        postedBy: moderator.id,
       },
     }),
     prisma.question.update({

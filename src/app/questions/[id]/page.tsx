@@ -151,6 +151,18 @@ export default async function QuestionPage({ params }: PageProps) {
                 Video response available (player coming soon)
               </p>
             )}
+            {answer.sourceUrl && (
+              <p className="mt-3 text-sm">
+                <a
+                  href={answer.sourceUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-indigo-600 hover:text-indigo-800 underline"
+                >
+                  View original source
+                </a>
+              </p>
+            )}
           </div>
         )}
       </div>

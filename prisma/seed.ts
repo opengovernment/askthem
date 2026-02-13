@@ -14,7 +14,8 @@ async function main() {
   await prisma.questionTag.deleteMany();
   await prisma.question.deleteMany();
   await prisma.userDistrict.deleteMany();
-  await prisma.oAuthAccount.deleteMany();
+  await prisma.session.deleteMany();
+  await prisma.account.deleteMany();
   await prisma.apiKey.deleteMany();
   await prisma.user.deleteMany();
   await prisma.official.deleteMany();

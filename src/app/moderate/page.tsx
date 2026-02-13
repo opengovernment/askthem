@@ -1,5 +1,7 @@
 import { getQuestionsByStatus, getQuestionCounts } from "@/lib/queries";
 import { ModerationQueue } from "@/components/ModerationQueue";
+import { auth } from "@/auth";
+import { redirect } from "next/navigation";
 import Link from "next/link";
 
 export const dynamic = "force-dynamic";
@@ -9,6 +11,12 @@ interface PageProps {
 }
 
 export default async function ModeratePage({ searchParams }: PageProps) {
+  // Server-side role check (middleware handles auth redirect)
+  const session = await auth();
+  if (!session?.user || (session.user.role !== "moderator" && session.user.role !== "admin")) {
+    redirect("/");
+  }
+
   const { tab } = await searchParams;
   const activeTab = tab || "pending_review";
   const counts = await getQuestionCounts();

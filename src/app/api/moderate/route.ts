@@ -1,12 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { requireModerator } from "@/lib/session";
 import { tagSignersInAN } from "@/lib/action-network";
 import { sendQuestionDelivered } from "@/lib/email";
 
-// In production, verify the user has moderator/admin role via session.
-// For now, this endpoint is unguarded (demo mode).
-
 export async function POST(request: NextRequest) {
+  const moderator = await requireModerator();
+  if (!moderator) {
+    return NextResponse.json({ error: "Moderator access required" }, { status: 403 });
+  }
+
   const body = await request.json();
   const { questionId, action } = body as {
     questionId?: string;
@@ -54,7 +57,8 @@ export async function POST(request: NextRequest) {
   const data: Record<string, unknown> = { status: newStatus };
   if (action === "deliver") {
     data.deliveredAt = new Date();
-    data.deliveredVia = "email"; // default; can be changed later
+    data.deliveredVia = "email";
+    data.deliveredBy = moderator.id;
   }
 
   const updated = await prisma.question.update({

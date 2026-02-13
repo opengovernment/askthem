@@ -1,36 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { cookies } from "next/headers";
-import { randomUUID } from "crypto";
 import { POLICY_AREAS } from "@/lib/types";
+import { requireAuth } from "@/lib/session";
 import { syncPersonToAN } from "@/lib/action-network";
 import { sendQuestionSubmitted } from "@/lib/email";
-
-async function getOrCreateAnonUser() {
-  const cookieStore = await cookies();
-  const userId = cookieStore.get("anon_user_id")?.value;
-
-  if (userId) {
-    const user = await prisma.user.findUnique({ where: { id: userId } });
-    if (user) return user;
-  }
-
-  const anonId = randomUUID().slice(0, 8);
-  const user = await prisma.user.create({
-    data: {
-      email: `anon-${anonId}@demo.askthem.local`,
-      name: `Anonymous ${anonId}`,
-    },
-  });
-
-  cookieStore.set("anon_user_id", user.id, {
-    httpOnly: true,
-    sameSite: "lax",
-    maxAge: 60 * 60 * 24 * 365,
-  });
-
-  return user;
-}
 
 // Basic content safety check — returns a rejection reason or null if OK.
 // TODO: Replace with AI-powered moderation (e.g. Claude API) in production.
@@ -48,6 +21,11 @@ function moderateContent(text: string): string | null {
 }
 
 export async function POST(request: NextRequest) {
+  const user = await requireAuth();
+  if (!user) {
+    return NextResponse.json({ error: "Sign in required to ask a question" }, { status: 401 });
+  }
+
   const body = await request.json();
   const { officialId, text, tags } = body as {
     officialId?: string;
@@ -84,8 +62,6 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: rejection }, { status: 422 });
   }
 
-  const user = await getOrCreateAnonUser();
-
   // Build district tag from official info
   const districtTag = official.district
     ? `${official.state}-${official.district}`
@@ -110,41 +86,37 @@ export async function POST(request: NextRequest) {
   });
 
   // Fire-and-forget: sync author to Action Network and send confirmation email.
-  // These are non-blocking — question creation succeeds regardless.
-  const isRealUser = !user.email.endsWith("@demo.askthem.local");
-  if (isRealUser) {
-    syncPersonToAN({
-      email: user.email,
-      name: user.name,
-      state: user.state,
-      city: user.city,
-      zip: user.zip,
-      districtTag,
-    }).then((anId) => {
-      if (anId && !user.actionNetworkId) {
-        prisma.user.update({ where: { id: user.id }, data: { actionNetworkId: anId } }).catch(() => {});
-      }
-    }).catch(() => {});
+  syncPersonToAN({
+    email: user.email,
+    name: user.name,
+    state: user.state,
+    city: user.city,
+    zip: user.zip,
+    districtTag,
+  }).then((anId) => {
+    if (anId && !user.actionNetworkId) {
+      prisma.user.update({ where: { id: user.id }, data: { actionNetworkId: anId } }).catch(() => {});
+    }
+  }).catch(() => {});
 
-    sendQuestionSubmitted(user.email, {
-      questionId: question.id,
-      questionText: question.text,
-      officialName: question.official.name,
-      officialTitle: question.official.title,
-    }).then((messageId) => {
-      if (messageId) {
-        prisma.emailEvent.create({
-          data: {
-            userId: user.id,
-            questionId: question.id,
-            emailType: "question_submitted",
-            subject: `Your question to ${question.official.name} was submitted`,
-            messageId,
-          },
-        }).catch(() => {});
-      }
-    }).catch(() => {});
-  }
+  sendQuestionSubmitted(user.email, {
+    questionId: question.id,
+    questionText: question.text,
+    officialName: question.official.name,
+    officialTitle: question.official.title,
+  }).then((messageId) => {
+    if (messageId) {
+      prisma.emailEvent.create({
+        data: {
+          userId: user.id,
+          questionId: question.id,
+          emailType: "question_submitted",
+          subject: `Your question to ${question.official.name} was submitted`,
+          messageId,
+        },
+      }).catch(() => {});
+    }
+  }).catch(() => {});
 
   return NextResponse.json({ id: question.id, status: question.status }, { status: 201 });
 }

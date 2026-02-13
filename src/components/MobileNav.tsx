@@ -4,17 +4,22 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-const links = [
-  { href: "/", label: "Home" },
-  { href: "/officials", label: "Officials" },
-  { href: "/questions", label: "Questions" },
-  { href: "/ask", label: "Ask a Question" },
-  { href: "/moderate", label: "Moderate" },
-];
+interface MobileNavProps {
+  user: { name?: string | null; role: string } | null;
+}
 
-export function MobileNav() {
+export function MobileNav({ user }: MobileNavProps) {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
+  const isModerator = user?.role === "moderator" || user?.role === "admin";
+
+  const links = [
+    { href: "/", label: "Home" },
+    { href: "/officials", label: "Officials" },
+    { href: "/questions", label: "Questions" },
+    { href: "/ask", label: "Ask a Question" },
+    ...(isModerator ? [{ href: "/moderate", label: "Moderate" }] : []),
+  ];
 
   return (
     <>
@@ -59,6 +64,31 @@ export function MobileNav() {
                 {label}
               </Link>
             ))}
+
+            <div className="border-t border-gray-100 pt-2">
+              {user ? (
+                <>
+                  <p className="px-3 py-1 text-xs text-gray-500">{user.name}</p>
+                  <form action="/api/auth/signout" method="POST">
+                    <button
+                      type="submit"
+                      onClick={() => setOpen(false)}
+                      className="block w-full rounded-md px-3 py-2 text-left text-sm font-medium text-gray-700 hover:bg-gray-100"
+                    >
+                      Sign Out
+                    </button>
+                  </form>
+                </>
+              ) : (
+                <Link
+                  href="/auth/signin"
+                  onClick={() => setOpen(false)}
+                  className="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-medium text-white hover:bg-indigo-700"
+                >
+                  Sign In
+                </Link>
+              )}
+            </div>
           </div>
         </div>
       )}

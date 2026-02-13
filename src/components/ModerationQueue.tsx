@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { AnswerForm } from "@/components/AnswerForm";
 
 interface Question {
   id: string;
@@ -154,10 +155,19 @@ function ModerationCard({
               Mark as Delivered
             </button>
           )}
-          {(activeTab === "delivered" || activeTab === "answered") && (
-            <span className="text-sm text-gray-400 italic">No actions available</span>
+          {activeTab === "answered" && (
+            <span className="text-sm text-gray-400 italic">Answered</span>
           )}
         </div>
+      )}
+
+      {/* Inline answer form for delivered questions */}
+      {activeTab === "delivered" && !result && (
+        <AnswerForm
+          questionId={question.id}
+          officialName={question.official.name}
+          compact
+        />
       )}
     </div>
   );

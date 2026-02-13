@@ -12,34 +12,55 @@ datasource db {
 // ─── Users & Authentication ──────────────────────────────────────────
 
 model User {
-  id                String   @id @default(cuid())
-  email             String   @unique
+  id                String    @id @default(cuid())
+  email             String    @unique
+  emailVerified     DateTime? // Auth.js: set when email is verified via OAuth
   name              String
+  image             String?   // Auth.js: profile photo from OAuth provider
   streetAddress     String?
   city              String?
   state             String?
   zip               String?
-  isAddressVerified Boolean  @default(false)
-  role              String   @default("user") // "user" | "moderator" | "admin"
-  actionNetworkId   String?  // Action Network person UUID (synced on registration)
-  emailConsent      Boolean  @default(false) // user opted in to email communications
-  createdAt         DateTime @default(now())
-  updatedAt         DateTime @updatedAt
+  isAddressVerified Boolean   @default(false)
+  role              String    @default("user") // "user" | "moderator" | "admin"
+  actionNetworkId   String?   // Action Network person UUID (synced on registration)
+  emailConsent      Boolean   @default(false) // user opted in to email communications
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
 
   questions   Question[]
   upvotes     Upvote[]
-  oauthAccounts OAuthAccount[]
+  accounts    Account[]
+  sessions    Session[]
   emailEvents EmailEvent[]
 }
 
-model OAuthAccount {
-  id         String @id @default(cuid())
-  provider   String // "google", "github", etc.
-  providerId String
-  userId     String
-  user       User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+// Auth.js Account model (replaces OAuthAccount)
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String  // "oauth" | "oidc"
+  provider          String  // "google", "github", etc.
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@unique([provider, providerId])
+  @@unique([provider, providerAccountId])
+}
+
+// Auth.js Session model (database sessions)
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 // ─── Elected Officials ───────────────────────────────────────────────
@@ -129,6 +150,7 @@ model Answer {
   responseText     String?
   responseVideoUrl String?
   responseAudioUrl String?
+  sourceUrl        String?  // link to social media post, gov website, press release, etc.
   postedBy         String   // moderator ID who posted the answer
   respondedAt      DateTime @default(now())
 }

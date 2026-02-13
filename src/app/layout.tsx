@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { MobileNav } from "@/components/MobileNav";
+import { UserMenu } from "@/components/UserMenu";
+import { auth } from "@/auth";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -14,11 +16,15 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = await auth();
+  const user = session?.user;
+  const isModerator = user?.role === "moderator" || user?.role === "admin";
+
   return (
     <html lang="en">
       <body className="antialiased">
@@ -49,19 +55,35 @@ export default function RootLayout({
               >
                 Ask a Question
               </Link>
-              <Link
-                href="/moderate"
-                className="text-sm font-medium text-gray-400 hover:text-gray-600"
-              >
-                Moderate
-              </Link>
-              <button className="rounded-full bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700">
-                Sign In
-              </button>
+              {isModerator && (
+                <Link
+                  href="/moderate"
+                  className="text-sm font-medium text-amber-600 hover:text-amber-700"
+                >
+                  Moderate
+                </Link>
+              )}
+              {user ? (
+                <UserMenu
+                  user={{
+                    name: user.name,
+                    email: user.email,
+                    image: user.image,
+                    role: user.role,
+                  }}
+                />
+              ) : (
+                <Link
+                  href="/auth/signin"
+                  className="rounded-full bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700"
+                >
+                  Sign In
+                </Link>
+              )}
             </div>
 
             {/* Mobile nav */}
-            <MobileNav />
+            <MobileNav user={user ? { name: user.name, role: user.role } : null} />
           </div>
         </nav>
 
