@@ -1,4 +1,4 @@
-import { getFilteredQuestions, getAllTags, getAllOfficials } from "@/lib/queries";
+import { getFilteredQuestions, getAllTags, getAllOfficials, getActiveStates, getDistrictsForState } from "@/lib/queries";
 import { QuestionCard } from "@/components/QuestionCard";
 import { SearchBar } from "@/components/SearchBar";
 import { QuestionFilters } from "@/components/QuestionFilters";
@@ -19,23 +19,29 @@ interface PageProps {
     sort?: string;
     tag?: string;
     official?: string;
+    state?: string;
+    district?: string;
   }>;
 }
 
 export default async function QuestionsPage({ searchParams }: PageProps) {
   const params = await searchParams;
-  const [questions, tags, officials] = await Promise.all([
+  const [questions, tags, officials, activeStates, districts] = await Promise.all([
     getFilteredQuestions({
       search: params.search,
       sort: (params.sort as "votes" | "newest" | "oldest") || "votes",
       tag: params.tag,
       officialId: params.official,
+      state: params.state,
+      district: params.district,
     }),
     getAllTags(),
     getAllOfficials(),
+    getActiveStates(),
+    params.state ? getDistrictsForState(params.state) : Promise.resolve([]),
   ]);
 
-  const hasActiveFilters = params.search || params.tag || params.official;
+  const hasActiveFilters = params.search || params.tag || params.official || params.state || params.district;
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -61,6 +67,8 @@ export default async function QuestionsPage({ searchParams }: PageProps) {
             <QuestionFilters
               tags={tags}
               officials={officials.map((o) => ({ id: o.id, name: o.name }))}
+              activeStates={activeStates}
+              districts={districts}
             />
           </Suspense>
         </div>

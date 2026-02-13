@@ -21,16 +21,22 @@ export interface QuestionFilters {
   sort?: "votes" | "newest" | "oldest";
   tag?: string;
   officialId?: string;
+  state?: string;
+  district?: string;
   status?: string;
 }
 
 export async function getFilteredQuestions(filters: QuestionFilters) {
-  const where: Record<string, unknown> = { status: { not: "pending_review" } };
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const where: Record<string, any> = { status: { not: "pending_review" } };
 
   if (filters.search) {
     where.OR = [
       { text: { contains: filters.search } },
       { categoryTags: { some: { tag: { contains: filters.search } } } },
+      { official: { name: { contains: filters.search } } },
+      { official: { state: { contains: filters.search } } },
+      { districtTag: { contains: filters.search } },
     ];
   }
   if (filters.tag) {
@@ -38,6 +44,12 @@ export async function getFilteredQuestions(filters: QuestionFilters) {
   }
   if (filters.officialId) {
     where.officialId = filters.officialId;
+  }
+  if (filters.state) {
+    where.official = { ...where.official, state: filters.state };
+  }
+  if (filters.district) {
+    where.official = { ...where.official, district: filters.district };
   }
   if (filters.status && filters.status !== "all") {
     where.status = filters.status;
@@ -81,6 +93,9 @@ export async function searchQuestions(query: string) {
       OR: [
         { text: { contains: query } },
         { categoryTags: { some: { tag: { contains: query } } } },
+        { official: { name: { contains: query } } },
+        { official: { state: { contains: query } } },
+        { districtTag: { contains: query } },
       ],
     },
     include: questionInclude,
@@ -106,6 +121,56 @@ export async function getAllOfficials() {
   return prisma.official.findMany({
     orderBy: { name: "asc" },
   });
+}
+
+export interface OfficialFilters {
+  search?: string;
+  state?: string;
+  chamber?: string;
+}
+
+export async function getFilteredOfficials(filters: OfficialFilters) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const where: Record<string, any> = {};
+
+  if (filters.search) {
+    where.OR = [
+      { name: { contains: filters.search } },
+      { title: { contains: filters.search } },
+      { state: { contains: filters.search } },
+      { district: { contains: filters.search } },
+    ];
+  }
+  if (filters.state) {
+    where.state = filters.state;
+  }
+  if (filters.chamber) {
+    where.chamber = filters.chamber;
+  }
+
+  return prisma.official.findMany({
+    where,
+    orderBy: { name: "asc" },
+  });
+}
+
+export async function getDistrictsForState(state: string) {
+  const officials = await prisma.official.findMany({
+    where: { state, district: { not: null } },
+    select: { district: true },
+    distinct: ["district"],
+    orderBy: { district: "asc" },
+  });
+  return officials.map((o) => o.district!).filter(Boolean);
+}
+
+export async function getActiveStates() {
+  const officials = await prisma.official.findMany({
+    select: { state: true },
+    distinct: ["state"],
+    orderBy: { state: "asc" },
+  });
+  return officials.map((o) => o.state);
 }
 
 // ─── Homepage stats ─────────────────────────────────────────────────
