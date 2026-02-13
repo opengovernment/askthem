@@ -1,5 +1,6 @@
 import { getQuestionById } from "@/lib/queries";
 import { UpvoteButton } from "@/components/UpvoteButton";
+import { AnswerForm } from "@/components/AnswerForm";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -91,6 +92,11 @@ export default async function QuestionPage({ params }: PageProps) {
               You must be a registered constituent to upvote.
             </p>
           </div>
+        )}
+
+        {/* Answer form for delivered questions without an answer */}
+        {question.status === "delivered" && !answer && (
+          <AnswerForm questionId={question.id} officialName={official.name} />
         )}
 
         {/* Answer section */}

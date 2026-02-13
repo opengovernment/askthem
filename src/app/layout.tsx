@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { MobileNav } from "@/components/MobileNav";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -17,17 +18,25 @@ export default function RootLayout({
     <html lang="en">
       <body className="antialiased">
         {/* Navigation */}
-        <nav className="border-b border-gray-200 bg-white">
+        <nav className="relative border-b border-gray-200 bg-white">
           <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-3">
             <Link href="/" className="text-xl font-bold text-indigo-600">
               AskThem
             </Link>
-            <div className="flex items-center gap-4">
+
+            {/* Desktop nav */}
+            <div className="hidden items-center gap-4 sm:flex">
               <Link
                 href="/officials"
                 className="text-sm font-medium text-gray-600 hover:text-indigo-600"
               >
                 Officials
+              </Link>
+              <Link
+                href="/questions"
+                className="text-sm font-medium text-gray-600 hover:text-indigo-600"
+              >
+                Questions
               </Link>
               <Link
                 href="/ask"
@@ -45,6 +54,9 @@ export default function RootLayout({
                 Sign In
               </button>
             </div>
+
+            {/* Mobile nav */}
+            <MobileNav />
           </div>
         </nav>
 
