@@ -368,16 +368,16 @@ async function main() {
     },
   });
 
-  // Create some upvotes
+  // Create some upvotes (isConstituent based on UserDistrict mappings)
   await prisma.upvote.createMany({
     data: [
-      { userId: sarah.id, questionId: q1.id },
-      { userId: james.id, questionId: q2.id },
-      { userId: maria.id, questionId: q3.id },
-      { userId: tom.id, questionId: q3.id },
-      { userId: robert.id, questionId: q4.id },
-      { userId: aaliyah.id, questionId: q5.id },
-      { userId: maria.id, questionId: q6.id },
+      { userId: sarah.id, questionId: q1.id, isConstituent: true },   // sarah is Warren constituent
+      { userId: james.id, questionId: q2.id, isConstituent: true },   // james is Cruz constituent
+      { userId: maria.id, questionId: q3.id, isConstituent: false },  // maria is not AOC constituent
+      { userId: tom.id, questionId: q3.id, isConstituent: false },    // tom is not AOC constituent
+      { userId: robert.id, questionId: q4.id, isConstituent: true },  // robert is Crenshaw constituent
+      { userId: aaliyah.id, questionId: q5.id, isConstituent: false }, // aaliyah is not Fetterman constituent
+      { userId: maria.id, questionId: q6.id, isConstituent: true },   // maria is Warren constituent
     ],
   });
 
