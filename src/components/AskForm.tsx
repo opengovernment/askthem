@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { POLICY_AREAS } from "@/lib/types";
 
 interface OfficialOption {
@@ -13,6 +14,7 @@ interface OfficialOption {
 }
 
 export function AskForm() {
+  const searchParams = useSearchParams();
   const [officials, setOfficials] = useState<OfficialOption[]>([]);
   const [selectedOfficial, setSelectedOfficial] = useState("");
   const [questionText, setQuestionText] = useState("");
@@ -25,10 +27,17 @@ export function AskForm() {
   useEffect(() => {
     fetch("/api/officials")
       .then((res) => res.json())
-      .then(setOfficials)
+      .then((data: OfficialOption[]) => {
+        setOfficials(data);
+        // Pre-select official from ?official=<id> query param
+        const preselect = searchParams.get("official");
+        if (preselect && data.some((o) => o.id === preselect)) {
+          setSelectedOfficial(preselect);
+        }
+      })
       .catch(() => {})
       .finally(() => setLoadingOfficials(false));
-  }, []);
+  }, [searchParams]);
 
   function toggleTag(tag: string) {
     setSelectedTags((prev) =>

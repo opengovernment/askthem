@@ -212,6 +212,12 @@ export function AddressForm() {
                                 {o.district ? ` \u2014 ${o.district}` : ""}
                               </p>
                             </div>
+                            <Link
+                              href={`/ask?official=${o.id}`}
+                              className="shrink-0 rounded-full bg-indigo-600 px-4 py-1.5 text-sm font-medium text-white hover:bg-indigo-700"
+                            >
+                              Ask
+                            </Link>
                           </div>
                         ))}
                       </div>
@@ -222,16 +228,10 @@ export function AddressForm() {
             ))}
           </div>
 
-          <div className="flex gap-3">
-            <Link
-              href="/ask"
-              className="flex-1 rounded-full bg-indigo-600 px-6 py-3 text-center font-medium text-white hover:bg-indigo-700"
-            >
-              Ask a Question
-            </Link>
+          <div className="text-center">
             <Link
               href="/"
-              className="flex-1 rounded-full border border-gray-300 px-6 py-3 text-center font-medium text-gray-700 hover:bg-gray-50"
+              className="inline-block rounded-full border border-gray-300 px-8 py-3 font-medium text-gray-700 hover:bg-gray-50"
             >
               Go Home
             </Link>
