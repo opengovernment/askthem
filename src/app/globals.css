@@ -12,17 +12,17 @@
   --font-mono: var(--font-geist-mono);
 
   /* AskThem 2014 teal palette — overrides Tailwind indigo */
-  --color-indigo-50: #E8F6F9;
-  --color-indigo-100: #D8F2F6;
-  --color-indigo-200: #B0D5DE;
-  --color-indigo-300: #82B7C8;
-  --color-indigo-400: #7B969E;
-  --color-indigo-500: #3C636E;
-  --color-indigo-600: #32515A;
-  --color-indigo-700: #2A4349;
-  --color-indigo-800: #1E3238;
-  --color-indigo-900: #141F23;
-  --color-indigo-950: #0D1619;
+  --color-indigo-50: #F0FAFB;
+  --color-indigo-100: #E0F3F7;
+  --color-indigo-200: #C2E4EC;
+  --color-indigo-300: #95CEDB;
+  --color-indigo-400: #6BB5C6;
+  --color-indigo-500: #509EB0;
+  --color-indigo-600: #4A95A6;
+  --color-indigo-700: #3F8293;
+  --color-indigo-800: #376C7B;
+  --color-indigo-900: #325A66;
+  --color-indigo-950: #1E3840;
 }
 
 @media (prefers-color-scheme: dark) {
