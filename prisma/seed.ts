@@ -18,15 +18,18 @@ async function main() {
   await prisma.user.deleteMany();
   await prisma.official.deleteMany();
 
-  // Create officials
+  // Create officials (ciceroId values are placeholders for seed data;
+  // real Cicero sk values are populated when users look up their address)
   const warren = await prisma.official.create({
     data: {
       id: "sen-warren",
+      ciceroId: "seed-warren",
       name: "Elizabeth Warren",
       title: "U.S. Senator",
       party: "D",
       state: "MA",
       chamber: "senate",
+      level: "NATIONAL_UPPER",
       email: "senator@warren.senate.gov",
       twitter: "@SenWarren",
       website: "https://www.warren.senate.gov",
@@ -36,11 +39,13 @@ async function main() {
   const cruz = await prisma.official.create({
     data: {
       id: "sen-cruz",
+      ciceroId: "seed-cruz",
       name: "Ted Cruz",
       title: "U.S. Senator",
       party: "R",
       state: "TX",
       chamber: "senate",
+      level: "NATIONAL_UPPER",
       email: "senator@cruz.senate.gov",
       twitter: "@SenTedCruz",
       website: "https://www.cruz.senate.gov",
@@ -50,12 +55,14 @@ async function main() {
   const aoc = await prisma.official.create({
     data: {
       id: "rep-ocasio-cortez",
+      ciceroId: "seed-aoc",
       name: "Alexandria Ocasio-Cortez",
       title: "U.S. Representative",
       party: "D",
       state: "NY",
       district: "NY-14",
       chamber: "house",
+      level: "NATIONAL_LOWER",
       email: "representative@ocasiocortez.house.gov",
       twitter: "@RepAOC",
     },
@@ -64,12 +71,14 @@ async function main() {
   const crenshaw = await prisma.official.create({
     data: {
       id: "rep-crenshaw",
+      ciceroId: "seed-crenshaw",
       name: "Dan Crenshaw",
       title: "U.S. Representative",
       party: "R",
       state: "TX",
       district: "TX-2",
       chamber: "house",
+      level: "NATIONAL_LOWER",
       email: "representative@crenshaw.house.gov",
       twitter: "@RepDanCrenshaw",
     },
@@ -78,11 +87,13 @@ async function main() {
   const fetterman = await prisma.official.create({
     data: {
       id: "sen-fetterman",
+      ciceroId: "seed-fetterman",
       name: "John Fetterman",
       title: "U.S. Senator",
       party: "D",
       state: "PA",
       chamber: "senate",
+      level: "NATIONAL_UPPER",
       email: "senator@fetterman.senate.gov",
       twitter: "@SenFettermanPA",
     },
@@ -99,6 +110,7 @@ async function main() {
       state: "MA",
       zip: "02116",
       isAddressVerified: true,
+      addressLookedUpAt: new Date("2026-01-10T12:00:00Z"),
     },
   });
 
@@ -112,6 +124,7 @@ async function main() {
       state: "TX",
       zip: "77001",
       isAddressVerified: true,
+      addressLookedUpAt: new Date("2026-01-12T09:00:00Z"),
     },
   });
 
@@ -125,6 +138,7 @@ async function main() {
       state: "NY",
       zip: "10451",
       isAddressVerified: true,
+      addressLookedUpAt: new Date("2026-01-14T15:00:00Z"),
     },
   });
 
@@ -151,6 +165,7 @@ async function main() {
       state: "PA",
       zip: "15222",
       isAddressVerified: true,
+      addressLookedUpAt: new Date("2026-01-18T11:00:00Z"),
     },
   });
 
@@ -164,6 +179,7 @@ async function main() {
       state: "MA",
       zip: "02138",
       isAddressVerified: true,
+      addressLookedUpAt: new Date("2026-01-08T14:00:00Z"),
     },
   });
 

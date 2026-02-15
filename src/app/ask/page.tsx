@@ -20,12 +20,14 @@ export default function AskPage() {
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
+  const [loadingOfficials, setLoadingOfficials] = useState(true);
 
   useEffect(() => {
     fetch("/api/officials")
       .then((res) => res.json())
       .then(setOfficials)
-      .catch(() => {});
+      .catch(() => {})
+      .finally(() => setLoadingOfficials(false));
   }, []);
 
   function toggleTag(tag: string) {
@@ -121,24 +123,32 @@ export default function AskPage() {
             <label htmlFor="official" className="mb-2 block text-sm font-medium text-gray-700">
               Select an Elected Official
             </label>
-            <select
-              id="official"
-              value={selectedOfficial}
-              onChange={(e) => setSelectedOfficial(e.target.value)}
-              className="w-full rounded-lg border border-gray-300 px-4 py-3 text-gray-900 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 focus:outline-none"
-            >
-              <option value="">Choose an official...</option>
-              {officials.map((o) => (
-                <option key={o.id} value={o.id}>
-                  {o.name} &mdash; {o.title}, {o.state}
-                  {o.district ? ` (${o.district})` : ""}
-                </option>
-              ))}
-            </select>
-            <p className="mt-1 text-xs text-gray-500">
-              In production, this list will be limited to your elected officials based on your
-              registered address.
-            </p>
+            {!loadingOfficials && officials.length === 0 ? (
+              <div className="rounded-lg border border-amber-200 bg-amber-50 p-4 text-sm text-amber-800">
+                <p className="mb-2 font-medium">No officials found for your account.</p>
+                <p>
+                  <Link href="/address" className="font-medium underline hover:text-amber-900">
+                    Enter your address
+                  </Link>{" "}
+                  to find your elected representatives, then come back to ask a question.
+                </p>
+              </div>
+            ) : (
+              <select
+                id="official"
+                value={selectedOfficial}
+                onChange={(e) => setSelectedOfficial(e.target.value)}
+                className="w-full rounded-lg border border-gray-300 px-4 py-3 text-gray-900 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 focus:outline-none"
+              >
+                <option value="">Choose an official...</option>
+                {officials.map((o) => (
+                  <option key={o.id} value={o.id}>
+                    {o.name} &mdash; {o.title}, {o.state}
+                    {o.district ? ` (${o.district})` : ""}
+                  </option>
+                ))}
+              </select>
+            )}
           </div>
 
           {/* Question Text */}

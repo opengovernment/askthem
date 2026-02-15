@@ -22,6 +22,7 @@ model User {
   state             String?
   zip               String?
   isAddressVerified Boolean   @default(false)
+  addressLookedUpAt DateTime? // timestamp of last Cicero lookup (avoids burning credits on repeat lookups)
   role              String    @default("user") // "user" | "moderator" | "admin"
   actionNetworkId   String?   // Action Network person UUID (synced on registration)
   emailConsent      Boolean   @default(false) // user opted in to email communications
@@ -67,12 +68,14 @@ model Session {
 
 model Official {
   id       String  @id @default(cuid())
+  ciceroId String? @unique // Cicero sk primary key — used for deduplication on upsert
   name     String
   title    String
   party    String
   state    String
   district String?
-  chamber  String  // "senate" | "house" | "state_senate" | "state_house" | "local"
+  chamber  String  // "senate" | "house" | "state_senate" | "state_house" | "state_exec" | "local"
+  level    String? // raw Cicero district_type (e.g. "NATIONAL_UPPER", "STATE_LOWER", "LOCAL")
   photoUrl String?
   email    String?
   twitter  String?

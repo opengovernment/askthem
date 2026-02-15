@@ -123,6 +123,14 @@ export async function getAllOfficials() {
   });
 }
 
+export async function getOfficialsForUser(userId: string) {
+  const districts = await prisma.userDistrict.findMany({
+    where: { userId },
+    include: { official: true },
+  });
+  return districts.map((d) => d.official).sort((a, b) => a.name.localeCompare(b.name));
+}
+
 export interface OfficialFilters {
   search?: string;
   state?: string;

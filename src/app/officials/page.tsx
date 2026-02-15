@@ -106,6 +106,7 @@ function chamberLabel(chamber: string): string {
   const labels: Record<string, string> = {
     senate: "U.S. Senate",
     house: "U.S. House of Representatives",
+    state_exec: "State Executive",
     state_senate: "State Senate",
     state_house: "State House",
     local: "Local Officials",

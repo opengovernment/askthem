@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { MobileNav } from "@/components/MobileNav";
 import { UserMenu } from "@/components/UserMenu";
+import { AddressBanner } from "@/components/AddressBanner";
 import { auth } from "@/auth";
 import "./globals.css";
 
@@ -87,6 +88,8 @@ export default async function RootLayout({
             <MobileNav user={user ? { name: user.name, role: user.role } : null} />
           </div>
         </nav>
+
+        {user && !user.isAddressVerified && <AddressBanner />}
 
         {children}
 

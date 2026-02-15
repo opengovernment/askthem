@@ -1,0 +1,167 @@
+import { NextRequest, NextResponse } from "next/server";
+import { requireAuth } from "@/lib/session";
+import { prisma } from "@/lib/prisma";
+import { lookupOfficialsByAddress, isEnabled } from "@/lib/cicero";
+
+export async function POST(req: NextRequest) {
+  const user = await requireAuth();
+  if (!user) {
+    return NextResponse.json({ error: "Sign in required" }, { status: 401 });
+  }
+
+  if (!isEnabled()) {
+    return NextResponse.json(
+      { error: "Address lookup is not available. Please try again later." },
+      { status: 503 },
+    );
+  }
+
+  const body = await req.json();
+  const { street, city, state, zip } = body;
+
+  // Validate required fields
+  if (!street || !city || !state || !zip) {
+    return NextResponse.json(
+      { error: "All address fields are required (street, city, state, zip)." },
+      { status: 400 },
+    );
+  }
+
+  if (typeof street !== "string" || street.trim().length < 3) {
+    return NextResponse.json({ error: "Please enter a valid street address." }, { status: 400 });
+  }
+  if (typeof zip !== "string" || !/^\d{5}(-\d{4})?$/.test(zip.trim())) {
+    return NextResponse.json({ error: "Please enter a valid 5-digit ZIP code." }, { status: 400 });
+  }
+
+  // Skip Cicero call if address hasn't changed and was recently looked up
+  const addressUnchanged =
+    user.streetAddress === street.trim() &&
+    user.city === city.trim() &&
+    user.state === state &&
+    user.zip === zip.trim() &&
+    user.isAddressVerified &&
+    user.addressLookedUpAt;
+
+  if (addressUnchanged) {
+    // Return existing officials without burning a credit
+    const existingDistricts = await prisma.userDistrict.findMany({
+      where: { userId: user.id },
+      include: { official: true },
+    });
+    return NextResponse.json({
+      officials: existingDistricts.map((ud) => ({
+        id: ud.official.id,
+        name: ud.official.name,
+        title: ud.official.title,
+        party: ud.official.party,
+        state: ud.official.state,
+        district: ud.official.district,
+        chamber: ud.official.chamber,
+      })),
+      cached: true,
+    });
+  }
+
+  // Call Cicero API
+  let normalizedOfficials;
+  try {
+    normalizedOfficials = await lookupOfficialsByAddress({
+      street: street.trim(),
+      city: city.trim(),
+      state,
+      zip: zip.trim(),
+    });
+  } catch {
+    return NextResponse.json(
+      { error: "Could not look up your address. Please verify it and try again." },
+      { status: 502 },
+    );
+  }
+
+  if (normalizedOfficials.length === 0) {
+    return NextResponse.json(
+      { error: "No elected officials found for this address. Please check your address and try again." },
+      { status: 404 },
+    );
+  }
+
+  // Upsert officials and build UserDistrict mappings in a transaction
+  const upsertedOfficials = await prisma.$transaction(async (tx) => {
+    // 1. Upsert each official by ciceroId
+    const officials = [];
+    for (const o of normalizedOfficials) {
+      const official = await tx.official.upsert({
+        where: { ciceroId: o.ciceroId },
+        create: {
+          ciceroId: o.ciceroId,
+          name: o.name,
+          title: o.title,
+          party: o.party,
+          state: o.state,
+          district: o.district,
+          chamber: o.chamber,
+          level: o.level,
+          photoUrl: o.photoUrl,
+          email: o.email,
+          phone: o.phone,
+          website: o.website,
+          twitter: o.twitter,
+        },
+        update: {
+          name: o.name,
+          title: o.title,
+          party: o.party,
+          state: o.state,
+          district: o.district,
+          chamber: o.chamber,
+          level: o.level,
+          photoUrl: o.photoUrl,
+          email: o.email,
+          phone: o.phone,
+          website: o.website,
+          twitter: o.twitter,
+        },
+      });
+      officials.push(official);
+    }
+
+    // 2. Clear existing UserDistrict records for this user
+    await tx.userDistrict.deleteMany({ where: { userId: user.id } });
+
+    // 3. Create new UserDistrict records
+    await tx.userDistrict.createMany({
+      data: officials.map((o) => ({
+        userId: user.id,
+        officialId: o.id,
+      })),
+    });
+
+    // 4. Update user address + verification status
+    await tx.user.update({
+      where: { id: user.id },
+      data: {
+        streetAddress: street.trim(),
+        city: city.trim(),
+        state,
+        zip: zip.trim(),
+        isAddressVerified: true,
+        addressLookedUpAt: new Date(),
+      },
+    });
+
+    return officials;
+  });
+
+  return NextResponse.json({
+    officials: upsertedOfficials.map((o) => ({
+      id: o.id,
+      name: o.name,
+      title: o.title,
+      party: o.party,
+      state: o.state,
+      district: o.district,
+      chamber: o.chamber,
+    })),
+  });
+}
