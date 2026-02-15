@@ -110,20 +110,15 @@ export default async function OfficialsPage({ searchParams }: PageProps) {
             )}
 
             {/* Per-state sections */}
-            {sortedStates.length > 0 && (
-              <div>
-                <h2 className="mb-4 text-lg font-semibold text-gray-700">State &amp; Local Officials</h2>
-                {sortedStates.map((stateAbbr) => (
-                  <CollapsibleSection
-                    key={stateAbbr}
-                    title={US_STATES[stateAbbr] || stateAbbr}
-                    count={byState[stateAbbr].length}
-                  >
-                    <OfficialGrid officials={byState[stateAbbr]} showChamber />
-                  </CollapsibleSection>
-                ))}
-              </div>
-            )}
+            {sortedStates.map((stateAbbr) => (
+              <CollapsibleSection
+                key={stateAbbr}
+                title={US_STATES[stateAbbr] || stateAbbr}
+                count={byState[stateAbbr].length}
+              >
+                <OfficialGrid officials={byState[stateAbbr]} showChamber />
+              </CollapsibleSection>
+            ))}
           </>
         )}
       </div>
