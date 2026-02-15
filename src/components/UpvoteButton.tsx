@@ -38,12 +38,12 @@ export function UpvoteButton({ questionId, initialCount }: UpvoteButtonProps) {
   const [hasUpvoted, setHasUpvoted] = useState(false);
   const [isConstituent, setIsConstituent] = useState<boolean | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [addressRequired, setAddressRequired] = useState(false);
+  const [gateReason, setGateReason] = useState<"sign_in" | "address" | null>(null);
 
   async function handleUpvote() {
     if (isLoading) return;
     setIsLoading(true);
-    setAddressRequired(false);
+    setGateReason(null);
 
     const wasUpvoted = hasUpvoted;
     setHasUpvoted(!wasUpvoted);
@@ -64,9 +64,13 @@ export function UpvoteButton({ questionId, initialCount }: UpvoteButtonProps) {
       } else {
         setHasUpvoted(wasUpvoted);
         setCount(wasUpvoted ? count : count);
-        const data = await res.json().catch(() => ({}));
-        if (data.addressRequired) {
-          setAddressRequired(true);
+        if (res.status === 401) {
+          setGateReason("sign_in");
+        } else {
+          const data = await res.json().catch(() => ({}));
+          if (data.addressRequired) {
+            setGateReason("address");
+          }
         }
       }
     } catch {
@@ -106,7 +110,15 @@ export function UpvoteButton({ questionId, initialCount }: UpvoteButtonProps) {
       {showSupporter && (
         <span className="text-[10px] font-medium text-amber-600">Supported</span>
       )}
-      {addressRequired && (
+      {gateReason === "sign_in" && (
+        <Link
+          href="/auth/signin"
+          className="mt-1 text-[10px] font-medium text-indigo-600 underline hover:text-indigo-800"
+        >
+          Sign in to sign
+        </Link>
+      )}
+      {gateReason === "address" && (
         <Link
           href="/address"
           className="mt-1 text-[10px] font-medium text-amber-700 underline hover:text-amber-800"
