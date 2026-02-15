@@ -32,3 +32,14 @@ export async function requireModerator() {
   if (user.role !== "moderator" && user.role !== "admin") return null;
   return user;
 }
+
+/**
+ * Require an admin. Returns the user or null.
+ * API routes should return 403 if this returns null.
+ */
+export async function requireAdmin() {
+  const user = await getCurrentUser();
+  if (!user) return null;
+  if (user.role !== "admin") return null;
+  return user;
+}

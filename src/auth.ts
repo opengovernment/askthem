@@ -3,6 +3,9 @@ import Google from "next-auth/providers/google";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { prisma } from "@/lib/prisma";
 
+// Emails that are automatically promoted to admin on sign-in
+const ADMIN_EMAILS = ["davidrussellmoore@gmail.com"];
+
 export const { handlers, auth, signIn, signOut } = NextAuth({
   adapter: PrismaAdapter(prisma),
   providers: [
@@ -16,16 +19,12 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   },
   callbacks: {
     async signIn({ user }) {
-      // After OAuth sign-in, redirect to /address if address not yet verified
-      if (user.id) {
-        const dbUser = await prisma.user.findUnique({
+      // Auto-promote admin emails on every sign-in
+      if (user.id && user.email && ADMIN_EMAILS.includes(user.email)) {
+        await prisma.user.update({
           where: { id: user.id },
-          select: { isAddressVerified: true },
+          data: { role: "admin" },
         });
-        if (dbUser && !dbUser.isAddressVerified) {
-          // Return true to allow sign-in; redirect is handled below
-          return true;
-        }
       }
       return true;
     },
