@@ -4,7 +4,7 @@ import { PrismaAdapter } from "@auth/prisma-adapter";
 import { prisma } from "@/lib/prisma";
 
 // Emails that are automatically promoted to admin on sign-in
-const ADMIN_EMAILS = ["davidrussellmoore@gmail.com", "nyccouncilmatic@gmail.com"];
+const ADMIN_EMAILS = ["davidrussellmoore@gmail.com"];
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   adapter: PrismaAdapter(prisma),
