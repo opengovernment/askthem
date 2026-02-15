@@ -27,13 +27,54 @@ const LEVEL_SECTIONS: { key: string; label: string; levels: string[] }[] = [
 const LEVEL_SUBLABELS: Record<string, string> = {
   NATIONAL_UPPER: "U.S. Senate",
   NATIONAL_LOWER: "U.S. House of Representatives",
-  STATE_EXEC: "Governor",
+  STATE_EXEC: "Statewide Officials",
   STATE_UPPER: "State Senate",
   STATE_LOWER: "State House / Assembly",
   COUNTY: "County",
   LOCAL: "Local Government",
   LOCAL_EXEC: "Local Executive",
 };
+
+// Fallback: infer level from chamber when level is null (e.g. older cached records)
+const CHAMBER_TO_LEVEL: Record<string, string> = {
+  senate: "NATIONAL_UPPER",
+  house: "NATIONAL_LOWER",
+  state_exec: "STATE_EXEC",
+  state_senate: "STATE_UPPER",
+  state_house: "STATE_LOWER",
+  local: "LOCAL",
+};
+
+function effectiveLevel(o: MatchedOfficial): string {
+  if (o.level) return o.level;
+  return CHAMBER_TO_LEVEL[o.chamber] ?? "LOCAL";
+}
+
+// Title-based priority for sorting within a group (lower = higher rank)
+function titlePriority(title: string): number {
+  const t = title.toLowerCase();
+  // Federal
+  if (t.includes("president") && !t.includes("vice") && !t.includes("borough")) return 0;
+  if (t.includes("vice president")) return 1;
+  // State executive — check lieutenant/lt before governor
+  if (t.includes("lieutenant governor") || t.includes("lt. governor")) return 1;
+  if (t.includes("governor")) return 0;
+  if (t.includes("attorney general")) return 2;
+  if (t.includes("secretary of state")) return 3;
+  if (t.includes("comptroller") && !t.includes("city")) return 4;
+  if (t.includes("treasurer")) return 5;
+  // Local executive
+  if (t.includes("mayor")) return 0;
+  if (t.includes("borough president")) return 1;
+  if (t.includes("city comptroller")) return 2;
+  if (t.includes("public advocate")) return 3;
+  if (t.includes("district attorney")) return 4;
+  // Legislative
+  if (t.includes("senator") || t.includes("senate")) return 10;
+  if (t.includes("representative") || t.includes("assembly") || t.includes("delegate")) return 20;
+  if (t.includes("council")) return 30;
+  return 50;
+}
 
 function groupOfficials(officials: MatchedOfficial[]) {
   const sections: { key: string; label: string; groups: { sublabel: string; officials: MatchedOfficial[] }[] }[] = [];
@@ -42,8 +83,15 @@ function groupOfficials(officials: MatchedOfficial[]) {
     const groups: { sublabel: string; officials: MatchedOfficial[] }[] = [];
 
     for (const level of section.levels) {
-      const matching = officials.filter((o) => o.level === level);
+      const matching = officials.filter((o) => effectiveLevel(o) === level);
       if (matching.length > 0) {
+        // Sort by title hierarchy, then alphabetically within same priority
+        matching.sort((a, b) => {
+          const pa = titlePriority(a.title);
+          const pb = titlePriority(b.title);
+          if (pa !== pb) return pa - pb;
+          return a.name.localeCompare(b.name);
+        });
         groups.push({ sublabel: LEVEL_SUBLABELS[level] ?? level, officials: matching });
       }
     }
@@ -53,10 +101,11 @@ function groupOfficials(officials: MatchedOfficial[]) {
     }
   }
 
-  // Catch any officials with unexpected/null levels
+  // Catch any officials with unexpected levels
   const knownLevels = LEVEL_SECTIONS.flatMap((s) => s.levels);
-  const uncategorized = officials.filter((o) => !o.level || !knownLevels.includes(o.level));
+  const uncategorized = officials.filter((o) => !knownLevels.includes(effectiveLevel(o)));
   if (uncategorized.length > 0) {
+    uncategorized.sort((a, b) => titlePriority(a.title) - titlePriority(b.title));
     sections.push({
       key: "other",
       label: "Other",
