@@ -22,7 +22,7 @@ export function SearchBar() {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search questions by topic, keyword, or official..."
-          className="w-full rounded-full border border-gray-300 bg-white px-6 py-4 pr-14 text-lg shadow-sm transition-shadow placeholder:text-gray-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 focus:outline-none"
+          className="w-full rounded-full border border-gray-300 bg-white px-6 py-4 pr-14 text-lg text-gray-900 shadow-sm transition-shadow placeholder:text-gray-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 focus:outline-none"
         />
         <button
           type="submit"
