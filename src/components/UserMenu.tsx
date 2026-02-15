@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
+import { signOutAction } from "@/app/actions";
 
 interface UserMenuProps {
   user: {
@@ -72,7 +73,7 @@ export function UserMenu({ user }: UserMenuProps) {
             </Link>
           )}
 
-          <form action="/api/auth/signout" method="POST">
+          <form action={signOutAction}>
             <button
               type="submit"
               className="block w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-50"

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { signOutAction } from "@/app/actions";
 
 interface MobileNavProps {
   user: { name?: string | null; role: string } | null;
@@ -69,7 +70,7 @@ export function MobileNav({ user }: MobileNavProps) {
               {user ? (
                 <>
                   <p className="px-3 py-1 text-xs text-gray-500">{user.name}</p>
-                  <form action="/api/auth/signout" method="POST">
+                  <form action={signOutAction}>
                     <button
                       type="submit"
                       onClick={() => setOpen(false)}
