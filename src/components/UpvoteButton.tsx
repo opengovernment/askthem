@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 
 interface UpvoteButtonProps {
   questionId: string;
@@ -37,10 +38,12 @@ export function UpvoteButton({ questionId, initialCount }: UpvoteButtonProps) {
   const [hasUpvoted, setHasUpvoted] = useState(false);
   const [isConstituent, setIsConstituent] = useState<boolean | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [addressRequired, setAddressRequired] = useState(false);
 
   async function handleUpvote() {
     if (isLoading) return;
     setIsLoading(true);
+    setAddressRequired(false);
 
     const wasUpvoted = hasUpvoted;
     setHasUpvoted(!wasUpvoted);
@@ -61,6 +64,10 @@ export function UpvoteButton({ questionId, initialCount }: UpvoteButtonProps) {
       } else {
         setHasUpvoted(wasUpvoted);
         setCount(wasUpvoted ? count : count);
+        const data = await res.json().catch(() => ({}));
+        if (data.addressRequired) {
+          setAddressRequired(true);
+        }
       }
     } catch {
       setHasUpvoted(wasUpvoted);
@@ -98,6 +105,14 @@ export function UpvoteButton({ questionId, initialCount }: UpvoteButtonProps) {
       )}
       {showSupporter && (
         <span className="text-[10px] font-medium text-amber-600">Supported</span>
+      )}
+      {addressRequired && (
+        <Link
+          href="/address"
+          className="mt-1 text-[10px] font-medium text-amber-700 underline hover:text-amber-800"
+        >
+          Verify address
+        </Link>
       )}
     </div>
   );

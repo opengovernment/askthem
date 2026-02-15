@@ -57,7 +57,11 @@ export default function AskPage() {
         setSubmitted(true);
       } else {
         const data = await res.json();
-        setError(data.error || "Something went wrong. Please try again.");
+        if (data.addressRequired) {
+          setError("Please verify your address before asking a question.");
+        } else {
+          setError(data.error || "Something went wrong. Please try again.");
+        }
       }
     } catch {
       setError("Network error. Please check your connection and try again.");

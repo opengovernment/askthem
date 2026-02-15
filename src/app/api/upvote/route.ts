@@ -10,6 +10,13 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Sign in required to upvote" }, { status: 401 });
   }
 
+  if (!user.isAddressVerified) {
+    return NextResponse.json(
+      { error: "Please verify your address before signing a question.", addressRequired: true },
+      { status: 403 },
+    );
+  }
+
   const body = await request.json();
   const questionId = body.questionId;
 
