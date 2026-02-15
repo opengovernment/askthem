@@ -1,10 +1,15 @@
 import { auth } from "@/auth";
+import { redirect } from "next/navigation";
 import { AddressForm } from "@/components/AddressForm";
 import Link from "next/link";
 
 export default async function AddressPage() {
   const session = await auth();
   const user = session?.user;
+
+  if (user?.isAddressVerified) {
+    redirect("/");
+  }
 
   if (!user) {
     return (
