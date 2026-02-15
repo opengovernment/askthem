@@ -1,5 +1,6 @@
 import { auth, signIn } from "@/auth";
 import { redirect } from "next/navigation";
+import Image from "next/image";
 import Link from "next/link";
 
 export default async function SignInPage() {
@@ -10,8 +11,8 @@ export default async function SignInPage() {
     <div className="flex min-h-screen items-center justify-center bg-gray-50 px-4">
       <div className="w-full max-w-sm">
         <div className="mb-8 text-center">
-          <Link href="/" className="text-2xl font-bold text-indigo-600">
-            AskThem
+          <Link href="/">
+            <Image src="/logo.svg" alt="AskThem" width={135} height={30} priority />
           </Link>
           <p className="mt-2 text-gray-600">
             Sign in to ask questions, sign petitions, and hold your elected officials accountable.

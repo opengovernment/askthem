@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { MobileNav } from "@/components/MobileNav";
 import { UserMenu } from "@/components/UserMenu";
@@ -31,8 +32,8 @@ export default async function RootLayout({
         {/* Navigation */}
         <nav className="relative border-b border-gray-200 bg-white">
           <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-3">
-            <Link href="/" className="text-xl font-bold text-indigo-600">
-              AskThem
+            <Link href="/">
+              <Image src="/logo.svg" alt="AskThem" width={135} height={30} priority />
             </Link>
 
             {/* Desktop nav */}
@@ -90,21 +91,12 @@ export default async function RootLayout({
         {children}
 
         {/* Footer */}
-        <footer className="border-t border-gray-200 bg-white px-4 py-8">
-          <div className="mx-auto max-w-5xl text-center text-sm text-gray-500">
-            <p className="mb-2">
-              <span className="font-semibold text-gray-700">AskThem</span> &mdash; Ask questions.
-              Get answers. Hold officials accountable.
-            </p>
-            <p>
-              A civic engagement platform for democratic dialogue. Questions are only delivered
-              after constituent verification.
-            </p>
-            <p className="mt-2">
-              <Link href="/feed.xml" className="text-indigo-500 hover:text-indigo-600">
-                RSS Feed
-              </Link>
-            </p>
+        <footer className="border-t border-gray-200 bg-white px-4 py-6">
+          <div className="mx-auto flex max-w-5xl items-center justify-between text-sm text-gray-500">
+            <Image src="/logo.svg" alt="AskThem" width={100} height={22} />
+            <Link href="/feed.xml" className="text-indigo-500 hover:text-indigo-600">
+              RSS Feed
+            </Link>
           </div>
         </footer>
       </body>
