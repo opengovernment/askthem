@@ -56,8 +56,19 @@ export default async function OfficialsPage({ searchParams }: PageProps) {
   for (const state of Object.keys(byState)) {
     byState[state].sort((a, b) => (chamberOrder[a.chamber] ?? 9) - (chamberOrder[b.chamber] ?? 9) || a.name.localeCompare(b.name));
   }
+  // Separate recognized US states from unrecognized keys (federal officials with empty/unknown state)
+  const recognizedStates: Record<string, typeof officials> = {};
+  const federalOfficials: typeof officials = [];
+  for (const [stateAbbr, stateOfficials] of Object.entries(byState)) {
+    if (stateAbbr && US_STATES[stateAbbr]) {
+      recognizedStates[stateAbbr] = stateOfficials;
+    } else {
+      federalOfficials.push(...stateOfficials);
+    }
+  }
+  federalOfficials.sort((a, b) => a.name.localeCompare(b.name));
   // Sort states alphabetically by full name
-  const sortedStates = Object.keys(byState).sort((a, b) => (US_STATES[a] || a).localeCompare(US_STATES[b] || b));
+  const sortedStates = Object.keys(recognizedStates).sort((a, b) => (US_STATES[a] || a).localeCompare(US_STATES[b] || b));
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -114,11 +125,19 @@ export default async function OfficialsPage({ searchParams }: PageProps) {
               <CollapsibleSection
                 key={stateAbbr}
                 title={US_STATES[stateAbbr] || stateAbbr}
-                count={byState[stateAbbr].length}
+                count={recognizedStates[stateAbbr].length}
               >
-                <OfficialGrid officials={byState[stateAbbr]} showChamber />
+                <OfficialGrid officials={recognizedStates[stateAbbr]} showChamber />
               </CollapsibleSection>
             ))}
+
+            {/* Federal Officials */}
+            {federalOfficials.length > 0 && (
+              <div className="mb-8">
+                <h2 className="mb-4 text-lg font-semibold text-gray-700">Federal Officials</h2>
+                <OfficialGrid officials={federalOfficials} />
+              </div>
+            )}
           </>
         )}
       </div>
