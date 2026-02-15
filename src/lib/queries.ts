@@ -7,9 +7,12 @@ const questionInclude = {
   answer: true,
 } as const;
 
+// Statuses hidden from public-facing queries
+const hiddenStatuses = ["pending_review", "rejected"];
+
 export async function getPopularQuestions(limit = 10) {
   return prisma.question.findMany({
-    where: { status: { not: "pending_review" } },
+    where: { status: { notIn: hiddenStatuses } },
     include: questionInclude,
     orderBy: { upvoteCount: "desc" },
     take: limit,
@@ -28,19 +31,19 @@ export interface QuestionFilters {
 
 export async function getFilteredQuestions(filters: QuestionFilters) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const where: Record<string, any> = { status: { not: "pending_review" } };
+  const where: Record<string, any> = { status: { notIn: hiddenStatuses } };
 
   if (filters.search) {
     where.OR = [
-      { text: { contains: filters.search } },
-      { categoryTags: { some: { tag: { contains: filters.search } } } },
-      { official: { name: { contains: filters.search } } },
-      { official: { state: { contains: filters.search } } },
-      { districtTag: { contains: filters.search } },
+      { text: { contains: filters.search, mode: "insensitive" } },
+      { categoryTags: { some: { tag: { contains: filters.search, mode: "insensitive" } } } },
+      { official: { name: { contains: filters.search, mode: "insensitive" } } },
+      { official: { state: { contains: filters.search, mode: "insensitive" } } },
+      { districtTag: { contains: filters.search, mode: "insensitive" } },
     ];
   }
   if (filters.tag) {
-    where.categoryTags = { some: { tag: { contains: filters.tag } } };
+    where.categoryTags = { some: { tag: { contains: filters.tag, mode: "insensitive" } } };
   }
   if (filters.officialId) {
     where.officialId = filters.officialId;
@@ -89,13 +92,13 @@ export async function getQuestionById(id: string) {
 export async function searchQuestions(query: string) {
   return prisma.question.findMany({
     where: {
-      status: { not: "pending_review" },
+      status: { notIn: hiddenStatuses },
       OR: [
-        { text: { contains: query } },
-        { categoryTags: { some: { tag: { contains: query } } } },
-        { official: { name: { contains: query } } },
-        { official: { state: { contains: query } } },
-        { districtTag: { contains: query } },
+        { text: { contains: query, mode: "insensitive" } },
+        { categoryTags: { some: { tag: { contains: query, mode: "insensitive" } } } },
+        { official: { name: { contains: query, mode: "insensitive" } } },
+        { official: { state: { contains: query, mode: "insensitive" } } },
+        { districtTag: { contains: query, mode: "insensitive" } },
       ],
     },
     include: questionInclude,
@@ -111,7 +114,7 @@ export async function getOfficialById(id: string) {
 
 export async function getQuestionsByOfficialId(officialId: string) {
   return prisma.question.findMany({
-    where: { officialId, status: { not: "pending_review" } },
+    where: { officialId, status: { notIn: hiddenStatuses } },
     include: questionInclude,
     orderBy: { upvoteCount: "desc" },
   });
@@ -143,10 +146,10 @@ export async function getFilteredOfficials(filters: OfficialFilters) {
 
   if (filters.search) {
     where.OR = [
-      { name: { contains: filters.search } },
-      { title: { contains: filters.search } },
-      { state: { contains: filters.search } },
-      { district: { contains: filters.search } },
+      { name: { contains: filters.search, mode: "insensitive" } },
+      { title: { contains: filters.search, mode: "insensitive" } },
+      { state: { contains: filters.search, mode: "insensitive" } },
+      { district: { contains: filters.search, mode: "insensitive" } },
     ];
   }
   if (filters.state) {
@@ -185,7 +188,7 @@ export async function getActiveStates() {
 
 export async function getHomepageStats() {
   const [totalQuestions, totalAnswered, totalUpvotes, totalOfficials] = await Promise.all([
-    prisma.question.count({ where: { status: { not: "pending_review" } } }),
+    prisma.question.count({ where: { status: { notIn: hiddenStatuses } } }),
     prisma.question.count({ where: { status: "answered" } }),
     prisma.upvote.count(),
     prisma.official.count(),
