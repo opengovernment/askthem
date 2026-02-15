@@ -3,6 +3,8 @@ import { UpvoteButton } from "@/components/UpvoteButton";
 import { ShareButton } from "@/components/ShareButton";
 import { SignatureCounts } from "@/components/SignatureCounts";
 import { AnswerForm } from "@/components/AnswerForm";
+import { VerifiedBadge } from "@/components/VerifiedBadge";
+import { GroupCommOptInButton } from "@/components/GroupCommOptInButton";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
@@ -73,11 +75,23 @@ export default async function QuestionPage({ params }: PageProps) {
             <div className="flex-1">
               <h1 className="mb-3 text-2xl font-bold text-gray-900">{question.text}</h1>
               <p className="mb-4 text-sm text-gray-500">
-                Asked by <span className="font-medium text-gray-700">{author.name}</span>{" "}
-                {author.city && author.state
-                  ? `from ${author.city}, ${author.state} `
-                  : ""}
-                on{" "}
+                {question.group?.isVerified ? (
+                  <>
+                    Asked by{" "}
+                    <span className="inline-flex items-center gap-1 font-medium text-gray-700">
+                      {question.group.name}
+                      <VerifiedBadge />
+                    </span>
+                  </>
+                ) : (
+                  <>
+                    Asked by <span className="font-medium text-gray-700">{author.name}</span>{" "}
+                    {author.city && author.state
+                      ? `from ${author.city}, ${author.state} `
+                      : ""}
+                  </>
+                )}
+                {" "}on{" "}
                 {new Date(question.createdAt).toLocaleDateString("en-US", {
                   year: "numeric",
                   month: "long",
@@ -116,6 +130,13 @@ export default async function QuestionPage({ params }: PageProps) {
             isAnswered={question.status === "answered"}
           />
         </div>
+
+        {/* Group communications opt-in (only for group questions where admin has enabled it) */}
+        {question.group?.isVerified && question.group.commsOptInEnabled && (
+          <div className="mt-6">
+            <GroupCommOptInButton groupId={question.group.id} groupName={question.group.name} />
+          </div>
+        )}
 
         {/* Answer form for delivered questions without an answer */}
         {question.status === "delivered" && !answer && (

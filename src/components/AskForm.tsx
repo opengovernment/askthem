@@ -13,6 +13,11 @@ interface OfficialOption {
   district: string | null;
 }
 
+interface GroupOption {
+  id: string;
+  name: string;
+}
+
 export function AskForm() {
   const searchParams = useSearchParams();
   const [officials, setOfficials] = useState<OfficialOption[]>([]);
@@ -23,6 +28,8 @@ export function AskForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
   const [loadingOfficials, setLoadingOfficials] = useState(true);
+  const [groups, setGroups] = useState<GroupOption[]>([]);
+  const [selectedGroupId, setSelectedGroupId] = useState("");
 
   useEffect(() => {
     fetch("/api/officials")
@@ -37,6 +44,12 @@ export function AskForm() {
       })
       .catch(() => {})
       .finally(() => setLoadingOfficials(false));
+
+    // Fetch user's verified groups (if any)
+    fetch("/api/groups/my-groups")
+      .then((res) => (res.ok ? res.json() : []))
+      .then((data: GroupOption[]) => setGroups(data))
+      .catch(() => {});
   }, [searchParams]);
 
   function toggleTag(tag: string) {
@@ -59,6 +72,7 @@ export function AskForm() {
           officialId: selectedOfficial,
           text: questionText.trim(),
           tags: selectedTags,
+          groupId: selectedGroupId || undefined,
         }),
       });
 
@@ -127,6 +141,31 @@ export function AskForm() {
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-6">
+          {/* Ask as Group (only shown if user has verified groups) */}
+          {groups.length > 0 && (
+            <div>
+              <label htmlFor="group" className="mb-2 block text-sm font-medium text-gray-700">
+                Ask as (optional)
+              </label>
+              <select
+                id="group"
+                value={selectedGroupId}
+                onChange={(e) => setSelectedGroupId(e.target.value)}
+                className="w-full rounded-lg border border-gray-300 px-4 py-3 text-gray-900 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 focus:outline-none"
+              >
+                <option value="">Yourself (individual)</option>
+                {groups.map((g) => (
+                  <option key={g.id} value={g.id}>
+                    {g.name} (Verified Group)
+                  </option>
+                ))}
+              </select>
+              <p className="mt-1 text-xs text-gray-500">
+                Select a verified group to ask on behalf of your organization.
+              </p>
+            </div>
+          )}
+
           {/* Select Official */}
           <div>
             <label htmlFor="official" className="mb-2 block text-sm font-medium text-gray-700">

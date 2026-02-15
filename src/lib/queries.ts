@@ -5,6 +5,9 @@ const questionInclude = {
   official: true,
   categoryTags: true,
   answer: true,
+  group: {
+    select: { id: true, name: true, slug: true, isVerified: true, commsOptInEnabled: true },
+  },
 } as const;
 
 // Statuses hidden from public-facing queries

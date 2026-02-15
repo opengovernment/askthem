@@ -29,11 +29,13 @@ model User {
   createdAt         DateTime  @default(now())
   updatedAt         DateTime  @updatedAt
 
-  questions   Question[]
-  upvotes     Upvote[]
-  accounts    Account[]
-  sessions    Session[]
-  emailEvents EmailEvent[]
+  questions      Question[]
+  upvotes        Upvote[]
+  accounts       Account[]
+  sessions       Session[]
+  emailEvents    EmailEvent[]
+  adminGroups    Group[]          @relation("groupAdmin")
+  groupCommOptIns GroupCommOptIn[]
 }
 
 // Auth.js Account model (replaces OAuthAccount)
@@ -111,6 +113,10 @@ model Question {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
+  // Optional: question asked on behalf of a verified group
+  groupId          String?
+  group            Group?   @relation(fields: [groupId], references: [id])
+
   // Delivery tracking
   deliveredAt      DateTime?
   deliveredVia     String?    // "email" | "twitter" | "facebook" | "mail"
@@ -172,6 +178,56 @@ model EmailEvent {
   sentAt      DateTime @default(now())
   messageId   String?  // Mailgun message ID for tracking
   status      String   @default("sent") // "sent" | "delivered" | "bounced" | "failed"
+}
+
+// ─── Verified Groups ─────────────────────────────────────────────────
+
+model Group {
+  id              String   @id @default(cuid())
+  name            String   // Display name of the group (e.g. "Sierra Club")
+  slug            String   @unique // URL-safe identifier
+  description     String   // Brief description of the group's mission
+  websiteDomain   String   // Verified domain (e.g. "sierraclub.org") — used for email domain verification
+  websiteUrl      String   // Full URL (e.g. "https://sierraclub.org")
+  logoUrl         String?  // Optional logo image URL
+  isVerified      Boolean  @default(false) // Set to true by admin after review
+  commsOptInEnabled Boolean @default(false) // Admin toggle: allow users to opt in to group communications
+  adminUserId     String   // The user who manages this group
+  adminUser       User     @relation("groupAdmin", fields: [adminUserId], references: [id])
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  questions     Question[]
+  applications  GroupApplication[]
+  commOptIns    GroupCommOptIn[]
+}
+
+// Application to become a verified group — reviewed by site admins
+model GroupApplication {
+  id              String   @id @default(cuid())
+  groupId         String
+  group           Group    @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  applicantEmail  String   // Must match the group's websiteDomain
+  contactName     String
+  organizationType String  // "advocacy" | "think_tank" | "nonprofit" | "other"
+  statement       String   // Why the group should be verified
+  status          String   @default("pending") // "pending" | "approved" | "rejected"
+  reviewedBy      String?  // admin user ID who reviewed
+  reviewedAt      DateTime?
+  reviewNote      String?  // optional admin note on approval/rejection
+  createdAt       DateTime @default(now())
+}
+
+// Tracks user opt-in to receive communications from a verified group
+model GroupCommOptIn {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  groupId   String
+  group     Group    @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  optedInAt DateTime @default(now())
+
+  @@unique([userId, groupId])
 }
 
 // ─── API Access (for future tiered API) ──────────────────────────────

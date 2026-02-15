@@ -97,9 +97,14 @@ export default async function RootLayout({
         <footer className="border-t border-gray-200 bg-white px-4 py-6">
           <div className="mx-auto flex max-w-5xl items-center justify-between text-sm text-gray-500">
             <Image src="/logo.svg" alt="AskThem" width={100} height={22} />
-            <Link href="/feed.xml" className="text-indigo-500 hover:text-indigo-600">
-              RSS Feed
-            </Link>
+            <div className="flex items-center gap-4">
+              <Link href="/groups/apply" className="text-gray-500 hover:text-indigo-600">
+                Groups
+              </Link>
+              <Link href="/feed.xml" className="text-indigo-500 hover:text-indigo-600">
+                RSS Feed
+              </Link>
+            </div>
           </div>
         </footer>
       </body>

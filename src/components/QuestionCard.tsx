@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { UpvoteButton } from "./UpvoteButton";
 import { ShareButton } from "./ShareButton";
+import { VerifiedBadge } from "./VerifiedBadge";
 
 interface QuestionCardProps {
   question: {
@@ -15,6 +16,7 @@ interface QuestionCardProps {
     author: { name: string; city: string | null; state: string | null };
     official: { id: string; name: string; title: string };
     categoryTags: { tag: string }[];
+    group?: { id: string; name: string; slug: string; isVerified: boolean } | null;
   };
 }
 
@@ -59,12 +61,19 @@ export function QuestionCard({ question }: QuestionCardProps) {
             </h3>
           </Link>
           <div className="flex flex-wrap items-center gap-2 text-sm text-gray-500">
-            <span>
-              Asked by {question.author.name}
-              {question.author.city && question.author.state
-                ? ` from ${question.author.city}, ${question.author.state}`
-                : ""}
-            </span>
+            {question.group?.isVerified ? (
+              <span className="inline-flex items-center gap-1">
+                Asked by <span className="font-medium text-gray-700">{question.group.name}</span>
+                <VerifiedBadge />
+              </span>
+            ) : (
+              <span>
+                Asked by {question.author.name}
+                {question.author.city && question.author.state
+                  ? ` from ${question.author.city}, ${question.author.state}`
+                  : ""}
+              </span>
+            )}
             <span>&middot;</span>
             <span>{new Date(question.createdAt).toLocaleDateString()}</span>
             <span>&middot;</span>

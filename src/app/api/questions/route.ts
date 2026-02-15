@@ -34,10 +34,11 @@ export async function POST(request: NextRequest) {
   }
 
   const body = await request.json();
-  const { officialId, text, tags } = body as {
+  const { officialId, text, tags, groupId } = body as {
     officialId?: string;
     text?: string;
     tags?: string[];
+    groupId?: string;
   };
 
   // Validate required fields
@@ -69,6 +70,20 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: rejection }, { status: 422 });
   }
 
+  // If groupId is provided, validate that the user is the group admin and the group is verified
+  if (groupId) {
+    const group = await prisma.group.findUnique({ where: { id: groupId } });
+    if (!group) {
+      return NextResponse.json({ error: "Group not found" }, { status: 404 });
+    }
+    if (!group.isVerified) {
+      return NextResponse.json({ error: "Group is not verified" }, { status: 403 });
+    }
+    if (group.adminUserId !== user.id) {
+      return NextResponse.json({ error: "You are not the admin of this group" }, { status: 403 });
+    }
+  }
+
   // Build district tag from official info
   const districtTag = official.district
     ? `${official.state}-${official.district}`
@@ -81,6 +96,7 @@ export async function POST(request: NextRequest) {
       officialId,
       districtTag,
       status: "pending_review",
+      groupId: groupId || undefined,
       categoryTags: {
         create: tags.map((tag) => ({ tag })),
       },

@@ -36,10 +36,22 @@ export default async function ModeratePage({ searchParams }: PageProps) {
           <Link href="/" className="mb-4 inline-block text-sm text-indigo-600 hover:text-indigo-800">
             &larr; Back to site
           </Link>
-          <h1 className="text-3xl font-bold text-gray-900">Moderator Dashboard</h1>
-          <p className="mt-1 text-gray-500">
-            Review, approve, and manage submitted questions.
-          </p>
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-3xl font-bold text-gray-900">Moderator Dashboard</h1>
+              <p className="mt-1 text-gray-500">
+                Review, approve, and manage submitted questions.
+              </p>
+            </div>
+            {session.user.role === "admin" && (
+              <Link
+                href="/moderate/groups"
+                className="rounded-md border border-indigo-200 bg-indigo-50 px-4 py-2 text-sm font-medium text-indigo-700 hover:bg-indigo-100"
+              >
+                Manage Groups
+              </Link>
+            )}
+          </div>
         </div>
 
         {/* Status tabs */}
