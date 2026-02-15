@@ -5,7 +5,7 @@ export interface Official {
   party: string;
   state: string;
   district?: string;
-  chamber: "senate" | "house" | "state_senate" | "state_house" | "local";
+  chamber: "senate" | "house" | "state_exec" | "state_senate" | "state_house" | "local";
   photoUrl?: string;
   email?: string;
   twitter?: string;

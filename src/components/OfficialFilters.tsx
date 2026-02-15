@@ -85,6 +85,7 @@ export function OfficialFilters({ activeStates }: OfficialFiltersProps) {
           <option value="">All Chambers</option>
           <option value="senate">U.S. Senate</option>
           <option value="house">U.S. House</option>
+          <option value="state_exec">Governors</option>
           <option value="state_senate">State Senate</option>
           <option value="state_house">State House</option>
           <option value="local">Local</option>

@@ -1,5 +1,7 @@
 import { getFilteredOfficials, getActiveStates } from "@/lib/queries";
 import { OfficialFilters } from "@/components/OfficialFilters";
+import { CollapsibleSection } from "@/components/CollapsibleSection";
+import { US_STATES } from "@/lib/types";
 import Link from "next/link";
 import { Suspense } from "react";
 import type { Metadata } from "next";
@@ -32,13 +34,25 @@ export default async function OfficialsPage({ searchParams }: PageProps) {
 
   const hasFilters = params.search || params.state || params.chamber;
 
-  // Group by chamber for display
-  const chambers: Record<string, typeof officials> = {};
-  for (const o of officials) {
-    const label = chamberLabel(o.chamber);
-    if (!chambers[label]) chambers[label] = [];
-    chambers[label].push(o);
+  // Group officials into federal sections and per-state sections
+  const senators = officials.filter((o) => o.chamber === "senate").sort((a, b) => a.state.localeCompare(b.state) || a.name.localeCompare(b.name));
+  const houseReps = officials.filter((o) => o.chamber === "house").sort((a, b) => a.state.localeCompare(b.state) || (a.district || "").localeCompare(b.district || "") || a.name.localeCompare(b.name));
+  const governors = officials.filter((o) => o.chamber === "state_exec").sort((a, b) => a.state.localeCompare(b.state) || a.name.localeCompare(b.name));
+
+  // State-level officials grouped by state
+  const stateLevelOfficials = officials.filter((o) => o.chamber === "state_senate" || o.chamber === "state_house" || o.chamber === "local");
+  const byState: Record<string, typeof officials> = {};
+  for (const o of stateLevelOfficials) {
+    if (!byState[o.state]) byState[o.state] = [];
+    byState[o.state].push(o);
   }
+  // Sort each state's officials: state senate first, then state house, then local, then by name
+  const chamberOrder: Record<string, number> = { state_senate: 0, state_house: 1, local: 2 };
+  for (const state of Object.keys(byState)) {
+    byState[state].sort((a, b) => (chamberOrder[a.chamber] ?? 9) - (chamberOrder[b.chamber] ?? 9) || a.name.localeCompare(b.name));
+  }
+  // Sort states alphabetically by full name
+  const sortedStates = Object.keys(byState).sort((a, b) => (US_STATES[a] || a).localeCompare(US_STATES[b] || b));
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -65,36 +79,46 @@ export default async function OfficialsPage({ searchParams }: PageProps) {
             <p className="mb-4 text-sm text-gray-500">
               {officials.length} official{officials.length !== 1 ? "s" : ""}
             </p>
-            {Object.entries(chambers).map(([label, group]) => (
-              <div key={label} className="mb-8">
-                <h2 className="mb-4 text-lg font-semibold text-gray-700">{label}</h2>
-                <div className="grid gap-4 sm:grid-cols-2">
-                  {group.map((official) => (
-                    <Link
-                      key={official.id}
-                      href={`/officials/${official.id}`}
-                      className="flex items-center gap-4 rounded-lg border border-gray-200 bg-white p-4 shadow-sm transition-shadow hover:shadow-md"
-                    >
-                      <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-indigo-100 text-sm font-bold text-indigo-600">
-                        {official.name
-                          .split(" ")
-                          .map((n) => n[0])
-                          .join("")}
-                      </div>
-                      <div className="min-w-0">
-                        <p className="font-medium text-gray-900">{official.name}</p>
-                        <p className="text-sm text-gray-500">
-                          {official.title} &middot;{" "}
-                          {official.party === "D" ? "Dem" : official.party === "R" ? "Rep" : official.party}{" "}
-                          &middot; {official.state}
-                          {official.district ? `, ${official.district}` : ""}
-                        </p>
-                      </div>
-                    </Link>
-                  ))}
-                </div>
+
+            {/* U.S. Senate */}
+            {senators.length > 0 && (
+              <div className="mb-8">
+                <h2 className="mb-4 text-lg font-semibold text-gray-700">U.S. Senate</h2>
+                <OfficialGrid officials={senators} />
               </div>
-            ))}
+            )}
+
+            {/* U.S. House */}
+            {houseReps.length > 0 && (
+              <div className="mb-8">
+                <h2 className="mb-4 text-lg font-semibold text-gray-700">U.S. House of Representatives</h2>
+                <OfficialGrid officials={houseReps} />
+              </div>
+            )}
+
+            {/* State Governors */}
+            {governors.length > 0 && (
+              <div className="mb-8">
+                <h2 className="mb-4 text-lg font-semibold text-gray-700">Governors</h2>
+                <OfficialGrid officials={governors} />
+              </div>
+            )}
+
+            {/* Per-state sections */}
+            {sortedStates.length > 0 && (
+              <div>
+                <h2 className="mb-4 text-lg font-semibold text-gray-700">State Legislatures</h2>
+                {sortedStates.map((stateAbbr) => (
+                  <CollapsibleSection
+                    key={stateAbbr}
+                    title={US_STATES[stateAbbr] || stateAbbr}
+                    count={byState[stateAbbr].length}
+                  >
+                    <OfficialGrid officials={byState[stateAbbr]} showChamber />
+                  </CollapsibleSection>
+                ))}
+              </div>
+            )}
           </>
         )}
       </div>
@@ -102,14 +126,45 @@ export default async function OfficialsPage({ searchParams }: PageProps) {
   );
 }
 
+function OfficialGrid({ officials, showChamber = false }: { officials: Array<{ id: string; name: string; title: string; party: string; state: string; district: string | null; chamber: string }>; showChamber?: boolean }) {
+  return (
+    <div className="grid gap-4 sm:grid-cols-2">
+      {officials.map((official) => (
+        <Link
+          key={official.id}
+          href={`/officials/${official.id}`}
+          className="flex items-center gap-4 rounded-lg border border-gray-200 bg-white p-4 shadow-sm transition-shadow hover:shadow-md"
+        >
+          <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-indigo-100 text-sm font-bold text-indigo-600">
+            {official.name
+              .split(" ")
+              .map((n) => n[0])
+              .join("")}
+          </div>
+          <div className="min-w-0">
+            <p className="font-medium text-gray-900">{official.name}</p>
+            <p className="text-sm text-gray-500">
+              {official.title} &middot;{" "}
+              {official.party === "D" ? "Dem" : official.party === "R" ? "Rep" : official.party}{" "}
+              &middot; {official.state}
+              {official.district ? `, ${official.district}` : ""}
+              {showChamber ? ` \u00b7 ${chamberLabel(official.chamber)}` : ""}
+            </p>
+          </div>
+        </Link>
+      ))}
+    </div>
+  );
+}
+
 function chamberLabel(chamber: string): string {
   const labels: Record<string, string> = {
     senate: "U.S. Senate",
-    house: "U.S. House of Representatives",
-    state_exec: "State Executive",
+    house: "U.S. House",
+    state_exec: "Governor",
     state_senate: "State Senate",
     state_house: "State House",
-    local: "Local Officials",
+    local: "Local",
   };
   return labels[chamber] || chamber;
 }
