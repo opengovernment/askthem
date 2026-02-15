@@ -17,11 +17,22 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   session: {
     strategy: "database",
   },
+  events: {
+    // Promote admin emails when their account is first created
+    async createUser({ user }) {
+      if (user.email && ADMIN_EMAILS.includes(user.email)) {
+        await prisma.user.update({
+          where: { id: user.id! },
+          data: { role: "admin" },
+        });
+      }
+    },
+  },
   callbacks: {
     async signIn({ user }) {
-      // Auto-promote admin emails on every sign-in
+      // Auto-promote admin emails on every sign-in (updateMany is safe if user doesn't exist yet)
       if (user.id && user.email && ADMIN_EMAILS.includes(user.email)) {
-        await prisma.user.update({
+        await prisma.user.updateMany({
           where: { id: user.id },
           data: { role: "admin" },
         });
