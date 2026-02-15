@@ -6,6 +6,12 @@ const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL });
 const prisma = new PrismaClient({ adapter });
 
 async function main() {
+  // Safety: refuse to run in production (Vercel sets VERCEL=1)
+  if (process.env.VERCEL) {
+    console.error("ERROR: seed.ts must not run in production. Use npm run db:seed locally only.");
+    process.exit(1);
+  }
+
   // Clean existing data
   await prisma.answer.deleteMany();
   await prisma.upvote.deleteMany();

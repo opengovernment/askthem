@@ -7,6 +7,7 @@ import { prisma } from "@/lib/prisma";
 const ADMIN_EMAILS = ["davidrussellmoore@gmail.com"];
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
+  trustHost: true,
   adapter: PrismaAdapter(prisma),
   providers: [
     Google({
@@ -16,6 +17,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   ],
   session: {
     strategy: "database",
+    maxAge: 30 * 24 * 60 * 60, // 30 days
   },
   events: {
     // Promote admin emails when their account is first created
