@@ -37,17 +37,22 @@ export default async function OfficialsPage({ searchParams }: PageProps) {
   // Group officials into federal sections and per-state sections
   const senators = officials.filter((o) => o.chamber === "senate").sort((a, b) => a.state.localeCompare(b.state) || a.name.localeCompare(b.name));
   const houseReps = officials.filter((o) => o.chamber === "house").sort((a, b) => a.state.localeCompare(b.state) || (a.district || "").localeCompare(b.district || "") || a.name.localeCompare(b.name));
-  const governors = officials.filter((o) => o.chamber === "state_exec").sort((a, b) => a.state.localeCompare(b.state) || a.name.localeCompare(b.name));
 
-  // State-level officials grouped by state
+  // Governors = state_exec officials whose title is strictly "Governor"
+  // Other state execs (Lt. Governor, AG, Secretary of State, etc.) go into per-state sections
+  const isGovernor = (o: { title: string }) => /^Governor$/i.test(o.title.trim());
+  const governors = officials.filter((o) => o.chamber === "state_exec" && isGovernor(o)).sort((a, b) => a.state.localeCompare(b.state) || a.name.localeCompare(b.name));
+  const otherStateExecs = officials.filter((o) => o.chamber === "state_exec" && !isGovernor(o));
+
+  // State-level officials grouped by state (includes other state execs, state legislature, local)
   const stateLevelOfficials = officials.filter((o) => o.chamber === "state_senate" || o.chamber === "state_house" || o.chamber === "local");
   const byState: Record<string, typeof officials> = {};
-  for (const o of stateLevelOfficials) {
+  for (const o of [...otherStateExecs, ...stateLevelOfficials]) {
     if (!byState[o.state]) byState[o.state] = [];
     byState[o.state].push(o);
   }
-  // Sort each state's officials: state senate first, then state house, then local, then by name
-  const chamberOrder: Record<string, number> = { state_senate: 0, state_house: 1, local: 2 };
+  // Sort each state's officials: state exec first, then state senate, state house, local, then by name
+  const chamberOrder: Record<string, number> = { state_exec: 0, state_senate: 1, state_house: 2, local: 3 };
   for (const state of Object.keys(byState)) {
     byState[state].sort((a, b) => (chamberOrder[a.chamber] ?? 9) - (chamberOrder[b.chamber] ?? 9) || a.name.localeCompare(b.name));
   }
@@ -107,7 +112,7 @@ export default async function OfficialsPage({ searchParams }: PageProps) {
             {/* Per-state sections */}
             {sortedStates.length > 0 && (
               <div>
-                <h2 className="mb-4 text-lg font-semibold text-gray-700">State Legislatures</h2>
+                <h2 className="mb-4 text-lg font-semibold text-gray-700">State &amp; Local Officials</h2>
                 {sortedStates.map((stateAbbr) => (
                   <CollapsibleSection
                     key={stateAbbr}
@@ -161,7 +166,7 @@ function chamberLabel(chamber: string): string {
   const labels: Record<string, string> = {
     senate: "U.S. Senate",
     house: "U.S. House",
-    state_exec: "Governor",
+    state_exec: "State Executive",
     state_senate: "State Senate",
     state_house: "State House",
     local: "Local",
