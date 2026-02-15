@@ -18,7 +18,6 @@ const PAGE_HEIGHT = 792;
 const CONTENT_WIDTH = PAGE_WIDTH - 2 * MARGIN;
 const BOTTOM_LIMIT = PAGE_HEIGHT - 70;
 
-const TABLE_DIR = path.resolve("public/ai-tables");
 const OUT_PATH = path.resolve("public/AskThem-AI-Integration-Briefing.pdf");
 
 // ─── Helpers ──────────────────────────────────────────────────────────
@@ -81,17 +80,6 @@ function code(doc: PDFKit.PDFDocument, text: string) {
   doc.save().roundedRect(boxX, boxY, CONTENT_WIDTH - 8, height, 2).lineWidth(0.5).strokeColor("#e2e8f0").stroke().restore();
   doc.font("Regular").fontSize(7.5).fillColor("#334155").text(text, boxX + 8, boxY + 5, { width: textWidth, lineGap: 1 });
   doc.y = boxY + height + 4;
-}
-
-function img(doc: PDFKit.PDFDocument, filename: string) {
-  const imgPath = path.join(TABLE_DIR, filename);
-  if (!fs.existsSync(imgPath)) return;
-  const imgW = CONTENT_WIDTH * 0.92;
-  const imgH = imgW * 0.51;
-  checkSpace(doc, imgH + 8);
-  const startY = doc.y;
-  doc.image(imgPath, MARGIN + (CONTENT_WIDTH - imgW) / 2, startY, { width: imgW });
-  doc.y = startY + imgH + 5;
 }
 
 // ─── Build ────────────────────────────────────────────────────────────
@@ -167,7 +155,9 @@ function build() {
   p(doc, "Currently, every submitted question enters a pending_review state and waits for a human moderator to approve or reject it via the /moderate dashboard. As question volume grows, this becomes the primary bottleneck in the pipeline.");
 
   h2(doc, "Recommended Tools");
-  img(doc, "1-question-moderation.png");
+  li(doc, "Perspective API (Google/Jigsaw) \u2014 Free toxicity, spam, and threat scoring. Use as a fast first-pass filter.");
+  li(doc, "Claude API (Anthropic) \u2014 Structured moderation decisions, policy-tag suggestion, and contextual judgment. The core intelligence layer.");
+  li(doc, "OpenAI Embeddings / Voyage AI / Cohere Embed \u2014 Vector embeddings for semantic duplicate detection via pgvector.");
 
   h2(doc, "How It Works");
 
@@ -198,7 +188,10 @@ ORDER BY similarity DESC LIMIT 5;`);
   p(doc, "Delivery is currently manual: a moderator selects a question, chooses a channel (email, Twitter, mail), and marks it as delivered. The deliveredBy field stores the moderator's ID. AI can automate most of this workflow.");
 
   h2(doc, "Recommended Tools");
-  img(doc, "2-delivery-automation.png");
+  li(doc, "Claude API \u2014 Draft professional, non-partisan digest emails grouping questions by constituent support.");
+  li(doc, "Mailgun (already integrated) \u2014 Deliver digests via email, tracked through the existing EmailEvent model.");
+  li(doc, "Congress.gov API \u2014 Enrich Official records with committee assignments and preferred contact methods.");
+  li(doc, "Vercel Cron \u2014 Schedule weekly delivery jobs that batch undelivered questions per official.");
 
   h2(doc, "Digest-Based Delivery");
 
@@ -221,7 +214,9 @@ ORDER BY similarity DESC LIMIT 5;`);
   p(doc, "Officials rarely respond directly through civic platforms. They respond through press releases, social media, committee statements, floor speeches, and official websites. AI can bridge this gap by monitoring these channels and matching public statements to pending questions.");
 
   h2(doc, "Recommended Tools");
-  img(doc, "3-answer-monitoring.png");
+  li(doc, "Apify / Browserbase \u2014 Web scraping for official press releases, social media, and committee statements.");
+  li(doc, "Claude API \u2014 Match scraped public statements to pending AskThem questions using structured-output prompts.");
+  li(doc, "Congress.gov API \u2014 Monitor floor speeches, vote records, and bill introductions for relevant activity.");
 
   h2(doc, "Matching Pipeline");
 
@@ -246,7 +241,8 @@ ORDER BY similarity DESC LIMIT 5;`);
   p(doc, "When an answer is posted, every user who signed (upvoted) the question should be notified. The current EmailEvent system tracks these notifications, but the emails are generic. AI can personalize them.");
 
   h2(doc, "Recommended Tools");
-  img(doc, "4-alerting-signers.png");
+  li(doc, "Claude API \u2014 Generate personalized 2\u20133 sentence answer summaries per signer, batched for efficiency.");
+  li(doc, "Mailgun / Resend \u2014 Send personalized notification emails. Resend offers a React Email SDK for richer Next.js templates.");
 
   h2(doc, "Personalized Notifications");
 
@@ -266,7 +262,9 @@ ORDER BY similarity DESC LIMIT 5;`);
   p(doc, "Across all questions and upvotes, AskThem accumulates a rich signal about what constituents care about and how they feel. AI can transform this from raw data into actionable civic intelligence.");
 
   h2(doc, "Recommended Tools");
-  img(doc, "5-sentiment-analysis.png");
+  li(doc, "Claude API \u2014 Classify question sentiment (concerned, frustrated, hopeful, neutral, urgent) and urgency level.");
+  li(doc, "@xenova/transformers \u2014 In-process embedding generation for thematic clustering without a separate Python service.");
+  li(doc, "Tremor / Observable Plot \u2014 React charting libraries for public-facing sentiment and issue dashboards.");
 
   h2(doc, "Implementation Approach");
 
