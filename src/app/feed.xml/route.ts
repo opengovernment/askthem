@@ -1,5 +1,7 @@
 import { getPopularQuestions } from "@/lib/queries";
 
+export const dynamic = "force-dynamic";
+
 export async function GET() {
   const questions = await getPopularQuestions(20);
 
