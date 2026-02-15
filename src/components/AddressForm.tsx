@@ -12,6 +12,59 @@ interface MatchedOfficial {
   state: string;
   district: string | null;
   chamber: string;
+  level: string | null;
+}
+
+// Ordered sections from federal → state → local
+const LEVEL_SECTIONS: { key: string; label: string; levels: string[] }[] = [
+  { key: "federal", label: "Federal", levels: ["NATIONAL_UPPER", "NATIONAL_LOWER"] },
+  { key: "state", label: "State", levels: ["STATE_EXEC", "STATE_UPPER", "STATE_LOWER"] },
+  { key: "county", label: "County", levels: ["COUNTY"] },
+  { key: "local", label: "Local", levels: ["LOCAL", "LOCAL_EXEC"] },
+];
+
+// Sub-labels within each section
+const LEVEL_SUBLABELS: Record<string, string> = {
+  NATIONAL_UPPER: "U.S. Senate",
+  NATIONAL_LOWER: "U.S. House of Representatives",
+  STATE_EXEC: "Governor",
+  STATE_UPPER: "State Senate",
+  STATE_LOWER: "State House / Assembly",
+  COUNTY: "County",
+  LOCAL: "Local Government",
+  LOCAL_EXEC: "Local Executive",
+};
+
+function groupOfficials(officials: MatchedOfficial[]) {
+  const sections: { key: string; label: string; groups: { sublabel: string; officials: MatchedOfficial[] }[] }[] = [];
+
+  for (const section of LEVEL_SECTIONS) {
+    const groups: { sublabel: string; officials: MatchedOfficial[] }[] = [];
+
+    for (const level of section.levels) {
+      const matching = officials.filter((o) => o.level === level);
+      if (matching.length > 0) {
+        groups.push({ sublabel: LEVEL_SUBLABELS[level] ?? level, officials: matching });
+      }
+    }
+
+    if (groups.length > 0) {
+      sections.push({ key: section.key, label: section.label, groups });
+    }
+  }
+
+  // Catch any officials with unexpected/null levels
+  const knownLevels = LEVEL_SECTIONS.flatMap((s) => s.levels);
+  const uncategorized = officials.filter((o) => !o.level || !knownLevels.includes(o.level));
+  if (uncategorized.length > 0) {
+    sections.push({
+      key: "other",
+      label: "Other",
+      groups: [{ sublabel: "Other Officials", officials: uncategorized }],
+    });
+  }
+
+  return sections;
 }
 
 export function AddressForm() {
@@ -60,15 +113,7 @@ export function AddressForm() {
     a[1].localeCompare(b[1]),
   );
 
-  // Chamber display labels
-  const chamberLabels: Record<string, string> = {
-    senate: "U.S. Senate",
-    house: "U.S. House",
-    state_exec: "State Executive",
-    state_senate: "State Senate",
-    state_house: "State House",
-    local: "Local",
-  };
+  const sections = officials ? groupOfficials(officials) : [];
 
   if (officials) {
     return (
@@ -97,22 +142,33 @@ export function AddressForm() {
             address. You can now ask them questions and sign petitions.
           </p>
 
-          <div className="mb-8 space-y-3">
-            {officials.map((o) => (
-              <div
-                key={o.id}
-                className="flex items-center justify-between rounded-lg border border-gray-200 bg-white px-4 py-3"
-              >
-                <div>
-                  <p className="font-medium text-gray-900">{o.name}</p>
-                  <p className="text-sm text-gray-500">
-                    {o.title} ({o.party})
-                    {o.district ? ` \u2014 ${o.district}` : ""}
-                  </p>
+          <div className="mb-8 space-y-6">
+            {sections.map((section) => (
+              <div key={section.key}>
+                <h2 className="mb-3 text-lg font-semibold text-gray-900">{section.label}</h2>
+                <div className="space-y-4">
+                  {section.groups.map((group) => (
+                    <div key={group.sublabel}>
+                      <h3 className="mb-2 text-sm font-medium text-gray-500">{group.sublabel}</h3>
+                      <div className="space-y-2">
+                        {group.officials.map((o) => (
+                          <div
+                            key={o.id}
+                            className="flex items-center justify-between rounded-lg border border-gray-200 bg-white px-4 py-3"
+                          >
+                            <div>
+                              <p className="font-medium text-gray-900">{o.name}</p>
+                              <p className="text-sm text-gray-500">
+                                {o.title} ({o.party})
+                                {o.district ? ` \u2014 ${o.district}` : ""}
+                              </p>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
                 </div>
-                <span className="rounded-full bg-indigo-50 px-2.5 py-0.5 text-xs font-medium text-indigo-700">
-                  {chamberLabels[o.chamber] ?? o.chamber}
-                </span>
               </div>
             ))}
           </div>

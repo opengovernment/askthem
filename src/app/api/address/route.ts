@@ -58,6 +58,7 @@ export async function POST(req: NextRequest) {
         state: ud.official.state,
         district: ud.official.district,
         chamber: ud.official.chamber,
+        level: ud.official.level,
       })),
       cached: true,
     });
@@ -162,6 +163,7 @@ export async function POST(req: NextRequest) {
       state: o.state,
       district: o.district,
       chamber: o.chamber,
+      level: o.level,
     })),
   });
 }
