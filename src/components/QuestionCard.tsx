@@ -13,7 +13,7 @@ interface QuestionCardProps {
     upvoteCount: number;
     districtTag: string;
     createdAt: Date;
-    author: { name: string; city: string | null; state: string | null };
+    author: { id: string; name: string; city: string | null; state: string | null; isProfilePublic?: boolean };
     official: { id: string; name: string; title: string };
     categoryTags: { tag: string }[];
     group?: { id: string; name: string; slug: string; isVerified: boolean } | null;
@@ -68,7 +68,17 @@ export function QuestionCard({ question }: QuestionCardProps) {
               </span>
             ) : (
               <span>
-                Asked by {question.author.name}
+                Asked by{" "}
+                {question.author.isProfilePublic ? (
+                  <Link
+                    href={`/profile/${question.author.id}`}
+                    className="font-medium text-indigo-600 hover:text-indigo-800"
+                  >
+                    {question.author.name}
+                  </Link>
+                ) : (
+                  question.author.name
+                )}
                 {question.author.city && question.author.state
                   ? ` from ${question.author.city}, ${question.author.state}`
                   : ""}

@@ -94,7 +94,14 @@ export default async function QuestionPage({ params }: PageProps) {
                   </>
                 ) : (
                   <>
-                    Asked by <span className="font-medium text-gray-700">{author.name}</span>{" "}
+                    Asked by{" "}
+                    {author.isProfilePublic ? (
+                      <Link href={`/profile/${author.id}`} className="font-medium text-indigo-600 hover:text-indigo-800">
+                        {author.name}
+                      </Link>
+                    ) : (
+                      <span className="font-medium text-gray-700">{author.name}</span>
+                    )}{" "}
                     {author.city && author.state
                       ? `from ${author.city}, ${author.state} `
                       : ""}

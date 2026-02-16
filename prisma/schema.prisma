@@ -24,6 +24,7 @@ model User {
   isAddressVerified Boolean   @default(false)
   addressLookedUpAt DateTime? // timestamp of last Cicero lookup (avoids burning credits on repeat lookups)
   role              String    @default("user") // "user" | "moderator" | "admin"
+  isProfilePublic   Boolean   @default(false) // user opts in to show a public profile page
   actionNetworkId   String?   // Action Network person UUID (synced on registration)
   emailConsent      Boolean   @default(false) // user opted in to email communications
   createdAt         DateTime  @default(now())

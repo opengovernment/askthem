@@ -2,20 +2,26 @@
 
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { signOutAction } from "@/app/actions";
 
 interface UserMenuProps {
   user: {
+    id: string;
     name?: string | null;
     email?: string | null;
     image?: string | null;
     role: string;
+    isProfilePublic: boolean;
   };
 }
 
 export function UserMenu({ user }: UserMenuProps) {
   const [open, setOpen] = useState(false);
+  const [profilePublic, setProfilePublic] = useState(user.isProfilePublic);
+  const [toggling, setToggling] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
@@ -26,6 +32,26 @@ export function UserMenu({ user }: UserMenuProps) {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
+  async function toggleProfile() {
+    setToggling(true);
+    const newValue = !profilePublic;
+    try {
+      const res = await fetch("/api/profile/visibility", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ isPublic: newValue }),
+      });
+      if (res.ok) {
+        setProfilePublic(newValue);
+        router.refresh();
+      }
+    } catch {
+      // silently fail
+    } finally {
+      setToggling(false);
+    }
+  }
 
   const isModerator = user.role === "moderator" || user.role === "admin";
   const initials = (user.name ?? user.email ?? "?")
@@ -62,6 +88,35 @@ export function UserMenu({ user }: UserMenuProps) {
               </span>
             )}
           </div>
+
+          {profilePublic && (
+            <Link
+              href={`/profile/${user.id}`}
+              onClick={() => setOpen(false)}
+              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+            >
+              My Profile
+            </Link>
+          )}
+
+          <button
+            onClick={toggleProfile}
+            disabled={toggling}
+            className="flex w-full items-center justify-between px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-50 disabled:opacity-50"
+          >
+            <span>Public Profile</span>
+            <span
+              className={`inline-flex h-5 w-9 items-center rounded-full transition-colors ${
+                profilePublic ? "bg-indigo-600" : "bg-gray-300"
+              }`}
+            >
+              <span
+                className={`inline-block h-3.5 w-3.5 rounded-full bg-white transition-transform ${
+                  profilePublic ? "translate-x-4" : "translate-x-0.5"
+                }`}
+              />
+            </span>
+          </button>
 
           {isModerator && (
             <Link

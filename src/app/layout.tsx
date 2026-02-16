@@ -68,10 +68,12 @@ export default async function RootLayout({
               {user ? (
                 <UserMenu
                   user={{
+                    id: user.id,
                     name: user.name,
                     email: user.email,
                     image: user.image,
                     role: user.role,
+                    isProfilePublic: user.isProfilePublic,
                   }}
                 />
               ) : (

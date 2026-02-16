@@ -261,6 +261,30 @@ export async function getConstituentCountsForQuestions(questionIds: string[]) {
   return map;
 }
 
+// ─── Public user profiles ────────────────────────────────────────────
+
+export async function getPublicProfile(userId: string) {
+  return prisma.user.findUnique({
+    where: { id: userId, isProfilePublic: true },
+    select: {
+      id: true,
+      name: true,
+      image: true,
+      city: true,
+      state: true,
+      createdAt: true,
+    },
+  });
+}
+
+export async function getPublicQuestionsForUser(userId: string) {
+  return prisma.question.findMany({
+    where: { authorId: userId, status: { in: ["published", "delivered", "answered"] } },
+    include: questionInclude,
+    orderBy: { createdAt: "desc" },
+  });
+}
+
 // ─── Moderator queries ──────────────────────────────────────────────
 
 export async function getQuestionsByStatus(status: string) {

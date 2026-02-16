@@ -52,12 +52,13 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       // Attach user ID, role, and address verification status to the session
       const dbUser = await prisma.user.findUnique({
         where: { id: user.id },
-        select: { id: true, role: true, name: true, image: true, isAddressVerified: true },
+        select: { id: true, role: true, name: true, image: true, isAddressVerified: true, isProfilePublic: true },
       });
       if (dbUser) {
         session.user.id = dbUser.id;
         session.user.role = dbUser.role;
         session.user.isAddressVerified = dbUser.isAddressVerified;
+        session.user.isProfilePublic = dbUser.isProfilePublic;
       }
       return session;
     },
@@ -74,6 +75,7 @@ declare module "next-auth" {
       id: string;
       role: string;
       isAddressVerified: boolean;
+      isProfilePublic: boolean;
       name?: string | null;
       email?: string | null;
       image?: string | null;
