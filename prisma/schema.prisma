@@ -122,10 +122,11 @@ model Question {
   deliveredVia     String?    // "email" | "twitter" | "facebook" | "mail"
   deliveredBy      String?    // moderator ID who delivered
 
-  categoryTags QuestionTag[]
-  upvotes      Upvote[]
-  answer       Answer?
-  emailEvents  EmailEvent[]
+  categoryTags    QuestionTag[]
+  upvotes         Upvote[]
+  answer          Answer?
+  emailEvents     EmailEvent[]
+  endorsements    GroupEndorsement[]
 }
 
 model QuestionTag {
@@ -200,6 +201,7 @@ model Group {
   questions     Question[]
   applications  GroupApplication[]
   commOptIns    GroupCommOptIn[]
+  endorsements  GroupEndorsement[]
 }
 
 // Application to become a verified group — reviewed by site admins
@@ -228,6 +230,23 @@ model GroupCommOptIn {
   optedInAt DateTime @default(now())
 
   @@unique([userId, groupId])
+}
+
+// ─── Group Endorsements ─────────────────────────────────────────────
+
+// A moderator can attach a verified Group's endorsement to any question,
+// signaling "this group thinks this question is important and should be delivered."
+model GroupEndorsement {
+  id          String   @id @default(cuid())
+  questionId  String
+  question    Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  groupId     String
+  group       Group    @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  addedBy     String   // moderator/admin user ID who added this endorsement
+  note        String?  // optional short note from the moderator
+  createdAt   DateTime @default(now())
+
+  @@unique([questionId, groupId])
 }
 
 // ─── API Access (for future tiered API) ──────────────────────────────

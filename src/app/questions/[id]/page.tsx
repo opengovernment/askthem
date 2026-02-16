@@ -5,6 +5,9 @@ import { SignatureCounts } from "@/components/SignatureCounts";
 import { AnswerForm } from "@/components/AnswerForm";
 import { VerifiedBadge } from "@/components/VerifiedBadge";
 import { GroupCommOptInButton } from "@/components/GroupCommOptInButton";
+import { GroupEndorsementSidebar } from "@/components/GroupEndorsementSidebar";
+import { AddEndorsementButton } from "@/components/AddEndorsementButton";
+import { auth } from "@/auth";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
@@ -38,6 +41,11 @@ export default async function QuestionPage({ params }: PageProps) {
 
   const { official, author, answer } = question;
   const signatureCounts = await getSignatureCounts(question.id);
+  const session = await auth();
+  const isModerator =
+    session?.user?.role === "moderator" || session?.user?.role === "admin";
+  const hasEndorsements = question.endorsements.length > 0;
+  const showSidebar = hasEndorsements || isModerator;
 
   const statusLabels: Record<string, { label: string; color: string }> = {
     pending_review: { label: "Pending Review", color: "bg-yellow-100 text-yellow-800" },
@@ -50,141 +58,162 @@ export default async function QuestionPage({ params }: PageProps) {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="mx-auto max-w-3xl px-4 py-10">
+      <div className={`mx-auto px-4 py-10 ${showSidebar ? "max-w-5xl" : "max-w-3xl"}`}>
         <Link href="/" className="mb-6 inline-block text-sm text-indigo-600 hover:text-indigo-800">
           &larr; Back to all questions
         </Link>
 
-        <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
-          <div className="mb-4 flex flex-wrap items-center gap-2">
-            <span className={`rounded-full px-3 py-1 text-sm font-medium ${status.color}`}>
-              {status.label}
-            </span>
-            {question.categoryTags.map((ct) => (
-              <span key={ct.tag} className="rounded bg-gray-100 px-2 py-0.5 text-xs text-gray-600">
-                {ct.tag}
-              </span>
-            ))}
-            <span className="rounded bg-indigo-50 px-2 py-0.5 text-xs text-indigo-600">
-              {question.districtTag}
-            </span>
-          </div>
+        <div className={showSidebar ? "lg:grid lg:grid-cols-[1fr_240px] lg:gap-8" : ""}>
+          {/* ── Main content column ── */}
+          <div>
+            <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
+              <div className="mb-4 flex flex-wrap items-center gap-2">
+                <span className={`rounded-full px-3 py-1 text-sm font-medium ${status.color}`}>
+                  {status.label}
+                </span>
+                {question.categoryTags.map((ct) => (
+                  <span key={ct.tag} className="rounded bg-gray-100 px-2 py-0.5 text-xs text-gray-600">
+                    {ct.tag}
+                  </span>
+                ))}
+                <span className="rounded bg-indigo-50 px-2 py-0.5 text-xs text-indigo-600">
+                  {question.districtTag}
+                </span>
+              </div>
 
-          <div className="flex gap-5">
-            <UpvoteButton questionId={question.id} initialCount={question.upvoteCount} />
-            <div className="flex-1">
-              <h1 className="mb-3 text-2xl font-bold text-gray-900">{question.text}</h1>
-              <p className="mb-4 text-sm text-gray-500">
-                {question.group?.isVerified ? (
-                  <>
-                    Asked by{" "}
-                    <span className="inline-flex items-center gap-1 font-medium text-gray-700">
-                      {question.group.name}
-                      <VerifiedBadge />
-                    </span>
-                  </>
-                ) : (
-                  <>
-                    Asked by <span className="font-medium text-gray-700">{author.name}</span>{" "}
-                    {author.city && author.state
-                      ? `from ${author.city}, ${author.state} `
-                      : ""}
-                  </>
+              <div className="flex gap-5">
+                <UpvoteButton questionId={question.id} initialCount={question.upvoteCount} />
+                <div className="flex-1">
+                  <h1 className="mb-3 text-2xl font-bold text-gray-900">{question.text}</h1>
+                  <p className="mb-4 text-sm text-gray-500">
+                    {question.group?.isVerified ? (
+                      <>
+                        Asked by{" "}
+                        <span className="inline-flex items-center gap-1 font-medium text-gray-700">
+                          {question.group.name}
+                          <VerifiedBadge />
+                        </span>
+                      </>
+                    ) : (
+                      <>
+                        Asked by <span className="font-medium text-gray-700">{author.name}</span>{" "}
+                        {author.city && author.state
+                          ? `from ${author.city}, ${author.state} `
+                          : ""}
+                      </>
+                    )}
+                    {" "}on{" "}
+                    {new Date(question.createdAt).toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })}
+                  </p>
+
+                  <div className="mb-4">
+                    <ShareButton questionId={question.id} text={question.text} />
+                  </div>
+
+                  <div className="rounded-lg border border-gray-100 bg-gray-50 p-4">
+                    <p className="mb-1 text-sm font-medium text-gray-500">Directed to:</p>
+                    <Link
+                      href={`/officials/${official.id}`}
+                      className="text-lg font-semibold text-indigo-600 hover:text-indigo-800"
+                    >
+                      {official.name}
+                    </Link>
+                    <p className="text-sm text-gray-600">
+                      {official.title} &middot; {official.party === "D" ? "Democrat" : "Republican"}{" "}
+                      &middot; {official.state}
+                      {official.district ? `, ${official.district}` : ""}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Signature counts breakdown */}
+            <div className="mt-6">
+              <SignatureCounts
+                total={signatureCounts.total}
+                constituent={signatureCounts.constituent}
+                supporting={signatureCounts.supporting}
+                isAnswered={question.status === "answered"}
+              />
+            </div>
+
+            {/* Group communications opt-in (only for group questions where admin has enabled it) */}
+            {question.group?.isVerified && question.group.commsOptInEnabled && (
+              <div className="mt-6">
+                <GroupCommOptInButton groupId={question.group.id} groupName={question.group.name} />
+              </div>
+            )}
+
+            {/* Answer form for delivered questions without an answer */}
+            {question.status === "delivered" && !answer && (
+              <AnswerForm questionId={question.id} officialName={official.name} />
+            )}
+
+            {/* Answer section */}
+            {answer && (
+              <div className="mt-6 rounded-lg border border-green-200 bg-green-50 p-6">
+                <div className="mb-3 flex items-center gap-2">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-green-200 text-sm font-bold text-green-800">
+                    A
+                  </div>
+                  <div>
+                    <p className="font-semibold text-green-900">
+                      Official Response from {official.name}
+                    </p>
+                    <p className="text-xs text-green-700">
+                      {new Date(answer.respondedAt).toLocaleDateString("en-US", {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                      })}
+                    </p>
+                  </div>
+                </div>
+                {answer.responseText && (
+                  <p className="leading-relaxed text-gray-800">{answer.responseText}</p>
                 )}
-                {" "}on{" "}
-                {new Date(question.createdAt).toLocaleDateString("en-US", {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                })}
-              </p>
-
-              <div className="mb-4">
-                <ShareButton questionId={question.id} text={question.text} />
+                {answer.responseVideoUrl && (
+                  <p className="mt-3 text-sm text-indigo-600">
+                    Video response available (player coming soon)
+                  </p>
+                )}
+                {answer.sourceUrl && (
+                  <p className="mt-3 text-sm">
+                    <a
+                      href={answer.sourceUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-indigo-600 hover:text-indigo-800 underline"
+                    >
+                      View original source
+                    </a>
+                  </p>
+                )}
               </div>
-
-              <div className="rounded-lg border border-gray-100 bg-gray-50 p-4">
-                <p className="mb-1 text-sm font-medium text-gray-500">Directed to:</p>
-                <Link
-                  href={`/officials/${official.id}`}
-                  className="text-lg font-semibold text-indigo-600 hover:text-indigo-800"
-                >
-                  {official.name}
-                </Link>
-                <p className="text-sm text-gray-600">
-                  {official.title} &middot; {official.party === "D" ? "Democrat" : "Republican"}{" "}
-                  &middot; {official.state}
-                  {official.district ? `, ${official.district}` : ""}
-                </p>
-              </div>
-            </div>
+            )}
           </div>
+
+          {/* ── Right sidebar: Group Endorsements ── */}
+          {showSidebar && (
+            <aside className="mt-6 lg:mt-0 lg:sticky lg:top-10 lg:self-start">
+              <GroupEndorsementSidebar endorsements={question.endorsements} />
+              {isModerator && (
+                <AddEndorsementButton
+                  questionId={question.id}
+                  existingEndorsements={question.endorsements.map((e) => ({
+                    id: e.id,
+                    group: { id: e.group.id, name: e.group.name },
+                  }))}
+                />
+              )}
+            </aside>
+          )}
         </div>
-
-        {/* Signature counts breakdown */}
-        <div className="mt-6">
-          <SignatureCounts
-            total={signatureCounts.total}
-            constituent={signatureCounts.constituent}
-            supporting={signatureCounts.supporting}
-            isAnswered={question.status === "answered"}
-          />
-        </div>
-
-        {/* Group communications opt-in (only for group questions where admin has enabled it) */}
-        {question.group?.isVerified && question.group.commsOptInEnabled && (
-          <div className="mt-6">
-            <GroupCommOptInButton groupId={question.group.id} groupName={question.group.name} />
-          </div>
-        )}
-
-        {/* Answer form for delivered questions without an answer */}
-        {question.status === "delivered" && !answer && (
-          <AnswerForm questionId={question.id} officialName={official.name} />
-        )}
-
-        {/* Answer section */}
-        {answer && (
-          <div className="mt-6 rounded-lg border border-green-200 bg-green-50 p-6">
-            <div className="mb-3 flex items-center gap-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-green-200 text-sm font-bold text-green-800">
-                A
-              </div>
-              <div>
-                <p className="font-semibold text-green-900">
-                  Official Response from {official.name}
-                </p>
-                <p className="text-xs text-green-700">
-                  {new Date(answer.respondedAt).toLocaleDateString("en-US", {
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                  })}
-                </p>
-              </div>
-            </div>
-            {answer.responseText && (
-              <p className="leading-relaxed text-gray-800">{answer.responseText}</p>
-            )}
-            {answer.responseVideoUrl && (
-              <p className="mt-3 text-sm text-indigo-600">
-                Video response available (player coming soon)
-              </p>
-            )}
-            {answer.sourceUrl && (
-              <p className="mt-3 text-sm">
-                <a
-                  href={answer.sourceUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-indigo-600 hover:text-indigo-800 underline"
-                >
-                  View original source
-                </a>
-              </p>
-            )}
-          </div>
-        )}
       </div>
     </div>
   );

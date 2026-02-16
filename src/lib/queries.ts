@@ -8,6 +8,14 @@ const questionInclude = {
   group: {
     select: { id: true, name: true, slug: true, isVerified: true, commsOptInEnabled: true },
   },
+  endorsements: {
+    include: {
+      group: {
+        select: { id: true, name: true, slug: true, logoUrl: true, isVerified: true, websiteUrl: true },
+      },
+    },
+    orderBy: { createdAt: "desc" as const },
+  },
 } as const;
 
 // Statuses hidden from public-facing queries
@@ -242,6 +250,14 @@ export async function getQuestionsByStatus(status: string) {
     where: { status },
     include: questionInclude,
     orderBy: { createdAt: "desc" },
+  });
+}
+
+export async function getVerifiedGroups() {
+  return prisma.group.findMany({
+    where: { isVerified: true },
+    select: { id: true, name: true, slug: true, logoUrl: true },
+    orderBy: { name: "asc" },
   });
 }
 
