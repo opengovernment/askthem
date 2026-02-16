@@ -24,6 +24,7 @@ export function AskForm() {
   const [selectedOfficial, setSelectedOfficial] = useState("");
   const [questionText, setQuestionText] = useState("");
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const [videoUrl, setVideoUrl] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
@@ -73,6 +74,7 @@ export function AskForm() {
           text: questionText.trim(),
           tags: selectedTags,
           groupId: selectedGroupId || undefined,
+          videoUrl: videoUrl.trim() || undefined,
         }),
       });
 
@@ -239,6 +241,24 @@ export function AskForm() {
                 </button>
               ))}
             </div>
+          </div>
+
+          {/* Video Link (optional) */}
+          <div>
+            <label htmlFor="videoUrl" className="mb-2 block text-sm font-medium text-gray-700">
+              Video Link (optional)
+            </label>
+            <input
+              id="videoUrl"
+              type="url"
+              value={videoUrl}
+              onChange={(e) => setVideoUrl(e.target.value)}
+              placeholder="https://youtube.com/watch?v=... or TikTok, Instagram, X link"
+              className="w-full rounded-lg border border-gray-300 px-4 py-3 text-gray-900 placeholder:text-gray-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 focus:outline-none"
+            />
+            <p className="mt-1 text-xs text-gray-500">
+              Add a short video to make your question more compelling. Supports YouTube, TikTok, Instagram, X/Twitter, Bluesky, and Facebook.
+            </p>
           </div>
 
           {/* Error message */}

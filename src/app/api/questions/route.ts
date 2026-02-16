@@ -4,6 +4,7 @@ import { POLICY_AREAS } from "@/lib/types";
 import { requireAuth } from "@/lib/session";
 import { syncPersonToAN } from "@/lib/action-network";
 import { sendQuestionSubmitted } from "@/lib/email";
+import { detectPlatform } from "@/lib/media";
 
 // Basic content safety check — returns a rejection reason or null if OK.
 // TODO: Replace with AI-powered moderation (e.g. Claude API) in production.
@@ -34,11 +35,12 @@ export async function POST(request: NextRequest) {
   }
 
   const body = await request.json();
-  const { officialId, text, tags, groupId } = body as {
+  const { officialId, text, tags, groupId, videoUrl } = body as {
     officialId?: string;
     text?: string;
     tags?: string[];
     groupId?: string;
+    videoUrl?: string;
   };
 
   // Validate required fields
@@ -70,6 +72,24 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: rejection }, { status: 422 });
   }
 
+  // Validate videoUrl if provided — must be a recognized social media platform
+  let validatedVideoUrl: string | undefined;
+  if (videoUrl && typeof videoUrl === "string" && videoUrl.trim()) {
+    try {
+      new URL(videoUrl.trim());
+    } catch {
+      return NextResponse.json({ error: "Invalid video URL" }, { status: 400 });
+    }
+    const { platform } = detectPlatform(videoUrl.trim());
+    if (!platform) {
+      return NextResponse.json(
+        { error: "Video URL must be from YouTube, TikTok, Instagram, X/Twitter, Facebook, or Bluesky" },
+        { status: 422 },
+      );
+    }
+    validatedVideoUrl = videoUrl.trim();
+  }
+
   // If groupId is provided, validate that the user is the group admin and the group is verified
   if (groupId) {
     const group = await prisma.group.findUnique({ where: { id: groupId } });
@@ -96,6 +116,7 @@ export async function POST(request: NextRequest) {
       officialId,
       districtTag,
       status: "pending_review",
+      videoUrl: validatedVideoUrl,
       groupId: groupId || undefined,
       categoryTags: {
         create: tags.map((tag) => ({ tag })),

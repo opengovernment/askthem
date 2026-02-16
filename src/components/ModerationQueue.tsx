@@ -3,10 +3,12 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { AnswerForm } from "@/components/AnswerForm";
+import { QuestionVideo } from "@/components/QuestionVideo";
 
 interface Question {
   id: string;
   text: string;
+  videoUrl: string | null;
   status: string;
   upvoteCount: number;
   districtTag: string;
@@ -116,6 +118,12 @@ function ModerationCard({
       </div>
 
       <p className="mb-2 text-lg font-medium text-gray-900">{question.text}</p>
+
+      {question.videoUrl && (
+        <div className="mb-3">
+          <QuestionVideo url={question.videoUrl} />
+        </div>
+      )}
 
       <div className="mb-4 flex flex-wrap items-center gap-3 text-sm text-gray-500">
         <span>

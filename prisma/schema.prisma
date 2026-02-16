@@ -123,6 +123,9 @@ model Question {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
+  // Optional: social media video link (YouTube, TikTok, Instagram, etc.)
+  videoUrl         String?
+
   // Optional: question asked on behalf of a verified group
   groupId          String?
   group            Group?   @relation(fields: [groupId], references: [id])

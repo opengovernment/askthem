@@ -9,6 +9,7 @@ import { GroupCommOptInButton } from "@/components/GroupCommOptInButton";
 import { GroupEndorsementBadge } from "@/components/GroupEndorsementBadge";
 import { AddEndorsementButton } from "@/components/AddEndorsementButton";
 import { SignerComments } from "@/components/SignerComments";
+import { QuestionVideo } from "@/components/QuestionVideo";
 import { auth } from "@/auth";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -115,6 +116,12 @@ export default async function QuestionPage({ params }: PageProps) {
                   day: "numeric",
                 })}
               </p>
+
+              {question.videoUrl && (
+                <div className="mb-4">
+                  <QuestionVideo url={question.videoUrl} />
+                </div>
+              )}
 
               <div className="mb-4">
                 <ShareButton questionId={question.id} text={question.text} officialName={official.name} />
