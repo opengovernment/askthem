@@ -221,7 +221,7 @@ export function AskForm() {
           {/* Category Tags */}
           <div>
             <label className="mb-2 block text-sm font-medium text-gray-700">
-              Policy Area Tags (select up to 3)
+              Policy Area Tags (pick at least 1, up to 3)
             </label>
             <div className="flex flex-wrap gap-2">
               {POLICY_AREAS.map((area) => (
