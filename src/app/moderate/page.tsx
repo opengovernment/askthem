@@ -49,14 +49,22 @@ export default async function ModeratePage({ searchParams }: PageProps) {
                 Review, approve, and manage submitted questions.
               </p>
             </div>
-            {session.user.role === "admin" && (
+            <div className="flex items-center gap-2">
               <Link
-                href="/moderate/groups"
+                href="/moderate/events"
                 className="rounded-md border border-indigo-200 bg-indigo-50 px-4 py-2 text-sm font-medium text-indigo-700 hover:bg-indigo-100"
               >
-                Manage Groups
+                Manage Events
               </Link>
-            )}
+              {session.user.role === "admin" && (
+                <Link
+                  href="/moderate/groups"
+                  className="rounded-md border border-indigo-200 bg-indigo-50 px-4 py-2 text-sm font-medium text-indigo-700 hover:bg-indigo-100"
+                >
+                  Manage Groups
+                </Link>
+              )}
+            </div>
           </div>
         </div>
 
