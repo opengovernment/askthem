@@ -77,7 +77,8 @@ export type EmailType =
   | "question_submitted"
   | "question_signed"
   | "question_delivered"
-  | "question_answered";
+  | "question_answered"
+  | "group_endorsement";
 
 interface QuestionContext {
   questionId: string;
@@ -171,6 +172,30 @@ export async function sendQuestionAnswered(
     <p><strong>Response preview:</strong></p>
     <p style="color:#1f2937;">${escapeHtml(ctx.answerPreview)}</p>
     <p><a href="${questionUrl(ctx.questionId)}">Read the full response</a></p>
+  `;
+  return sendEmail(to, subject, html);
+}
+
+/**
+ * Notify opted-in users that a group they follow endorsed a question.
+ */
+export async function sendGroupEndorsementNotification(
+  to: string,
+  ctx: QuestionContext & { groupName: string },
+): Promise<string | null> {
+  const subject = `${ctx.groupName} endorsed a question to ${ctx.officialName}`;
+  const html = `
+    <h2>${escapeHtml(ctx.groupName)} endorsed a question</h2>
+    <p><strong>${escapeHtml(ctx.groupName)}</strong> thinks this question to
+    <strong>${escapeHtml(ctx.officialName)}</strong> (${escapeHtml(ctx.officialTitle)}) is important:</p>
+    <blockquote style="border-left:3px solid #4f46e5;padding-left:12px;color:#374151;">
+      ${escapeHtml(ctx.questionText)}
+    </blockquote>
+    <p>Add your signature to help get it delivered:</p>
+    <p><a href="${questionUrl(ctx.questionId)}" style="display:inline-block;background:#4f46e5;color:#fff;padding:10px 24px;border-radius:999px;text-decoration:none;font-weight:600;">Sign this question</a></p>
+    <p style="color:#6b7280;font-size:12px;margin-top:24px;">
+      You received this because you opted in to communications from ${escapeHtml(ctx.groupName)}.
+    </p>
   `;
   return sendEmail(to, subject, html);
 }

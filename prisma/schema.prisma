@@ -30,12 +30,13 @@ model User {
   createdAt         DateTime  @default(now())
   updatedAt         DateTime  @updatedAt
 
-  questions      Question[]
-  upvotes        Upvote[]
-  accounts       Account[]
-  sessions       Session[]
-  emailEvents    EmailEvent[]
-  adminGroups    Group[]          @relation("groupAdmin")
+  questions       Question[]
+  upvotes         Upvote[]
+  signerComments  SignerComment[]
+  accounts        Account[]
+  sessions        Session[]
+  emailEvents     EmailEvent[]
+  adminGroups     Group[]          @relation("groupAdmin")
   groupCommOptIns GroupCommOptIn[]
 }
 
@@ -133,6 +134,7 @@ model Question {
 
   categoryTags    QuestionTag[]
   upvotes         Upvote[]
+  signerComments  SignerComment[]
   answer          Answer?
   emailEvents     EmailEvent[]
   endorsements    GroupEndorsement[]
@@ -157,6 +159,20 @@ model Upvote {
   question       Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
   isConstituent  Boolean  @default(false)
   createdAt      DateTime @default(now())
+
+  @@unique([userId, questionId])
+}
+
+// ─── Signer Comments ────────────────────────────────────────────────
+
+model SignerComment {
+  id         String   @id @default(cuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id])
+  questionId String
+  question   Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  text       String
+  createdAt  DateTime @default(now())
 
   @@unique([userId, questionId])
 }

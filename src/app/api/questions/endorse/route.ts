@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { requireModerator } from "@/lib/session";
+import { sendGroupEndorsementNotification } from "@/lib/email";
 
 export async function POST(request: NextRequest) {
   const moderator = await requireModerator();
@@ -59,6 +60,39 @@ export async function POST(request: NextRequest) {
       },
     },
   });
+
+  // Fire-and-forget: notify all users who opted into this group's communications
+  if (group.commsOptInEnabled) {
+    const official = await prisma.official.findUnique({ where: { id: question.officialId } });
+    if (official) {
+      prisma.groupCommOptIn.findMany({
+        where: { groupId },
+        include: { user: { select: { id: true, email: true } } },
+      }).then((optIns) => {
+        for (const optIn of optIns) {
+          sendGroupEndorsementNotification(optIn.user.email, {
+            questionId,
+            questionText: question.text,
+            officialName: official.name,
+            officialTitle: official.title,
+            groupName: group.name,
+          }).then((messageId) => {
+            if (messageId) {
+              prisma.emailEvent.create({
+                data: {
+                  userId: optIn.user.id,
+                  questionId,
+                  emailType: "group_endorsement",
+                  subject: `${group.name} endorsed a question to ${official.name}`,
+                  messageId,
+                },
+              }).catch(() => {});
+            }
+          }).catch(() => {});
+        }
+      }).catch(() => {});
+    }
+  }
 
   return NextResponse.json(endorsement);
 }

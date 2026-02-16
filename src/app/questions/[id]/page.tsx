@@ -8,6 +8,7 @@ import { VerifiedBadge } from "@/components/VerifiedBadge";
 import { GroupCommOptInButton } from "@/components/GroupCommOptInButton";
 import { GroupEndorsementBadge } from "@/components/GroupEndorsementBadge";
 import { AddEndorsementButton } from "@/components/AddEndorsementButton";
+import { SignerComments } from "@/components/SignerComments";
 import { auth } from "@/auth";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -80,7 +81,7 @@ export default async function QuestionPage({ params }: PageProps) {
           </div>
 
           <div className="flex gap-5">
-            <UpvoteButton questionId={question.id} initialCount={question.upvoteCount} />
+            <UpvoteButton questionId={question.id} initialCount={question.upvoteCount} questionText={question.text} officialName={official.name} />
             <div className="flex-1">
               <h1 className="mb-3 text-2xl font-bold text-gray-900">{question.text}</h1>
               <p className="mb-4 text-sm text-gray-500">
@@ -116,7 +117,7 @@ export default async function QuestionPage({ params }: PageProps) {
               </p>
 
               <div className="mb-4">
-                <ShareButton questionId={question.id} text={question.text} />
+                <ShareButton questionId={question.id} text={question.text} officialName={official.name} />
               </div>
 
               <div className="rounded-lg border border-gray-100 bg-gray-50 p-4">
@@ -154,11 +155,15 @@ export default async function QuestionPage({ params }: PageProps) {
             total={signatureCounts.total}
             constituent={signatureCounts.constituent}
             supporting={signatureCounts.supporting}
+            recent={signatureCounts.recent}
             isAnswered={question.status === "answered"}
             deliveryThreshold={official.deliveryThreshold}
             deliveryThresholdType={official.deliveryThresholdType}
           />
         </div>
+
+        {/* Why people signed — signer comments */}
+        <SignerComments questionId={question.id} />
 
         {/* Group communications opt-in (only for group questions where admin has enabled it) */}
         {question.group?.isVerified && question.group.commsOptInEnabled && (

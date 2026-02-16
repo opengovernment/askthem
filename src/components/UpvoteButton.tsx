@@ -2,10 +2,13 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { SignerCommentForm } from "./SignerComments";
 
 interface UpvoteButtonProps {
   questionId: string;
   initialCount: number;
+  questionText?: string;
+  officialName?: string;
 }
 
 function ArrowIcon() {
@@ -33,12 +36,13 @@ function EyeIcon() {
   );
 }
 
-export function UpvoteButton({ questionId, initialCount }: UpvoteButtonProps) {
+export function UpvoteButton({ questionId, initialCount, questionText, officialName }: UpvoteButtonProps) {
   const [count, setCount] = useState(initialCount);
   const [hasUpvoted, setHasUpvoted] = useState(false);
   const [isConstituent, setIsConstituent] = useState<boolean | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [gateReason, setGateReason] = useState<"sign_in" | "address" | null>(null);
+  const [showSharePrompt, setShowSharePrompt] = useState(false);
 
   async function handleUpvote() {
     if (isLoading) return;
@@ -61,6 +65,10 @@ export function UpvoteButton({ questionId, initialCount }: UpvoteButtonProps) {
         setHasUpvoted(data.upvoted);
         setCount(data.upvoteCount);
         setIsConstituent(data.isConstituent);
+        // Show share prompt only on new signatures, not on un-signing
+        if (data.upvoted && !wasUpvoted) {
+          setShowSharePrompt(true);
+        }
       } else {
         setHasUpvoted(wasUpvoted);
         setCount(wasUpvoted ? count : count);
@@ -156,6 +164,141 @@ export function UpvoteButton({ questionId, initialCount }: UpvoteButtonProps) {
           </button>
         </div>
       )}
+
+      {/* Post-signature share prompt */}
+      {showSharePrompt && (
+        <PostSignatureShare
+          questionId={questionId}
+          questionText={questionText}
+          officialName={officialName}
+          onClose={() => setShowSharePrompt(false)}
+        />
+      )}
+    </div>
+  );
+}
+
+function PostSignatureShare({
+  questionId,
+  questionText,
+  officialName,
+  onClose,
+}: {
+  questionId: string;
+  questionText?: string;
+  officialName?: string;
+  onClose: () => void;
+}) {
+  const [copied, setCopied] = useState(false);
+  const url = typeof window !== "undefined"
+    ? `${window.location.origin}/questions/${questionId}`
+    : "";
+  const shareText = questionText && officialName
+    ? `I just signed a question to ${officialName}: "${questionText.length > 100 ? questionText.slice(0, 100) + "..." : questionText}" — Add your name on AskThem`
+    : "I just signed a question on AskThem — Add your name!";
+
+  async function copyLink() {
+    try {
+      await navigator.clipboard.writeText(url);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      // ignore
+    }
+  }
+
+  const encodedText = encodeURIComponent(shareText);
+  const encodedUrl = encodeURIComponent(url);
+  const emailSubject = encodeURIComponent(
+    officialName
+      ? `Sign this question to ${officialName} on AskThem`
+      : "Sign this question on AskThem",
+  );
+  const emailBody = encodeURIComponent(
+    `${shareText}\n\n${url}`,
+  );
+
+  return (
+    <div className="absolute left-1/2 top-full z-10 mt-2 w-72 -translate-x-1/2 animate-[fadeSlideIn_0.25s_ease-out] rounded-lg border border-green-200 bg-white p-4 shadow-lg">
+      <div className="absolute -top-2 left-1/2 h-3 w-3 -translate-x-1/2 rotate-45 border-l border-t border-green-200 bg-white" />
+      <p className="mb-1 text-center text-sm font-semibold text-green-800">
+        Thanks for signing!
+      </p>
+      <p className="mb-3 text-center text-xs text-gray-500">
+        Share this question to help it reach the delivery threshold
+      </p>
+
+      <div className="grid grid-cols-2 gap-2">
+        {/* Twitter/X */}
+        <a
+          href={`https://twitter.com/intent/tweet?text=${encodedText}&url=${encodedUrl}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center justify-center gap-1.5 rounded-md bg-gray-900 px-3 py-2 text-xs font-medium text-white hover:bg-gray-800"
+        >
+          <svg className="h-3.5 w-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          Post
+        </a>
+
+        {/* Facebook */}
+        <a
+          href={`https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center justify-center gap-1.5 rounded-md bg-[#1877F2] px-3 py-2 text-xs font-medium text-white hover:bg-[#166FE5]"
+        >
+          <svg className="h-3.5 w-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          Share
+        </a>
+
+        {/* Bluesky */}
+        <a
+          href={`https://bsky.app/intent/compose?text=${encodeURIComponent(shareText + " " + url)}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center justify-center gap-1.5 rounded-md bg-[#0085FF] px-3 py-2 text-xs font-medium text-white hover:bg-[#0077E6]"
+        >
+          <svg className="h-3.5 w-3.5" fill="currentColor" viewBox="0 0 568 501"><path d="M123.121 33.664C188.241 82.553 258.281 181.68 284 234.873c25.719-53.192 95.759-152.32 160.879-201.21C491.866-1.611 568-28.906 568 57.947c0 17.346-9.945 145.713-15.778 166.555-20.275 72.453-94.155 90.933-159.875 79.748C507.222 323.8 536.444 388.56 473.333 453.32c-119.86 122.992-172.272-30.859-185.702-70.281-2.462-7.227-3.614-10.608-3.631-7.733-.017-2.875-1.169.506-3.631 7.733-13.43 39.422-65.842 193.273-185.702 70.281-63.111-64.76-33.89-129.52 80.986-149.071-65.72 11.185-139.6-7.295-159.875-79.748C10.945 203.66 1 75.293 1 57.947 1-28.906 76.134-1.611 123.121 33.664z"/></svg>
+          Post
+        </a>
+
+        {/* Email */}
+        <a
+          href={`mailto:?subject=${emailSubject}&body=${emailBody}`}
+          className="flex items-center justify-center gap-1.5 rounded-md bg-gray-600 px-3 py-2 text-xs font-medium text-white hover:bg-gray-500"
+        >
+          <svg className="h-3.5 w-3.5" fill="currentColor" viewBox="0 0 20 20"><path d="M3 4a2 2 0 00-2 2v1.161l8.441 4.221a1.25 1.25 0 001.118 0L19 7.162V6a2 2 0 00-2-2H3z"/><path d="M19 8.839l-7.77 3.885a2.75 2.75 0 01-2.46 0L1 8.839V14a2 2 0 002 2h14a2 2 0 002-2V8.839z"/></svg>
+          Email
+        </a>
+      </div>
+
+      {/* Copy link */}
+      <button
+        onClick={copyLink}
+        className="mt-2 flex w-full items-center justify-center gap-1.5 rounded-md border border-gray-200 bg-gray-50 px-3 py-2 text-xs font-medium text-gray-700 hover:bg-gray-100"
+      >
+        {copied ? (
+          <>
+            <svg className="h-3.5 w-3.5 text-green-600" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clipRule="evenodd"/></svg>
+            <span className="text-green-600">Link copied!</span>
+          </>
+        ) : (
+          <>
+            <svg className="h-3.5 w-3.5" fill="currentColor" viewBox="0 0 20 20"><path d="M12.232 4.232a2.5 2.5 0 013.536 3.536l-1.225 1.224a.75.75 0 001.061 1.06l1.224-1.224a4 4 0 00-5.656-5.656l-3 3a4 4 0 00.225 5.865.75.75 0 00.977-1.138 2.5 2.5 0 01-.142-3.667l3-3z"/><path d="M11.603 7.963a.75.75 0 00-.977 1.138 2.5 2.5 0 01.142 3.667l-3 3a2.5 2.5 0 01-3.536-3.536l1.225-1.224a.75.75 0 00-1.061-1.06l-1.224 1.224a4 4 0 005.656 5.656l3-3a4 4 0 00-.225-5.865z"/></svg>
+            Copy link
+          </>
+        )}
+      </button>
+
+      {/* Why I signed comment form */}
+      <SignerCommentForm questionId={questionId} />
+
+      <button
+        onClick={onClose}
+        className="mt-2 block w-full text-center text-xs text-gray-400 hover:text-gray-600"
+      >
+        Dismiss
+      </button>
     </div>
   );
 }

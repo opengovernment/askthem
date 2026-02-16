@@ -240,11 +240,13 @@ export async function getTrendingTags(limit = 8) {
 // ─── Signature counts (constituent vs supporting) ───────────────────
 
 export async function getSignatureCounts(questionId: string) {
-  const [total, constituent] = await Promise.all([
+  const oneDayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000);
+  const [total, constituent, recent] = await Promise.all([
     prisma.upvote.count({ where: { questionId } }),
     prisma.upvote.count({ where: { questionId, isConstituent: true } }),
+    prisma.upvote.count({ where: { questionId, createdAt: { gte: oneDayAgo } } }),
   ]);
-  return { total, constituent, supporting: total - constituent };
+  return { total, constituent, supporting: total - constituent, recent };
 }
 
 export async function getConstituentCountsForQuestions(questionIds: string[]) {

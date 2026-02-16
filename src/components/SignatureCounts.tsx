@@ -4,6 +4,7 @@ interface SignatureCountsProps {
   total: number;
   constituent: number;
   supporting: number;
+  recent?: number;
   isAnswered: boolean;
   deliveryThreshold?: number | null;
   deliveryThresholdType?: string;
@@ -13,6 +14,7 @@ export function SignatureCounts({
   total,
   constituent,
   supporting,
+  recent,
   isAnswered,
   deliveryThreshold,
   deliveryThresholdType = "constituent",
@@ -35,7 +37,7 @@ export function SignatureCounts({
         </span>
       </div>
 
-      <div className="mb-4 flex gap-4">
+      <div className="mb-4 flex flex-wrap gap-4">
         <div className="flex items-center gap-1.5">
           <span className="inline-block h-2.5 w-2.5 rounded-full bg-indigo-600" />
           <span className="text-sm font-medium text-gray-900">{constituent}</span>
@@ -47,6 +49,12 @@ export function SignatureCounts({
           <span className="text-sm text-gray-500">supporting</span>
         </div>
       </div>
+
+      {!!recent && recent > 0 && (
+        <p className="mb-4 text-xs font-medium text-green-700">
+          {recent} {recent === 1 ? "person" : "people"} signed in the last 24 hours
+        </p>
+      )}
 
       {!isAnswered && (
         <>
