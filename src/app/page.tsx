@@ -1,5 +1,6 @@
 import { SearchBar } from "@/components/SearchBar";
 import { QuestionCard } from "@/components/QuestionCard";
+import { StateExplorer } from "@/components/StateExplorer";
 import { getPopularQuestions, getHomepageStats, getTrendingTags } from "@/lib/queries";
 import Link from "next/link";
 
@@ -37,6 +38,9 @@ export default async function Home() {
           <StatCard label="Officials" value={stats.totalOfficials} />
         </div>
       </section>
+
+      {/* Explore your state */}
+      <StateExplorer />
 
       {/* Trending Topics */}
       {trendingTags.length > 0 && (
