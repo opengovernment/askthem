@@ -98,6 +98,9 @@ export default async function RootLayout({
           <div className="mx-auto flex max-w-5xl items-center justify-between text-sm text-gray-500">
             <Image src="/logo.svg" alt="AskThem" width={100} height={22} />
             <div className="flex items-center gap-4">
+              <Link href="/about" className="text-gray-500 hover:text-indigo-600">
+                About
+              </Link>
               <Link href="/states" className="text-gray-500 hover:text-indigo-600">
                 States
               </Link>
