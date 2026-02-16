@@ -118,6 +118,9 @@ export default async function RootLayout({
               <Link href="/widgets" className="text-gray-500 hover:text-indigo-600">
                 Widgets
               </Link>
+              <Link href="/donate" className="text-gray-500 hover:text-indigo-600">
+                Donate
+              </Link>
               <Link href="/feed.xml" className="text-indigo-500 hover:text-indigo-600">
                 RSS Feed
               </Link>
