@@ -78,7 +78,8 @@ export type EmailType =
   | "question_signed"
   | "question_delivered"
   | "question_answered"
-  | "group_endorsement";
+  | "group_endorsement"
+  | "delivery_nudge";
 
 interface QuestionContext {
   questionId: string;
@@ -195,6 +196,31 @@ export async function sendGroupEndorsementNotification(
     <p><a href="${questionUrl(ctx.questionId)}" style="display:inline-block;background:#4f46e5;color:#fff;padding:10px 24px;border-radius:999px;text-decoration:none;font-weight:600;">Sign this question</a></p>
     <p style="color:#6b7280;font-size:12px;margin-top:24px;">
       You received this because you opted in to communications from ${escapeHtml(ctx.groupName)}.
+    </p>
+  `;
+  return sendEmail(to, subject, html);
+}
+
+/**
+ * Nudge signers of a delivered question that is still waiting for an answer.
+ */
+export async function sendDeliveryNudge(
+  to: string,
+  ctx: QuestionContext & { signatureCount: number; daysSinceDelivery: number },
+): Promise<string | null> {
+  const subject = `Still waiting: your question to ${ctx.officialName} needs attention`;
+  const html = `
+    <h2>Still waiting for a response</h2>
+    <p>It&rsquo;s been <strong>${ctx.daysSinceDelivery} days</strong> since this question was delivered to
+    <strong>${escapeHtml(ctx.officialName)}</strong> (${escapeHtml(ctx.officialTitle)}) with
+    <strong>${ctx.signatureCount} signatures</strong>:</p>
+    <blockquote style="border-left:3px solid #4f46e5;padding-left:12px;color:#374151;">
+      ${escapeHtml(ctx.questionText)}
+    </blockquote>
+    <p>Help keep the pressure on &mdash; share this question so more people can add their name:</p>
+    <p><a href="${questionUrl(ctx.questionId)}" style="display:inline-block;background:#4f46e5;color:#fff;padding:10px 24px;border-radius:999px;text-decoration:none;font-weight:600;">View &amp; share this question</a></p>
+    <p style="color:#6b7280;font-size:12px;margin-top:24px;">
+      You received this because you signed this question on AskThem.
     </p>
   `;
   return sendEmail(to, subject, html);
