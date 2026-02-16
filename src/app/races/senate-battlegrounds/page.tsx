@@ -15,31 +15,28 @@ export const metadata: Metadata = {
 // Democrats need net +4 to retake majority.
 
 const LIKELY_D = [
-  "Minnesota (Smith, D)",
-  "Virginia (Warner, D)",
+  "MN: OPEN",
 ];
 
 const LEAN_D = [
-  "New Hampshire (Shaheen, D - Open)",
-  "Colorado (Hickenlooper, D)",
+  "NH: OPEN",
 ];
 
 const TOSS_UP = [
-  "Georgia (Ossoff, D)",
-  "Michigan (Peters, D - Open)",
+  "GA: Ossoff",
+  "ME: Collins",
+  "MI: OPEN",
+  "NC: OPEN",
 ];
 
 const LEAN_R = [
-  "Alaska (Murkowski, R)",
-  "Maine (Collins, R)",
-  "North Carolina (Tillis, R)",
+  "AK: Sullivan",
+  "OH: Husted",
 ];
 
 const LIKELY_R = [
-  "Florida Special (Scott, R - Open)",
-  "Iowa (Grassley, R - Open)",
-  "Ohio Special (Husted, R)",
-  "Texas (Cruz, R)",
+  "IA: OPEN",
+  "TX: Cornyn",
 ];
 
 type RatingCategory = {
