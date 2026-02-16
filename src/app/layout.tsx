@@ -109,7 +109,7 @@ export default async function RootLayout({
               <Link href="/states" className="text-gray-500 hover:text-indigo-600">
                 States
               </Link>
-              <Link href="/groups/apply" className="text-gray-500 hover:text-indigo-600">
+              <Link href="/groups" className="text-gray-500 hover:text-indigo-600">
                 Groups
               </Link>
               <Link href="/widgets" className="text-gray-500 hover:text-indigo-600">
