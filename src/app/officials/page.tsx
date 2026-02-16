@@ -1,5 +1,6 @@
 import { getFilteredOfficials, getActiveStates } from "@/lib/queries";
 import { OfficialFilters } from "@/components/OfficialFilters";
+import { OfficialAvatar } from "@/components/OfficialAvatar";
 import { CollapsibleSection } from "@/components/CollapsibleSection";
 import { US_STATES } from "@/lib/types";
 import Link from "next/link";
@@ -176,7 +177,7 @@ export default async function OfficialsPage({ searchParams }: PageProps) {
   );
 }
 
-function OfficialGrid({ officials, showChamber = false }: { officials: Array<{ id: string; name: string; title: string; party: string; state: string; district: string | null; chamber: string }>; showChamber?: boolean }) {
+function OfficialGrid({ officials, showChamber = false }: { officials: Array<{ id: string; name: string; title: string; party: string; state: string; district: string | null; chamber: string; photoUrl: string | null }>; showChamber?: boolean }) {
   return (
     <div className="grid gap-4 sm:grid-cols-2">
       {officials.map((official) => (
@@ -185,12 +186,7 @@ function OfficialGrid({ officials, showChamber = false }: { officials: Array<{ i
           href={`/officials/${official.id}`}
           className="flex items-center gap-4 rounded-lg border border-gray-200 bg-white p-4 shadow-sm transition-shadow hover:shadow-md"
         >
-          <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-indigo-100 text-sm font-bold text-indigo-600">
-            {official.name
-              .split(" ")
-              .map((n) => n[0])
-              .join("")}
-          </div>
+          <OfficialAvatar name={official.name} photoUrl={official.photoUrl} size="md" />
           <div className="min-w-0">
             <p className="font-medium text-gray-900">{official.name}</p>
             <p className="text-sm text-gray-500">
