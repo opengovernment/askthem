@@ -164,6 +164,23 @@ model Answer {
   sourceUrl        String?  // link to social media post, gov website, press release, etc.
   postedBy         String   // moderator ID who posted the answer
   respondedAt      DateTime @default(now())
+
+  media            ResponseMedia[]
+}
+
+// Media attachments for official responses (social embeds + uploaded files)
+model ResponseMedia {
+  id               String   @id @default(cuid())
+  answerId         String
+  answer           Answer   @relation(fields: [answerId], references: [id], onDelete: Cascade)
+  mediaType        String   // "social_embed" | "video_upload" | "audio_upload"
+  platform         String?  // for embeds: "youtube" | "twitter" | "instagram" | "bluesky" | "facebook" | "tiktok" | null for uploads
+  url              String   // embed URL or path to uploaded file
+  originalFilename String?  // for uploads: original file name
+  mimeType         String?  // for uploads: e.g. "video/mp4"
+  caption          String?  // optional moderator-added caption
+  sortOrder        Int      @default(0)
+  createdAt        DateTime @default(now())
 }
 
 // ─── Email Events (transactional email audit log) ────────────────────

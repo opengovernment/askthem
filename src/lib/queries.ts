@@ -4,7 +4,11 @@ const questionInclude = {
   author: true,
   official: true,
   categoryTags: true,
-  answer: true,
+  answer: {
+    include: {
+      media: { orderBy: { sortOrder: "asc" as const } },
+    },
+  },
   group: {
     select: { id: true, name: true, slug: true, isVerified: true, commsOptInEnabled: true },
   },

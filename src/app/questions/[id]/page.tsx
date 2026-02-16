@@ -3,6 +3,7 @@ import { UpvoteButton } from "@/components/UpvoteButton";
 import { ShareButton } from "@/components/ShareButton";
 import { SignatureCounts } from "@/components/SignatureCounts";
 import { AnswerForm } from "@/components/AnswerForm";
+import { AnswerMedia } from "@/components/AnswerMedia";
 import { VerifiedBadge } from "@/components/VerifiedBadge";
 import { GroupCommOptInButton } from "@/components/GroupCommOptInButton";
 import { GroupEndorsementBadge } from "@/components/GroupEndorsementBadge";
@@ -185,9 +186,23 @@ export default async function QuestionPage({ params }: PageProps) {
             {answer.responseText && (
               <p className="leading-relaxed text-gray-800">{answer.responseText}</p>
             )}
-            {answer.responseVideoUrl && (
+
+            {/* Rich media items (social embeds + uploaded video/audio) */}
+            {answer.media && answer.media.length > 0 && (
+              <AnswerMedia media={answer.media} />
+            )}
+
+            {/* Legacy fields for backwards compat with older answers */}
+            {!answer.media?.length && answer.responseVideoUrl && (
               <p className="mt-3 text-sm text-indigo-600">
-                Video response available (player coming soon)
+                <a
+                  href={answer.responseVideoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline hover:text-indigo-800"
+                >
+                  View video response
+                </a>
               </p>
             )}
             {answer.sourceUrl && (

@@ -5,6 +5,16 @@ import { sendQuestionAnswered } from "@/lib/email";
 
 import { requireModerator } from "@/lib/session";
 
+interface MediaInput {
+  mediaType: "social_embed" | "video_upload" | "audio_upload";
+  platform?: string | null;
+  url: string;
+  originalFilename?: string;
+  mimeType?: string;
+  caption?: string;
+  sortOrder?: number;
+}
+
 // POST /api/answers — post an official's answer to a delivered question
 export async function POST(request: NextRequest) {
   const moderator = await requireModerator();
@@ -13,22 +23,39 @@ export async function POST(request: NextRequest) {
   }
 
   const body = await request.json();
-  const { questionId, responseText, responseVideoUrl, sourceUrl } = body as {
+  const { questionId, responseText, responseVideoUrl, sourceUrl, media } = body as {
     questionId?: string;
     responseText?: string;
     responseVideoUrl?: string;
     sourceUrl?: string;
+    media?: MediaInput[];
   };
 
   if (!questionId || typeof questionId !== "string") {
     return NextResponse.json({ error: "questionId is required" }, { status: 400 });
   }
 
-  if (!responseText && !responseVideoUrl && !sourceUrl) {
+  const hasLegacyContent = responseText || responseVideoUrl || sourceUrl;
+  const hasMedia = Array.isArray(media) && media.length > 0;
+
+  if (!hasLegacyContent && !hasMedia) {
     return NextResponse.json(
-      { error: "At least one of responseText, responseVideoUrl, or sourceUrl is required" },
+      { error: "At least one of responseText, media items, or a source URL is required" },
       { status: 400 },
     );
+  }
+
+  // Validate media items
+  if (hasMedia) {
+    for (const item of media!) {
+      if (!item.url || typeof item.url !== "string") {
+        return NextResponse.json({ error: "Each media item must have a URL" }, { status: 400 });
+      }
+      const validTypes = ["social_embed", "video_upload", "audio_upload"];
+      if (!validTypes.includes(item.mediaType)) {
+        return NextResponse.json({ error: `Invalid media type: ${item.mediaType}` }, { status: 400 });
+      }
+    }
   }
 
   const question = await prisma.question.findUnique({
@@ -51,7 +78,7 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  // Create the answer and update question status in a transaction
+  // Create the answer, media items, and update question status in a transaction
   const [answer] = await prisma.$transaction([
     prisma.answer.create({
       data: {
@@ -61,6 +88,21 @@ export async function POST(request: NextRequest) {
         sourceUrl: sourceUrl ?? null,
         respondedAt: new Date(),
         postedBy: moderator.id,
+        ...(hasMedia
+          ? {
+              media: {
+                create: media!.map((item, i) => ({
+                  mediaType: item.mediaType,
+                  platform: item.platform ?? null,
+                  url: item.url,
+                  originalFilename: item.originalFilename ?? null,
+                  mimeType: item.mimeType ?? null,
+                  caption: item.caption ?? null,
+                  sortOrder: item.sortOrder ?? i,
+                })),
+              },
+            }
+          : {}),
       },
     }),
     prisma.question.update({
@@ -94,7 +136,7 @@ export async function POST(request: NextRequest) {
     }
 
     const signers = Array.from(signerMap.values());
-    const answerPreview = (responseText ?? "Video response available").slice(0, 200);
+    const answerPreview = (responseText ?? "Media response available — view online").slice(0, 200);
 
     // Fire-and-forget: send answer notifications
     for (const signer of signers) {
