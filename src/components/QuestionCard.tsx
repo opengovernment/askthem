@@ -4,6 +4,7 @@ import Link from "next/link";
 import { UpvoteButton } from "./UpvoteButton";
 import { ShareButton } from "./ShareButton";
 import { VerifiedBadge } from "./VerifiedBadge";
+import { OfficialAvatar } from "./OfficialAvatar";
 
 interface QuestionCardProps {
   question: {
@@ -14,7 +15,7 @@ interface QuestionCardProps {
     districtTag: string;
     createdAt: Date;
     author: { id: string; name: string; city: string | null; state: string | null; isProfilePublic?: boolean };
-    official: { id: string; name: string; title: string };
+    official: { id: string; name: string; title: string; photoUrl?: string | null };
     categoryTags: { tag: string }[];
     group?: { id: string; name: string; slug: string; isVerified: boolean } | null;
   };
@@ -50,8 +51,9 @@ export function QuestionCard({ question }: QuestionCardProps) {
             </span>
             <Link
               href={`/officials/${question.official.id}`}
-              className="text-sm text-indigo-600 hover:text-indigo-800"
+              className="inline-flex items-center gap-1.5 text-sm text-indigo-600 hover:text-indigo-800"
             >
+              <OfficialAvatar name={question.official.name} photoUrl={question.official.photoUrl ?? null} size="sm" />
               To: {question.official.name} ({question.official.title})
             </Link>
           </div>

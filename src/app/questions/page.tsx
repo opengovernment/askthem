@@ -1,5 +1,6 @@
 import { getFilteredQuestions, getFilteredOfficials, getAllTags, getAllOfficials, getActiveStates, getDistrictsForState } from "@/lib/queries";
 import { QuestionCard } from "@/components/QuestionCard";
+import { OfficialAvatar } from "@/components/OfficialAvatar";
 import { SearchBar } from "@/components/SearchBar";
 import { QuestionFilters } from "@/components/QuestionFilters";
 import Link from "next/link";
@@ -90,9 +91,7 @@ export default async function QuestionsPage({ searchParams }: PageProps) {
                   className="flex items-center justify-between rounded-lg border border-gray-200 bg-white px-4 py-3 transition-colors hover:border-indigo-300 hover:bg-indigo-50"
                 >
                   <div className="flex items-center gap-3">
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-indigo-100 text-sm font-bold text-indigo-600">
-                      {o.name.split(" ").map((n: string) => n[0]).join("")}
-                    </div>
+                    <OfficialAvatar name={o.name} photoUrl={o.photoUrl} size="md" />
                     <div>
                       <p className="font-medium text-gray-900">{o.name}</p>
                       <p className="text-sm text-gray-500">

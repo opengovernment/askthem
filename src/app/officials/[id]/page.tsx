@@ -1,6 +1,7 @@
 import { getOfficialById, getQuestionsByOfficialId } from "@/lib/queries";
 import { QuestionCard } from "@/components/QuestionCard";
 import { DeliveryThresholdEditor } from "@/components/DeliveryThresholdEditor";
+import { OfficialAvatar } from "@/components/OfficialAvatar";
 import { auth } from "@/auth";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -56,12 +57,7 @@ export default async function OfficialPage({ params }: PageProps) {
         {/* Official Profile Header */}
         <div className="mb-6 rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
           <div className="flex items-start gap-4">
-            <div className="flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-full bg-indigo-100 text-xl font-bold text-indigo-600">
-              {official.name
-                .split(" ")
-                .map((n) => n[0])
-                .join("")}
-            </div>
+            <OfficialAvatar name={official.name} photoUrl={official.photoUrl} size="lg" />
             <div className="flex-1">
               <h1 className="text-2xl font-bold text-gray-900">{official.name}</h1>
               <p className="text-gray-600">
