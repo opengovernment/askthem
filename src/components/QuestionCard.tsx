@@ -5,6 +5,7 @@ import { UpvoteButton } from "./UpvoteButton";
 import { ShareButton } from "./ShareButton";
 import { VerifiedBadge } from "./VerifiedBadge";
 import { OfficialAvatar } from "./OfficialAvatar";
+import { ResponsivenessBadge } from "./ResponsivenessBadge";
 
 interface QuestionCardProps {
   question: {
@@ -15,7 +16,7 @@ interface QuestionCardProps {
     districtTag: string;
     createdAt: Date;
     author: { id: string; name: string; city: string | null; state: string | null; isProfilePublic?: boolean };
-    official: { id: string; name: string; title: string; photoUrl?: string | null };
+    official: { id: string; name: string; title: string; photoUrl?: string | null; _count?: { questions: number } };
     categoryTags: { tag: string }[];
     group?: { id: string; name: string; slug: string; isVerified: boolean } | null;
   };
@@ -56,6 +57,9 @@ export function QuestionCard({ question }: QuestionCardProps) {
               <OfficialAvatar name={question.official.name} photoUrl={question.official.photoUrl ?? null} size="sm" />
               To: {question.official.name} ({question.official.title})
             </Link>
+            {question.official._count && (
+              <ResponsivenessBadge answeredCount={question.official._count.questions} />
+            )}
           </div>
           <Link href={`/questions/${question.id}`} className="group">
             <h3 className="mb-2 text-lg font-medium text-gray-900 group-hover:text-indigo-600">

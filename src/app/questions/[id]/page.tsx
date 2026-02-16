@@ -1,4 +1,4 @@
-import { getQuestionById, getSignatureCounts } from "@/lib/queries";
+import { getQuestionById, getSignatureCounts, getOfficialResponseStats } from "@/lib/queries";
 import { UpvoteButton } from "@/components/UpvoteButton";
 import { ShareButton } from "@/components/ShareButton";
 import { SignatureCounts } from "@/components/SignatureCounts";
@@ -43,7 +43,10 @@ export default async function QuestionPage({ params }: PageProps) {
   if (!question) notFound();
 
   const { official, author, answer } = question;
-  const signatureCounts = await getSignatureCounts(question.id);
+  const [signatureCounts, responseStats] = await Promise.all([
+    getSignatureCounts(question.id),
+    getOfficialResponseStats(official.id),
+  ]);
   const session = await auth();
   const isModerator =
     session?.user?.role === "moderator" || session?.user?.role === "admin";
@@ -140,6 +143,14 @@ export default async function QuestionPage({ params }: PageProps) {
                   &middot; {official.state}
                   {official.district ? `, ${official.district}` : ""}
                 </p>
+                {responseStats.answered > 0 && (
+                  <p className="mt-2 inline-flex items-center gap-1.5 rounded-full bg-green-100 px-3 py-1 text-xs font-medium text-green-800">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="h-3.5 w-3.5">
+                      <path fillRule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14Zm3.844-8.791a.75.75 0 0 0-1.188-.918l-3.7 4.79-1.649-1.833a.75.75 0 1 0-1.114 1.004l2.25 2.5a.75.75 0 0 0 1.15-.043l4.25-5.5Z" clipRule="evenodd" />
+                    </svg>
+                    Answered {responseStats.answered} of {responseStats.total} delivered {responseStats.total === 1 ? "question" : "questions"}
+                  </p>
+                )}
               </div>
             </div>
           </div>

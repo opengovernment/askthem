@@ -25,11 +25,18 @@ export function SignatureCounts({
   const progress = Math.min(currentCount / threshold, 1);
   const reached = currentCount >= threshold;
   const remaining = threshold - currentCount;
+  const almostThere = !reached && remaining > 0 && remaining <= 2;
 
   const countLabel = isSupporter ? "total" : "constituent";
 
   return (
-    <div className="rounded-lg border border-gray-200 bg-white p-5">
+    <div
+      className={`rounded-lg border p-5 ${
+        almostThere
+          ? "border-amber-300 bg-amber-50"
+          : "border-gray-200 bg-white"
+      }`}
+    >
       <div className="mb-3 flex items-baseline gap-3">
         <span className="text-2xl font-bold text-gray-900">{total}</span>
         <span className="text-sm text-gray-500">
@@ -69,16 +76,30 @@ export function SignatureCounts({
             </div>
             <div className="mt-1 h-2 overflow-hidden rounded-full bg-gray-100">
               <div
-                className={`h-full rounded-full transition-all ${reached ? "bg-green-500" : "bg-indigo-600"}`}
+                className={`h-full rounded-full transition-all ${
+                  reached
+                    ? "bg-green-500"
+                    : almostThere
+                      ? "animate-pulse bg-amber-500"
+                      : "bg-indigo-600"
+                }`}
                 style={{ width: `${progress * 100}%` }}
               />
             </div>
           </div>
-          <p className="text-xs text-gray-500">
-            {reached
-              ? `${isSupporter ? "Supporter" : "Constituent"} threshold reached — this question qualifies for delivery.`
-              : `${remaining} more ${countLabel} ${remaining === 1 ? "signature" : "signatures"} needed for delivery to the official.`}
-          </p>
+          {almostThere ? (
+            <p className="text-sm font-semibold text-amber-800">
+              {remaining === 1
+                ? `Just 1 more ${countLabel} signature and this question gets delivered!`
+                : `Only ${remaining} more ${countLabel} signatures until delivery!`}
+            </p>
+          ) : (
+            <p className="text-xs text-gray-500">
+              {reached
+                ? `${isSupporter ? "Supporter" : "Constituent"} threshold reached — this question qualifies for delivery.`
+                : `${remaining} more ${countLabel} ${remaining === 1 ? "signature" : "signatures"} needed for delivery to the official.`}
+            </p>
+          )}
         </>
       )}
     </div>

@@ -2,7 +2,15 @@ import { prisma } from "./prisma";
 
 const questionInclude = {
   author: true,
-  official: true,
+  official: {
+    include: {
+      _count: {
+        select: {
+          questions: { where: { status: "answered" } },
+        },
+      },
+    },
+  },
   categoryTags: true,
   answer: {
     include: {
@@ -261,6 +269,18 @@ export async function getConstituentCountsForQuestions(questionIds: string[]) {
     map[row.questionId] = row._count.id;
   }
   return map;
+}
+
+// ─── Official responsiveness stats ──────────────────────────────────
+
+export async function getOfficialResponseStats(officialId: string) {
+  const [answered, deliveredOrAnswered] = await Promise.all([
+    prisma.question.count({ where: { officialId, status: "answered" } }),
+    prisma.question.count({
+      where: { officialId, status: { in: ["delivered", "answered"] } },
+    }),
+  ]);
+  return { answered, total: deliveredOrAnswered };
 }
 
 // ─── Public user profiles ────────────────────────────────────────────
