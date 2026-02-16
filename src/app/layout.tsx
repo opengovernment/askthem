@@ -101,6 +101,9 @@ export default async function RootLayout({
               <Link href="/about" className="text-gray-500 hover:text-indigo-600">
                 About
               </Link>
+              <Link href="/races" className="text-gray-500 hover:text-indigo-600">
+                Races
+              </Link>
               <Link href="/states" className="text-gray-500 hover:text-indigo-600">
                 States
               </Link>
