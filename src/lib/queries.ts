@@ -307,6 +307,47 @@ export async function getPublicQuestionsForUser(userId: string) {
   });
 }
 
+// ─── Events (town halls, public forums) ─────────────────────────────
+
+const eventInclude = {
+  official: true,
+  _count: { select: { questions: true } },
+} as const;
+
+export async function getUpcomingEvents(limit = 10) {
+  return prisma.event.findMany({
+    where: { status: { in: ["upcoming", "live"] }, startsAt: { gte: new Date() } },
+    include: eventInclude,
+    orderBy: { startsAt: "asc" },
+    take: limit,
+  });
+}
+
+export async function getPastEvents(limit = 10) {
+  return prisma.event.findMany({
+    where: { status: { in: ["completed", "live"] }, startsAt: { lt: new Date() } },
+    include: eventInclude,
+    orderBy: { startsAt: "desc" },
+    take: limit,
+  });
+}
+
+export async function getEventBySlug(slug: string) {
+  return prisma.event.findUnique({
+    where: { slug },
+    include: { official: true },
+  });
+}
+
+export async function getTopQuestionsForEvent(eventId: string, limit = 10) {
+  return prisma.question.findMany({
+    where: { eventId, status: { notIn: hiddenStatuses } },
+    include: questionInclude,
+    orderBy: { upvoteCount: "desc" },
+    take: limit,
+  });
+}
+
 // ─── Moderator queries ──────────────────────────────────────────────
 
 export async function getQuestionsByStatus(status: string) {

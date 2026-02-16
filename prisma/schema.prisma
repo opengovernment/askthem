@@ -96,6 +96,7 @@ model Official {
 
   questions       Question[]
   userDistricts   UserDistrict[]
+  events          Event[]
 }
 
 // Maps users to their elected officials based on address lookup
@@ -134,6 +135,10 @@ model Question {
   deliveredAt      DateTime?
   deliveredVia     String?    // "email" | "twitter" | "facebook" | "mail"
   deliveredBy      String?    // moderator ID who delivered
+
+  // Optional: question submitted for a specific event (town hall, public forum)
+  eventId          String?
+  event            Event?   @relation(fields: [eventId], references: [id])
 
   categoryTags    QuestionTag[]
   upvotes         Upvote[]
@@ -292,6 +297,26 @@ model GroupEndorsement {
   createdAt   DateTime @default(now())
 
   @@unique([questionId, groupId])
+}
+
+// ─── Events (town halls, public forums) ──────────────────────────────
+
+model Event {
+  id          String    @id @default(cuid())
+  title       String    // e.g. "Town Hall: Healthcare Q&A with Sen. Smith"
+  slug        String    @unique
+  description String
+  officialId  String
+  official    Official  @relation(fields: [officialId], references: [id])
+  location    String?   // physical address or "Virtual"
+  startsAt    DateTime
+  endsAt      DateTime?
+  status      String    @default("upcoming") // "upcoming" | "live" | "completed" | "cancelled"
+  createdBy   String    // moderator/admin user ID who created the event
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  questions   Question[]
 }
 
 // ─── API Access (for future tiered API) ──────────────────────────────
