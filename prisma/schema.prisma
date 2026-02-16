@@ -84,6 +84,10 @@ model Official {
   phone    String?
   website  String?
 
+  // Verified Responder: official actively participates in Q&A on the platform
+  isVerifiedResponder Boolean   @default(false)
+  verifiedAt          DateTime? // when the moderator marked them as verified responder
+
   questions       Question[]
   userDistricts   UserDistrict[]
 }

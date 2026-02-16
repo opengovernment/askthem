@@ -140,6 +140,37 @@ export default async function OfficialsPage({ searchParams }: PageProps) {
             )}
           </>
         )}
+
+        {/* Verified Responders callout */}
+        <div className="mt-10 rounded-lg border border-green-200 bg-green-50 p-6">
+          <div className="flex items-start gap-4">
+            <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-green-200 text-green-700">
+              <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                <path
+                  fillRule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold text-green-900">
+                Verified Responders
+              </h3>
+              <p className="mt-1 text-sm text-green-800">
+                Some officials actively participate on AskThem, answering
+                constituent questions via video, social media, and written
+                statements.
+              </p>
+              <Link
+                href="/officials/verified"
+                className="mt-3 inline-block rounded-full bg-green-600 px-5 py-2 text-sm font-medium text-white hover:bg-green-700 transition-colors"
+              >
+                View Verified Responders
+              </Link>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
