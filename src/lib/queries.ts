@@ -123,10 +123,26 @@ export async function getQuestionsByOfficialId(officialId: string) {
   });
 }
 
+// Seniority rank: U.S. Senate → U.S. House → Governor/state exec → state senate → state house → local
+const chamberRank: Record<string, number> = {
+  senate: 0,
+  house: 1,
+  state_exec: 2,
+  state_senate: 3,
+  state_house: 4,
+  local: 5,
+};
+
+function bySeniority(a: { chamber: string; name: string }, b: { chamber: string; name: string }) {
+  const rankA = chamberRank[a.chamber] ?? 6;
+  const rankB = chamberRank[b.chamber] ?? 6;
+  if (rankA !== rankB) return rankA - rankB;
+  return a.name.localeCompare(b.name);
+}
+
 export async function getAllOfficials() {
-  return prisma.official.findMany({
-    orderBy: { name: "asc" },
-  });
+  const officials = await prisma.official.findMany();
+  return officials.sort(bySeniority);
 }
 
 export async function getOfficialsForUser(userId: string) {
@@ -134,7 +150,7 @@ export async function getOfficialsForUser(userId: string) {
     where: { userId },
     include: { official: true },
   });
-  return districts.map((d) => d.official).sort((a, b) => a.name.localeCompare(b.name));
+  return districts.map((d) => d.official).sort(bySeniority);
 }
 
 export interface OfficialFilters {
