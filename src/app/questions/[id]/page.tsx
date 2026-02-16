@@ -148,6 +148,8 @@ export default async function QuestionPage({ params }: PageProps) {
             constituent={signatureCounts.constituent}
             supporting={signatureCounts.supporting}
             isAnswered={question.status === "answered"}
+            deliveryThreshold={official.deliveryThreshold}
+            deliveryThresholdType={official.deliveryThresholdType}
           />
         </div>
 

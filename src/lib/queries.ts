@@ -247,6 +247,20 @@ export async function getSignatureCounts(questionId: string) {
   return { total, constituent, supporting: total - constituent };
 }
 
+export async function getConstituentCountsForQuestions(questionIds: string[]) {
+  if (questionIds.length === 0) return {};
+  const rows = await prisma.upvote.groupBy({
+    by: ["questionId"],
+    where: { questionId: { in: questionIds }, isConstituent: true },
+    _count: { id: true },
+  });
+  const map: Record<string, number> = {};
+  for (const row of rows) {
+    map[row.questionId] = row._count.id;
+  }
+  return map;
+}
+
 // ─── Moderator queries ──────────────────────────────────────────────
 
 export async function getQuestionsByStatus(status: string) {

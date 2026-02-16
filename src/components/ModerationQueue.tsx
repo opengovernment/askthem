@@ -12,31 +12,48 @@ interface Question {
   districtTag: string;
   createdAt: Date;
   author: { name: string; city: string | null; state: string | null };
-  official: { id: string; name: string; title: string };
+  official: {
+    id: string;
+    name: string;
+    title: string;
+    deliveryThreshold: number | null;
+    deliveryThresholdType: string;
+  };
   categoryTags: { tag: string }[];
 }
 
 interface ModerationQueueProps {
   questions: Question[];
   activeTab: string;
+  /** Map of questionId → constituent signature count, used for threshold progress on the "published" tab */
+  constituentCounts?: Record<string, number>;
 }
 
-export function ModerationQueue({ questions, activeTab }: ModerationQueueProps) {
+export function ModerationQueue({ questions, activeTab, constituentCounts }: ModerationQueueProps) {
   return (
     <div className="space-y-4">
       {questions.map((q) => (
-        <ModerationCard key={q.id} question={q} activeTab={activeTab} />
+        <ModerationCard
+          key={q.id}
+          question={q}
+          activeTab={activeTab}
+          constituentCount={constituentCounts?.[q.id]}
+        />
       ))}
     </div>
   );
 }
 
+const DEFAULT_THRESHOLD = 5;
+
 function ModerationCard({
   question,
   activeTab,
+  constituentCount,
 }: {
   question: Question;
   activeTab: string;
+  constituentCount?: number;
 }) {
   const router = useRouter();
   const [isActing, setIsActing] = useState(false);
@@ -114,6 +131,34 @@ function ModerationCard({
         <span>&middot;</span>
         <span>{question.upvoteCount} upvotes</span>
       </div>
+
+      {/* Threshold progress for published questions */}
+      {activeTab === "published" && !result && (() => {
+        const threshold = question.official.deliveryThreshold ?? DEFAULT_THRESHOLD;
+        const isSupporter = question.official.deliveryThresholdType === "supporter";
+        const current = isSupporter ? question.upvoteCount : (constituentCount ?? 0);
+        const progress = Math.min(current / threshold, 1);
+        const reached = current >= threshold;
+        const label = isSupporter ? "total" : "constituent";
+
+        return (
+          <div className="mb-4">
+            <div className="flex items-center justify-between text-xs text-gray-500">
+              <span>
+                {reached
+                  ? <span className="font-semibold text-green-700">Threshold reached</span>
+                  : `${current} / ${threshold} ${label} signatures`}
+              </span>
+            </div>
+            <div className="mt-1 h-1.5 overflow-hidden rounded-full bg-gray-100">
+              <div
+                className={`h-full rounded-full transition-all ${reached ? "bg-green-500" : "bg-indigo-600"}`}
+                style={{ width: `${progress * 100}%` }}
+              />
+            </div>
+          </div>
+        );
+      })()}
 
       {/* Action buttons based on current status */}
       {result ? (

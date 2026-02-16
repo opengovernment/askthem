@@ -88,6 +88,10 @@ model Official {
   isVerifiedResponder Boolean   @default(false)
   verifiedAt          DateTime? // when the moderator marked them as verified responder
 
+  // Delivery threshold — moderator/admin configurable per-official
+  deliveryThreshold     Int?    // null = use site default (5); otherwise custom target
+  deliveryThresholdType String  @default("constituent") // "constituent" | "supporter"
+
   questions       Question[]
   userDistricts   UserDistrict[]
 }

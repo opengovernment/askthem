@@ -1,4 +1,4 @@
-import { getQuestionsByStatus, getQuestionCounts } from "@/lib/queries";
+import { getQuestionsByStatus, getQuestionCounts, getConstituentCountsForQuestions } from "@/lib/queries";
 import { ModerationQueue } from "@/components/ModerationQueue";
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
@@ -21,6 +21,12 @@ export default async function ModeratePage({ searchParams }: PageProps) {
   const activeTab = tab || "pending_review";
   const counts = await getQuestionCounts();
   const questions = await getQuestionsByStatus(activeTab);
+
+  // Fetch constituent counts for the published tab (needed for threshold progress)
+  const constituentCounts =
+    activeTab === "published" && questions.length > 0
+      ? await getConstituentCountsForQuestions(questions.map((q) => q.id))
+      : undefined;
 
   const tabs = [
     { key: "pending_review", label: "Pending Review", count: counts.pendingReview },
@@ -86,7 +92,7 @@ export default async function ModeratePage({ searchParams }: PageProps) {
             <p className="text-gray-500">No questions with this status.</p>
           </div>
         ) : (
-          <ModerationQueue questions={questions} activeTab={activeTab} />
+          <ModerationQueue questions={questions} activeTab={activeTab} constituentCounts={constituentCounts} />
         )}
       </div>
     </div>

@@ -1,5 +1,7 @@
 import { getOfficialById, getQuestionsByOfficialId } from "@/lib/queries";
 import { QuestionCard } from "@/components/QuestionCard";
+import { DeliveryThresholdEditor } from "@/components/DeliveryThresholdEditor";
+import { auth } from "@/auth";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
@@ -30,6 +32,9 @@ export default async function OfficialPage({ params }: PageProps) {
   if (!official) notFound();
 
   const questions = await getQuestionsByOfficialId(official.id);
+  const session = await auth();
+  const isModerator =
+    session?.user?.role === "moderator" || session?.user?.role === "admin";
 
   // Compute stats from the questions
   const totalUpvotes = questions.reduce((sum, q) => sum + q.upvoteCount, 0);
@@ -127,6 +132,18 @@ export default async function OfficialPage({ params }: PageProps) {
                 {answeredCount} answered
               </span>
             )}
+          </div>
+        )}
+
+        {/* Delivery threshold editor (moderators only) */}
+        {isModerator && (
+          <div className="mb-6">
+            <DeliveryThresholdEditor
+              officialId={official.id}
+              officialName={official.name}
+              initialThreshold={official.deliveryThreshold}
+              initialType={official.deliveryThresholdType}
+            />
           </div>
         )}
 

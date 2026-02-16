@@ -1,10 +1,12 @@
-const CONSTITUENT_THRESHOLD = 5;
+const DEFAULT_THRESHOLD = 5;
 
 interface SignatureCountsProps {
   total: number;
   constituent: number;
   supporting: number;
   isAnswered: boolean;
+  deliveryThreshold?: number | null;
+  deliveryThresholdType?: string;
 }
 
 export function SignatureCounts({
@@ -12,9 +14,17 @@ export function SignatureCounts({
   constituent,
   supporting,
   isAnswered,
+  deliveryThreshold,
+  deliveryThresholdType = "constituent",
 }: SignatureCountsProps) {
-  const progress = Math.min(constituent / CONSTITUENT_THRESHOLD, 1);
-  const reached = constituent >= CONSTITUENT_THRESHOLD;
+  const threshold = deliveryThreshold ?? DEFAULT_THRESHOLD;
+  const isSupporter = deliveryThresholdType === "supporter";
+  const currentCount = isSupporter ? total : constituent;
+  const progress = Math.min(currentCount / threshold, 1);
+  const reached = currentCount >= threshold;
+  const remaining = threshold - currentCount;
+
+  const countLabel = isSupporter ? "total" : "constituent";
 
   return (
     <div className="rounded-lg border border-gray-200 bg-white p-5">
@@ -42,9 +52,11 @@ export function SignatureCounts({
         <>
           <div className="mb-2">
             <div className="flex justify-between text-xs text-gray-500">
-              <span>Constituent signatures for delivery</span>
               <span>
-                {constituent} / {CONSTITUENT_THRESHOLD}
+                {isSupporter ? "Total" : "Constituent"} signatures for delivery
+              </span>
+              <span>
+                {currentCount} / {threshold}
               </span>
             </div>
             <div className="mt-1 h-2 overflow-hidden rounded-full bg-gray-100">
@@ -56,8 +68,8 @@ export function SignatureCounts({
           </div>
           <p className="text-xs text-gray-500">
             {reached
-              ? "Constituent threshold reached — this question qualifies for delivery."
-              : `${CONSTITUENT_THRESHOLD - constituent} more constituent ${CONSTITUENT_THRESHOLD - constituent === 1 ? "signature" : "signatures"} needed for delivery to the official.`}
+              ? `${isSupporter ? "Supporter" : "Constituent"} threshold reached — this question qualifies for delivery.`
+              : `${remaining} more ${countLabel} ${remaining === 1 ? "signature" : "signatures"} needed for delivery to the official.`}
           </p>
         </>
       )}
