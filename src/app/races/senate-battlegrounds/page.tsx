@@ -1,89 +1,12 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { RATINGS } from "./data";
 
 export const metadata: Metadata = {
   title: "Senate Battlegrounds 2026 - AskThem",
   description:
     "Competitive U.S. Senate races in the 2026 midterm cycle, rated by the Cook Political Report.",
 };
-
-// ── Cook Political Report Senate Race Ratings ───────────────────────
-// According to Cook Political Report, as of Feb. 16, 2026
-// Source: https://www.cookpolitical.com/ratings/senate-race-ratings
-//
-// 35 seats up in 2026 (23 R, 12 D + 2 special elections)
-// Democrats need net +4 to retake majority.
-
-const LIKELY_D = [
-  "MN: OPEN",
-];
-
-const LEAN_D = [
-  "NH: OPEN",
-];
-
-const TOSS_UP = [
-  "GA: Ossoff",
-  "ME: Collins",
-  "MI: OPEN",
-  "NC: OPEN",
-];
-
-const LEAN_R = [
-  "AK: Sullivan",
-  "OH: Husted",
-];
-
-const LIKELY_R = [
-  "IA: OPEN",
-  "TX: Cornyn",
-];
-
-type RatingCategory = {
-  label: string;
-  color: string;
-  bgColor: string;
-  borderColor: string;
-  races: string[];
-};
-
-const RATINGS: RatingCategory[] = [
-  {
-    label: "Likely D",
-    color: "text-blue-800",
-    bgColor: "bg-blue-50",
-    borderColor: "border-blue-200",
-    races: LIKELY_D,
-  },
-  {
-    label: "Lean D",
-    color: "text-blue-700",
-    bgColor: "bg-blue-50/50",
-    borderColor: "border-blue-100",
-    races: LEAN_D,
-  },
-  {
-    label: "Toss-Up",
-    color: "text-purple-800",
-    bgColor: "bg-purple-50",
-    borderColor: "border-purple-200",
-    races: TOSS_UP,
-  },
-  {
-    label: "Lean R",
-    color: "text-red-700",
-    bgColor: "bg-red-50/50",
-    borderColor: "border-red-100",
-    races: LEAN_R,
-  },
-  {
-    label: "Likely R",
-    color: "text-red-800",
-    bgColor: "bg-red-50",
-    borderColor: "border-red-200",
-    races: LIKELY_R,
-  },
-];
 
 export default function SenateBattlegroundsPage() {
   const totalCompetitive = RATINGS.reduce((sum, r) => sum + r.races.length, 0);
@@ -175,12 +98,19 @@ export default function SenateBattlegroundsPage() {
               </h2>
               <div className="space-y-2">
                 {rating.races.map((race) => (
-                  <div
-                    key={race}
-                    className="rounded bg-white/70 px-3 py-2 text-sm text-gray-800"
+                  <Link
+                    key={race.slug}
+                    href={`/races/senate-battlegrounds/${race.slug}`}
+                    className="block rounded bg-white/70 px-3 py-2 text-sm text-gray-800 transition-colors hover:bg-white hover:shadow-sm"
                   >
-                    {race}
-                  </div>
+                    {race.state}:{" "}
+                    {race.isOpen
+                      ? race.name
+                        ? `OPEN (${race.name})`
+                        : "OPEN"
+                      : race.name}
+                    <span className="ml-1 text-indigo-400">&rarr;</span>
+                  </Link>
                 ))}
               </div>
             </div>
