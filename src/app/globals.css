@@ -23,6 +23,19 @@
   --color-indigo-800: #376C7B;
   --color-indigo-900: #325A66;
   --color-indigo-950: #1E3840;
+
+  /* AskThem 2014 orange accent — CTA buttons & highlights */
+  --color-orange-50: #FFF7ED;
+  --color-orange-100: #FFEDD5;
+  --color-orange-200: #FED7AA;
+  --color-orange-300: #FDBA74;
+  --color-orange-400: #FB923C;
+  --color-orange-500: #F97316;
+  --color-orange-600: #E87722;
+  --color-orange-700: #C2631A;
+  --color-orange-800: #9A4F15;
+  --color-orange-900: #7C4012;
+  --color-orange-950: #431407;
 }
 
 @media (prefers-color-scheme: dark) {

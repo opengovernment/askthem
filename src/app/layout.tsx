@@ -53,7 +53,7 @@ export default async function RootLayout({
               </Link>
               <Link
                 href="/ask"
-                className="text-sm font-medium text-gray-600 hover:text-indigo-600"
+                className="text-sm font-medium text-gray-600 hover:text-orange-600"
               >
                 Ask a Question
               </Link>

@@ -69,7 +69,7 @@ export default async function Home() {
           <h2 className="text-2xl font-bold text-gray-900">Popular Questions</h2>
           <Link
             href="/ask"
-            className="rounded-full bg-indigo-600 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-indigo-700"
+            className="rounded-full bg-orange-600 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-orange-700"
           >
             Ask a Question
           </Link>
@@ -97,7 +97,7 @@ export default async function Home() {
           <h2 className="mb-10 text-center text-2xl font-bold text-gray-900">How AskThem Works</h2>
           <div className="grid gap-8 sm:grid-cols-3">
             <div className="text-center">
-              <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-indigo-100 text-xl font-bold text-indigo-600">
+              <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-orange-100 text-xl font-bold text-orange-600">
                 1
               </div>
               <h3 className="mb-2 font-semibold text-gray-900">Ask a Question</h3>
@@ -107,7 +107,7 @@ export default async function Home() {
               </p>
             </div>
             <div className="text-center">
-              <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-indigo-100 text-xl font-bold text-indigo-600">
+              <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-orange-100 text-xl font-bold text-orange-600">
                 2
               </div>
               <h3 className="mb-2 font-semibold text-gray-900">Upvote &amp; Share</h3>
@@ -117,7 +117,7 @@ export default async function Home() {
               </p>
             </div>
             <div className="text-center">
-              <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-indigo-100 text-xl font-bold text-indigo-600">
+              <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-orange-100 text-xl font-bold text-orange-600">
                 3
               </div>
               <h3 className="mb-2 font-semibold text-gray-900">Get Answers</h3>
@@ -136,7 +136,7 @@ export default async function Home() {
 function StatCard({ label, value }: { label: string; value: number }) {
   return (
     <div className="text-center">
-      <p className="text-2xl font-bold text-indigo-600">{value.toLocaleString()}</p>
+      <p className="text-2xl font-bold text-orange-600">{value.toLocaleString()}</p>
       <p className="text-sm text-gray-500">{label}</p>
     </div>
   );
