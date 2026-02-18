@@ -16,7 +16,7 @@ interface QuestionCardProps {
     districtTag: string;
     createdAt: Date;
     author: { id: string; name: string; city: string | null; state: string | null; isProfilePublic?: boolean };
-    official: { id: string; name: string; title: string; photoUrl?: string | null; _count?: { questions: number } };
+    official: { id: string; name: string; title: string; photoUrl?: string | null; isVerifiedResponder?: boolean; _count?: { questions: number } };
     categoryTags: { tag: string }[];
     group?: { id: string; name: string; slug: string; isVerified: boolean } | null;
   };
@@ -57,6 +57,14 @@ export function QuestionCard({ question }: QuestionCardProps) {
               <OfficialAvatar name={question.official.name} photoUrl={question.official.photoUrl ?? null} size="sm" />
               To: {question.official.name} ({question.official.title})
             </Link>
+            {question.official.isVerifiedResponder && (
+              <span className="inline-flex items-center gap-0.5 rounded-full bg-green-50 px-2 py-0.5 text-[10px] font-semibold text-green-700" title="Verified Responder — this official actively answers on AskThem">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-3 w-3">
+                  <path fillRule="evenodd" d="M16.403 12.652a3 3 0 000-5.304 3 3 0 00-3.75-3.751 3 3 0 00-5.305 0 3 3 0 00-3.751 3.75 3 3 0 000 5.305 3 3 0 003.75 3.751 3 3 0 005.305 0 3 3 0 003.751-3.75zm-2.546-4.46a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" />
+                </svg>
+                Verified
+              </span>
+            )}
             {question.official._count && (
               <ResponsivenessBadge answeredCount={question.official._count.questions} />
             )}
