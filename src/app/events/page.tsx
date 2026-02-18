@@ -134,6 +134,40 @@ export default async function EventsPage() {
           )}
         </section>
 
+        {/* AMA / Live Q&A placeholder */}
+        <section id="ama" className="mb-10">
+          <div className="rounded-lg border border-purple-200 bg-purple-50 p-6">
+            <div className="mb-3 flex items-center gap-2">
+              <span className="rounded-full bg-purple-200 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-purple-700">
+                Coming Soon
+              </span>
+              <h2 className="text-lg font-semibold text-purple-900">Live Q&amp;A Events</h2>
+            </div>
+            <p className="mb-3 leading-relaxed text-purple-800">
+              We&apos;re building the ability to hold live, online Ask Me Anything (AMA) sessions
+              with your elected officials. During a live Q&amp;A, constituents can submit questions
+              in real time, upvote the ones that matter most, and watch as officials respond directly.
+            </p>
+            <ul className="mb-4 space-y-1.5 text-sm text-purple-700">
+              <li className="flex items-start gap-2">
+                <span className="mt-0.5 text-purple-400">&bull;</span>
+                Submit and upvote questions during a live session
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="mt-0.5 text-purple-400">&bull;</span>
+                Join a moderated discussion thread alongside the Q&amp;A
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="mt-0.5 text-purple-400">&bull;</span>
+                Catch up on past AMAs with full question-and-answer transcripts
+              </li>
+            </ul>
+            <p className="text-sm text-purple-600">
+              Stay tuned &mdash; the first live Q&amp;A events will be announced here soon.
+            </p>
+          </div>
+        </section>
+
         {/* Past events */}
         {past.length > 0 && (
           <section>

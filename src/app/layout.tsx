@@ -112,6 +112,9 @@ export default async function RootLayout({
               <Link href="/events" className="text-gray-500 hover:text-indigo-600">
                 Events
               </Link>
+              <Link href="/events#ama" className="text-gray-500 hover:text-indigo-600">
+                Live Q&amp;A
+              </Link>
               <Link href="/groups" className="text-gray-500 hover:text-indigo-600">
                 Groups
               </Link>
