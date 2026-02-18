@@ -4,6 +4,14 @@ import { useState } from "react";
 import Link from "next/link";
 import { SignerCommentForm } from "./SignerComments";
 
+interface OfficialSummary {
+  id: string;
+  name: string;
+  title: string;
+  state: string;
+  district: string | null;
+}
+
 interface UpvoteButtonProps {
   questionId: string;
   initialCount: number;
@@ -41,7 +49,8 @@ export function UpvoteButton({ questionId, initialCount, questionText, officialN
   const [hasUpvoted, setHasUpvoted] = useState(false);
   const [isConstituent, setIsConstituent] = useState<boolean | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [gateReason, setGateReason] = useState<"sign_in" | "address" | null>(null);
+  const [gateReason, setGateReason] = useState<"sign_in" | "address" | "not_constituent" | null>(null);
+  const [yourOfficials, setYourOfficials] = useState<OfficialSummary[]>([]);
   const [showSharePrompt, setShowSharePrompt] = useState(false);
 
   async function handleUpvote() {
@@ -76,7 +85,10 @@ export function UpvoteButton({ questionId, initialCount, questionText, officialN
           setGateReason("sign_in");
         } else {
           const data = await res.json().catch(() => ({}));
-          if (data.addressRequired) {
+          if (data.notConstituent) {
+            setGateReason("not_constituent");
+            setYourOfficials(data.yourOfficials ?? []);
+          } else if (data.addressRequired) {
             setGateReason("address");
           }
         }
@@ -156,6 +168,54 @@ export function UpvoteButton({ questionId, initialCount, questionText, officialN
           >
             Verify Address
           </Link>
+          <button
+            onClick={() => setGateReason(null)}
+            className="mt-2 block w-full text-center text-xs text-gray-400 hover:text-gray-600"
+          >
+            Dismiss
+          </button>
+        </div>
+      )}
+
+      {/* Gate callout — not a constituent of this official */}
+      {gateReason === "not_constituent" && (
+        <div className="absolute left-1/2 top-full z-10 mt-2 w-72 -translate-x-1/2 animate-[fadeSlideIn_0.25s_ease-out] rounded-lg border border-indigo-200 bg-white p-4 shadow-lg">
+          <div className="absolute -top-2 left-1/2 h-3 w-3 -translate-x-1/2 rotate-45 border-l border-t border-indigo-200 bg-white" />
+          <p className="mb-1 text-center text-sm font-semibold text-gray-800">
+            This one&apos;s not your rep!
+          </p>
+          <p className="mb-3 text-center text-xs text-gray-500">
+            You can only sign questions to your own elected officials. But the good news? Your reps are waiting to hear from you:
+          </p>
+          {yourOfficials.length > 0 ? (
+            <div className="max-h-40 space-y-1.5 overflow-y-auto">
+              {yourOfficials.map((o) => (
+                <Link
+                  key={o.id}
+                  href={`/officials/${o.id}`}
+                  className="flex items-center gap-2 rounded-md border border-gray-100 bg-indigo-50 px-3 py-2 text-left transition-colors hover:bg-indigo-100"
+                >
+                  <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-indigo-200 text-[10px] font-bold text-indigo-800">
+                    {o.name.charAt(0)}
+                  </span>
+                  <span className="min-w-0 flex-1">
+                    <span className="block truncate text-xs font-medium text-indigo-800">{o.name}</span>
+                    <span className="block truncate text-[10px] text-gray-500">{o.title}</span>
+                  </span>
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="h-3 w-3 shrink-0 text-indigo-400">
+                    <path fillRule="evenodd" d="M2 8a.75.75 0 0 1 .75-.75h8.69L8.22 4.03a.75.75 0 0 1 1.06-1.06l4.5 4.5a.75.75 0 0 1 0 1.06l-4.5 4.5a.75.75 0 0 1-1.06-1.06l3.22-3.22H2.75A.75.75 0 0 1 2 8Z" clipRule="evenodd" />
+                  </svg>
+                </Link>
+              ))}
+            </div>
+          ) : (
+            <Link
+              href="/questions"
+              className="block rounded-full bg-indigo-600 px-4 py-2 text-center text-sm font-medium text-white hover:bg-indigo-700"
+            >
+              Browse all questions
+            </Link>
+          )}
           <button
             onClick={() => setGateReason(null)}
             className="mt-2 block w-full text-center text-xs text-gray-400 hover:text-gray-600"

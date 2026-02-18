@@ -54,6 +54,28 @@ export async function POST(request: NextRequest) {
     where: { userId_officialId: { userId: user.id, officialId: question.officialId } },
   }));
 
+  // Block non-constituents: they can only sign questions to their own officials
+  if (!isConstituent) {
+    const userDistricts = await prisma.userDistrict.findMany({
+      where: { userId: user.id },
+      include: { official: { select: { id: true, name: true, title: true, state: true, district: true } } },
+    });
+    return NextResponse.json(
+      {
+        error: "You can only sign questions to your own elected officials.",
+        notConstituent: true,
+        yourOfficials: userDistricts.map((d) => ({
+          id: d.official.id,
+          name: d.official.name,
+          title: d.official.title,
+          state: d.official.state,
+          district: d.official.district,
+        })),
+      },
+      { status: 403 },
+    );
+  }
+
   await prisma.$transaction([
     prisma.upvote.create({ data: { userId: user.id, questionId, isConstituent } }),
     prisma.question.update({
