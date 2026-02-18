@@ -35,12 +35,13 @@ export async function POST(request: NextRequest) {
   }
 
   const body = await request.json();
-  const { officialId, text, tags, groupId, videoUrl } = body as {
+  const { officialId, text, tags, groupId, videoUrl, eventId } = body as {
     officialId?: string;
     text?: string;
     tags?: string[];
     groupId?: string;
     videoUrl?: string;
+    eventId?: string;
   };
 
   // Validate required fields
@@ -104,6 +105,22 @@ export async function POST(request: NextRequest) {
     }
   }
 
+  // Validate eventId if provided — event must exist and be accepting questions
+  let validatedEventId: string | undefined;
+  if (eventId && typeof eventId === "string") {
+    const event = await prisma.event.findUnique({ where: { id: eventId } });
+    if (!event) {
+      return NextResponse.json({ error: "Event not found" }, { status: 404 });
+    }
+    if (!event.acceptingQuestions) {
+      return NextResponse.json({ error: "This event is no longer accepting questions." }, { status: 403 });
+    }
+    if (event.officialId !== officialId) {
+      return NextResponse.json({ error: "Official does not match the event." }, { status: 400 });
+    }
+    validatedEventId = eventId;
+  }
+
   // Build district tag from official info
   const districtTag = official.district
     ? `${official.state}-${official.district}`
@@ -118,6 +135,7 @@ export async function POST(request: NextRequest) {
       status: "pending_review",
       videoUrl: validatedVideoUrl,
       groupId: groupId || undefined,
+      eventId: validatedEventId,
       categoryTags: {
         create: tags.map((tag) => ({ tag })),
       },

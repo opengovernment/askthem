@@ -18,7 +18,16 @@ interface GroupOption {
   name: string;
 }
 
-export function AskForm() {
+interface AskFormProps {
+  /** When provided, the question is linked to this event */
+  eventId?: string;
+  /** When provided, locks the official selector to this ID */
+  lockedOfficialId?: string;
+  /** When provided, shows the event name in the header context */
+  eventName?: string;
+}
+
+export function AskForm({ eventId: propEventId, lockedOfficialId, eventName }: AskFormProps = {}) {
   const searchParams = useSearchParams();
   const [officials, setOfficials] = useState<OfficialOption[]>([]);
   const [selectedOfficial, setSelectedOfficial] = useState("");
@@ -32,13 +41,16 @@ export function AskForm() {
   const [groups, setGroups] = useState<GroupOption[]>([]);
   const [selectedGroupId, setSelectedGroupId] = useState("");
 
+  // Resolve eventId from prop or URL search param
+  const eventId = propEventId || searchParams.get("eventId") || undefined;
+
   useEffect(() => {
     fetch("/api/officials")
       .then((res) => res.json())
       .then((data: OfficialOption[]) => {
         setOfficials(data);
-        // Pre-select official from ?official=<id> query param
-        const preselect = searchParams.get("official");
+        // Pre-select official from prop or ?official=<id> query param
+        const preselect = lockedOfficialId || searchParams.get("official");
         if (preselect && data.some((o) => o.id === preselect)) {
           setSelectedOfficial(preselect);
         }
@@ -75,6 +87,7 @@ export function AskForm() {
           tags: selectedTags,
           groupId: selectedGroupId || undefined,
           videoUrl: videoUrl.trim() || undefined,
+          eventId: eventId || undefined,
         }),
       });
 

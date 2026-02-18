@@ -17,6 +17,8 @@ interface EventItem {
   slug: string;
   description: string;
   status: string;
+  isAma: boolean;
+  acceptingQuestions: boolean;
   startsAt: string;
   endsAt: string | null;
   location: string | null;
@@ -58,6 +60,7 @@ function CreateEventForm({ officials }: { officials: Official[] }) {
       location: form.get("location") as string,
       startsAt: form.get("startsAt") as string,
       endsAt: (form.get("endsAt") as string) || undefined,
+      isAma: form.get("isAma") === "on",
     };
 
     try {
@@ -175,6 +178,21 @@ function CreateEventForm({ officials }: { officials: Official[] }) {
             />
           </div>
         </div>
+
+        <div className="flex items-start gap-3 rounded-md border border-indigo-100 bg-indigo-50 p-3">
+          <input
+            id="isAma"
+            name="isAma"
+            type="checkbox"
+            className="mt-0.5 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+          />
+          <label htmlFor="isAma" className="text-sm">
+            <span className="font-medium text-indigo-900">AMA (Ask Me Anything)</span>
+            <span className="block text-xs text-indigo-700">
+              Enables live Q&amp;A mode with inline question submission, moderated comments, and a live banner during the session.
+            </span>
+          </label>
+        </div>
       </div>
 
       <button
@@ -255,7 +273,12 @@ function EventCard({ event }: { event: EventItem }) {
         </Link>
       </div>
 
-      <h4 className="mb-1 text-base font-semibold text-gray-900">{event.title}</h4>
+      <div className="mb-1 flex items-center gap-2">
+        <h4 className="text-base font-semibold text-gray-900">{event.title}</h4>
+        {event.isAma && (
+          <span className="rounded-full bg-purple-100 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-purple-700">AMA</span>
+        )}
+      </div>
       <p className="mb-2 line-clamp-2 text-sm text-gray-600">{event.description}</p>
 
       <div className="mb-3 flex flex-wrap items-center gap-3 text-sm text-gray-500">
@@ -278,6 +301,42 @@ function EventCard({ event }: { event: EventItem }) {
               {btn.label}
             </button>
           ))}
+        </div>
+      )}
+
+      {/* AMA: toggle question acceptance during live events */}
+      {event.isAma && event.status === "live" && (
+        <div className="mt-3 flex items-center gap-2 border-t border-gray-100 pt-3">
+          <button
+            onClick={async () => {
+              setLoading(true);
+              try {
+                const res = await fetch("/api/events/manage", {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({
+                    action: "toggle_questions",
+                    eventId: event.id,
+                    acceptingQuestions: !event.acceptingQuestions,
+                  }),
+                });
+                if (res.ok) router.refresh();
+              } finally {
+                setLoading(false);
+              }
+            }}
+            disabled={loading}
+            className={`rounded-md px-3 py-1.5 text-sm font-medium disabled:opacity-50 ${
+              event.acceptingQuestions
+                ? "border border-amber-300 bg-amber-50 text-amber-700 hover:bg-amber-100"
+                : "border border-green-300 bg-green-50 text-green-700 hover:bg-green-100"
+            }`}
+          >
+            {event.acceptingQuestions ? "Close Question Submission" : "Reopen Question Submission"}
+          </button>
+          <span className="text-xs text-gray-500">
+            {event.acceptingQuestions ? "Constituents can currently submit questions" : "Question submission is paused"}
+          </span>
         </div>
       )}
     </div>

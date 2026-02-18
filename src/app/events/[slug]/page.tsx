@@ -1,6 +1,9 @@
 import { getEventBySlug, getTopQuestionsForEvent } from "@/lib/queries";
 import { QuestionCard } from "@/components/QuestionCard";
 import { OfficialAvatar } from "@/components/OfficialAvatar";
+import { AmaComments } from "@/components/AmaComments";
+import { AmaQuestionForm } from "@/components/AmaQuestionForm";
+import { auth } from "@/auth";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
@@ -37,8 +40,13 @@ export default async function EventPage({ params }: PageProps) {
   const questions = await getTopQuestionsForEvent(event.id, 20);
   const { official } = event;
   const status = statusStyles[event.status] ?? statusStyles.upcoming;
+  const session = await auth();
+  const isSignedIn = !!session?.user;
+  const isAddressVerified = !!session?.user?.isAddressVerified;
 
   const isActive = event.status === "upcoming" || event.status === "live";
+  const isLive = event.status === "live";
+  const isAmaLive = event.isAma && isLive;
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -47,12 +55,45 @@ export default async function EventPage({ params }: PageProps) {
           &larr; All events
         </Link>
 
+        {/* AMA live banner */}
+        {isAmaLive && (
+          <div className="mb-6 overflow-hidden rounded-lg border border-red-200 bg-red-50">
+            <div className="flex items-center gap-3 px-5 py-3">
+              <span className="relative flex h-3 w-3">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-400 opacity-75" />
+                <span className="relative inline-flex h-3 w-3 rounded-full bg-red-500" />
+              </span>
+              <span className="text-sm font-semibold text-red-800">
+                AMA is live &mdash; {official.name} is answering your questions
+              </span>
+            </div>
+          </div>
+        )}
+
+        {/* AMA upcoming banner */}
+        {event.isAma && event.status === "upcoming" && (
+          <div className="mb-6 rounded-lg border border-purple-200 bg-purple-50 px-5 py-3">
+            <div className="flex items-center gap-2">
+              <span className="rounded-full bg-purple-200 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-purple-700">AMA</span>
+              <span className="text-sm font-medium text-purple-800">
+                Ask Me Anything with {official.name} &mdash; starting {new Date(event.startsAt).toLocaleDateString("en-US", { month: "long", day: "numeric" })}
+              </span>
+            </div>
+            <p className="mt-1 text-xs text-purple-600">
+              Submit questions now. When the AMA goes live, {official.name.split(" ")[0]} will answer the top questions voted on by constituents.
+            </p>
+          </div>
+        )}
+
         {/* Event header */}
         <div className="mb-8 rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
           <div className="mb-3 flex flex-wrap items-center gap-2">
             <span className={`rounded-full px-3 py-1 text-sm font-medium ${status.color}`}>
               {status.label}
             </span>
+            {event.isAma && (
+              <span className="rounded-full bg-purple-100 px-2.5 py-0.5 text-xs font-bold uppercase tracking-wide text-purple-700">AMA</span>
+            )}
             <span className="text-sm text-gray-500">
               {new Date(event.startsAt).toLocaleDateString("en-US", {
                 weekday: "long",
@@ -106,6 +147,47 @@ export default async function EventPage({ params }: PageProps) {
           </div>
         </div>
 
+        {/* Inline question form for AMA events */}
+        {event.isAma && isActive && event.acceptingQuestions && (
+          <div className="mb-8">
+            <h2 className="mb-3 text-lg font-semibold text-gray-900">
+              {isLive ? "Ask a question live" : "Submit a question for the AMA"}
+            </h2>
+            {isSignedIn && isAddressVerified ? (
+              <AmaQuestionForm
+                eventId={event.id}
+                officialId={official.id}
+                officialName={official.name}
+              />
+            ) : (
+              <div className="rounded-lg border border-gray-200 bg-white p-6 text-center">
+                {!isSignedIn ? (
+                  <>
+                    <p className="mb-3 text-gray-600">Sign in to ask a question during this AMA.</p>
+                    <Link href="/auth/signin" className="inline-block rounded-full bg-indigo-600 px-6 py-2.5 text-sm font-medium text-white hover:bg-indigo-700">
+                      Sign In
+                    </Link>
+                  </>
+                ) : (
+                  <>
+                    <p className="mb-3 text-gray-600">Verify your address to ask questions.</p>
+                    <Link href="/address" className="inline-block rounded-full bg-indigo-600 px-6 py-2.5 text-sm font-medium text-white hover:bg-indigo-700">
+                      Enter Your Address
+                    </Link>
+                  </>
+                )}
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* Not accepting questions message */}
+        {event.isAma && isActive && !event.acceptingQuestions && (
+          <div className="mb-8 rounded-lg border border-amber-200 bg-amber-50 px-5 py-3 text-center text-sm text-amber-700">
+            Question submission is currently paused for this AMA. Stay tuned!
+          </div>
+        )}
+
         {/* Top questions */}
         <div className="mb-4 flex items-center justify-between">
           <h2 className="text-lg font-semibold text-gray-900">
@@ -116,9 +198,9 @@ export default async function EventPage({ params }: PageProps) {
               </span>
             )}
           </h2>
-          {isActive && (
+          {isActive && !event.isAma && (
             <Link
-              href={`/ask?event=${event.slug}&official=${official.id}`}
+              href={`/ask?eventId=${event.id}&official=${official.id}`}
               className="rounded-full bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700"
             >
               Submit a Question
@@ -129,9 +211,9 @@ export default async function EventPage({ params }: PageProps) {
         {questions.length === 0 ? (
           <div className="rounded-lg border border-gray-200 bg-white p-8 text-center">
             <p className="text-gray-500">No questions submitted for this event yet.</p>
-            {isActive && (
+            {isActive && !event.isAma && (
               <Link
-                href={`/ask?event=${event.slug}&official=${official.id}`}
+                href={`/ask?eventId=${event.id}&official=${official.id}`}
                 className="mt-2 inline-block text-indigo-600 hover:text-indigo-800"
               >
                 Be the first to ask!
@@ -150,6 +232,17 @@ export default async function EventPage({ params }: PageProps) {
                 <QuestionCard question={question} />
               </div>
             ))}
+          </div>
+        )}
+
+        {/* AMA live comment thread */}
+        {event.isAma && (event.status === "live" || event.status === "completed") && (
+          <div className="mt-10">
+            <AmaComments
+              eventId={event.id}
+              isLive={isLive}
+              isSignedIn={isSignedIn}
+            />
           </div>
         )}
       </div>

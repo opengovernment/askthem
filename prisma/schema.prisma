@@ -38,6 +38,7 @@ model User {
   emailEvents     EmailEvent[]
   adminGroups     Group[]          @relation("groupAdmin")
   groupCommOptIns GroupCommOptIn[]
+  amaComments     AmaComment[]
 }
 
 // Auth.js Account model (replaces OAuthAccount)
@@ -299,7 +300,7 @@ model GroupEndorsement {
   @@unique([questionId, groupId])
 }
 
-// ─── Events (town halls, public forums) ──────────────────────────────
+// ─── Events (town halls, public forums, AMAs) ─────────────────────────
 
 model Event {
   id          String    @id @default(cuid())
@@ -316,7 +317,26 @@ model Event {
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
 
+  // AMA mode: live, moderated Q&A session with an elected official
+  isAma              Boolean @default(false)
+  acceptingQuestions Boolean @default(true)  // moderator can close question submission mid-event
+
   questions   Question[]
+  amaComments AmaComment[]
+}
+
+// Live comments during AMA events — moderated before display
+model AmaComment {
+  id        String   @id @default(cuid())
+  eventId   String
+  event     Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  text      String
+  status    String   @default("pending") // "pending" | "approved" | "rejected"
+  createdAt DateTime @default(now())
+
+  @@index([eventId, status])
 }
 
 // ─── API Access (for future tiered API) ──────────────────────────────

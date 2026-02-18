@@ -21,13 +21,14 @@ export async function POST(request: NextRequest) {
 
   // ── Create event ──────────────────────────────────────────────────
   if (action === "create") {
-    const { title, description, officialId, location, startsAt, endsAt } = body as {
+    const { title, description, officialId, location, startsAt, endsAt, isAma } = body as {
       title?: string;
       description?: string;
       officialId?: string;
       location?: string;
       startsAt?: string;
       endsAt?: string;
+      isAma?: boolean;
     };
 
     if (!title?.trim()) {
@@ -67,6 +68,7 @@ export async function POST(request: NextRequest) {
         startsAt: new Date(startsAt),
         endsAt: endsAt ? new Date(endsAt) : null,
         createdBy: moderator.id,
+        isAma: isAma === true,
       },
     });
 
@@ -145,8 +147,32 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ id: updated.id });
   }
 
+  // ── Toggle AMA question acceptance ──────────────────────────────
+  if (action === "toggle_questions") {
+    const { eventId, acceptingQuestions } = body as { eventId?: string; acceptingQuestions?: boolean };
+
+    if (!eventId) {
+      return NextResponse.json({ error: "eventId is required" }, { status: 400 });
+    }
+    if (typeof acceptingQuestions !== "boolean") {
+      return NextResponse.json({ error: "acceptingQuestions must be a boolean" }, { status: 400 });
+    }
+
+    const event = await prisma.event.findUnique({ where: { id: eventId } });
+    if (!event) {
+      return NextResponse.json({ error: "Event not found" }, { status: 404 });
+    }
+
+    const updated = await prisma.event.update({
+      where: { id: eventId },
+      data: { acceptingQuestions },
+    });
+
+    return NextResponse.json({ id: updated.id, acceptingQuestions: updated.acceptingQuestions });
+  }
+
   return NextResponse.json(
-    { error: "Invalid action. Must be: create, update_status, or edit" },
+    { error: "Invalid action. Must be: create, update_status, edit, or toggle_questions" },
     { status: 400 },
   );
 }
