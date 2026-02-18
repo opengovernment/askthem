@@ -39,13 +39,26 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           data: { role: "admin" },
         });
       }
+
+      // Redirect users who haven't verified their address to the address page.
+      // The PrismaAdapter creates/finds the user before this callback runs,
+      // so the DB lookup is safe for both new and returning users.
+      if (user.id) {
+        const dbUser = await prisma.user.findUnique({
+          where: { id: user.id },
+          select: { isAddressVerified: true },
+        });
+        if (dbUser && !dbUser.isAddressVerified) {
+          return "/address";
+        }
+      }
+
       return true;
     },
     async redirect({ url, baseUrl }) {
-      // If user just signed in, check if they need address verification
-      // The signIn callback can't redirect directly in DB strategy,
-      // so we handle it here
       if (url.startsWith(baseUrl)) return url;
+      // Relative URLs (e.g. "/address" from signIn callback) resolve against baseUrl
+      if (url.startsWith("/")) return `${baseUrl}${url}`;
       return baseUrl;
     },
     async session({ session, user }) {

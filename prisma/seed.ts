@@ -105,6 +105,400 @@ async function main() {
     },
   });
 
+  // Second senator per state (users need 2 senators)
+  const markey = await prisma.official.create({
+    data: {
+      id: "sen-markey",
+      ciceroId: "seed-markey",
+      name: "Ed Markey",
+      title: "U.S. Senator",
+      party: "D",
+      state: "MA",
+      chamber: "senate",
+      level: "NATIONAL_UPPER",
+      email: "senator@markey.senate.gov",
+      twitter: "@SenMarkey",
+      website: "https://www.markey.senate.gov",
+    },
+  });
+
+  const cornyn = await prisma.official.create({
+    data: {
+      id: "sen-cornyn",
+      ciceroId: "seed-cornyn",
+      name: "John Cornyn",
+      title: "U.S. Senator",
+      party: "R",
+      state: "TX",
+      chamber: "senate",
+      level: "NATIONAL_UPPER",
+      email: "senator@cornyn.senate.gov",
+      twitter: "@JohnCornyn",
+      website: "https://www.cornyn.senate.gov",
+    },
+  });
+
+  const gillibrand = await prisma.official.create({
+    data: {
+      id: "sen-gillibrand",
+      ciceroId: "seed-gillibrand",
+      name: "Kirsten Gillibrand",
+      title: "U.S. Senator",
+      party: "D",
+      state: "NY",
+      chamber: "senate",
+      level: "NATIONAL_UPPER",
+      email: "senator@gillibrand.senate.gov",
+      twitter: "@SenGillibrand",
+      website: "https://www.gillibrand.senate.gov",
+    },
+  });
+
+  const casey = await prisma.official.create({
+    data: {
+      id: "sen-casey",
+      ciceroId: "seed-casey",
+      name: "Bob Casey",
+      title: "U.S. Senator",
+      party: "D",
+      state: "PA",
+      chamber: "senate",
+      level: "NATIONAL_UPPER",
+      email: "senator@casey.senate.gov",
+      twitter: "@SenBobCasey",
+      website: "https://www.casey.senate.gov",
+    },
+  });
+
+  // U.S. House representatives for remaining users
+  const mcgovern = await prisma.official.create({
+    data: {
+      id: "rep-mcgovern",
+      ciceroId: "seed-mcgovern",
+      name: "Jim McGovern",
+      title: "U.S. Representative",
+      party: "D",
+      state: "MA",
+      district: "MA-2",
+      chamber: "house",
+      level: "NATIONAL_LOWER",
+      email: "representative@mcgovern.house.gov",
+      twitter: "@RepMcGovern",
+    },
+  });
+
+  const delgado = await prisma.official.create({
+    data: {
+      id: "rep-delgado",
+      ciceroId: "seed-delgado",
+      name: "Antonio Delgado",
+      title: "U.S. Representative",
+      party: "D",
+      state: "NY",
+      district: "NY-15",
+      chamber: "house",
+      level: "NATIONAL_LOWER",
+    },
+  });
+
+  const lamb = await prisma.official.create({
+    data: {
+      id: "rep-lamb",
+      ciceroId: "seed-lamb",
+      name: "Conor Lamb",
+      title: "U.S. Representative",
+      party: "D",
+      state: "PA",
+      district: "PA-17",
+      chamber: "house",
+      level: "NATIONAL_LOWER",
+    },
+  });
+
+  // ─── State-level officials: Governors ──────────────────────────────
+  const healey = await prisma.official.create({
+    data: {
+      id: "gov-healey",
+      ciceroId: "seed-healey",
+      name: "Maura Healey",
+      title: "Governor",
+      party: "D",
+      state: "MA",
+      chamber: "state_exec",
+      level: "STATE_EXEC",
+      website: "https://www.mass.gov/governor",
+    },
+  });
+
+  const abbott = await prisma.official.create({
+    data: {
+      id: "gov-abbott",
+      ciceroId: "seed-abbott",
+      name: "Greg Abbott",
+      title: "Governor",
+      party: "R",
+      state: "TX",
+      chamber: "state_exec",
+      level: "STATE_EXEC",
+      twitter: "@GovAbbott",
+      website: "https://gov.texas.gov",
+    },
+  });
+
+  const hochul = await prisma.official.create({
+    data: {
+      id: "gov-hochul",
+      ciceroId: "seed-hochul",
+      name: "Kathy Hochul",
+      title: "Governor",
+      party: "D",
+      state: "NY",
+      chamber: "state_exec",
+      level: "STATE_EXEC",
+      twitter: "@GovKathyHochul",
+      website: "https://www.governor.ny.gov",
+    },
+  });
+
+  const shapiro = await prisma.official.create({
+    data: {
+      id: "gov-shapiro",
+      ciceroId: "seed-shapiro",
+      name: "Josh Shapiro",
+      title: "Governor",
+      party: "D",
+      state: "PA",
+      chamber: "state_exec",
+      level: "STATE_EXEC",
+      twitter: "@GovernorShapiro",
+      website: "https://www.governor.pa.gov",
+    },
+  });
+
+  // ─── State-level officials: State Senators ─────────────────────────
+  const crighton = await prisma.official.create({
+    data: {
+      id: "state-sen-crighton",
+      ciceroId: "seed-crighton",
+      name: "Brendan Crighton",
+      title: "State Senator",
+      party: "D",
+      state: "MA",
+      district: "MA-3",
+      chamber: "state_senate",
+      level: "STATE_UPPER",
+    },
+  });
+
+  const whitmire = await prisma.official.create({
+    data: {
+      id: "state-sen-whitmire",
+      ciceroId: "seed-whitmire",
+      name: "John Whitmire",
+      title: "State Senator",
+      party: "D",
+      state: "TX",
+      district: "TX-15",
+      chamber: "state_senate",
+      level: "STATE_UPPER",
+    },
+  });
+
+  const sepulveda = await prisma.official.create({
+    data: {
+      id: "state-sen-sepulveda",
+      ciceroId: "seed-sepulveda",
+      name: "Luis Sepulveda",
+      title: "State Senator",
+      party: "D",
+      state: "NY",
+      district: "NY-32",
+      chamber: "state_senate",
+      level: "STATE_UPPER",
+    },
+  });
+
+  const fontana = await prisma.official.create({
+    data: {
+      id: "state-sen-fontana",
+      ciceroId: "seed-fontana",
+      name: "Wayne Fontana",
+      title: "State Senator",
+      party: "D",
+      state: "PA",
+      district: "PA-42",
+      chamber: "state_senate",
+      level: "STATE_UPPER",
+    },
+  });
+
+  // ─── State-level officials: State Representatives ──────────────────
+  const livingstone = await prisma.official.create({
+    data: {
+      id: "state-rep-livingstone",
+      ciceroId: "seed-livingstone",
+      name: "Jay Livingstone",
+      title: "State Representative",
+      party: "D",
+      state: "MA",
+      district: "MA-8",
+      chamber: "state_house",
+      level: "STATE_LOWER",
+    },
+  });
+
+  const dutton = await prisma.official.create({
+    data: {
+      id: "state-rep-dutton",
+      ciceroId: "seed-dutton",
+      name: "Harold Dutton",
+      title: "State Representative",
+      party: "D",
+      state: "TX",
+      district: "TX-142",
+      chamber: "state_house",
+      level: "STATE_LOWER",
+    },
+  });
+
+  const burgos = await prisma.official.create({
+    data: {
+      id: "state-rep-burgos",
+      ciceroId: "seed-burgos",
+      name: "Kenny Burgos",
+      title: "State Assembly Member",
+      party: "D",
+      state: "NY",
+      district: "NY-85",
+      chamber: "state_house",
+      level: "STATE_LOWER",
+    },
+  });
+
+  const pisciottano = await prisma.official.create({
+    data: {
+      id: "state-rep-pisciottano",
+      ciceroId: "seed-pisciottano",
+      name: "Nick Pisciottano",
+      title: "State Representative",
+      party: "D",
+      state: "PA",
+      district: "PA-29",
+      chamber: "state_house",
+      level: "STATE_LOWER",
+    },
+  });
+
+  // ─── Local officials: County Executives / Commissioners ────────────
+  const suffolk_da = await prisma.official.create({
+    data: {
+      id: "local-suffolk-da",
+      ciceroId: "seed-suffolk-da",
+      name: "Kevin Hayden",
+      title: "Suffolk County District Attorney",
+      party: "D",
+      state: "MA",
+      chamber: "local",
+      level: "COUNTY",
+    },
+  });
+
+  const harris_county_judge = await prisma.official.create({
+    data: {
+      id: "local-harris-judge",
+      ciceroId: "seed-harris-judge",
+      name: "Lina Hidalgo",
+      title: "Harris County Judge",
+      party: "D",
+      state: "TX",
+      chamber: "local",
+      level: "COUNTY",
+    },
+  });
+
+  const bronx_bp = await prisma.official.create({
+    data: {
+      id: "local-bronx-bp",
+      ciceroId: "seed-bronx-bp",
+      name: "Vanessa Gibson",
+      title: "Bronx Borough President",
+      party: "D",
+      state: "NY",
+      chamber: "local",
+      level: "LOCAL_EXEC",
+    },
+  });
+
+  const allegheny_exec = await prisma.official.create({
+    data: {
+      id: "local-allegheny-exec",
+      ciceroId: "seed-allegheny-exec",
+      name: "Sara Innamorato",
+      title: "Allegheny County Executive",
+      party: "D",
+      state: "PA",
+      chamber: "local",
+      level: "COUNTY",
+    },
+  });
+
+  // ─── Local officials: City Council Members ─────────────────────────
+  const boston_council = await prisma.official.create({
+    data: {
+      id: "local-boston-council",
+      ciceroId: "seed-boston-council",
+      name: "Erin Murphy",
+      title: "Boston City Councillor At-Large",
+      party: "D",
+      state: "MA",
+      district: "At-Large",
+      chamber: "local",
+      level: "LOCAL",
+    },
+  });
+
+  const houston_council = await prisma.official.create({
+    data: {
+      id: "local-houston-council",
+      ciceroId: "seed-houston-council",
+      name: "Abbie Kamin",
+      title: "Houston City Council Member",
+      party: "D",
+      state: "TX",
+      district: "District C",
+      chamber: "local",
+      level: "LOCAL",
+    },
+  });
+
+  const nyc_council = await prisma.official.create({
+    data: {
+      id: "local-nyc-council",
+      ciceroId: "seed-nyc-council",
+      name: "Pierina Sanchez",
+      title: "NYC Council Member",
+      party: "D",
+      state: "NY",
+      district: "District 14",
+      chamber: "local",
+      level: "LOCAL",
+    },
+  });
+
+  const pittsburgh_council = await prisma.official.create({
+    data: {
+      id: "local-pgh-council",
+      ciceroId: "seed-pgh-council",
+      name: "Bobby Wilson",
+      title: "Pittsburgh City Council Member",
+      party: "D",
+      state: "PA",
+      district: "District 1",
+      chamber: "local",
+      level: "LOCAL",
+    },
+  });
+
   // Create sample users
   const maria = await prisma.user.create({
     data: {
@@ -200,16 +594,64 @@ async function main() {
   });
 
   // Map users to their officials (UserDistrict)
+  // Each verified user gets multi-level representation:
+  // 2 US senators, 1 US rep, governor, 1 state senator, 1 state rep,
+  // county official, city council member (~8-10 officials each)
   await prisma.userDistrict.createMany({
     data: [
+      // Maria Rodriguez (Boston, MA) — 8 officials
       { userId: maria.id, officialId: warren.id },
+      { userId: maria.id, officialId: markey.id },
+      { userId: maria.id, officialId: mcgovern.id },
+      { userId: maria.id, officialId: healey.id },
+      { userId: maria.id, officialId: crighton.id },
+      { userId: maria.id, officialId: livingstone.id },
+      { userId: maria.id, officialId: suffolk_da.id },
+      { userId: maria.id, officialId: boston_council.id },
+
+      // Sarah Mitchell (Cambridge, MA) — 8 officials (same MA delegation)
       { userId: sarah.id, officialId: warren.id },
+      { userId: sarah.id, officialId: markey.id },
+      { userId: sarah.id, officialId: mcgovern.id },
+      { userId: sarah.id, officialId: healey.id },
+      { userId: sarah.id, officialId: crighton.id },
+      { userId: sarah.id, officialId: livingstone.id },
+      { userId: sarah.id, officialId: suffolk_da.id },
+      { userId: sarah.id, officialId: boston_council.id },
+
+      // James Chen (Houston, TX) — 8 officials
       { userId: james.id, officialId: cruz.id },
+      { userId: james.id, officialId: cornyn.id },
       { userId: james.id, officialId: crenshaw.id },
+      { userId: james.id, officialId: abbott.id },
+      { userId: james.id, officialId: whitmire.id },
+      { userId: james.id, officialId: dutton.id },
+      { userId: james.id, officialId: harris_county_judge.id },
+      { userId: james.id, officialId: houston_council.id },
+
+      // Robert Kim (Houston, TX) — NOT verified, but partial mapping for demo
       { userId: robert.id, officialId: cruz.id },
       { userId: robert.id, officialId: crenshaw.id },
+
+      // Aaliyah Washington (Bronx, NY) — 8 officials
+      { userId: aaliyah.id, officialId: gillibrand.id },
+      { userId: aaliyah.id, officialId: delgado.id },
       { userId: aaliyah.id, officialId: aoc.id },
+      { userId: aaliyah.id, officialId: hochul.id },
+      { userId: aaliyah.id, officialId: sepulveda.id },
+      { userId: aaliyah.id, officialId: burgos.id },
+      { userId: aaliyah.id, officialId: bronx_bp.id },
+      { userId: aaliyah.id, officialId: nyc_council.id },
+
+      // Tom Kowalski (Pittsburgh, PA) — 8 officials
       { userId: tom.id, officialId: fetterman.id },
+      { userId: tom.id, officialId: casey.id },
+      { userId: tom.id, officialId: lamb.id },
+      { userId: tom.id, officialId: shapiro.id },
+      { userId: tom.id, officialId: fontana.id },
+      { userId: tom.id, officialId: pisciottano.id },
+      { userId: tom.id, officialId: allegheny_exec.id },
+      { userId: tom.id, officialId: pittsburgh_council.id },
     ],
   });
 
@@ -404,6 +846,7 @@ async function main() {
   console.log("Seed data created successfully!");
   console.log(`  Officials: ${await prisma.official.count()}`);
   console.log(`  Users: ${await prisma.user.count()}`);
+  console.log(`  UserDistricts: ${await prisma.userDistrict.count()}`);
   console.log(`  Questions: ${await prisma.question.count()}`);
   console.log(`  Upvotes: ${await prisma.upvote.count()}`);
   console.log(`  Answers: ${await prisma.answer.count()}`);
