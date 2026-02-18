@@ -103,20 +103,17 @@ export default async function RootLayout({
               <Link href="/about" className="text-gray-500 hover:text-indigo-600">
                 About
               </Link>
-              <Link href="/races" className="text-gray-500 hover:text-indigo-600">
-                Races
-              </Link>
-              <Link href="/states" className="text-gray-500 hover:text-indigo-600">
-                States
-              </Link>
               <Link href="/events" className="text-gray-500 hover:text-indigo-600">
                 Events
               </Link>
               <Link href="/events#ama" className="text-gray-500 hover:text-indigo-600">
                 Live Q&amp;A
               </Link>
-              <Link href="/groups" className="text-gray-500 hover:text-indigo-600">
-                Groups
+              <Link href="/races" className="text-gray-500 hover:text-indigo-600">
+                Races
+              </Link>
+              <Link href="/states" className="text-gray-500 hover:text-indigo-600">
+                States
               </Link>
               <Link href="/widgets" className="text-gray-500 hover:text-indigo-600">
                 Widgets
