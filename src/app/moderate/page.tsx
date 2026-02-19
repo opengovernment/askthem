@@ -1,5 +1,6 @@
 import { getQuestionsByStatus, getQuestionCounts, getConstituentCountsForQuestions } from "@/lib/queries";
 import { ModerationQueue } from "@/components/ModerationQueue";
+import { UserManagement } from "@/components/UserManagement";
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 import Link from "next/link";
@@ -102,6 +103,15 @@ export default async function ModeratePage({ searchParams }: PageProps) {
         ) : (
           <ModerationQueue questions={questions} activeTab={activeTab} constituentCounts={constituentCounts} />
         )}
+
+        {/* User Management */}
+        <section className="mt-12 border-t border-gray-200 pt-8">
+          <h2 className="mb-1 text-xl font-bold text-gray-900">User Management</h2>
+          <p className="mb-4 text-sm text-gray-500">
+            Search for users by email or name to ban, pause, or {session.user.role === "admin" ? "delete" : "manage"} accounts.
+          </p>
+          <UserManagement isAdmin={session.user.role === "admin"} />
+        </section>
       </div>
     </div>
   );

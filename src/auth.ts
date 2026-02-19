@@ -52,16 +52,30 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         });
       }
 
-      // Redirect users who haven't verified their address to the address page.
-      // The PrismaAdapter creates/finds the user before this callback runs,
-      // so the DB lookup is safe for both new and returning users.
+      // Check account status (banned / paused) and address verification
       if (user.id) {
         const dbUser = await prisma.user.findUnique({
           where: { id: user.id },
-          select: { isAddressVerified: true },
+          select: { isAddressVerified: true, status: true, pausedUntil: true },
         });
-        if (dbUser && !dbUser.isAddressVerified) {
-          return "/address";
+
+        if (dbUser) {
+          // Block banned users from signing in
+          if (dbUser.status === "banned") {
+            return false;
+          }
+
+          // Auto-resume expired pauses
+          if (dbUser.status === "paused" && dbUser.pausedUntil && dbUser.pausedUntil <= new Date()) {
+            await prisma.user.update({
+              where: { id: user.id },
+              data: { status: "active", pausedUntil: null },
+            });
+          }
+
+          if (!dbUser.isAddressVerified) {
+            return "/address";
+          }
         }
       }
 
