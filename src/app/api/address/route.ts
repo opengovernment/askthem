@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { requireAuth } from "@/lib/session";
 import { prisma } from "@/lib/prisma";
 import { lookupOfficialsByAddress, isEnabled } from "@/lib/cicero";
+import { syncPersonToAN } from "@/lib/action-network";
 
 export async function POST(req: NextRequest) {
   const user = await requireAuth();
@@ -153,6 +154,31 @@ export async function POST(req: NextRequest) {
 
     return officials;
   });
+
+  // Sync full address to Action Network (fire-and-forget, don't block response)
+  if (user.email && user.name) {
+    const houseRep = upsertedOfficials.find((o) => o.chamber === "house");
+    const districtTag = houseRep?.state && houseRep?.district
+      ? `${houseRep.state}-${houseRep.district}`
+      : undefined;
+
+    syncPersonToAN({
+      email: user.email,
+      name: user.name,
+      street: street.trim(),
+      city: city.trim(),
+      state,
+      zip: zip.trim(),
+      districtTag,
+    }).then((anId) => {
+      if (anId) {
+        prisma.user.update({
+          where: { id: user.id },
+          data: { actionNetworkId: anId },
+        }).catch(() => {});
+      }
+    }).catch(() => {});
+  }
 
   return NextResponse.json({
     officials: upsertedOfficials.map((o) => ({

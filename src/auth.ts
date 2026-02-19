@@ -2,6 +2,7 @@ import NextAuth from "next-auth";
 import Google from "next-auth/providers/google";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { prisma } from "@/lib/prisma";
+import { syncPersonToAN } from "@/lib/action-network";
 
 // Emails that are automatically promoted to admin on sign-in
 const ADMIN_EMAILS = ["davidrussellmoore@gmail.com"];
@@ -27,6 +28,17 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           where: { id: user.id! },
           data: { role: "admin" },
         });
+      }
+
+      // Sync new user to Action Network (email + name only at registration)
+      if (user.email && user.name) {
+        const anId = await syncPersonToAN({ email: user.email, name: user.name });
+        if (anId && user.id) {
+          await prisma.user.update({
+            where: { id: user.id },
+            data: { actionNetworkId: anId },
+          });
+        }
       }
     },
   },

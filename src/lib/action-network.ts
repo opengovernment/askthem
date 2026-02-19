@@ -26,7 +26,12 @@ interface ANPersonPayload {
     given_name: string;
     family_name: string;
     email_addresses: { address: string }[];
-    postal_addresses?: { postal_code?: string; locality?: string; region?: string }[];
+    postal_addresses?: {
+      address_lines?: string[];
+      postal_code?: string;
+      locality?: string;
+      region?: string;
+    }[];
   };
   add_tags?: string[];
   remove_tags?: string[];
@@ -81,6 +86,7 @@ async function anFetch(path: string, body: unknown): Promise<{ ok: boolean; data
 export async function syncPersonToAN(user: {
   email: string;
   name: string;
+  street?: string | null;
   state?: string | null;
   city?: string | null;
   zip?: string | null;
@@ -101,9 +107,10 @@ export async function syncPersonToAN(user: {
   };
 
   // Add address info if available
-  if (user.zip || user.city || user.state) {
+  if (user.zip || user.city || user.state || user.street) {
     payload.person.postal_addresses = [
       {
+        address_lines: user.street ? [user.street] : undefined,
         postal_code: user.zip ?? undefined,
         locality: user.city ?? undefined,
         region: user.state ?? undefined,
