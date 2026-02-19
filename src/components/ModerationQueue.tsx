@@ -5,6 +5,13 @@ import { useRouter } from "next/navigation";
 import { AnswerForm } from "@/components/AnswerForm";
 import { QuestionVideo } from "@/components/QuestionVideo";
 
+interface QuestionFlag {
+  id: string;
+  reason: string;
+  createdAt: Date;
+  user: { id: string; name: string | null; email: string };
+}
+
 interface Question {
   id: string;
   text: string;
@@ -22,6 +29,7 @@ interface Question {
     deliveryThresholdType: string;
   };
   categoryTags: { tag: string }[];
+  flags?: QuestionFlag[];
 }
 
 interface ModerationQueueProps {
@@ -222,6 +230,58 @@ function ModerationCard({
           compact
         />
       )}
+
+      {/* Flag reports for the flagged tab */}
+      {activeTab === "flagged" && question.flags && question.flags.length > 0 && !result && (
+        <FlagReports questionId={question.id} flags={question.flags} />
+      )}
+    </div>
+  );
+}
+
+function FlagReports({ questionId, flags }: { questionId: string; flags: QuestionFlag[] }) {
+  const router = useRouter();
+  const [dismissing, setDismissing] = useState(false);
+
+  async function handleDismiss() {
+    setDismissing(true);
+    try {
+      await fetch("/api/moderate/flags", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ questionId, action: "dismiss" }),
+      });
+      router.refresh();
+    } catch {
+      // ignore
+    } finally {
+      setDismissing(false);
+    }
+  }
+
+  return (
+    <div className="mt-4 rounded-lg border border-red-100 bg-red-50 p-4">
+      <p className="mb-2 text-sm font-medium text-red-800">
+        {flags.length} {flags.length === 1 ? "report" : "reports"}
+      </p>
+      <div className="space-y-2">
+        {flags.map((flag) => (
+          <div key={flag.id} className="rounded bg-white px-3 py-2 text-sm">
+            <p className="text-gray-800">&ldquo;{flag.reason}&rdquo;</p>
+            <p className="mt-1 text-xs text-gray-400">
+              {flag.user.name ?? flag.user.email} &middot;{" "}
+              {new Date(flag.createdAt).toLocaleDateString()}
+            </p>
+          </div>
+        ))}
+      </div>
+      <button
+        onClick={handleDismiss}
+        disabled={dismissing}
+        className="mt-3 rounded-md bg-gray-600 px-4 py-2 text-sm font-medium text-white hover:bg-gray-700 disabled:opacity-50"
+      >
+        {dismissing ? "Dismissing..." : "Dismiss Reports"}
+      </button>
     </div>
   );
 }

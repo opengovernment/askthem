@@ -10,6 +10,7 @@ import { GroupEndorsementBadge } from "@/components/GroupEndorsementBadge";
 import { AddEndorsementButton } from "@/components/AddEndorsementButton";
 import { SignerComments } from "@/components/SignerComments";
 import { QuestionVideo } from "@/components/QuestionVideo";
+import { ReportButton } from "@/components/ReportButton";
 import { auth } from "@/auth";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -261,6 +262,9 @@ export default async function QuestionPage({ params }: PageProps) {
             )}
           </div>
         )}
+
+        {/* Report / flag — unobtrusive link at the bottom */}
+        <ReportButton questionId={question.id} isSignedIn={!!session?.user} />
       </div>
     </div>
   );

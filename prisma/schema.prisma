@@ -41,6 +41,7 @@ model User {
   adminGroups     Group[]          @relation("groupAdmin")
   groupCommOptIns GroupCommOptIn[]
   amaComments     AmaComment[]
+  questionFlags   QuestionFlag[]
 }
 
 // Auth.js Account model (replaces OAuthAccount)
@@ -158,6 +159,7 @@ model Question {
   answer          Answer?
   emailEvents     EmailEvent[]
   endorsements    GroupEndorsement[]
+  flags           QuestionFlag[]
 }
 
 model QuestionTag {
@@ -167,6 +169,20 @@ model QuestionTag {
   tag        String   // Policy area from Congress.gov
 
   @@unique([questionId, tag])
+}
+
+// User-submitted flags/reports for moderator review
+model QuestionFlag {
+  id         String   @id @default(cuid())
+  questionId String
+  question   Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  userId     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  reason     String   // short note from the reporter
+  status     String   @default("pending") // "pending" | "reviewed" | "dismissed"
+  createdAt  DateTime @default(now())
+
+  @@unique([userId, questionId]) // one flag per user per question
 }
 
 // ─── Upvotes ─────────────────────────────────────────────────────────

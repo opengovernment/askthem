@@ -1,4 +1,4 @@
-import { getQuestionsByStatus, getQuestionCounts, getConstituentCountsForQuestions } from "@/lib/queries";
+import { getQuestionsByStatus, getQuestionCounts, getConstituentCountsForQuestions, getFlaggedQuestions } from "@/lib/queries";
 import { ModerationQueue } from "@/components/ModerationQueue";
 import { UserManagement } from "@/components/UserManagement";
 import { auth } from "@/auth";
@@ -21,7 +21,9 @@ export default async function ModeratePage({ searchParams }: PageProps) {
   const { tab } = await searchParams;
   const activeTab = tab || "pending_review";
   const counts = await getQuestionCounts();
-  const questions = await getQuestionsByStatus(activeTab);
+  const questions = activeTab === "flagged"
+    ? await getFlaggedQuestions()
+    : await getQuestionsByStatus(activeTab);
 
   // Fetch constituent counts for the published tab (needed for threshold progress)
   const constituentCounts =
@@ -34,6 +36,7 @@ export default async function ModeratePage({ searchParams }: PageProps) {
     { key: "published", label: "Published", count: counts.published },
     { key: "delivered", label: "Delivered", count: counts.delivered },
     { key: "answered", label: "Answered", count: counts.answered },
+    { key: "flagged", label: "Flagged", count: counts.flagged },
   ];
 
   return (
@@ -84,9 +87,11 @@ export default async function ModeratePage({ searchParams }: PageProps) {
               {t.label}
               <span
                 className={`ml-1.5 inline-flex items-center justify-center rounded-full px-2 py-0.5 text-xs ${
-                  activeTab === t.key
-                    ? "bg-indigo-100 text-indigo-700"
-                    : "bg-gray-200 text-gray-600"
+                  t.key === "flagged" && t.count > 0
+                    ? "bg-red-100 text-red-700"
+                    : activeTab === t.key
+                      ? "bg-indigo-100 text-indigo-700"
+                      : "bg-gray-200 text-gray-600"
                 }`}
               >
                 {t.count}

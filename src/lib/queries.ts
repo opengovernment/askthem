@@ -367,11 +367,34 @@ export async function getVerifiedGroups() {
 }
 
 export async function getQuestionCounts() {
-  const [pendingReview, published, delivered, answered] = await Promise.all([
+  const [pendingReview, published, delivered, answered, flagged] = await Promise.all([
     prisma.question.count({ where: { status: "pending_review" } }),
     prisma.question.count({ where: { status: "published" } }),
     prisma.question.count({ where: { status: "delivered" } }),
     prisma.question.count({ where: { status: "answered" } }),
+    prisma.question.count({ where: { flags: { some: { status: "pending" } } } }),
   ]);
-  return { pendingReview, published, delivered, answered };
+  return { pendingReview, published, delivered, answered, flagged };
+}
+
+export async function getFlaggedQuestions() {
+  return prisma.question.findMany({
+    where: { flags: { some: { status: "pending" } } },
+    include: {
+      ...questionInclude,
+      flags: {
+        where: { status: "pending" },
+        include: { user: { select: { id: true, name: true, email: true } } },
+        orderBy: { createdAt: "desc" },
+      },
+    },
+    orderBy: { createdAt: "desc" },
+  });
+}
+
+export async function dismissFlags(questionId: string) {
+  return prisma.questionFlag.updateMany({
+    where: { questionId, status: "pending" },
+    data: { status: "dismissed" },
+  });
 }
