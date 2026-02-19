@@ -107,9 +107,27 @@ model Official {
   deliveryThreshold     Int?    // null = use site default (5); otherwise custom target
   deliveryThresholdType String  @default("constituent") // "constituent" | "supporter"
 
-  questions       Question[]
-  userDistricts   UserDistrict[]
-  events          Event[]
+  questions              Question[]
+  userDistricts          UserDistrict[]
+  events                 Event[]
+  responderApplications  ResponderApplication[]
+}
+
+// Application from an elected official's office to become a verified responder
+model ResponderApplication {
+  id             String    @id @default(cuid())
+  officialName   String    // name of the elected official
+  officialTitle  String    // e.g. "U.S. Senator", "State Representative"
+  contactName    String    // staff contact who submitted the application
+  contactEmail   String    // staff contact email
+  websiteUrl     String    // official government website
+  officialId     String?   // linked Official record (set by moderator on approval)
+  official       Official? @relation(fields: [officialId], references: [id])
+  status         String    @default("pending") // "pending" | "approved" | "rejected"
+  reviewedBy     String?   // moderator/admin user ID who reviewed
+  reviewedAt     DateTime?
+  reviewNote     String?   // optional moderator note on approval/rejection
+  createdAt      DateTime  @default(now())
 }
 
 // Maps users to their elected officials based on address lookup

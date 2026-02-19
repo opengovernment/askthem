@@ -55,6 +55,12 @@ export default async function ModeratePage({ searchParams }: PageProps) {
             </div>
             <div className="flex items-center gap-2">
               <Link
+                href="/moderate/responders"
+                className="rounded-md border border-indigo-200 bg-indigo-50 px-4 py-2 text-sm font-medium text-indigo-700 hover:bg-indigo-100"
+              >
+                Responder Applications
+              </Link>
+              <Link
                 href="/moderate/events"
                 className="rounded-md border border-indigo-200 bg-indigo-50 px-4 py-2 text-sm font-medium text-indigo-700 hover:bg-indigo-100"
               >
