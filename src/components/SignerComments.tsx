@@ -9,7 +9,7 @@ interface Comment {
   createdAt: string;
   user: {
     id: string;
-    name: string;
+    name: string | null;
     isProfilePublic: boolean;
     city: string | null;
     state: string | null;
@@ -43,10 +43,10 @@ export function SignerComments({ questionId }: { questionId: string }) {
               &mdash;{" "}
               {c.user.isProfilePublic ? (
                 <Link href={`/profile/${c.user.id}`} className="text-indigo-600 hover:text-indigo-800">
-                  {c.user.name}
+                  {c.user.name ?? "Anonymous"}
                 </Link>
               ) : (
-                <span>{c.user.name}</span>
+                <span>{c.user.name ?? "Anonymous"}</span>
               )}
               {c.user.city && c.user.state && `, ${c.user.city}, ${c.user.state}`}
             </p>

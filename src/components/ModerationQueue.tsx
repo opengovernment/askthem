@@ -13,7 +13,7 @@ interface Question {
   upvoteCount: number;
   districtTag: string;
   createdAt: Date;
-  author: { name: string; city: string | null; state: string | null };
+  author: { name: string | null; city: string | null; state: string | null };
   official: {
     id: string;
     name: string;
@@ -127,7 +127,7 @@ function ModerationCard({
 
       <div className="mb-4 flex flex-wrap items-center gap-3 text-sm text-gray-500">
         <span>
-          By {question.author.name}
+          By {question.author.name ?? "Anonymous"}
           {question.author.city && question.author.state
             ? ` (${question.author.city}, ${question.author.state})`
             : ""}

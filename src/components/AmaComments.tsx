@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 
 interface CommentUser {
   id: string;
-  name: string;
+  name: string | null;
   image: string | null;
   city: string | null;
   state: string | null;
@@ -148,10 +148,10 @@ export function AmaComments({ eventId, isLive, isSignedIn }: AmaCommentsProps) {
                   />
                 ) : (
                   <div className="flex h-6 w-6 items-center justify-center rounded-full bg-indigo-100 text-[10px] font-bold text-indigo-600">
-                    {comment.user.name.charAt(0)}
+                    {(comment.user.name ?? "?").charAt(0)}
                   </div>
                 )}
-                <span className="text-sm font-medium text-gray-900">{comment.user.name}</span>
+                <span className="text-sm font-medium text-gray-900">{comment.user.name ?? "Anonymous"}</span>
                 {comment.user.city && comment.user.state && (
                   <span className="text-xs text-gray-400">
                     {comment.user.city}, {comment.user.state}

@@ -6,7 +6,7 @@ import Image from "next/image";
 interface UserResult {
   id: string;
   email: string;
-  name: string;
+  name: string | null;
   image: string | null;
   role: string;
   status: string;
@@ -172,7 +172,7 @@ function UserCard({
             <Image src={user.image} alt="" width={40} height={40} className="h-10 w-10 rounded-full object-cover" />
           ) : (
             <div className="flex h-10 w-10 items-center justify-center text-sm font-medium text-gray-500">
-              {user.name.charAt(0).toUpperCase()}
+              {(user.name ?? user.email ?? "?").charAt(0).toUpperCase()}
             </div>
           )}
         </div>
@@ -180,7 +180,7 @@ function UserCard({
         {/* Info */}
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-center gap-2">
-            <span className="font-medium text-gray-900">{user.name}</span>
+            <span className="font-medium text-gray-900">{user.name ?? user.email}</span>
             <span className={`rounded-full px-2 py-0.5 text-xs font-medium ${statusBadge}`}>
               {user.status}
             </span>

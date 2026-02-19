@@ -15,7 +15,7 @@ interface QuestionCardProps {
     upvoteCount: number;
     districtTag: string;
     createdAt: Date;
-    author: { id: string; name: string; city: string | null; state: string | null; isProfilePublic?: boolean };
+    author: { id: string; name: string | null; city: string | null; state: string | null; isProfilePublic?: boolean };
     official: { id: string; name: string; title: string; photoUrl?: string | null; isVerifiedResponder?: boolean; _count?: { questions: number } };
     categoryTags: { tag: string }[];
     group?: { id: string; name: string; slug: string; isVerified: boolean } | null;
@@ -88,10 +88,10 @@ export function QuestionCard({ question }: QuestionCardProps) {
                     href={`/profile/${question.author.id}`}
                     className="font-medium text-indigo-600 hover:text-indigo-800"
                   >
-                    {question.author.name}
+                    {question.author.name ?? "Anonymous"}
                   </Link>
                 ) : (
-                  question.author.name
+                  question.author.name ?? "Anonymous"
                 )}
                 {question.author.city && question.author.state
                   ? ` from ${question.author.city}, ${question.author.state}`

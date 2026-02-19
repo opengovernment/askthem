@@ -44,5 +44,5 @@ export default async function AddressPage() {
     );
   }
 
-  return <AddressForm />;
+  return <AddressForm userName={user.name} />;
 }

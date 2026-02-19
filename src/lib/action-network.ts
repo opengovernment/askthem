@@ -85,7 +85,7 @@ async function anFetch(path: string, body: unknown): Promise<{ ok: boolean; data
  */
 export async function syncPersonToAN(user: {
   email: string;
-  name: string;
+  name: string | null;
   street?: string | null;
   state?: string | null;
   city?: string | null;
@@ -94,7 +94,7 @@ export async function syncPersonToAN(user: {
 }): Promise<string | null> {
   if (!isEnabled()) return null;
 
-  const [givenName, ...rest] = user.name.split(" ");
+  const [givenName, ...rest] = (user.name ?? "").split(" ");
   const familyName = rest.join(" ") || "";
 
   const payload: ANPersonPayload = {

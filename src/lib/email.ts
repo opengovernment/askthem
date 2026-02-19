@@ -79,7 +79,8 @@ export type EmailType =
   | "question_delivered"
   | "question_answered"
   | "group_endorsement"
-  | "delivery_nudge";
+  | "delivery_nudge"
+  | "magic_link";
 
 interface QuestionContext {
   questionId: string;
@@ -221,6 +222,34 @@ export async function sendDeliveryNudge(
     <p><a href="${questionUrl(ctx.questionId)}" style="display:inline-block;background:#4f46e5;color:#fff;padding:10px 24px;border-radius:999px;text-decoration:none;font-weight:600;">View &amp; share this question</a></p>
     <p style="color:#6b7280;font-size:12px;margin-top:24px;">
       You received this because you signed this question on AskThem.
+    </p>
+  `;
+  return sendEmail(to, subject, html);
+}
+
+/**
+ * Send a magic link sign-in email. Used by the NextAuth email provider.
+ */
+export async function sendMagicLink(
+  to: string,
+  url: string,
+): Promise<string | null> {
+  const subject = "Sign in to AskThem";
+  const html = `
+    <h2>Sign in to AskThem</h2>
+    <p>Click the button below to sign in to your AskThem account:</p>
+    <p style="margin:24px 0;">
+      <a href="${url}" style="display:inline-block;background:#4f46e5;color:#fff;padding:12px 32px;border-radius:999px;text-decoration:none;font-weight:600;">
+        Sign in to AskThem
+      </a>
+    </p>
+    <p style="color:#6b7280;font-size:14px;">
+      If you didn&rsquo;t request this email, you can safely ignore it.
+      This link expires in 24 hours.
+    </p>
+    <p style="color:#9ca3af;font-size:12px;margin-top:24px;">
+      If the button doesn&rsquo;t work, copy and paste this URL into your browser:<br/>
+      <a href="${url}" style="color:#4f46e5;">${url}</a>
     </p>
   `;
   return sendEmail(to, subject, html);

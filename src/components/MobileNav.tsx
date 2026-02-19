@@ -69,7 +69,7 @@ export function MobileNav({ user }: MobileNavProps) {
             <div className="border-t border-gray-100 pt-2">
               {user ? (
                 <>
-                  <p className="px-3 py-1 text-xs text-gray-500">{user.name}</p>
+                  <p className="px-3 py-1 text-xs text-gray-500">{user.name ?? "Account"}</p>
                   <form action={signOutAction}>
                     <button
                       type="submit"

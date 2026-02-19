@@ -51,7 +51,7 @@ export default async function ProfilePage({ params }: PageProps) {
               />
             ) : (
               <div className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-full bg-indigo-100 text-xl font-bold text-indigo-600">
-                {profile.name
+                {(profile.name ?? "?")
                   .split(" ")
                   .map((n) => n[0])
                   .join("")}
@@ -59,7 +59,7 @@ export default async function ProfilePage({ params }: PageProps) {
             )}
             <div>
               <h1 className="text-2xl font-bold text-gray-900">
-                {profile.name}
+                {profile.name ?? "Anonymous"}
               </h1>
               <p className="text-sm text-gray-500">
                 {profile.city && profile.state

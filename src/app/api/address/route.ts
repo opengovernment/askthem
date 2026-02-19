@@ -18,7 +18,7 @@ export async function POST(req: NextRequest) {
   }
 
   const body = await req.json();
-  const { street, city, state, zip } = body;
+  const { street, city, state, zip, name } = body;
 
   // Validate required fields
   if (!street || !city || !state || !zip) {
@@ -139,7 +139,7 @@ export async function POST(req: NextRequest) {
       })),
     });
 
-    // 4. Update user address + verification status
+    // 4. Update user address + verification status (and name if provided by email sign-up)
     await tx.user.update({
       where: { id: user.id },
       data: {
@@ -149,6 +149,7 @@ export async function POST(req: NextRequest) {
         zip: zip.trim(),
         isAddressVerified: true,
         addressLookedUpAt: new Date(),
+        ...(typeof name === "string" && name.trim() ? { name: name.trim() } : {}),
       },
     });
 
@@ -156,7 +157,8 @@ export async function POST(req: NextRequest) {
   });
 
   // Sync full address to Action Network (fire-and-forget, don't block response)
-  if (user.email && user.name) {
+  const effectiveName = (typeof name === "string" && name.trim()) ? name.trim() : user.name;
+  if (user.email && effectiveName) {
     const houseRep = upsertedOfficials.find((o) => o.chamber === "house");
     const districtTag = houseRep?.state && houseRep?.district
       ? `${houseRep.state}-${houseRep.district}`
@@ -164,7 +166,7 @@ export async function POST(req: NextRequest) {
 
     syncPersonToAN({
       email: user.email,
-      name: user.name,
+      name: effectiveName,
       street: street.trim(),
       city: city.trim(),
       state,

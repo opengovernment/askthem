@@ -1,8 +1,10 @@
 import NextAuth from "next-auth";
 import Google from "next-auth/providers/google";
+import Nodemailer from "next-auth/providers/nodemailer";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { prisma } from "@/lib/prisma";
 import { syncPersonToAN } from "@/lib/action-network";
+import { sendMagicLink } from "@/lib/email";
 
 // Emails that are automatically promoted to admin on sign-in
 const ADMIN_EMAILS = ["davidrussellmoore@gmail.com"];
@@ -14,6 +16,23 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     Google({
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+    }),
+    Nodemailer({
+      server: process.env.EMAIL_SERVER ?? {
+        host: "smtp.mailgun.org",
+        port: 587,
+        auth: {
+          user: process.env.MAILGUN_SMTP_USER ?? `postmaster@${process.env.MAILGUN_DOMAIN ?? "localhost"}`,
+          pass: process.env.MAILGUN_SMTP_PASSWORD ?? "",
+        },
+      },
+      from: process.env.MAILGUN_FROM ?? "AskThem <noreply@askthem.io>",
+      async sendVerificationRequest({ identifier: email, url }) {
+        const result = await sendMagicLink(email, url);
+        if (!result) {
+          throw new Error("Failed to send verification email. Please try again.");
+        }
+      },
     }),
   ],
   session: {
@@ -104,6 +123,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   },
   pages: {
     signIn: "/auth/signin",
+    verifyRequest: "/auth/verify-request",
   },
 });
 

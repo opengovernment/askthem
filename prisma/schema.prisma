@@ -15,7 +15,7 @@ model User {
   id                String    @id @default(cuid())
   email             String    @unique
   emailVerified     DateTime? // Auth.js: set when email is verified via OAuth
-  name              String
+  name              String?
   image             String?   // Auth.js: profile photo from OAuth provider
   streetAddress     String?
   city              String?
@@ -47,7 +47,7 @@ model User {
 model Account {
   id                String  @id @default(cuid())
   userId            String
-  type              String  // "oauth" | "oidc"
+  type              String  // "oauth" | "oidc" | "email"
   provider          String  // "google", "github", etc.
   providerAccountId String
   refresh_token     String?
@@ -69,6 +69,15 @@ model Session {
   userId       String
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+// Auth.js VerificationToken model (magic link / email sign-in tokens)
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
 }
 
 // ─── Elected Officials ───────────────────────────────────────────────

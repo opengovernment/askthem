@@ -116,7 +116,14 @@ function groupOfficials(officials: MatchedOfficial[]) {
   return sections;
 }
 
-export function AddressForm() {
+interface AddressFormProps {
+  /** If the user already has a name (e.g. from Google OAuth), pass it here. When null, the form collects a name. */
+  userName?: string | null;
+}
+
+export function AddressForm({ userName }: AddressFormProps) {
+  const [displayName, setDisplayName] = useState(userName ?? "");
+  const needsName = !userName;
   const [street, setStreet] = useState("");
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
@@ -127,6 +134,7 @@ export function AddressForm() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    if (needsName && !displayName.trim()) return;
     if (!street.trim() || !city.trim() || !state || !zip.trim()) return;
     setIsSubmitting(true);
     setError("");
@@ -141,6 +149,7 @@ export function AddressForm() {
           city: city.trim(),
           state,
           zip: zip.trim(),
+          ...(needsName && displayName.trim() ? { name: displayName.trim() } : {}),
         }),
       });
 
@@ -255,6 +264,23 @@ export function AddressForm() {
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-5">
+          {/* Name (only for email sign-ups without a name) */}
+          {needsName && (
+            <div>
+              <label htmlFor="displayName" className="mb-1.5 block text-sm font-medium text-gray-700">
+                Your Name
+              </label>
+              <input
+                id="displayName"
+                type="text"
+                value={displayName}
+                onChange={(e) => setDisplayName(e.target.value)}
+                placeholder="Jane Smith"
+                className="w-full rounded-lg border border-gray-300 px-4 py-3 text-gray-900 placeholder:text-gray-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 focus:outline-none"
+              />
+            </div>
+          )}
+
           {/* Street */}
           <div>
             <label htmlFor="street" className="mb-1.5 block text-sm font-medium text-gray-700">
@@ -329,7 +355,7 @@ export function AddressForm() {
 
           <button
             type="submit"
-            disabled={isSubmitting || !street.trim() || !city.trim() || !state || !zip.trim()}
+            disabled={isSubmitting || (needsName && !displayName.trim()) || !street.trim() || !city.trim() || !state || !zip.trim()}
             className="w-full rounded-full bg-indigo-600 px-6 py-3.5 font-medium text-white transition-colors hover:bg-indigo-700 disabled:cursor-not-allowed disabled:bg-gray-300"
           >
             {isSubmitting ? "Looking up your officials..." : "Find My Officials"}

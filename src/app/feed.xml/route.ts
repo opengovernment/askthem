@@ -17,7 +17,7 @@ export async function GET() {
       <guid isPermaLink="false">${q.id}</guid>
       <pubDate>${pubDate}</pubDate>
       <description>${escapeXml(`Question for ${q.official.name} (${q.official.title}). ${q.upvoteCount} upvotes.`)}</description>
-      <author>${escapeXml(q.author.name)}</author>
+      <author>${escapeXml(q.author.name ?? "Anonymous")}</author>
       ${tags}
     </item>`;
     })
