@@ -13,6 +13,7 @@ interface MatchedOfficial {
   district: string | null;
   chamber: string;
   level: string | null;
+  photoUrl: string | null;
 }
 
 // Ordered sections from federal → state → local
@@ -193,11 +194,16 @@ export function AddressForm({ userName }: AddressFormProps) {
           </div>
 
           <h1 className="mb-2 text-center text-2xl font-bold text-gray-900">
-            Registration Complete!
+            Welcome!
           </h1>
-          <p className="mb-6 text-center text-gray-600">
+          <p className="mb-2 text-center text-gray-600">
             We found {officials.length} elected official{officials.length !== 1 ? "s" : ""} for your
-            address. You can now ask them questions and sign petitions.
+            address. The first thing most people do is ask a question to one of your elected
+            officials about something that matters to you personally.
+          </p>
+          <p className="mb-6 text-center text-gray-600">
+            Then, you can browse to see what questions other people in your state and city are
+            asking, or search by issue area.
           </p>
 
           <div className="mb-8 space-y-6">
@@ -212,9 +218,20 @@ export function AddressForm({ userName }: AddressFormProps) {
                         {group.officials.map((o) => (
                           <div
                             key={o.id}
-                            className="flex items-center justify-between rounded-lg border border-gray-200 bg-white px-4 py-3"
+                            className="flex items-center gap-3 rounded-lg border border-gray-200 bg-white px-4 py-3"
                           >
-                            <div>
+                            {o.photoUrl ? (
+                              <img
+                                src={o.photoUrl}
+                                alt=""
+                                className="h-10 w-10 shrink-0 rounded-full object-cover"
+                              />
+                            ) : (
+                              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gray-200 text-sm font-medium text-gray-600">
+                                {o.name.split(" ").map((n) => n[0]).join("").slice(0, 2)}
+                              </div>
+                            )}
+                            <div className="min-w-0 flex-1">
                               <p className="font-medium text-gray-900">{o.name}</p>
                               <p className="text-sm text-gray-500">
                                 {o.title} ({o.party})

@@ -60,6 +60,7 @@ export async function POST(req: NextRequest) {
         district: ud.official.district,
         chamber: ud.official.chamber,
         level: ud.official.level,
+        photoUrl: ud.official.photoUrl,
       })),
       cached: true,
     });
@@ -192,6 +193,7 @@ export async function POST(req: NextRequest) {
       district: o.district,
       chamber: o.chamber,
       level: o.level,
+      photoUrl: o.photoUrl,
     })),
   });
 }
