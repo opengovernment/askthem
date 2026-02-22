@@ -398,3 +398,45 @@ export async function dismissFlags(questionId: string) {
     data: { status: "dismissed" },
   });
 }
+
+// ─── All-users directory (moderator / admin dashboard) ──────────────
+
+export async function getAllUsersForDirectory() {
+  return prisma.user.findMany({
+    select: {
+      id: true,
+      email: true,
+      name: true,
+      state: true,
+      role: true,
+      status: true,
+      isProfilePublic: true,
+      createdAt: true,
+      _count: {
+        select: {
+          questions: true,
+          upvotes: true,
+        },
+      },
+    },
+    orderBy: { createdAt: "desc" },
+  });
+}
+
+export async function getUserCongressionalDistricts(userIds: string[]) {
+  if (userIds.length === 0) return {};
+  const districts = await prisma.userDistrict.findMany({
+    where: { userId: { in: userIds }, official: { chamber: "house" } },
+    select: {
+      userId: true,
+      official: { select: { state: true, district: true } },
+    },
+  });
+  const map: Record<string, string> = {};
+  for (const d of districts) {
+    if (d.official.state && d.official.district) {
+      map[d.userId] = `${d.official.state}-${d.official.district}`;
+    }
+  }
+  return map;
+}
