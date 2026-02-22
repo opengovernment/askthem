@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { US_STATES } from "@/lib/types";
 
@@ -124,7 +123,6 @@ interface AddressFormProps {
 }
 
 export function AddressForm({ userName }: AddressFormProps) {
-  const router = useRouter();
   const [displayName, setDisplayName] = useState(userName ?? "");
   const needsName = !userName;
   const [street, setStreet] = useState("");
@@ -171,9 +169,6 @@ export function AddressForm({ userName }: AddressFormProps) {
       if (res.ok) {
         const data = await res.json();
         setOfficials(data.officials);
-        // Invalidate the Router Cache so the layout picks up isAddressVerified: true
-        // (removes the address banner on subsequent navigations)
-        router.refresh();
       } else {
         const data = await res.json();
         setError(data.error || "Could not look up your address. Please try again.");
