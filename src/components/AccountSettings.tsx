@@ -111,10 +111,15 @@ export function AccountSettings({ user, districts }: AccountSettingsProps) {
     }
   }
 
-  // Group districts by chamber level
-  const sortedDistricts = [...districts].sort(
-    (a, b) => (CHAMBER_ORDER[a.chamber] ?? 99) - (CHAMBER_ORDER[b.chamber] ?? 99),
-  );
+  // Deduplicate district labels (e.g. "NY-14") sorted by chamber level
+  const uniqueDistricts = [
+    ...new Set(
+      [...districts]
+        .sort((a, b) => (CHAMBER_ORDER[a.chamber] ?? 99) - (CHAMBER_ORDER[b.chamber] ?? 99))
+        .map((d) => (d.district ? `${d.state}-${d.district}` : d.state))
+        .filter(Boolean),
+    ),
+  ];
 
   const joinDate = new Date(user.createdAt).toLocaleDateString("en-US", {
     month: "long",
@@ -169,7 +174,7 @@ export function AccountSettings({ user, districts }: AccountSettingsProps) {
             </Link>{" "}
             to see your elected officials.
           </p>
-        ) : sortedDistricts.length === 0 ? (
+        ) : uniqueDistricts.length === 0 ? (
           <p className="mt-3 text-sm text-gray-500">
             No district information found. Try{" "}
             <Link href="/address" className="text-indigo-600 hover:text-indigo-700">
@@ -178,38 +183,14 @@ export function AccountSettings({ user, districts }: AccountSettingsProps) {
             .
           </p>
         ) : (
-          <div className="mt-4 space-y-3">
-            {sortedDistricts.map((d) => (
-              <div
-                key={d.officialId}
-                className="flex items-center gap-3 rounded-md border border-gray-100 bg-gray-50 px-4 py-3"
+          <div className="mt-3 flex flex-wrap gap-2">
+            {uniqueDistricts.map((label) => (
+              <span
+                key={label}
+                className="rounded-full bg-indigo-50 px-3 py-1 text-sm font-medium text-indigo-700"
               >
-                {d.photoUrl ? (
-                  <img
-                    src={d.photoUrl}
-                    alt=""
-                    className="h-9 w-9 rounded-full object-cover"
-                  />
-                ) : (
-                  <span className="flex h-9 w-9 items-center justify-center rounded-full bg-gray-200 text-xs font-medium text-gray-500">
-                    {d.name
-                      .split(" ")
-                      .map((w) => w[0])
-                      .join("")
-                      .slice(0, 2)}
-                  </span>
-                )}
-                <div className="min-w-0 flex-1">
-                  <p className="text-sm font-medium text-gray-900">{d.name}</p>
-                  <p className="text-xs text-gray-500">
-                    {d.title} · {chamberLabel(d.chamber)}
-                    {d.district ? ` · ${d.state}-${d.district}` : ` · ${d.state}`}
-                  </p>
-                </div>
-                <span className="rounded-full bg-gray-200 px-2 py-0.5 text-xs text-gray-600">
-                  {d.party}
-                </span>
-              </div>
+                {label}
+              </span>
             ))}
           </div>
         )}
