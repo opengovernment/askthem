@@ -8,12 +8,12 @@ export const metadata: Metadata = {
 };
 
 const DUMMY_GROUPS = [
-  { slug: "sierra-club-nyc", name: "Sierra Club NYC", city: "New York", state: "NY" },
-  { slug: "league-of-women-voters-la", name: "League of Women Voters LA", city: "Los Angeles", state: "CA" },
-  { slug: "citizens-climate-lobby-chicago", name: "Citizens' Climate Lobby Chicago", city: "Chicago", state: "IL" },
-  { slug: "texas-freedom-network", name: "Texas Freedom Network", city: "Austin", state: "TX" },
-  { slug: "common-cause-dc", name: "Common Cause DC", city: "Washington", state: "DC" },
-  { slug: "aclu-of-florida", name: "ACLU of Florida", city: "Miami", state: "FL" },
+  { slug: "greenway-alliance-nyc", name: "Greenway Alliance NYC", city: "New York", state: "NY" },
+  { slug: "westside-voter-project", name: "Westside Voter Project", city: "Los Angeles", state: "CA" },
+  { slug: "lakefront-civic-league", name: "Lakefront Civic League", city: "Chicago", state: "IL" },
+  { slug: "lone-star-accountability", name: "Lone Star Accountability Project", city: "Austin", state: "TX" },
+  { slug: "capitol-watch-dc", name: "Capitol Watch DC", city: "Washington", state: "DC" },
+  { slug: "sunshine-advocacy-coalition", name: "Sunshine Advocacy Coalition", city: "Miami", state: "FL" },
 ];
 
 export default function GroupsPage() {
