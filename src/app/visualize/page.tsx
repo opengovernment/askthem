@@ -1,4 +1,5 @@
 import { VisualizeBubbleMap } from "@/components/VisualizeBubbleMap";
+import { getTrendingKeywords } from "@/lib/queries";
 import Link from "next/link";
 import type { Metadata } from "next";
 
@@ -61,8 +62,9 @@ function aggregateByState(data: typeof trendingData) {
   return Object.values(byState);
 }
 
-export default function VisualizePage() {
+export default async function VisualizePage() {
   const aggregated = aggregateByState(trendingData);
+  const trendingKeywords = await getTrendingKeywords(20);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -101,6 +103,28 @@ export default function VisualizePage() {
             })}
           </div>
         </div>
+
+        {/* Trending Keywords — extracted from real question text */}
+        {trendingKeywords.length > 0 && (
+          <div className="mt-6 rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
+            <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-gray-500">Trending Keywords</h2>
+            <p className="mb-3 text-xs text-gray-500">
+              Keywords automatically extracted from constituent questions. Click to find related questions.
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {trendingKeywords.map((kw) => (
+                <Link
+                  key={kw.keyword}
+                  href={`/questions?search=${encodeURIComponent(kw.keyword)}`}
+                  className="inline-flex items-center gap-1.5 rounded-full bg-amber-50 px-3 py-1.5 text-sm text-amber-800 transition-colors hover:bg-amber-100"
+                >
+                  {kw.keyword}
+                  <span className="rounded-full bg-amber-200 px-1.5 py-0.5 text-xs font-medium text-amber-900">{kw.count}</span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
