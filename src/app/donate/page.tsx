@@ -10,7 +10,7 @@ const channels = [
   {
     name: "OpenCollective",
     description:
-      "Our primary fiscal sponsor. Contributions through OpenCollective are tax-deductible and fully transparent — every dollar in and out is public.",
+      "Contributions through OpenCollective are tax-deductible and fully transparent — every dollar in and out is public.",
     cta: "Coming soon",
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-8 w-8 text-orange-600">
