@@ -70,6 +70,13 @@ export function MobileNav({ user }: MobileNavProps) {
               {user ? (
                 <>
                   <p className="px-3 py-1 text-xs text-gray-500">{user.name ?? "Account"}</p>
+                  <Link
+                    href="/account"
+                    onClick={() => setOpen(false)}
+                    className="block rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100"
+                  >
+                    Account Settings
+                  </Link>
                   <form action={signOutAction}>
                     <button
                       type="submit"

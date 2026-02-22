@@ -99,6 +99,14 @@ export function UserMenu({ user }: UserMenuProps) {
             </Link>
           )}
 
+          <Link
+            href="/account"
+            onClick={() => setOpen(false)}
+            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+          >
+            Account Settings
+          </Link>
+
           <button
             onClick={toggleProfile}
             disabled={toggling}
