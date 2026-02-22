@@ -8,6 +8,8 @@ import {
   getQuestionsByOfficialId,
   getAllOfficials,
   getAllTags,
+  getAllKeywords,
+  getTrendingKeywords,
   getHomepageStats,
   getTrendingTags,
   getQuestionsByStatus,
@@ -33,7 +35,7 @@ describe("getPopularQuestions", () => {
     expect(questions.length).toBeLessThanOrEqual(2);
   });
 
-  it("includes related data (author, official, tags, answer)", async () => {
+  it("includes related data (author, official, tags, keywords, answer)", async () => {
     const questions = await getPopularQuestions(1);
     const q = questions[0];
     expect(q.author).toBeDefined();
@@ -42,6 +44,8 @@ describe("getPopularQuestions", () => {
     expect(q.official.name).toBeTruthy();
     expect(q.categoryTags).toBeDefined();
     expect(Array.isArray(q.categoryTags)).toBe(true);
+    expect(q.keywords).toBeDefined();
+    expect(Array.isArray(q.keywords)).toBe(true);
   });
 });
 
@@ -212,5 +216,38 @@ describe("moderator queries", () => {
     expect(
       counts.pendingReview + counts.published + counts.delivered + counts.answered,
     ).toBeGreaterThanOrEqual(6);
+  });
+});
+
+describe("keyword queries", () => {
+  it("getAllKeywords returns distinct keywords sorted alphabetically", async () => {
+    const keywords = await getAllKeywords();
+    expect(keywords.length).toBeGreaterThan(0);
+    for (let i = 1; i < keywords.length; i++) {
+      expect(keywords[i - 1].localeCompare(keywords[i])).toBeLessThanOrEqual(0);
+    }
+  });
+
+  it("getTrendingKeywords returns keywords with counts sorted by frequency", async () => {
+    const keywords = await getTrendingKeywords(5);
+    expect(keywords.length).toBeGreaterThan(0);
+    expect(keywords.length).toBeLessThanOrEqual(5);
+    keywords.forEach((k) => {
+      expect(k.keyword).toBeTruthy();
+      expect(k.count).toBeGreaterThanOrEqual(1);
+    });
+    for (let i = 1; i < keywords.length; i++) {
+      expect(keywords[i - 1].count).toBeGreaterThanOrEqual(keywords[i].count);
+    }
+  });
+
+  it("questions include keywords from seed data", async () => {
+    const q = await getQuestionById("q1");
+    expect(q).not.toBeNull();
+    expect(q!.keywords).toBeDefined();
+    expect(q!.keywords.length).toBeGreaterThan(0);
+    // q1 is about affordable housing for working families
+    const kwStrings = q!.keywords.map((k) => k.keyword);
+    expect(kwStrings.some((k) => k.includes("housing") || k.includes("affordable housing"))).toBe(true);
   });
 });

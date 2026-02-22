@@ -78,6 +78,11 @@ export default async function QuestionPage({ params }: PageProps) {
                 {ct.tag}
               </span>
             ))}
+            {question.keywords && question.keywords.length > 0 && question.keywords.map((kw) => (
+              <span key={kw.keyword} className="rounded bg-amber-50 px-2 py-0.5 text-xs text-amber-700">
+                {kw.keyword}
+              </span>
+            ))}
             <span className="rounded bg-indigo-50 px-2 py-0.5 text-xs text-indigo-600">
               {question.districtTag}
             </span>

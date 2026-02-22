@@ -12,6 +12,7 @@ const questionInclude = {
     },
   },
   categoryTags: true,
+  keywords: true,
   answer: {
     include: {
       media: { orderBy: { sortOrder: "asc" as const } },
@@ -60,6 +61,7 @@ export async function getFilteredQuestions(filters: QuestionFilters) {
     where.OR = [
       { text: { contains: filters.search, mode: "insensitive" } },
       { categoryTags: { some: { tag: { contains: filters.search, mode: "insensitive" } } } },
+      { keywords: { some: { keyword: { contains: filters.search, mode: "insensitive" } } } },
       { official: { name: { contains: filters.search, mode: "insensitive" } } },
       { official: { state: { contains: filters.search, mode: "insensitive" } } },
       { districtTag: { contains: filters.search, mode: "insensitive" } },
@@ -164,6 +166,7 @@ export async function searchQuestions(query: string) {
       OR: [
         { text: { contains: query, mode: "insensitive" } },
         { categoryTags: { some: { tag: { contains: query, mode: "insensitive" } } } },
+        { keywords: { some: { keyword: { contains: query, mode: "insensitive" } } } },
         { official: { name: { contains: query, mode: "insensitive" } } },
         { official: { state: { contains: query, mode: "insensitive" } } },
         { districtTag: { contains: query, mode: "insensitive" } },
@@ -288,6 +291,25 @@ export async function getTrendingTags(limit = 8) {
     take: limit,
   });
   return tags.map((t) => ({ tag: t.tag, count: t._count.tag }));
+}
+
+export async function getAllKeywords() {
+  const keywords = await prisma.questionKeyword.findMany({
+    select: { keyword: true },
+    distinct: ["keyword"],
+    orderBy: { keyword: "asc" },
+  });
+  return keywords.map((k) => k.keyword);
+}
+
+export async function getTrendingKeywords(limit = 10) {
+  const keywords = await prisma.questionKeyword.groupBy({
+    by: ["keyword"],
+    _count: { keyword: true },
+    orderBy: { _count: { keyword: "desc" } },
+    take: limit,
+  });
+  return keywords.map((k) => ({ keyword: k.keyword, count: k._count.keyword }));
 }
 
 // ─── Signature counts (constituent vs supporting) ───────────────────

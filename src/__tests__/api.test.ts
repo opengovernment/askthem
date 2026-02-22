@@ -219,15 +219,20 @@ describe("question creation", () => {
 
   afterAll(async () => {
     if (testQuestionId) {
+      await prisma.questionKeyword.deleteMany({ where: { questionId: testQuestionId } });
       await prisma.questionTag.deleteMany({ where: { questionId: testQuestionId } });
       await prisma.question.delete({ where: { id: testQuestionId } }).catch(() => {});
     }
   });
 
-  it("creates a question with tags in pending_review status", async () => {
+  it("creates a question with tags and keywords in pending_review status", async () => {
+    const { extractKeywords } = await import("@/lib/keywords");
+    const text = "What is your plan for education funding in our state?";
+    const keywords = extractKeywords(text);
+
     const question = await prisma.question.create({
       data: {
-        text: "What is your plan for education funding in our state?",
+        text,
         authorId: "user-sarah",
         officialId: "sen-warren",
         districtTag: "MA-Senate",
@@ -235,13 +240,18 @@ describe("question creation", () => {
         categoryTags: {
           create: [{ tag: "Education" }, { tag: "Economics and Public Finance" }],
         },
+        keywords: {
+          create: keywords.map((keyword) => ({ keyword })),
+        },
       },
-      include: { categoryTags: true },
+      include: { categoryTags: true, keywords: true },
     });
 
     testQuestionId = question.id;
     expect(question.status).toBe("pending_review");
     expect(question.categoryTags).toHaveLength(2);
     expect(question.categoryTags.map((t) => t.tag)).toContain("Education");
+    expect(question.keywords.length).toBeGreaterThan(0);
+    expect(question.keywords.map((k) => k.keyword)).toContain("education");
   });
 });

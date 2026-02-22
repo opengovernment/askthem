@@ -5,6 +5,7 @@ import { requireAuth } from "@/lib/session";
 import { syncPersonToAN } from "@/lib/action-network";
 import { sendQuestionSubmitted } from "@/lib/email";
 import { detectPlatform } from "@/lib/media";
+import { extractKeywords } from "@/lib/keywords";
 
 // Basic content safety check — returns a rejection reason or null if OK.
 // TODO: Replace with AI-powered moderation (e.g. Claude API) in production.
@@ -160,6 +161,8 @@ export async function POST(request: NextRequest) {
     ? `${official.state}-${official.district}`
     : `${official.state}-${official.chamber}`;
 
+  const extractedKeywords = extractKeywords(text.trim());
+
   const question = await prisma.question.create({
     data: {
       text: text.trim(),
@@ -173,9 +176,13 @@ export async function POST(request: NextRequest) {
       categoryTags: {
         create: tags.map((tag) => ({ tag })),
       },
+      keywords: {
+        create: extractedKeywords.map((keyword) => ({ keyword })),
+      },
     },
     include: {
       categoryTags: true,
+      keywords: true,
       official: true,
       author: true,
     },

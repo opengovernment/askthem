@@ -18,6 +18,7 @@ interface QuestionCardProps {
     author: { id: string; name: string | null; city: string | null; state: string | null; isProfilePublic?: boolean };
     official: { id: string; name: string; title: string; photoUrl?: string | null; isVerifiedResponder?: boolean; _count?: { questions: number } };
     categoryTags: { tag: string }[];
+    keywords?: { keyword: string }[];
     group?: { id: string; name: string; slug: string; isVerified: boolean } | null;
   };
 }
@@ -110,6 +111,14 @@ export function QuestionCard({ question }: QuestionCardProps) {
                 className="rounded bg-gray-100 px-2 py-0.5 text-xs text-gray-600"
               >
                 {ct.tag}
+              </span>
+            ))}
+            {question.keywords && question.keywords.length > 0 && question.keywords.map((kw) => (
+              <span
+                key={kw.keyword}
+                className="rounded bg-amber-50 px-2 py-0.5 text-xs text-amber-700"
+              >
+                {kw.keyword}
               </span>
             ))}
             <span className="rounded bg-indigo-50 px-2 py-0.5 text-xs text-indigo-600">

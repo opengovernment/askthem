@@ -1,6 +1,7 @@
 import "dotenv/config";
 import { PrismaClient } from "@prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
+import { extractKeywords } from "../src/lib/keywords";
 
 const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL });
 const prisma = new PrismaClient({ adapter });
@@ -15,6 +16,7 @@ async function main() {
   // Clean existing data
   await prisma.answer.deleteMany();
   await prisma.upvote.deleteMany();
+  await prisma.questionKeyword.deleteMany();
   await prisma.questionTag.deleteMany();
   await prisma.question.deleteMany();
   await prisma.userDistrict.deleteMany();
@@ -655,11 +657,12 @@ async function main() {
     ],
   });
 
-  // Create questions with tags
+  // Create questions with tags and auto-extracted keywords
+  const q1Text = "What specific steps will you take to make housing more affordable for working families in our state?";
   const q1 = await prisma.question.create({
     data: {
       id: "q1",
-      text: "What specific steps will you take to make housing more affordable for working families in our state?",
+      text: q1Text,
       authorId: maria.id,
       officialId: warren.id,
       districtTag: "MA-Senate",
@@ -672,13 +675,17 @@ async function main() {
           { tag: "Economics and Public Finance" },
         ],
       },
+      keywords: {
+        create: extractKeywords(q1Text).map((keyword) => ({ keyword })),
+      },
     },
   });
 
+  const q2Text = "How do you plan to address the rising cost of prescription drugs for seniors on fixed incomes?";
   const q2 = await prisma.question.create({
     data: {
       id: "q2",
-      text: "How do you plan to address the rising cost of prescription drugs for seniors on fixed incomes?",
+      text: q2Text,
       authorId: james.id,
       officialId: cruz.id,
       districtTag: "TX-Senate",
@@ -688,13 +695,17 @@ async function main() {
       categoryTags: {
         create: [{ tag: "Health" }, { tag: "Social Welfare" }],
       },
+      keywords: {
+        create: extractKeywords(q2Text).map((keyword) => ({ keyword })),
+      },
     },
   });
 
+  const q3Text = "What is your position on expanding public transit funding in our district, and will you support the proposed Green New Deal transit provisions?";
   const q3 = await prisma.question.create({
     data: {
       id: "q3",
-      text: "What is your position on expanding public transit funding in our district, and will you support the proposed Green New Deal transit provisions?",
+      text: q3Text,
       authorId: aaliyah.id,
       officialId: aoc.id,
       districtTag: "NY-14",
@@ -706,6 +717,9 @@ async function main() {
           { tag: "Transportation and Public Works" },
           { tag: "Environmental Protection" },
         ],
+      },
+      keywords: {
+        create: extractKeywords(q3Text).map((keyword) => ({ keyword })),
       },
     },
   });
@@ -721,10 +735,11 @@ async function main() {
     },
   });
 
+  const q4Text = "Will you commit to opposing any new taxes on small businesses with under 50 employees?";
   const q4 = await prisma.question.create({
     data: {
       id: "q4",
-      text: "Will you commit to opposing any new taxes on small businesses with under 50 employees?",
+      text: q4Text,
       authorId: robert.id,
       officialId: crenshaw.id,
       districtTag: "TX-2",
@@ -734,13 +749,17 @@ async function main() {
       categoryTags: {
         create: [{ tag: "Taxation" }, { tag: "Commerce" }],
       },
+      keywords: {
+        create: extractKeywords(q4Text).map((keyword) => ({ keyword })),
+      },
     },
   });
 
+  const q5Text = "What actions are you taking to protect Pennsylvania workers from AI-driven job displacement in manufacturing?";
   const q5 = await prisma.question.create({
     data: {
       id: "q5",
-      text: "What actions are you taking to protect Pennsylvania workers from AI-driven job displacement in manufacturing?",
+      text: q5Text,
       authorId: tom.id,
       officialId: fetterman.id,
       districtTag: "PA-Senate",
@@ -753,13 +772,17 @@ async function main() {
           { tag: "Science, Technology, Communications" },
         ],
       },
+      keywords: {
+        create: extractKeywords(q5Text).map((keyword) => ({ keyword })),
+      },
     },
   });
 
+  const q6Text = "Do you support universal background checks for all gun purchases, including private sales?";
   const q6 = await prisma.question.create({
     data: {
       id: "q6",
-      text: "Do you support universal background checks for all gun purchases, including private sales?",
+      text: q6Text,
       authorId: sarah.id,
       officialId: warren.id,
       districtTag: "MA-Senate",
@@ -772,14 +795,18 @@ async function main() {
           { tag: "Civil Rights and Liberties" },
         ],
       },
+      keywords: {
+        create: extractKeywords(q6Text).map((keyword) => ({ keyword })),
+      },
     },
   });
 
   // Pending review questions (for moderator dashboard demo)
+  const q7Text = "Why haven't you held a town hall in our district in over two years? When will you face your constituents in person?";
   await prisma.question.create({
     data: {
       id: "q7",
-      text: "Why haven't you held a town hall in our district in over two years? When will you face your constituents in person?",
+      text: q7Text,
       authorId: aaliyah.id,
       officialId: aoc.id,
       districtTag: "NY-14",
@@ -789,13 +816,17 @@ async function main() {
       categoryTags: {
         create: [{ tag: "Government Operations and Politics" }],
       },
+      keywords: {
+        create: extractKeywords(q7Text).map((keyword) => ({ keyword })),
+      },
     },
   });
 
+  const q8Text = "What is your plan to reduce the federal deficit without cutting Social Security or Medicare benefits?";
   await prisma.question.create({
     data: {
       id: "q8",
-      text: "What is your plan to reduce the federal deficit without cutting Social Security or Medicare benefits?",
+      text: q8Text,
       authorId: tom.id,
       officialId: cruz.id,
       districtTag: "TX-Senate",
@@ -808,13 +839,17 @@ async function main() {
           { tag: "Social Welfare" },
         ],
       },
+      keywords: {
+        create: extractKeywords(q8Text).map((keyword) => ({ keyword })),
+      },
     },
   });
 
+  const q9Text = "Will you support legislation to require broadband internet providers to offer affordable plans in rural Pennsylvania?";
   await prisma.question.create({
     data: {
       id: "q9",
-      text: "Will you support legislation to require broadband internet providers to offer affordable plans in rural Pennsylvania?",
+      text: q9Text,
       authorId: tom.id,
       officialId: fetterman.id,
       districtTag: "PA-Senate",
@@ -826,6 +861,9 @@ async function main() {
           { tag: "Science, Technology, Communications" },
           { tag: "Commerce" },
         ],
+      },
+      keywords: {
+        create: extractKeywords(q9Text).map((keyword) => ({ keyword })),
       },
     },
   });
@@ -850,6 +888,7 @@ async function main() {
   console.log(`  Questions: ${await prisma.question.count()}`);
   console.log(`  Upvotes: ${await prisma.upvote.count()}`);
   console.log(`  Answers: ${await prisma.answer.count()}`);
+  console.log(`  Keywords: ${await prisma.questionKeyword.count()}`);
 }
 
 main()
