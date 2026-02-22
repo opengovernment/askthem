@@ -1,10 +1,26 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getCurrentUser } from "@/lib/session";
-import { getAllOfficials, getOfficialsForUser } from "@/lib/queries";
+import { getAllOfficials, getOfficialsForUser, getFilteredOfficials } from "@/lib/queries";
 
 export async function GET(req: NextRequest) {
-  // If ?all=true, return all officials (for the officials directory page)
-  const all = req.nextUrl.searchParams.get("all") === "true";
+  const params = req.nextUrl.searchParams;
+  const all = params.get("all") === "true";
+  const stateFilter = params.get("state");
+  const chamberFilter = params.get("chamber"); // comma-separated chambers
+
+  // If filtering by state or chamber, return filtered results
+  if (stateFilter || chamberFilter) {
+    const chambers = chamberFilter ? chamberFilter.split(",") : undefined;
+    // Use getFilteredOfficials for state, then filter chambers client-side
+    // since getFilteredOfficials only supports a single chamber
+    let officials = await getFilteredOfficials({
+      state: stateFilter || undefined,
+    });
+    if (chambers && chambers.length > 0) {
+      officials = officials.filter((o) => chambers.includes(o.chamber));
+    }
+    return NextResponse.json(officials);
+  }
 
   if (!all) {
     // Try to filter to the user's representatives

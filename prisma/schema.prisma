@@ -173,6 +173,9 @@ model Question {
   eventId          String?
   event            Event?   @relation(fields: [eventId], references: [id])
 
+  // Broadcast batch: groups questions published to multiple officials at once
+  batchId          String?
+
   categoryTags    QuestionTag[]
   keywords        QuestionKeyword[]
   upvotes         Upvote[]

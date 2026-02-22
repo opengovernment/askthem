@@ -77,6 +77,12 @@ export default async function ModeratePage({ searchParams }: PageProps) {
                 Responder Applications
               </Link>
               <Link
+                href="/moderate/broadcast"
+                className="rounded-md border border-green-200 bg-green-50 px-4 py-2 text-sm font-medium text-green-700 hover:bg-green-100"
+              >
+                Broadcast Question
+              </Link>
+              <Link
                 href="/moderate/events"
                 className="rounded-md border border-indigo-200 bg-indigo-50 px-4 py-2 text-sm font-medium text-indigo-700 hover:bg-indigo-100"
               >
