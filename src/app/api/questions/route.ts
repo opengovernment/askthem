@@ -34,6 +34,17 @@ export async function POST(request: NextRequest) {
     );
   }
 
+  // Enforce read-only mode (moderators and admins are exempt)
+  if (user.role !== "moderator" && user.role !== "admin") {
+    const readOnlyRow = await prisma.siteSetting.findUnique({ where: { key: "readOnlyMode" } });
+    if (readOnlyRow?.value === "true") {
+      return NextResponse.json(
+        { error: "The site is currently in read-only mode. New questions cannot be submitted at this time. Please check back later." },
+        { status: 503 },
+      );
+    }
+  }
+
   // Enforce daily question limit (moderators and admins are exempt)
   if (user.role !== "moderator" && user.role !== "admin") {
     const limitRow = await prisma.siteSetting.findUnique({ where: { key: "dailyQuestionLimit" } });

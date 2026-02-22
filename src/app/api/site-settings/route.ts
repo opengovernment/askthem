@@ -4,6 +4,8 @@ import { requireAuth, requireModerator } from "@/lib/session";
 
 const DEFAULTS: Record<string, string> = {
   dailyQuestionLimit: "5",
+  readOnlyMode: "false",
+  maintenanceMode: "false",
 };
 
 /**
@@ -37,7 +39,11 @@ export async function PATCH(request: Request) {
   }
 
   const body = await request.json();
-  const { dailyQuestionLimit } = body as { dailyQuestionLimit?: number };
+  const { dailyQuestionLimit, readOnlyMode, maintenanceMode } = body as {
+    dailyQuestionLimit?: number;
+    readOnlyMode?: boolean;
+    maintenanceMode?: boolean;
+  };
 
   if (dailyQuestionLimit !== undefined) {
     const limit = Number(dailyQuestionLimit);
@@ -51,6 +57,22 @@ export async function PATCH(request: Request) {
       where: { key: "dailyQuestionLimit" },
       update: { value: String(limit) },
       create: { key: "dailyQuestionLimit", value: String(limit) },
+    });
+  }
+
+  if (typeof readOnlyMode === "boolean") {
+    await prisma.siteSetting.upsert({
+      where: { key: "readOnlyMode" },
+      update: { value: String(readOnlyMode) },
+      create: { key: "readOnlyMode", value: String(readOnlyMode) },
+    });
+  }
+
+  if (typeof maintenanceMode === "boolean") {
+    await prisma.siteSetting.upsert({
+      where: { key: "maintenanceMode" },
+      update: { value: String(maintenanceMode) },
+      create: { key: "maintenanceMode", value: String(maintenanceMode) },
     });
   }
 

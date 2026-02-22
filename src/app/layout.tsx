@@ -5,6 +5,7 @@ import { MobileNav } from "@/components/MobileNav";
 import { UserMenu } from "@/components/UserMenu";
 import { AddressBanner } from "@/components/AddressBanner";
 import { auth } from "@/auth";
+import { getSiteMode } from "@/lib/site-mode";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -23,13 +24,68 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const session = await auth();
+  const [session, siteMode] = await Promise.all([auth(), getSiteMode()]);
   const user = session?.user;
   const isModerator = user?.role === "moderator" || user?.role === "admin";
+
+  // Maintenance mode: show full-page placard for non-moderators
+  if (siteMode.maintenance && !isModerator) {
+    return (
+      <html lang="en">
+        <body className="antialiased">
+          <div className="flex min-h-screen flex-col items-center justify-center bg-gray-50 px-4">
+            <div className="mx-auto max-w-md text-center">
+              <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-amber-100">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="h-8 w-8 text-amber-600">
+                  <path fillRule="evenodd" d="M12 6.75a5.25 5.25 0 016.775-5.025.75.75 0 01.313 1.248l-3.32 3.319c.063.475.276.934.641 1.299.365.365.824.578 1.3.64l3.318-3.319a.75.75 0 011.248.313 5.25 5.25 0 01-5.472 6.756c-1.018-.086-1.87.1-2.309.634L7.344 21.3A3.298 3.298 0 112.7 16.657l8.684-7.151c.533-.44.72-1.291.634-2.309A5.342 5.342 0 0112 6.75zM4.117 19.125a.75.75 0 01.75-.75h.008a.75.75 0 01.75.75v.008a.75.75 0 01-.75.75h-.008a.75.75 0 01-.75-.75v-.008z" clipRule="evenodd" />
+                </svg>
+              </div>
+              <h1 className="mb-3 text-2xl font-bold text-gray-900">Under Maintenance</h1>
+              <p className="mb-8 text-gray-600">
+                AskThem is temporarily undergoing maintenance. We&apos;ll be back shortly.
+                Thank you for your patience.
+              </p>
+              <a
+                href="/auth/signin?callbackUrl=/moderate"
+                className="text-xs text-gray-400 hover:text-gray-500"
+              >
+                Site administrator?
+              </a>
+            </div>
+          </div>
+        </body>
+      </html>
+    );
+  }
 
   return (
     <html lang="en">
       <body className="antialiased">
+        {/* Maintenance mode banner for moderators */}
+        {siteMode.maintenance && isModerator && (
+          <div className="bg-red-600 px-4 py-2 text-center text-sm font-medium text-white">
+            Maintenance mode is active — only moderators and admins can see the site.{" "}
+            <Link href="/moderate" className="underline hover:text-red-100">
+              Turn off
+            </Link>
+          </div>
+        )}
+
+        {/* Read-only mode banner */}
+        {siteMode.readOnly && (
+          <div className="bg-amber-500 px-4 py-2 text-center text-sm font-medium text-white">
+            The site is currently in read-only mode. New questions and registrations are temporarily paused.
+            {isModerator && (
+              <>
+                {" "}
+                <Link href="/moderate" className="underline hover:text-amber-100">
+                  Turn off
+                </Link>
+              </>
+            )}
+          </div>
+        )}
+
         {/* Navigation */}
         <nav className="relative border-b border-gray-200 bg-white">
           <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-3">

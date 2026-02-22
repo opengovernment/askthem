@@ -17,6 +17,17 @@ export async function POST(req: NextRequest) {
     );
   }
 
+  // Block new registrations in read-only mode (moderators and admins are exempt)
+  if (!user.isAddressVerified && user.role !== "moderator" && user.role !== "admin") {
+    const readOnlyRow = await prisma.siteSetting.findUnique({ where: { key: "readOnlyMode" } });
+    if (readOnlyRow?.value === "true") {
+      return NextResponse.json(
+        { error: "New registrations are temporarily paused. The site is currently in read-only mode. Please check back later." },
+        { status: 503 },
+      );
+    }
+  }
+
   const body = await req.json();
   const { street, city, state, zip, name, policiesAccepted } = body;
 

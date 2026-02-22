@@ -2,6 +2,7 @@ import { getQuestionsByStatus, getQuestionCounts, getConstituentCountsForQuestio
 import { ModerationQueue } from "@/components/ModerationQueue";
 import { UserManagement } from "@/components/UserManagement";
 import { DailyQuestionLimit } from "@/components/DailyQuestionLimit";
+import { SiteModeToggles } from "@/components/SiteModeToggles";
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 import Link from "next/link";
@@ -20,8 +21,11 @@ export default async function ModeratePage({ searchParams }: PageProps) {
     redirect("/");
   }
 
-  const dailyLimitRow = await prisma.siteSetting.findUnique({ where: { key: "dailyQuestionLimit" } });
-  const dailyQuestionLimit = dailyLimitRow ? Number(dailyLimitRow.value) : 5;
+  const siteSettings = await prisma.siteSetting.findMany();
+  const settingsMap = new Map(siteSettings.map((s) => [s.key, s.value]));
+  const dailyQuestionLimit = Number(settingsMap.get("dailyQuestionLimit") ?? "5");
+  const readOnlyMode = settingsMap.get("readOnlyMode") === "true";
+  const maintenanceMode = settingsMap.get("maintenanceMode") === "true";
 
   const { tab } = await searchParams;
   const activeTab = tab || "pending_review";
@@ -136,6 +140,9 @@ export default async function ModeratePage({ searchParams }: PageProps) {
             Global limits that apply to all registered users. Moderators and admins are exempt.
           </p>
           <DailyQuestionLimit initialLimit={dailyQuestionLimit} />
+          <div className="mt-6">
+            <SiteModeToggles initialReadOnly={readOnlyMode} initialMaintenance={maintenanceMode} />
+          </div>
         </section>
       </div>
     </div>
