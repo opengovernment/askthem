@@ -96,13 +96,17 @@ export function VisualizeBubbleMap({ data }: VisualizeBubbleMapProps) {
   const [hoveredBubble, setHoveredBubble] = useState<string | null>(null);
   const [tooltipPos, setTooltipPos] = useState<{ x: number; y: number } | null>(null);
 
-  // Scale bubble radius based on totalQuestions
+  // Scale bubble radius based on totalQuestions, sized to fit tag names
   const maxQuestions = Math.max(...data.map((d) => d.totalQuestions));
-  const minRadius = 12;
-  const maxRadius = 35;
+  const minRadius = 22;
+  const maxRadius = 42;
 
-  function getRadius(totalQuestions: number) {
-    return minRadius + (totalQuestions / maxQuestions) * (maxRadius - minRadius);
+  function getRadius(entry: BubbleData) {
+    const sizeByQuestions = minRadius + (entry.totalQuestions / maxQuestions) * (maxRadius - minRadius);
+    // Ensure the bubble is wide enough for the tag label
+    const tagLen = entry.tags[0].length;
+    const minForLabel = Math.max(minRadius, tagLen * 3.2 + 4);
+    return Math.max(sizeByQuestions, minForLabel);
   }
 
   const hoveredData = data.find((d) => d.state === hoveredBubble);
@@ -174,7 +178,7 @@ export function VisualizeBubbleMap({ data }: VisualizeBubbleMapProps) {
           const centroid = stateCentroids[entry.state];
           if (!centroid) return null;
 
-          const radius = getRadius(entry.totalQuestions);
+          const radius = getRadius(entry);
           const primaryTag = entry.tags[0];
           const color = getTagColor(primaryTag);
           const isHovered = hoveredBubble === entry.state;
@@ -183,15 +187,11 @@ export function VisualizeBubbleMap({ data }: VisualizeBubbleMapProps) {
             <g
               key={entry.state}
               className="cursor-pointer"
-              onMouseEnter={(e) => {
+              onMouseEnter={() => {
                 setHoveredBubble(entry.state);
-                const svg = e.currentTarget.closest("svg");
-                if (svg) {
-                  const rect = svg.getBoundingClientRect();
-                  const svgX = centroid.x / 960;
-                  const svgY = centroid.y / 600;
-                  setTooltipPos({ x: svgX * 100, y: svgY * 100 });
-                }
+                const svgX = centroid.x / 960;
+                const svgY = centroid.y / 600;
+                setTooltipPos({ x: svgX * 100, y: svgY * 100 });
               }}
               onMouseLeave={() => {
                 setHoveredBubble(null);
@@ -220,15 +220,15 @@ export function VisualizeBubbleMap({ data }: VisualizeBubbleMapProps) {
                 opacity={isHovered ? 0.85 : 0.6}
                 className="transition-all duration-150"
               />
-              {/* State abbreviation label */}
+              {/* Issue area label */}
               <text
                 x={centroid.x}
                 y={centroid.y}
                 textAnchor="middle"
                 dominantBaseline="central"
-                className="pointer-events-none select-none fill-white text-[11px] font-bold"
+                className="pointer-events-none select-none fill-white text-[9px] font-bold"
               >
-                {entry.state}
+                {primaryTag}
               </text>
             </g>
           );
