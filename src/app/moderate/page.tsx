@@ -3,6 +3,7 @@ import { ModerationQueue } from "@/components/ModerationQueue";
 import { UserManagement } from "@/components/UserManagement";
 import { DailyQuestionLimit } from "@/components/DailyQuestionLimit";
 import { SiteModeToggles } from "@/components/SiteModeToggles";
+import { ModeratorManagement } from "@/components/ModeratorManagement";
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 import Link from "next/link";
@@ -132,6 +133,17 @@ export default async function ModeratePage({ searchParams }: PageProps) {
           </p>
           <UserManagement isAdmin={session.user.role === "admin"} />
         </section>
+
+        {/* Moderator Management (admin only) */}
+        {session.user.role === "admin" && (
+          <section className="mt-12 border-t border-gray-200 pt-8">
+            <h2 className="mb-1 text-xl font-bold text-gray-900">Moderator Management</h2>
+            <p className="mb-4 text-sm text-gray-500">
+              Search for users to promote to moderator, or remove existing moderators.
+            </p>
+            <ModeratorManagement />
+          </section>
+        )}
 
         {/* Site Settings */}
         <section className="mt-12 border-t border-gray-200 pt-8">
