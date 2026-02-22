@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "User" ADD COLUMN "isGovUser" BOOLEAN NOT NULL DEFAULT false;

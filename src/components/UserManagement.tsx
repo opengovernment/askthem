@@ -13,8 +13,17 @@ interface UserResult {
   pausedUntil: string | null;
   city: string | null;
   state: string | null;
+  isGovUser: boolean;
   createdAt: string;
   _count: { questions: number; upvotes: number };
+}
+
+interface OfficialResult {
+  id: string;
+  name: string;
+  title: string;
+  state: string;
+  party: string;
 }
 
 export function UserManagement({ isAdmin }: { isAdmin: boolean }) {
@@ -112,6 +121,14 @@ function UserCard({
   const [showConfirm, setShowConfirm] = useState<string | null>(null);
   const [pauseDays, setPauseDays] = useState(7);
 
+  // District assignment for gov users
+  const [showDistricts, setShowDistricts] = useState(false);
+  const [officialQuery, setOfficialQuery] = useState("");
+  const [officialResults, setOfficialResults] = useState<OfficialResult[]>([]);
+  const [selectedOfficials, setSelectedOfficials] = useState<OfficialResult[]>([]);
+  const [searchingOfficials, setSearchingOfficials] = useState(false);
+  const [districtResult, setDistrictResult] = useState<string | null>(null);
+
   async function handleAction(action: string, extraBody?: Record<string, unknown>) {
     setActing(true);
     setResult(null);
@@ -184,6 +201,11 @@ function UserCard({
             <span className={`rounded-full px-2 py-0.5 text-xs font-medium ${statusBadge}`}>
               {user.status}
             </span>
+            {user.isGovUser && (
+              <span className="rounded-full bg-emerald-100 px-2 py-0.5 text-xs font-medium text-emerald-700">
+                .gov
+              </span>
+            )}
             {user.role !== "user" && (
               <span className="rounded-full bg-indigo-100 px-2 py-0.5 text-xs font-medium text-indigo-700">
                 {user.role}
@@ -336,6 +358,137 @@ function UserCard({
                 Delete
               </button>
             )
+          )}
+
+          {/* Manage Districts (gov users only) */}
+          {user.isGovUser && (
+            <button
+              onClick={() => setShowDistricts(!showDistricts)}
+              className="rounded border border-emerald-200 bg-emerald-50 px-3 py-1.5 text-xs font-medium text-emerald-700 hover:bg-emerald-100 disabled:opacity-50"
+            >
+              {showDistricts ? "Hide Districts" : "Manage Districts"}
+            </button>
+          )}
+        </div>
+      )}
+
+      {/* District assignment panel for gov users */}
+      {showDistricts && user.isGovUser && (
+        <div className="mt-3 rounded-lg border border-emerald-200 bg-emerald-50/50 p-3">
+          <p className="mb-2 text-xs font-medium text-emerald-800">
+            Assign districts for this government user
+          </p>
+
+          {/* Search officials */}
+          <div className="mb-2 flex gap-2">
+            <input
+              type="text"
+              value={officialQuery}
+              onChange={(e) => setOfficialQuery(e.target.value)}
+              placeholder="Search officials by name or title..."
+              className="flex-1 rounded border border-gray-300 px-2 py-1.5 text-xs shadow-sm focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500"
+            />
+            <button
+              onClick={async () => {
+                if (officialQuery.trim().length < 2) return;
+                setSearchingOfficials(true);
+                try {
+                  const res = await fetch(`/api/officials/search?q=${encodeURIComponent(officialQuery.trim())}`);
+                  if (res.ok) {
+                    const data = await res.json();
+                    setOfficialResults(data.officials);
+                  }
+                } finally {
+                  setSearchingOfficials(false);
+                }
+              }}
+              disabled={searchingOfficials || officialQuery.trim().length < 2}
+              className="rounded bg-emerald-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-emerald-700 disabled:opacity-50"
+            >
+              {searchingOfficials ? "..." : "Search"}
+            </button>
+          </div>
+
+          {/* Search results */}
+          {officialResults.length > 0 && (
+            <div className="mb-2 max-h-36 overflow-y-auto rounded border border-gray-200 bg-white">
+              {officialResults.map((o) => {
+                const alreadySelected = selectedOfficials.some((s) => s.id === o.id);
+                return (
+                  <button
+                    key={o.id}
+                    onClick={() => {
+                      if (!alreadySelected) {
+                        setSelectedOfficials((prev) => [...prev, o]);
+                      }
+                    }}
+                    disabled={alreadySelected}
+                    className={`flex w-full items-center gap-2 px-2 py-1.5 text-left text-xs hover:bg-gray-50 ${alreadySelected ? "opacity-50" : ""}`}
+                  >
+                    <span className="font-medium text-gray-900">{o.name}</span>
+                    <span className="text-gray-500">{o.title}</span>
+                    <span className="text-gray-400">({o.party}, {o.state})</span>
+                  </button>
+                );
+              })}
+            </div>
+          )}
+
+          {/* Selected officials */}
+          {selectedOfficials.length > 0 && (
+            <div className="mb-2">
+              <p className="mb-1 text-xs text-gray-600">Selected officials:</p>
+              <div className="flex flex-wrap gap-1">
+                {selectedOfficials.map((o) => (
+                  <span key={o.id} className="inline-flex items-center gap-1 rounded-full bg-emerald-100 px-2 py-0.5 text-xs text-emerald-800">
+                    {o.name}
+                    <button
+                      onClick={() => setSelectedOfficials((prev) => prev.filter((s) => s.id !== o.id))}
+                      className="ml-0.5 text-emerald-600 hover:text-emerald-800"
+                    >
+                      &times;
+                    </button>
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Save button */}
+          <button
+            onClick={async () => {
+              if (selectedOfficials.length === 0) return;
+              setDistrictResult(null);
+              try {
+                const res = await fetch("/api/moderate/users", {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({
+                    userId: user.id,
+                    action: "assign_districts",
+                    officialIds: selectedOfficials.map((o) => o.id),
+                  }),
+                });
+                const data = await res.json();
+                if (res.ok) {
+                  setDistrictResult(`Assigned ${selectedOfficials.length} official(s)`);
+                } else {
+                  setDistrictResult(`Error: ${data.error}`);
+                }
+              } catch {
+                setDistrictResult("Network error");
+              }
+            }}
+            disabled={selectedOfficials.length === 0}
+            className="rounded bg-emerald-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-emerald-700 disabled:opacity-50"
+          >
+            Save District Assignments
+          </button>
+
+          {districtResult && (
+            <p className={`mt-1 text-xs font-medium ${districtResult.startsWith("Error") ? "text-red-600" : "text-emerald-700"}`}>
+              {districtResult}
+            </p>
           )}
         </div>
       )}

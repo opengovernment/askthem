@@ -2,6 +2,7 @@ import { auth, signIn } from "@/auth";
 import { redirect } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
+import { GovEmailForm } from "@/components/GovEmailForm";
 
 export default async function SignInPage() {
   const session = await auth();
@@ -20,44 +21,6 @@ export default async function SignInPage() {
         </div>
 
         <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
-          {/* Email magic link sign-in */}
-          <form
-            action={async (formData: FormData) => {
-              "use server";
-              const email = formData.get("email") as string;
-              await signIn("nodemailer", { email, redirectTo: "/address" });
-            }}
-          >
-            <label htmlFor="email" className="mb-1.5 block text-sm font-medium text-gray-700">
-              Email address
-            </label>
-            <input
-              id="email"
-              name="email"
-              type="email"
-              required
-              placeholder="you@example.gov"
-              className="mb-3 w-full rounded-lg border border-gray-300 px-4 py-3 text-gray-900 placeholder:text-gray-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 focus:outline-none"
-            />
-            <button
-              type="submit"
-              className="flex w-full items-center justify-center gap-2 rounded-lg bg-indigo-600 px-4 py-3 text-sm font-medium text-white shadow-sm transition-colors hover:bg-indigo-700"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-5 w-5">
-                <path d="M3 4a2 2 0 00-2 2v1.161l8.441 4.221a1.25 1.25 0 001.118 0L19 7.162V6a2 2 0 00-2-2H3z" />
-                <path d="M19 8.839l-7.77 3.885a2.75 2.75 0 01-2.46 0L1 8.839V14a2 2 0 002 2h14a2 2 0 002-2V8.839z" />
-              </svg>
-              Sign in with email
-            </button>
-          </form>
-
-          {/* Divider */}
-          <div className="my-5 flex items-center gap-3">
-            <div className="h-px flex-1 bg-gray-200" />
-            <span className="text-xs font-medium text-gray-400">OR</span>
-            <div className="h-px flex-1 bg-gray-200" />
-          </div>
-
           {/* Google OAuth sign-in */}
           <form
             action={async () => {
@@ -108,6 +71,16 @@ export default async function SignInPage() {
               Continue with Facebook
             </button>
           </form>
+
+          {/* Divider */}
+          <div className="my-5 flex items-center gap-3">
+            <div className="h-px flex-1 bg-gray-200" />
+            <span className="text-xs font-medium text-gray-400">OR</span>
+            <div className="h-px flex-1 bg-gray-200" />
+          </div>
+
+          {/* Government email sign-in */}
+          <GovEmailForm />
 
           <p className="mt-4 text-center text-xs text-gray-500">
             By signing in, you agree to our terms of service and privacy policy.

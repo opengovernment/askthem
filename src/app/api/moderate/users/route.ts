@@ -34,6 +34,7 @@ export async function GET(req: NextRequest) {
       pausedUntil: true,
       city: true,
       state: true,
+      isGovUser: true,
       createdAt: true,
       _count: { select: { questions: true, upvotes: true } },
     },
@@ -56,17 +57,18 @@ export async function POST(req: NextRequest) {
   }
 
   const body = await req.json();
-  const { userId, action, pauseDays } = body as {
+  const { userId, action, pauseDays, officialIds } = body as {
     userId?: string;
-    action?: "ban" | "unban" | "pause" | "unpause" | "delete";
+    action?: "ban" | "unban" | "pause" | "unpause" | "delete" | "assign_districts";
     pauseDays?: number;
+    officialIds?: string[];
   };
 
   if (!userId || typeof userId !== "string") {
     return NextResponse.json({ error: "userId is required" }, { status: 400 });
   }
 
-  const validActions = ["ban", "unban", "pause", "unpause", "delete"] as const;
+  const validActions = ["ban", "unban", "pause", "unpause", "delete", "assign_districts"] as const;
   if (!action || !validActions.includes(action)) {
     return NextResponse.json(
       { error: `action must be one of: ${validActions.join(", ")}` },
@@ -130,6 +132,47 @@ export async function POST(req: NextRequest) {
         data: { status: "active", pausedUntil: null },
       });
       return NextResponse.json({ success: true, status: "active" });
+    }
+
+    case "assign_districts": {
+      // Assign officials/districts to a gov user (moderator or admin)
+      if (!targetUser.isGovUser) {
+        return NextResponse.json(
+          { error: "District assignment is only available for government (.gov) users" },
+          { status: 400 },
+        );
+      }
+      if (!officialIds || !Array.isArray(officialIds) || officialIds.length === 0) {
+        return NextResponse.json(
+          { error: "officialIds array is required" },
+          { status: 400 },
+        );
+      }
+
+      // Verify all officials exist
+      const officials = await prisma.official.findMany({
+        where: { id: { in: officialIds } },
+        select: { id: true, name: true, title: true, state: true, district: true, chamber: true },
+      });
+      if (officials.length !== officialIds.length) {
+        return NextResponse.json(
+          { error: "One or more official IDs are invalid" },
+          { status: 400 },
+        );
+      }
+
+      // Replace existing district assignments with the new set
+      await prisma.$transaction(async (tx) => {
+        await tx.userDistrict.deleteMany({ where: { userId } });
+        await tx.userDistrict.createMany({
+          data: officialIds.map((officialId) => ({ userId, officialId })),
+        });
+      });
+
+      return NextResponse.json({
+        success: true,
+        assignedOfficials: officials,
+      });
     }
 
     case "delete": {

@@ -54,6 +54,14 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         });
       }
 
+      // Flag .gov email users — they skip address verification; moderators assign districts
+      if (user.email && user.id && user.email.toLowerCase().endsWith(".gov")) {
+        await prisma.user.update({
+          where: { id: user.id },
+          data: { isGovUser: true, isAddressVerified: true },
+        });
+      }
+
       // Sync new user to Action Network (email + name only at registration)
       if (user.email && user.name) {
         const anId = await syncPersonToAN({ email: user.email, name: user.name });
@@ -80,7 +88,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       if (user.id) {
         const dbUser = await prisma.user.findUnique({
           where: { id: user.id },
-          select: { isAddressVerified: true, status: true, pausedUntil: true },
+          select: { isAddressVerified: true, isGovUser: true, status: true, pausedUntil: true },
         });
 
         if (dbUser) {
@@ -97,7 +105,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
             });
           }
 
-          if (!dbUser.isAddressVerified) {
+          if (!dbUser.isAddressVerified && !dbUser.isGovUser) {
             return "/address";
           }
         }
