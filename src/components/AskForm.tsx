@@ -37,6 +37,7 @@ export function AskForm({ eventId: propEventId, lockedOfficialId, eventName }: A
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
+  const [limitReached, setLimitReached] = useState(false);
   const [loadingOfficials, setLoadingOfficials] = useState(true);
   const [groups, setGroups] = useState<GroupOption[]>([]);
   const [selectedGroupId, setSelectedGroupId] = useState("");
@@ -95,6 +96,9 @@ export function AskForm({ eventId: propEventId, lockedOfficialId, eventName }: A
         setSubmitted(true);
       } else {
         const data = await res.json();
+        if (data.dailyLimitReached) {
+          setLimitReached(true);
+        }
         setError(data.error || "Something went wrong. Please try again.");
       }
     } catch {
@@ -284,7 +288,7 @@ export function AskForm({ eventId: propEventId, lockedOfficialId, eventName }: A
           {/* Submit */}
           <button
             type="submit"
-            disabled={isSubmitting || !selectedOfficial || !questionText.trim() || selectedTags.length === 0}
+            disabled={isSubmitting || limitReached || !selectedOfficial || !questionText.trim() || selectedTags.length === 0}
             className="w-full rounded-full bg-indigo-600 px-6 py-3.5 font-medium text-white transition-colors hover:bg-indigo-700 disabled:cursor-not-allowed disabled:bg-gray-300"
           >
             {isSubmitting ? "Submitting..." : "Submit Question for Review"}

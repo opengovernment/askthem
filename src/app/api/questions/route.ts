@@ -34,6 +34,29 @@ export async function POST(request: NextRequest) {
     );
   }
 
+  // Enforce daily question limit (moderators and admins are exempt)
+  if (user.role !== "moderator" && user.role !== "admin") {
+    const limitRow = await prisma.siteSetting.findUnique({ where: { key: "dailyQuestionLimit" } });
+    const dailyLimit = limitRow ? Number(limitRow.value) : 5;
+
+    const startOfDay = new Date();
+    startOfDay.setHours(0, 0, 0, 0);
+
+    const todayCount = await prisma.question.count({
+      where: { authorId: user.id, createdAt: { gte: startOfDay } },
+    });
+
+    if (todayCount >= dailyLimit) {
+      return NextResponse.json(
+        {
+          error: `You've reached the daily limit of ${dailyLimit} question${dailyLimit === 1 ? "" : "s"}. In order to get responses to your questions, the limit per day has been reached. Please try again tomorrow.`,
+          dailyLimitReached: true,
+        },
+        { status: 429 },
+      );
+    }
+  }
+
   const body = await request.json();
   const { officialId, text, tags, groupId, videoUrl, eventId } = body as {
     officialId?: string;

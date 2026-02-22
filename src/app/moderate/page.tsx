@@ -1,9 +1,11 @@
 import { getQuestionsByStatus, getQuestionCounts, getConstituentCountsForQuestions, getFlaggedQuestions } from "@/lib/queries";
 import { ModerationQueue } from "@/components/ModerationQueue";
 import { UserManagement } from "@/components/UserManagement";
+import { DailyQuestionLimit } from "@/components/DailyQuestionLimit";
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 import Link from "next/link";
+import { prisma } from "@/lib/prisma";
 
 export const dynamic = "force-dynamic";
 
@@ -17,6 +19,9 @@ export default async function ModeratePage({ searchParams }: PageProps) {
   if (!session?.user || (session.user.role !== "moderator" && session.user.role !== "admin")) {
     redirect("/");
   }
+
+  const dailyLimitRow = await prisma.siteSetting.findUnique({ where: { key: "dailyQuestionLimit" } });
+  const dailyQuestionLimit = dailyLimitRow ? Number(dailyLimitRow.value) : 5;
 
   const { tab } = await searchParams;
   const activeTab = tab || "pending_review";
@@ -122,6 +127,15 @@ export default async function ModeratePage({ searchParams }: PageProps) {
             Search for users by email or name to ban, pause, or {session.user.role === "admin" ? "delete" : "manage"} accounts.
           </p>
           <UserManagement isAdmin={session.user.role === "admin"} />
+        </section>
+
+        {/* Site Settings */}
+        <section className="mt-12 border-t border-gray-200 pt-8">
+          <h2 className="mb-1 text-xl font-bold text-gray-900">Site Settings</h2>
+          <p className="mb-4 text-sm text-gray-500">
+            Global limits that apply to all registered users. Moderators and admins are exempt.
+          </p>
+          <DailyQuestionLimit initialLimit={dailyQuestionLimit} />
         </section>
       </div>
     </div>

@@ -385,6 +385,14 @@ model AmaComment {
   @@index([eventId, status])
 }
 
+// ─── Site Settings (key-value store for global config) ──────────────
+
+model SiteSetting {
+  key       String   @id // e.g. "dailyQuestionLimit"
+  value     String   // stored as string, parsed by application
+  updatedAt DateTime @updatedAt
+}
+
 // ─── API Access (for future tiered API) ──────────────────────────────
 
 model ApiKey {
