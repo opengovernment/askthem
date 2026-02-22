@@ -14,6 +14,8 @@ const DUMMY_GROUPS = [
   { slug: "lone-star-accountability", name: "Lone Star Accountability Project", city: "Austin", state: "TX" },
   { slug: "capitol-watch-dc", name: "Capitol Watch DC", city: "Washington", state: "DC" },
   { slug: "sunshine-advocacy-coalition", name: "Sunshine Advocacy Coalition", city: "Miami", state: "FL" },
+  { slug: "harbor-city-gazette", name: "Harbor City Gazette", city: "Baltimore", state: "MD" },
+  { slug: "pinecrest-media-group", name: "Pinecrest Media Group", city: "Denver", state: "CO" },
 ];
 
 export default function GroupsPage() {
