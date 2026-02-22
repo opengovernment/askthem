@@ -18,7 +18,15 @@ export async function POST(req: NextRequest) {
   }
 
   const body = await req.json();
-  const { street, city, state, zip, name } = body;
+  const { street, city, state, zip, name, policiesAccepted } = body;
+
+  // Require policy acceptance for new registrations
+  if (!user.isAddressVerified && !policiesAccepted) {
+    return NextResponse.json(
+      { error: "You must agree to the Terms of Service, Privacy Policy, and Comment Policy." },
+      { status: 400 },
+    );
+  }
 
   // Validate required fields
   if (!street || !city || !state || !zip) {
@@ -151,6 +159,7 @@ export async function POST(req: NextRequest) {
         isAddressVerified: true,
         addressLookedUpAt: new Date(),
         ...(typeof name === "string" && name.trim() ? { name: name.trim() } : {}),
+        ...(policiesAccepted && !user.policiesAcceptedAt ? { policiesAcceptedAt: new Date() } : {}),
       },
     });
 

@@ -27,6 +27,7 @@ model User {
   isProfilePublic   Boolean   @default(false) // user opts in to show a public profile page
   actionNetworkId   String?   // Action Network person UUID (synced on registration)
   emailConsent      Boolean   @default(false) // user opted in to email communications
+  policiesAcceptedAt DateTime? // timestamp when user accepted Terms of Service, Privacy Policy, and Comment Policy
   status            String    @default("active") // "active" | "banned" | "paused"
   pausedUntil       DateTime? // when set and status is "paused", account resumes after this time
   createdAt         DateTime  @default(now())

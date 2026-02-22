@@ -135,10 +135,21 @@ export function AddressForm({ userName }: AddressFormProps) {
   const [error, setError] = useState("");
   const [officials, setOfficials] = useState<MatchedOfficial[] | null>(null);
 
-  async function handleSubmit(e: React.FormEvent) {
+  // Policy agreement step
+  const [showPolicies, setShowPolicies] = useState(false);
+  const [agreedTerms, setAgreedTerms] = useState(false);
+  const [agreedPrivacy, setAgreedPrivacy] = useState(false);
+  const [agreedComments, setAgreedComments] = useState(false);
+
+  function handleAddressContinue(e: React.FormEvent) {
     e.preventDefault();
     if (needsName && !displayName.trim()) return;
     if (!street.trim() || !city.trim() || !state || !zip.trim()) return;
+    setShowPolicies(true);
+  }
+
+  async function handlePoliciesSubmit() {
+    if (!agreedTerms || !agreedPrivacy || !agreedComments) return;
     setIsSubmitting(true);
     setError("");
     setOfficials(null);
@@ -152,6 +163,7 @@ export function AddressForm({ userName }: AddressFormProps) {
           city: city.trim(),
           state,
           zip: zip.trim(),
+          policiesAccepted: true,
           ...(needsName && displayName.trim() ? { name: displayName.trim() } : {}),
         }),
       });
@@ -165,9 +177,12 @@ export function AddressForm({ userName }: AddressFormProps) {
       } else {
         const data = await res.json();
         setError(data.error || "Could not look up your address. Please try again.");
+        // Go back to address form so the user can fix errors
+        setShowPolicies(false);
       }
     } catch {
       setError("Network error. Please check your connection and try again.");
+      setShowPolicies(false);
     } finally {
       setIsSubmitting(false);
     }
@@ -272,6 +287,138 @@ export function AddressForm({ userName }: AddressFormProps) {
     );
   }
 
+  if (showPolicies) {
+    return (
+      <div className="min-h-screen bg-gray-50">
+        <div className="mx-auto max-w-2xl px-4 py-10">
+          <button
+            type="button"
+            onClick={() => setShowPolicies(false)}
+            className="mb-6 inline-block text-sm text-indigo-600 hover:text-indigo-800"
+          >
+            &larr; Back to address
+          </button>
+
+          <h1 className="mb-2 text-3xl font-bold text-gray-900">Review Our Policies</h1>
+          <p className="mb-8 text-gray-600">
+            Before we find your elected officials, please review and agree to our site policies.
+            AskThem is a moderated platform committed to constructive civic dialogue.
+          </p>
+
+          <div className="space-y-4">
+            <label
+              htmlFor="agree-terms"
+              className={`flex cursor-pointer items-start gap-3 rounded-lg border px-4 py-4 transition-colors ${
+                agreedTerms
+                  ? "border-indigo-300 bg-indigo-50"
+                  : "border-gray-200 bg-white hover:border-gray-300"
+              }`}
+            >
+              <input
+                id="agree-terms"
+                type="checkbox"
+                checked={agreedTerms}
+                onChange={(e) => setAgreedTerms(e.target.checked)}
+                className="mt-0.5 h-5 w-5 shrink-0 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+              />
+              <div>
+                <p className="font-medium text-gray-900">Terms of Service</p>
+                <p className="mt-1 text-sm text-gray-600">
+                  I agree that AskThem moderators have editorial control over all user-posted content,
+                  including the right to edit, remove, or decline to publish submissions.
+                </p>
+                <Link
+                  href="/terms"
+                  target="_blank"
+                  className="mt-1 inline-block text-sm text-indigo-600 hover:text-indigo-800"
+                >
+                  Read full Terms of Service
+                </Link>
+              </div>
+            </label>
+
+            <label
+              htmlFor="agree-privacy"
+              className={`flex cursor-pointer items-start gap-3 rounded-lg border px-4 py-4 transition-colors ${
+                agreedPrivacy
+                  ? "border-indigo-300 bg-indigo-50"
+                  : "border-gray-200 bg-white hover:border-gray-300"
+              }`}
+            >
+              <input
+                id="agree-privacy"
+                type="checkbox"
+                checked={agreedPrivacy}
+                onChange={(e) => setAgreedPrivacy(e.target.checked)}
+                className="mt-0.5 h-5 w-5 shrink-0 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+              />
+              <div>
+                <p className="font-medium text-gray-900">Privacy Policy</p>
+                <p className="mt-1 text-sm text-gray-600">
+                  I understand how AskThem collects, uses, and protects my personal information,
+                  including my home address for representative matching.
+                </p>
+                <Link
+                  href="/privacy"
+                  target="_blank"
+                  className="mt-1 inline-block text-sm text-indigo-600 hover:text-indigo-800"
+                >
+                  Read full Privacy Policy
+                </Link>
+              </div>
+            </label>
+
+            <label
+              htmlFor="agree-comments"
+              className={`flex cursor-pointer items-start gap-3 rounded-lg border px-4 py-4 transition-colors ${
+                agreedComments
+                  ? "border-indigo-300 bg-indigo-50"
+                  : "border-gray-200 bg-white hover:border-gray-300"
+              }`}
+            >
+              <input
+                id="agree-comments"
+                type="checkbox"
+                checked={agreedComments}
+                onChange={(e) => setAgreedComments(e.target.checked)}
+                className="mt-0.5 h-5 w-5 shrink-0 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+              />
+              <div>
+                <p className="font-medium text-gray-900">Comment Policy</p>
+                <p className="mt-1 text-sm text-gray-600">
+                  I agree to abide by strict moderation rules that prohibit hate speech, personal
+                  questions about officials&rsquo; private lives, harassment, and misinformation.
+                </p>
+                <Link
+                  href="/comment-policy"
+                  target="_blank"
+                  className="mt-1 inline-block text-sm text-indigo-600 hover:text-indigo-800"
+                >
+                  Read full Comment Policy
+                </Link>
+              </div>
+            </label>
+          </div>
+
+          {error && (
+            <div className="mt-4 rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-700">
+              {error}
+            </div>
+          )}
+
+          <button
+            type="button"
+            onClick={handlePoliciesSubmit}
+            disabled={isSubmitting || !agreedTerms || !agreedPrivacy || !agreedComments}
+            className="mt-6 w-full rounded-full bg-indigo-600 px-6 py-3.5 font-medium text-white transition-colors hover:bg-indigo-700 disabled:cursor-not-allowed disabled:bg-gray-300"
+          >
+            {isSubmitting ? "Looking up your officials..." : "Agree & Find My Officials"}
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="mx-auto max-w-2xl px-4 py-10">
@@ -285,7 +432,7 @@ export function AddressForm({ userName }: AddressFormProps) {
           level of government. This is required to ask questions and sign petitions.
         </p>
 
-        <form onSubmit={handleSubmit} className="space-y-5">
+        <form onSubmit={handleAddressContinue} className="space-y-5">
           {/* Name (only for email sign-ups without a name) */}
           {needsName && (
             <div>
@@ -377,10 +524,10 @@ export function AddressForm({ userName }: AddressFormProps) {
 
           <button
             type="submit"
-            disabled={isSubmitting || (needsName && !displayName.trim()) || !street.trim() || !city.trim() || !state || !zip.trim()}
+            disabled={(needsName && !displayName.trim()) || !street.trim() || !city.trim() || !state || !zip.trim()}
             className="w-full rounded-full bg-indigo-600 px-6 py-3.5 font-medium text-white transition-colors hover:bg-indigo-700 disabled:cursor-not-allowed disabled:bg-gray-300"
           >
-            {isSubmitting ? "Looking up your officials..." : "Find My Officials"}
+            Continue
           </button>
         </form>
 
