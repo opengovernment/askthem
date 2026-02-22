@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
+
 
 interface District {
   officialId: string;
@@ -156,31 +156,15 @@ export function AccountSettings({ user, districts }: AccountSettingsProps) {
 
       {/* District Info */}
       <section className="rounded-lg border border-gray-200 bg-white p-6">
-        <div className="flex items-center justify-between">
-          <h2 className="text-lg font-semibold text-gray-900">Your Districts</h2>
-          <Link
-            href="/address"
-            className="text-sm font-medium text-indigo-600 hover:text-indigo-700"
-          >
-            Update address
-          </Link>
-        </div>
+        <h2 className="text-lg font-semibold text-gray-900">Your Districts</h2>
 
         {!user.isAddressVerified ? (
           <p className="mt-3 text-sm text-gray-500">
-            You haven&apos;t verified your address yet.{" "}
-            <Link href="/address" className="text-indigo-600 hover:text-indigo-700">
-              Enter your address
-            </Link>{" "}
-            to see your elected officials.
+            You haven&apos;t verified your address yet.
           </p>
         ) : uniqueDistricts.length === 0 ? (
           <p className="mt-3 text-sm text-gray-500">
-            No district information found. Try{" "}
-            <Link href="/address" className="text-indigo-600 hover:text-indigo-700">
-              updating your address
-            </Link>
-            .
+            No district information found.
           </p>
         ) : (
           <div className="mt-3 flex flex-wrap gap-2">
