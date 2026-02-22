@@ -44,7 +44,7 @@ export async function getPopularQuestions(limit = 10) {
 
 export interface QuestionFilters {
   search?: string;
-  sort?: "votes" | "newest" | "oldest";
+  sort?: "votes" | "newest" | "trending";
   tag?: string;
   officialId?: string;
   state?: string;
@@ -81,18 +81,63 @@ export async function getFilteredQuestions(filters: QuestionFilters) {
     where.status = filters.status;
   }
 
+  if (filters.sort === "trending") {
+    return getTrendingQuestions(where);
+  }
+
   const orderBy =
     filters.sort === "newest"
       ? { createdAt: "desc" as const }
-      : filters.sort === "oldest"
-        ? { createdAt: "asc" as const }
-        : { upvoteCount: "desc" as const };
+      : { upvoteCount: "desc" as const };
 
   return prisma.question.findMany({
     where,
     include: questionInclude,
     orderBy,
     take: 50,
+  });
+}
+
+/**
+ * Trending: fetch recent questions and sort by a score that combines
+ * recent upvote velocity (last 7 days) with total votes and recency.
+ */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+async function getTrendingQuestions(where: Record<string, any>) {
+  const sevenDaysAgo = new Date();
+  sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+
+  // Fetch candidate questions (recent or with recent votes)
+  const questions = await prisma.question.findMany({
+    where,
+    include: {
+      ...questionInclude,
+      upvotes: {
+        where: { createdAt: { gte: sevenDaysAgo } },
+        select: { id: true },
+      },
+    },
+    take: 200,
+  });
+
+  const now = Date.now();
+
+  // Score each question: recent votes (7d) * 3 + total votes + recency bonus
+  const scored = questions.map((q) => {
+    const recentVotes = q.upvotes.length;
+    const ageHours = (now - new Date(q.createdAt).getTime()) / (1000 * 60 * 60);
+    // Recency bonus: decays over ~72 hours
+    const recencyBonus = Math.max(0, 10 - ageHours / 7.2);
+    const score = recentVotes * 3 + q.upvoteCount + recencyBonus;
+    return { question: q, score };
+  });
+
+  scored.sort((a, b) => b.score - a.score);
+
+  // Strip the extra upvotes field used for scoring
+  return scored.slice(0, 50).map(({ question }) => {
+    const { upvotes: _upvotes, ...rest } = question;
+    return rest;
   });
 }
 

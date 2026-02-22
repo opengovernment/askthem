@@ -31,7 +31,7 @@ export default async function QuestionsPage({ searchParams }: PageProps) {
   const [questions, matchingOfficials, tags, officials, activeStates, districts] = await Promise.all([
     getFilteredQuestions({
       search: params.search,
-      sort: (params.sort as "votes" | "newest" | "oldest") || "votes",
+      sort: (params.sort as "votes" | "newest" | "trending") || "votes",
       status: params.status,
       tag: params.tag,
       officialId: params.official,

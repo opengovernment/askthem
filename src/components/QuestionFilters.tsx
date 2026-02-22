@@ -50,7 +50,7 @@ export function QuestionFilters({ tags, officials, activeStates, districts }: Qu
       >
         <option value="votes">Most Votes</option>
         <option value="newest">Newest</option>
-        <option value="oldest">Oldest</option>
+        <option value="trending">Trending</option>
       </select>
 
       <select
