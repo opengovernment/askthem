@@ -425,6 +425,24 @@ export async function getQuestionsByStatus(status: string) {
   });
 }
 
+export async function getQuestionsByStatusPaginated(
+  status: string,
+  page: number,
+  pageSize: number,
+) {
+  const [questions, total] = await Promise.all([
+    prisma.question.findMany({
+      where: { status },
+      include: questionInclude,
+      orderBy: { createdAt: "desc" },
+      skip: (page - 1) * pageSize,
+      take: pageSize,
+    }),
+    prisma.question.count({ where: { status } }),
+  ]);
+  return { questions, total };
+}
+
 export async function getVerifiedGroups() {
   return prisma.group.findMany({
     where: { isVerified: true },

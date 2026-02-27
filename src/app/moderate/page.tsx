@@ -1,4 +1,4 @@
-import { getQuestionsByStatus, getQuestionCounts, getConstituentCountsForQuestions, getFlaggedQuestions } from "@/lib/queries";
+import { getQuestionsByStatusPaginated, getQuestionCounts, getConstituentCountsForQuestions, getFlaggedQuestions } from "@/lib/queries";
 import { ModerationQueue } from "@/components/ModerationQueue";
 import { UserManagement } from "@/components/UserManagement";
 import { DailyQuestionLimit } from "@/components/DailyQuestionLimit";
@@ -12,7 +12,7 @@ import { prisma } from "@/lib/prisma";
 export const dynamic = "force-dynamic";
 
 interface PageProps {
-  searchParams: Promise<{ tab?: string }>;
+  searchParams: Promise<{ tab?: string; page?: string; pageSize?: string }>;
 }
 
 export default async function ModeratePage({ searchParams }: PageProps) {
@@ -29,12 +29,24 @@ export default async function ModeratePage({ searchParams }: PageProps) {
   const readOnlyMode = settingsMap.get("readOnlyMode") === "true";
   const maintenanceMode = settingsMap.get("maintenanceMode") === "true";
 
-  const { tab } = await searchParams;
-  const activeTab = tab || "pending_review";
+  const params = await searchParams;
+  const activeTab = params.tab || "pending_review";
+  const pageSize = Math.min(Math.max(Number(params.pageSize) || 25, 1), 100);
+  const page = Math.max(Number(params.page) || 1, 1);
   const counts = await getQuestionCounts();
-  const questions = activeTab === "flagged"
-    ? await getFlaggedQuestions()
-    : await getQuestionsByStatus(activeTab);
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  let questions: any[];
+  let totalCount: number | undefined;
+
+  if (activeTab === "flagged") {
+    questions = await getFlaggedQuestions();
+    totalCount = questions.length;
+  } else {
+    const result = await getQuestionsByStatusPaginated(activeTab, page, pageSize);
+    questions = result.questions;
+    totalCount = result.total;
+  }
 
   // Fetch constituent counts for the published tab (needed for threshold progress)
   const constituentCounts =
@@ -134,7 +146,14 @@ export default async function ModeratePage({ searchParams }: PageProps) {
             <p className="text-gray-500">No questions with this status.</p>
           </div>
         ) : (
-          <ModerationQueue questions={questions} activeTab={activeTab} constituentCounts={constituentCounts} />
+          <ModerationQueue
+            questions={questions}
+            activeTab={activeTab}
+            constituentCounts={constituentCounts}
+            totalCount={totalCount}
+            page={page}
+            pageSize={pageSize}
+          />
         )}
 
         {/* User Management */}

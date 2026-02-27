@@ -11,16 +11,13 @@ export async function POST(request: NextRequest) {
   }
 
   const body = await request.json();
-  const { questionId, action } = body as {
+  const { questionId, questionIds, action } = body as {
     questionId?: string;
-    action?: "publish" | "reject" | "deliver";
+    questionIds?: string[];
+    action?: "publish" | "reject" | "deliver" | "hide" | "delete";
   };
 
-  if (!questionId || typeof questionId !== "string") {
-    return NextResponse.json({ error: "questionId is required" }, { status: 400 });
-  }
-
-  const validActions = ["publish", "reject", "deliver"] as const;
+  const validActions = ["publish", "reject", "deliver", "hide", "delete"] as const;
   if (!action || !validActions.includes(action)) {
     return NextResponse.json(
       { error: `action must be one of: ${validActions.join(", ")}` },
@@ -28,7 +25,59 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  const question = await prisma.question.findUnique({ where: { id: questionId } });
+  // Support bulk operations via questionIds array, or single via questionId
+  const ids: string[] = questionIds && Array.isArray(questionIds)
+    ? questionIds
+    : questionId && typeof questionId === "string"
+      ? [questionId]
+      : [];
+
+  if (ids.length === 0) {
+    return NextResponse.json({ error: "questionId or questionIds is required" }, { status: 400 });
+  }
+
+  // Bulk hide: set status to "rejected" (hidden from public)
+  if (action === "hide") {
+    const questions = await prisma.question.findMany({ where: { id: { in: ids } } });
+    const validIds = questions.filter((q) => q.status !== "rejected").map((q) => q.id);
+    if (validIds.length === 0) {
+      return NextResponse.json({ error: "No eligible questions to hide" }, { status: 422 });
+    }
+    await prisma.question.updateMany({
+      where: { id: { in: validIds } },
+      data: { status: "rejected" },
+    });
+    return NextResponse.json({ hidden: validIds.length });
+  }
+
+  // Bulk delete: permanently remove questions and their relations
+  if (action === "delete") {
+    const questions = await prisma.question.findMany({ where: { id: { in: ids } } });
+    if (questions.length === 0) {
+      return NextResponse.json({ error: "No questions found" }, { status: 404 });
+    }
+    await prisma.$transaction(async (tx) => {
+      // Delete answers (not cascade) and detach email events before removing questions
+      await tx.answer.deleteMany({ where: { questionId: { in: ids } } });
+      await tx.emailEvent.updateMany({
+        where: { questionId: { in: ids } },
+        data: { questionId: null },
+      });
+      await tx.question.deleteMany({ where: { id: { in: ids } } });
+    });
+    return NextResponse.json({ deleted: questions.length });
+  }
+
+  // Single-question actions below (publish, reject, deliver)
+  if (ids.length !== 1) {
+    return NextResponse.json(
+      { error: `Bulk operations are only supported for hide and delete` },
+      { status: 400 },
+    );
+  }
+
+  const singleId = ids[0];
+  const question = await prisma.question.findUnique({ where: { id: singleId } });
   if (!question) {
     return NextResponse.json({ error: "Question not found" }, { status: 404 });
   }
@@ -62,7 +111,7 @@ export async function POST(request: NextRequest) {
   }
 
   const updated = await prisma.question.update({
-    where: { id: questionId },
+    where: { id: singleId },
     data,
     include: { official: true },
   });
@@ -70,7 +119,7 @@ export async function POST(request: NextRequest) {
   // On delivery: notify all signers via Mailgun and tag them in Action Network
   if (action === "deliver") {
     const upvotes = await prisma.upvote.findMany({
-      where: { questionId },
+      where: { questionId: singleId },
       include: { user: true },
     });
 
@@ -93,7 +142,7 @@ export async function POST(request: NextRequest) {
     // Fire-and-forget: send delivery notifications
     for (const signer of signers) {
       sendQuestionDelivered(signer.email, {
-        questionId,
+        questionId: singleId,
         questionText: question.text,
         officialName: updated.official.name,
         officialTitle: updated.official.title,
@@ -103,7 +152,7 @@ export async function POST(request: NextRequest) {
           prisma.emailEvent.create({
             data: {
               userId: signer.id,
-              questionId,
+              questionId: singleId,
               emailType: "question_delivered",
               subject: `Your question was delivered to ${updated.official.name}`,
               messageId,
@@ -115,7 +164,7 @@ export async function POST(request: NextRequest) {
 
     // Tag signers in Action Network for ladder triggering
     const signerEmails = signers.map((s) => s.email);
-    tagSignersInAN(signerEmails, `delivered:${questionId}`).catch(() => {});
+    tagSignersInAN(signerEmails, `delivered:${singleId}`).catch(() => {});
   }
 
   return NextResponse.json({ id: updated.id, status: updated.status });
