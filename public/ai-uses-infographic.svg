@@ -1,0 +1,142 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1100" width="900" height="1100">
+  <defs>
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#1e3a5f;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2d5f8a;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f8fafc;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow" x="-4%" y="-4%" width="108%" height="108%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000" flood-opacity="0.08"/>
+    </filter>
+    <filter id="iconShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#000" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="1100" rx="0" fill="#f1f5f9"/>
+
+  <!-- Header -->
+  <rect x="0" y="0" width="900" height="160" fill="url(#headerGrad)"/>
+  <text x="450" y="60" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="500" fill="#93c5fd" letter-spacing="3">ASKTHEM.IO</text>
+  <text x="450" y="100" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="32" font-weight="700" fill="#ffffff">How AI Powers Civic Engagement</text>
+  <text x="450" y="135" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="16" fill="#94a3b8">Six ways AI helps constituents and elected officials connect</text>
+
+  <!-- Flow arrow backbone -->
+  <line x1="450" y1="180" x2="450" y2="1040" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="6,4"/>
+
+  <!-- Card 1: Question Generation -->
+  <g transform="translate(60, 190)">
+    <rect width="780" height="120" rx="12" fill="url(#cardGrad)" filter="url(#shadow)" stroke="#e2e8f0" stroke-width="1"/>
+    <rect x="0" y="0" width="6" height="120" rx="3" fill="#3b82f6"/>
+    <!-- Number badge -->
+    <circle cx="50" cy="60" r="22" fill="#3b82f6" filter="url(#iconShadow)"/>
+    <text x="50" y="67" text-anchor="middle" font-family="system-ui, sans-serif" font-size="18" font-weight="700" fill="#ffffff">1</text>
+    <!-- Icon: lightbulb -->
+    <g transform="translate(95, 30)">
+      <circle cx="22" cy="22" r="22" fill="#eff6ff"/>
+      <text x="22" y="30" text-anchor="middle" font-size="24">💡</text>
+    </g>
+    <!-- Text -->
+    <text x="155" y="42" font-family="system-ui, sans-serif" font-size="20" font-weight="700" fill="#1e293b">Question Generation</text>
+    <text x="155" y="68" font-family="system-ui, sans-serif" font-size="14" fill="#475569">AI suggests relevant, timely questions based on current legislation, local issues,</text>
+    <text x="155" y="88" font-family="system-ui, sans-serif" font-size="14" fill="#475569">and community concerns — helping constituents ask what matters most.</text>
+  </g>
+
+  <!-- Arrow -->
+  <polygon points="450,320 444,310 456,310" fill="#94a3b8"/>
+
+  <!-- Card 2: Composition Assistance -->
+  <g transform="translate(60, 330)">
+    <rect width="780" height="120" rx="12" fill="url(#cardGrad)" filter="url(#shadow)" stroke="#e2e8f0" stroke-width="1"/>
+    <rect x="0" y="0" width="6" height="120" rx="3" fill="#8b5cf6"/>
+    <circle cx="50" cy="60" r="22" fill="#8b5cf6" filter="url(#iconShadow)"/>
+    <text x="50" y="67" text-anchor="middle" font-family="system-ui, sans-serif" font-size="18" font-weight="700" fill="#ffffff">2</text>
+    <g transform="translate(95, 30)">
+      <circle cx="22" cy="22" r="22" fill="#f5f3ff"/>
+      <text x="22" y="30" text-anchor="middle" font-size="24">✍️</text>
+    </g>
+    <text x="155" y="42" font-family="system-ui, sans-serif" font-size="20" font-weight="700" fill="#1e293b">Composition Assistance</text>
+    <text x="155" y="68" font-family="system-ui, sans-serif" font-size="14" fill="#475569">AI helps users refine their questions for clarity, proper grammar, and impact —</text>
+    <text x="155" y="88" font-family="system-ui, sans-serif" font-size="14" fill="#475569">making civic participation accessible regardless of writing ability.</text>
+  </g>
+
+  <!-- Arrow -->
+  <polygon points="450,460 444,450 456,450" fill="#94a3b8"/>
+
+  <!-- Card 3: Content Moderation -->
+  <g transform="translate(60, 470)">
+    <rect width="780" height="120" rx="12" fill="url(#cardGrad)" filter="url(#shadow)" stroke="#e2e8f0" stroke-width="1"/>
+    <rect x="0" y="0" width="6" height="120" rx="3" fill="#10b981"/>
+    <circle cx="50" cy="60" r="22" fill="#10b981" filter="url(#iconShadow)"/>
+    <text x="50" y="67" text-anchor="middle" font-family="system-ui, sans-serif" font-size="18" font-weight="700" fill="#ffffff">3</text>
+    <g transform="translate(95, 30)">
+      <circle cx="22" cy="22" r="22" fill="#ecfdf5"/>
+      <text x="22" y="30" text-anchor="middle" font-size="24">🛡️</text>
+    </g>
+    <text x="155" y="42" font-family="system-ui, sans-serif" font-size="20" font-weight="700" fill="#1e293b">Content Moderation</text>
+    <text x="155" y="68" font-family="system-ui, sans-serif" font-size="14" fill="#475569">AI automatically flags inappropriate, abusive, or off-topic submissions,</text>
+    <text x="155" y="88" font-family="system-ui, sans-serif" font-size="14" fill="#475569">keeping the platform civil and productive for everyone.</text>
+  </g>
+
+  <!-- Arrow -->
+  <polygon points="450,600 444,590 456,590" fill="#94a3b8"/>
+
+  <!-- Card 4: Constituency Verification -->
+  <g transform="translate(60, 610)">
+    <rect width="780" height="120" rx="12" fill="url(#cardGrad)" filter="url(#shadow)" stroke="#e2e8f0" stroke-width="1"/>
+    <rect x="0" y="0" width="6" height="120" rx="3" fill="#f59e0b"/>
+    <circle cx="50" cy="60" r="22" fill="#f59e0b" filter="url(#iconShadow)"/>
+    <text x="50" y="67" text-anchor="middle" font-family="system-ui, sans-serif" font-size="18" font-weight="700" fill="#ffffff">4</text>
+    <g transform="translate(95, 30)">
+      <circle cx="22" cy="22" r="22" fill="#fffbeb"/>
+      <text x="22" y="30" text-anchor="middle" font-size="24">📍</text>
+    </g>
+    <text x="155" y="42" font-family="system-ui, sans-serif" font-size="20" font-weight="700" fill="#1e293b">Constituency Verification</text>
+    <text x="155" y="68" font-family="system-ui, sans-serif" font-size="14" fill="#475569">AI cross-references addresses with district boundaries to verify that questions</text>
+    <text x="155" y="88" font-family="system-ui, sans-serif" font-size="14" fill="#475569">reach the correct elected officials — ensuring authentic constituent voices.</text>
+  </g>
+
+  <!-- Arrow -->
+  <polygon points="450,740 444,730 456,730" fill="#94a3b8"/>
+
+  <!-- Card 5: Question Delivery -->
+  <g transform="translate(60, 750)">
+    <rect width="780" height="120" rx="12" fill="url(#cardGrad)" filter="url(#shadow)" stroke="#e2e8f0" stroke-width="1"/>
+    <rect x="0" y="0" width="6" height="120" rx="3" fill="#ef4444"/>
+    <circle cx="50" cy="60" r="22" fill="#ef4444" filter="url(#iconShadow)"/>
+    <text x="50" y="67" text-anchor="middle" font-family="system-ui, sans-serif" font-size="18" font-weight="700" fill="#ffffff">5</text>
+    <g transform="translate(95, 30)">
+      <circle cx="22" cy="22" r="22" fill="#fef2f2"/>
+      <text x="22" y="30" text-anchor="middle" font-size="24">📬</text>
+    </g>
+    <text x="155" y="42" font-family="system-ui, sans-serif" font-size="20" font-weight="700" fill="#1e293b">Question Delivery</text>
+    <text x="155" y="68" font-family="system-ui, sans-serif" font-size="14" fill="#475569">AI intelligently routes and prioritizes questions to officials' offices,</text>
+    <text x="155" y="88" font-family="system-ui, sans-serif" font-size="14" fill="#475569">grouping similar topics and surfacing the most-signed petitions first.</text>
+  </g>
+
+  <!-- Arrow -->
+  <polygon points="450,880 444,870 456,870" fill="#94a3b8"/>
+
+  <!-- Card 6: Answer Sharing -->
+  <g transform="translate(60, 890)">
+    <rect width="780" height="120" rx="12" fill="url(#cardGrad)" filter="url(#shadow)" stroke="#e2e8f0" stroke-width="1"/>
+    <rect x="0" y="0" width="6" height="120" rx="3" fill="#06b6d4"/>
+    <circle cx="50" cy="60" r="22" fill="#06b6d4" filter="url(#iconShadow)"/>
+    <text x="50" y="67" text-anchor="middle" font-family="system-ui, sans-serif" font-size="18" font-weight="700" fill="#ffffff">6</text>
+    <g transform="translate(95, 30)">
+      <circle cx="22" cy="22" r="22" fill="#ecfeff"/>
+      <text x="22" y="30" text-anchor="middle" font-size="24">📢</text>
+    </g>
+    <text x="155" y="42" font-family="system-ui, sans-serif" font-size="20" font-weight="700" fill="#1e293b">Answer Sharing</text>
+    <text x="155" y="68" font-family="system-ui, sans-serif" font-size="14" fill="#475569">AI generates shareable summaries and social media posts when officials respond,</text>
+    <text x="155" y="88" font-family="system-ui, sans-serif" font-size="14" fill="#475569">amplifying transparency and driving broader civic awareness.</text>
+  </g>
+
+  <!-- Footer -->
+  <text x="450" y="1060" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#94a3b8">AskThem — AI-powered civic engagement for a more accountable democracy</text>
+  <text x="450" y="1085" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">askthem.io</text>
+</svg>
