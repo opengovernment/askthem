@@ -8,7 +8,7 @@ import { syncPersonToAN } from "@/lib/action-network";
 import { sendMagicLink } from "@/lib/email";
 
 // Emails that are automatically promoted to admin on sign-in
-const ADMIN_EMAILS = ["davidrussellmoore@gmail.com"];
+const ADMIN_EMAILS = ["davidrussellmoore@gmail.com", "mayram.gunja@gmail.com"];
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   trustHost: true,
