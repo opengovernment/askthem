@@ -21,7 +21,7 @@
 
   <!-- Header -->
   <rect x="0" y="0" width="900" height="160" fill="url(#headerGrad)"/>
-  <text x="450" y="60" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="500" fill="#93c5fd" letter-spacing="3">ASKTHEM.IO</text>
+  <text x="450" y="60" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="500" fill="#93c5fd" letter-spacing="3">ASKTHEM.VERCEL.APP (ALPHA)</text>
   <text x="450" y="100" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="32" font-weight="700" fill="#ffffff">How AI Powers Civic Engagement</text>
   <text x="450" y="135" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="16" fill="#94a3b8">Six ways AI helps constituents and elected officials connect</text>
 
