@@ -16,8 +16,10 @@ interface PageProps {
 }
 
 export default async function ManageGroupsPage({ searchParams }: PageProps) {
+  // TODO: Temporarily allowing all authenticated users. Restore admin-only check:
+  //   if (!session?.user || session.user.role !== "admin") { redirect("/"); }
   const session = await auth();
-  if (!session?.user || session.user.role !== "admin") {
+  if (!session?.user) {
     redirect("/");
   }
 
