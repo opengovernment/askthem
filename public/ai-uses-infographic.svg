@@ -138,5 +138,5 @@
 
   <!-- Footer -->
   <text x="450" y="1060" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#94a3b8">AskThem — AI-powered civic engagement for a more accountable democracy</text>
-  <text x="450" y="1085" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">askthem.io</text>
+  <text x="450" y="1085" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">askthem.vercel.app (alpha)</text>
 </svg>
