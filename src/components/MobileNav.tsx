@@ -12,14 +12,13 @@ interface MobileNavProps {
 export function MobileNav({ user }: MobileNavProps) {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
-  const isModerator = user?.role === "moderator" || user?.role === "admin";
-
+  // TODO: Restore moderator-only check: user?.role === "moderator" || user?.role === "admin"
   const links = [
     { href: "/", label: "Home" },
     { href: "/officials", label: "Officials" },
     { href: "/questions", label: "Questions" },
     { href: "/ask", label: "Ask a Question" },
-    ...(isModerator ? [{ href: "/moderate", label: "Moderate" }] : []),
+    ...(user ? [{ href: "/moderate", label: "Moderate" }] : []),
   ];
 
   return (

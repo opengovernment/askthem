@@ -113,7 +113,8 @@ export default async function RootLayout({
               >
                 Ask a Question
               </Link>
-              {isModerator && (
+              {/* TODO: Restore moderator-only check: isModerator && (...) */}
+              {user && (
                 <Link
                   href="/moderate"
                   className="text-sm font-medium text-amber-600 hover:text-amber-700"

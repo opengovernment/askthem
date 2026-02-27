@@ -126,15 +126,14 @@ export function UserMenu({ user }: UserMenuProps) {
             </span>
           </button>
 
-          {isModerator && (
-            <Link
-              href="/moderate"
-              onClick={() => setOpen(false)}
-              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
-            >
-              Moderator Dashboard
-            </Link>
-          )}
+          {/* TODO: Restore moderator-only check: isModerator && (...) */}
+          <Link
+            href="/moderate"
+            onClick={() => setOpen(false)}
+            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+          >
+            Moderator Dashboard
+          </Link>
 
           <form action={signOutAction}>
             <button
