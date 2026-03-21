@@ -4,6 +4,27 @@ import { requireAuth } from "@/lib/session";
 import { recordSignatureInAN } from "@/lib/action-network";
 import { sendQuestionSigned } from "@/lib/email";
 
+export async function GET(request: NextRequest) {
+  const user = await requireAuth();
+  if (!user) {
+    return NextResponse.json({ upvoted: false, isConstituent: null });
+  }
+
+  const questionId = request.nextUrl.searchParams.get("questionId");
+  if (!questionId) {
+    return NextResponse.json({ error: "questionId is required" }, { status: 400 });
+  }
+
+  const existing = await prisma.upvote.findUnique({
+    where: { userId_questionId: { userId: user.id, questionId } },
+  });
+
+  return NextResponse.json({
+    upvoted: !!existing,
+    isConstituent: existing?.isConstituent ?? null,
+  });
+}
+
 export async function POST(request: NextRequest) {
   const user = await requireAuth();
   if (!user) {

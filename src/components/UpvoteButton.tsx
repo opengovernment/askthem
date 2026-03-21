@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { SignerCommentForm } from "./SignerComments";
 
@@ -52,6 +52,43 @@ export function UpvoteButton({ questionId, initialCount, questionText, officialN
   const [gateReason, setGateReason] = useState<"sign_in" | "address" | "not_constituent" | null>(null);
   const [yourOfficials, setYourOfficials] = useState<OfficialSummary[]>([]);
   const [showSharePrompt, setShowSharePrompt] = useState(false);
+  const [isHoverPrompt, setIsHoverPrompt] = useState(false);
+  const hoverTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // Fetch existing upvote status on mount
+  useEffect(() => {
+    fetch(`/api/upvote?questionId=${questionId}`)
+      .then((res) => res.ok ? res.json() : null)
+      .then((data) => {
+        if (data?.upvoted) {
+          setHasUpvoted(true);
+          setIsConstituent(data.isConstituent);
+        }
+      })
+      .catch(() => {});
+  }, [questionId]);
+
+  // Show share prompt on hover for already-signed questions
+  function handleMouseEnter() {
+    if (hasUpvoted && !showSharePrompt) {
+      hoverTimeoutRef.current = setTimeout(() => {
+        setShowSharePrompt(true);
+        setIsHoverPrompt(true);
+      }, 300);
+    }
+  }
+
+  function handleMouseLeave() {
+    if (hoverTimeoutRef.current) {
+      clearTimeout(hoverTimeoutRef.current);
+      hoverTimeoutRef.current = null;
+    }
+    if (isHoverPrompt) {
+      setShowSharePrompt(false);
+      setIsHoverPrompt(false);
+    }
+  }
 
   async function handleUpvote() {
     if (isLoading) return;
@@ -77,6 +114,7 @@ export function UpvoteButton({ questionId, initialCount, questionText, officialN
         // Show share prompt only on new signatures, not on un-signing
         if (data.upvoted && !wasUpvoted) {
           setShowSharePrompt(true);
+          setIsHoverPrompt(false); // Persist the prompt (don't dismiss on mouse leave)
         }
       } else {
         setHasUpvoted(wasUpvoted);
@@ -106,7 +144,12 @@ export function UpvoteButton({ questionId, initialCount, questionText, officialN
   const showSupporter = hasUpvoted && isConstituent === false;
 
   return (
-    <div className="relative flex flex-col items-center gap-1">
+    <div
+      ref={containerRef}
+      className="relative flex flex-col items-center gap-1"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
       <button
         onClick={handleUpvote}
         disabled={isLoading}
@@ -231,7 +274,7 @@ export function UpvoteButton({ questionId, initialCount, questionText, officialN
           questionId={questionId}
           questionText={questionText}
           officialName={officialName}
-          onClose={() => setShowSharePrompt(false)}
+          onClose={() => { setShowSharePrompt(false); setIsHoverPrompt(false); }}
         />
       )}
     </div>
