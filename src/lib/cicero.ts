@@ -239,6 +239,135 @@ export async function lookupOfficialsByAddress(address: {
   }
 }
 
+// ─── Officials by Region API ────────────────────────────────────────
+
+/**
+ * Abbreviated official returned by the /officials_by_region endpoint.
+ * Contains a subset of fields compared to the full /official response.
+ */
+interface CiceroRegionOfficial {
+  sk: number;
+  first_name: string;
+  last_name: string;
+  middle_initial?: string;
+  party: string;
+  photo_origin_url?: string;
+  email_addresses: string[];
+  urls: string[];
+  addresses: CiceroAddress[];
+  office: CiceroOffice;
+  identifiers?: { identifier_type: string; identifier_value: string }[];
+  notes?: string[];
+}
+
+interface CiceroRegionResponse {
+  response: {
+    errors: string[];
+    messages: string[];
+    results: {
+      officials: CiceroRegionOfficial[];
+      count?: { total: number; max: number; offset: number };
+    };
+  };
+}
+
+export interface RegionQuery {
+  district_type: string[];  // e.g. ["NATIONAL_UPPER", "STATE_LOWER"]
+  country?: string;         // default "US"
+  state: string;            // e.g. "NY"
+  max?: number;             // pagination limit (default 100)
+  offset?: number;          // pagination offset (default 0)
+}
+
+/**
+ * Fetch a single page of officials by region from Cicero.
+ * Returns the officials array and total count for pagination.
+ */
+async function fetchRegionPage(query: RegionQuery): Promise<{
+  officials: NormalizedOfficial[];
+  total: number;
+}> {
+  const apiKey = getApiKey();
+  if (!apiKey) {
+    throw new Error("Cicero API key not configured");
+  }
+
+  const params = new URLSearchParams({
+    country: query.country ?? "US",
+    state: query.state,
+    key: apiKey,
+    format: "json",
+    max: String(query.max ?? 100),
+    offset: String(query.offset ?? 0),
+  });
+
+  // district_type can appear multiple times
+  for (const dt of query.district_type) {
+    params.append("district_type", dt);
+  }
+
+  const url = `${CICERO_API_BASE}/officials_by_region?${params.toString()}`;
+
+  const res = await fetch(url);
+  if (!res.ok) {
+    const text = await res.text();
+    console.error(`[Cicero] officials_by_region error ${res.status}: ${text}`);
+    throw new Error(`Cicero API returned ${res.status}`);
+  }
+
+  const data: CiceroRegionResponse = await res.json();
+
+  if (data.response.errors?.length > 0) {
+    console.error("[Cicero] officials_by_region errors:", data.response.errors);
+    throw new Error(`Cicero API error: ${data.response.errors[0]}`);
+  }
+
+  const rawOfficials = data.response.results?.officials ?? [];
+  const total = data.response.results?.count?.total ?? rawOfficials.length;
+
+  // The region endpoint returns the same official shape — normalize it
+  const normalized = rawOfficials.map((o) => normalizeOfficial(o as unknown as CiceroOfficial));
+
+  return { officials: normalized, total };
+}
+
+/**
+ * Fetch ALL officials for a region, handling pagination automatically.
+ * Makes multiple API calls if needed (100 per page).
+ *
+ * Returns all normalized officials and a summary of API calls made.
+ */
+export async function lookupOfficialsByRegion(query: RegionQuery): Promise<{
+  officials: NormalizedOfficial[];
+  totalFromApi: number;
+  apiCalls: number;
+}> {
+  const pageSize = query.max ?? 100;
+  let offset = query.offset ?? 0;
+  let allOfficials: NormalizedOfficial[] = [];
+  let totalFromApi = 0;
+  let apiCalls = 0;
+
+  // Fetch first page
+  const first = await fetchRegionPage({ ...query, max: pageSize, offset });
+  apiCalls++;
+  allOfficials = first.officials;
+  totalFromApi = first.total;
+
+  // Fetch remaining pages
+  while (allOfficials.length < totalFromApi) {
+    offset += pageSize;
+    const page = await fetchRegionPage({ ...query, max: pageSize, offset });
+    apiCalls++;
+    allOfficials = allOfficials.concat(page.officials);
+
+    // Safety: break if we get an empty page (avoid infinite loop)
+    if (page.officials.length === 0) break;
+  }
+
+  return { officials: allOfficials, totalFromApi, apiCalls };
+}
+
 // Re-export for testing
 export { normalizeParty, mapChamber, buildDistrictLabel, extractTwitter, normalizeOfficial };
-export type { CiceroOfficial, CiceroResponse };
+export type { CiceroOfficial, CiceroResponse, CiceroRegionResponse, CiceroRegionOfficial };
