@@ -32,7 +32,7 @@ export async function GET() {
     },
   });
 
-  const districts = userDistricts.map((ud) => ({
+  const districts = userDistricts.map((ud: (typeof userDistricts)[number]) => ({
     officialId: ud.official.id,
     name: ud.official.name,
     title: ud.official.title,
@@ -112,23 +112,24 @@ export async function DELETE(request: Request) {
 
   const userId = user.id;
 
-  await prisma.$transaction(async (tx) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  await prisma.$transaction(async (tx: any) => {
     // Get user's question IDs for cascading cleanup
-    const userQuestions = await tx.question.findMany({
+    const userQuestions: { id: string }[] = await tx.question.findMany({
       where: { authorId: userId },
       select: { id: true },
     });
-    const questionIds = userQuestions.map((q) => q.id);
+    const questionIds = userQuestions.map((q: { id: string }) => q.id);
 
     if (questionIds.length > 0) {
       // Delete answer media, then answers for user's questions
-      const answers = await tx.answer.findMany({
+      const answers: { id: string }[] = await tx.answer.findMany({
         where: { questionId: { in: questionIds } },
         select: { id: true },
       });
       if (answers.length > 0) {
         await tx.responseMedia.deleteMany({
-          where: { answerId: { in: answers.map((a) => a.id) } },
+          where: { answerId: { in: answers.map((a: { id: string }) => a.id) } },
         });
         await tx.answer.deleteMany({ where: { questionId: { in: questionIds } } });
       }

@@ -51,7 +51,7 @@ export default async function AccountPage() {
     },
   });
 
-  const districts = userDistricts.map((ud) => ({
+  const districts = userDistricts.map((ud: (typeof userDistricts)[number]) => ({
     officialId: ud.official.id,
     name: ud.official.name,
     title: ud.official.title,
