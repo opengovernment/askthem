@@ -102,6 +102,15 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Official not found" }, { status: 404 });
   }
 
+  // During beta, only verified Groups can ask questions to federal officials
+  const isFederalOfficial = official.chamber === "senate" || official.chamber === "house";
+  if (isFederalOfficial && !groupId) {
+    return NextResponse.json(
+      { error: "During the public beta, only Groups can ask questions to federal officials." },
+      { status: 403 },
+    );
+  }
+
   // Content moderation
   const rejection = moderateContent(text.trim());
   if (rejection) {

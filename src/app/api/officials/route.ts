@@ -2,6 +2,12 @@ import { NextRequest, NextResponse } from "next/server";
 import { getCurrentUser } from "@/lib/session";
 import { getAllOfficials, getOfficialsForUser, getFilteredOfficials } from "@/lib/queries";
 
+const FEDERAL_CHAMBERS = ["senate", "house"];
+
+function excludeFederal<T extends { chamber: string }>(officials: T[]): T[] {
+  return officials.filter((o) => !FEDERAL_CHAMBERS.includes(o.chamber));
+}
+
 export async function GET(req: NextRequest) {
   const params = req.nextUrl.searchParams;
   const all = params.get("all") === "true";
@@ -28,12 +34,14 @@ export async function GET(req: NextRequest) {
     if (user?.isAddressVerified) {
       const officials = await getOfficialsForUser(user.id);
       if (officials.length > 0) {
-        return NextResponse.json(officials);
+        // Exclude federal officials during beta (only Groups can ask them)
+        return NextResponse.json(excludeFederal(officials));
       }
     }
   }
 
   // Fall back to all officials (not signed in, no address, or ?all=true)
   const officials = await getAllOfficials();
-  return NextResponse.json(officials);
+  // Exclude federal officials during beta (only Groups can ask them)
+  return NextResponse.json(excludeFederal(officials));
 }
