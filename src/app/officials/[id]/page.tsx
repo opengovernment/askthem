@@ -3,6 +3,7 @@ import { QuestionCard } from "@/components/QuestionCard";
 import { DeliveryThresholdEditor } from "@/components/DeliveryThresholdEditor";
 import { OfficialAvatar } from "@/components/OfficialAvatar";
 import { auth } from "@/auth";
+import { US_STATES } from "@/lib/types";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
@@ -49,11 +50,12 @@ export default async function OfficialPage({ params }: PageProps) {
   const responseRate =
     questions.length > 0 ? Math.round((answeredCount / questions.length) * 100) : 0;
 
-  const isFederalOfficial =
-    official.chamber === "senate" ||
-    official.chamber === "house" ||
-    official.level === "NATIONAL_UPPER" ||
-    official.level === "NATIONAL_LOWER";
+  // Non-Congress federal officials (cabinet, executive branch) have unrecognized
+  // state values and are NOT senate/house. Congress members are unrestricted.
+  const isCongressMember =
+    official.chamber === "senate" || official.chamber === "house";
+  const isFederalExecutive =
+    !isCongressMember && !US_STATES[official.state];
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -63,7 +65,7 @@ export default async function OfficialPage({ params }: PageProps) {
         </Link>
 
         {/* Federal official beta restriction notice */}
-        {isFederalOfficial && (
+        {isFederalExecutive && (
           <div className="mb-6 rounded-lg border border-blue-200 bg-blue-50 p-5">
             <div className="flex items-start gap-3">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="mt-0.5 h-5 w-5 shrink-0 text-blue-500">
@@ -154,7 +156,7 @@ export default async function OfficialPage({ params }: PageProps) {
         </div>
 
         {/* Nudge for officials who haven't joined yet (hidden for federal officials during beta) */}
-        {!official.isVerifiedResponder && !isFederalOfficial && (
+        {!official.isVerifiedResponder && !isFederalExecutive && (
           <div className="mb-6 rounded-lg border border-amber-200 bg-amber-50 p-5">
             <div className="flex items-start gap-3">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="mt-0.5 h-5 w-5 shrink-0 text-amber-500">
@@ -239,7 +241,7 @@ export default async function OfficialPage({ params }: PageProps) {
           <h2 className="text-xl font-bold text-gray-900">
             Questions
           </h2>
-          {!isFederalOfficial && (
+          {!isFederalExecutive && (
             <Link
               href="/ask"
               className="rounded-full bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700"
@@ -252,7 +254,7 @@ export default async function OfficialPage({ params }: PageProps) {
         {questions.length === 0 ? (
           <div className="rounded-lg border border-gray-200 bg-white p-8 text-center">
             <p className="text-gray-500">
-              {isFederalOfficial
+              {isFederalExecutive
                 ? "No questions yet. During the public beta, only Groups can ask questions to federal officials."
                 : "No questions yet. Be the first to ask!"}
             </p>

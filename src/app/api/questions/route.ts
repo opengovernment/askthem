@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { POLICY_AREAS } from "@/lib/types";
+import { POLICY_AREAS, US_STATES } from "@/lib/types";
 import { requireAuth } from "@/lib/session";
 import { syncPersonToAN } from "@/lib/action-network";
 import { sendQuestionSubmitted } from "@/lib/email";
@@ -102,11 +102,13 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Official not found" }, { status: 404 });
   }
 
-  // During beta, only verified Groups can ask questions to federal officials
-  const isFederalOfficial = official.chamber === "senate" || official.chamber === "house";
-  if (isFederalOfficial && !groupId) {
+  // During beta, only verified Groups can ask questions to non-Congress federal officials
+  // (cabinet members, executive branch). Congress members (senate/house) are unrestricted.
+  const isCongressMember = official.chamber === "senate" || official.chamber === "house";
+  const isFederalExecutive = !isCongressMember && !US_STATES[official.state];
+  if (isFederalExecutive && !groupId) {
     return NextResponse.json(
-      { error: "During the public beta, only Groups can ask questions to federal officials." },
+      { error: "During the public beta, only Groups can ask questions to federal executive officials." },
       { status: 403 },
     );
   }
