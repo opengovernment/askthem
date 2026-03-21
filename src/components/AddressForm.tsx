@@ -16,9 +16,11 @@ interface MatchedOfficial {
   photoUrl: string | null;
 }
 
-// Ordered sections from federal → state → local
+// Federal levels — temporarily excluded from address results (only Groups can ask federal officials during beta)
+const FEDERAL_LEVELS = ["NATIONAL_UPPER", "NATIONAL_LOWER"];
+
+// Ordered sections from state → local (federal excluded during public beta)
 const LEVEL_SECTIONS: { key: string; label: string; levels: string[] }[] = [
-  { key: "federal", label: "Federal", levels: ["NATIONAL_UPPER", "NATIONAL_LOWER"] },
   { key: "state", label: "State", levels: ["STATE_EXEC", "STATE_UPPER", "STATE_LOWER"] },
   { key: "county", label: "County", levels: ["COUNTY"] },
   { key: "local", label: "Local", levels: ["LOCAL", "LOCAL_EXEC"] },
@@ -187,7 +189,11 @@ export function AddressForm({ userName }: AddressFormProps) {
     a[1].localeCompare(b[1]),
   );
 
-  const sections = officials ? groupOfficials(officials) : [];
+  // Exclude federal officials from address results (only Groups can ask them during beta)
+  const nonFederalOfficials = officials
+    ? officials.filter((o) => !FEDERAL_LEVELS.includes(effectiveLevel(o)))
+    : [];
+  const sections = officials ? groupOfficials(nonFederalOfficials) : [];
 
   if (officials) {
     return (
@@ -212,7 +218,7 @@ export function AddressForm({ userName }: AddressFormProps) {
             Welcome!
           </h1>
           <p className="mb-2 text-center text-gray-600">
-            We found {officials.length} elected official{officials.length !== 1 ? "s" : ""} for your
+            We found {nonFederalOfficials.length} elected official{nonFederalOfficials.length !== 1 ? "s" : ""} for your
             address. The first thing most people do is ask a question to one of your elected
             officials about something that matters to you personally.
           </p>

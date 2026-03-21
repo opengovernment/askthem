@@ -47,12 +47,32 @@ export default async function OfficialPage({ params }: PageProps) {
   const responseRate =
     questions.length > 0 ? Math.round((answeredCount / questions.length) * 100) : 0;
 
+  const isFederalOfficial =
+    official.chamber === "senate" ||
+    official.chamber === "house" ||
+    official.level === "NATIONAL_UPPER" ||
+    official.level === "NATIONAL_LOWER";
+
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="mx-auto max-w-3xl px-4 py-10">
         <Link href="/officials" className="mb-6 inline-block text-sm text-indigo-600 hover:text-indigo-800">
           &larr; All Officials
         </Link>
+
+        {/* Federal official beta restriction notice */}
+        {isFederalOfficial && (
+          <div className="mb-6 rounded-lg border border-blue-200 bg-blue-50 p-5">
+            <div className="flex items-start gap-3">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="mt-0.5 h-5 w-5 shrink-0 text-blue-500">
+                <path fillRule="evenodd" d="M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0Zm-7-4a1 1 0 1 1-2 0 1 1 0 0 1 2 0ZM9 9a.75.75 0 0 0 0 1.5h.253a.25.25 0 0 1 .244.304l-.459 2.066A1.75 1.75 0 0 0 10.747 15H11a.75.75 0 0 0 0-1.5h-.253a.25.25 0 0 1-.244-.304l.459-2.066A1.75 1.75 0 0 0 9.253 9H9Z" clipRule="evenodd" />
+              </svg>
+              <p className="text-sm text-blue-800">
+                While AskThem is in public beta, only Groups can ask questions to federal officials.
+              </p>
+            </div>
+          </div>
+        )}
 
         {/* Official Profile Header */}
         <div className={`mb-6 rounded-lg border bg-white shadow-sm ${
@@ -118,8 +138,8 @@ export default async function OfficialPage({ params }: PageProps) {
           </div>
         </div>
 
-        {/* Nudge for officials who haven't joined yet */}
-        {!official.isVerifiedResponder && (
+        {/* Nudge for officials who haven't joined yet (hidden for federal officials during beta) */}
+        {!official.isVerifiedResponder && !isFederalOfficial && (
           <div className="mb-6 rounded-lg border border-amber-200 bg-amber-50 p-5">
             <div className="flex items-start gap-3">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="mt-0.5 h-5 w-5 shrink-0 text-amber-500">
@@ -204,17 +224,23 @@ export default async function OfficialPage({ params }: PageProps) {
           <h2 className="text-xl font-bold text-gray-900">
             Questions
           </h2>
-          <Link
-            href="/ask"
-            className="rounded-full bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700"
-          >
-            Ask {official.name.split(" ")[0]} a Question
-          </Link>
+          {!isFederalOfficial && (
+            <Link
+              href="/ask"
+              className="rounded-full bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700"
+            >
+              Ask {official.name.split(" ")[0]} a Question
+            </Link>
+          )}
         </div>
 
         {questions.length === 0 ? (
           <div className="rounded-lg border border-gray-200 bg-white p-8 text-center">
-            <p className="text-gray-500">No questions yet. Be the first to ask!</p>
+            <p className="text-gray-500">
+              {isFederalOfficial
+                ? "No questions yet. During the public beta, only Groups can ask questions to federal officials."
+                : "No questions yet. Be the first to ask!"}
+            </p>
           </div>
         ) : (
           <div className="space-y-4">
