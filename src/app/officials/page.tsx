@@ -135,7 +135,7 @@ export default async function OfficialsPage({ searchParams }: PageProps) {
             {/* Federal Officials */}
             {federalOfficials.length > 0 && (
               <div className="mb-8">
-                <h2 className="mb-4 text-lg font-semibold text-gray-700">Federal Officials</h2>
+                <h2 className="mb-4 text-lg font-semibold text-gray-700">Federal Executive Officials</h2>
                 <OfficialGrid officials={federalOfficials} />
               </div>
             )}

@@ -1,11 +1,21 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getCurrentUser } from "@/lib/session";
 import { getAllOfficials, getOfficialsForUser, getFilteredOfficials } from "@/lib/queries";
+import { US_STATES } from "@/lib/types";
 
 const FEDERAL_CHAMBERS = ["senate", "house"];
 
 function excludeFederal<T extends { chamber: string }>(officials: T[]): T[] {
   return officials.filter((o) => !FEDERAL_CHAMBERS.includes(o.chamber));
+}
+
+/** Exclude federal executive officials (non-Congress officials with unrecognized states) */
+function excludeFederalExecutive<T extends { chamber: string; state: string }>(officials: T[]): T[] {
+  return officials.filter((o) => {
+    const isCongressMember = FEDERAL_CHAMBERS.includes(o.chamber);
+    const isFederalExecutive = !isCongressMember && !US_STATES[o.state];
+    return !isFederalExecutive;
+  });
 }
 
 export async function GET(req: NextRequest) {
@@ -35,7 +45,7 @@ export async function GET(req: NextRequest) {
       const officials = await getOfficialsForUser(user.id);
       if (officials.length > 0) {
         // Exclude federal officials during beta (only Groups can ask them)
-        return NextResponse.json(excludeFederal(officials));
+        return NextResponse.json(excludeFederalExecutive(excludeFederal(officials)));
       }
     }
   }
@@ -43,5 +53,5 @@ export async function GET(req: NextRequest) {
   // Fall back to all officials (not signed in, no address, or ?all=true)
   const officials = await getAllOfficials();
   // Exclude federal officials during beta (only Groups can ask them)
-  return NextResponse.json(excludeFederal(officials));
+  return NextResponse.json(excludeFederalExecutive(excludeFederal(officials)));
 }
