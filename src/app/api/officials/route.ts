@@ -44,8 +44,8 @@ export async function GET(req: NextRequest) {
     if (user?.isAddressVerified) {
       const officials = await getOfficialsForUser(user.id);
       if (officials.length > 0) {
-        // Exclude federal officials during beta (only Groups can ask them)
-        return NextResponse.json(excludeFederalExecutive(excludeFederal(officials)));
+        // Authenticated users with verified addresses see their federal reps
+        return NextResponse.json(excludeFederalExecutive(officials));
       }
     }
   }
