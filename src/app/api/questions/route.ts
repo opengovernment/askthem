@@ -6,14 +6,14 @@ import { syncPersonToAN } from "@/lib/action-network";
 import { sendQuestionSubmitted } from "@/lib/email";
 import { detectPlatform } from "@/lib/media";
 import { extractKeywords } from "@/lib/keywords";
+import { checkOfficialConduct } from "@/lib/moderation";
 
 // Basic content safety check — returns a rejection reason or null if OK.
-// TODO: Replace with AI-powered moderation (e.g. Claude API) in production.
 function moderateContent(text: string): string | null {
   if (text.length < 10) return "Question is too short (minimum 10 characters).";
   if (text.length > 500) return "Question is too long (maximum 500 characters).";
 
-  // Block obvious profanity / slurs (very basic list — use a real filter in production)
+  // Block obvious profanity / slurs
   const blocked = /\b(fuck|shit|damn|bitch|ass(?:hole)?|cunt|dick|bastard)\b/i;
   if (blocked.test(text)) {
     return "Your question contains language that violates our community guidelines. Please rephrase.";
@@ -119,6 +119,37 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: rejection }, { status: 422 });
   }
 
+  // AI-powered Official Conduct moderation check
+  const aiModeration = await checkOfficialConduct(text.trim());
+
+  // Log the moderation check
+  prisma.moderationLog
+    .create({
+      data: {
+        userId: user.id,
+        questionText: text.trim(),
+        result: aiModeration.result,
+        reason: aiModeration.reason,
+        suggestion: aiModeration.suggestion,
+      },
+    })
+    .catch((err: unknown) => {
+      console.error("Failed to log moderation check:", err);
+    });
+
+  // Block submission if the question fails Official Conduct check
+  if (aiModeration.result === "fail") {
+    return NextResponse.json(
+      {
+        error: "Your question does not appear to relate to Official Conduct (public duties, voting record, policy positions, or use of public resources). Please revise your question.",
+        moderationFailed: true,
+        moderationReason: aiModeration.reason,
+        moderationSuggestion: aiModeration.suggestion,
+      },
+      { status: 422 },
+    );
+  }
+
   // Validate videoUrl if provided — must be a recognized social media platform
   let validatedVideoUrl: string | undefined;
   if (videoUrl && typeof videoUrl === "string" && videoUrl.trim()) {
@@ -182,6 +213,9 @@ export async function POST(request: NextRequest) {
       districtTag,
       status: "pending_review",
       videoUrl: validatedVideoUrl,
+      aiModerationStatus: aiModeration.result,
+      aiModerationReason: aiModeration.reason,
+      aiModeratedAt: new Date(),
       groupId: groupId || undefined,
       eventId: validatedEventId,
       categoryTags: {

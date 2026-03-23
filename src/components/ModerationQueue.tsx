@@ -31,6 +31,8 @@ interface Question {
   categoryTags: { tag: string }[];
   keywords?: { keyword: string }[];
   flags?: QuestionFlag[];
+  aiModerationStatus?: string | null;
+  aiModerationReason?: string | null;
 }
 
 interface ModerationQueueProps {
@@ -342,6 +344,16 @@ function ModerationCard({
             <span className="rounded bg-indigo-50 px-2 py-0.5 text-xs text-indigo-600">
               {question.districtTag}
             </span>
+            {question.aiModerationStatus === "pass" && (
+              <span className="rounded bg-green-50 px-2 py-0.5 text-xs text-green-700">
+                AI: Pass
+              </span>
+            )}
+            {question.aiModerationStatus === "error" && (
+              <span className="rounded bg-gray-50 px-2 py-0.5 text-xs text-gray-500">
+                AI: Skipped
+              </span>
+            )}
           </div>
         </div>
         <span className="text-xs text-gray-400">

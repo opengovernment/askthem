@@ -176,6 +176,11 @@ model Question {
   // Broadcast batch: groups questions published to multiple officials at once
   batchId          String?
 
+  // AI moderation (Official Conduct policy check)
+  aiModerationStatus String?   // "pass" | "fail" | "error" — result of AI moderation check
+  aiModerationReason String?   // AI explanation when question fails moderation
+  aiModeratedAt      DateTime? // when the AI moderation check was performed
+
   categoryTags    QuestionTag[]
   keywords        QuestionKeyword[]
   upvotes         Upvote[]
@@ -184,6 +189,7 @@ model Question {
   emailEvents     EmailEvent[]
   endorsements    GroupEndorsement[]
   flags           QuestionFlag[]
+  moderationLogs  ModerationLog[]
 }
 
 model QuestionTag {
@@ -217,6 +223,25 @@ model QuestionFlag {
   createdAt  DateTime @default(now())
 
   @@unique([userId, questionId]) // one flag per user per question
+}
+
+// ─── AI Moderation Log ───────────────────────────────────────────────
+// Records every AI moderation check so moderators can audit decisions.
+
+model ModerationLog {
+  id            String   @id @default(cuid())
+  questionId    String?
+  question      Question? @relation(fields: [questionId], references: [id], onDelete: SetNull)
+  userId        String   // the user whose content was checked
+  questionText  String   // snapshot of the text that was moderated (in case question is deleted)
+  result        String   // "pass" | "fail" | "error"
+  reason        String?  // AI-generated explanation for failure
+  suggestion    String?  // AI-generated suggestion for how to rephrase
+  createdAt     DateTime @default(now())
+
+  @@index([questionId])
+  @@index([userId])
+  @@index([result])
 }
 
 // ─── Upvotes ─────────────────────────────────────────────────────────

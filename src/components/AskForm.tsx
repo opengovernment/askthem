@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { POLICY_AREAS } from "@/lib/types";
@@ -16,6 +16,12 @@ interface OfficialOption {
 interface GroupOption {
   id: string;
   name: string;
+}
+
+interface ModerationFeedback {
+  result: "pass" | "fail" | "error";
+  reason: string;
+  suggestion: string | null;
 }
 
 interface AskFormProps {
@@ -42,6 +48,12 @@ export function AskForm({ eventId: propEventId, lockedOfficialId, eventName }: A
   const [groups, setGroups] = useState<GroupOption[]>([]);
   const [selectedGroupId, setSelectedGroupId] = useState("");
 
+  // AI moderation state
+  const [moderationFeedback, setModerationFeedback] = useState<ModerationFeedback | null>(null);
+  const [isCheckingModeration, setIsCheckingModeration] = useState(false);
+  const moderationTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const lastCheckedTextRef = useRef<string>("");
+
   // Resolve eventId from prop or URL search param
   const eventId = propEventId || searchParams.get("eventId") || undefined;
 
@@ -66,6 +78,67 @@ export function AskForm({ eventId: propEventId, lockedOfficialId, eventName }: A
       .catch(() => {});
   }, [searchParams]);
 
+  // Debounced AI moderation check — runs 1.5s after user stops typing
+  const runModerationCheck = useCallback(async (text: string) => {
+    const trimmed = text.trim();
+    if (trimmed.length < 10 || trimmed === lastCheckedTextRef.current) return;
+
+    lastCheckedTextRef.current = trimmed;
+    setIsCheckingModeration(true);
+
+    try {
+      const res = await fetch("/api/moderation/check", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text: trimmed }),
+      });
+
+      if (res.ok) {
+        const data: ModerationFeedback = await res.json();
+        setModerationFeedback(data);
+      } else {
+        // Don't block user on moderation errors
+        setModerationFeedback(null);
+      }
+    } catch {
+      setModerationFeedback(null);
+    } finally {
+      setIsCheckingModeration(false);
+    }
+  }, []);
+
+  function handleQuestionTextChange(e: React.ChangeEvent<HTMLTextAreaElement>) {
+    const newText = e.target.value;
+    setQuestionText(newText);
+
+    // Clear previous moderation feedback when user starts editing again
+    if (moderationFeedback?.result === "fail") {
+      // Keep showing the feedback while they edit so they can reference the suggestion
+    }
+
+    // Debounce the moderation check
+    if (moderationTimerRef.current) {
+      clearTimeout(moderationTimerRef.current);
+    }
+
+    if (newText.trim().length >= 10) {
+      moderationTimerRef.current = setTimeout(() => {
+        runModerationCheck(newText);
+      }, 1500);
+    } else {
+      setModerationFeedback(null);
+    }
+  }
+
+  // Cleanup timer on unmount
+  useEffect(() => {
+    return () => {
+      if (moderationTimerRef.current) {
+        clearTimeout(moderationTimerRef.current);
+      }
+    };
+  }, []);
+
   function toggleTag(tag: string) {
     setSelectedTags((prev) =>
       prev.includes(tag) ? prev.filter((t) => t !== tag) : prev.length < 3 ? [...prev, tag] : prev
@@ -75,6 +148,15 @@ export function AskForm({ eventId: propEventId, lockedOfficialId, eventName }: A
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!selectedOfficial || !questionText.trim() || selectedTags.length === 0) return;
+
+    // If the question failed moderation and user hasn't changed text, block submission
+    if (moderationFeedback?.result === "fail" && questionText.trim() === lastCheckedTextRef.current) {
+      setError(
+        "Your question does not appear to relate to Official Conduct. Please revise your question using the suggestion above before submitting."
+      );
+      return;
+    }
+
     setIsSubmitting(true);
     setError("");
 
@@ -98,6 +180,13 @@ export function AskForm({ eventId: propEventId, lockedOfficialId, eventName }: A
         const data = await res.json();
         if (data.dailyLimitReached) {
           setLimitReached(true);
+        }
+        if (data.moderationFailed) {
+          setModerationFeedback({
+            result: "fail",
+            reason: data.moderationReason || "Question does not relate to Official Conduct.",
+            suggestion: data.moderationSuggestion || null,
+          });
         }
         setError(data.error || "Something went wrong. Please try again.");
       }
@@ -158,6 +247,16 @@ export function AskForm({ eventId: propEventId, lockedOfficialId, eventName }: A
           Submit a question to one of your elected officials. Your question will be reviewed for
           safety before being published.
         </p>
+
+        {/* Official Conduct Guidelines */}
+        <div className="mb-6 rounded-lg border border-blue-200 bg-blue-50 p-4">
+          <h3 className="mb-1 text-sm font-semibold text-blue-900">Official Conduct Guidelines</h3>
+          <p className="text-sm text-blue-800">
+            Questions must relate to an official&apos;s <strong>public duties</strong>, <strong>voting record</strong>,{" "}
+            <strong>policy positions</strong>, or <strong>use of public resources</strong>. Questions about
+            personal matters unrelated to their official role will not be accepted.
+          </p>
+        </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Ask as Group (only shown if user has verified groups) */}
@@ -226,16 +325,55 @@ export function AskForm({ eventId: propEventId, lockedOfficialId, eventName }: A
             <textarea
               id="question"
               value={questionText}
-              onChange={(e) => setQuestionText(e.target.value)}
+              onChange={handleQuestionTextChange}
               rows={4}
               maxLength={500}
-              placeholder="What would you like to ask your elected official?"
-              className="w-full rounded-lg border border-gray-300 px-4 py-3 text-gray-900 placeholder:text-gray-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 focus:outline-none"
+              placeholder="What would you like to ask your elected official about their public duties, voting record, or policy positions?"
+              className={`w-full rounded-lg border px-4 py-3 text-gray-900 placeholder:text-gray-400 focus:ring-2 focus:outline-none ${
+                moderationFeedback?.result === "fail"
+                  ? "border-amber-400 focus:border-amber-500 focus:ring-amber-200"
+                  : moderationFeedback?.result === "pass"
+                    ? "border-green-400 focus:border-green-500 focus:ring-green-200"
+                    : "border-gray-300 focus:border-indigo-500 focus:ring-indigo-200"
+              }`}
             />
-            <p className="mt-1 text-right text-xs text-gray-500">
-              {questionText.length}/500 characters
-            </p>
+            <div className="mt-1 flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                {isCheckingModeration && (
+                  <span className="text-xs text-gray-400">Checking guidelines...</span>
+                )}
+                {!isCheckingModeration && moderationFeedback?.result === "pass" && (
+                  <span className="text-xs text-green-600">Meets Official Conduct guidelines</span>
+                )}
+              </div>
+              <p className="text-xs text-gray-500">
+                {questionText.length}/500 characters
+              </p>
+            </div>
           </div>
+
+          {/* AI Moderation Feedback — shown when question fails Official Conduct check */}
+          {moderationFeedback?.result === "fail" && (
+            <div className="rounded-lg border border-amber-300 bg-amber-50 p-4">
+              <div className="flex items-start gap-3">
+                <div className="mt-0.5 flex-shrink-0">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-5 w-5 text-amber-600">
+                    <path fillRule="evenodd" d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495zM10 5a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 0110 5zm0 9a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" />
+                  </svg>
+                </div>
+                <div>
+                  <h4 className="text-sm font-semibold text-amber-900">Outside Official Conduct Guidelines</h4>
+                  <p className="mt-1 text-sm text-amber-800">{moderationFeedback.reason}</p>
+                  {moderationFeedback.suggestion && (
+                    <div className="mt-3 rounded-md border border-amber-200 bg-white p-3">
+                      <p className="text-xs font-medium text-amber-700">Suggestion to align with guidelines:</p>
+                      <p className="mt-1 text-sm text-gray-700">{moderationFeedback.suggestion}</p>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
 
           {/* Category Tags */}
           <div>

@@ -1,5 +1,6 @@
-import { getQuestionsByStatusPaginated, getQuestionCounts, getConstituentCountsForQuestions, getFlaggedQuestions } from "@/lib/queries";
+import { getQuestionsByStatusPaginated, getQuestionCounts, getConstituentCountsForQuestions, getFlaggedQuestions, getAiFlaggedModerationLogs } from "@/lib/queries";
 import { ModerationQueue } from "@/components/ModerationQueue";
+import { AiModerationLog } from "@/components/AiModerationLog";
 import { UserManagement } from "@/components/UserManagement";
 import { DailyQuestionLimit } from "@/components/DailyQuestionLimit";
 import { SiteModeToggles } from "@/components/SiteModeToggles";
@@ -38,8 +39,17 @@ export default async function ModeratePage({ searchParams }: PageProps) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let questions: any[];
   let totalCount: number | undefined;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  let aiModerationLogs: any[] | undefined;
+  let aiModerationTotal: number | undefined;
 
-  if (activeTab === "flagged") {
+  if (activeTab === "ai_flagged") {
+    questions = [];
+    const aiResult = await getAiFlaggedModerationLogs(page, pageSize);
+    aiModerationLogs = aiResult.logs;
+    aiModerationTotal = aiResult.total;
+    totalCount = aiResult.total;
+  } else if (activeTab === "flagged") {
     questions = await getFlaggedQuestions();
     totalCount = questions.length;
   } else {
@@ -60,6 +70,7 @@ export default async function ModeratePage({ searchParams }: PageProps) {
     { key: "delivered", label: "Delivered", count: counts.delivered },
     { key: "answered", label: "Answered", count: counts.answered },
     { key: "flagged", label: "Flagged", count: counts.flagged },
+    { key: "ai_flagged", label: "AI Flagged", count: counts.aiFlagged },
   ];
 
   return (
@@ -140,8 +151,21 @@ export default async function ModeratePage({ searchParams }: PageProps) {
           ))}
         </div>
 
-        {/* Question list */}
-        {questions.length === 0 ? (
+        {/* Question list or AI moderation log */}
+        {activeTab === "ai_flagged" ? (
+          aiModerationLogs && aiModerationLogs.length > 0 ? (
+            <AiModerationLog
+              logs={aiModerationLogs}
+              totalCount={aiModerationTotal}
+              page={page}
+              pageSize={pageSize}
+            />
+          ) : (
+            <div className="rounded-lg border border-gray-200 bg-white p-12 text-center">
+              <p className="text-gray-500">No AI-flagged moderation events.</p>
+            </div>
+          )
+        ) : questions.length === 0 ? (
           <div className="rounded-lg border border-gray-200 bg-white p-12 text-center">
             <p className="text-gray-500">No questions with this status.</p>
           </div>

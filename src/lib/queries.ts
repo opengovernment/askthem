@@ -452,14 +452,15 @@ export async function getVerifiedGroups() {
 }
 
 export async function getQuestionCounts() {
-  const [pendingReview, published, delivered, answered, flagged] = await Promise.all([
+  const [pendingReview, published, delivered, answered, flagged, aiFlagged] = await Promise.all([
     prisma.question.count({ where: { status: "pending_review" } }),
     prisma.question.count({ where: { status: "published" } }),
     prisma.question.count({ where: { status: "delivered" } }),
     prisma.question.count({ where: { status: "answered" } }),
     prisma.question.count({ where: { flags: { some: { status: "pending" } } } }),
+    prisma.moderationLog.count({ where: { result: "fail" } }),
   ]);
-  return { pendingReview, published, delivered, answered, flagged };
+  return { pendingReview, published, delivered, answered, flagged, aiFlagged };
 }
 
 export async function getFlaggedQuestions() {
@@ -475,6 +476,19 @@ export async function getFlaggedQuestions() {
     },
     orderBy: { createdAt: "desc" },
   });
+}
+
+export async function getAiFlaggedModerationLogs(page: number = 1, pageSize: number = 25) {
+  const [logs, total] = await Promise.all([
+    prisma.moderationLog.findMany({
+      where: { result: "fail" },
+      orderBy: { createdAt: "desc" },
+      skip: (page - 1) * pageSize,
+      take: pageSize,
+    }),
+    prisma.moderationLog.count({ where: { result: "fail" } }),
+  ]);
+  return { logs, total };
 }
 
 export async function dismissFlags(questionId: string) {
