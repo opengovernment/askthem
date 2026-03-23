@@ -108,6 +108,18 @@ export async function POST(req: NextRequest) {
     );
   }
 
+  // Diagnostic: warn if Cicero returned senators but no House representative.
+  // This helps catch address-matching issues (e.g. ambiguous addresses that resolve
+  // to a state but not a specific congressional district).
+  const hasSenators = normalizedOfficials.some((o) => o.level === "NATIONAL_UPPER");
+  const hasHouseRep = normalizedOfficials.some((o) => o.level === "NATIONAL_LOWER");
+  if (hasSenators && !hasHouseRep) {
+    console.warn(
+      `[Address] Cicero returned ${normalizedOfficials.filter((o) => o.level === "NATIONAL_UPPER").length} senator(s) but no U.S. House representative for address: ${street.trim()}, ${city.trim()}, ${state} ${zip.trim()}. ` +
+      `This may indicate the address could not be resolved to a specific congressional district.`,
+    );
+  }
+
   // Upsert officials and build UserDistrict mappings in a transaction
   const upsertedOfficials = await prisma.$transaction(async (tx) => {
     // 1. Upsert each official by ciceroId

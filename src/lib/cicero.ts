@@ -232,7 +232,16 @@ export async function lookupOfficialsByAddress(address: {
 
     // Use the first (best-match) candidate
     const officials = candidates[0].officials ?? [];
-    return officials.map(normalizeOfficial);
+    const normalized = officials.map(normalizeOfficial);
+
+    // Log district-type breakdown for debugging address-matching issues
+    const levelCounts: Record<string, number> = {};
+    for (const o of normalized) {
+      levelCounts[o.level] = (levelCounts[o.level] || 0) + 1;
+    }
+    console.log(`[Cicero] Address lookup returned ${normalized.length} officials:`, levelCounts);
+
+    return normalized;
   } catch (err) {
     console.error("[Cicero] lookup failed:", err);
     throw err;
