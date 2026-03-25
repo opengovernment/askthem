@@ -163,6 +163,9 @@ export default async function RootLayout({
               <Link href="/contact" className="text-gray-500 hover:text-indigo-600">
                 Contact
               </Link>
+              <Link href="/join" className="text-gray-500 hover:text-indigo-600">
+                Join Us
+              </Link>
               <Link href="/events" className="text-gray-500 hover:text-indigo-600">
                 Events
               </Link>
