@@ -22,7 +22,7 @@ export default async function Home() {
         </h1>
         <p className="mx-auto mb-8 max-w-xl text-lg text-indigo-100">
           Ask questions, upvote what matters, and get real answers from the people who represent
-          you
+          you.
         </p>
         <div className="flex justify-center">
           <SearchBar />
