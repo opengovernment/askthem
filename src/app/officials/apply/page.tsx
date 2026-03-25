@@ -2,9 +2,9 @@ import { ResponderApplicationForm } from "@/components/ResponderApplicationForm"
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Apply for Verified Responder Status - AskThem",
+  title: "Get Verified on AskThem",
   description:
-    "Elected officials can apply to become verified responders on AskThem, committing to answer constituent questions directly on the platform.",
+    "Verified officials on AskThem agree to publicly respond to at least one question per month from among their top-signed questions.",
 };
 
 export default function ResponderApplyPage() {

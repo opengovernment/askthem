@@ -6,7 +6,6 @@ import Link from "next/link";
 export function ResponderApplicationForm() {
   const [officialName, setOfficialName] = useState("");
   const [officialTitle, setOfficialTitle] = useState("");
-  const [contactName, setContactName] = useState("");
   const [contactEmail, setContactEmail] = useState("");
   const [websiteUrl, setWebsiteUrl] = useState("");
   const [submitting, setSubmitting] = useState(false);
@@ -25,7 +24,7 @@ export function ResponderApplicationForm() {
         body: JSON.stringify({
           officialName: officialName.trim(),
           officialTitle: officialTitle.trim(),
-          contactName: contactName.trim(),
+          contactName: officialName.trim(),
           contactEmail: contactEmail.trim(),
           websiteUrl: websiteUrl.trim(),
         }),
@@ -83,22 +82,20 @@ export function ResponderApplicationForm() {
       </Link>
 
       <h1 className="mb-2 text-3xl font-bold text-gray-900">
-        Apply for Verified Responder Status
+        Get Verified on AskThem
       </h1>
       <p className="mb-4 text-gray-600">
-        Verified responders on AskThem commit to answering at least one question per month
-        from the top questions asked to them across different issue areas. Responses are
-        published publicly on the platform and shared with constituents who signed the question.
+        Verified officials on AskThem agree to publicly respond to at least one question
+        per month from among their top-signed questions.
       </p>
       <p className="mb-8 text-gray-600">
-        This form is for elected officials and their staff. After submitting, our team will
-        verify your identity and set up your verified profile.
+        Fill out the form below and a site moderator will review your application.
       </p>
 
       <form onSubmit={handleSubmit} className="space-y-5">
         <div>
           <label htmlFor="officialName" className="mb-1.5 block text-sm font-medium text-gray-700">
-            Elected Official&apos;s Name
+            Name
           </label>
           <input
             id="officialName"
@@ -113,7 +110,7 @@ export function ResponderApplicationForm() {
 
         <div>
           <label htmlFor="officialTitle" className="mb-1.5 block text-sm font-medium text-gray-700">
-            Position / Title
+            Office
           </label>
           <input
             id="officialTitle"
@@ -127,38 +124,8 @@ export function ResponderApplicationForm() {
         </div>
 
         <div>
-          <label htmlFor="contactName" className="mb-1.5 block text-sm font-medium text-gray-700">
-            Staff Contact Name
-          </label>
-          <input
-            id="contactName"
-            type="text"
-            value={contactName}
-            onChange={(e) => setContactName(e.target.value)}
-            placeholder="e.g. John Doe, Communications Director"
-            required
-            className="w-full rounded-lg border border-gray-300 px-4 py-3 text-gray-900 placeholder:text-gray-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 focus:outline-none"
-          />
-        </div>
-
-        <div>
-          <label htmlFor="contactEmail" className="mb-1.5 block text-sm font-medium text-gray-700">
-            Staff Contact Email
-          </label>
-          <input
-            id="contactEmail"
-            type="email"
-            value={contactEmail}
-            onChange={(e) => setContactEmail(e.target.value)}
-            placeholder="e.g. john.doe@senate.gov"
-            required
-            className="w-full rounded-lg border border-gray-300 px-4 py-3 text-gray-900 placeholder:text-gray-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 focus:outline-none"
-          />
-        </div>
-
-        <div>
           <label htmlFor="websiteUrl" className="mb-1.5 block text-sm font-medium text-gray-700">
-            Official Website
+            Official Government Link
           </label>
           <input
             id="websiteUrl"
@@ -166,6 +133,24 @@ export function ResponderApplicationForm() {
             value={websiteUrl}
             onChange={(e) => setWebsiteUrl(e.target.value)}
             placeholder="e.g. https://smith.senate.gov"
+            required
+            className="w-full rounded-lg border border-gray-300 px-4 py-3 text-gray-900 placeholder:text-gray-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 focus:outline-none"
+          />
+        </div>
+
+        <div>
+          <label htmlFor="contactEmail" className="mb-1.5 block text-sm font-medium text-gray-700">
+            Preferred Email Contact
+          </label>
+          <p className="mb-1.5 text-xs text-gray-500">
+            Can be a government employee email address.
+          </p>
+          <input
+            id="contactEmail"
+            type="email"
+            value={contactEmail}
+            onChange={(e) => setContactEmail(e.target.value)}
+            placeholder="e.g. john.doe@senate.gov"
             required
             className="w-full rounded-lg border border-gray-300 px-4 py-3 text-gray-900 placeholder:text-gray-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 focus:outline-none"
           />
@@ -183,7 +168,6 @@ export function ResponderApplicationForm() {
             submitting ||
             !officialName.trim() ||
             !officialTitle.trim() ||
-            !contactName.trim() ||
             !contactEmail.trim() ||
             !websiteUrl.trim()
           }
