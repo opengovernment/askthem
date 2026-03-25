@@ -71,6 +71,31 @@ export default function PreviewPage() {
       </section>
 
       <div className="mx-auto max-w-4xl px-4 py-16">
+        {/* ── Action Network Signup ─────────────────────────────── */}
+        <section className="mb-20">
+          <h2 className="mb-2 text-center text-2xl font-bold text-gray-900">
+            Stay Connected
+          </h2>
+          <p className="mb-8 text-center text-gray-600">
+            Sign up for updates on our relaunch and ways to get involved.
+          </p>
+          <div className="mx-auto max-w-lg rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
+            <link
+              href="https://actionnetwork.org/css/style-embed-v3.css"
+              rel="stylesheet"
+              type="text/css"
+            />
+            <Script
+              src="https://actionnetwork.org/widgets/v6/form/get-updates-from-askthem?format=js&source=widget"
+              strategy="afterInteractive"
+            />
+            <div
+              id="can-form-area-get-updates-from-askthem"
+              style={{ width: "100%" }}
+            />
+          </div>
+        </section>
+
         {/* ── Mock Q&A Screenshots ──────────────────────────────── */}
         <section className="mb-20">
           <h2 className="mb-2 text-center text-2xl font-bold text-gray-900">
@@ -184,31 +209,6 @@ export default function PreviewPage() {
               width={1200}
               height={800}
               className="h-auto w-full"
-            />
-          </div>
-        </section>
-
-        {/* ── Action Network Signup ─────────────────────────────── */}
-        <section className="mb-20">
-          <h2 className="mb-2 text-center text-2xl font-bold text-gray-900">
-            Stay Connected
-          </h2>
-          <p className="mb-8 text-center text-gray-600">
-            Sign up for updates on our relaunch and ways to get involved.
-          </p>
-          <div className="mx-auto max-w-lg rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
-            <link
-              href="https://actionnetwork.org/css/style-embed-v3.css"
-              rel="stylesheet"
-              type="text/css"
-            />
-            <Script
-              src="https://actionnetwork.org/widgets/v6/form/get-updates-from-askthem?format=js&source=widget"
-              strategy="afterInteractive"
-            />
-            <div
-              id="can-form-area-get-updates-from-askthem"
-              style={{ width: "100%" }}
             />
           </div>
         </section>
