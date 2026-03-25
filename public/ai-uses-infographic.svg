@@ -132,8 +132,8 @@
       <text x="22" y="30" text-anchor="middle" font-size="24">📢</text>
     </g>
     <text x="155" y="42" font-family="system-ui, sans-serif" font-size="20" font-weight="700" fill="#1e293b">Answer Sharing</text>
-    <text x="155" y="68" font-family="system-ui, sans-serif" font-size="14" fill="#475569">AI generates shareable summaries and social media posts when officials respond,</text>
-    <text x="155" y="88" font-family="system-ui, sans-serif" font-size="14" fill="#475569">amplifying transparency and driving broader civic awareness.</text>
+    <text x="155" y="68" font-family="system-ui, sans-serif" font-size="14" fill="#475569">AI generates shareable summaries when officials respond, amplifying transparency</text>
+    <text x="155" y="88" font-family="system-ui, sans-serif" font-size="14" fill="#475569">and driving broader civic awareness.</text>
   </g>
 
   <!-- Footer -->
