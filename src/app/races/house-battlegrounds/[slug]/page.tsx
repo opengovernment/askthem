@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { findHouseRace, allHouseSlugs } from "../data";
+import { findHouseRace, allHouseSlugs, CANDIDATES } from "../data";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -20,12 +20,23 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
+const partyColor: Record<string, string> = {
+  D: "bg-blue-100 text-blue-800",
+  R: "bg-red-100 text-red-800",
+};
+
+const partyBorder: Record<string, string> = {
+  D: "border-l-blue-500",
+  R: "border-l-red-500",
+};
+
 export default async function HouseRacePage({ params }: Props) {
   const { slug } = await params;
   const result = findHouseRace(slug);
   if (!result) notFound();
 
   const { race, rating } = result;
+  const candidates = CANDIDATES[race.slug] ?? [];
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -66,30 +77,47 @@ export default async function HouseRacePage({ params }: Props) {
           </div>
         </div>
 
-        {/* Candidates placeholder */}
-        <div className="mb-6 rounded-lg border border-dashed border-gray-300 bg-white p-5">
-          <h2 className="mb-2 text-lg font-semibold text-gray-900">
+        {/* Candidates */}
+        <div className="mb-6 rounded-lg border border-gray-200 bg-white p-5">
+          <h2 className="mb-3 text-lg font-semibold text-gray-900">
             Candidates
           </h2>
-          <p className="text-sm text-gray-500">
-            Candidate information will be available here once data is loaded.
-          </p>
-          <div className="mt-4 space-y-3">
-            <div className="flex items-center gap-3 rounded bg-gray-50 p-3">
-              <div className="h-10 w-10 rounded-full bg-gray-200" />
-              <div className="flex-1">
-                <div className="h-4 w-32 rounded bg-gray-200" />
-                <div className="mt-1 h-3 w-20 rounded bg-gray-100" />
-              </div>
+          {candidates.length > 0 ? (
+            <div className="space-y-3">
+              {candidates.map((c) => (
+                <div
+                  key={c.name}
+                  className={`flex items-center gap-4 rounded-lg border-l-4 ${partyBorder[c.party] ?? "border-l-gray-300"} bg-gray-50 p-4`}
+                >
+                  <div
+                    className={`flex h-11 w-11 items-center justify-center rounded-full text-lg font-bold ${partyColor[c.party] ?? "bg-gray-100 text-gray-600"}`}
+                  >
+                    {c.name.charAt(0)}
+                  </div>
+                  <div className="flex-1">
+                    <p className="font-medium text-gray-900">{c.name}</p>
+                    <div className="mt-0.5 flex items-center gap-2">
+                      <span
+                        className={`inline-block rounded px-1.5 py-0.5 text-xs font-semibold ${partyColor[c.party] ?? "bg-gray-100 text-gray-600"}`}
+                      >
+                        {c.party === "D" ? "Democrat" : c.party === "R" ? "Republican" : c.party}
+                      </span>
+                      {c.isIncumbent && (
+                        <span className="text-xs text-gray-500">Incumbent</span>
+                      )}
+                    </div>
+                    {c.bio && (
+                      <p className="mt-1 text-sm text-gray-600">{c.bio}</p>
+                    )}
+                  </div>
+                </div>
+              ))}
             </div>
-            <div className="flex items-center gap-3 rounded bg-gray-50 p-3">
-              <div className="h-10 w-10 rounded-full bg-gray-200" />
-              <div className="flex-1">
-                <div className="h-4 w-28 rounded bg-gray-200" />
-                <div className="mt-1 h-3 w-20 rounded bg-gray-100" />
-              </div>
-            </div>
-          </div>
+          ) : (
+            <p className="text-sm text-gray-500">
+              Candidate information will be updated as filings are confirmed.
+            </p>
+          )}
         </div>
 
         {/* Polling placeholder */}
