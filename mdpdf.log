@@ -1,0 +1,611 @@
+    INFO: 2026-03-17 12:39:07,715:               log.py:   20: Logging to /home/user/qa-2026/mdpdf.log
+   DEBUG: 2026-03-17 12:39:07,715:               cli.py:  103: research-civic-ai-partners.md
+    INFO: 2026-03-17 12:39:07,716:         converter.py:   14: research-civic-ai-partners.md
+   DEBUG: 2026-03-17 12:39:07,725:      pdf_renderer.py:  470: printSegment: Civic AI 
+   DEBUG: 2026-03-17 12:39:07,727:      pdf_renderer.py:  470: printSegment: &
+   DEBUG: 2026-03-17 12:39:07,729:      pdf_renderer.py:  470: printSegment:  Moderation Partners Research — 2026 Launch
+   DEBUG: 2026-03-17 12:39:07,742:      pdf_renderer.py:  470: printSegment: Research on companies and organizations aligned with the MacArthur-Omidyar 
+   DEBUG: 2026-03-17 12:39:07,744:      pdf_renderer.py:  470: printSegment: Humanity AI
+   DEBUG: 2026-03-17 12:39:07,748:      pdf_renderer.py:  470: printSegment:  initiative that are
+   DEBUG: 2026-03-17 12:39:07,750:      pdf_renderer.py:  470: printSegment: active in civic AI systems, AI moderation, and deliberative democracy technology.
+   DEBUG: 2026-03-17 12:39:07,751:      pdf_renderer.py:  470: printSegment: 1. The Humanity AI Initiative — Context
+   DEBUG: 2026-03-17 12:39:07,752:      pdf_renderer.py:  470: printSegment: Launched October 14, 2025, 
+   DEBUG: 2026-03-17 12:39:07,753:      pdf_renderer.py:  470: printSegment: Humanity AI
+   DEBUG: 2026-03-17 12:39:07,754:      pdf_renderer.py:  470: printSegment:  is a $500M five-year initiative co-chaired by the 
+   DEBUG: 2026-03-17 12:39:07,754:      pdf_renderer.py:  470: printSegment: MacArthur
+   DEBUG: 2026-03-17 12:39:07,755:      pdf_renderer.py:  470: printSegment: Foundation
+   DEBUG: 2026-03-17 12:39:07,756:      pdf_renderer.py:  470: printSegment:  (John Palfrey, President) and 
+   DEBUG: 2026-03-17 12:39:07,756:      pdf_renderer.py:  470: printSegment: Omidyar Network
+   DEBUG: 2026-03-17 12:39:07,760:      pdf_renderer.py:  470: printSegment:  (Michele L. Jawando, President). Ten founding
+   DEBUG: 2026-03-17 12:39:07,761:      pdf_renderer.py:  470: printSegment: philanthropies are committed across five priority areas: 
+   DEBUG: 2026-03-17 12:39:07,762:      pdf_renderer.py:  470: printSegment: Democracy, Education, Humanities 
+   DEBUG: 2026-03-17 12:39:07,763:      pdf_renderer.py:  470: printSegment: &
+   DEBUG: 2026-03-17 12:39:07,763:      pdf_renderer.py:  470: printSegment:  Culture, Labor 
+   DEBUG: 2026-03-17 12:39:07,764:      pdf_renderer.py:  470: printSegment: &
+   DEBUG: 2026-03-17 12:39:07,765:      pdf_renderer.py:  470: printSegment: 
+   DEBUG: 2026-03-17 12:39:07,765:      pdf_renderer.py:  470: printSegment: Economy, and Safety 
+   DEBUG: 2026-03-17 12:39:07,766:      pdf_renderer.py:  470: printSegment: &
+   DEBUG: 2026-03-17 12:39:07,766:      pdf_renderer.py:  470: printSegment:  Security
+   DEBUG: 2026-03-17 12:39:07,767:      pdf_renderer.py:  470: printSegment: .
+   DEBUG: 2026-03-17 12:39:07,767:      pdf_renderer.py:  470: printSegment: Pooled-fund grantmaking via 
+   DEBUG: 2026-03-17 12:39:07,768:      pdf_renderer.py:  470: printSegment: Rockefeller Philanthropy Advisors
+   DEBUG: 2026-03-17 12:39:07,771:      pdf_renderer.py:  470: printSegment:  begins in 2026 — making this the ideal moment for
+   DEBUG: 2026-03-17 12:39:07,789:      pdf_renderer.py:  470: printSegment: aligned civic tech projects to position for partnership.
+   DEBUG: 2026-03-17 12:39:07,790:      pdf_renderer.py:  470: printSegment: Founding Coalition Members
+   DEBUG: 2026-03-17 12:39:07,791:      pdf_renderer.py:  470: printSegment: | Foundation | Focus Area Alignment |
+   DEBUG: 2026-03-17 12:39:07,792:      pdf_renderer.py:  470: printSegment:  
+   DEBUG: 2026-03-17 12:39:07,792:      pdf_renderer.py:  470: printSegment: |---|---|
+   DEBUG: 2026-03-17 12:39:07,793:      pdf_renderer.py:  470: printSegment:  
+   DEBUG: 2026-03-17 12:39:07,794:      pdf_renderer.py:  470: printSegment: | MacArthur Foundation | Democracy, AI governance, workforce |
+   DEBUG: 2026-03-17 12:39:07,795:      pdf_renderer.py:  470: printSegment:  
+   DEBUG: 2026-03-17 12:39:07,796:      pdf_renderer.py:  470: printSegment: |
+   DEBUG: 2026-03-17 12:39:07,797:      pdf_renderer.py:  470: printSegment: Omidyar Network | Tech accountability, civic power |
+   DEBUG: 2026-03-17 12:39:07,798:      pdf_renderer.py:  470: printSegment:  
+   DEBUG: 2026-03-17 12:39:07,799:      pdf_renderer.py:  470: printSegment: | Ford Foundation | Technology 
+   DEBUG: 2026-03-17 12:39:07,799:      pdf_renderer.py:  470: printSegment: &
+   DEBUG: 2026-03-17 12:39:07,800:      pdf_renderer.py:  470: printSegment:  society |
+   DEBUG: 2026-03-17 12:39:07,801:      pdf_renderer.py:  470: printSegment:  
+   DEBUG: 2026-03-17 12:39:07,802:      pdf_renderer.py:  470: printSegment: | Mozilla
+   DEBUG: 2026-03-17 12:39:07,803:      pdf_renderer.py:  470: printSegment: Foundation | Open-source tools, algorithmic accountability |
+   DEBUG: 2026-03-17 12:39:07,804:      pdf_renderer.py:  470: printSegment:  
+   DEBUG: 2026-03-17 12:39:07,805:      pdf_renderer.py:  470: printSegment: | Mellon Foundation | Humanities, cultural preservation
+   DEBUG: 2026-03-17 12:39:07,806:      pdf_renderer.py:  470: printSegment: |
+   DEBUG: 2026-03-17 12:39:07,806:      pdf_renderer.py:  470: printSegment:  
+   DEBUG: 2026-03-17 12:39:07,807:      pdf_renderer.py:  470: printSegment: | Kapor Foundation | Equity in tech |
+   DEBUG: 2026-03-17 12:39:07,808:      pdf_renderer.py:  470: printSegment:  
+   DEBUG: 2026-03-17 12:39:07,809:      pdf_renderer.py:  470: printSegment: | Lumina Foundation | Workforce education, credentialing |
+   DEBUG: 2026-03-17 12:39:07,810:      pdf_renderer.py:  470: printSegment:  
+   DEBUG: 2026-03-17 12:39:07,811:      pdf_renderer.py:  470: printSegment: | Siegel Family
+   DEBUG: 2026-03-17 12:39:07,812:      pdf_renderer.py:  470: printSegment: Endowment | Technology
+   DEBUG: 2026-03-17 12:39:07,812:      pdf_renderer.py:  470: printSegment: '
+   DEBUG: 2026-03-17 12:39:07,813:      pdf_renderer.py:  470: printSegment: s impact on learning 
+   DEBUG: 2026-03-17 12:39:07,814:      pdf_renderer.py:  470: printSegment: &
+   DEBUG: 2026-03-17 12:39:07,814:      pdf_renderer.py:  470: printSegment:  civic life |
+   DEBUG: 2026-03-17 12:39:07,815:      pdf_renderer.py:  470: printSegment:  
+   DEBUG: 2026-03-17 12:39:07,816:      pdf_renderer.py:  470: printSegment: | Doris Duke Foundation | Environment, arts |
+   DEBUG: 2026-03-17 12:39:07,817:      pdf_renderer.py:  470: printSegment:  
+   DEBUG: 2026-03-17 12:39:07,818:      pdf_renderer.py:  470: printSegment: | David 
+   DEBUG: 2026-03-17 12:39:07,818:      pdf_renderer.py:  470: printSegment: &
+   DEBUG: 2026-03-17 12:39:07,820:      pdf_renderer.py:  470: printSegment: 
+   DEBUG: 2026-03-17 12:39:07,820:      pdf_renderer.py:  470: printSegment: Lucile Packard Foundation | Science, conservation |
+   DEBUG: 2026-03-17 12:39:07,822:      pdf_renderer.py:  470: printSegment: 2. High-Priority Partner Companies 
+   DEBUG: 2026-03-17 12:39:07,823:      pdf_renderer.py:  470: printSegment: &
+   DEBUG: 2026-03-17 12:39:07,823:      pdf_renderer.py:  470: printSegment:  Organizations
+   DEBUG: 2026-03-17 12:39:07,825:      pdf_renderer.py:  470: printSegment: Tier 1 — Directly Aligned with Humanity AI / Civic AI Deliberation
+   DEBUG: 2026-03-17 12:39:07,826:      pdf_renderer.py:  470: printSegment: Cortico (nonprofit) — Cambridge, MA
+   DEBUG: 2026-03-17 12:39:07,826:      pdf_renderer.py:  470: printSegment: l
+   DEBUG: 2026-03-17 12:39:07,827:      pdf_renderer.py:  470: printSegment: What they do:
+   DEBUG: 2026-03-17 12:39:07,831:      pdf_renderer.py:  470: printSegment:  AI-powered conversation platform that surfaces underheard voices and perspectives;
+   DEBUG: 2026-03-17 12:39:07,832:      pdf_renderer.py:  470: printSegment: builds scalable dialogue networks.
+   DEBUG: 2026-03-17 12:39:07,833:      pdf_renderer.py:  470: printSegment: l
+   DEBUG: 2026-03-17 12:39:07,834:      pdf_renderer.py:  470: printSegment: Key leader:
+   DEBUG: 2026-03-17 12:39:07,834:      pdf_renderer.py:  470: printSegment:  
+   DEBUG: 2026-03-17 12:39:07,835:      pdf_renderer.py:  470: printSegment: Deb Roy
+   DEBUG: 2026-03-17 12:39:07,836:      pdf_renderer.py:  470: printSegment:  (MIT Media Lab professor, co-founder). Co-authored the 
+   DEBUG: 2026-03-17 12:39:07,837:      pdf_renderer.py:  470: printSegment: "
+   DEBUG: 2026-03-17 12:39:07,838:      pdf_renderer.py:  470: printSegment: Conversation
+   DEBUG: 2026-03-17 12:39:07,839:      pdf_renderer.py:  470: printSegment: Networks
+   DEBUG: 2026-03-17 12:39:07,840:      pdf_renderer.py:  470: printSegment: "
+   DEBUG: 2026-03-17 12:39:07,841:      pdf_renderer.py:  470: printSegment:  paper (2025) with Lawrence Lessig and Audrey Tang.
+   DEBUG: 2026-03-17 12:39:07,842:      pdf_renderer.py:  470: printSegment: l
+   DEBUG: 2026-03-17 12:39:07,842:      pdf_renderer.py:  470: printSegment: Humanity AI alignment:
+   DEBUG: 2026-03-17 12:39:07,848:      pdf_renderer.py:  470: printSegment:  Direct grantee territory — civic engagement, democracy pillar. Roy sits on
+   DEBUG: 2026-03-17 12:39:07,849:      pdf_renderer.py:  470: printSegment: the Knight First Amendment Institute board and Berkman Klein Center.
+   DEBUG: 2026-03-17 12:39:07,850:      pdf_renderer.py:  470: printSegment: l
+   DEBUG: 2026-03-17 12:39:07,851:      pdf_renderer.py:  470: printSegment: Why partner:
+   DEBUG: 2026-03-17 12:39:07,855:      pdf_renderer.py:  470: printSegment:  Their conversation-analysis AI and community network of 250+ organizations is
+   DEBUG: 2026-03-17 12:39:07,856:      pdf_renderer.py:  470: printSegment: infrastructure for inclusive civic deliberation at scale.
+   DEBUG: 2026-03-17 12:39:07,857:      pdf_renderer.py:  470: printSegment: l
+   DEBUG: 2026-03-17 12:39:07,858:      pdf_renderer.py:  470: printSegment: Link:
+   DEBUG: 2026-03-17 12:39:07,859:      pdf_renderer.py:  470: printSegment:  https://cortico.ai
+   DEBUG: 2026-03-17 12:39:07,860:      pdf_renderer.py:  470: printSegment: Pol.is (open source)
+   DEBUG: 2026-03-17 12:39:07,861:      pdf_renderer.py:  470: printSegment: l
+   DEBUG: 2026-03-17 12:39:07,861:      pdf_renderer.py:  470: printSegment: What they do:
+   DEBUG: 2026-03-17 12:39:07,867:      pdf_renderer.py:  470: printSegment:  Wiki-survey software for large-group opinion mapping. Algorithmically surfaces
+   DEBUG: 2026-03-17 12:39:07,869:      pdf_renderer.py:  470: printSegment: consensus rather than engagement/outrage. Anonymous participation to avoid personal attacks.
+   DEBUG: 2026-03-17 12:39:07,870:      pdf_renderer.py:  470: printSegment: l
+   DEBUG: 2026-03-17 12:39:07,871:      pdf_renderer.py:  470: printSegment: Key leaders:
+   DEBUG: 2026-03-17 12:39:07,872:      pdf_renderer.py:  470: printSegment:  Colin Megill, Christopher Small, Michael Bjorkegren.
+   DEBUG: 2026-03-17 12:39:07,873:      pdf_renderer.py:  470: printSegment: l
+   DEBUG: 2026-03-17 12:39:07,874:      pdf_renderer.py:  470: printSegment: Humanity AI alignment:
+   DEBUG: 2026-03-17 12:39:07,875:      pdf_renderer.py:  470: printSegment:  Used by Taiwan
+   DEBUG: 2026-03-17 12:39:07,875:      pdf_renderer.py:  470: printSegment: '
+   DEBUG: 2026-03-17 12:39:07,880:      pdf_renderer.py:  470: printSegment: s vTaiwan for policy deliberation; influenced Twitter/X
+   DEBUG: 2026-03-17 12:39:07,881:      pdf_renderer.py:  470: printSegment: Community Notes; Anthropic explored using Polis for model alignment.
+   DEBUG: 2026-03-17 12:39:07,882:      pdf_renderer.py:  470: printSegment: l
+   DEBUG: 2026-03-17 12:39:07,883:      pdf_renderer.py:  470: printSegment: Why partner:
+   DEBUG: 2026-03-17 12:39:07,886:      pdf_renderer.py:  470: printSegment:  The gold standard for AI-assisted large-scale deliberation. Open source, proven at
+   DEBUG: 2026-03-17 12:39:07,887:      pdf_renderer.py:  470: printSegment: government scale (Taiwan, California).
+   DEBUG: 2026-03-17 12:39:07,888:      pdf_renderer.py:  470: printSegment: l
+   DEBUG: 2026-03-17 12:39:07,889:      pdf_renderer.py:  470: printSegment: Link:
+   DEBUG: 2026-03-17 12:39:07,890:      pdf_renderer.py:  470: printSegment:  https://pol.is
+   DEBUG: 2026-03-17 12:39:07,891:      pdf_renderer.py:  470: printSegment: Humane Intelligence (nonprofit PBC)
+   DEBUG: 2026-03-17 12:39:07,892:      pdf_renderer.py:  470: printSegment: l
+   DEBUG: 2026-03-17 12:39:07,893:      pdf_renderer.py:  470: printSegment: What they do:
+   DEBUG: 2026-03-17 12:39:07,894:      pdf_renderer.py:  470: printSegment:  Community-driven AI auditing, bias bounties, red-teaming exercises. Co-organized 
+   DEBUG: 2026-03-17 12:39:07,896:      pdf_renderer.py:  470: printSegment: "
+   DEBUG: 2026-03-17 12:39:07,896:      pdf_renderer.py:  470: printSegment: Hack the Future
+   DEBUG: 2026-03-17 12:39:07,897:      pdf_renderer.py:  470: printSegment: "
+   DEBUG: 2026-03-17 12:39:07,898:      pdf_renderer.py:  470: printSegment:  — largest-ever GenAI red-teaming with 8 major tech companies and 4,000
+   DEBUG: 2026-03-17 12:39:07,899:      pdf_renderer.py:  470: printSegment: participants.
+   DEBUG: 2026-03-17 12:39:07,900:      pdf_renderer.py:  470: printSegment: l
+   DEBUG: 2026-03-17 12:39:07,900:      pdf_renderer.py:  470: printSegment: Key leader:
+   DEBUG: 2026-03-17 12:39:07,901:      pdf_renderer.py:  470: printSegment:  
+   DEBUG: 2026-03-17 12:39:07,901:      pdf_renderer.py:  470: printSegment: Dr. Rumman Chowdhury
+   DEBUG: 2026-03-17 12:39:07,907:      pdf_renderer.py:  470: printSegment:  — TIME 100 AI, BBC 100 Women, Forbes Five Shaping AI.
+   DEBUG: 2026-03-17 12:39:07,908:      pdf_renderer.py:  470: printSegment: U.S. Science Envoy for AI. Responsible AI Fellow at Harvard Berkman Klein Center.
+   DEBUG: 2026-03-17 12:39:07,909:      pdf_renderer.py:  470: printSegment: l
+   DEBUG: 2026-03-17 12:39:07,910:      pdf_renderer.py:  470: printSegment: Humanity AI alignment:
+   DEBUG: 2026-03-17 12:39:07,910:      pdf_renderer.py:  470: printSegment:  Chowdhury was highlighted in Brookings
+   DEBUG: 2026-03-17 12:39:07,911:      pdf_renderer.py:  470: printSegment: '
+   DEBUG: 2026-03-17 12:39:07,912:      pdf_renderer.py:  470: printSegment:  
+   DEBUG: 2026-03-17 12:39:07,912:      pdf_renderer.py:  470: printSegment: "
+   DEBUG: 2026-03-17 12:39:07,913:      pdf_renderer.py:  470: printSegment: (un)Hidden Figures in AI
+   DEBUG: 2026-03-17 12:39:07,914:      pdf_renderer.py:  470: printSegment: "
+   DEBUG: 2026-03-17 12:39:07,916:      pdf_renderer.py:  470: printSegment: 
+   DEBUG: 2026-03-17 12:39:07,917:      pdf_renderer.py:  470: printSegment: alongside other civic AI leaders. Deep policy engagement (Congress, FTC, OECD, UNESCO).
+   DEBUG: 2026-03-17 12:39:07,918:      pdf_renderer.py:  470: printSegment: l
+   DEBUG: 2026-03-17 12:39:07,919:      pdf_renderer.py:  470: printSegment: Why partner:
+   DEBUG: 2026-03-17 12:39:07,925:      pdf_renderer.py:  470: printSegment:  Leading voice in accountable AI with strong credibility across government,
+   DEBUG: 2026-03-17 12:39:07,926:      pdf_renderer.py:  470: printSegment: philanthropy, and tech. Red-teaming and auditing expertise directly relevant to trust 
+   DEBUG: 2026-03-17 12:39:07,927:      pdf_renderer.py:  470: printSegment: &
+   DEBUG: 2026-03-17 12:39:07,928:      pdf_renderer.py:  470: printSegment:  safety in
+   DEBUG: 2026-03-17 12:39:07,928:      pdf_renderer.py:  470: printSegment: civic systems.
+   DEBUG: 2026-03-17 12:39:07,929:      pdf_renderer.py:  470: printSegment: l
+   DEBUG: 2026-03-17 12:39:07,930:      pdf_renderer.py:  470: printSegment: Link:
+   DEBUG: 2026-03-17 12:39:07,931:      pdf_renderer.py:  470: printSegment:  https://humane-intelligence.org
+   DEBUG: 2026-03-17 12:39:07,931:      pdf_renderer.py:  470: printSegment: Reboot Democracy AI / The GovLab
+   DEBUG: 2026-03-17 12:39:07,932:      pdf_renderer.py:  470: printSegment: l
+   DEBUG: 2026-03-17 12:39:07,933:      pdf_renderer.py:  470: printSegment: What they do:
+   DEBUG: 2026-03-17 12:39:07,941:      pdf_renderer.py:  470: printSegment:  Research initiative focused on using AI to strengthen participatory democracy. Runs
+   DEBUG: 2026-03-17 12:39:07,942:      pdf_renderer.py:  470: printSegment: InnovateUS (free AI training for public sector), lectures, and courses on designing democratic
+   DEBUG: 2026-03-17 12:39:07,943:      pdf_renderer.py:  470: printSegment: engagement.
+   DEBUG: 2026-03-17 12:39:07,944:      pdf_renderer.py:  470: printSegment: l
+   DEBUG: 2026-03-17 12:39:07,944:      pdf_renderer.py:  470: printSegment: Key leader:
+   DEBUG: 2026-03-17 12:39:07,945:      pdf_renderer.py:  470: printSegment:  
+   DEBUG: 2026-03-17 12:39:07,946:      pdf_renderer.py:  470: printSegment: Beth Simone Noveck
+   DEBUG: 2026-03-17 12:39:07,947:      pdf_renderer.py:  470: printSegment:  — former White House Deputy CTO under Obama, New Jersey
+   DEBUG: 2026-03-17 12:39:07,947:      pdf_renderer.py:  470: printSegment: '
+   DEBUG: 2026-03-17 12:39:07,949:      pdf_renderer.py:  470: printSegment: s
+   DEBUG: 2026-03-17 12:39:07,949:      pdf_renderer.py:  470: printSegment: first Chief AI Strategist. Book: 
+   DEBUG: 2026-03-17 12:39:07,951:      pdf_renderer.py:  470: printSegment: Reboot: The Race to Save Democracy with AI
+   DEBUG: 2026-03-17 12:39:07,952:      pdf_renderer.py:  470: printSegment:  (Yale University
+   DEBUG: 2026-03-17 12:39:07,954:      pdf_renderer.py:  470: printSegment: Press).
+   DEBUG: 2026-03-17 12:39:07,954:      pdf_renderer.py:  470: printSegment: l
+   DEBUG: 2026-03-17 12:39:07,955:      pdf_renderer.py:  470: printSegment: Humanity AI alignment:
+   DEBUG: 2026-03-17 12:39:07,958:      pdf_renderer.py:  470: printSegment:  Directly at the intersection of democracy + AI + public sector. Noveck
+   DEBUG: 2026-03-17 12:39:07,959:      pdf_renderer.py:  470: printSegment: has relationships across the foundation world.
+   DEBUG: 2026-03-17 12:39:07,960:      pdf_renderer.py:  470: printSegment: l
+   DEBUG: 2026-03-17 12:39:07,961:      pdf_renderer.py:  470: printSegment: Why partner:
+   DEBUG: 2026-03-17 12:39:07,964:      pdf_renderer.py:  470: printSegment:  Brings academic rigor, government credibility, and a practitioner network of
+   DEBUG: 2026-03-17 12:39:07,965:      pdf_renderer.py:  470: printSegment: public-sector AI professionals worldwide.
+   DEBUG: 2026-03-17 12:39:07,965:      pdf_renderer.py:  470: printSegment: l
+   DEBUG: 2026-03-17 12:39:07,966:      pdf_renderer.py:  470: printSegment: Link:
+   DEBUG: 2026-03-17 12:39:07,967:      pdf_renderer.py:  470: printSegment:  https://rebootdemocracy.ai
+   DEBUG: 2026-03-17 12:39:07,968:      pdf_renderer.py:  470: printSegment: Data 
+   DEBUG: 2026-03-17 12:39:07,968:      pdf_renderer.py:  470: printSegment: &
+   DEBUG: 2026-03-17 12:39:07,969:      pdf_renderer.py:  470: printSegment:  Society Research Institute
+   DEBUG: 2026-03-17 12:39:07,970:      pdf_renderer.py:  470: printSegment: l
+   DEBUG: 2026-03-17 12:39:07,971:      pdf_renderer.py:  470: printSegment: What they do:
+   DEBUG: 2026-03-17 12:39:07,972:      pdf_renderer.py:  470: printSegment:  Launched the 
+   DEBUG: 2026-03-17 12:39:07,973:      pdf_renderer.py:  470: printSegment: AI Civics
+   DEBUG: 2026-03-17 12:39:07,980:      pdf_renderer.py:  470: printSegment:  initiative — treats AI as a domain of civic life where people
+   DEBUG: 2026-03-17 12:39:07,983:      pdf_renderer.py:  470: printSegment: have rights, responsibilities, and avenues for collective action. Seeking partners for civics curricula
+   DEBUG: 2026-03-17 12:39:07,983:      pdf_renderer.py:  470: printSegment: through 2029.
+   DEBUG: 2026-03-17 12:39:07,984:      pdf_renderer.py:  470: printSegment: l
+   DEBUG: 2026-03-17 12:39:07,985:      pdf_renderer.py:  470: printSegment: Humanity AI alignment:
+   DEBUG: 2026-03-17 12:39:07,989:      pdf_renderer.py:  470: printSegment:  Received $500K from MacArthur for civic engagement and public
+   DEBUG: 2026-03-17 12:39:07,990:      pdf_renderer.py:  470: printSegment: conversations about AI as part of Humanity AI
+   DEBUG: 2026-03-17 12:39:07,991:      pdf_renderer.py:  470: printSegment: '
+   DEBUG: 2026-03-17 12:39:07,992:      pdf_renderer.py:  470: printSegment: s initial aligned grantmaking.
+   DEBUG: 2026-03-17 12:39:07,992:      pdf_renderer.py:  470: printSegment: l
+   DEBUG: 2026-03-17 12:39:07,993:      pdf_renderer.py:  470: printSegment: Why partner:
+   DEBUG: 2026-03-17 12:39:07,996:      pdf_renderer.py:  470: printSegment:  Already funded by Humanity AI coalition. Their AI Civics framework is directly
+   DEBUG: 2026-03-17 12:39:07,997:      pdf_renderer.py:  470: printSegment: complementary to civic tech platforms.
+   DEBUG: 2026-03-17 12:39:07,998:      pdf_renderer.py:  470: printSegment: l
+   DEBUG: 2026-03-17 12:39:07,999:      pdf_renderer.py:  470: printSegment: Link:
+   DEBUG: 2026-03-17 12:39:08,000:      pdf_renderer.py:  470: printSegment:  https://datasociety.net
+   DEBUG: 2026-03-17 12:39:08,001:      pdf_renderer.py:  470: printSegment: AI Now Institute
+   DEBUG: 2026-03-17 12:39:08,002:      pdf_renderer.py:  470: printSegment: l
+   DEBUG: 2026-03-17 12:39:08,002:      pdf_renderer.py:  470: printSegment: What they do:
+   DEBUG: 2026-03-17 12:39:08,007:      pdf_renderer.py:  470: printSegment:  Research institute challenging the current trajectory of AI. Focus on AI governance,
+   DEBUG: 2026-03-17 12:39:08,008:      pdf_renderer.py:  470: printSegment: national security, and corporate power in AI.
+   DEBUG: 2026-03-17 12:39:08,009:      pdf_renderer.py:  470: printSegment: l
+   DEBUG: 2026-03-17 12:39:08,010:      pdf_renderer.py:  470: printSegment: Humanity AI alignment:
+   DEBUG: 2026-03-17 12:39:08,011:      pdf_renderer.py:  470: printSegment:  Received $2M from MacArthur as part of Humanity AI
+   DEBUG: 2026-03-17 12:39:08,012:      pdf_renderer.py:  470: printSegment: '
+   DEBUG: 2026-03-17 12:39:08,012:      pdf_renderer.py:  470: printSegment: s initial grants.
+   DEBUG: 2026-03-17 12:39:08,013:      pdf_renderer.py:  470: printSegment: l
+   DEBUG: 2026-03-17 12:39:08,014:      pdf_renderer.py:  470: printSegment: Why partner:
+   DEBUG: 2026-03-17 12:39:08,015:      pdf_renderer.py:  470: printSegment:  Major credibility in AI policy. Their research shapes regulatory conversations.
+   DEBUG: 2026-03-17 12:39:08,016:      pdf_renderer.py:  470: printSegment: l
+   DEBUG: 2026-03-17 12:39:08,017:      pdf_renderer.py:  470: printSegment: Link:
+   DEBUG: 2026-03-17 12:39:08,018:      pdf_renderer.py:  470: printSegment:  https://ainowinstitute.org
+   DEBUG: 2026-03-17 12:39:08,020:      pdf_renderer.py:  470: printSegment: Tier 2 — Civic AI Platforms 
+   DEBUG: 2026-03-17 12:39:08,021:      pdf_renderer.py:  470: printSegment: &
+   DEBUG: 2026-03-17 12:39:08,022:      pdf_renderer.py:  470: printSegment:  Tools
+   DEBUG: 2026-03-17 12:39:08,023:      pdf_renderer.py:  470: printSegment: Go Vocal (formerly CitizenLab) — Brussels, Belgium
+   DEBUG: 2026-03-17 12:39:08,024:      pdf_renderer.py:  470: printSegment: l
+   DEBUG: 2026-03-17 12:39:08,025:      pdf_renderer.py:  470: printSegment: What they do:
+   DEBUG: 2026-03-17 12:39:08,035:      pdf_renderer.py:  470: printSegment:  SaaS community engagement platform for local governments. AI-powered analytics
+   DEBUG: 2026-03-17 12:39:08,038:      pdf_renderer.py:  470: printSegment: (sentiment detection, topic clustering, trend analysis). Used by Cambridge City Council (UK) and
+   DEBUG: 2026-03-17 12:39:08,039:      pdf_renderer.py:  470: printSegment: hundreds of EU municipalities.
+   DEBUG: 2026-03-17 12:39:08,040:      pdf_renderer.py:  470: printSegment: l
+   DEBUG: 2026-03-17 12:39:08,041:      pdf_renderer.py:  470: printSegment: Why partner:
+   DEBUG: 2026-03-17 12:39:08,044:      pdf_renderer.py:  470: printSegment:  Most commercially mature civic participation platform. Strong EU presence;
+   DEBUG: 2026-03-17 12:39:08,044:      pdf_renderer.py:  470: printSegment: expanding to North America.
+   DEBUG: 2026-03-17 12:39:08,045:      pdf_renderer.py:  470: printSegment: l
+   DEBUG: 2026-03-17 12:39:08,045:      pdf_renderer.py:  470: printSegment: Link:
+   DEBUG: 2026-03-17 12:39:08,046:      pdf_renderer.py:  470: printSegment:  https://www.govocal.com
+   DEBUG: 2026-03-17 12:39:08,047:      pdf_renderer.py:  470: printSegment: Decidim (open source) — Barcelona origin
+   DEBUG: 2026-03-17 12:39:08,048:      pdf_renderer.py:  470: printSegment: l
+   DEBUG: 2026-03-17 12:39:08,048:      pdf_renderer.py:  470: printSegment: What they do:
+   DEBUG: 2026-03-17 12:39:08,053:      pdf_renderer.py:  470: printSegment:  Comprehensive open-source participation platform — debates, proposals, assemblies,
+   DEBUG: 2026-03-17 12:39:08,054:      pdf_renderer.py:  470: printSegment: budgeting. Experimenting with GPT integration. Democratically governed.
+   DEBUG: 2026-03-17 12:39:08,054:      pdf_renderer.py:  470: printSegment: l
+   DEBUG: 2026-03-17 12:39:08,055:      pdf_renderer.py:  470: printSegment: Why partner:
+   DEBUG: 2026-03-17 12:39:08,059:      pdf_renderer.py:  470: printSegment:  Largest open-source civic participation platform globally. Free, modular, and trusted
+   DEBUG: 2026-03-17 12:39:08,060:      pdf_renderer.py:  470: printSegment: by governments. Natural fit for foundation-funded projects.
+   DEBUG: 2026-03-17 12:39:08,061:      pdf_renderer.py:  470: printSegment: l
+   DEBUG: 2026-03-17 12:39:08,061:      pdf_renderer.py:  470: printSegment: Link:
+   DEBUG: 2026-03-17 12:39:08,062:      pdf_renderer.py:  470: printSegment:  https://decidim.org
+   DEBUG: 2026-03-17 12:39:08,062:      pdf_renderer.py:  470: printSegment: Remesh
+   DEBUG: 2026-03-17 12:39:08,063:      pdf_renderer.py:  470: printSegment: l
+   DEBUG: 2026-03-17 12:39:08,064:      pdf_renderer.py:  470: printSegment: What they do:
+   DEBUG: 2026-03-17 12:39:08,065:      pdf_renderer.py:  470: printSegment:  AI-assisted digital deliberation platform. Used for OpenAI
+   DEBUG: 2026-03-17 12:39:08,065:      pdf_renderer.py:  470: printSegment: '
+   DEBUG: 2026-03-17 12:39:08,066:      pdf_renderer.py:  470: printSegment: s 
+   DEBUG: 2026-03-17 12:39:08,066:      pdf_renderer.py:  470: printSegment: "
+   DEBUG: 2026-03-17 12:39:08,067:      pdf_renderer.py:  470: printSegment: Democratic Inputs to
+   DEBUG: 2026-03-17 12:39:08,068:      pdf_renderer.py:  470: printSegment: AI
+   DEBUG: 2026-03-17 12:39:08,068:      pdf_renderer.py:  470: printSegment: "
+   DEBUG: 2026-03-17 12:39:08,072:      pdf_renderer.py:  470: printSegment:  process (1,500 Americans deliberating on AI guidelines in two weeks). AI helps with prompt
+   DEBUG: 2026-03-17 12:39:08,072:      pdf_renderer.py:  470: printSegment: suggestions to reduce framing bias.
+   DEBUG: 2026-03-17 12:39:08,073:      pdf_renderer.py:  470: printSegment: l
+   DEBUG: 2026-03-17 12:39:08,074:      pdf_renderer.py:  470: printSegment: Why partner:
+   DEBUG: 2026-03-17 12:39:08,075:      pdf_renderer.py:  470: printSegment:  Proven at scale for AI governance deliberation specifically. Strong case study with
+   DEBUG: 2026-03-17 12:39:08,076:      pdf_renderer.py:  470: printSegment: OpenAI.
+   DEBUG: 2026-03-17 12:39:08,077:      pdf_renderer.py:  470: printSegment: l
+   DEBUG: 2026-03-17 12:39:08,077:      pdf_renderer.py:  470: printSegment: Link:
+   DEBUG: 2026-03-17 12:39:08,078:      pdf_renderer.py:  470: printSegment:  https://remesh.ai
+   DEBUG: 2026-03-17 12:39:08,079:      pdf_renderer.py:  470: printSegment: Make.org — Paris, France
+   DEBUG: 2026-03-17 12:39:08,079:      pdf_renderer.py:  470: printSegment: l
+   DEBUG: 2026-03-17 12:39:08,080:      pdf_renderer.py:  470: printSegment: What they do:
+   DEBUG: 2026-03-17 12:39:08,084:      pdf_renderer.py:  470: printSegment:  Civic tech platform for large-scale citizen consultations. Building significant AI
+   DEBUG: 2026-03-17 12:39:08,085:      pdf_renderer.py:  470: printSegment: features for proposal analysis and synthesis.
+   DEBUG: 2026-03-17 12:39:08,085:      pdf_renderer.py:  470: printSegment: l
+   DEBUG: 2026-03-17 12:39:08,086:      pdf_renderer.py:  470: printSegment: Why partner:
+   DEBUG: 2026-03-17 12:39:08,091:      pdf_renderer.py:  470: printSegment:  European civic tech leader. Co-launched Global Coalition for Inclusive AI
+   DEBUG: 2026-03-17 12:39:08,092:      pdf_renderer.py:  470: printSegment: Governance at Paris AI Action Summit (Feb 2025) with Stanford
+   DEBUG: 2026-03-17 12:39:08,093:      pdf_renderer.py:  470: printSegment: '
+   DEBUG: 2026-03-17 12:39:08,094:      pdf_renderer.py:  470: printSegment: s Deliberative Democracy Lab.
+   DEBUG: 2026-03-17 12:39:08,094:      pdf_renderer.py:  470: printSegment: All Our Ideas
+   DEBUG: 2026-03-17 12:39:08,095:      pdf_renderer.py:  470: printSegment: l
+   DEBUG: 2026-03-17 12:39:08,096:      pdf_renderer.py:  470: printSegment: What they do:
+   DEBUG: 2026-03-17 12:39:08,097:      pdf_renderer.py:  470: printSegment:  Pairwise voting / opinion prioritization tool. Used by New Jersey
+   DEBUG: 2026-03-17 12:39:08,098:      pdf_renderer.py:  470: printSegment: '
+   DEBUG: 2026-03-17 12:39:08,100:      pdf_renderer.py:  470: printSegment: s State AI Task
+   DEBUG: 2026-03-17 12:39:08,101:      pdf_renderer.py:  470: printSegment: Force to engage 2,200 workers in prioritizing AI workforce issues.
+   DEBUG: 2026-03-17 12:39:08,102:      pdf_renderer.py:  470: printSegment: l
+   DEBUG: 2026-03-17 12:39:08,103:      pdf_renderer.py:  470: printSegment: Why partner:
+   DEBUG: 2026-03-17 12:39:08,104:      pdf_renderer.py:  470: printSegment:  Simple, accessible tool for priority-setting. Proven in state-level AI governance.
+   DEBUG: 2026-03-17 12:39:08,105:      pdf_renderer.py:  470: printSegment: l
+   DEBUG: 2026-03-17 12:39:08,105:      pdf_renderer.py:  470: printSegment: Link:
+   DEBUG: 2026-03-17 12:39:08,106:      pdf_renderer.py:  470: printSegment:  https://allourideas.org
+   DEBUG: 2026-03-17 12:39:08,108:      pdf_renderer.py:  470: printSegment: Tier 3 — Major Tech with Civic AI Divisions
+   DEBUG: 2026-03-17 12:39:08,109:      pdf_renderer.py:  470: printSegment: Jigsaw (Google)
+   DEBUG: 2026-03-17 12:39:08,109:      pdf_renderer.py:  470: printSegment: l
+   DEBUG: 2026-03-17 12:39:08,110:      pdf_renderer.py:  470: printSegment: What they do:
+   DEBUG: 2026-03-17 12:39:08,113:      pdf_renderer.py:  470: printSegment:  Builds tools to mitigate online harms — Perspective API (toxicity detection), content
+   DEBUG: 2026-03-17 12:39:08,114:      pdf_renderer.py:  470: printSegment: moderation research. Published 
+   DEBUG: 2026-03-17 12:39:08,115:      pdf_renderer.py:  470: printSegment: "
+   DEBUG: 2026-03-17 12:39:08,116:      pdf_renderer.py:  470: printSegment: Using LLMs to Support Online Communities
+   DEBUG: 2026-03-17 12:39:08,116:      pdf_renderer.py:  470: printSegment: "
+   DEBUG: 2026-03-17 12:39:08,117:      pdf_renderer.py:  470: printSegment:  (2025).
+   DEBUG: 2026-03-17 12:39:08,118:      pdf_renderer.py:  470: printSegment: l
+   DEBUG: 2026-03-17 12:39:08,119:      pdf_renderer.py:  470: printSegment: Why partner:
+   DEBUG: 2026-03-17 12:39:08,121:      pdf_renderer.py:  470: printSegment:  Deep moderation expertise and resources. Perspective API is already widely used in
+   DEBUG: 2026-03-17 12:39:08,122:      pdf_renderer.py:  470: printSegment: civic platforms. Google
+   DEBUG: 2026-03-17 12:39:08,123:      pdf_renderer.py:  470: printSegment: '
+   DEBUG: 2026-03-17 12:39:08,124:      pdf_renderer.py:  470: printSegment: s civic tech experiment arm.
+   DEBUG: 2026-03-17 12:39:08,124:      pdf_renderer.py:  470: printSegment: l
+   DEBUG: 2026-03-17 12:39:08,125:      pdf_renderer.py:  470: printSegment: Link:
+   DEBUG: 2026-03-17 12:39:08,126:      pdf_renderer.py:  470: printSegment:  https://jigsaw.google.com
+   DEBUG: 2026-03-17 12:39:08,127:      pdf_renderer.py:  470: printSegment: Anthropic
+   DEBUG: 2026-03-17 12:39:08,128:      pdf_renderer.py:  470: printSegment: l
+   DEBUG: 2026-03-17 12:39:08,129:      pdf_renderer.py:  470: printSegment: What they do:
+   DEBUG: 2026-03-17 12:39:08,134:      pdf_renderer.py:  470: printSegment:  AI safety company (Claude). Explored using Polis for democratic model alignment.
+   DEBUG: 2026-03-17 12:39:08,135:      pdf_renderer.py:  470: printSegment: CEO Dario Amodei is a vocal advocate for democratic AI governance.
+   DEBUG: 2026-03-17 12:39:08,136:      pdf_renderer.py:  470: printSegment: l
+   DEBUG: 2026-03-17 12:39:08,137:      pdf_renderer.py:  470: printSegment: Humanity AI alignment:
+   DEBUG: 2026-03-17 12:39:08,138:      pdf_renderer.py:  470: printSegment:  Partnered with Taiwan
+   DEBUG: 2026-03-17 12:39:08,139:      pdf_renderer.py:  470: printSegment: '
+   DEBUG: 2026-03-17 12:39:08,140:      pdf_renderer.py:  470: printSegment: s Ministry of Digital Affairs on Alignment
+   DEBUG: 2026-03-17 12:39:08,141:      pdf_renderer.py:  470: printSegment: Assemblies. Amodei
+   DEBUG: 2026-03-17 12:39:08,142:      pdf_renderer.py:  470: printSegment: '
+   DEBUG: 2026-03-17 12:39:08,143:      pdf_renderer.py:  470: printSegment: s 
+   DEBUG: 2026-03-17 12:39:08,143:      pdf_renderer.py:  470: printSegment: "
+   DEBUG: 2026-03-17 12:39:08,144:      pdf_renderer.py:  470: printSegment: entente
+   DEBUG: 2026-03-17 12:39:08,145:      pdf_renderer.py:  470: printSegment: "
+   DEBUG: 2026-03-17 12:39:08,146:      pdf_renderer.py:  470: printSegment:  framework for democratic AI aligns with Humanity AI
+   DEBUG: 2026-03-17 12:39:08,147:      pdf_renderer.py:  470: printSegment: '
+   DEBUG: 2026-03-17 12:39:08,148:      pdf_renderer.py:  470: printSegment: s democracy
+   DEBUG: 2026-03-17 12:39:08,149:      pdf_renderer.py:  470: printSegment: pillar.
+   DEBUG: 2026-03-17 12:39:08,150:      pdf_renderer.py:  470: printSegment: l
+   DEBUG: 2026-03-17 12:39:08,150:      pdf_renderer.py:  470: printSegment: Why partner:
+   DEBUG: 2026-03-17 12:39:08,162:      pdf_renderer.py:  470: printSegment:  Both a potential technology partner (Claude for deliberation facilitation) and a
+   DEBUG: 2026-03-17 12:39:08,166:      pdf_renderer.py:  470: printSegment: values-aligned AI company that has demonstrated commitment to democratic governance even at
+   DEBUG: 2026-03-17 12:39:08,167:      pdf_renderer.py:  470: printSegment: significant cost (DoD contract dispute, Feb 2026).
+   DEBUG: 2026-03-17 12:39:08,168:      pdf_renderer.py:  470: printSegment: Mozilla Foundation
+   DEBUG: 2026-03-17 12:39:08,169:      pdf_renderer.py:  470: printSegment: l
+   DEBUG: 2026-03-17 12:39:08,169:      pdf_renderer.py:  470: printSegment: What they do:
+   DEBUG: 2026-03-17 12:39:08,170:      pdf_renderer.py:  470: printSegment:  Founding member of Humanity AI. Running a 
+   DEBUG: 2026-03-17 12:39:08,171:      pdf_renderer.py:  470: printSegment: Democracy 
+   DEBUG: 2026-03-17 12:39:08,171:      pdf_renderer.py:  470: printSegment: &
+   DEBUG: 2026-03-17 12:39:08,172:      pdf_renderer.py:  470: printSegment:  AI Cohort
+   DEBUG: 2026-03-17 12:39:08,175:      pdf_renderer.py:  470: printSegment:  with $50K
+   DEBUG: 2026-03-17 12:39:08,176:      pdf_renderer.py:  470: printSegment: grants for: information ecosystem resilience, institutional transparency, and civic participation tools.
+   DEBUG: 2026-03-17 12:39:08,177:      pdf_renderer.py:  470: printSegment: l
+   DEBUG: 2026-03-17 12:39:08,178:      pdf_renderer.py:  470: printSegment: Humanity AI alignment:
+   DEBUG: 2026-03-17 12:39:08,178:      pdf_renderer.py:  470: printSegment:  Founding coalition member.
+   DEBUG: 2026-03-17 12:39:08,179:      pdf_renderer.py:  470: printSegment: l
+   DEBUG: 2026-03-17 12:39:08,180:      pdf_renderer.py:  470: printSegment: Why partner:
+   DEBUG: 2026-03-17 12:39:08,181:      pdf_renderer.py:  470: printSegment:  Already inside the coalition. Their Democracy 
+   DEBUG: 2026-03-17 12:39:08,181:      pdf_renderer.py:  470: printSegment: &
+   DEBUG: 2026-03-17 12:39:08,182:      pdf_renderer.py:  470: printSegment:  AI grantees will be natural
+   DEBUG: 2026-03-17 12:39:08,183:      pdf_renderer.py:  470: printSegment: collaborators.
+   DEBUG: 2026-03-17 12:39:08,184:      pdf_renderer.py:  470: printSegment: 3. Key Individual Leaders in Civic AI Discussion
+   DEBUG: 2026-03-17 12:39:08,187:      pdf_renderer.py:  470: printSegment: Leaders who have appeared at events connected to the Humanity AI ecosystem, Brookings AI initiative, or major
+   DEBUG: 2026-03-17 12:39:08,188:      pdf_renderer.py:  470: printSegment: civic AI convenings:
+   DEBUG: 2026-03-17 12:39:08,188:      pdf_renderer.py:  470: printSegment: | Name | Affiliation | Relevance |
+   DEBUG: 2026-03-17 12:39:08,189:      pdf_renderer.py:  470: printSegment:  
+   DEBUG: 2026-03-17 12:39:08,190:      pdf_renderer.py:  470: printSegment: |---|---|---|
+   DEBUG: 2026-03-17 12:39:08,190:      pdf_renderer.py:  470: printSegment:  
+   DEBUG: 2026-03-17 12:39:08,191:      pdf_renderer.py:  470: printSegment: | 
+   DEBUG: 2026-03-17 12:39:08,192:      pdf_renderer.py:  470: printSegment: Dr. Rumman Chowdhury
+   DEBUG: 2026-03-17 12:39:08,195:      pdf_renderer.py:  470: printSegment:  | Humane Intelligence, Harvard Berkman
+   DEBUG: 2026-03-17 12:39:08,197:      pdf_renderer.py:  470: printSegment: Klein | TIME 100 AI; U.S. Science Envoy for AI; Brookings 
+   DEBUG: 2026-03-17 12:39:08,197:      pdf_renderer.py:  470: printSegment: "
+   DEBUG: 2026-03-17 12:39:08,198:      pdf_renderer.py:  470: printSegment: (un)Hidden Figures
+   DEBUG: 2026-03-17 12:39:08,198:      pdf_renderer.py:  470: printSegment: "
+   DEBUG: 2026-03-17 12:39:08,199:      pdf_renderer.py:  470: printSegment:  |
+   DEBUG: 2026-03-17 12:39:08,200:      pdf_renderer.py:  470: printSegment:  
+   DEBUG: 2026-03-17 12:39:08,200:      pdf_renderer.py:  470: printSegment: | 
+   DEBUG: 2026-03-17 12:39:08,201:      pdf_renderer.py:  470: printSegment: Deb Roy
+   DEBUG: 2026-03-17 12:39:08,202:      pdf_renderer.py:  470: printSegment:  | MIT / Cortico | 
+   DEBUG: 2026-03-17 12:39:08,202:      pdf_renderer.py:  470: printSegment: "
+   DEBUG: 2026-03-17 12:39:08,203:      pdf_renderer.py:  470: printSegment: Conversation Networks
+   DEBUG: 2026-03-17 12:39:08,204:      pdf_renderer.py:  470: printSegment: "
+   DEBUG: 2026-03-17 12:39:08,205:      pdf_renderer.py:  470: printSegment:  co-author; ACM Collective Intelligence 2025 speaker |
+   DEBUG: 2026-03-17 12:39:08,205:      pdf_renderer.py:  470: printSegment:  
+   DEBUG: 2026-03-17 12:39:08,206:      pdf_renderer.py:  470: printSegment: | 
+   DEBUG: 2026-03-17 12:39:08,207:      pdf_renderer.py:  470: printSegment: Beth Simone Noveck
+   DEBUG: 2026-03-17 12:39:08,210:      pdf_renderer.py:  470: printSegment:  | The
+   DEBUG: 2026-03-17 12:39:08,212:      pdf_renderer.py:  470: printSegment: GovLab / Reboot Democracy AI | Former White House Deputy CTO; NJ Chief AI Strategist |
+   DEBUG: 2026-03-17 12:39:08,212:      pdf_renderer.py:  470: printSegment:  
+   DEBUG: 2026-03-17 12:39:08,213:      pdf_renderer.py:  470: printSegment: | 
+   DEBUG: 2026-03-17 12:39:08,214:      pdf_renderer.py:  470: printSegment: Audrey Tang
+   DEBUG: 2026-03-17 12:39:08,215:      pdf_renderer.py:  470: printSegment:  |
+   DEBUG: 2026-03-17 12:39:08,216:      pdf_renderer.py:  470: printSegment: Taiwan Cyber Ambassador | vTaiwan/Polis pioneer; 
+   DEBUG: 2026-03-17 12:39:08,217:      pdf_renderer.py:  470: printSegment: "
+   DEBUG: 2026-03-17 12:39:08,218:      pdf_renderer.py:  470: printSegment: Conversation Networks
+   DEBUG: 2026-03-17 12:39:08,218:      pdf_renderer.py:  470: printSegment: "
+   DEBUG: 2026-03-17 12:39:08,220:      pdf_renderer.py:  470: printSegment:  co-author; Right Livelihood Laureate
+   DEBUG: 2026-03-17 12:39:08,220:      pdf_renderer.py:  470: printSegment: 2025 |
+   DEBUG: 2026-03-17 12:39:08,221:      pdf_renderer.py:  470: printSegment:  
+   DEBUG: 2026-03-17 12:39:08,222:      pdf_renderer.py:  470: printSegment: | 
+   DEBUG: 2026-03-17 12:39:08,222:      pdf_renderer.py:  470: printSegment: Timnit Gebru
+   DEBUG: 2026-03-17 12:39:08,223:      pdf_renderer.py:  470: printSegment:  | Distributed AI Research Institute (DAIR) | Brookings 
+   DEBUG: 2026-03-17 12:39:08,224:      pdf_renderer.py:  470: printSegment: "
+   DEBUG: 2026-03-17 12:39:08,225:      pdf_renderer.py:  470: printSegment: (un)Hidden Figures
+   DEBUG: 2026-03-17 12:39:08,226:      pdf_renderer.py:  470: printSegment: "
+   DEBUG: 2026-03-17 12:39:08,227:      pdf_renderer.py:  470: printSegment: ; leading voice
+   DEBUG: 2026-03-17 12:39:08,227:      pdf_renderer.py:  470: printSegment: on AI equity |
+   DEBUG: 2026-03-17 12:39:08,228:      pdf_renderer.py:  470: printSegment:  
+   DEBUG: 2026-03-17 12:39:08,229:      pdf_renderer.py:  470: printSegment: | 
+   DEBUG: 2026-03-17 12:39:08,230:      pdf_renderer.py:  470: printSegment: Lawrence Lessig
+   DEBUG: 2026-03-17 12:39:08,231:      pdf_renderer.py:  470: printSegment:  | Harvard Law School | 
+   DEBUG: 2026-03-17 12:39:08,231:      pdf_renderer.py:  470: printSegment: "
+   DEBUG: 2026-03-17 12:39:08,232:      pdf_renderer.py:  470: printSegment: Conversation Networks
+   DEBUG: 2026-03-17 12:39:08,233:      pdf_renderer.py:  470: printSegment: "
+   DEBUG: 2026-03-17 12:39:08,234:      pdf_renderer.py:  470: printSegment:  co-author; foundational thinker
+   DEBUG: 2026-03-17 12:39:08,235:      pdf_renderer.py:  470: printSegment: in tech governance |
+   DEBUG: 2026-03-17 12:39:08,236:      pdf_renderer.py:  470: printSegment:  
+   DEBUG: 2026-03-17 12:39:08,237:      pdf_renderer.py:  470: printSegment: | 
+   DEBUG: 2026-03-17 12:39:08,237:      pdf_renderer.py:  470: printSegment: John Palfrey
+   DEBUG: 2026-03-17 12:39:08,238:      pdf_renderer.py:  470: printSegment:  | MacArthur Foundation | Co-chair of Humanity AI |
+   DEBUG: 2026-03-17 12:39:08,239:      pdf_renderer.py:  470: printSegment:  
+   DEBUG: 2026-03-17 12:39:08,240:      pdf_renderer.py:  470: printSegment: | 
+   DEBUG: 2026-03-17 12:39:08,241:      pdf_renderer.py:  470: printSegment: Michele L. Jawando
+   DEBUG: 2026-03-17 12:39:08,242:      pdf_renderer.py:  470: printSegment:  |
+   DEBUG: 2026-03-17 12:39:08,243:      pdf_renderer.py:  470: printSegment: Omidyar Network | Co-chair of Humanity AI |
+   DEBUG: 2026-03-17 12:39:08,244:      pdf_renderer.py:  470: printSegment:  
+   DEBUG: 2026-03-17 12:39:08,245:      pdf_renderer.py:  470: printSegment: | 
+   DEBUG: 2026-03-17 12:39:08,246:      pdf_renderer.py:  470: printSegment: Courtney Radsch
+   DEBUG: 2026-03-17 12:39:08,247:      pdf_renderer.py:  470: printSegment:  | Open Markets Institute | Director, Center for
+   DEBUG: 2026-03-17 12:39:08,248:      pdf_renderer.py:  470: printSegment: Journalism 
+   DEBUG: 2026-03-17 12:39:08,249:      pdf_renderer.py:  470: printSegment: &
+   DEBUG: 2026-03-17 12:39:08,250:      pdf_renderer.py:  470: printSegment:  Liberty; Brookings AI speaker |
+   DEBUG: 2026-03-17 12:39:08,250:      pdf_renderer.py:  470: printSegment:  
+   DEBUG: 2026-03-17 12:39:08,251:      pdf_renderer.py:  470: printSegment: | 
+   DEBUG: 2026-03-17 12:39:08,252:      pdf_renderer.py:  470: printSegment: Elham Tabassi
+   DEBUG: 2026-03-17 12:39:08,253:      pdf_renderer.py:  470: printSegment:  | Brookings AI Initiative | Director of AI 
+   DEBUG: 2026-03-17 12:39:08,254:      pdf_renderer.py:  470: printSegment: &
+   DEBUG: 2026-03-17 12:39:08,255:      pdf_renderer.py:  470: printSegment: 
+   DEBUG: 2026-03-17 12:39:08,255:      pdf_renderer.py:  470: printSegment: Emerging Tech at Brookings (ex-NIST) |
+   DEBUG: 2026-03-17 12:39:08,256:      pdf_renderer.py:  470: printSegment:  
+   DEBUG: 2026-03-17 12:39:08,257:      pdf_renderer.py:  470: printSegment: | 
+   DEBUG: 2026-03-17 12:39:08,258:      pdf_renderer.py:  470: printSegment: Dario Amodei
+   DEBUG: 2026-03-17 12:39:08,260:      pdf_renderer.py:  470: printSegment:  | Anthropic | Vocal democratic AI advocate; Paris AI
+   DEBUG: 2026-03-17 12:39:08,261:      pdf_renderer.py:  470: printSegment: Summit speaker |
+   DEBUG: 2026-03-17 12:39:08,262:      pdf_renderer.py:  470: printSegment: 4. Key Events 
+   DEBUG: 2026-03-17 12:39:08,263:      pdf_renderer.py:  470: printSegment: &
+   DEBUG: 2026-03-17 12:39:08,264:      pdf_renderer.py:  470: printSegment:  Convenings to Watch (2026)
+   DEBUG: 2026-03-17 12:39:08,265:      pdf_renderer.py:  470: printSegment: | Event | Relevance |
+   DEBUG: 2026-03-17 12:39:08,266:      pdf_renderer.py:  470: printSegment:  
+   DEBUG: 2026-03-17 12:39:08,266:      pdf_renderer.py:  470: printSegment: |---|---|
+   DEBUG: 2026-03-17 12:39:08,267:      pdf_renderer.py:  470: printSegment:  
+   DEBUG: 2026-03-17 12:39:08,268:      pdf_renderer.py:  470: printSegment: | 
+   DEBUG: 2026-03-17 12:39:08,269:      pdf_renderer.py:  470: printSegment: Humanity AI pooled fund launch
+   DEBUG: 2026-03-17 12:39:08,271:      pdf_renderer.py:  470: printSegment:  (2026) | First RFPs from the pooled fund via
+   DEBUG: 2026-03-17 12:39:08,272:      pdf_renderer.py:  470: printSegment: Rockefeller Philanthropy Advisors |
+   DEBUG: 2026-03-17 12:39:08,273:      pdf_renderer.py:  470: printSegment:  
+   DEBUG: 2026-03-17 12:39:08,274:      pdf_renderer.py:  470: printSegment: | 
+   DEBUG: 2026-03-17 12:39:08,275:      pdf_renderer.py:  470: printSegment: Mozilla Democracy 
+   DEBUG: 2026-03-17 12:39:08,276:      pdf_renderer.py:  470: printSegment: &
+   DEBUG: 2026-03-17 12:39:08,277:      pdf_renderer.py:  470: printSegment:  AI Cohort
+   DEBUG: 2026-03-17 12:39:08,279:      pdf_renderer.py:  470: printSegment:  (proposals due March 2026) | $50K grants
+   DEBUG: 2026-03-17 12:39:08,280:      pdf_renderer.py:  470: printSegment: for civic AI projects |
+   DEBUG: 2026-03-17 12:39:08,281:      pdf_renderer.py:  470: printSegment:  
+   DEBUG: 2026-03-17 12:39:08,281:      pdf_renderer.py:  470: printSegment: | 
+   DEBUG: 2026-03-17 12:39:08,282:      pdf_renderer.py:  470: printSegment: Stanford Deliberative Democracy Lab forums
+   DEBUG: 2026-03-17 12:39:08,285:      pdf_renderer.py:  470: printSegment:  | Global Coalition for Inclusive AI
+   DEBUG: 2026-03-17 12:39:08,286:      pdf_renderer.py:  470: printSegment: Governance; 10,000+ citizen deliberation |
+   DEBUG: 2026-03-17 12:39:08,287:      pdf_renderer.py:  470: printSegment:  
+   DEBUG: 2026-03-17 12:39:08,288:      pdf_renderer.py:  470: printSegment: | 
+   DEBUG: 2026-03-17 12:39:08,289:      pdf_renderer.py:  470: printSegment: ACM Collective Intelligence Conference
+   DEBUG: 2026-03-17 12:39:08,291:      pdf_renderer.py:  470: printSegment:  | Key venue for civic AI
+   DEBUG: 2026-03-17 12:39:08,292:      pdf_renderer.py:  470: printSegment: research (Deb Roy spoke 2025) |
+   DEBUG: 2026-03-17 12:39:08,293:      pdf_renderer.py:  470: printSegment:  
+   DEBUG: 2026-03-17 12:39:08,294:      pdf_renderer.py:  470: printSegment: | 
+   DEBUG: 2026-03-17 12:39:08,295:      pdf_renderer.py:  470: printSegment: Rebooting Democracy in the Age of AI lecture series
+   DEBUG: 2026-03-17 12:39:08,297:      pdf_renderer.py:  470: printSegment:  | Northeastern University;
+   DEBUG: 2026-03-17 12:39:08,298:      pdf_renderer.py:  470: printSegment: Beth Noveck and collaborators |
+   DEBUG: 2026-03-17 12:39:08,299:      pdf_renderer.py:  470: printSegment:  
+   DEBUG: 2026-03-17 12:39:08,300:      pdf_renderer.py:  470: printSegment: | 
+   DEBUG: 2026-03-17 12:39:08,301:      pdf_renderer.py:  470: printSegment: Human+Tech Week 2026
+   DEBUG: 2026-03-17 12:39:08,302:      pdf_renderer.py:  470: printSegment:  | Global innovation engine for human-centered AI |
+   DEBUG: 2026-03-17 12:39:08,304:      pdf_renderer.py:  470: printSegment: 5. Recommended Partnership Strategy
+   DEBUG: 2026-03-17 12:39:08,305:      pdf_renderer.py:  470: printSegment: Immediate Outreach (strongest alignment, active in 2026 grantmaking cycle)
+   DEBUG: 2026-03-17 12:39:08,306:      pdf_renderer.py:  470: printSegment:  1 
+   DEBUG: 2026-03-17 12:39:08,307:      pdf_renderer.py:  470: printSegment: Cortico
+   DEBUG: 2026-03-17 12:39:08,308:      pdf_renderer.py:  470: printSegment:  — conversation infrastructure partner
+   DEBUG: 2026-03-17 12:39:08,309:      pdf_renderer.py:  470: printSegment:  2 
+   DEBUG: 2026-03-17 12:39:08,310:      pdf_renderer.py:  470: printSegment: Humane Intelligence
+   DEBUG: 2026-03-17 12:39:08,312:      pdf_renderer.py:  470: printSegment:  — trust 
+   DEBUG: 2026-03-17 12:39:08,313:      pdf_renderer.py:  470: printSegment: &
+   DEBUG: 2026-03-17 12:39:08,314:      pdf_renderer.py:  470: printSegment:  safety / auditing partner
+   DEBUG: 2026-03-17 12:39:08,315:      pdf_renderer.py:  470: printSegment:  3 
+   DEBUG: 2026-03-17 12:39:08,316:      pdf_renderer.py:  470: printSegment: Data 
+   DEBUG: 2026-03-17 12:39:08,317:      pdf_renderer.py:  470: printSegment: &
+   DEBUG: 2026-03-17 12:39:08,318:      pdf_renderer.py:  470: printSegment:  Society
+   DEBUG: 2026-03-17 12:39:08,319:      pdf_renderer.py:  470: printSegment:  — already Humanity AI-funded; AI Civics curriculum partner
+   DEBUG: 2026-03-17 12:39:08,320:      pdf_renderer.py:  470: printSegment:  4 
+   DEBUG: 2026-03-17 12:39:08,321:      pdf_renderer.py:  470: printSegment: Reboot Democracy AI / The GovLab
+   DEBUG: 2026-03-17 12:39:08,322:      pdf_renderer.py:  470: printSegment:  — research 
+   DEBUG: 2026-03-17 12:39:08,323:      pdf_renderer.py:  470: printSegment: &
+   DEBUG: 2026-03-17 12:39:08,324:      pdf_renderer.py:  470: printSegment:  public sector training partner
+   DEBUG: 2026-03-17 12:39:08,326:      pdf_renderer.py:  470: printSegment: Technology Integration Partners
+   DEBUG: 2026-03-17 12:39:08,326:      pdf_renderer.py:  470: printSegment:  5 
+   DEBUG: 2026-03-17 12:39:08,327:      pdf_renderer.py:  470: printSegment: Pol.is
+   DEBUG: 2026-03-17 12:39:08,328:      pdf_renderer.py:  470: printSegment:  — deliberation engine (open source, can be embedded)
+   DEBUG: 2026-03-17 12:39:08,329:      pdf_renderer.py:  470: printSegment:  6 
+   DEBUG: 2026-03-17 12:39:08,329:      pdf_renderer.py:  470: printSegment: Go Vocal (CitizenLab)
+   DEBUG: 2026-03-17 12:39:08,330:      pdf_renderer.py:  470: printSegment:  — if commercial civic engagement platform needed
+   DEBUG: 2026-03-17 12:39:08,331:      pdf_renderer.py:  470: printSegment:  7 
+   DEBUG: 2026-03-17 12:39:08,331:      pdf_renderer.py:  470: printSegment: Decidim
+   DEBUG: 2026-03-17 12:39:08,332:      pdf_renderer.py:  470: printSegment:  — if open-source participation platform preferred
+   DEBUG: 2026-03-17 12:39:08,333:      pdf_renderer.py:  470: printSegment:  8 
+   DEBUG: 2026-03-17 12:39:08,334:      pdf_renderer.py:  470: printSegment: Jigsaw / Perspective API
+   DEBUG: 2026-03-17 12:39:08,334:      pdf_renderer.py:  470: printSegment:  — moderation layer for civic discussions
+   DEBUG: 2026-03-17 12:39:08,335:      pdf_renderer.py:  470: printSegment: Strategic / Ecosystem Partners
+   DEBUG: 2026-03-17 12:39:08,336:      pdf_renderer.py:  470: printSegment:  9 
+   DEBUG: 2026-03-17 12:39:08,336:      pdf_renderer.py:  470: printSegment: Mozilla Foundation
+   DEBUG: 2026-03-17 12:39:08,337:      pdf_renderer.py:  470: printSegment:  — funder + open-source ally (inside Humanity AI coalition)
+   DEBUG: 2026-03-17 12:39:08,338:      pdf_renderer.py:  470: printSegment:  10 
+   DEBUG: 2026-03-17 12:39:08,339:      pdf_renderer.py:  470: printSegment: Anthropic
+   DEBUG: 2026-03-17 12:39:08,340:      pdf_renderer.py:  470: printSegment:  — AI model partner with demonstrated democratic values alignment
+   DEBUG: 2026-03-17 12:39:08,340:      pdf_renderer.py:  470: printSegment:  11 
+   DEBUG: 2026-03-17 12:39:08,341:      pdf_renderer.py:  470: printSegment: AI Now Institute
+   DEBUG: 2026-03-17 12:39:08,342:      pdf_renderer.py:  470: printSegment:  — policy credibility, already Humanity AI-funded
+   DEBUG: 2026-03-17 12:39:08,342:      pdf_renderer.py:  470: printSegment:  12 
+   DEBUG: 2026-03-17 12:39:08,343:      pdf_renderer.py:  470: printSegment: Brookings AI 
+   DEBUG: 2026-03-17 12:39:08,344:      pdf_renderer.py:  470: printSegment: &
+   DEBUG: 2026-03-17 12:39:08,344:      pdf_renderer.py:  470: printSegment:  Emerging Technology Initiative
+   DEBUG: 2026-03-17 12:39:08,345:      pdf_renderer.py:  470: printSegment:  — policy research partner, Humanity AI-funded
+   DEBUG: 2026-03-17 12:39:08,346:      pdf_renderer.py:  470: printSegment: ($2M)
+   DEBUG: 2026-03-17 12:39:08,347:      pdf_renderer.py:  470: printSegment: Foundation Relationships to Cultivate
+   DEBUG: 2026-03-17 12:39:08,348:      pdf_renderer.py:  470: printSegment: l
+   DEBUG: 2026-03-17 12:39:08,349:      pdf_renderer.py:  470: printSegment: MacArthur Foundation (democracy + AI Opportunity Big Bet)
+   DEBUG: 2026-03-17 12:39:08,349:      pdf_renderer.py:  470: printSegment: l
+   DEBUG: 2026-03-17 12:39:08,350:      pdf_renderer.py:  470: printSegment: Omidyar Network (tech accountability)
+   DEBUG: 2026-03-17 12:39:08,351:      pdf_renderer.py:  470: printSegment: l
+   DEBUG: 2026-03-17 12:39:08,352:      pdf_renderer.py:  470: printSegment: Ford Foundation (technology 
+   DEBUG: 2026-03-17 12:39:08,352:      pdf_renderer.py:  470: printSegment: &
+   DEBUG: 2026-03-17 12:39:08,353:      pdf_renderer.py:  470: printSegment:  society)
+   DEBUG: 2026-03-17 12:39:08,354:      pdf_renderer.py:  470: printSegment: l
+   DEBUG: 2026-03-17 12:39:08,354:      pdf_renderer.py:  470: printSegment: Kapor Foundation (equity in tech)
+   DEBUG: 2026-03-17 12:39:08,355:      pdf_renderer.py:  470: printSegment: l
+   DEBUG: 2026-03-17 12:39:08,356:      pdf_renderer.py:  470: printSegment: Siegel Family Endowment (civic life + technology)
+   DEBUG: 2026-03-17 12:39:08,357:      pdf_renderer.py:  470: printSegment: Sources
+   DEBUG: 2026-03-17 12:39:08,358:      pdf_renderer.py:  470: printSegment: l
+   DEBUG: 2026-03-17 12:39:08,359:      pdf_renderer.py:  470: printSegment: Humanity AI — Omidyar Network
+   DEBUG: 2026-03-17 12:39:08,360:      pdf_renderer.py:  470: printSegment: l
+   DEBUG: 2026-03-17 12:39:08,360:      pdf_renderer.py:  470: printSegment: Humanity AI — MacArthur Foundation
+   DEBUG: 2026-03-17 12:39:08,361:      pdf_renderer.py:  470: printSegment: l
+   DEBUG: 2026-03-17 12:39:08,362:      pdf_renderer.py:  470: printSegment: MacArthur $10M Initial Grants
+   DEBUG: 2026-03-17 12:39:08,363:      pdf_renderer.py:  470: printSegment: l
+   DEBUG: 2026-03-17 12:39:08,364:      pdf_renderer.py:  470: printSegment: Data 
+   DEBUG: 2026-03-17 12:39:08,364:      pdf_renderer.py:  470: printSegment: &
+   DEBUG: 2026-03-17 12:39:08,365:      pdf_renderer.py:  470: printSegment:  Society — AI Civics
+   DEBUG: 2026-03-17 12:39:08,366:      pdf_renderer.py:  470: printSegment: l
+   DEBUG: 2026-03-17 12:39:08,367:      pdf_renderer.py:  470: printSegment: Cortico — Conversation Networks
+   DEBUG: 2026-03-17 12:39:08,368:      pdf_renderer.py:  470: printSegment: l
+   DEBUG: 2026-03-17 12:39:08,369:      pdf_renderer.py:  470: printSegment: Conversation Networks Paper (Roy, Lessig, Tang)
+   DEBUG: 2026-03-17 12:39:08,370:      pdf_renderer.py:  470: printSegment: l
+   DEBUG: 2026-03-17 12:39:08,371:      pdf_renderer.py:  470: printSegment: Rumman Chowdhury — Humane Intelligence
+   DEBUG: 2026-03-17 12:39:08,372:      pdf_renderer.py:  470: printSegment: l
+   DEBUG: 2026-03-17 12:39:08,373:      pdf_renderer.py:  470: printSegment: Reboot Democracy AI
+   DEBUG: 2026-03-17 12:39:08,374:      pdf_renderer.py:  470: printSegment: l
+   DEBUG: 2026-03-17 12:39:08,375:      pdf_renderer.py:  470: printSegment: Brookings (un)Hidden Figures in AI
+   DEBUG: 2026-03-17 12:39:08,376:      pdf_renderer.py:  470: printSegment: l
+   DEBUG: 2026-03-17 12:39:08,377:      pdf_renderer.py:  470: printSegment: Brookings AI Initiative
+   DEBUG: 2026-03-17 12:39:08,377:      pdf_renderer.py:  470: printSegment: l
+   DEBUG: 2026-03-17 12:39:08,378:      pdf_renderer.py:  470: printSegment: Carnegie: AI Can Unlock Public Wisdom
+   DEBUG: 2026-03-17 12:39:08,379:      pdf_renderer.py:  470: printSegment: l
+   DEBUG: 2026-03-17 12:39:08,380:      pdf_renderer.py:  470: printSegment: OECD: AI in Civic Participation
+   DEBUG: 2026-03-17 12:39:08,381:      pdf_renderer.py:  470: printSegment: l
+   DEBUG: 2026-03-17 12:39:08,382:      pdf_renderer.py:  470: printSegment: Pol.is — Wikipedia
+   DEBUG: 2026-03-17 12:39:08,383:      pdf_renderer.py:  470: printSegment: l
+   DEBUG: 2026-03-17 12:39:08,384:      pdf_renderer.py:  470: printSegment: Audrey Tang — Alignment Assemblies
+   DEBUG: 2026-03-17 12:39:08,385:      pdf_renderer.py:  470: printSegment: l
+   DEBUG: 2026-03-17 12:39:08,386:      pdf_renderer.py:  470: printSegment: Mozilla Democracy 
+   DEBUG: 2026-03-17 12:39:08,386:      pdf_renderer.py:  470: printSegment: &
+   DEBUG: 2026-03-17 12:39:08,387:      pdf_renderer.py:  470: printSegment:  AI Cohort
+   DEBUG: 2026-03-17 12:39:08,388:      pdf_renderer.py:  470: printSegment: l
+   DEBUG: 2026-03-17 12:39:08,389:      pdf_renderer.py:  470: printSegment: Anthropic — Paris AI Summit Statement
+   DEBUG: 2026-03-17 12:39:08,390:      pdf_renderer.py:  470: printSegment: l
+   DEBUG: 2026-03-17 12:39:08,391:      pdf_renderer.py:  470: printSegment: Jigsaw — Google Civic Tech
+   DEBUG: 2026-03-17 12:39:08,392:      pdf_renderer.py:  470: printSegment: l
+   DEBUG: 2026-03-17 12:39:08,393:      pdf_renderer.py:  470: printSegment: Go Vocal (CitizenLab) — Crunchbase
+   DEBUG: 2026-03-17 12:39:08,394:      pdf_renderer.py:  470: printSegment: l
+   DEBUG: 2026-03-17 12:39:08,395:      pdf_renderer.py:  470: printSegment: Humanity AI — NonProfit Times
+   DEBUG: 2026-03-17 12:39:08,396:      pdf_renderer.py:   53: 0, [1, 'Civic AI ', 1, 68.0]
+   DEBUG: 2026-03-17 12:39:08,396:      pdf_renderer.py:   53: 1, [2, '1. The Humanity AI Initiative — Context', 1, 148.0]
+   DEBUG: 2026-03-17 12:39:08,396:      pdf_renderer.py:   53: 2, [3, 'Founding Coalition Members', 1, 265.2]
+   DEBUG: 2026-03-17 12:39:08,396:      pdf_renderer.py:   53: 3, [2, '2. High-Priority Partner Companies ', 1, 384.4]
+   DEBUG: 2026-03-17 12:39:08,396:      pdf_renderer.py:   53: 4, [3, 'Tier 1 — Directly Aligned with Humanity AI / Civic AI Deliberation', 1, 417.59999999999997]
+   DEBUG: 2026-03-17 12:39:08,396:      pdf_renderer.py:   53: 5, [4, 'Cortico (nonprofit) — Cambridge, MA', 1, 445.99999999999994]
+   DEBUG: 2026-03-17 12:39:08,396:      pdf_renderer.py:   53: 6, [4, 'Pol.is (open source)', 1, 590.0]
+   DEBUG: 2026-03-17 12:39:08,396:      pdf_renderer.py:   53: 7, [4, 'Humane Intelligence (nonprofit PBC)', 2, 74.0]
+   DEBUG: 2026-03-17 12:39:08,396:      pdf_renderer.py:   53: 8, [4, 'Reboot Democracy AI / The GovLab', 2, 242.0]
+   DEBUG: 2026-03-17 12:39:08,396:      pdf_renderer.py:   53: 9, [4, 'Data ', 2, 410.0]
+   DEBUG: 2026-03-17 12:39:08,396:      pdf_renderer.py:   53: 10, [4, 'AI Now Institute', 2, 542.0]
+   DEBUG: 2026-03-17 12:39:08,396:      pdf_renderer.py:   53: 11, [3, 'Tier 2 — Civic AI Platforms ', 2, 650.4]
+   DEBUG: 2026-03-17 12:39:08,396:      pdf_renderer.py:   53: 12, [4, 'Go Vocal (formerly CitizenLab) — Brussels, Belgium', 2, 678.8]
+   DEBUG: 2026-03-17 12:39:08,396:      pdf_renderer.py:   53: 13, [4, 'Decidim (open source) — Barcelona origin', 3, 140.0]
+   DEBUG: 2026-03-17 12:39:08,396:      pdf_renderer.py:   53: 14, [4, 'Remesh', 3, 236.0]
+   DEBUG: 2026-03-17 12:39:08,396:      pdf_renderer.py:   53: 15, [4, 'Make.org — Paris, France', 3, 344.0]
+   DEBUG: 2026-03-17 12:39:08,396:      pdf_renderer.py:   53: 16, [4, 'All Our Ideas', 3, 428.0]
+   DEBUG: 2026-03-17 12:39:08,396:      pdf_renderer.py:   53: 17, [3, 'Tier 3 — Major Tech with Civic AI Divisions', 3, 524.4]
+   DEBUG: 2026-03-17 12:39:08,396:      pdf_renderer.py:   53: 18, [4, 'Jigsaw (Google)', 3, 552.8]
+   DEBUG: 2026-03-17 12:39:08,396:      pdf_renderer.py:   53: 19, [4, 'Anthropic', 3, 648.8]
+   DEBUG: 2026-03-17 12:39:08,396:      pdf_renderer.py:   53: 20, [4, 'Mozilla Foundation', 4, 140.0]
+   DEBUG: 2026-03-17 12:39:08,396:      pdf_renderer.py:   53: 21, [2, '3. Key Individual Leaders in Civic AI Discussion', 4, 248.8]
+   DEBUG: 2026-03-17 12:39:08,396:      pdf_renderer.py:   53: 22, [2, '4. Key Events ', 4, 474.40000000000003]
+   DEBUG: 2026-03-17 12:39:08,396:      pdf_renderer.py:   53: 23, [2, '5. Recommended Partnership Strategy', 4, 598.0]
+   DEBUG: 2026-03-17 12:39:08,396:      pdf_renderer.py:   53: 24, [3, 'Immediate Outreach (strongest alignment, active in 2026 grantmaking cycle)', 4, 631.1999999999999]
+   DEBUG: 2026-03-17 12:39:08,396:      pdf_renderer.py:   53: 25, [3, 'Technology Integration Partners', 5, 72.0]
+   DEBUG: 2026-03-17 12:39:08,396:      pdf_renderer.py:   53: 26, [3, 'Strategic / Ecosystem Partners', 5, 160.8]
+   DEBUG: 2026-03-17 12:39:08,396:      pdf_renderer.py:   53: 27, [3, 'Foundation Relationships to Cultivate', 5, 261.6]
+   DEBUG: 2026-03-17 12:39:08,396:      pdf_renderer.py:   53: 28, [2, 'Sources', 5, 374.8]

@@ -1,0 +1,448 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ─── Users & Authentication ──────────────────────────────────────────
+
+model User {
+  id                String    @id @default(cuid())
+  email             String    @unique
+  emailVerified     DateTime? // Auth.js: set when email is verified via OAuth
+  name              String?
+  image             String?   // Auth.js: profile photo from OAuth provider
+  streetAddress     String?
+  city              String?
+  state             String?
+  zip               String?
+  isAddressVerified Boolean   @default(false)
+  addressLookedUpAt DateTime? // timestamp of last Cicero lookup (avoids burning credits on repeat lookups)
+  role              String    @default("user") // "user" | "moderator" | "admin"
+  isProfilePublic   Boolean   @default(false) // user opts in to show a public profile page
+  actionNetworkId   String?   // Action Network person UUID (synced on registration)
+  emailConsent      Boolean   @default(false) // user opted in to email communications
+  policiesAcceptedAt DateTime? // timestamp when user accepted Terms of Service, Privacy Policy, and Comment Policy
+  isGovUser         Boolean   @default(false) // true for users who signed up with a .gov email; districts assigned by moderator
+  status            String    @default("active") // "active" | "banned" | "paused"
+  pausedUntil       DateTime? // when set and status is "paused", account resumes after this time
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+
+  questions       Question[]
+  upvotes         Upvote[]
+  signerComments  SignerComment[]
+  accounts        Account[]
+  sessions        Session[]
+  emailEvents     EmailEvent[]
+  adminGroups     Group[]          @relation("groupAdmin")
+  groupCommOptIns GroupCommOptIn[]
+  amaComments     AmaComment[]
+  questionFlags   QuestionFlag[]
+}
+
+// Auth.js Account model (replaces OAuthAccount)
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String  // "oauth" | "oidc" | "email"
+  provider          String  // "google", "github", etc.
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+// Auth.js Session model (database sessions)
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+// Auth.js VerificationToken model (magic link / email sign-in tokens)
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+// ─── Elected Officials ───────────────────────────────────────────────
+
+model Official {
+  id       String  @id @default(cuid())
+  ciceroId String? @unique // Cicero sk primary key — used for deduplication on upsert
+  name     String
+  title    String
+  party    String
+  state    String
+  district String?
+  chamber  String  // "senate" | "house" | "state_senate" | "state_house" | "state_exec" | "local"
+  level    String? // raw Cicero district_type (e.g. "NATIONAL_UPPER", "STATE_LOWER", "LOCAL")
+  photoUrl String?
+  email    String?
+  twitter  String?
+  phone    String?
+  website  String?
+
+  // Verified Responder: official actively participates in Q&A on the platform
+  isVerifiedResponder Boolean   @default(false)
+  verifiedAt          DateTime? // when the moderator marked them as verified responder
+
+  // Delivery threshold — moderator/admin configurable per-official
+  deliveryThreshold     Int?    // null = use site default (5); otherwise custom target
+  deliveryThresholdType String  @default("constituent") // "constituent" | "supporter"
+
+  questions              Question[]
+  userDistricts          UserDistrict[]
+  events                 Event[]
+  responderApplications  ResponderApplication[]
+}
+
+// Application from an elected official's office to become a verified responder
+model ResponderApplication {
+  id             String    @id @default(cuid())
+  officialName   String    // name of the elected official
+  officialTitle  String    // e.g. "U.S. Senator", "State Representative"
+  contactName    String    // staff contact who submitted the application
+  contactEmail   String    // staff contact email
+  websiteUrl     String    // official government website
+  officialId     String?   // linked Official record (set by moderator on approval)
+  official       Official? @relation(fields: [officialId], references: [id])
+  status         String    @default("pending") // "pending" | "approved" | "rejected"
+  reviewedBy     String?   // moderator/admin user ID who reviewed
+  reviewedAt     DateTime?
+  reviewNote     String?   // optional moderator note on approval/rejection
+  createdAt      DateTime  @default(now())
+}
+
+// Maps users to their elected officials based on address lookup
+model UserDistrict {
+  id         String @id @default(cuid())
+  userId     String
+  officialId String
+  official   Official @relation(fields: [officialId], references: [id])
+
+  @@unique([userId, officialId])
+}
+
+// ─── Questions ───────────────────────────────────────────────────────
+
+model Question {
+  id          String   @id @default(cuid())
+  text        String
+  authorId    String
+  author      User     @relation(fields: [authorId], references: [id])
+  officialId  String
+  official    Official @relation(fields: [officialId], references: [id])
+  districtTag String
+  status      String   @default("pending_review") // "pending_review" | "published" | "delivered" | "answered"
+  upvoteCount Int      @default(0) // denormalized for fast sorting
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Optional: social media video link (YouTube, TikTok, Instagram, etc.)
+  videoUrl         String?
+
+  // Optional: question asked on behalf of a verified group
+  groupId          String?
+  group            Group?   @relation(fields: [groupId], references: [id])
+
+  // Delivery tracking
+  deliveredAt      DateTime?
+  deliveredVia     String?    // "email" | "twitter" | "facebook" | "mail"
+  deliveredBy      String?    // moderator ID who delivered
+
+  // Optional: question submitted for a specific event (town hall, public forum)
+  eventId          String?
+  event            Event?   @relation(fields: [eventId], references: [id])
+
+  // Broadcast batch: groups questions published to multiple officials at once
+  batchId          String?
+
+  // AI moderation (Official Conduct policy check)
+  aiModerationStatus String?   // "pass" | "fail" | "error" — result of AI moderation check
+  aiModerationReason String?   // AI explanation when question fails moderation
+  aiModeratedAt      DateTime? // when the AI moderation check was performed
+
+  categoryTags    QuestionTag[]
+  keywords        QuestionKeyword[]
+  upvotes         Upvote[]
+  signerComments  SignerComment[]
+  answer          Answer?
+  emailEvents     EmailEvent[]
+  endorsements    GroupEndorsement[]
+  flags           QuestionFlag[]
+  moderationLogs  ModerationLog[]
+}
+
+model QuestionTag {
+  id         String   @id @default(cuid())
+  questionId String
+  question   Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  tag        String   // Policy area from Congress.gov
+
+  @@unique([questionId, tag])
+}
+
+// Auto-extracted keywords from question text
+model QuestionKeyword {
+  id         String   @id @default(cuid())
+  questionId String
+  question   Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  keyword    String   // normalized lowercase keyword or phrase extracted from question text
+
+  @@unique([questionId, keyword])
+}
+
+// User-submitted flags/reports for moderator review
+model QuestionFlag {
+  id         String   @id @default(cuid())
+  questionId String
+  question   Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  userId     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  reason     String   // short note from the reporter
+  status     String   @default("pending") // "pending" | "reviewed" | "dismissed"
+  createdAt  DateTime @default(now())
+
+  @@unique([userId, questionId]) // one flag per user per question
+}
+
+// ─── AI Moderation Log ───────────────────────────────────────────────
+// Records every AI moderation check so moderators can audit decisions.
+
+model ModerationLog {
+  id            String   @id @default(cuid())
+  questionId    String?
+  question      Question? @relation(fields: [questionId], references: [id], onDelete: SetNull)
+  userId        String   // the user whose content was checked
+  questionText  String   // snapshot of the text that was moderated (in case question is deleted)
+  result        String   // "pass" | "fail" | "error"
+  reason        String?  // AI-generated explanation for failure
+  suggestion    String?  // AI-generated suggestion for how to rephrase
+  createdAt     DateTime @default(now())
+
+  @@index([questionId])
+  @@index([userId])
+  @@index([result])
+}
+
+// ─── Upvotes ─────────────────────────────────────────────────────────
+
+model Upvote {
+  id             String   @id @default(cuid())
+  userId         String
+  user           User     @relation(fields: [userId], references: [id])
+  questionId     String
+  question       Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  isConstituent  Boolean  @default(false)
+  createdAt      DateTime @default(now())
+
+  @@unique([userId, questionId])
+}
+
+// ─── Signer Comments ────────────────────────────────────────────────
+
+model SignerComment {
+  id         String   @id @default(cuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id])
+  questionId String
+  question   Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  text       String
+  createdAt  DateTime @default(now())
+
+  @@unique([userId, questionId])
+}
+
+// ─── Answers ─────────────────────────────────────────────────────────
+
+model Answer {
+  id               String   @id @default(cuid())
+  questionId       String   @unique
+  question         Question @relation(fields: [questionId], references: [id])
+  responseText     String?
+  responseVideoUrl String?
+  responseAudioUrl String?
+  sourceUrl        String?  // link to social media post, gov website, press release, etc.
+  postedBy         String   // moderator ID who posted the answer
+  respondedAt      DateTime @default(now())
+
+  media            ResponseMedia[]
+}
+
+// Media attachments for official responses (social embeds + uploaded files)
+model ResponseMedia {
+  id               String   @id @default(cuid())
+  answerId         String
+  answer           Answer   @relation(fields: [answerId], references: [id], onDelete: Cascade)
+  mediaType        String   // "social_embed" | "video_upload" | "audio_upload"
+  platform         String?  // for embeds: "youtube" | "twitter" | "instagram" | "bluesky" | "facebook" | "tiktok" | null for uploads
+  url              String   // embed URL or path to uploaded file
+  originalFilename String?  // for uploads: original file name
+  mimeType         String?  // for uploads: e.g. "video/mp4"
+  caption          String?  // optional moderator-added caption
+  sortOrder        Int      @default(0)
+  createdAt        DateTime @default(now())
+}
+
+// ─── Email Events (transactional email audit log) ────────────────────
+
+model EmailEvent {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  questionId  String?
+  question    Question? @relation(fields: [questionId], references: [id])
+  emailType   String   // "question_submitted" | "question_signed" | "question_delivered" | "question_answered"
+  subject     String
+  sentAt      DateTime @default(now())
+  messageId   String?  // Mailgun message ID for tracking
+  status      String   @default("sent") // "sent" | "delivered" | "bounced" | "failed"
+}
+
+// ─── Verified Groups ─────────────────────────────────────────────────
+
+model Group {
+  id              String   @id @default(cuid())
+  name            String   // Display name of the group (e.g. "Sierra Club")
+  slug            String   @unique // URL-safe identifier
+  description     String   // Brief description of the group's mission
+  websiteDomain   String   // Verified domain (e.g. "sierraclub.org") — used for email domain verification
+  websiteUrl      String   // Full URL (e.g. "https://sierraclub.org")
+  logoUrl         String?  // Optional logo image URL
+  isVerified      Boolean  @default(false) // Set to true by admin after review
+  commsOptInEnabled Boolean @default(false) // Admin toggle: allow users to opt in to group communications
+  adminUserId     String   // The user who manages this group
+  adminUser       User     @relation("groupAdmin", fields: [adminUserId], references: [id])
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  questions     Question[]
+  applications  GroupApplication[]
+  commOptIns    GroupCommOptIn[]
+  endorsements  GroupEndorsement[]
+}
+
+// Application to become a verified group — reviewed by site admins
+model GroupApplication {
+  id              String   @id @default(cuid())
+  groupId         String
+  group           Group    @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  applicantEmail  String   // Must match the group's websiteDomain
+  contactName     String
+  organizationType String  // "advocacy" | "think_tank" | "nonprofit" | "other"
+  statement       String   // Why the group should be verified
+  status          String   @default("pending") // "pending" | "approved" | "rejected"
+  reviewedBy      String?  // admin user ID who reviewed
+  reviewedAt      DateTime?
+  reviewNote      String?  // optional admin note on approval/rejection
+  createdAt       DateTime @default(now())
+}
+
+// Tracks user opt-in to receive communications from a verified group
+model GroupCommOptIn {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  groupId   String
+  group     Group    @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  optedInAt DateTime @default(now())
+
+  @@unique([userId, groupId])
+}
+
+// ─── Group Endorsements ─────────────────────────────────────────────
+
+// A moderator can attach a verified Group's endorsement to any question,
+// signaling "this group thinks this question is important and should be delivered."
+model GroupEndorsement {
+  id          String   @id @default(cuid())
+  questionId  String
+  question    Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  groupId     String
+  group       Group    @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  addedBy     String   // moderator/admin user ID who added this endorsement
+  note        String?  // optional short note from the moderator
+  createdAt   DateTime @default(now())
+
+  @@unique([questionId, groupId])
+}
+
+// ─── Events (town halls, public forums, AMAs) ─────────────────────────
+
+model Event {
+  id          String    @id @default(cuid())
+  title       String    // e.g. "Town Hall: Healthcare Q&A with Sen. Smith"
+  slug        String    @unique
+  description String
+  officialId  String
+  official    Official  @relation(fields: [officialId], references: [id])
+  location    String?   // physical address or "Virtual"
+  startsAt    DateTime
+  endsAt      DateTime?
+  status      String    @default("upcoming") // "upcoming" | "live" | "completed" | "cancelled"
+  createdBy   String    // moderator/admin user ID who created the event
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  // AMA mode: live, moderated Q&A session with an elected official
+  isAma              Boolean @default(false)
+  acceptingQuestions Boolean @default(true)  // moderator can close question submission mid-event
+
+  questions   Question[]
+  amaComments AmaComment[]
+}
+
+// Live comments during AMA events — moderated before display
+model AmaComment {
+  id        String   @id @default(cuid())
+  eventId   String
+  event     Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  text      String
+  status    String   @default("pending") // "pending" | "approved" | "rejected"
+  createdAt DateTime @default(now())
+
+  @@index([eventId, status])
+}
+
+// ─── Site Settings (key-value store for global config) ──────────────
+
+model SiteSetting {
+  key       String   @id // e.g. "dailyQuestionLimit"
+  value     String   // stored as string, parsed by application
+  updatedAt DateTime @updatedAt
+}
+
+// ─── API Access (for future tiered API) ──────────────────────────────
+
+model ApiKey {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  name      String
+  tier      String   @default("free") // "free" | "basic" | "pro" | "enterprise"
+  userId    String?
+  rateLimit Int      @default(100) // requests per hour
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  lastUsedAt DateTime?
+}
