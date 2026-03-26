@@ -13,8 +13,8 @@ export function middleware(req: NextRequest) {
   if (sitePassword) {
     const authCookie = req.cookies.get("site-auth")?.value;
     if (authCookie !== sitePassword) {
-      // Always allow Auth.js routes through (OAuth callbacks, session endpoint)
-      if (pathname.startsWith("/api/auth")) {
+      // Allow the public preview homepage and Auth.js routes through
+      if (pathname === "/" || pathname.startsWith("/api/auth")) {
         return NextResponse.next();
       }
       // If this is the password form submission, check the password
