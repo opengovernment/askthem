@@ -90,7 +90,7 @@ export default async function RootLayout({
         <nav className="relative border-b border-gray-200 bg-white">
           <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-3">
             <Link href="/">
-              <Image src="/logo.svg" alt="AskThem" width={135} height={30} priority />
+              <Image src="/logo.svg" alt="AskThem" width={135} height={30} priority unoptimized />
             </Link>
 
             {/* Desktop nav */}
@@ -155,7 +155,7 @@ export default async function RootLayout({
         {/* Footer */}
         <footer className="border-t border-gray-200 bg-white px-4 py-6">
           <div className="mx-auto flex max-w-5xl items-center justify-between text-sm text-gray-500">
-            <Image src="/logo.svg" alt="AskThem" width={100} height={22} />
+            <Image src="/logo.svg" alt="AskThem" width={100} height={22} unoptimized />
             <div className="flex items-center gap-4">
               <Link href="/about" className="text-gray-500 hover:text-indigo-600">
                 About

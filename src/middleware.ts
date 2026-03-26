@@ -13,8 +13,12 @@ export function middleware(req: NextRequest) {
   if (sitePassword) {
     const authCookie = req.cookies.get("site-auth")?.value;
     if (authCookie !== sitePassword) {
-      // Allow the public preview homepage and Auth.js routes through
-      if (pathname === "/" || pathname.startsWith("/api/auth")) {
+      // Allow the public preview homepage, static assets, and Auth.js routes through
+      if (
+        pathname === "/" ||
+        pathname.startsWith("/api/auth") ||
+        /\.(png|jpg|jpeg|gif|svg|ico|webp|woff2?|ttf|eot|css|js)$/.test(pathname)
+      ) {
         return NextResponse.next();
       }
       // If this is the password form submission, check the password

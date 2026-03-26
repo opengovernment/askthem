@@ -209,6 +209,7 @@ export default function PreviewPage() {
               width={1200}
               height={800}
               className="h-auto w-full"
+              unoptimized
             />
           </div>
         </section>
