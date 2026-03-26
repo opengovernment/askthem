@@ -64,21 +64,11 @@ export default function PreviewPage() {
           in 2014, we&rsquo;re now seeking partners to launch a new version with
           civic AI for moderated public dialogue.
         </p>
-        <p className="mx-auto mt-4 max-w-2xl text-base text-indigo-200">
-          Get in touch and support our nonprofit work for democratic
-          accountability.
-        </p>
       </section>
 
       <div className="mx-auto max-w-4xl px-4 py-16">
         {/* ── Action Network Signup ─────────────────────────────── */}
         <section className="mb-20">
-          <h2 className="mb-2 text-center text-2xl font-bold text-gray-900">
-            Stay Connected
-          </h2>
-          <p className="mb-8 text-center text-gray-600">
-            Sign up for updates on our relaunch and ways to get involved.
-          </p>
           <div className="mx-auto max-w-lg rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
             <link
               href="https://actionnetwork.org/css/style-embed-v3.css"
