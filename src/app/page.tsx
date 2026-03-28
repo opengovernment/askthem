@@ -204,10 +204,17 @@ export default function PreviewPage() {
           </div>
         </section>
 
-        {/* ── Contact ───────────────────────────────────────────── */}
-        <section className="pb-8 text-center">
+        {/* ── Donate & Contact ─────────────────────────────────── */}
+        <section className="pb-8 text-center space-y-3">
           <p className="text-sm text-gray-500">
-            Contact: <span className="italic">[soon]</span>
+            Donate:{" "}
+            <a href="https://opencollective.com/participatory-politics-fdn" className="text-indigo-600 hover:text-indigo-800" target="_blank" rel="noopener noreferrer">OpenCollective</a>
+            {" | "}
+            <a href="https://actionnetwork.org/fundraising/donate-to-askthem-free-open-source/" className="text-indigo-600 hover:text-indigo-800" target="_blank" rel="noopener noreferrer">Action Network</a>
+          </p>
+          <p className="text-sm text-gray-500">
+            Contact:{" "}
+            <a href="https://bsky.app/profile/davidrussellmoore.bsky.social" className="text-indigo-600 hover:text-indigo-800" target="_blank" rel="noopener noreferrer">David Moore</a>
           </p>
         </section>
       </div>
