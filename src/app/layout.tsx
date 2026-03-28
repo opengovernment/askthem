@@ -164,7 +164,7 @@ export default async function RootLayout({
                 Contact
               </Link>
               <Link href="/join" className="text-gray-500 hover:text-indigo-600">
-                Join Us
+                Join
               </Link>
               <Link href="/events" className="text-gray-500 hover:text-indigo-600">
                 Events
