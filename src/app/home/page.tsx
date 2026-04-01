@@ -1,16 +1,18 @@
 import { SearchBar } from "@/components/SearchBar";
+import { AddressSearchBar } from "@/components/AddressSearchBar";
 import { QuestionCard } from "@/components/QuestionCard";
-import { StateExplorer } from "@/components/StateExplorer";
-import { getPopularQuestions, getHomepageStats, getTrendingTags } from "@/lib/queries";
+import { StateExplorerWithMap } from "@/components/StateExplorerWithMap";
+import { getPopularQuestions, getHomepageStats, getTrendingTags, getActiveStates } from "@/lib/queries";
 import Link from "next/link";
 
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
-  const [popularQuestions, stats, trendingTags] = await Promise.all([
+  const [popularQuestions, stats, trendingTags, activeStates] = await Promise.all([
     getPopularQuestions(6),
     getHomepageStats(),
     getTrendingTags(8),
+    getActiveStates(),
   ]);
 
   return (
@@ -27,6 +29,9 @@ export default async function Home() {
         <div className="flex justify-center">
           <SearchBar />
         </div>
+        <div className="mt-4 flex justify-center">
+          <AddressSearchBar />
+        </div>
       </section>
 
       {/* Stats bar */}
@@ -40,7 +45,7 @@ export default async function Home() {
       </section>
 
       {/* Explore your state */}
-      <StateExplorer />
+      <StateExplorerWithMap activeStates={activeStates} />
 
       {/* Trending Topics */}
       {trendingTags.length > 0 && (
