@@ -76,8 +76,11 @@ export default function PreviewPage() {
             <style>{`
               .an-minimal #can-form-area-get-updates-from-askthem-2 h2,
               .an-minimal #can-form-area-get-updates-from-askthem-2 h4,
-              .an-minimal .action_network_footer,
-              .an-minimal #can-form-area-get-updates-from-askthem-2 .action_sponsor {
+              .an-minimal #can-form-area-get-updates-from-askthem-2 #action_info,
+              .an-minimal #can-form-area-get-updates-from-askthem-2 #logo_wrap,
+              .an-minimal #can-form-area-get-updates-from-askthem-2 #d_sharing,
+              .an-minimal #can-form-area-get-updates-from-askthem-2 .action_sponsor,
+              .an-minimal .action_network_footer {
                 display: none !important;
               }
             `}</style>
