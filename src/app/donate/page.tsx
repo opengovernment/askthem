@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 const channels = [
   {
     name: "OpenCollective",
-    href: "https://opencollective.com/dashboard/participatory-politics-fdn",
+    href: "https://opencollective.com/participatory-politics-fdn",
     description:
       "Contributions through OpenCollective are tax-deductible and fully transparent — every dollar in and out is public.",
     cta: "Donate on OpenCollective",
