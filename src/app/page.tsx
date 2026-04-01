@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Script from "next/script";
 import { ObfuscatedEmail } from "@/components/ObfuscatedEmail";
-import { DummyEmailSignup } from "@/components/DummyEmailSignup";
 
 export const metadata: Metadata = {
   title: "Preview - AskThem",
@@ -68,16 +68,22 @@ export default function PreviewPage() {
       </section>
 
       <div className="mx-auto max-w-4xl px-4 py-16">
-        {/* ── Email Signup ──────────────────────────────────────── */}
+        {/* ── Action Network Signup ─────────────────────────────── */}
         <section className="mb-20">
           <div className="mx-auto max-w-lg rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-2 text-center text-lg font-bold text-gray-900">
-              Get Updates
-            </h2>
-            <p className="mb-4 text-center text-sm text-gray-600">
-              Sign up for news on our relaunch and ways to get involved.
-            </p>
-            <DummyEmailSignup />
+            <link
+              href="https://actionnetwork.org/css/style-embed-v3.css"
+              rel="stylesheet"
+              type="text/css"
+            />
+            <Script
+              src="https://actionnetwork.org/widgets/v6/form/get-updates-from-askthem-2?format=js&source=widget"
+              strategy="afterInteractive"
+            />
+            <div
+              id="can-form-area-get-updates-from-askthem-2"
+              style={{ width: "100%" }}
+            />
           </div>
         </section>
 
