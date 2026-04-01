@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Script from "next/script";
+import { ObfuscatedEmail } from "@/components/ObfuscatedEmail";
 
 export const metadata: Metadata = {
   title: "Preview - AskThem",
@@ -214,7 +215,7 @@ export default function PreviewPage() {
           </p>
           <p className="text-sm text-gray-500">
             Contact: David Moore —{" "}
-            <a href="mailto:davidrussellmoore@gmail.com" className="text-indigo-600 hover:text-indigo-800">davidrussellmoore@gmail.com</a>
+            <ObfuscatedEmail user="davidrussellmoore" domain="gmail.com" className="text-indigo-600 hover:text-indigo-800" />
             {" | "}
             <a href="https://bsky.app/profile/davidrussellmoore.bsky.social" className="text-indigo-600 hover:text-indigo-800" target="_blank" rel="noopener noreferrer">Bluesky</a>
             {" | "}

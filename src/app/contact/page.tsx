@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ObfuscatedEmail } from "@/components/ObfuscatedEmail";
 
 export const metadata: Metadata = {
   title: "Contact - AskThem",
@@ -18,7 +19,7 @@ export default function ContactPage() {
         <section className="mb-10">
           <h2 className="mb-4 text-xl font-semibold text-gray-900">Email</h2>
           <p className="text-gray-700">
-            <a href="mailto:davidrussellmoore@gmail.com" className="text-indigo-600 hover:text-indigo-800">davidrussellmoore@gmail.com</a>
+            <ObfuscatedEmail user="davidrussellmoore" domain="gmail.com" className="text-indigo-600 hover:text-indigo-800" />
           </p>
         </section>
 
