@@ -213,8 +213,12 @@ export default function PreviewPage() {
             <a href="https://actionnetwork.org/fundraising/donate-to-askthem-free-open-source/" className="text-indigo-600 hover:text-indigo-800" target="_blank" rel="noopener noreferrer">Action Network</a>
           </p>
           <p className="text-sm text-gray-500">
-            Contact:{" "}
-            <a href="https://bsky.app/profile/davidrussellmoore.bsky.social" className="text-indigo-600 hover:text-indigo-800" target="_blank" rel="noopener noreferrer">David Moore</a>
+            Contact: David Moore —{" "}
+            <a href="mailto:davidrussellmoore@gmail.com" className="text-indigo-600 hover:text-indigo-800">davidrussellmoore@gmail.com</a>
+            {" | "}
+            <a href="https://bsky.app/profile/davidrussellmoore.bsky.social" className="text-indigo-600 hover:text-indigo-800" target="_blank" rel="noopener noreferrer">Bluesky</a>
+            {" | "}
+            Signal: davidrussellmoore.52
           </p>
         </section>
       </div>

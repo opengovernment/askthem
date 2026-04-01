@@ -18,7 +18,14 @@ export default function ContactPage() {
         <section className="mb-10">
           <h2 className="mb-4 text-xl font-semibold text-gray-900">Email</h2>
           <p className="text-gray-700">
-            Email us: <span className="text-gray-400">[soon]</span>
+            <a href="mailto:davidrussellmoore@gmail.com" className="text-indigo-600 hover:text-indigo-800">davidrussellmoore@gmail.com</a>
+          </p>
+        </section>
+
+        <section className="mb-10">
+          <h2 className="mb-4 text-xl font-semibold text-gray-900">Signal</h2>
+          <p className="text-gray-700">
+            davidrussellmoore.52
           </p>
         </section>
 
@@ -29,7 +36,7 @@ export default function ContactPage() {
           <ul className="space-y-2 text-gray-700">
             <li>
               <a
-                href="https://bsky.app"
+                href="https://bsky.app/profile/davidrussellmoore.bsky.social"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-indigo-600 hover:text-indigo-800"
