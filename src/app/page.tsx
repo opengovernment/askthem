@@ -72,7 +72,15 @@ export default function PreviewPage() {
       <div className="mx-auto max-w-4xl px-4 py-16">
         {/* ── Action Network Signup ─────────────────────────────── */}
         <section className="mb-20">
-          <div className="mx-auto max-w-lg rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
+          <div className="an-minimal mx-auto max-w-lg rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
+            <style>{`
+              .an-minimal #can-form-area-get-updates-from-askthem-2 h2,
+              .an-minimal #can-form-area-get-updates-from-askthem-2 h4,
+              .an-minimal .action_network_footer,
+              .an-minimal #can-form-area-get-updates-from-askthem-2 .action_sponsor {
+                display: none !important;
+              }
+            `}</style>
             <link
               href="https://actionnetwork.org/css/style-embed-v3.css"
               rel="stylesheet"
