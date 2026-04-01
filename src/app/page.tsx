@@ -60,10 +60,12 @@ export default function PreviewPage() {
         <h1 className="mx-auto max-w-3xl text-4xl font-bold leading-tight sm:text-5xl">
           AskThem
         </h1>
-        <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-indigo-100">
-          A free questions-and-answers platform with elected officials.
-          We&rsquo;re seeking partners to launch a new version with
-          civic AI for moderated public dialogue.
+        <p className="mx-auto mt-4 max-w-2xl text-xl font-semibold text-white">
+          Real Officials, Verified Voters
+        </p>
+        <p className="mx-auto mt-4 max-w-2xl text-lg leading-relaxed text-indigo-100">
+          Get real answers from elected officials and candidates about the most
+          important questions in your community.
         </p>
       </section>
 
