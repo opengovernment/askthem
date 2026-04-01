@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Script from "next/script";
 import { ObfuscatedEmail } from "@/components/ObfuscatedEmail";
+import { DummyEmailSignup } from "@/components/DummyEmailSignup";
 
 export const metadata: Metadata = {
   title: "Preview - AskThem",
@@ -61,29 +61,23 @@ export default function PreviewPage() {
           AskThem
         </h1>
         <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-indigo-100">
-          A free questions-and-answers platform with elected officials. Created
-          in 2014, we&rsquo;re now seeking partners to launch a new version with
+          A free questions-and-answers platform with elected officials.
+          We&rsquo;re seeking partners to launch a new version with
           civic AI for moderated public dialogue.
         </p>
       </section>
 
       <div className="mx-auto max-w-4xl px-4 py-16">
-        {/* ── Action Network Signup ─────────────────────────────── */}
+        {/* ── Email Signup ──────────────────────────────────────── */}
         <section className="mb-20">
           <div className="mx-auto max-w-lg rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
-            <link
-              href="https://actionnetwork.org/css/style-embed-v3.css"
-              rel="stylesheet"
-              type="text/css"
-            />
-            <Script
-              src="https://actionnetwork.org/widgets/v6/form/get-updates-from-askthem?format=js&source=widget"
-              strategy="afterInteractive"
-            />
-            <div
-              id="can-form-area-get-updates-from-askthem"
-              style={{ width: "100%" }}
-            />
+            <h2 className="mb-2 text-center text-lg font-bold text-gray-900">
+              Get Updates
+            </h2>
+            <p className="mb-4 text-center text-sm text-gray-600">
+              Sign up for news on our relaunch and ways to get involved.
+            </p>
+            <DummyEmailSignup />
           </div>
         </section>
 

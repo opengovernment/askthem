@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { ObfuscatedEmail } from "@/components/ObfuscatedEmail";
 
 export const metadata: Metadata = {
@@ -28,6 +29,26 @@ export default function ContactPage() {
           <p className="text-gray-700">
             davidrussellmoore.52
           </p>
+        </section>
+
+        {/* ── Action Network Signup ─────────────────────────────── */}
+        <section className="mb-10">
+          <h2 className="mb-4 text-xl font-semibold text-gray-900">Get Updates</h2>
+          <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
+            <link
+              href="https://actionnetwork.org/css/style-embed-v3.css"
+              rel="stylesheet"
+              type="text/css"
+            />
+            <Script
+              src="https://actionnetwork.org/widgets/v6/form/get-updates-from-askthem?format=js&source=widget"
+              strategy="afterInteractive"
+            />
+            <div
+              id="can-form-area-get-updates-from-askthem"
+              style={{ width: "100%" }}
+            />
+          </div>
         </section>
 
         <section>
