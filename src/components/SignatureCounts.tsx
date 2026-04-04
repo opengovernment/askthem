@@ -5,6 +5,7 @@ interface SignatureCountsProps {
   constituent: number;
   supporting: number;
   recent?: number;
+  displayTotal?: number;
   isAnswered: boolean;
   deliveryThreshold?: number | null;
   deliveryThresholdType?: string;
@@ -15,6 +16,7 @@ export function SignatureCounts({
   constituent,
   supporting,
   recent,
+  displayTotal,
   isAnswered,
   deliveryThreshold,
   deliveryThresholdType = "constituent",
@@ -28,38 +30,26 @@ export function SignatureCounts({
   const almostThere = !reached && remaining > 0 && remaining <= 2;
 
   const countLabel = isSupporter ? "total" : "constituent";
+  const headlineCount = displayTotal ?? total;
 
   return (
     <div
-      className={`rounded-lg border p-5 ${
+      className={`rounded-xl border p-5 ${
         almostThere
           ? "border-amber-300 bg-amber-50"
           : "border-gray-200 bg-white"
       }`}
     >
-      <div className="mb-3 flex items-baseline gap-3">
-        <span className="text-2xl font-bold text-gray-900">{total}</span>
+      <div className="mb-3 flex items-baseline gap-2">
+        <span className="text-2xl font-bold text-gray-900">{headlineCount}</span>
         <span className="text-sm text-gray-500">
-          {total === 1 ? "signature" : "signatures"}
+          {headlineCount === 1 ? "upvote" : "upvotes"} from constituents
         </span>
-      </div>
-
-      <div className="mb-4 flex flex-wrap gap-4">
-        <div className="flex items-center gap-1.5">
-          <span className="inline-block h-2.5 w-2.5 rounded-full bg-indigo-600" />
-          <span className="text-sm font-medium text-gray-900">{constituent}</span>
-          <span className="text-sm text-gray-500">constituent</span>
-        </div>
-        <div className="flex items-center gap-1.5">
-          <span className="inline-block h-2.5 w-2.5 rounded-full bg-gray-300" />
-          <span className="text-sm font-medium text-gray-900">{supporting}</span>
-          <span className="text-sm text-gray-500">supporting</span>
-        </div>
       </div>
 
       {!!recent && recent > 0 && (
         <p className="mb-4 text-xs font-medium text-green-700">
-          {recent} {recent === 1 ? "person" : "people"} signed in the last 24 hours
+          {recent} {recent === 1 ? "upvote" : "upvotes"} in the last 24 hours
         </p>
       )}
 
@@ -68,7 +58,7 @@ export function SignatureCounts({
           <div className="mb-2">
             <div className="flex justify-between text-xs text-gray-500">
               <span>
-                {isSupporter ? "Total" : "Constituent"} signatures for delivery
+                {isSupporter ? "Total" : "Constituent"} upvotes for delivery
               </span>
               <span>
                 {currentCount} / {threshold}
@@ -90,14 +80,14 @@ export function SignatureCounts({
           {almostThere ? (
             <p className="text-sm font-semibold text-amber-800">
               {remaining === 1
-                ? `Just 1 more ${countLabel} signature and this question gets delivered!`
-                : `Only ${remaining} more ${countLabel} signatures until delivery!`}
+                ? `Just 1 more ${countLabel} upvote and this question gets delivered!`
+                : `Only ${remaining} more ${countLabel} upvotes until delivery!`}
             </p>
           ) : (
             <p className="text-xs text-gray-500">
               {reached
                 ? `${isSupporter ? "Supporter" : "Constituent"} threshold reached — this question qualifies for delivery.`
-                : `${remaining} more ${countLabel} ${remaining === 1 ? "signature" : "signatures"} needed for delivery to the official.`}
+                : `${remaining} more ${countLabel} ${remaining === 1 ? "upvote" : "upvotes"} needed for delivery to the official.`}
             </p>
           )}
         </>

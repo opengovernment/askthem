@@ -71,6 +71,7 @@ async function main() {
       district: "NY-14",
       chamber: "house",
       level: "NATIONAL_LOWER",
+      photoUrl: "https://bioguide.congress.gov/bioguide/photo/O/O000172.jpg",
       email: "representative@ocasiocortez.house.gov",
       twitter: "@RepAOC",
     },
@@ -657,229 +658,150 @@ async function main() {
     ],
   });
 
-  // Create questions with tags and auto-extracted keywords
-  const q1Text = "What specific steps will you take to make housing more affordable for working families in our state?";
-  const q1 = await prisma.question.create({
-    data: {
-      id: "q1",
-      text: q1Text,
-      authorId: maria.id,
-      officialId: warren.id,
-      districtTag: "MA-Senate",
-      upvoteCount: 342,
-      status: "delivered",
-      createdAt: new Date("2026-01-15T10:30:00Z"),
-      categoryTags: {
-        create: [
-          { tag: "Housing and Community Development" },
-          { tag: "Economics and Public Finance" },
-        ],
-      },
-      keywords: {
-        create: extractKeywords(q1Text).map((keyword) => ({ keyword })),
-      },
-    },
-  });
+  // ─── 50 Questions (25 answered, 25 unanswered) ─────────────────────
+  // Helper: all users and officials for distributing questions
+  const users = [maria, james, aaliyah, robert, tom, sarah];
+  const officials = [
+    { o: warren, tag: "MA-Senate" }, { o: cruz, tag: "TX-Senate" },
+    { o: aoc, tag: "NY-14" }, { o: crenshaw, tag: "TX-2" },
+    { o: fetterman, tag: "PA-Senate" }, { o: markey, tag: "MA-Senate" },
+    { o: cornyn, tag: "TX-Senate" }, { o: gillibrand, tag: "NY-Senate" },
+    { o: casey, tag: "PA-Senate" }, { o: mcgovern, tag: "MA-2" },
+    { o: healey, tag: "MA-Gov" }, { o: abbott, tag: "TX-Gov" },
+    { o: hochul, tag: "NY-Gov" }, { o: shapiro, tag: "PA-Gov" },
+    { o: crighton, tag: "MA-State-Senate" }, { o: whitmire, tag: "TX-State-Senate" },
+    { o: boston_council, tag: "Boston-Local" }, { o: houston_council, tag: "Houston-Local" },
+    { o: nyc_council, tag: "NYC-Local" }, { o: pittsburgh_council, tag: "Pittsburgh-Local" },
+  ];
 
-  const q2Text = "How do you plan to address the rising cost of prescription drugs for seniors on fixed incomes?";
-  const q2 = await prisma.question.create({
-    data: {
-      id: "q2",
-      text: q2Text,
-      authorId: james.id,
-      officialId: cruz.id,
-      districtTag: "TX-Senate",
-      upvoteCount: 287,
-      status: "published",
-      createdAt: new Date("2026-01-20T14:15:00Z"),
-      categoryTags: {
-        create: [{ tag: "Health" }, { tag: "Social Welfare" }],
-      },
-      keywords: {
-        create: extractKeywords(q2Text).map((keyword) => ({ keyword })),
-      },
-    },
-  });
+  interface QDef {
+    text: string;
+    tags: string[];
+    officialIdx: number;
+    userIdx: number;
+    upvotes: number;
+    status: "published" | "delivered" | "answered" | "pending_review";
+    answer?: string;
+    createdAt: string;
+    answeredAt?: string;
+  }
 
-  const q3Text = "What is your position on expanding public transit funding in our district, and will you support the proposed Green New Deal transit provisions?";
-  const q3 = await prisma.question.create({
-    data: {
-      id: "q3",
-      text: q3Text,
-      authorId: aaliyah.id,
-      officialId: aoc.id,
-      districtTag: "NY-14",
-      upvoteCount: 518,
-      status: "answered",
-      createdAt: new Date("2026-01-22T09:00:00Z"),
-      categoryTags: {
-        create: [
-          { tag: "Transportation and Public Works" },
-          { tag: "Environmental Protection" },
-        ],
-      },
-      keywords: {
-        create: extractKeywords(q3Text).map((keyword) => ({ keyword })),
-      },
-    },
-  });
+  const questionDefs: QDef[] = [
+    // ── 25 ANSWERED questions ────────────────────────────────────────
+    { text: "What specific steps will you take to make housing more affordable for working families in our state?", tags: ["Housing and Community Development", "Economics and Public Finance"], officialIdx: 0, userIdx: 0, upvotes: 342, status: "answered", createdAt: "2026-01-15T10:30:00Z", answeredAt: "2026-01-28T14:00:00Z", answer: "Affordable housing is one of my top priorities. I have co-sponsored the Housing Supply Act to incentivize local zoning reform and increase federal investment in public housing construction. I am also pushing for expanded rental assistance and down payment support for first-time homebuyers. Every family deserves a safe, affordable place to live." },
+    { text: "What is your position on expanding public transit funding in our district?", tags: ["Transportation and Public Works", "Environmental Protection"], officialIdx: 2, userIdx: 2, upvotes: 518, status: "answered", createdAt: "2026-01-22T09:00:00Z", answeredAt: "2026-02-01T16:00:00Z", answer: "I am a strong supporter of expanding public transit in the Bronx and across NY-14. The Green New Deal transit provisions would bring billions in investment to our communities, creating good-paying union jobs while reducing emissions. I am currently co-sponsoring the Transit for All Act which would guarantee federal funding for zero-emission bus fleets and new subway extensions." },
+    { text: "Do you support universal background checks for all gun purchases, including private sales?", tags: ["Crime and Law Enforcement", "Civil Rights and Liberties"], officialIdx: 0, userIdx: 5, upvotes: 421, status: "answered", createdAt: "2026-01-10T13:00:00Z", answeredAt: "2026-01-25T11:00:00Z", answer: "Yes, I strongly support universal background checks. No one should be able to purchase a firearm without a thorough background check, whether at a gun show, online, or through a private sale. This is a common-sense measure supported by the vast majority of Americans, including responsible gun owners." },
+    { text: "How will you protect Social Security benefits for current and future retirees?", tags: ["Social Welfare", "Economics and Public Finance"], officialIdx: 4, userIdx: 4, upvotes: 389, status: "answered", createdAt: "2026-01-18T08:00:00Z", answeredAt: "2026-02-02T10:30:00Z", answer: "Social Security is a promise we made to working Americans and I will never vote to cut benefits. I support the Social Security Expansion Act which would extend the program's solvency by requiring the wealthiest Americans to pay their fair share into the system. We can strengthen Social Security without raising the retirement age or reducing benefits." },
+    { text: "What is your plan to reduce prescription drug costs for seniors?", tags: ["Health", "Social Welfare"], officialIdx: 1, userIdx: 1, upvotes: 287, status: "answered", createdAt: "2026-01-20T14:15:00Z", answeredAt: "2026-02-05T09:00:00Z", answer: "I have been fighting to lower drug prices by allowing Medicare to negotiate directly with pharmaceutical companies and by enabling Americans to import cheaper drugs from Canada. The Inflation Reduction Act was a good start with the $35 insulin cap, but we need to go further to cap out-of-pocket costs for all prescription medications." },
+    { text: "What are you doing to address the opioid crisis in rural Pennsylvania?", tags: ["Health", "Crime and Law Enforcement"], officialIdx: 4, userIdx: 4, upvotes: 276, status: "answered", createdAt: "2026-01-25T11:30:00Z", answeredAt: "2026-02-10T15:00:00Z", answer: "The opioid crisis has devastated communities across Pennsylvania and it's personal to me. I secured $45 million in federal funding for treatment centers in rural PA last year. I'm pushing for expanded access to medication-assisted treatment, more funding for first responders who carry naloxone, and holding pharmaceutical companies accountable for the damage they've caused." },
+    { text: "Will you support the DREAM Act to provide a pathway to citizenship for undocumented immigrants brought here as children?", tags: ["Immigration", "Civil Rights and Liberties"], officialIdx: 7, userIdx: 2, upvotes: 312, status: "answered", createdAt: "2026-01-28T10:00:00Z", answeredAt: "2026-02-12T14:00:00Z", answer: "Yes. Dreamers are Americans in every way that matters. They grew up here, went to school here, and contribute to our communities and our economy. I am a co-sponsor of the DREAM Act and will continue to fight for a pathway to citizenship for the 2 million Dreamers living in our country." },
+    { text: "How do you plan to support small businesses recovering from the pandemic?", tags: ["Commerce", "Economics and Public Finance"], officialIdx: 3, userIdx: 3, upvotes: 198, status: "answered", createdAt: "2026-02-01T11:45:00Z", answeredAt: "2026-02-15T10:00:00Z", answer: "Small businesses are the backbone of our economy. I voted for the RESTART Act to provide long-term recovery loans, and I'm pushing for permanent tax relief for businesses with under 50 employees. I also support cutting red tape at the SBA to make it easier for entrepreneurs to access capital and navigate federal programs." },
+    { text: "What legislation are you pursuing to combat climate change?", tags: ["Environmental Protection", "Energy"], officialIdx: 5, userIdx: 0, upvotes: 445, status: "answered", createdAt: "2026-01-12T09:30:00Z", answeredAt: "2026-01-30T13:00:00Z", answer: "Climate change is an existential threat and Massachusetts must lead. I authored the Clean Energy Innovation Act to double federal investment in clean energy R&D. I'm also fighting for stronger methane regulations, a national clean electricity standard, and environmental justice funding for frontline communities." },
+    { text: "What steps are you taking to improve public school funding in our district?", tags: ["Education", "Economics and Public Finance"], officialIdx: 9, userIdx: 5, upvotes: 234, status: "answered", createdAt: "2026-02-03T14:00:00Z", answeredAt: "2026-02-18T11:30:00Z", answer: "I secured $12 million in additional Title I funding for schools in our district last year and I'm fighting for the full funding of IDEA to support students with disabilities. I oppose diverting public school funds to private voucher programs. Every child in MA-2 deserves a well-funded school with qualified teachers and modern facilities." },
+    { text: "Do you support term limits for members of Congress?",  tags: ["Government Operations and Politics"], officialIdx: 6, userIdx: 1, upvotes: 367, status: "answered", createdAt: "2026-01-30T16:00:00Z", answeredAt: "2026-02-14T09:45:00Z", answer: "I have long supported term limits and have co-sponsored the Term Limits Amendment which would limit senators to two terms and representatives to three. Career politicians are part of the problem in Washington. Fresh perspectives and new leaders will help restore trust in our institutions." },
+    { text: "How will you address the growing cost of child care for working parents?", tags: ["Families", "Labor and Employment"], officialIdx: 7, userIdx: 2, upvotes: 298, status: "answered", createdAt: "2026-02-05T10:00:00Z", answeredAt: "2026-02-20T14:00:00Z", answer: "Child care costs are crushing working families. I'm fighting for universal pre-K and a cap on child care costs at 7% of family income. I also support raising wages for child care workers — we can't build a sustainable system on poverty wages. The Family Act would provide 12 weeks of paid family leave for all workers." },
+    { text: "What is your stance on legalizing recreational marijuana at the federal level?", tags: ["Crime and Law Enforcement", "Health"], officialIdx: 4, userIdx: 4, upvotes: 256, status: "answered", createdAt: "2026-02-08T13:00:00Z", answeredAt: "2026-02-22T10:00:00Z", answer: "I support the federal decriminalization of marijuana. It makes no sense that something legal in Pennsylvania and most states remains a federal crime. I co-sponsored the MORE Act to deschedule cannabis, expunge prior convictions, and invest tax revenue in communities most harmed by the war on drugs." },
+    { text: "What will you do to protect voting rights in Texas?", tags: ["Civil Rights and Liberties", "Government Operations and Politics"], officialIdx: 1, userIdx: 1, upvotes: 334, status: "answered", createdAt: "2026-01-16T15:30:00Z", answeredAt: "2026-02-01T11:00:00Z", answer: "I believe every eligible citizen should be able to vote easily and securely. I support voter ID requirements to maintain election integrity while opposing measures that unnecessarily burden voters. I have pushed for extended early voting hours and more polling locations in underserved areas." },
+    { text: "How are you addressing the mental health crisis among young people?", tags: ["Health", "Education"], officialIdx: 10, userIdx: 0, upvotes: 412, status: "answered", createdAt: "2026-02-10T09:00:00Z", answeredAt: "2026-02-25T16:00:00Z", answer: "This is one of the most urgent issues we face. I signed the Student Mental Health Act allocating $50 million for school counselors and crisis intervention services. We're also working with insurers to eliminate barriers to mental health treatment and expanding telehealth access across the Commonwealth." },
+    { text: "What are you doing to make college more affordable?", tags: ["Education", "Economics and Public Finance"], officialIdx: 0, userIdx: 5, upvotes: 378, status: "answered", createdAt: "2026-01-14T11:00:00Z", answeredAt: "2026-01-29T15:00:00Z", answer: "I wrote the Student Loan Debt Relief Act to cancel up to $50,000 in student debt. I'm also pushing to double Pell Grant funding and make community college tuition-free. No one should have to choose between getting an education and financial security. Higher education is an investment in our future, not a luxury." },
+    { text: "Will you support federal investment in high-speed rail connecting Houston and Dallas?", tags: ["Transportation and Public Works", "Commerce"], officialIdx: 11, userIdx: 1, upvotes: 189, status: "answered", createdAt: "2026-02-12T10:00:00Z", answeredAt: "2026-02-28T14:30:00Z", answer: "Texas needs modern infrastructure to match our growing economy. I've reviewed the Texas Central Railway proposal and while I prefer private-sector solutions, I'm open to public-private partnerships that don't burden taxpayers. I will support streamlining federal permitting to help this project move forward." },
+    { text: "What is your position on raising the minimum wage?", tags: ["Labor and Employment", "Economics and Public Finance"], officialIdx: 2, userIdx: 2, upvotes: 467, status: "answered", createdAt: "2026-01-08T14:30:00Z", answeredAt: "2026-01-22T10:00:00Z", answer: "I support raising the federal minimum wage to $15 an hour and indexing it to inflation. No one working full time should live in poverty. The current $7.25 federal minimum hasn't been raised since 2009 — that's unconscionable. A living wage means a stronger economy because workers spend that money right back in their communities." },
+    { text: "How will you ensure clean drinking water for all New Yorkers?", tags: ["Environmental Protection", "Health"], officialIdx: 12, userIdx: 2, upvotes: 223, status: "answered", createdAt: "2026-02-15T08:00:00Z", answeredAt: "2026-03-01T11:00:00Z", answer: "Clean water is a fundamental right. I secured $200 million in state funding to replace lead service lines across New York and am pushing for stricter PFAS contamination standards. We're also investing in upgrading aging water treatment infrastructure upstate and in the city. No family should have to question the safety of their tap water." },
+    { text: "What are you doing about rising car insurance rates in Pennsylvania?", tags: ["Commerce", "Economics and Public Finance"], officialIdx: 13, userIdx: 4, upvotes: 178, status: "answered", createdAt: "2026-02-18T12:00:00Z", answeredAt: "2026-03-04T09:00:00Z", answer: "I hear this from Pennsylvanians every day. I've directed the Insurance Department to investigate rate increases and we're pushing legislation to increase transparency in how insurers set premiums. I also support expanding public transit options so fewer families are car-dependent in the first place." },
+    { text: "Will you fight to keep the local VA hospital open?", tags: ["Armed Forces and National Security", "Health"], officialIdx: 8, userIdx: 4, upvotes: 345, status: "answered", createdAt: "2026-01-20T10:00:00Z", answeredAt: "2026-02-03T14:00:00Z", answer: "Absolutely. Our veterans earned these services and I will fight any attempt to close or consolidate VA facilities in Pennsylvania. I led a bipartisan letter with 23 senators opposing the proposed closures and secured a commitment from the VA Secretary to maintain current service levels. Our veterans deserve better, not less." },
+    { text: "What is your plan for making broadband internet available in rural communities?", tags: ["Science, Technology, Communications", "Commerce"], officialIdx: 4, userIdx: 4, upvotes: 203, status: "answered", createdAt: "2026-02-05T08:30:00Z", answeredAt: "2026-02-19T13:00:00Z", answer: "Broadband is not a luxury — it's essential infrastructure. I helped pass the Infrastructure Investment and Jobs Act which includes $65 billion for broadband expansion. Pennsylvania is receiving $1.2 billion to connect every household. I'm working to ensure these funds reach the rural communities that need them most, not just the easy-to-serve areas." },
+    { text: "How do you plan to reduce violent crime in the Bronx?", tags: ["Crime and Law Enforcement", "Social Welfare"], officialIdx: 18, userIdx: 2, upvotes: 267, status: "answered", createdAt: "2026-02-20T09:30:00Z", answeredAt: "2026-03-06T15:00:00Z", answer: "We need a comprehensive approach: investing in community violence intervention programs, funding youth employment, and ensuring our police have the resources they need while maintaining accountability. I secured $3.5 million for the Bronx CVI initiative and we've seen a 15% reduction in gun violence in the pilot areas." },
+    { text: "What steps are you taking to address food deserts in Houston?", tags: ["Agriculture and Food", "Health"], officialIdx: 17, userIdx: 1, upvotes: 156, status: "answered", createdAt: "2026-02-22T11:00:00Z", answeredAt: "2026-03-08T10:00:00Z", answer: "I passed the Healthy Houston initiative last year which provides tax incentives for grocery stores to open in underserved neighborhoods. We've also expanded the mobile farmers market program to reach 12 additional food desert areas. The city is investing $8 million in community gardens and urban agriculture projects." },
+    { text: "Will you support funding for historic building preservation in our neighborhood?", tags: ["Housing and Community Development", "Government Operations and Politics"], officialIdx: 16, userIdx: 0, upvotes: 134, status: "answered", createdAt: "2026-02-25T14:00:00Z", answeredAt: "2026-03-10T09:30:00Z", answer: "Boston's historic buildings are part of what makes our city special. I voted to increase the historic preservation fund by 40% this year and I'm working to streamline the permitting process for restoration projects. We can preserve our heritage while making these buildings energy-efficient and accessible." },
 
-  // Create the answer for q3
-  await prisma.answer.create({
-    data: {
-      questionId: q3.id,
-      responseText:
-        "Thank you for this important question. I am a strong supporter of expanding public transit in the Bronx and across NY-14. The Green New Deal transit provisions would bring billions in investment to our communities, creating good-paying union jobs while reducing emissions. I am currently co-sponsoring the Transit for All Act which would guarantee federal funding for zero-emission bus fleets and new subway extensions. I will continue to fight for the resources our district needs.",
-      respondedAt: new Date("2026-02-01T16:00:00Z"),
-      postedBy: "mod-sarah",
-    },
-  });
+    // ── 25 UNANSWERED questions ──────────────────────────────────────
+    { text: "How do you plan to address the rising cost of prescription drugs for seniors on fixed incomes?", tags: ["Health", "Social Welfare"], officialIdx: 6, userIdx: 1, upvotes: 287, status: "published", createdAt: "2026-02-26T14:15:00Z" },
+    { text: "Will you commit to opposing any new taxes on small businesses with under 50 employees?", tags: ["Taxation", "Commerce"], officialIdx: 3, userIdx: 3, upvotes: 156, status: "published", createdAt: "2026-02-27T11:45:00Z" },
+    { text: "What actions are you taking to protect workers from AI-driven job displacement in manufacturing?", tags: ["Labor and Employment", "Science, Technology, Communications"], officialIdx: 8, userIdx: 4, upvotes: 203, status: "published", createdAt: "2026-02-28T08:30:00Z" },
+    { text: "Why haven't you held a town hall in our district in over two years? When will you face your constituents in person?", tags: ["Government Operations and Politics"], officialIdx: 2, userIdx: 2, upvotes: 145, status: "published", createdAt: "2026-03-01T15:00:00Z" },
+    { text: "What is your plan to reduce the federal deficit without cutting Social Security or Medicare benefits?", tags: ["Economics and Public Finance", "Social Welfare"], officialIdx: 1, userIdx: 4, upvotes: 312, status: "published", createdAt: "2026-03-02T17:30:00Z" },
+    { text: "Will you support legislation to require broadband internet providers to offer affordable plans in rural areas?", tags: ["Science, Technology, Communications", "Commerce"], officialIdx: 11, userIdx: 1, upvotes: 178, status: "published", createdAt: "2026-03-03T09:00:00Z" },
+    { text: "What will you do to prevent another government shutdown?", tags: ["Government Operations and Politics", "Economics and Public Finance"], officialIdx: 0, userIdx: 5, upvotes: 398, status: "delivered", createdAt: "2026-03-04T10:00:00Z" },
+    { text: "How do you justify voting against the infrastructure bill when our roads and bridges are crumbling?", tags: ["Transportation and Public Works", "Economics and Public Finance"], officialIdx: 3, userIdx: 3, upvotes: 267, status: "published", createdAt: "2026-03-05T11:30:00Z" },
+    { text: "What is your position on banning stock trading by members of Congress?", tags: ["Government Operations and Politics", "Commerce"], officialIdx: 5, userIdx: 0, upvotes: 534, status: "delivered", createdAt: "2026-03-06T13:00:00Z" },
+    { text: "Will you support federal legalization of marijuana and expungement of prior convictions?", tags: ["Crime and Law Enforcement", "Civil Rights and Liberties"], officialIdx: 6, userIdx: 1, upvotes: 289, status: "published", createdAt: "2026-03-07T09:45:00Z" },
+    { text: "What specific measures will you take to reduce carbon emissions from power plants in our state?", tags: ["Environmental Protection", "Energy"], officialIdx: 10, userIdx: 0, upvotes: 345, status: "published", createdAt: "2026-03-08T14:00:00Z" },
+    { text: "How do you plan to address the teacher shortage in public schools?", tags: ["Education", "Labor and Employment"], officialIdx: 13, userIdx: 4, upvotes: 256, status: "published", createdAt: "2026-03-09T10:30:00Z" },
+    { text: "Will you support a federal ban on assault weapons?", tags: ["Crime and Law Enforcement", "Civil Rights and Liberties"], officialIdx: 7, userIdx: 2, upvotes: 478, status: "delivered", createdAt: "2026-03-10T08:00:00Z" },
+    { text: "What are you doing to protect renters from corporate landlords buying up single-family homes?", tags: ["Housing and Community Development", "Commerce"], officialIdx: 12, userIdx: 2, upvotes: 356, status: "published", createdAt: "2026-03-11T12:00:00Z" },
+    { text: "How will you ensure AI regulation doesn't stifle innovation while still protecting consumers?", tags: ["Science, Technology, Communications", "Commerce"], officialIdx: 0, userIdx: 5, upvotes: 267, status: "published", createdAt: "2026-03-12T15:30:00Z" },
+    { text: "What is your plan to address the homelessness crisis in our city?", tags: ["Housing and Community Development", "Social Welfare"], officialIdx: 16, userIdx: 0, upvotes: 423, status: "published", createdAt: "2026-03-13T09:00:00Z" },
+    { text: "Will you support expanding Medicare to cover dental, vision, and hearing?", tags: ["Health", "Social Welfare"], officialIdx: 8, userIdx: 4, upvotes: 389, status: "delivered", createdAt: "2026-03-14T10:00:00Z" },
+    { text: "How do you plan to hold social media companies accountable for harming children?", tags: ["Science, Technology, Communications", "Families"], officialIdx: 1, userIdx: 1, upvotes: 445, status: "published", createdAt: "2026-03-15T11:00:00Z" },
+    { text: "What will you do to lower property taxes for seniors on fixed incomes?", tags: ["Taxation", "Social Welfare"], officialIdx: 14, userIdx: 5, upvotes: 198, status: "published", createdAt: "2026-03-16T13:30:00Z" },
+    { text: "Do you support a pathway to citizenship for undocumented essential workers who served during the pandemic?", tags: ["Immigration", "Labor and Employment"], officialIdx: 2, userIdx: 2, upvotes: 312, status: "published", createdAt: "2026-03-17T08:30:00Z" },
+    { text: "What legislation will you introduce to address the fentanyl crisis at the border?", tags: ["Crime and Law Enforcement", "Immigration"], officialIdx: 6, userIdx: 3, upvotes: 378, status: "published", createdAt: "2026-03-18T10:00:00Z" },
+    { text: "How will you protect access to reproductive healthcare in our state?", tags: ["Health", "Civil Rights and Liberties"], officialIdx: 12, userIdx: 2, upvotes: 456, status: "delivered", createdAt: "2026-03-19T14:00:00Z" },
+    { text: "What is your position on reforming qualified immunity for police officers?", tags: ["Crime and Law Enforcement", "Civil Rights and Liberties"], officialIdx: 19, userIdx: 4, upvotes: 234, status: "published", createdAt: "2026-03-20T09:00:00Z" },
+    { text: "Will you fight to keep our community hospital open despite proposed budget cuts?", tags: ["Health", "Economics and Public Finance"], officialIdx: 15, userIdx: 1, upvotes: 289, status: "pending_review", createdAt: "2026-03-21T11:30:00Z" },
+    { text: "What are you doing to attract new businesses and jobs to our district?", tags: ["Commerce", "Labor and Employment"], officialIdx: 19, userIdx: 4, upvotes: 167, status: "pending_review", createdAt: "2026-03-22T13:00:00Z" },
+  ];
 
-  const q4Text = "Will you commit to opposing any new taxes on small businesses with under 50 employees?";
-  const q4 = await prisma.question.create({
-    data: {
-      id: "q4",
-      text: q4Text,
-      authorId: robert.id,
-      officialId: crenshaw.id,
-      districtTag: "TX-2",
-      upvoteCount: 156,
-      status: "published",
-      createdAt: new Date("2026-02-01T11:45:00Z"),
-      categoryTags: {
-        create: [{ tag: "Taxation" }, { tag: "Commerce" }],
-      },
-      keywords: {
-        create: extractKeywords(q4Text).map((keyword) => ({ keyword })),
-      },
-    },
-  });
+  // Create all questions, answers, and upvotes
+  const createdQuestions: { id: string; upvoteCount: number }[] = [];
 
-  const q5Text = "What actions are you taking to protect Pennsylvania workers from AI-driven job displacement in manufacturing?";
-  const q5 = await prisma.question.create({
-    data: {
-      id: "q5",
-      text: q5Text,
-      authorId: tom.id,
-      officialId: fetterman.id,
-      districtTag: "PA-Senate",
-      upvoteCount: 203,
-      status: "published",
-      createdAt: new Date("2026-02-05T08:30:00Z"),
-      categoryTags: {
-        create: [
-          { tag: "Labor and Employment" },
-          { tag: "Science, Technology, Communications" },
-        ],
-      },
-      keywords: {
-        create: extractKeywords(q5Text).map((keyword) => ({ keyword })),
-      },
-    },
-  });
+  for (let i = 0; i < questionDefs.length; i++) {
+    const qd = questionDefs[i];
+    const off = officials[qd.officialIdx];
+    const user = users[qd.userIdx];
+    const qId = `q${i + 1}`;
 
-  const q6Text = "Do you support universal background checks for all gun purchases, including private sales?";
-  const q6 = await prisma.question.create({
-    data: {
-      id: "q6",
-      text: q6Text,
-      authorId: sarah.id,
-      officialId: warren.id,
-      districtTag: "MA-Senate",
-      upvoteCount: 421,
-      status: "published",
-      createdAt: new Date("2026-01-10T13:00:00Z"),
-      categoryTags: {
-        create: [
-          { tag: "Crime and Law Enforcement" },
-          { tag: "Civil Rights and Liberties" },
-        ],
+    const q = await prisma.question.create({
+      data: {
+        id: qId,
+        text: qd.text,
+        authorId: user.id,
+        officialId: off.o.id,
+        districtTag: off.tag,
+        upvoteCount: qd.upvotes,
+        status: qd.status,
+        createdAt: new Date(qd.createdAt),
+        categoryTags: { create: qd.tags.map((tag) => ({ tag })) },
+        keywords: { create: extractKeywords(qd.text).map((keyword) => ({ keyword })) },
       },
-      keywords: {
-        create: extractKeywords(q6Text).map((keyword) => ({ keyword })),
-      },
-    },
-  });
+    });
 
-  // Pending review questions (for moderator dashboard demo)
-  const q7Text = "Why haven't you held a town hall in our district in over two years? When will you face your constituents in person?";
-  await prisma.question.create({
-    data: {
-      id: "q7",
-      text: q7Text,
-      authorId: aaliyah.id,
-      officialId: aoc.id,
-      districtTag: "NY-14",
-      upvoteCount: 0,
-      status: "pending_review",
-      createdAt: new Date("2026-02-12T15:00:00Z"),
-      categoryTags: {
-        create: [{ tag: "Government Operations and Politics" }],
-      },
-      keywords: {
-        create: extractKeywords(q7Text).map((keyword) => ({ keyword })),
-      },
-    },
-  });
+    createdQuestions.push({ id: q.id, upvoteCount: qd.upvotes });
 
-  const q8Text = "What is your plan to reduce the federal deficit without cutting Social Security or Medicare benefits?";
-  await prisma.question.create({
-    data: {
-      id: "q8",
-      text: q8Text,
-      authorId: tom.id,
-      officialId: cruz.id,
-      districtTag: "TX-Senate",
-      upvoteCount: 0,
-      status: "pending_review",
-      createdAt: new Date("2026-02-12T17:30:00Z"),
-      categoryTags: {
-        create: [
-          { tag: "Economics and Public Finance" },
-          { tag: "Social Welfare" },
-        ],
-      },
-      keywords: {
-        create: extractKeywords(q8Text).map((keyword) => ({ keyword })),
-      },
-    },
-  });
+    // Create answer for answered questions
+    if (qd.status === "answered" && qd.answer) {
+      await prisma.answer.create({
+        data: {
+          questionId: q.id,
+          responseText: qd.answer,
+          respondedAt: new Date(qd.answeredAt!),
+          postedBy: "mod-sarah",
+        },
+      });
+    }
+  }
 
-  const q9Text = "Will you support legislation to require broadband internet providers to offer affordable plans in rural Pennsylvania?";
-  await prisma.question.create({
-    data: {
-      id: "q9",
-      text: q9Text,
-      authorId: tom.id,
-      officialId: fetterman.id,
-      districtTag: "PA-Senate",
-      upvoteCount: 0,
-      status: "pending_review",
-      createdAt: new Date("2026-02-13T09:00:00Z"),
-      categoryTags: {
-        create: [
-          { tag: "Science, Technology, Communications" },
-          { tag: "Commerce" },
-        ],
-      },
-      keywords: {
-        create: extractKeywords(q9Text).map((keyword) => ({ keyword })),
-      },
-    },
-  });
+  // Create upvotes spread across questions
+  const upvoteData: { userId: string; questionId: string; isConstituent: boolean }[] = [];
+  const upvotePairs = new Set<string>();
 
-  // Create some upvotes (isConstituent based on UserDistrict mappings)
-  await prisma.upvote.createMany({
-    data: [
-      { userId: sarah.id, questionId: q1.id, isConstituent: true },   // sarah is Warren constituent
-      { userId: james.id, questionId: q2.id, isConstituent: true },   // james is Cruz constituent
-      { userId: maria.id, questionId: q3.id, isConstituent: false },  // maria is not AOC constituent
-      { userId: tom.id, questionId: q3.id, isConstituent: false },    // tom is not AOC constituent
-      { userId: robert.id, questionId: q4.id, isConstituent: true },  // robert is Crenshaw constituent
-      { userId: aaliyah.id, questionId: q5.id, isConstituent: false }, // aaliyah is not Fetterman constituent
-      { userId: maria.id, questionId: q6.id, isConstituent: true },   // maria is Warren constituent
-    ],
-  });
+  for (const q of createdQuestions) {
+    // Create 1-4 upvotes per question from random users
+    const numUpvotes = Math.min(users.length, 1 + Math.floor(q.upvoteCount / 150));
+    for (let j = 0; j < numUpvotes; j++) {
+      const user = users[j % users.length];
+      const key = `${user.id}-${q.id}`;
+      if (upvotePairs.has(key)) continue;
+      upvotePairs.add(key);
+      upvoteData.push({
+        userId: user.id,
+        questionId: q.id,
+        isConstituent: j === 0, // first upvoter is a constituent
+      });
+    }
+  }
+
+  await prisma.upvote.createMany({ data: upvoteData });
 
   console.log("Seed data created successfully!");
   console.log(`  Officials: ${await prisma.official.count()}`);
